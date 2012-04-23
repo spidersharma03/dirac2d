@@ -3,7 +3,6 @@
  *  Dirac2D
  *
  *  Created by Prashant on 23/04/12.
- *  Copyright 2012 Sourcebits Technologies. All rights reserved.
  *
  */
 
