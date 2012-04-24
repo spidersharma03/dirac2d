@@ -1,0 +1,36 @@
+/*
+ *  Capsule.h
+ *  Dirac2D
+ *
+ *  Created by Prashant on 24/04/12.
+ *
+ */
+
+#ifndef _CAPSULE_H_
+#define _CAPSULE_H_
+
+BEGIN_NAMESPACE_DIRAC2D
+
+class Capsule : public Shape
+{
+public:
+	Capsule();
+	
+	Capsule(const Shape& other);
+	
+	virtual dfloat getArea();
+	
+	
+protected:
+	
+	virtual void findCentroid();
+	
+protected:
+	
+	dfloat m_Radius;
+	dfloat m_Height;
+};
+
+END_NAMESPACE_DIRAC2D
+
+#endif

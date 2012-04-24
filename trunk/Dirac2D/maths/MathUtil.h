@@ -377,10 +377,25 @@ class Matrix3
 public:
 	Matrix3()
 	{
+		setIdentity();
 	}
 	
 	Matrix3(const Matrix3<T>& other)
 	{
+		setIdentity();
+	}
+	
+	void rotate(T angle)
+	{
+		T cs = cos(angle); T sn = sin(angle);
+		col1.x = cs; col2.x = -sn;
+		col1.x = sn; col2.x = cs;
+	}
+	
+	void translate( Vector2<T>& translation )
+	{
+		col3.x = translation.x;
+		col3.y = translation.y;
 	}
 	
 	Vector2<T> operator*( const Vector2<T>& v )
@@ -395,6 +410,13 @@ public:
 	
 	Matrix3<T> getInverse()
 	{
+	}
+	
+	void setIdentity()
+	{
+		col1.x = 1.0f; col2.x = 0.0f; col3.x = 0.0f;
+		col1.y = 0.0f; col2.y = 1.0f; col3.y = 0.0f;
+		col1.z = 0.0f; col2.z = 0.0f; col3.z = 1.0f;
 	}
 	
 public:
