@@ -1,24 +1,24 @@
 /*
- *  Circle.h
+ *  Box.h
  *  Dirac2D
  *
- *  Created by Prashant on 24/04/12.
+ *  Created by Prashant on 25/04/12.
  *
  */
 
-#ifndef _CIRCLE_H_
-#define _CIRCLE_H_
+#ifndef _BOX_H_
+#define _BOX_H_
 
 #include "Shape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class Circle : public Shape
+class Box : public Shape
 {
 public:
-	Circle();
+	Box();
 	
-	Circle(const Circle& other);
+	Box(const Box& other);
 	
 	virtual dfloat getArea();
 	
@@ -29,7 +29,7 @@ protected:
 	virtual void findCentroid();
 	
 protected:
-	dfloat m_Radius;
+	dfloat m_Width, m_Height;
 };
 
 END_NAMESPACE_DIRAC2D

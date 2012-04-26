@@ -37,5 +37,6 @@ typedef char dchar;
 typedef unsigned char duchar;
 typedef float dfloat;
 typedef double ddouble;
+typedef bool dbool;
 
 #endif

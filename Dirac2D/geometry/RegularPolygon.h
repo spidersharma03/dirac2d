@@ -20,7 +20,17 @@ public:
 	
 	virtual dfloat getArea();
 	
+	virtual Vector2f getSupportPoint(Vector2f& d);
+
+	inline dint32 getNumVertices()
+	{
+		return m_NumVertices;
+	}
 	
+	Vector2f* getVertices()
+	{
+		return m_Vertices;
+	}
 protected:
 	
 	virtual void findCentroid();

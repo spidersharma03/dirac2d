@@ -50,9 +50,22 @@
 #include "Settings.h"
 #include "definitions.h"
 #include "../Dirac2D/memory/memoryAllocator.h"
-#include "../Dirac2D/maths/MathUtil.h"
-#include "../Dirac2D/dynamics/PhysicalBody.h"
-#include "../Dirac2D/dynamics/contacts/Contact.h"
 
+#include "../Dirac2D/maths/MathUtil.h"
+
+#include "../Dirac2D/dynamics/PhysicalBody.h"
+#include "../Dirac2D/dynamics/PhysicalWorld.h"
+#include "../Dirac2D/dynamics/PhysicalAppearance.h"
+
+#include "../Dirac2D/dynamics/contacts/Contact.h"
+#include "../Dirac2D/dynamics/contacts/ContactSolver.h"
+
+#include "../Dirac2D/geometry/Shape.h"
+#include "../Dirac2D/geometry/Circle.h"
+#include "../Dirac2D/geometry/Capsule.h"
+#include "../Dirac2D/geometry/Box.h"
+#include "../Dirac2D/geometry/RegularPolygon.h"
+
+#include "../Dirac2D/collision/CollisionDetectionPolygon.h"
 
 #endif

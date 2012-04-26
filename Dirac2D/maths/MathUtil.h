@@ -14,6 +14,21 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 template< class T >
+T MIN( T a, T b )
+{
+	T min = a < b ? a : b;
+	return min;
+}
+
+template< class T >
+T MAX( T a, T b )
+{
+	T max = a > b ? a : b;
+	return max;
+}
+
+
+template< class T >
 class Point2
 {
 public:
@@ -42,6 +57,11 @@ public:
 	Point2<T> operator-( const Point2<T>& other )
 	{
 		return Point2<T>(x-other.x, y-other.y);
+	}
+	
+	inline void set( T inx, T iny)
+	{
+		x = inx; y = iny;
 	}
 	
 	void operator/=( const T d )
