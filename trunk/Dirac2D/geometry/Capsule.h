@@ -20,7 +20,8 @@ public:
 	
 	virtual dfloat getArea();
 	
-	
+	virtual Vector2f getSupportPoint(Vector2f& d);
+
 protected:
 	
 	virtual void findCentroid();

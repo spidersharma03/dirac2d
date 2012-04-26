@@ -6,9 +6,9 @@
  *
  */
 
-#include "../../definitions.h"
-#include "../../Settings.h"
-#include "../../maths/MathUtil.h"
+#include "../definitions.h"
+#include "../Settings.h"
+#include "../maths/MathUtil.h"
 
 #ifndef _SHAPE_H_
 #define _SHAPE_H_
@@ -17,7 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class Shape
 {
-	enum SHAPE_TYPE { EST_CIRCLE, EST_REGULARPOLY, EST_CAPSULE};
+	enum SHAPE_TYPE { EST_CIRCLE, EST_BOX, EST_REGULARPOLY, EST_CAPSULE };
 public:
 	Shape();
 	
@@ -25,7 +25,11 @@ public:
 	
 	virtual dfloat getArea();
 	
+	// For GJK/EPA 
+	virtual Vector2f getSupportPoint(Vector2f& d);
 	
+	Vector2f m_Centroid;
+
 protected:
 	
 	virtual void findCentroid();
@@ -33,7 +37,6 @@ protected:
 protected:
 	
 	dfloat m_Area;
-	Vector2f m_Centroid;
 	SHAPE_TYPE m_ShapeType;
 };
 

@@ -18,7 +18,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 struct Contact
 {
-	Point2f m_ContactPoint;
+	Vector2f m_ContactPoint;
 	dfloat m_Depth;
 };
 
@@ -26,6 +26,7 @@ struct ContactManifold
 {
 	Contact m_ContactPoints[MAX_CONTACTS];
 	Vector2f m_ContactNormal;
+	dchar m_NumContacts;
 };
 
 END_NAMESPACE_DIRAC2D
