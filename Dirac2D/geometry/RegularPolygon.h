@@ -11,7 +11,7 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class RegularPolygon : public Shape
+class RegularPolygon : public CollisionShape
 {
 public:
 	RegularPolygon();

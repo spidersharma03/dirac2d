@@ -11,12 +11,12 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class Capsule : public Shape
+class Capsule : public CollisionShape
 {
 public:
 	Capsule();
 	
-	Capsule(const Shape& other);
+	Capsule(const Capsule& other);
 	
 	virtual dfloat getArea();
 	
