@@ -9,11 +9,11 @@
 #ifndef _BOX_H_
 #define _BOX_H_
 
-#include "Shape.h"
+#include "CollisionShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class Box : public Shape
+class Box : public CollisionShape
 {
 public:
 	Box();

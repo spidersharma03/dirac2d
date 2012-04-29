@@ -10,7 +10,7 @@
 #include "../definitions.h"
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
-#include "../geometry/Shape.h"
+#include "../geometry/CollisionShape.h"
 #include "../geometry/RegularPolygon.h"
 #include "../dynamics/contacts/Contact.h"
 
@@ -99,16 +99,11 @@ static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold& contactManifol
 	dfloat u2 = refEdge.dot(o1);
 	dfloat lambda = u1/(u1-u2);
 	
-	if( u1 < 0.0f ) 
+	if( u1*u2 < 0.0f ) 
 	{
 		cp0.x = cp0.x + lambda*(cp1.x - cp0.x); 
 		cp0.y = cp0.y + lambda*(cp1.y - cp0.y); 
 	}
-	if( u2 < 0.0f )
-	{
-		cp1.x = cp0.x + lambda*(cp1.x - cp0.x); 
-		cp1.y = cp0.y + lambda*(cp1.y - cp0.y); 
-	}	
 }
 
 
@@ -152,7 +147,7 @@ dbool intersectPolygons( RegularPolygon& poly1, Matrix3f& xform1, RegularPolygon
 		}
 		Vector2f axisNormal(v1.x - v2.x, v2.y - v1.y); //Calculate the perpendicular to this edge and normalize it
 		
-		dfloat min1, min2, max1, max2; 
+		dfloat min1 = 0.0f, min2 = 0.0f, max1 = 0.0f, max2 = 0.0f; 
 		
 		//Project both Polygons on to the perpendicular
 		PROJECT_POLYGON( vertices1, numVertices1, axisNormal, min1, max1 )

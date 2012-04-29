@@ -9,11 +9,11 @@
 #ifndef _CIRCLE_H_
 #define _CIRCLE_H_
 
-#include "Shape.h"
+#include "CollisionShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class Circle : public Shape
+class Circle : public CollisionShape
 {
 public:
 	Circle();

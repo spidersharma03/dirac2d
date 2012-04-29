@@ -19,13 +19,22 @@ class Shape;
 // This Structure Contains all the physical attributes to construct a Physical Body
 struct PhysicalAttributes
 {
+	Vector2f m_Position;
+	dfloat m_Angle;
 	dfloat m_Friction;
 	dfloat e;
+	dfloat m_LinearDamping;
+	dfloat m_AngularDamping;
+};
+
+struct CollisionFilter
+{
 };
 
 struct CollisionAttributes
 {
 	Shape* m_Shape;
+	CollisionFilter m_Filter;
 };
 
 struct MassAttributes
@@ -43,6 +52,7 @@ public:
 public:
 	PhysicalAttributes m_PhysicalAttributes;
 	CollisionAttributes m_CollisionAttributes;
+	MassAttributes m_MassAttributes;
 };
 
 END_NAMESPACE_DIRAC2D

@@ -17,7 +17,12 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class ContactSolver
 {
-	
+public:
+	ContactSolver();
+
+	void buildJacobian();
+
+	void correctVelocities();
 };
 
 END_NAMESPACE_DIRAC2D
