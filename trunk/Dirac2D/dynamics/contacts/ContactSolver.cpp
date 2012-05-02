@@ -75,6 +75,9 @@ void ContactSolver::correctVelocities()
 		Vector2f& c1 = body1->m_Centre;
 		Vector2f& c2 = body2->m_Centre;
 		
+		body1->m_Transform.transformAsPoint(c1);
+		body2->m_Transform.transformAsPoint(c2);
+		
 		Vector2f tangent = manifold.m_ContactNormal.cross(-1.0f);
 		
 		for( dint32 i=0; i<manifold.m_NumContacts; i++ )
@@ -83,8 +86,7 @@ void ContactSolver::correctVelocities()
 			Vector2f r1 = p - c1;
 			Vector2f r2 = p - c2;
 			
-			body1->m_Transform.transformAsPoint(c1);
-			body2->m_Transform.transformAsPoint(c2);
+			
 			
 			dfloat Cdot_Normal, Cdot_Tangent; // Cdot = J * v
 			// Relative Velocity of the Contact point on the Bodies = V2 - V1 = v2 + w2xr2 - v1 - w1xr1
