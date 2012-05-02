@@ -8,6 +8,7 @@
 
 #include "../definitions.h"
 #include "../maths/MathUtil.h"
+#include "../common.h"
 
 #ifndef _PHYSICAL_BODY_H_
 #define _PHYSICAL_BODY_H_
@@ -15,6 +16,7 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 class PhysicalWorld;
+class CollisionShape;
 class PhysicalShape;
 class PhysicalAppearance;
 
@@ -47,8 +49,13 @@ public:
 	BODY_TYPE m_Type;
 	dfloat m_Mass, m_InvMass;
 	dfloat m_I, m_InvI;
+	
+	friend class CollisionManager;
+	friend class ContactSolver;
 protected:
 	dList<PhysicalShape*> m_ShapeList;
+	PhysicalShape* m_PhysicalShape;
+	CollisionShape* m_CollisionShape;
 };
 
 END_NAMESPACE_DIRAC2D

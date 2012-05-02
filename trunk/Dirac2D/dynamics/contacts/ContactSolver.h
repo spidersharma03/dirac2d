@@ -15,14 +15,22 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+class Contact;
+
 class ContactSolver
 {
 public:
 	ContactSolver();
 
+	// Initialize the effective mass matrix data.
 	void buildJacobian();
 
+	// Solve for the Normal and Tangent(Frictional) impulses and apply them on to the physical bodies.
 	void correctVelocities();
+	
+private:
+	Contact *m_Contacts;
+	dint32 m_NumContacts;
 };
 
 END_NAMESPACE_DIRAC2D

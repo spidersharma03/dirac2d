@@ -23,6 +23,10 @@ class PhysicalShape
 public:
 	PhysicalShape();	
 	
+public:
+	PhysicalBody* m_ParentBody;
+
+	PhysicalAppearance m_PhysicalAppearance;
 };
 
 END_NAMESPACE_DIRAC2D
