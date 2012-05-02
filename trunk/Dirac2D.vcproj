@@ -174,119 +174,155 @@
 				RelativePath=".\main.cpp"
 				>
 			</File>
+			<Filter
+				Name="dynamics"
+				>
+				<Filter
+					Name="contacts"
+					>
+					<File
+						RelativePath=".\Dirac2D\dynamics\contacts\ContactSolver.cpp"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="collision"
+				>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetectionPolygon.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionManager.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\Common.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Dirac2D\definitions.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Dirac2D\Dirac2D.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Dirac2D\Settings.h"
+				>
+			</File>
 			<Filter
-				Name="Dirac2D"
+				Name="collision"
 				>
 				<File
-					RelativePath=".\Common.h"
+					RelativePath=".\Dirac2D\collision\CollisionDetection.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Dirac2D\definitions.h"
+					RelativePath=".\Dirac2D\collision\CollisionDetectionPolygon.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Dirac2D\Dirac2D.h"
+					RelativePath=".\Dirac2D\collision\CollisionManager.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="dynamics"
+				>
+				<File
+					RelativePath=".\Dirac2D\dynamics\PhysicalAppearance.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Dirac2D\Settings.h"
+					RelativePath=".\Dirac2D\dynamics\PhysicalBody.h"
+					>
+				</File>
+				<File
+					RelativePath=".\PhysicalShape.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\dynamics\PhysicalWorld.h"
 					>
 				</File>
 				<Filter
-					Name="collision"
+					Name="joints"
 					>
 					<File
-						RelativePath=".\Dirac2D\collision\CollisionDetectionPolygon.h"
+						RelativePath=".\Dirac2D\dynamics\joints\Constraint.h"
 						>
 					</File>
 					<File
-						RelativePath=".\CollisionManager.h"
+						RelativePath=".\Dirac2D\dynamics\joints\DistantConstraint.h"
 						>
 					</File>
 				</Filter>
 				<Filter
-					Name="maths"
+					Name="contacts"
 					>
 					<File
-						RelativePath=".\Dirac2D\maths\MathUtil.h"
+						RelativePath=".\Dirac2D\dynamics\contacts\Contact.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\contacts\ContactSolver.h"
 						>
 					</File>
 				</Filter>
-				<Filter
-					Name="geometry"
+			</Filter>
+			<Filter
+				Name="geometry"
+				>
+				<File
+					RelativePath=".\Dirac2D\geometry\Box.h"
 					>
-					<File
-						RelativePath=".\Dirac2D\geometry\Box.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Dirac2D\geometry\Capsule.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Dirac2D\geometry\Circle.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Dirac2D\geometry\CollisionShape.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Dirac2D\geometry\RegularPolygon.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="memory"
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\Capsule.h"
 					>
-					<File
-						RelativePath=".\Dirac2D\memory\memoryAllocator.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="dynamics"
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\Circle.h"
 					>
-					<File
-						RelativePath=".\Dirac2D\dynamics\PhysicalAppearance.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Dirac2D\dynamics\PhysicalBody.h"
-						>
-					</File>
-					<File
-						RelativePath=".\PhysicalShape.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Dirac2D\dynamics\PhysicalWorld.h"
-						>
-					</File>
-					<Filter
-						Name="joints"
-						>
-					</Filter>
-					<Filter
-						Name="contacts"
-						>
-						<File
-							RelativePath=".\Dirac2D\dynamics\contacts\Contact.h"
-							>
-						</File>
-						<File
-							RelativePath=".\Dirac2D\dynamics\contacts\ContactSolver.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\CollisionShape.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\RegularPolygon.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="maths"
+				>
+				<File
+					RelativePath=".\Dirac2D\maths\MathUtil.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="memory"
+				>
+				<File
+					RelativePath=".\Dirac2D\memory\memoryAllocator.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
