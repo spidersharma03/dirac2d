@@ -6,10 +6,10 @@
  *
  */
 
-#include "PhysicalWorld.h"
+#include "../dynamics/PhysicalWorld.h"
 #include "CollisionManager.h"
 #include "CollisionDetection.h"
-#include "PhysicalBody.h"
+#include "../dynamics/PhysicalBody.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -23,10 +23,10 @@ void CollisionManager::update()
 	m_vecContacts.clear();
 	
 	// n2 Collision test
-	for( dint32 b1=0; b1<m_PhysicalWorld->m_vecPhysicalBodies.size(); b1++ )
+	for( duint32 b1=0; b1<m_PhysicalWorld->m_vecPhysicalBodies.size(); b1++ )
 	{
 		PhysicalBody* body1 = m_PhysicalWorld->m_vecPhysicalBodies[b1];
-		for( dint32 b2=0; b2<m_PhysicalWorld->m_vecPhysicalBodies.size(); b2++ )
+		for( duint32 b2=0; b2<m_PhysicalWorld->m_vecPhysicalBodies.size(); b2++ )
 		{
 			PhysicalBody* body2 = m_PhysicalWorld->m_vecPhysicalBodies[b2];
 

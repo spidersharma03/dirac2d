@@ -7,7 +7,7 @@
  */
 
 #include "CollisionDetection.h"
-#include "CollisionShape.h"
+#include "../geometry/CollisionShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
