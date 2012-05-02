@@ -50,7 +50,7 @@ void ContactSolver::buildJacobian()
 			// Effective mass for Normal Impulses
 			contact->m_NormalMassMatrix[i] = 1.0f/JInvMJT + contact->m_CFM;
 			// Positional Error for Position Stabilization( Baumgarte )
-			contact->m_PositionError[i] = -contact->m_ERP * MIN( 0.0, depth + ALLOWED_PENETRATION);
+			contact->m_PositionError[i] = -contact->m_ERP * MIN( 0.0f, depth + ALLOWED_PENETRATION);
 			
 			dfloat r1cross_t = r1.cross(t);
 			dfloat r2cross_t = r2.cross(t);
@@ -86,8 +86,6 @@ void ContactSolver::correctVelocities()
 			Vector2f r1 = p - c1;
 			Vector2f r2 = p - c2;
 			
-			
-			
 			dfloat Cdot_Normal, Cdot_Tangent; // Cdot = J * v
 			// Relative Velocity of the Contact point on the Bodies = V2 - V1 = v2 + w2xr2 - v1 - w1xr1
 			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
@@ -110,7 +108,7 @@ void ContactSolver::correctVelocities()
 			body2->m_AngularVelocity -= body2->m_InvI * Vector2f::cross( r2, correctiveImpulse);		
 			
 			oldImpulseMag = contact->m_TangentImpulse;
-			dfloat mu; 
+			dfloat mu = 0.0f; 
 			dfloat maxFriction = contact->m_NormalImpulse * mu;
 			correctiveImpulseMag = contact->m_FrictionMassMatrix[i] * -Cdot_Tangent;
 			contact->m_TangentImpulse = CLAMP(correctiveImpulseMag, -maxFriction, maxFriction);
