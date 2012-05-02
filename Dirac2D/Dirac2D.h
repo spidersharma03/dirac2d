@@ -51,25 +51,29 @@
 #include "definitions.h"
 #include "Common.h"
 
-#include "../Dirac2D/memory/memoryAllocator.h"
+#include "memory/memoryAllocator.h"
 
-#include "../Dirac2D/maths/MathUtil.h"
+#include "maths/MathUtil.h"
 
-#include "../Dirac2D/dynamics/PhysicalBody.h"
-#include "../Dirac2D/dynamics/PhysicalWorld.h"
-#include "../Dirac2D/dynamics/PhysicalAppearance.h"
-#include "../Dirac2D/dynamics/PhysicalShape.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalWorld.h"
+#include "dynamics/PhysicalAppearance.h"
+#include "dynamics/PhysicalShape.h"
 
-#include "../Dirac2D/dynamics/contacts/Contact.h"
-#include "../Dirac2D/dynamics/contacts/ContactSolver.h"
+#include "dynamics/contacts/Contact.h"
+#include "dynamics/contacts/ContactSolver.h"
 
-#include "../Dirac2D/geometry/CollisionShape.h"
-#include "../Dirac2D/geometry/Circle.h"
-#include "../Dirac2D/geometry/Capsule.h"
-#include "../Dirac2D/geometry/Box.h"
-#include "../Dirac2D/geometry/RegularPolygon.h"
+#include "dynamics/joints/Constraint.h"
+#include "dynamics/joints/DistantConstraint.h"
 
-#include "../Dirac2D/collision/CollisionDetectionPolygon.h"
-#include "../Dirac2D/collision/CollisionManager.h"
+#include "geometry/CollisionShape.h"
+#include "geometry/Circle.h"
+#include "geometry/Capsule.h"
+#include "geometry/Box.h"
+#include "geometry/RegularPolygon.h"
+
+#include "collision/CollisionDetection.h"
+#include "collision/CollisionDetectionPolygon.h"
+#include "collision/CollisionManager.h"
 
 #endif

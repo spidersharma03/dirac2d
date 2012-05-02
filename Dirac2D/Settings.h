@@ -17,6 +17,8 @@ BEGIN_NAMESPACE_DIRAC2D
 #define MAX_CONTACTS 2
 // Maximum Number of vertices a Polygon can have
 #define MAX_POLY_VERTICES 20
+// Allowed penetration for collision
+#define ALLOWED_PENETRATION 0.01
 
 END_NAMESPACE_DIRAC2D
 

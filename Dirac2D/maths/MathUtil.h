@@ -13,20 +13,40 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-template< class T >
-T MIN( T a, T b )
+template< typename T >
+inline T MIN( T a, T b )
 {
 	T min = a < b ? a : b;
 	return min;
 }
 
-template< class T >
-T MAX( T a, T b )
+template< typename T >
+inline T MAX( T a, T b )
 {
 	T max = a > b ? a : b;
 	return max;
 }
 
+template< typename T >
+inline void SWAP( T a, T b )
+{
+	T temp = a;
+	a = b;
+	b = temp;
+}
+
+template< typename T >
+inline T CLAMP( T a, T lo, T hi )
+{
+	if( a < lo )
+	{
+		a = lo;
+		return a;
+	}
+	if( a > hi )
+		a = hi;
+	return a;
+}
 
 template< class T >
 class Point2
@@ -148,7 +168,22 @@ public:
 	
 	inline Vector2<T> cross( T d )
 	{
-		return Vector2<T>(-d*y, d*x);
+		return Vector2<T>(d*y, -d*x);
+	}
+	
+	static inline Vector2<T> cross( Vector2<T>& v, T d )
+	{
+		return Vector2<T>(d * v.y, -d * v.x);
+	}
+	
+	static inline Vector2<T> cross( T d, Vector2<T>& v )
+	{
+		return Vector2<T>(-d * v.y, d * v.x);
+	}
+	
+	static inline T cross( Vector2<T>& v1, Vector2<T>& v2 )
+	{
+		return  v1.x * v2.y - v1.y * v2.x;
 	}
 	
 	inline T length()
@@ -172,74 +207,83 @@ public:
 		}
 	}
 	
-	void add( Vector2<T>& other )
+	inline void add( Vector2<T>& other )
 	{
 		x += other.x;
 		y += other.y;
 	}
 	
-	void sub( Vector2<T>& other )
+	inline void sub( Vector2<T>& other )
 	{
 		x -= other.x;
 		y -= other.y;
 	}
 	
-	Vector2<T> operator-()
+	inline Vector2<T> operator-()
 	{
 		return Vector2<T>(-x, -y);
 	}
 
-	Vector2<T> operator+( const Vector2<T>& other )
+	inline Vector2<T> operator+( const Vector2<T>& other )
 	{
 		return Vector2<T>(x+other.x, y+other.y);
 	}
 	
-	Vector2<T> operator-( const Vector2<T>& other )
+	inline Vector2<T> operator-( const Vector2<T>& other )
 	{
 		return Vector2<T>(x-other.x, y-other.y);
 	}
 	
-	void operator/=( const T d )
+	inline Vector2<T> operator*( const Vector2<T>& other )
+	{
+		return Vector2<T>(x*other.x, y*other.y);
+	}
+	
+	inline Vector2<T> operator*( const T d )
+	{
+		return Vector2<T>(x*d, y*d);
+	}
+	
+	inline void operator/=( const T d )
 	{
 		x /= d;
 		y /= d;
 	}
 	
-	void operator/=( const Vector2<T>& other )
+	inline void operator/=( const Vector2<T>& other )
 	{
 		x /= other.x;
 		y /= other.y;
 	}
 	
-	void operator*=( const Vector2<T>& other )
+	inline void operator*=( const Vector2<T>& other )
 	{
 		x *= other.x;
 		y *= other.y;
 	}
 	
-	void operator*=( const T d )
+	inline void operator*=( const T d )
 	{
 		x *= d;
 		y *= d;
 	}
 	
-	void operator+=( const Vector2<T>& other )
+	inline void operator+=( const Vector2<T>& other )
 	{
 		x += other.x;
 		y += other.y;
 	}
 	
-	void operator-=( const Vector2<T>& other )
+	inline void operator-=( const Vector2<T>& other )
 	{
 		x -= other.x;
 		y -= other.y;
 	}
 	
-	bool operator==( const Vector2<T>& other )
+	inline bool operator==( const Vector2<T>& other )
 	{
 		return (x==other.x) && (y==other.y);
 	}
-	
 public:
 	T x, y;
 };
@@ -373,21 +417,29 @@ class Matrix2
 public:
 	Matrix2()
 	{
-		col1.x = 1; col1.y = 0;
-		col2.x = 0; col2.y = 1;
+		a11 = 1; a12 = 0;
+		a21 = 0; a22 = 1;
 	}
 	
-	Matrix2(Vector2<T> c1, Vector2<T> c2 ):col1(c1), col2(c2)
+	Matrix2(Vector2<T> c1, Vector2<T> c2 )
 	{
+		a11 = c1.x; a12 = c2.x;
+		a21 = c1.y; a22 = c2.y;
 	}
 	
-	T determinant()
+	inline T determinant()
 	{
-		return col1.x*col2.y - col1.y*col2.x;
+		return a11 * a22 - a21 * a12;
 	}
 	
-public:
-	Vector2<T> col1, col2;
+	inline T& operator[] ( dint32 index )
+	{
+		return (&a11)[index];
+	}
+	
+public:	
+	
+	T a11, a21, a12, a22;
 };
 
 
@@ -428,6 +480,14 @@ public:
 		return Vector2<T>( col1.x*p.x + col2.x*p.y + col3.x,  col1.y*p.x + col2.y*p.y + col3.y);
 	}
 	
+	void transformAsPoint(Vector2<T>& v)
+	{
+	}
+	
+	void transformAsVector(Vector2<T>& v)
+	{
+	}
+	
 	Matrix3<T> getInverse()
 	{
 	}
@@ -442,6 +502,14 @@ public:
 public:
 	Vector3<T> col1, col2, col3;
 };
+
+template< class T>
+class AABB2
+{
+};
+
+typedef AABB2<dfloat> AABB2f;
+typedef AABB2<ddouble> AABB2d;
 
 typedef Vector2<dfloat> Vector2f;
 typedef Vector2<ddouble> Vector2d;
