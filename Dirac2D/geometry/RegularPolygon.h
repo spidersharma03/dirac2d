@@ -9,6 +9,8 @@
 #ifndef _REGULAR_POLYGON_H_
 #define _REGULAR_POLYGON_H_
 
+#include "CollisionShape.h"
+
 BEGIN_NAMESPACE_DIRAC2D
 
 class RegularPolygon : public CollisionShape
@@ -16,12 +18,16 @@ class RegularPolygon : public CollisionShape
 public:
 	RegularPolygon();
 	
-	RegularPolygon(const RegularPolygon& other);
+	//RegularPolygon(const RegularPolygon& other);
 	
 	virtual dfloat getArea();
 	
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
+	virtual dbool isPointInside(Point2f& p);
+	
+	virtual void updateAABB(Matrix3f& xForm);
+	
 	inline dint32 getNumVertices()
 	{
 		return m_NumVertices;

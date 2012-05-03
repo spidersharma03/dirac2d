@@ -9,6 +9,8 @@
 #ifndef _CAPSULE_H_
 #define _CAPSULE_H_
 
+#include "CollisionShape.h"
+
 BEGIN_NAMESPACE_DIRAC2D
 
 class Capsule : public CollisionShape
@@ -16,12 +18,16 @@ class Capsule : public CollisionShape
 public:
 	Capsule();
 	
-	Capsule(const Capsule& other);
+	//Capsule(const Capsule& other);
 	
 	virtual dfloat getArea();
 	
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
+	virtual dbool isPointInside(Point2f& p);
+	
+	virtual void updateAABB(Matrix3f& xForm);
+	
 protected:
 	
 	virtual void findCentroid();

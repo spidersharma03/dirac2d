@@ -18,12 +18,16 @@ class Circle : public CollisionShape
 public:
 	Circle();
 	
-	Circle(const Circle& other);
+	//Circle(const Circle& other);
 	
 	virtual dfloat getArea();
 	
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
+	virtual dbool isPointInside(Point2f& p);
+	
+	virtual void updateAABB(Matrix3f& xForm);
+	
 protected:
 	
 	virtual void findCentroid();

@@ -24,9 +24,7 @@ class PhysicalBody
 {
 	enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
 
-public:
-	PhysicalBody(PhysicalWorld* world, PhysicalShape*);
-	
+public:	
 	void applyForce( Vector2f& force );	
 	
 	void applyForce( Vector2f& force, Vector2f& point );	
@@ -37,7 +35,10 @@ public:
 
 	void applyTorque( Vector2f& torque );	
 
-	PhysicalShape* createPhysicalShape(PhysicalAppearance*);
+	PhysicalShape* createPhysicalShape(PhysicalAppearance& pApp);
+	
+	void updateTransform();
+	
 public:
 	Vector2f m_Centre;
 	Vector2f m_Velocity;
@@ -50,12 +51,18 @@ public:
 	dfloat m_Mass, m_InvMass;
 	dfloat m_I, m_InvI;
 	
+	Vector2f m_Force;
+	
 	friend class CollisionManager;
 	friend class ContactSolver;
+	friend class PhysicalWorld;
+	
 protected:
-	dList<PhysicalShape*> m_ShapeList;
+	
+	PhysicalBody(PhysicalWorld* world, PhysicalShape*);
+
+	PhysicalShape* m_PhysicalShapeList;
 	PhysicalShape* m_PhysicalShape;
-	CollisionShape* m_CollisionShape;
 };
 
 END_NAMESPACE_DIRAC2D

@@ -10,6 +10,7 @@
 #include "CollisionManager.h"
 #include "CollisionDetection.h"
 #include "../dynamics/PhysicalBody.h"
+#include "../dynamics/PhysicalShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -33,7 +34,7 @@ void CollisionManager::update()
 			if( body1 == body2 )continue;
 			
 			ContactManifold manifold;
-			dbool res = intersectShapes( body1->m_CollisionShape, body1->m_Transform, body2->m_CollisionShape, body2->m_Transform, &manifold);
+			dbool res = intersectShapes( body1->m_PhysicalShape->m_CollisionShape, body1->m_Transform, body2->m_PhysicalShape->m_CollisionShape, body2->m_Transform, &manifold);
 			if( res )
 			{
 				Contact contact;
