@@ -17,16 +17,35 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 class PhysicalBody;
+class CollisionShape;
 
 class PhysicalShape
 {
-public:
-	PhysicalShape();	
+protected:
+	PhysicalShape()
+	{
+	}
 	
 public:
 	PhysicalBody* m_ParentBody;
 
-	PhysicalAppearance m_PhysicalAppearance;
+	dfloat m_Friction;
+	dfloat m_Elasticity;
+	
+	MassAttributes m_MassAttributes;
+	
+	CollisionShape* m_CollisionShape;
+	CollisionFilter m_CollisionFilter;
+	
+	Vector2f m_Position;
+	dfloat m_Angle;
+
+protected:
+	// pointer to the next shape from the parent body.
+	PhysicalShape* m_NextShape;
+	
+public:
+	friend class PhysicalBody;
 };
 
 END_NAMESPACE_DIRAC2D

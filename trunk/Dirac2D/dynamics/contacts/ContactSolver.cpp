@@ -108,7 +108,7 @@ void ContactSolver::correctVelocities()
 			body2->m_AngularVelocity -= body2->m_InvI * Vector2f::cross( r2, correctiveImpulse);		
 			
 			oldImpulseMag = contact->m_TangentImpulse;
-			dfloat mu = 0.0f; 
+			dfloat mu = ( shape1->m_Friction + shape2->m_Friction ) * 0.5f; 
 			dfloat maxFriction = contact->m_NormalImpulse * mu;
 			correctiveImpulseMag = contact->m_FrictionMassMatrix[i] * -Cdot_Tangent;
 			contact->m_TangentImpulse = CLAMP(correctiveImpulseMag, -maxFriction, maxFriction);

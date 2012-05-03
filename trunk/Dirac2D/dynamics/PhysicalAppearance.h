@@ -17,21 +17,19 @@ BEGIN_NAMESPACE_DIRAC2D
 class CollisionShape;
 
 /*
- All the Attributes related to the Physical Body are declared. PhysicalAppearance is a Collection of all the Attributes.
- PhysicalAttributes contains all the attributes related to Physics. eg friction, damping, elasticity.
+ All the Attributes related to the Physical Shape are declared. PhysicalAppearance is a Collection of all the Attributes.
+ PhysicalAttributes contains all the attributes related to PhysicalShape. eg friction, elasticity.
  CollisionAttributes contains Shape data and Collision Filters
- MassAttributes contains mass, moment of inertia and centre of mass.
+ MassAttributes contains mass, moment of inertia, density and centre of mass of the PhysicalShape.
  */
 
-// This Structure Contains all the physical attributes to construct a Physical Body
+// This Structure Contains all the physical attributes to construct a Physical Shape
 struct PhysicalAttributes
 {
 	Vector2f m_Position;
 	dfloat m_Angle;
 	dfloat m_Friction;
-	dfloat e;
-	dfloat m_LinearDamping;
-	dfloat m_AngularDamping;
+	dfloat m_Elasticity;
 };
 
 struct CollisionFilter
@@ -48,13 +46,16 @@ struct MassAttributes
 {
 	dfloat m_Mass;
 	dfloat m_I;
+	dfloat m_Density;
 	Vector2f m_C;
 };
 
 class PhysicalAppearance
 {
 public:
-	PhysicalAppearance();
+	PhysicalAppearance()
+	{
+	}
 		
 public:
 	PhysicalAttributes m_PhysicalAttributes;
