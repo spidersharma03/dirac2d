@@ -344,6 +344,22 @@
 					RelativePath=".\Dirac2D\maths\MathUtil.h"
 					>
 				</File>
+				<File
+					RelativePath=".\Dirac2D\maths\Matrix2.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\maths\Matrix3.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\maths\Vector2.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\maths\Vector3.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="memory"
