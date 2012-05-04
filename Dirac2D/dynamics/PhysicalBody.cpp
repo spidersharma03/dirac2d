@@ -8,21 +8,20 @@
 
 #include "PhysicalBody.h"
 #include "PhysicalShape.h"
-//#include "PhysicalAppearance.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
 PhysicalBody::PhysicalBody(PhysicalWorld* world, PhysicalShape* shape)
 {
-	//m_Angle = 0.0f;
-//	m_LinearDamping = 0.0f;
-//	m_AngularDamping = 0.0f;
-//	m_Type = EBT_DYNAMIC;
-//	m_Mass = m_InvMass = 1.0f;
-//	m_I = m_InvI = 1.0f;
-//	
-//	PhysicalAppearance pApp;
-//	pApp.m_CollisionAttributes.m_Shape = 0;
+	m_Angle = 0.0f;
+	m_LinearDamping = 0.0f;
+	m_AngularDamping = 0.0f;
+	m_Type = EBT_DYNAMIC;
+	m_Mass = m_InvMass = 1.0f;
+	m_I = m_InvI = 1.0f;
+	
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = shape->m_CollisionShape;
 	//PhysicalShape* pShape = new PhysicalShape();
 }
 

@@ -27,8 +27,9 @@ BEGIN_NAMESPACE_DIRAC2D
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-#define PROJECT_POLYGON( VERTICES, NUMVERTICES, AXIS, MINIMUM, MAXIMUM ) \
+#define PROJECT_POLYGON( POLYGON, NUMVERTICES, AXIS, MINIMUM, MAXIMUM ) \
 { \
+  Vector2f* VERTICES = POLYGON->getVertices();	\
   float dot = AXIS.dot(VERTICES[0]); \
   min1 = max1 = dot; \
   for( dint32 i = 1; i < NUMVERTICES; i++ ) \
@@ -39,6 +40,56 @@ BEGIN_NAMESPACE_DIRAC2D
   } \
 } \
 
+// Project both the Polygons on to the list of seperating axis of Polygon 1. if there is an Axis which seperates the Polygons, then return.
+static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, RegularPolygon* poly2, Matrix3f& polyxForm2, dfloat& minDistance, Vector2f& collisionNormal )
+{
+	dint32 numVertices1 = poly1->getNumVertices();
+	dint32 numVertices2 = poly2->getNumVertices();
+
+	Vector2f* vertices = poly1->getVertices();
+	
+	Vector2f& v1 = vertices[0];
+	Vector2f& v2 = vertices[0];
+	Matrix2f xForm1, xForm2;
+	// Transform which converts Seperating Normal into Polygon1's Space.
+	xForm1 = polyxForm1.getRotationMatrixTransposed();
+	xForm2 = polyxForm2.getRotationMatrix();
+	xForm1 *= xForm2;
+	
+	for( dint32 i=0; i<numVertices1; i++ )
+	{
+		v1 = vertices[i];
+		if( i == numVertices1-1)
+			i = -1;
+		v2 = vertices[i+1];
+		
+		Vector2f axisNormal(v1.x - v2.x, v2.y - v1.y); //Calculate the perpendicular to this edge and normalize it
+		
+		dfloat min1 = 10000.0f, min2 = 10000.0f, max1 = -10000.0f, max2 = -10000.0f; 
+		
+		//Project both Polygons on to the perpendicular
+		PROJECT_POLYGON( poly1, numVertices1, axisNormal, min1, max1 )
+		
+		// Transform the seperating normal into Polygon1's space
+		axisNormal = xForm1 * axisNormal;
+		
+		PROJECT_POLYGON( poly2 ,numVertices2, axisNormal, min2, max2 )
+		
+		dfloat distance; //Calculate the distance between the two intervals
+		distance = min1 < min2 ? min2-max1 : min1-max2;
+		
+		if( distance > 0.0f ) //If the intervals don't overlap, return, since there is no collision
+			return false;
+		
+		if( fabs( distance ) < minDistance )
+		{
+			minDistance = fabs( distance );
+			collisionNormal = axisNormal; //Save collision information for later
+		}
+	}
+	return true;
+}
+
 // Finds an Edge on the Shape which is most perpendicular to the input Normal
 static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& edgeVertex1, dint32& edgeVertex2 )
 {
@@ -47,10 +98,14 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	dint32 index;
 	dint32 numVertices = poly->getNumVertices();
 	Vector2f* vertices = poly->getVertices();
+	
+	// Transform the input normal in polygon's space
+	Vector2f localNormal = normal;
+	
 	for( dint32 i=0; i<numVertices; i++ )
 	{
 		Vector2f& p =  vertices[i];
-		float dot = p.dot(normal);
+		float dot = p.dot(localNormal);
 		if( dot > maxDot )
 		{
 			maxDot = dot;
@@ -77,6 +132,8 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 		index2 = newindex;
 		p1 = vertices[index1];
 		p2 = vertices[index2];
+	
+		
 		d = p2 - p1;
 		dfloat d1 = d.dot(normal);
 		if( fabs(dot) > fabs(d1) )

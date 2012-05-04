@@ -30,7 +30,6 @@ PhysicalWorld::PhysicalWorld()
 	
 PhysicalBody* PhysicalWorld::createPhysicalBody()
 {
-	
 	return 0;
 }
 	
