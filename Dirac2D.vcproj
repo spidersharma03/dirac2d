@@ -178,6 +178,14 @@
 			<Filter
 				Name="dynamics"
 				>
+				<File
+					RelativePath=".\Dirac2D\dynamics\PhysicalBody.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\dynamics\PhysicalWorld.cpp"
+					>
+				</File>
 				<Filter
 					Name="contacts"
 					>
