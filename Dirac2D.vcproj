@@ -60,6 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="glut32.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -202,6 +203,34 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="geometry"
+				>
+				<File
+					RelativePath=".\Dirac2D\geometry\Box.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\Capsule.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\Circle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\RegularPolygon.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="draw"
+				>
+				<File
+					RelativePath=".\Dirac2D\draw\GLRenderer.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -321,6 +350,18 @@
 				>
 				<File
 					RelativePath=".\Dirac2D\memory\memoryAllocator.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="draw"
+				>
+				<File
+					RelativePath=".\Dirac2D\draw\GLRenderer.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\draw\Renderer.h"
 					>
 				</File>
 			</Filter>
