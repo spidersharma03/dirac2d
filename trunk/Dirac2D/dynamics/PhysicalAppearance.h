@@ -7,7 +7,7 @@
 
 #include "../definitions.h"
 #include "../Settings.h"
-#include "../maths/MathUtil.h"
+#include "../maths/Vector2.h"
 
 #ifndef _PHYSICAL_APPEARANCE_H_
 #define _PHYSICAL_APPEARANCE_H_

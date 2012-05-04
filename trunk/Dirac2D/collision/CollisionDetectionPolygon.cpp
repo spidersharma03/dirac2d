@@ -25,60 +25,23 @@ dbool intersectPolygons( RegularPolygon& poly1, Matrix3f& xform1, RegularPolygon
 
 
 // Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& xform1, RegularPolygon* poly2, Matrix3f& xform2, ContactManifold* contactManifold)
+dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, RegularPolygon* poly2, Matrix3f& polygonXform2, ContactManifold* contactManifold)
 {
-	dint32 numVertices1 = poly1->getNumVertices();
-	dint32 numVertices2 = poly2->getNumVertices();
 	Vector2f* vertices1 = poly1->getVertices();
 	Vector2f* vertices2 = poly2->getVertices();
-	
-	// Loop through the vertices of polygon1
-	Vector2f& v1 = vertices1[0];
-	Vector2f& v2 = vertices1[1];
 	
 	float minDistance = 10000.0f; //Initialize the length of the collision vector to a relatively large value
 	Vector2f collisionNormal;
 	
-	for( dint32 i=0; i<numVertices1+numVertices2; i++ )
-	{
-		if( i < numVertices1 )
-		{
-		    v1 = vertices1[i];
-			if( i == numVertices1-1)
-				i = -1;
-		    v2 = vertices1[i+1];
-		}
-		else
-		{
-			v1 = vertices2[i-numVertices1];
-			if( i == numVertices1+numVertices2-1)
-				i = numVertices1-1;
-			v2 = vertices2[i-numVertices1+1];
-		}
-		Vector2f axisNormal(v1.x - v2.x, v2.y - v1.y); //Calculate the perpendicular to this edge and normalize it
-		
-		dfloat min1 = 0.0f, min2 = 0.0f, max1 = 0.0f, max2 = 0.0f; 
-		
-		//Project both Polygons on to the perpendicular
-		PROJECT_POLYGON( vertices1, numVertices1, axisNormal, min1, max1 )
-		
-		PROJECT_POLYGON( vertices2, numVertices2, axisNormal, min2, max2 )
-		
-		dfloat distance; //Calculate the distance between the two intervals
-		distance = min1 < min2 ? min2-max1 : min1-max2;
-		
-		if( distance > 0.0f ) //If the intervals don't overlap, return, since there is no collision
-			return false;
-		
-		if( fabs( distance ) < minDistance )
-		{
-			minDistance = fabs( distance );
-			collisionNormal = axisNormal; //Save collision information for later
-		}
-		
-	}
+	dbool bRes = findSeperationAxis(poly1, polygonXform1, poly2, polygonXform2, minDistance, collisionNormal);
 	
-	//dfloat m_CollisionDepth = minDistance;
+	if( !bRes )
+		return false;
+	
+	bRes = findSeperationAxis(poly2, polygonXform2, poly1, polygonXform1, minDistance, collisionNormal);
+
+	if( !bRes )
+		return false;
 	
 	Vector2f d = poly1->m_Centroid  - poly2->m_Centroid;
 	

@@ -26,6 +26,12 @@ protected:
 	{
 	}
 	
+	void setAsBox(dfloat width, dfloat height);
+	
+	void setAsCircle(dfloat radius);
+	
+	void setAsCapsule( dfloat radius, dfloat height);
+	
 public:
 	PhysicalBody* m_ParentBody;
 
