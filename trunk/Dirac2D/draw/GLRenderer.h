@@ -11,7 +11,11 @@
 #ifndef _GL_RENDERER_H_
 #define _GL_RENDERER_H_
 
-#include <OpenGL/OpenGL.h>
+#ifdef WIN32
+  #include <GL/glut.h>
+#else
+  #include <OpenGL/OpenGL.h>
+#endif
 
 BEGIN_NAMESPACE_DIRAC2D
 
