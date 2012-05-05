@@ -82,6 +82,11 @@ public:
 		}
 	}
 	
+	inline void set( T inx, T iny)
+	{
+		x = inx; y = iny;
+	}
+	
 	inline void add( Vector2<T>& other )
 	{
 		x += other.x;

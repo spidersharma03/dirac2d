@@ -43,7 +43,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	if( !bRes )
 		return false;
 	
-	Vector2f d = poly1->m_Centroid  - poly2->m_Centroid;
+	Vector2f d = polygonXform1 * poly1->m_Centroid  - polygonXform2 * poly2->m_Centroid;
 	
 	dfloat dot = d.dot(collisionNormal);
 	
@@ -55,15 +55,17 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	Vector2f edge1, edge2;
 	dint32 p1, p2, p3, p4;
 	
-	findCandidateEdge( poly2, collisionNormal , p1, p2 );
+	Vector2f normalLocal = polygonXform2.getRotationMatrixTransposed() * collisionNormal;
 	
-	Vector2f negNormal = -collisionNormal;
+	findCandidateEdge( poly2, normalLocal , p1, p2 );
+	
+	Vector2f negNormal = -(polygonXform1.getRotationMatrixTransposed() * collisionNormal);
 	
 	findCandidateEdge( poly1, negNormal , p3, p4 );
 	
 	// Find Reference and incident Edges
-	Vector2f refEdge      = vertices2[p2] - vertices2[p1];
-	Vector2f incidentEdge = vertices1[p4] - vertices1[p3];
+	Vector2f refEdge      = polygonXform2 * (vertices2[p2] - vertices2[p1] );
+	Vector2f incidentEdge = polygonXform1 * (vertices1[p4] - vertices1[p3] );
 	
 	dot = refEdge.dot(collisionNormal);
 	dbool bFlip = false;
@@ -86,8 +88,8 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 		bFlip = true;
 	}
 	
-	contactManifold->m_ContactPoints[0].m_Point = vertices1[p3];
-	contactManifold->m_ContactPoints[0].m_Point = vertices1[p4];
+	contactManifold->m_ContactPoints[0].m_Point = vertices2[p3];
+	contactManifold->m_ContactPoints[0].m_Point = vertices2[p4];
 	
 	// Clip Against first Edge Plane
 	clip(refEdge, vertices1[p1], contactManifold);
