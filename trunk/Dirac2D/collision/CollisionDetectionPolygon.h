@@ -27,17 +27,23 @@ BEGIN_NAMESPACE_DIRAC2D
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-#define PROJECT_POLYGON( POLYGON, NUMVERTICES, AXIS, MINIMUM, MAXIMUM ) \
+#define PROJECT_POLYGON( POLYGON, NUMVERTICES, AXIS, MININDEX , MAXINDEX ) \
 { \
   Vector2f* VERTICES = POLYGON->getVertices();	\
   float dot = AXIS.dot(VERTICES[0]); \
-  min1 = max1 = dot; \
+  dfloat min = dot; dfloat max = dot; \
   for( dint32 i = 1; i < NUMVERTICES; i++ ) \
   { \
 	dot = AXIS.dot(VERTICES[i]); \
-	MINIMUM = MIN( dot, MINIMUM ); \
-	MAXIMUM = MAX( dot, MAXIMUM ); \
-  } \
+	if( dot < min ){ \
+	  min = dot; \
+      MININDEX = i; \
+	} \
+    if( dot > max ){ \
+	  max = dot; \
+      MAXINDEX = i; \
+	} \
+} \
 } \
 
 // Project both the Polygons on to the list of seperating axis of Polygon 1. if there is an Axis which seperates the Polygons, then return.
@@ -51,10 +57,10 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 	Vector2f& v1 = vertices[0];
 	Vector2f& v2 = vertices[0];
 	Matrix2f xForm1, xForm2;
-	// Transform which converts Seperating Normal into Polygon1's Space.
-	xForm1 = polyxForm1.getRotationMatrixTransposed();
-	xForm2 = polyxForm2.getRotationMatrix();
-	xForm1 *= xForm2;
+	// Transform which converts Seperating Normal into Polygon2's Space.
+	xForm1 = polyxForm1.getRotationMatrix();
+	xForm2 = polyxForm2.getRotationMatrixTransposed();
+	xForm2 *= xForm1;
 	
 	for( dint32 i=0; i<numVertices1; i++ )
 	{
@@ -63,17 +69,17 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 			i = -1;
 		v2 = vertices[i+1];
 		
-		Vector2f axisNormal(v1.x - v2.x, v2.y - v1.y); //Calculate the perpendicular to this edge and normalize it
+		Vector2f axisNormal(v1.x - v2.x, v2.y - v1.y); //Calculate the perpendicular to this edge
 		
 		dfloat min1 = 10000.0f, min2 = 10000.0f, max1 = -10000.0f, max2 = -10000.0f; 
-		
+		dint32 minIndex, maxIndex;
 		//Project both Polygons on to the perpendicular
-		PROJECT_POLYGON( poly1, numVertices1, axisNormal, min1, max1 )
+		PROJECT_POLYGON( poly1, numVertices1, axisNormal, minIndex, maxIndex )
 		
-		// Transform the seperating normal into Polygon1's space
-		axisNormal = xForm1 * axisNormal;
+		// Transform the seperating normal into Polygon2's space
+		axisNormal = xForm2 * axisNormal;
 		
-		PROJECT_POLYGON( poly2 ,numVertices2, axisNormal, min2, max2 )
+		PROJECT_POLYGON( poly2 ,numVertices2, axisNormal, minIndex, maxIndex )
 		
 		dfloat distance; //Calculate the distance between the two intervals
 		distance = min1 < min2 ? min2-max1 : min1-max2;
