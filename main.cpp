@@ -13,5 +13,8 @@ int main (int argc, char * const argv[]) {
 	
 	v *= v1;
 	v = v + v1;
+	
+	//CollisionManager cm(0);
+	
     return 0;
 }

@@ -39,7 +39,9 @@ public:
 	virtual void drawPoint( Vector2f& point );
 	
 	virtual void setTransform( Matrix3f& xform);
-	
+
+protected:
+	dfloat data[16];
 };
 
 END_NAMESPACE_DIRAC2D
