@@ -10,16 +10,15 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 		
-Box::Box()
+Box::Box(dfloat width, dfloat height):m_Width(width), m_Height(height)
 {
+	m_Area = m_Width * m_Height;
 }
-//
-////Box(const Box& other);
-//
 
-dfloat Box::getArea()
+Box::Box(const Box& other)
 {
-	return 0.0f;
+	m_Width  = other.m_Width;
+	m_Height = other.m_Height;
 }
 
 Vector2f Box::getSupportPoint(Vector2f& d)

@@ -16,12 +16,10 @@ BEGIN_NAMESPACE_DIRAC2D
 class Circle : public CollisionShape
 {
 public:
-	Circle();
+	Circle(dfloat radius);
 	
-	//Circle(const Circle& other);
-	
-	virtual dfloat getArea();
-	
+	Circle(const Circle& other);
+		
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
 	virtual dbool isPointInside(Point2f& p);

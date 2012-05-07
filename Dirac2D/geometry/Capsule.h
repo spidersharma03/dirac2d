@@ -16,12 +16,10 @@ BEGIN_NAMESPACE_DIRAC2D
 class Capsule : public CollisionShape
 {
 public:
-	Capsule();
+	Capsule(dfloat radius, dfloat height);
 	
-	//Capsule(const Capsule& other);
-	
-	virtual dfloat getArea();
-	
+	Capsule(const Capsule& other);
+		
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
 	virtual dbool isPointInside(Point2f& p);

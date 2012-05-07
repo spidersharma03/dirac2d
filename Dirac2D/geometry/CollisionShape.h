@@ -22,9 +22,21 @@ class CollisionShape
 public:
 	CollisionShape(){}
 
-	virtual dfloat getArea() = 0;
+	CollisionShape( const CollisionShape& other )
+	{
+		m_Centroid  = other.m_Centroid;
+		m_Area	    = other.m_Area;
+		m_ShapeType = other.m_ShapeType;
+		m_AABB      = other.m_AABB;
+	}
+	
+	dfloat getArea()
+	{
+		return m_Area;
+	}
 	
 	// For GJK/EPA 
+	// returns Local Support Point on the Shape.
 	virtual Vector2f getSupportPoint(Vector2f& d) = 0;
 	
 	virtual dbool isPointInside(Point2f& p) = 0;

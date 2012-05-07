@@ -19,10 +19,6 @@ RegularPolygon::RegularPolygon()
 ////Box(const Box& other);
 //
 
-dfloat RegularPolygon::getArea()
-{
-	return 0.0f;
-}
 
 Vector2f RegularPolygon::getSupportPoint(Vector2f& d)
 {

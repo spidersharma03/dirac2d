@@ -19,9 +19,7 @@ public:
 	RegularPolygon();
 	
 	//RegularPolygon(const RegularPolygon& other);
-	
-	virtual dfloat getArea();
-	
+		
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
 	virtual dbool isPointInside(Point2f& p);
