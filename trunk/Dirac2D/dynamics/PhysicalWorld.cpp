@@ -19,6 +19,7 @@ PhysicalWorld::PhysicalWorld()
 {
 	m_CollisionManager = new CollisionManager(this);
 	m_ContactSolver    = new ContactSolver();
+	m_Renderer		   = 0;
 	
 	m_bGravityOn = true;
 	
@@ -69,5 +70,13 @@ void PhysicalWorld::Step(dfloat dt)
 	}
 }
 
+void PhysicalWorld::draw()
+{
+}
+
+void PhysicalWorld::setRenderer(Renderer* renderer)
+{
+	m_Renderer = renderer;
+}
 	
 END_NAMESPACE_DIRAC2D

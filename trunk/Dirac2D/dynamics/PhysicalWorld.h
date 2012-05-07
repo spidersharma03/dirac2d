@@ -23,6 +23,7 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
 class CollisionManager;
 class ContactSolver;
+class Renderer;
 
 class PhysicalWorld
 {
@@ -34,6 +35,10 @@ public:
 	PhysicalBody* createPhysicalBody(PhysicalAppearance& pApp);
 
 	void Step(dfloat dt);
+	
+	void draw();
+	
+	void setRenderer(Renderer*);
 	
 	inline void setGravityOn(dbool btrue)
 	{
@@ -53,6 +58,7 @@ public:
 private:
 	CollisionManager* m_CollisionManager;
 	ContactSolver*	  m_ContactSolver;
+	Renderer*         m_Renderer;
 	
 	vector<PhysicalBody*> m_vecPhysicalBodies;
 	
@@ -63,6 +69,7 @@ private:
 	
 	dfloat m_CFM, m_ERP;
 	dbool m_bGravityOn;
+	dfloat m_GravityScale;
 	
 	dint16 m_VelocityIterations;
 };

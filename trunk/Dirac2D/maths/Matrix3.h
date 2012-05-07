@@ -46,17 +46,20 @@ public:
 		return Vector2<T>( col1.x*v.x + col2.x*v.y,  col1.y*v.x + col2.y*v.y);
 	}
 	
-	//Point2<T> operator*( const Point2<T>& p )
-//	{
-//		return Vector2<T>( col1.x*p.x + col2.x*p.y + col3.x,  col1.y*p.x + col2.y*p.y + col3.y);
-//	}
-	
 	void transformAsPoint(Vector2<T>& v)
 	{
+		dfloat x = col1.x*v.x + col2.x*v.y + col3.x;
+		dfloat y = col1.y*v.x + col2.y*v.y + col3.y;
+		v.x = x;
+		v.y = y;
 	}
 	
 	void transformAsVector(Vector2<T>& v)
 	{
+		dfloat x = col1.x*v.x + col2.x*v.y;
+		dfloat y = col1.y*v.x + col2.y*v.y;
+		v.x = x;
+		v.y = y;
 	}
 	
 	Matrix3<T> getInverse()
@@ -78,6 +81,14 @@ public:
 		col1.x = 1.0f; col2.x = 0.0f; col3.x = 0.0f;
 		col1.y = 0.0f; col2.y = 1.0f; col3.y = 0.0f;
 		col1.z = 0.0f; col2.z = 0.0f; col3.z = 1.0f;
+	}
+	
+	void getPointer( T* data )
+	{
+		data[0] = col1.x; data[1] = col1.y; data[2] = 0.0;    data[3] = 0.0;
+		data[4] = col2.x; data[5] = col2.y; data[6] = 0.0;    data[7] = 0.0;
+		data[8] = 0.0;    data[9] = 0.0;    data[10] = 0.0;    data[11] = 0.0;
+		data[12] = col3.x; data[13] = col3.y; data[14] = 0.0;    data[15] = 1.0;
 	}
 	
 public:

@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
+		C257F15B154E71AE00270D77 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
+		C257F15C154E71AE00270D77 /* ContactSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */; };
+		C257F198154E75F400270D77 /* CollisionDetectionPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */; };
+		C257F1FD154E7D7E00270D77 /* CollisionDetection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */; };
+		C257F7C915528EE500270D77 /* PhysicalWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F7C815528EE500270D77 /* PhysicalWorld.cpp */; };
+		C257F8031552996600270D77 /* PhysicalBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F8021552996600270D77 /* PhysicalBody.cpp */; };
+		C257F80F15529CBC00270D77 /* GLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F80E15529CBC00270D77 /* GLRenderer.cpp */; };
+		C257F8361552A23500270D77 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C257F8351552A23500270D77 /* OpenGL.framework */; };
+		C257F85C1552BEF400270D77 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F85B1552BEF400270D77 /* Box.cpp */; };
+		C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9321552CCDA00270D77 /* Capsule.cpp */; };
+		C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */; };
+		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +39,46 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* Dirac2D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dirac2D; sourceTree = BUILT_PRODUCTS_DIR; };
-		C257EC2C1545891400270D77 /* Dirac2D */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Dirac2D; sourceTree = SOURCE_ROOT; };
+		C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionDetectionPolygon.h; path = Dirac2D/collision/CollisionDetectionPolygon.h; sourceTree = SOURCE_ROOT; };
+		C257F140154E71AE00270D77 /* CollisionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionManager.cpp; path = Dirac2D/collision/CollisionManager.cpp; sourceTree = SOURCE_ROOT; };
+		C257F141154E71AE00270D77 /* CollisionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionManager.h; path = Dirac2D/collision/CollisionManager.h; sourceTree = SOURCE_ROOT; };
+		C257F142154E71AE00270D77 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = Dirac2D/common.h; sourceTree = SOURCE_ROOT; };
+		C257F143154E71AE00270D77 /* definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = definitions.h; path = Dirac2D/definitions.h; sourceTree = SOURCE_ROOT; };
+		C257F144154E71AE00270D77 /* Dirac2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dirac2D.h; path = Dirac2D/Dirac2D.h; sourceTree = SOURCE_ROOT; };
+		C257F147154E71AE00270D77 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contact.h; path = Dirac2D/dynamics/contacts/Contact.h; sourceTree = SOURCE_ROOT; };
+		C257F148154E71AE00270D77 /* ContactSolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ContactSolver.cpp; path = Dirac2D/dynamics/contacts/ContactSolver.cpp; sourceTree = SOURCE_ROOT; };
+		C257F149154E71AE00270D77 /* ContactSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactSolver.h; path = Dirac2D/dynamics/contacts/ContactSolver.h; sourceTree = SOURCE_ROOT; };
+		C257F14B154E71AE00270D77 /* PhysicalAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicalAppearance.h; path = Dirac2D/dynamics/PhysicalAppearance.h; sourceTree = SOURCE_ROOT; };
+		C257F14C154E71AE00270D77 /* PhysicalBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicalBody.h; path = Dirac2D/dynamics/PhysicalBody.h; sourceTree = SOURCE_ROOT; };
+		C257F14D154E71AE00270D77 /* PhysicalShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicalShape.h; path = Dirac2D/dynamics/PhysicalShape.h; sourceTree = SOURCE_ROOT; };
+		C257F14E154E71AE00270D77 /* PhysicalWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicalWorld.h; path = Dirac2D/dynamics/PhysicalWorld.h; sourceTree = SOURCE_ROOT; };
+		C257F150154E71AE00270D77 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Box.h; path = Dirac2D/geometry/Box.h; sourceTree = SOURCE_ROOT; };
+		C257F151154E71AE00270D77 /* Capsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Capsule.h; path = Dirac2D/geometry/Capsule.h; sourceTree = SOURCE_ROOT; };
+		C257F152154E71AE00270D77 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = Dirac2D/geometry/Circle.h; sourceTree = SOURCE_ROOT; };
+		C257F153154E71AE00270D77 /* CollisionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionShape.h; path = Dirac2D/geometry/CollisionShape.h; sourceTree = SOURCE_ROOT; };
+		C257F154154E71AE00270D77 /* RegularPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularPolygon.h; path = Dirac2D/geometry/RegularPolygon.h; sourceTree = SOURCE_ROOT; };
+		C257F157154E71AE00270D77 /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathUtil.h; path = Dirac2D/maths/MathUtil.h; sourceTree = SOURCE_ROOT; };
+		C257F159154E71AE00270D77 /* memoryAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memoryAllocator.h; path = Dirac2D/memory/memoryAllocator.h; sourceTree = SOURCE_ROOT; };
+		C257F15A154E71AE00270D77 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Dirac2D/Settings.h; sourceTree = SOURCE_ROOT; };
+		C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetectionPolygon.cpp; sourceTree = "<group>"; };
+		C257F1A5154E76CD00270D77 /* CollisionDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetection.h; sourceTree = "<group>"; };
+		C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetection.cpp; sourceTree = "<group>"; };
+		C257F248154E9CAD00270D77 /* Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constraint.h; sourceTree = "<group>"; };
+		C257F53E154FDF2900270D77 /* DistantConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistantConstraint.h; sourceTree = "<group>"; };
+		C257F7C815528EE500270D77 /* PhysicalWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicalWorld.cpp; sourceTree = "<group>"; };
+		C257F8021552996600270D77 /* PhysicalBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicalBody.cpp; sourceTree = "<group>"; };
+		C257F80D15529CBC00270D77 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		C257F80E15529CBC00270D77 /* GLRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLRenderer.cpp; sourceTree = "<group>"; };
+		C257F81E15529F4700270D77 /* GLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLRenderer.h; sourceTree = "<group>"; };
+		C257F8351552A23500270D77 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		C257F85B1552BEF400270D77 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
+		C257F9321552CCDA00270D77 /* Capsule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Capsule.cpp; sourceTree = "<group>"; };
+		C257F9381552CD6900270D77 /* RegularPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegularPolygon.cpp; sourceTree = "<group>"; };
+		C257F93A1552CD7A00270D77 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
+		C2DD136A1553EAE100432320 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
+		C2DD136B1553EAEF00432320 /* Matrix2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2.h; sourceTree = "<group>"; };
+		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
+		C2DD136D1553EC7C00432320 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -36,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C257F8361552A23500270D77 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +100,7 @@
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				C257F8351552A23500270D77 /* OpenGL.framework */,
 			);
 			name = Dirac2D;
 			sourceTree = "<group>";
@@ -55,7 +108,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C257EC2C1545891400270D77 /* Dirac2D */,
+				C257F13D154E71AE00270D77 /* Dirac2D */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 			);
 			name = Source;
@@ -68,6 +121,124 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		C257F13D154E71AE00270D77 /* Dirac2D */ = {
+			isa = PBXGroup;
+			children = (
+				C257F142154E71AE00270D77 /* common.h */,
+				C257F15A154E71AE00270D77 /* Settings.h */,
+				C257F143154E71AE00270D77 /* definitions.h */,
+				C257F144154E71AE00270D77 /* Dirac2D.h */,
+				C257F80C15529C4000270D77 /* draw */,
+				C257F13E154E71AE00270D77 /* collision */,
+				C257F145154E71AE00270D77 /* dynamics */,
+				C257F14F154E71AE00270D77 /* geometry */,
+				C257F156154E71AE00270D77 /* maths */,
+				C257F158154E71AE00270D77 /* memory */,
+			);
+			path = Dirac2D;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F13E154E71AE00270D77 /* collision */ = {
+			isa = PBXGroup;
+			children = (
+				C257F140154E71AE00270D77 /* CollisionManager.cpp */,
+				C257F141154E71AE00270D77 /* CollisionManager.h */,
+				C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */,
+				C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */,
+				C257F1A5154E76CD00270D77 /* CollisionDetection.h */,
+				C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */,
+			);
+			name = collision;
+			path = Dirac2D/collision;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F145154E71AE00270D77 /* dynamics */ = {
+			isa = PBXGroup;
+			children = (
+				C257F146154E71AE00270D77 /* contacts */,
+				C257F14A154E71AE00270D77 /* Constraints */,
+				C257F14B154E71AE00270D77 /* PhysicalAppearance.h */,
+				C257F14C154E71AE00270D77 /* PhysicalBody.h */,
+				C257F14D154E71AE00270D77 /* PhysicalShape.h */,
+				C257F14E154E71AE00270D77 /* PhysicalWorld.h */,
+				C257F7C815528EE500270D77 /* PhysicalWorld.cpp */,
+				C257F8021552996600270D77 /* PhysicalBody.cpp */,
+			);
+			name = dynamics;
+			path = Dirac2D/dynamics;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F146154E71AE00270D77 /* contacts */ = {
+			isa = PBXGroup;
+			children = (
+				C257F147154E71AE00270D77 /* Contact.h */,
+				C257F149154E71AE00270D77 /* ContactSolver.h */,
+				C257F148154E71AE00270D77 /* ContactSolver.cpp */,
+			);
+			name = contacts;
+			path = Dirac2D/dynamics/contacts;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F14A154E71AE00270D77 /* Constraints */ = {
+			isa = PBXGroup;
+			children = (
+				C257F248154E9CAD00270D77 /* Constraint.h */,
+				C257F53E154FDF2900270D77 /* DistantConstraint.h */,
+			);
+			name = Constraints;
+			path = Dirac2D/dynamics/joints;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F14F154E71AE00270D77 /* geometry */ = {
+			isa = PBXGroup;
+			children = (
+				C257F153154E71AE00270D77 /* CollisionShape.h */,
+				C257F150154E71AE00270D77 /* Box.h */,
+				C257F151154E71AE00270D77 /* Capsule.h */,
+				C257F152154E71AE00270D77 /* Circle.h */,
+				C257F154154E71AE00270D77 /* RegularPolygon.h */,
+				C257F85B1552BEF400270D77 /* Box.cpp */,
+				C257F9321552CCDA00270D77 /* Capsule.cpp */,
+				C257F9381552CD6900270D77 /* RegularPolygon.cpp */,
+				C257F93A1552CD7A00270D77 /* Circle.cpp */,
+			);
+			name = geometry;
+			path = Dirac2D/geometry;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F156154E71AE00270D77 /* maths */ = {
+			isa = PBXGroup;
+			children = (
+				C257F157154E71AE00270D77 /* MathUtil.h */,
+				C2DD136A1553EAE100432320 /* Vector2.h */,
+				C2DD136D1553EC7C00432320 /* Vector3.h */,
+				C2DD136B1553EAEF00432320 /* Matrix2.h */,
+				C2DD136C1553EAFD00432320 /* Matrix3.h */,
+			);
+			name = maths;
+			path = Dirac2D/maths;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F158154E71AE00270D77 /* memory */ = {
+			isa = PBXGroup;
+			children = (
+				C257F159154E71AE00270D77 /* memoryAllocator.h */,
+			);
+			name = memory;
+			path = Dirac2D/memory;
+			sourceTree = SOURCE_ROOT;
+		};
+		C257F80C15529C4000270D77 /* draw */ = {
+			isa = PBXGroup;
+			children = (
+				C257F80D15529CBC00270D77 /* Renderer.h */,
+				C257F81E15529F4700270D77 /* GLRenderer.h */,
+				C257F80E15529CBC00270D77 /* GLRenderer.cpp */,
+			);
+			name = draw;
+			path = Dirac2D/draw;
+			sourceTree = SOURCE_ROOT;
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
@@ -128,6 +299,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				C257F15B154E71AE00270D77 /* CollisionManager.cpp in Sources */,
+				C257F15C154E71AE00270D77 /* ContactSolver.cpp in Sources */,
+				C257F198154E75F400270D77 /* CollisionDetectionPolygon.cpp in Sources */,
+				C257F1FD154E7D7E00270D77 /* CollisionDetection.cpp in Sources */,
+				C257F7C915528EE500270D77 /* PhysicalWorld.cpp in Sources */,
+				C257F8031552996600270D77 /* PhysicalBody.cpp in Sources */,
+				C257F80F15529CBC00270D77 /* GLRenderer.cpp in Sources */,
+				C257F85C1552BEF400270D77 /* Box.cpp in Sources */,
+				C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */,
+				C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */,
+				C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +349,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
