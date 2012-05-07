@@ -8,6 +8,7 @@
 
 #include "Vector2.h"
 #include "Vector3.h"
+#include <math.h>
 
 #ifndef _MATRIX3_H_
 #define _MATRIX3_H_

@@ -12,16 +12,13 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 
-Circle::Circle()
+Circle::Circle(dfloat radius):m_Radius(radius)
 {
+	m_Area = M_PI * m_Radius * m_Radius;
 }
-//
-////Box(const Box& other);
-//
 
-dfloat Circle::getArea()
+Circle::Circle(const Circle& other)
 {
-	return 0.0f;
 }
 
 Vector2f Circle::getSupportPoint(Vector2f& d)

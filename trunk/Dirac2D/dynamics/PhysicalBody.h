@@ -20,9 +20,10 @@ class CollisionShape;
 class PhysicalShape;
 class PhysicalAppearance;
 
+enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
+
 class PhysicalBody
 {
-	enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
 
 public:	
 	void applyForce( Vector2f& force );	
@@ -47,7 +48,7 @@ public:
 	dfloat m_LinearDamping;
 	dfloat m_AngularDamping;
 	Matrix3f m_Transform;
-	BODY_TYPE m_Type;
+	BODY_TYPE m_BodyType;
 	dfloat m_Mass, m_InvMass;
 	dfloat m_I, m_InvI;
 	

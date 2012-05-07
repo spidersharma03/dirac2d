@@ -16,7 +16,7 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world, PhysicalShape* shape)
 	m_Angle = 0.0f;
 	m_LinearDamping = 0.0f;
 	m_AngularDamping = 0.0f;
-	m_Type = EBT_DYNAMIC;
+	m_BodyType = EBT_DYNAMIC;
 	m_Mass = m_InvMass = 1.0f;
 	m_I = m_InvI = 1.0f;
 	
@@ -59,11 +59,16 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	pShape->m_CollisionShape = pApp.m_CollisionAttributes.m_Shape;
 	pShape->m_CollisionFilter = pApp.m_CollisionAttributes.m_Filter;
 	
+	m_PhysicalShapeList = pShape;
+	m_PhysicalShapeList->m_NextShape = 0;
+	
 	return pShape;
 }
 
 void PhysicalBody::updateTransform()
 {
+	m_Transform.rotate(m_Angle);
+	m_Transform.translate(m_Centre);
 }
 
 END_NAMESPACE_DIRAC2D

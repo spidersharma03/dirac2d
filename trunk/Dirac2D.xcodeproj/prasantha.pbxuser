@@ -5,6 +5,7 @@
 		activeExecutable = C21DD0B31526FA6D0008ADD0 /* Dirac2D */;
 		activeTarget = 8DD76F620486A84900D96B5E /* Dirac2D */;
 		addToTargets = (
+			8DD76F620486A84900D96B5E /* Dirac2D */,
 		);
 		breakpoints = (
 		);
@@ -324,29 +325,29 @@
 	C257F14B154E71AE00270D77 /* PhysicalAppearance.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1534, 900}}";
-			sepNavSelRange = "{130, 0}";
-			sepNavVisRange = "{0, 951}";
+			sepNavSelRange = "{774, 17}";
+			sepNavVisRange = "{0, 895}";
 		};
 	};
 	C257F14C154E71AE00270D77 /* PhysicalBody.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1534, 1017}}";
-			sepNavSelRange = "{256, 0}";
-			sepNavVisRange = "{0, 963}";
+			sepNavSelRange = "{826, 17}";
+			sepNavVisRange = "{408, 828}";
 		};
 	};
 	C257F14D154E71AE00270D77 /* PhysicalShape.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1534, 865}}";
 			sepNavSelRange = "{553, 0}";
-			sepNavVisRange = "{111, 800}";
+			sepNavVisRange = "{322, 589}";
 		};
 	};
 	C257F14E154E71AE00270D77 /* PhysicalWorld.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 1060}}";
-			sepNavSelRange = "{630, 0}";
-			sepNavVisRange = "{386, 711}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1165}}";
+			sepNavSelRange = "{1062, 0}";
+			sepNavVisRange = "{425, 792}";
 		};
 	};
 	C257F150154E71AE00270D77 /* Box.h */ = {
@@ -400,9 +401,9 @@
 	};
 	C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 2267}}";
-			sepNavSelRange = "{3255, 0}";
-			sepNavVisRange = "{2642, 1297}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1982}}";
+			sepNavSelRange = "{1873, 0}";
+			sepNavVisRange = "{1107, 1706}";
 		};
 	};
 	C257F1A5154E76CD00270D77 /* CollisionDetection.h */ = {
@@ -472,16 +473,16 @@
 	};
 	C257F7C815528EE500270D77 /* PhysicalWorld.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 1201}}";
-			sepNavSelRange = "{580, 0}";
-			sepNavVisRange = "{84, 1019}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1246}}";
+			sepNavSelRange = "{1627, 15}";
+			sepNavVisRange = "{542, 1194}";
 		};
 	};
 	C257F8021552996600270D77 /* PhysicalBody.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 1021}}";
-			sepNavSelRange = "{773, 0}";
-			sepNavVisRange = "{304, 1164}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1051}}";
+			sepNavSelRange = "{1272, 0}";
+			sepNavVisRange = "{641, 912}";
 		};
 	};
 	C257F80D15529CBC00270D77 /* Renderer.h */ = {
@@ -575,7 +576,7 @@
 		fRef = C257F14E154E71AE00270D77 /* PhysicalWorld.h */;
 		name = "PhysicalWorld.h: 41";
 		rLen = 0;
-		rLoc = 630;
+		rLoc = 694;
 		rType = 0;
 		vrLen = 711;
 		vrLoc = 386;
@@ -706,9 +707,9 @@
 	};
 	C2DD136C1553EAFD00432320 /* Matrix3.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 1497}}";
-			sepNavSelRange = "{959, 0}";
-			sepNavVisRange = "{679, 1088}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1692}}";
+			sepNavSelRange = "{136, 0}";
+			sepNavVisRange = "{72, 546}";
 		};
 	};
 	C2DD136D1553EC7C00432320 /* Vector3.h */ = {
@@ -733,7 +734,7 @@
 		fRef = C257F7C815528EE500270D77 /* PhysicalWorld.cpp */;
 		name = "PhysicalWorld.cpp: 32";
 		rLen = 0;
-		rLoc = 580;
+		rLoc = 625;
 		rType = 0;
 		vrLen = 1019;
 		vrLoc = 84;
@@ -813,7 +814,7 @@
 		fRef = C2DD136C1553EAFD00432320 /* Matrix3.h */;
 		name = "Matrix3.h: 45";
 		rLen = 0;
-		rLoc = 602;
+		rLoc = 620;
 		rType = 0;
 		vrLen = 708;
 		vrLoc = 244;

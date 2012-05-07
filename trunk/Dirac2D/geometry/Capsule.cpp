@@ -11,16 +11,12 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 
-Capsule::Capsule()
+Capsule::Capsule(dfloat radius, dfloat height):m_Radius(radius), m_Height(height)
 {
 }
-//
-////Box(const Box& other);
-//
 
-dfloat Capsule::getArea()
+Capsule::Capsule(const Capsule& other)
 {
-	return 0.0f;
 }
 
 Vector2f Capsule::getSupportPoint(Vector2f& d)

@@ -21,6 +21,7 @@
 		C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9321552CCDA00270D77 /* Capsule.cpp */; };
 		C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */; };
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
+		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +80,7 @@
 		C2DD136B1553EAEF00432320 /* Matrix2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2.h; sourceTree = "<group>"; };
 		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
 		C2DD136D1553EC7C00432320 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
+		C2DD149C1558102700432320 /* PhysicalShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicalShape.cpp; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +166,7 @@
 				C257F14E154E71AE00270D77 /* PhysicalWorld.h */,
 				C257F7C815528EE500270D77 /* PhysicalWorld.cpp */,
 				C257F8021552996600270D77 /* PhysicalBody.cpp */,
+				C2DD149C1558102700432320 /* PhysicalShape.cpp */,
 			);
 			name = dynamics;
 			path = Dirac2D/dynamics;
@@ -310,6 +313,7 @@
 				C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */,
 				C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */,
 				C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */,
+				C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,7 @@ PhysicalWorld::PhysicalWorld()
 	m_Renderer		   = 0;
 	
 	m_bGravityOn = true;
+	m_GravityScale = 1.0f;
 	
 	m_CFM = 0.0f;
 	m_ERP = 0.0f;
@@ -44,12 +45,13 @@ void PhysicalWorld::Step(dfloat dt)
 {
 	Vector2f totalForce;
 	if( m_bGravityOn )
-		totalForce += GRAVITY;
+		totalForce += GRAVITY * m_GravityScale;
 	
 	// Integrate/Advance the velocities by time step. 
 	for( duint32 b=0; b<m_vecPhysicalBodies.size(); b++ )
 	{
-		m_vecPhysicalBodies[b]->m_Velocity += totalForce * dt;
+		if( m_vecPhysicalBodies[b]->m_BodyType == EBT_DYNAMIC )
+			m_vecPhysicalBodies[b]->m_Velocity += totalForce * dt;
 	}
 	// Collision detection	
 	m_CollisionManager->update();
@@ -64,9 +66,12 @@ void PhysicalWorld::Step(dfloat dt)
 	// Integrate/Advance the positions by time step. 
 	for( duint32 b=0; b<m_vecPhysicalBodies.size(); b++ )
 	{
-		m_vecPhysicalBodies[b]->m_Centre += m_vecPhysicalBodies[b]->m_Velocity * dt;
-		m_vecPhysicalBodies[b]->m_Angle  += m_vecPhysicalBodies[b]->m_AngularVelocity * dt;
-		m_vecPhysicalBodies[b]->updateTransform();
+		if( m_vecPhysicalBodies[b]->m_BodyType == EBT_DYNAMIC )
+		{
+			m_vecPhysicalBodies[b]->m_Centre += m_vecPhysicalBodies[b]->m_Velocity * dt;
+			m_vecPhysicalBodies[b]->m_Angle  += m_vecPhysicalBodies[b]->m_AngularVelocity * dt;
+			m_vecPhysicalBodies[b]->updateTransform();
+		}
 	}
 }
 
