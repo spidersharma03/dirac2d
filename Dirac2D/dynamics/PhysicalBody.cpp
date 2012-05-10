@@ -11,7 +11,7 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-PhysicalBody::PhysicalBody(PhysicalWorld* world, PhysicalShape* shape)
+PhysicalBody::PhysicalBody(PhysicalWorld* world)
 {
 	m_Angle = 0.0f;
 	m_LinearDamping = 0.0f;
@@ -20,8 +20,6 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world, PhysicalShape* shape)
 	m_Mass = m_InvMass = 1.0f;
 	m_I = m_InvI = 1.0f;
 	
-	PhysicalAppearance pApp;
-	pApp.m_CollisionAttributes.m_Shape = shape->m_CollisionShape;
 	//PhysicalShape* pShape = new PhysicalShape();
 }
 
@@ -62,6 +60,8 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	m_PhysicalShapeList = pShape;
 	m_PhysicalShapeList->m_NextShape = 0;
 	
+	calculateMassAttributes();
+	
 	return pShape;
 }
 
@@ -69,6 +69,41 @@ void PhysicalBody::updateTransform()
 {
 	m_Transform.rotate(m_Angle);
 	m_Transform.translate(m_Centre);
+}
+
+void PhysicalBody::calculateMassAttributes()
+{
+	PhysicalShape* shape = m_PhysicalShapeList;
+	// Calculate Centre of Mass of the PhysicalBody.
+	Vector2f sum_mr, sum_r;
+	while( shape == 0 )
+	{
+		shape->calculateMassAttributes();
+		sum_r  += shape->m_MassAttributes.m_C;
+		sum_mr += shape->m_MassAttributes.m_C * shape->m_MassAttributes.m_Mass;
+		shape = m_PhysicalShapeList->m_NextShape;
+	}
+	m_Centre = sum_mr/sum_r;
+	
+	// Calculate Moment of Inertia and Mass of the PhysicalBody.
+	shape = m_PhysicalShapeList;
+	m_I = 0.0f;
+	m_Mass = 0.0f;
+
+	while( shape == 0 )
+	{
+		Vector2f R = shape->m_MassAttributes.m_C - m_Centre;
+		dfloat r2 = R.lengthSquared();
+		m_I += ( shape->m_MassAttributes.m_I + shape->m_MassAttributes.m_Mass * r2);
+		m_Mass += shape->m_MassAttributes.m_Mass;
+		shape = m_PhysicalShapeList->m_NextShape;
+	}
+	
+	dAssert( m_Mass > 0.0f );
+	dAssert( m_I > 0.0f );
+	
+	m_InvMass = 1.0f/m_Mass;
+	m_InvI    = 1.0f/m_I;
 }
 
 END_NAMESPACE_DIRAC2D

@@ -37,4 +37,8 @@ void Capsule::findCentroid()
 {
 }
 
+void Capsule::findMomentOfInertia()
+{
+}
+
 END_NAMESPACE_DIRAC2D

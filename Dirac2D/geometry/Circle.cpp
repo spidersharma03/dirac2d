@@ -39,4 +39,8 @@ void Circle::findCentroid()
 {
 }
 
+void Circle::findMomentOfInertia()
+{
+}
+
 END_NAMESPACE_DIRAC2D

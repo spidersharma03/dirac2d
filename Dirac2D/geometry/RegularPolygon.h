@@ -16,9 +16,9 @@ BEGIN_NAMESPACE_DIRAC2D
 class RegularPolygon : public CollisionShape
 {
 public:
-	RegularPolygon();
+	RegularPolygon(Vector2f* vertices, dint32 numVertices);
 	
-	//RegularPolygon(const RegularPolygon& other);
+	RegularPolygon(const RegularPolygon& other);
 		
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
@@ -39,6 +39,8 @@ protected:
 	
 	virtual void findCentroid();
 	
+	virtual void findMomentOfInertia();
+
 protected:
 	dint32 m_NumVertices;
 	Vector2f m_Vertices[MAX_POLY_VERTICES];

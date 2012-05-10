@@ -60,7 +60,10 @@ public:
 	
 protected:
 	
-	PhysicalBody(PhysicalWorld* world, PhysicalShape*);
+	// Calculates MassAttributes( mass, moment of inertia, centre of mass) of this Body from the Physical Shapes associated with this Body.
+	void calculateMassAttributes();
+	
+	PhysicalBody(PhysicalWorld* world);
 
 	PhysicalShape* m_PhysicalShapeList;
 	PhysicalShape* m_PhysicalShape;

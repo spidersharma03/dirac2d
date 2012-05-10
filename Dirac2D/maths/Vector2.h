@@ -129,10 +129,20 @@ public:
 		return Vector2<T>(x*d, y*d);
 	}
 	
+	inline Vector2<T> operator/( const T d )
+	{
+		return Vector2<T>(x/d, y/d);
+	}
+	
 	inline void operator/=( const T d )
 	{
 		x /= d;
 		y /= d;
+	}
+	
+	inline Vector2<T> operator/( const Vector2<T>& other )
+	{
+		return Vector2<T>(x/other.x, y/other.y);
 	}
 	
 	inline void operator/=( const Vector2<T>& other )
