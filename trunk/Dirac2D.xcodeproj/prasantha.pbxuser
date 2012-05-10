@@ -116,9 +116,9 @@
 	};
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 659}}";
-			sepNavSelRange = "{249, 0}";
-			sepNavVisRange = "{0, 291}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1950}}";
+			sepNavSelRange = "{930, 0}";
+			sepNavVisRange = "{0, 1288}";
 			sepNavWindowFrame = "{{6, 60}, {1914, 997}}";
 		};
 	};
@@ -282,16 +282,16 @@
 	};
 	C257F142154E71AE00270D77 /* common.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 679}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 271}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 637}}";
+			sepNavSelRange = "{76, 0}";
+			sepNavVisRange = "{0, 325}";
 		};
 	};
 	C257F143154E71AE00270D77 /* definitions.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 582}}";
-			sepNavSelRange = "{173, 17}";
-			sepNavVisRange = "{0, 827}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 637}}";
+			sepNavSelRange = "{546, 0}";
+			sepNavVisRange = "{0, 828}";
 		};
 	};
 	C257F144154E71AE00270D77 /* Dirac2D.h */ = {
@@ -324,65 +324,65 @@
 	};
 	C257F14B154E71AE00270D77 /* PhysicalAppearance.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 900}}";
-			sepNavSelRange = "{774, 17}";
-			sepNavVisRange = "{0, 895}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 988}}";
+			sepNavSelRange = "{1038, 0}";
+			sepNavVisRange = "{639, 631}";
 		};
 	};
 	C257F14C154E71AE00270D77 /* PhysicalBody.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 1017}}";
-			sepNavSelRange = "{826, 17}";
-			sepNavVisRange = "{408, 828}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1090}}";
+			sepNavSelRange = "{1252, 0}";
+			sepNavVisRange = "{417, 983}";
 		};
 	};
 	C257F14D154E71AE00270D77 /* PhysicalShape.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 865}}";
-			sepNavSelRange = "{553, 0}";
-			sepNavVisRange = "{322, 589}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 882}}";
+			sepNavSelRange = "{680, 16}";
+			sepNavVisRange = "{227, 719}";
 		};
 	};
 	C257F14E154E71AE00270D77 /* PhysicalWorld.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1534, 1165}}";
 			sepNavSelRange = "{1062, 0}";
-			sepNavVisRange = "{425, 792}";
+			sepNavVisRange = "{592, 624}";
 		};
 	};
 	C257F150154E71AE00270D77 /* Box.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 625}}";
-			sepNavSelRange = "{427, 0}";
-			sepNavVisRange = "{25, 519}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 637}}";
+			sepNavSelRange = "{470, 37}";
+			sepNavVisRange = "{0, 580}";
 		};
 	};
 	C257F151154E71AE00270D77 /* Capsule.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 627}}";
-			sepNavSelRange = "{436, 0}";
-			sepNavVisRange = "{0, 535}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 637}}";
+			sepNavSelRange = "{517, 0}";
+			sepNavVisRange = "{0, 600}";
 		};
 	};
 	C257F152154E71AE00270D77 /* Circle.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 595}}";
-			sepNavSelRange = "{429, 0}";
-			sepNavVisRange = "{0, 531}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 637}}";
+			sepNavSelRange = "{495, 0}";
+			sepNavVisRange = "{0, 558}";
 		};
 	};
 	C257F153154E71AE00270D77 /* CollisionShape.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 715}}";
-			sepNavSelRange = "{421, 0}";
-			sepNavVisRange = "{74, 666}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1002}}";
+			sepNavSelRange = "{658, 0}";
+			sepNavVisRange = "{349, 724}";
 		};
 	};
 	C257F154154E71AE00270D77 /* RegularPolygon.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1534, 760}}";
-			sepNavSelRange = "{487, 0}";
-			sepNavVisRange = "{141, 634}";
+			sepNavSelRange = "{694, 0}";
+			sepNavVisRange = "{83, 731}";
 		};
 	};
 	C257F157154E71AE00270D77 /* MathUtil.h */ = {
@@ -394,8 +394,8 @@
 	};
 	C257F15A154E71AE00270D77 /* Settings.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 675}}";
-			sepNavSelRange = "{147, 23}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 637}}";
+			sepNavSelRange = "{171, 0}";
 			sepNavVisRange = "{0, 421}";
 		};
 	};
@@ -439,7 +439,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 17";
 		rLen = 0;
-		rLoc = 249;
+		rLoc = 117;
 		rType = 0;
 		vrLen = 291;
 		vrLoc = 0;
@@ -473,16 +473,16 @@
 	};
 	C257F7C815528EE500270D77 /* PhysicalWorld.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 1246}}";
-			sepNavSelRange = "{1627, 15}";
-			sepNavVisRange = "{542, 1194}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1426}}";
+			sepNavSelRange = "{892, 0}";
+			sepNavVisRange = "{313, 1007}";
 		};
 	};
 	C257F8021552996600270D77 /* PhysicalBody.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 1051}}";
-			sepNavSelRange = "{1272, 0}";
-			sepNavVisRange = "{641, 912}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1216}}";
+			sepNavSelRange = "{1369, 0}";
+			sepNavVisRange = "{595, 1070}";
 		};
 	};
 	C257F80D15529CBC00270D77 /* Renderer.h */ = {
@@ -508,30 +508,30 @@
 	};
 	C257F85B1552BEF400270D77 /* Box.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 640}}";
-			sepNavSelRange = "{276, 0}";
-			sepNavVisRange = "{30, 396}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 691}}";
+			sepNavSelRange = "{507, 35}";
+			sepNavVisRange = "{27, 539}";
 		};
 	};
 	C257F9321552CCDA00270D77 /* Capsule.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 655}}";
-			sepNavSelRange = "{301, 0}";
-			sepNavVisRange = "{74, 387}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 661}}";
+			sepNavSelRange = "{430, 0}";
+			sepNavVisRange = "{0, 531}";
 		};
 	};
 	C257F9381552CD6900270D77 /* RegularPolygon.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 655}}";
-			sepNavSelRange = "{211, 0}";
-			sepNavVisRange = "{41, 483}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 1291}}";
+			sepNavSelRange = "{1441, 0}";
+			sepNavVisRange = "{479, 963}";
 		};
 	};
 	C257F93A1552CD7A00270D77 /* Circle.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 655}}";
-			sepNavSelRange = "{79, 373}";
-			sepNavVisRange = "{70, 382}";
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 676}}";
+			sepNavSelRange = "{499, 0}";
+			sepNavVisRange = "{18, 506}";
 		};
 	};
 	C257F9541552CF8000270D77 /* PBXTextBookmark */ = {
@@ -625,7 +625,7 @@
 		isa = PBXTextBookmark;
 		fRef = C257F93A1552CD7A00270D77 /* Circle.cpp */;
 		name = "Circle.cpp: 10";
-		rLen = 373;
+		rLen = 445;
 		rLoc = 79;
 		rType = 0;
 		vrLen = 382;
@@ -636,7 +636,7 @@
 		fRef = C257F152154E71AE00270D77 /* Circle.h */;
 		name = "Circle.h: 30";
 		rLen = 0;
-		rLoc = 429;
+		rLoc = 412;
 		rType = 0;
 		vrLen = 531;
 		vrLoc = 0;
@@ -646,7 +646,7 @@
 		fRef = C257F150154E71AE00270D77 /* Box.h */;
 		name = "Box.h: 32";
 		rLen = 0;
-		rLoc = 427;
+		rLoc = 424;
 		rType = 0;
 		vrLen = 519;
 		vrLoc = 25;
@@ -656,7 +656,7 @@
 		fRef = C257F85B1552BEF400270D77 /* Box.cpp */;
 		name = "Box.cpp: 28";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 379;
 		rType = 0;
 		vrLen = 396;
 		vrLoc = 30;
@@ -666,7 +666,7 @@
 		fRef = C257F151154E71AE00270D77 /* Capsule.h */;
 		name = "Capsule.h: 30";
 		rLen = 0;
-		rLoc = 436;
+		rLoc = 434;
 		rType = 0;
 		vrLen = 535;
 		vrLoc = 0;
@@ -676,7 +676,7 @@
 		fRef = C257F9321552CCDA00270D77 /* Capsule.cpp */;
 		name = "Capsule.cpp: 31";
 		rLen = 0;
-		rLoc = 301;
+		rLoc = 330;
 		rType = 0;
 		vrLen = 387;
 		vrLoc = 74;
@@ -724,7 +724,7 @@
 		fRef = C257F14D154E71AE00270D77 /* PhysicalShape.h */;
 		name = "PhysicalShape.h: 36";
 		rLen = 0;
-		rLoc = 553;
+		rLoc = 618;
 		rType = 0;
 		vrLen = 800;
 		vrLoc = 111;
@@ -754,7 +754,7 @@
 		fRef = C257F8021552996600270D77 /* PhysicalBody.cpp */;
 		name = "PhysicalBody.cpp: 41";
 		rLen = 0;
-		rLoc = 773;
+		rLoc = 666;
 		rType = 0;
 		vrLen = 1164;
 		vrLoc = 304;
@@ -794,7 +794,7 @@
 		fRef = C257F153154E71AE00270D77 /* CollisionShape.h */;
 		name = "CollisionShape.h: 28";
 		rLen = 0;
-		rLoc = 421;
+		rLoc = 722;
 		rType = 0;
 		vrLen = 666;
 		vrLoc = 74;
@@ -864,7 +864,7 @@
 		fRef = C257F154154E71AE00270D77 /* RegularPolygon.h */;
 		name = "RegularPolygon.h: 30";
 		rLen = 0;
-		rLoc = 487;
+		rLoc = 495;
 		rType = 0;
 		vrLen = 634;
 		vrLoc = 141;
@@ -874,7 +874,7 @@
 		fRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */;
 		name = "RegularPolygon.cpp: 20";
 		rLen = 0;
-		rLoc = 211;
+		rLoc = 172;
 		rType = 0;
 		vrLen = 483;
 		vrLoc = 41;
@@ -958,5 +958,12 @@
 		rType = 0;
 		vrLen = 1057;
 		vrLoc = 3298;
+	};
+	C2DD149C1558102700432320 /* PhysicalShape.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1534, 637}}";
+			sepNavSelRange = "{709, 0}";
+			sepNavVisRange = "{0, 820}";
+		};
 	};
 }
