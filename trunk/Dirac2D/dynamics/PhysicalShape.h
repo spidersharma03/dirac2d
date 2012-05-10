@@ -32,6 +32,8 @@ protected:
 	
 	void setAsCapsule( dfloat radius, dfloat height);
 	
+	void calculateMassAttributes();
+	
 public:
 	PhysicalBody* m_ParentBody;
 

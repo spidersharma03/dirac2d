@@ -39,4 +39,8 @@ void Box::findCentroid()
 {
 }
 
+void Box::findMomentOfInertia()
+{
+}
+
 END_NAMESPACE_DIRAC2D

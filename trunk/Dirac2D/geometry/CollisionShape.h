@@ -15,24 +15,31 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+enum SHAPE_TYPE { EST_CIRCLE = 0, EST_BOX, EST_REGULARPOLY, EST_CAPSULE };
+
 class CollisionShape
 {
-	enum SHAPE_TYPE { EST_CIRCLE = 0, EST_BOX, EST_REGULARPOLY, EST_CAPSULE };
-
 public:
-	CollisionShape(){}
+	CollisionShape()
+	{
+	}
 
 	CollisionShape( const CollisionShape& other )
 	{
 		m_Centroid  = other.m_Centroid;
 		m_Area	    = other.m_Area;
 		m_ShapeType = other.m_ShapeType;
-		m_AABB      = other.m_AABB;
+		m_AABB      = other.m_AABB;		
 	}
 	
-	dfloat getArea()
+	dfloat getArea() const
 	{
 		return m_Area;
+	}
+	
+	dfloat getMomentOfInertia() const
+	{
+		return m_I;
 	}
 	
 	// For GJK/EPA 
@@ -45,13 +52,18 @@ public:
 	
 	Vector2f m_Centroid;
 
+	// friend classes
+	friend class PhysicalShape;
 protected:
 	
 	virtual void findCentroid() = 0;
 	
+	virtual void findMomentOfInertia() = 0;
+	
 protected:
 
 	dfloat m_Area;
+	dfloat m_I;
 	SHAPE_TYPE m_ShapeType;
 	AABB2f m_AABB;
 };

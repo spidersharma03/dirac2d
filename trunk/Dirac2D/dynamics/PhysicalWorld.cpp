@@ -32,12 +32,15 @@ PhysicalWorld::PhysicalWorld()
 	
 PhysicalBody* PhysicalWorld::createPhysicalBody()
 {
-	return 0;
+	PhysicalBody* pBody = new PhysicalBody(this);
+	m_vecPhysicalBodies.push_back(pBody);
+	return pBody;
 }
 	
 PhysicalBody* PhysicalWorld::createPhysicalBody(PhysicalAppearance& pApp)
 {
-	PhysicalBody* pBody = new PhysicalBody(this,0);
+	PhysicalBody* pBody = new PhysicalBody(this);
+	m_vecPhysicalBodies.push_back(pBody);
 	return pBody;
 }
 

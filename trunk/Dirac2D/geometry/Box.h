@@ -32,6 +32,8 @@ protected:
 	
 	virtual void findCentroid();
 	
+	virtual void findMomentOfInertia();
+	
 protected:
 	dfloat m_Width, m_Height;
 };

@@ -2,10 +2,14 @@
 #include "definitions.h"
 #include "maths/MathUtil.h"
 
+#include <cassert>
+
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
 BEGIN_NAMESPACE_DIRAC2D
+
+#define dAssert(EXP) assert(EXP)
 
 template<class T>
 struct dList

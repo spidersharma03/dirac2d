@@ -130,12 +130,17 @@ public:
 		return (x==other.x) && (y==other.y);
 	}
 	
-	T EuclidiandDistanceSquared( Point2<T>& other )
+	inline T EuclidiandDistance( Point2<T>& other )
+	{
+		return sqrt( (x-other.x)*(x-other.x) + (y-other.y)*(y-other.y) );
+	}
+	
+	inline T EuclidiandDistanceSquared( Point2<T>& other )
 	{
 		return (x-other.x)*(x-other.x) + (y-other.y)*(y-other.y);
 	}
 	
-	T ManhattendDistance( Point2<T>& other )
+	inline T ManhattendDistance( Point2<T>& other )
 	{
 		return fabs(x-other.x) + fabs(y-other.y);
 	}
