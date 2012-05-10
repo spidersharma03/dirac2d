@@ -22,6 +22,7 @@
 		C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */; };
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
+		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,6 +82,7 @@
 		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
 		C2DD136D1553EC7C00432320 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		C2DD149C1558102700432320 /* PhysicalShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicalShape.cpp; sourceTree = "<group>"; };
+		C2DD14FF1558E6A300432320 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C257F8361552A23500270D77 /* OpenGL.framework in Frameworks */,
+				C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +106,7 @@
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				C257F8351552A23500270D77 /* OpenGL.framework */,
+				C2DD14FF1558E6A300432320 /* GLUT.framework */,
 			);
 			name = Dirac2D;
 			sourceTree = "<group>";
