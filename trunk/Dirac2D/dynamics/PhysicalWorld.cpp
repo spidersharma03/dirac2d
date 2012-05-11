@@ -8,8 +8,10 @@
 
 #include "PhysicalWorld.h"
 #include "PhysicalBody.h"
+#include "PhysicalShape.h"
 #include "../collision/CollisionManager.h"
 #include "../dynamics/contacts/ContactSolver.h"
+#include "../draw/Renderer.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -59,7 +61,6 @@ void PhysicalWorld::Step(dfloat dt)
 	// Collision detection	
 	m_CollisionManager->update();
 	
-	
 	// Initialize the Solver.
 	m_ContactSolver->buildJacobian();
 	// Correct the velocities.
@@ -80,6 +81,34 @@ void PhysicalWorld::Step(dfloat dt)
 
 void PhysicalWorld::draw()
 {
+	if( !m_Renderer )
+		return;
+	// Draw Physical Bodies
+	m_Renderer->setColor(255, 255, 255);
+	for( duint32 b=0; b<m_vecPhysicalBodies.size(); b++ )
+	{
+		PhysicalBody* pBody = m_vecPhysicalBodies[b];
+		m_Renderer->setTransform(pBody->m_Transform);
+		m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
+	}
+	// Draw Constraints/Joints
+	//return;
+	
+	// Draw Contacts
+	m_Renderer->setColor(255, 0, 0);
+	m_Renderer->setPointSize(5.0f);
+	Matrix3f I;
+	m_Renderer->setTransform(I);
+	Contact* contacts = 0;
+	dint32 numContacts = 0;
+	m_CollisionManager->getContactList(&contacts, numContacts);
+	for( dint32 c=0; c<numContacts; c++ )
+	{
+		Contact& contact = contacts[c];
+		m_Renderer->drawPoint(contact.m_Manifold.m_ContactPoints[0].m_Point);
+		if( contact.m_Manifold.m_NumContacts > 1 )
+			m_Renderer->drawPoint(contact.m_Manifold.m_ContactPoints[1].m_Point);			
+	}
 }
 
 void PhysicalWorld::setRenderer(Renderer* renderer)

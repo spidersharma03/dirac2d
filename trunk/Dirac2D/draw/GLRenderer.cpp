@@ -7,12 +7,24 @@
  */
 
 #include "GLRenderer.h"
+#include "../geometry/CollisionShape.h"
+#include "../geometry/RegularPolygon.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
 
 void GLRenderer::drawShape(CollisionShape* shape)
 {
+	switch ( shape->getShapeType() )
+	{
+		case EST_BOX:
+			break;
+		case EST_REGULARPOLY:
+			drawPolygon( ((RegularPolygon*)shape)->getVertices() , ((RegularPolygon*)shape)->getNumVertices() );
+			break;
+		default:
+			break;
+	}
 }
 
 void GLRenderer::drawCircle( dfloat radius )
@@ -60,6 +72,21 @@ void GLRenderer::setTransform( Matrix3f& xform)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glLoadMatrixf(data);
+}
+
+void GLRenderer::setColor( dchar r, dchar g, dchar b, dchar a )
+{
+	glColor4ub(r, g, b, a);
+}
+
+void GLRenderer::setColor( dchar r, dchar g, dchar b )
+{
+	glColor3ub(r, g, b);
+}
+
+void GLRenderer::setPointSize(dfloat size)
+{
+	glPointSize(size);
 }
 
 END_NAMESPACE_DIRAC2D

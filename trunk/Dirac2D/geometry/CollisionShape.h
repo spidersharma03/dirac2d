@@ -42,6 +42,11 @@ public:
 		return m_I;
 	}
 	
+	inline SHAPE_TYPE getShapeType()
+	{
+		return m_ShapeType;
+	}
+	
 	// For GJK/EPA 
 	// returns Local Support Point on the Shape.
 	virtual Vector2f getSupportPoint(Vector2f& d) = 0;
@@ -60,7 +65,7 @@ protected:
 	
 	virtual void findMomentOfInertia() = 0;
 	
-protected:
+	protected:
 
 	dfloat m_Area;
 	dfloat m_I;

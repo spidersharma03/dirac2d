@@ -21,28 +21,28 @@ CollisionManager::CollisionManager(PhysicalWorld* world) : m_PhysicalWorld(world
 void CollisionManager::update()
 {
 	// clear Contact list.
-	m_vecContacts.clear();
+	m_NumContacts = 0;
 	
 	// n2 Collision test
 	for( duint32 b1=0; b1<m_PhysicalWorld->m_vecPhysicalBodies.size(); b1++ )
 	{
 		PhysicalBody* body1 = m_PhysicalWorld->m_vecPhysicalBodies[b1];
-		for( duint32 b2=0; b2<m_PhysicalWorld->m_vecPhysicalBodies.size(); b2++ )
+		for( duint32 b2=b1; b2<m_PhysicalWorld->m_vecPhysicalBodies.size(); b2++ )
 		{
 			PhysicalBody* body2 = m_PhysicalWorld->m_vecPhysicalBodies[b2];
 
 			if( body1 == body2 )continue;
 			
 			ContactManifold manifold;
-			dbool res = intersectShapes( body1->m_PhysicalShape->m_CollisionShape, body1->m_Transform, body2->m_PhysicalShape->m_CollisionShape, body2->m_Transform, &manifold);
+			dbool res = intersectShapes( body1->m_PhysicalShapeList->m_CollisionShape, body1->m_Transform, body2->m_PhysicalShapeList->m_CollisionShape, body2->m_Transform, &manifold);
 			if( res )
 			{
-				Contact contact;
+				Contact& contact = m_ContactList[m_NumContacts];
 				contact.m_Manifold = manifold;
 				contact.m_PhysicalShape1 = body1->m_PhysicalShape;
 				contact.m_PhysicalShape2 = body2->m_PhysicalShape;
 				
-				m_vecContacts.push_back(contact);
+				m_NumContacts++;
 			}
 		}
 	}

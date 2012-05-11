@@ -18,7 +18,8 @@ RegularPolygon::RegularPolygon(Vector2f* vertices, dint32 numVertices) : m_NumVe
 	dAssert(m_NumVertices > 2);
 	for( dint32 v=0; v< m_NumVertices; v++ )
 		m_Vertices[v] = vertices[v];
-	
+
+	m_ShapeType = EST_REGULARPOLY;
 	findCentroid();
 	findMomentOfInertia();
 }
@@ -57,7 +58,7 @@ void RegularPolygon::findCentroid()
 	for( dint32 v=0; v<m_NumVertices; v++ )
 	{
 		Vector2f v1 = m_Vertices[v];
-		i = v;
+		i = v+1;
 		if( v == m_NumVertices-1 )
 			i = 0;
 		Vector2f v2 = m_Vertices[i];
@@ -65,7 +66,7 @@ void RegularPolygon::findCentroid()
 		// Find Area of the Triangle formed by the above vertices
 		Vector2f edge1 = -v1;
 		Vector2f edge2 = v2 - v1;
-		dfloat A = 0.5f * edge1.cross(edge2);
+		dfloat A = 0.5f * edge2.cross(edge1);
 		// Center of the Triangle
 		Vector2f c = ( v1 + v2 ) * ONE_BY_THREE;
 
@@ -73,6 +74,8 @@ void RegularPolygon::findCentroid()
 		Area += A;
 		m_Centroid += c * A;
 	}
+	m_Area = Area;
+	dAssert( m_Area > 0.0f );
 	m_Centroid /= m_Area;
 }
 

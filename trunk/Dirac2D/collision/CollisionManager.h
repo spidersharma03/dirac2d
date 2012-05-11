@@ -13,6 +13,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class PhysicalWorld;
 class ContactSolver;
+class Contact;
 
 class CollisionManager
 {
@@ -23,9 +24,16 @@ public:
 	
 	friend class ContactSolver;
 	
+	void getContactList( Contact** contacts, dint32& numContacts)
+	{
+		*contacts = m_ContactList;
+		numContacts = m_NumContacts;
+	}
+	
 private:
 	PhysicalWorld *m_PhysicalWorld;
-	vector<Contact> m_vecContacts;
+	Contact m_ContactList[MAX_CONTACTS];
+	dint32 m_NumContacts;
 };
 
 END_NAMESPACE_DIRAC2D

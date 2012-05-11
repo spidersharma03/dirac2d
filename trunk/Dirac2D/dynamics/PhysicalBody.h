@@ -38,7 +38,35 @@ public:
 
 	PhysicalShape* createPhysicalShape(PhysicalAppearance& pApp);
 	
+	void setPosition(Vector2f& position)
+	{
+		m_Centre = position;
+		updateTransform();
+	}
+	
+	void setPosition(Vector2f position)
+	{
+		m_Centre = position;
+		m_Transform.translate(position);
+	}
+	
+	void setAngle(dfloat angle)
+	{
+		m_Angle = angle;
+		m_Transform.rotate(m_Angle);
+	}
+	
 	void updateTransform();
+	
+	Matrix3f getTransform()
+	{
+		return m_Transform;
+	}
+	
+	void setTransform( Matrix3f& xForm )
+	{
+		m_Transform = xForm;
+	}
 	
 public:
 	Vector2f m_Centre;

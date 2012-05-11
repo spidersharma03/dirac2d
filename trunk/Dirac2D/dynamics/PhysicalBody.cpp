@@ -46,6 +46,7 @@ void PhysicalBody::applyTorque( Vector2f& torque )
 PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 {
 	PhysicalShape* pShape = new PhysicalShape();
+	pShape->m_ParentBody = this;
 	pShape->m_NextShape = 0;
 	pShape->m_Elasticity = pApp.m_PhysicalAttributes.m_Elasticity;
 	pShape->m_Friction = pApp.m_PhysicalAttributes.m_Friction;
@@ -56,6 +57,7 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	
 	pShape->m_CollisionShape = pApp.m_CollisionAttributes.m_Shape;
 	pShape->m_CollisionFilter = pApp.m_CollisionAttributes.m_Filter;
+	
 	
 	m_PhysicalShapeList = pShape;
 	m_PhysicalShapeList->m_NextShape = 0;
@@ -75,22 +77,24 @@ void PhysicalBody::calculateMassAttributes()
 {
 	PhysicalShape* shape = m_PhysicalShapeList;
 	// Calculate Centre of Mass of the PhysicalBody.
-	Vector2f sum_mr, sum_r;
-	while( shape == 0 )
+	Vector2f sum_mr;
+	dfloat sum_m;
+	while( shape != 0 )
 	{
 		shape->calculateMassAttributes();
-		sum_r  += shape->m_MassAttributes.m_C;
+		sum_m  += shape->m_MassAttributes.m_Mass;
 		sum_mr += shape->m_MassAttributes.m_C * shape->m_MassAttributes.m_Mass;
 		shape = m_PhysicalShapeList->m_NextShape;
 	}
-	m_Centre = sum_mr/sum_r;
+	dAssert( sum_m > 0.0f );
+	m_Centre = sum_mr/sum_m;
 	
 	// Calculate Moment of Inertia and Mass of the PhysicalBody.
 	shape = m_PhysicalShapeList;
 	m_I = 0.0f;
 	m_Mass = 0.0f;
 
-	while( shape == 0 )
+	while( shape != 0 )
 	{
 		Vector2f R = shape->m_MassAttributes.m_C - m_Centre;
 		dfloat r2 = R.lengthSquared();

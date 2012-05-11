@@ -26,14 +26,16 @@ public:
 	
 	Matrix3(const Matrix3<T>& other)
 	{
-		setIdentity();
+		col1 = other.col1;
+		col2 = other.col2;
+		col3 = other.col3;
 	}
 	
 	void rotate(T angle)
 	{
 		T cs = cos(angle); T sn = sin(angle);
 		col1.x = cs; col2.x = -sn;
-		col1.x = sn; col2.x = cs;
+		col1.y = sn; col2.y = cs;
 	}
 	
 	void translate( Vector2<T>& translation )
@@ -44,7 +46,7 @@ public:
 	
 	Vector2<T> operator*( const Vector2<T>& v )
 	{
-		return Vector2<T>( col1.x*v.x + col2.x*v.y,  col1.y*v.x + col2.y*v.y);
+		return Vector2<T>( col1.x*v.x + col2.x*v.y + col3.x,  col1.y*v.x + col2.y*v.y + col3.y);
 	}
 	
 	void transformAsPoint(Vector2<T>& v)
@@ -88,7 +90,7 @@ public:
 	{
 		data[0] = col1.x; data[1] = col1.y; data[2] = 0.0;    data[3] = 0.0;
 		data[4] = col2.x; data[5] = col2.y; data[6] = 0.0;    data[7] = 0.0;
-		data[8] = 0.0;    data[9] = 0.0;    data[10] = 0.0;    data[11] = 0.0;
+		data[8] = 0.0;    data[9] = 0.0;    data[10] = 1.0;    data[11] = 0.0;
 		data[12] = col3.x; data[13] = col3.y; data[14] = 0.0;    data[15] = 1.0;
 	}
 	
