@@ -1,7 +1,11 @@
 #include <iostream>
 
+#ifndef WIN32 
 #include <sys/time.h>
 #include<GLUT/glut.h>
+#else
+#include<GL/glut.h>
+#endif
 
 #include "Dirac2D/Dirac2D.h"
 
@@ -91,6 +95,7 @@ void renderScene(void)
     glutSwapBuffers();
 }
 
+#ifndef WIN32
 static void timerCallback (int value)
 {
     timeval t1, t2;
@@ -125,6 +130,8 @@ static void timerCallback (int value)
     glutTimerFunc (0, timerCallback, 0);
 }
 
+#endif
+
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
@@ -134,7 +141,10 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(renderScene);
     //glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
+
+#ifndef WIN32
 	glutTimerFunc(0, timerCallback, 0);
+#endif
 	
 	initScene();
 	

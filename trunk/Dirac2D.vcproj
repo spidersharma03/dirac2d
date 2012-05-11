@@ -183,6 +183,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Dirac2D\dynamics\PhysicalShape.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Dirac2D\dynamics\PhysicalWorld.cpp"
 					>
 				</File>
