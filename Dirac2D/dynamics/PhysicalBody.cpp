@@ -78,7 +78,7 @@ void PhysicalBody::calculateMassAttributes()
 	PhysicalShape* shape = m_PhysicalShapeList;
 	// Calculate Centre of Mass of the PhysicalBody.
 	Vector2f sum_mr;
-	dfloat sum_m;
+	dfloat sum_m = 0.0f;
 	while( shape != 0 )
 	{
 		shape->calculateMassAttributes();

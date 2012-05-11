@@ -27,6 +27,9 @@ END_NAMESPACE_DIRAC2D \
 
 #define EPSILON 1e-15
 
+#define M_PI 3.14159265358979
+#define M_PI_4 (M_PI/4.0f)
+#define M_PI_2 (M_PI/2.0f)
 
 typedef long dint64;
 typedef unsigned long duint64;
