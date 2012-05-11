@@ -26,6 +26,12 @@ public:
 	{
 	}
 	
+	virtual void setPointSize(dfloat size);
+
+	virtual void setColor( dchar r, dchar g, dchar b, dchar a );
+	
+	virtual void setColor( dchar r, dchar g, dchar b );
+	
 	virtual void drawShape(CollisionShape*);
 	
 	virtual void drawCircle( dfloat radius );

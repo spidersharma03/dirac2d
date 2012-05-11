@@ -37,13 +37,13 @@ BEGIN_NAMESPACE_DIRAC2D
 	dot = AXIS.dot(VERTICES[i]); \
 	if( dot < min ){ \
 	  min = dot; \
-      MININDEX = i; \
+	 MININDEX = i; \
 	} \
     if( dot > max ){ \
 	  max = dot; \
       MAXINDEX = i; \
 	} \
-} \
+  } \
 } \
 
 // Project both the Polygons on to the list of seperating axis of Polygon 1. if there is an Axis which seperates the Polygons, then return.
@@ -53,10 +53,10 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 	dint32 numVertices2 = poly2->getNumVertices();
 
 	Vector2f* vertices1 = poly1->getVertices();
-	Vector2f* vertices2 = poly1->getVertices();
+	Vector2f* vertices2 = poly2->getVertices();
 	
-	Vector2f& v1 = vertices1[0];
-	Vector2f& v2 = vertices1[0];
+	Vector2f v1 = vertices1[0];
+	Vector2f v2 = vertices1[0];
 	Matrix2f xForm1, xForm2;
 	// Transform which converts Seperating Normal into Polygon2's Space.
 	xForm1 = polyxForm1.getRotationMatrix();
@@ -67,16 +67,17 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 	for( dint32 i=0; i<numVertices1; i++ )
 	{
 		v1 = vertices1[i];
+		dint32 j = i;
 		if( i == numVertices1-1)
-			i = -1;
-		v2 = vertices1[i+1];
+			j = -1;
+		v2 = vertices1[j+1];
 		
 		axisNormalLocal.set(v1.x - v2.x, v2.y - v1.y); //Calculate the perpendicular to this edge
 		// Normal in world space.
 		axisNormalWorld = xForm1 * axisNormalLocal;
 		
 		dfloat min1 = 10000.0f, min2 = 10000.0f, max1 = -10000.0f, max2 = -10000.0f; 
-		dint32 minIndex, maxIndex;
+		dint32 minIndex = 0, maxIndex = 0;
 		//Project both Polygons on to the perpendicular
 		PROJECT_POLYGON( poly1, numVertices1, axisNormalLocal, minIndex, maxIndex )
 		Vector2f p1 = vertices1[minIndex];
@@ -89,6 +90,7 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 		// Transform the seperating normal into Polygon2's space
 		axisNormalLocal = xForm2 * axisNormalLocal;
 		
+		minIndex = 0, maxIndex = 0;
 		PROJECT_POLYGON( poly2 ,numVertices2, axisNormalLocal, minIndex, maxIndex )
 		p1 = vertices2[minIndex];
 		p2 = vertices2[maxIndex];
@@ -122,13 +124,10 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	dint32 numVertices = poly->getNumVertices();
 	Vector2f* vertices = poly->getVertices();
 	
-	// Transform the input normal in polygon's space
-	Vector2f localNormal = normal;
-	
 	for( dint32 i=0; i<numVertices; i++ )
 	{
 		Vector2f& p =  vertices[i];
-		float dot = p.dot(localNormal);
+		float dot = p.dot(normal);
 		if( dot > maxDot )
 		{
 			maxDot = dot;
@@ -139,8 +138,8 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	duint16 newindex = (index == numVertices-1) ? 0 : index+1;
 	duint16 index2 = newindex;
 	
-	Vector2f& p1 = vertices[index1];
-	Vector2f& p2 = vertices[index2];
+	Vector2f p1 = vertices[index1];
+	Vector2f p2 = vertices[index2];
 	edgeVertex1 = index1;
 	edgeVertex2 = index2;
 	
@@ -179,10 +178,15 @@ static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifol
 	dfloat u2 = refEdge.dot(o1);
 	dfloat lambda = u1/(u1-u2);
 	
-	if( u1*u2 < 0.0f ) 
+	if( u1 < 0.0f ) 
 	{
 		cp0.x = cp0.x + lambda*(cp1.x - cp0.x); 
 		cp0.y = cp0.y + lambda*(cp1.y - cp0.y); 
+	}
+	if( u2 < 0.0f ) 
+	{
+		cp1.x = cp0.x + lambda*(cp1.x - cp0.x); 
+		cp1.y = cp0.y + lambda*(cp1.y - cp0.y); 
 	}
 }
 

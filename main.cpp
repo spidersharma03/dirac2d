@@ -13,26 +13,35 @@ void renderScene(void);
 
 PhysicalWorld* pWorld;
 
+dfloat dt = 1.0f/60.0f;
+
 void initScene()
 {
 	pWorld = new PhysicalWorld();
+	GLRenderer* glRenderer = new GLRenderer(pWorld);
+	pWorld->setRenderer(glRenderer);
+	
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.2f,0.0f));
+	pBodyGround->setAngle(M_PI_4);
+	
 	pBodyGround->m_BodyType = EBT_STATIC;
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.2f;
+	dfloat groundWidth = 0.2f; dfloat groundHeight = 0.2f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
 	// Create Box
 	PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
-	dfloat boxWidth = 0.2f; dfloat boxHeight = 0.2f;
+	pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBox->setPosition(Vector2f(-0.2f,0.0f));
+	pBodyBox->setAngle(M_PI_4/2);
+	dfloat boxWidth = 0.25f; dfloat boxHeight = 0.25f;
 	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 	pBodyBox->createPhysicalShape(pApp);
-	
-	
 }
 
 void changeSize(int w, int h) 
@@ -56,12 +65,14 @@ void changeSize(int w, int h)
 	
     // Set the correct perspective.
 	
-    gluPerspective(45,ratio,1,1000);
+	glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+	glOrtho(-1, 1, -1, 1, -0.01, 100);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0.0,0.0,5.0, 
-			  0.0,0.0,-1.0,
-			  0.0f,1.0f,0.0f);
+    //gluLookAt(0.0,0.0,5.0, 
+//			  0.0,0.0,-1.0,
+//			  0.0f,1.0f,0.0f);
 	
 	
 }
@@ -71,10 +82,11 @@ void renderScene(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 	glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-	glOrtho(-4, 4, -4, 4, -0.01, 100);
-	glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	
+	pWorld->Step(dt);
+	
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	pWorld->draw();
 	
     glutSwapBuffers();
 }
@@ -123,6 +135,8 @@ int main(int argc, char **argv) {
     //glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
 	glutTimerFunc(0, timerCallback, 0);
+	
+	initScene();
 	
     glutMainLoop();
 	

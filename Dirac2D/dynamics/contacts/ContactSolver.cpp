@@ -20,6 +20,7 @@ ContactSolver::ContactSolver()
 	
 void ContactSolver::buildJacobian()
 {
+	return;
 	for( dint32 c=0; c<m_NumContacts; c++ )
 	{
 		Contact* contact = m_Contacts+c;
@@ -64,6 +65,7 @@ void ContactSolver::buildJacobian()
 	
 void ContactSolver::correctVelocities()
 {
+	return;
 	for( dint32 c=0; c<m_NumContacts; c++ )
 	{
 		Contact* contact = m_Contacts+c;

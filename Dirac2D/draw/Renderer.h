@@ -17,8 +17,16 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalWorld;
 class CollisionShape;
 
-class RenderingAttributes
+enum POLYGON_MODE { EPM_FILL, EPM_LINE, EPM_POINT };
+
+struct RenderingAttributes
 {
+	POLYGON_MODE m_PolygonMode;	
+	
+	RenderingAttributes()
+	{
+		m_PolygonMode = EPM_FILL;
+	}
 };
 
 class Renderer
@@ -32,7 +40,13 @@ public:
 	{
 		m_RenderingAttributes = renderAtt;
 	}
-		
+	
+	virtual void setPointSize(dfloat size) = 0;
+	
+	virtual void setColor( dchar r, dchar g, dchar b, dchar a ) = 0;
+
+	virtual void setColor( dchar r, dchar g, dchar b ) = 0;
+
 	virtual void drawShape(CollisionShape*) = 0;
 	
 	virtual void drawCircle( dfloat radius ) = 0;

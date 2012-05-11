@@ -30,6 +30,13 @@ struct PhysicalAttributes
 	dfloat m_Angle;
 	dfloat m_Friction;
 	dfloat m_Elasticity;
+	
+	PhysicalAttributes()
+	{
+		m_Angle = 0.0f;
+		m_Friction = 0.0f;
+		m_Elasticity = 0.0f;
+	}
 };
 
 struct CollisionFilter
@@ -40,6 +47,11 @@ struct CollisionAttributes
 {
 	CollisionShape* m_Shape;
 	CollisionFilter m_Filter;
+	
+	CollisionAttributes()
+	{
+		m_Shape = 0;
+	}
 };
 
 struct MassAttributes
@@ -48,6 +60,12 @@ struct MassAttributes
 	dfloat m_I;
 	dfloat m_Density;
 	Vector2f m_C;
+	
+	MassAttributes()
+	{
+		m_Density = 1.0f;
+		m_Mass = m_I = 0.0f;
+	}
 };
 
 class PhysicalAppearance

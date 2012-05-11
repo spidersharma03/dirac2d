@@ -7,6 +7,7 @@
  */
 
 #include "CollisionDetectionPolygon.h"
+#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -43,7 +44,14 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	if( !bRes )
 		return false;
 	
-	Vector2f d = polygonXform1 * poly1->m_Centroid  - polygonXform2 * poly2->m_Centroid;
+	printf("Collision Detected %f\n", minDistance);
+		
+	Vector2f c1 = poly1->m_Centroid;
+	Vector2f c2 = poly2->m_Centroid;
+	polygonXform1.transformAsPoint(c1);
+	polygonXform2.transformAsPoint(c2);
+		
+	Vector2f d = c1 - c2;
 	
 	dfloat dot = d.dot(collisionNormal);
 	
@@ -55,7 +63,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	Vector2f edge1, edge2;
 	dint32 p1, p2, p3, p4;
 	
-	Vector2f normalLocal = polygonXform2.getRotationMatrixTransposed() * collisionNormal;
+	Vector2f normalLocal = (polygonXform2.getRotationMatrixTransposed() * collisionNormal);
 	
 	findCandidateEdge( poly2, normalLocal , p1, p2 );
 	
@@ -64,18 +72,26 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	findCandidateEdge( poly1, negNormal , p3, p4 );
 	
 	// Find Reference and incident Edges
-	Vector2f refEdge      = polygonXform2 * (vertices2[p2] - vertices2[p1] );
-	Vector2f incidentEdge = polygonXform1 * (vertices1[p4] - vertices1[p3] );
+	Vector2f refEdge      = vertices2[p2] - vertices2[p1];
+	Vector2f incidentEdge = vertices1[p4] - vertices1[p3];
+	
+	polygonXform2.transformAsVector(refEdge);
+	polygonXform1.transformAsVector(incidentEdge);
 	
 	dot = refEdge.dot(collisionNormal);
 	dbool bFlip = false;
-	Matrix3f& Xform1 = polygonXform1;
-	Matrix3f& Xform2 = polygonXform2;
+	Matrix3f Xform1 = polygonXform1;
+	Matrix3f Xform2 = polygonXform2;
 	
 	if( fabs(dot) > fabs(incidentEdge.dot(collisionNormal)) )
 	{
-		refEdge      = vertices1[p4] - vertices1[p3];
-		incidentEdge = vertices2[p2] - vertices2[p1];
+		Matrix3f tempMat = Xform2;
+		Xform2 = Xform1;
+		Xform1 = tempMat;
+		
+		Vector2f tempEdge = refEdge;
+		refEdge = incidentEdge;
+		incidentEdge = tempEdge;
 		
 		Vector2f* tempVertices = vertices1;
 		vertices1 = vertices2;
@@ -88,33 +104,33 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 		temp = p2;
 		p2 = p4;
 		p4 = temp;
-		bFlip = true;
-		
-		Matrix3f tempMat = Xform2;
-		Xform2 = Xform1;
-		Xform1 = tempMat;
+		bFlip = true;		
 	}
 	
-	contactManifold->m_ContactPoints[0].m_Point = Xform2 * vertices2[p3];
-	contactManifold->m_ContactPoints[0].m_Point = Xform2 * vertices2[p4];
+	contactManifold->m_ContactPoints[0].m_Point = Xform1 * vertices1[p3];
+	contactManifold->m_ContactPoints[1].m_Point = Xform1 * vertices1[p4];
 	
-	// Clip Against first Edge Plane
-	Vector2f edgeVertex1 = Xform1 * vertices1[p1];
+	contactManifold->m_NumContacts = 2;
+	
+	// Clip Against first Edge Plane of Reference Edge
+	Vector2f edgeVertex1 = Xform2 * vertices2[p1];
 	clip(refEdge, edgeVertex1, contactManifold);
-	
+
 	Vector2f refNegEdge = -refEdge;
-	
-	// Clip Against Second Edge Plane
-	Vector2f edgeVertex2 = Xform1 * vertices1[p2];
+
+	// Clip Against Second Edge Plane of Reference Edge
+	Vector2f edgeVertex2 = Xform2 * vertices2[p2];
 	clip(refNegEdge, edgeVertex2, contactManifold);
-	
+
 	// Clip the ContactPoints against the Reference Edge Normal.
-	Vector2f refNormal( -refEdge.y, refEdge.x);
+	Vector2f refNormal( refEdge.y, -refEdge.x);
 	
 	if( bFlip )
 		refNormal = -refNormal;
 	
 	ContactPoint* contactPoints = contactManifold->m_ContactPoints;
+	
+	refNormal.normalize();
 	
 	Vector2f T = contactPoints[0].m_Point - edgeVertex1;
 	float dot1 = refNormal.dot(T);
@@ -125,8 +141,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	contactPoints[0].m_Depth = dot1;
 	contactPoints[1].m_Depth = dot2;
 	
-	contactManifold->m_NumContacts = 2;
-	
+		
 	if( dot1 < 0.0f )
 	{
 		contactPoints[0].m_Point = edgeVertex2;
@@ -134,12 +149,10 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 		contactManifold->m_NumContacts = 1;
 	}
 	
-	
-	
 	if( dot2 < 0.0f )
 	{
-		contactPoints[0].m_Point = edgeVertex1;
-		contactPoints[0].m_Depth = dot1;
+		contactPoints[1].m_Point = edgeVertex1;
+		contactPoints[1].m_Depth = dot1;
 		contactManifold->m_NumContacts = 1;
 	}
 	
