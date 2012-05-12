@@ -16,6 +16,7 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world)
 	m_Angle = 0.0f;
 	m_LinearDamping = 0.0f;
 	m_AngularDamping = 0.0f;
+	m_AngularVelocity = 0.0f;
 	m_BodyType = EBT_DYNAMIC;
 	m_Mass = m_InvMass = 1.0f;
 	m_I = m_InvI = 1.0f;
@@ -93,21 +94,29 @@ void PhysicalBody::calculateMassAttributes()
 	shape = m_PhysicalShapeList;
 	m_I = 0.0f;
 	m_Mass = 0.0f;
-
-	while( shape != 0 )
+	if( m_BodyType == EBT_DYNAMIC )
 	{
-		Vector2f R = shape->m_MassAttributes.m_C - m_Centre;
-		dfloat r2 = R.lengthSquared();
-		m_I += ( shape->m_MassAttributes.m_I + shape->m_MassAttributes.m_Mass * r2);
-		m_Mass += shape->m_MassAttributes.m_Mass;
-		shape = m_PhysicalShapeList->m_NextShape;
+		while( shape != 0 )
+		{
+			Vector2f R = shape->m_MassAttributes.m_C - m_Centre;
+			dfloat r2 = R.lengthSquared();
+			m_I += ( shape->m_MassAttributes.m_I + shape->m_MassAttributes.m_Mass * r2);
+			m_Mass += shape->m_MassAttributes.m_Mass;
+			shape = m_PhysicalShapeList->m_NextShape;
+		}
+		dAssert( m_Mass > 0.0f );
+		dAssert( m_I > 0.0f );
+		
+		m_InvMass = 1.0f/m_Mass;
+		m_InvI    = 1.0f/m_I;
 	}
-	
-	dAssert( m_Mass > 0.0f );
-	dAssert( m_I > 0.0f );
-	
-	m_InvMass = 1.0f/m_Mass;
-	m_InvI    = 1.0f/m_I;
+	else
+	{
+		m_InvMass = 0.0f;
+		m_InvI    = 0.0f;
+	}
+
+	m_Transform.transformAsPoint(m_Centre);
 }
 
 END_NAMESPACE_DIRAC2D

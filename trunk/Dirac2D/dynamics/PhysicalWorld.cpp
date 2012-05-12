@@ -61,6 +61,13 @@ void PhysicalWorld::Step(dfloat dt)
 	// Collision detection	
 	m_CollisionManager->update();
 	
+	Contact* contacts = 0;
+	dint32 numContacts = 0;
+	m_CollisionManager->getContactList(&contacts, numContacts);
+	
+	m_ContactSolver->m_Contacts = contacts;
+	m_ContactSolver->m_NumContacts = numContacts;
+	
 	// Initialize the Solver.
 	m_ContactSolver->buildJacobian();
 	// Correct the velocities.
@@ -84,11 +91,14 @@ void PhysicalWorld::draw()
 	if( !m_Renderer )
 		return;
 	// Draw Physical Bodies
-	m_Renderer->setColor(255, 255, 255);
 	for( duint32 b=0; b<m_vecPhysicalBodies.size(); b++ )
 	{
 		PhysicalBody* pBody = m_vecPhysicalBodies[b];
 		m_Renderer->setTransform(pBody->m_Transform);
+		if( pBody->m_BodyType == EBT_DYNAMIC )
+			m_Renderer->setColor(255, 255, 255);
+		if( pBody->m_BodyType == EBT_STATIC )
+			m_Renderer->setColor(0, 255, 0);
 		m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
 	}
 	// Draw Constraints/Joints
@@ -102,6 +112,8 @@ void PhysicalWorld::draw()
 	Contact* contacts = 0;
 	dint32 numContacts = 0;
 	m_CollisionManager->getContactList(&contacts, numContacts);
+	
+	
 	for( dint32 c=0; c<numContacts; c++ )
 	{
 		Contact& contact = contacts[c];
