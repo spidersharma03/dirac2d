@@ -44,7 +44,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	if( !bRes )
 		return false;
 	
-	printf("Collision Detected %f\n", minDistance);
+	//printf("Collision Detected %f\n", minDistance);
 		
 	Vector2f c1 = poly1->m_Centroid;
 	Vector2f c2 = poly2->m_Centroid;
@@ -104,7 +104,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 		temp = p2;
 		p2 = p4;
 		p4 = temp;
-		bFlip = true;		
+		//bFlip = true;		
 	}
 	
 	contactManifold->m_ContactPoints[0].m_Point = Xform1 * vertices1[p3];
@@ -141,15 +141,15 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	contactPoints[0].m_Depth = dot1;
 	contactPoints[1].m_Depth = dot2;
 	
-		
-	if( dot1 < 0.0f )
+	
+	if( dot1 > 0.0f )
 	{
 		contactPoints[0].m_Point = edgeVertex2;
 		contactPoints[0].m_Depth = dot2;
 		contactManifold->m_NumContacts = 1;
 	}
 	
-	if( dot2 < 0.0f )
+	if( dot2 > 0.0f )
 	{
 		contactPoints[1].m_Point = edgeVertex1;
 		contactPoints[1].m_Depth = dot1;
@@ -157,7 +157,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	}
 	
 	contactManifold->m_ContactNormal = collisionNormal;
-	
+	contactManifold->m_ContactNormal.normalize();
 	return true;
 }
 

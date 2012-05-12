@@ -32,7 +32,7 @@ public:
 	
 private:
 	PhysicalWorld *m_PhysicalWorld;
-	Contact m_ContactList[MAX_CONTACTS];
+	Contact m_ContactList[MAX_CONTACT_POINTS];
 	dint32 m_NumContacts;
 };
 

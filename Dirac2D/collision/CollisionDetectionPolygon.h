@@ -14,6 +14,8 @@
 #include "../geometry/RegularPolygon.h"
 #include "../dynamics/contacts/Contact.h"
 
+#include <stdio.h>
+
 #ifndef _COLLISION_DETECTION_POLYGON_H_
 #define _COLLISION_DETECTION_POLYGON_H_
 
@@ -149,21 +151,23 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	newindex = index - 1;
 	
 	if( index == 0 )
+	{
 		newindex = numVertices-1;
-		
-		index2 = newindex;
-		p1 = vertices[index1];
-		p2 = vertices[index2];
+		index2 = index1;
+		index1 = newindex;
+	}
 	
-		
-		d = p2 - p1;
-		dfloat d1 = d.dot(normal);
-		if( fabs(dot) > fabs(d1) )
-		{
-			edgeIndex = newindex;
-			edgeVertex1 = index1;
-			edgeVertex2 = index2;
-		}
+	p1 = vertices[index1];
+	p2 = vertices[index2];
+			
+	d = p2 - p1;
+	dfloat d1 = d.dot(normal);
+	if( fabs(dot) > fabs(d1) )
+	{
+		edgeIndex = newindex;
+		edgeVertex1 = index1;
+		edgeVertex2 = index2;
+	}
 }
 
 // Clip Against Edge Plane
@@ -176,7 +180,13 @@ static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifol
 	dfloat u1 = refEdge.dot(o1);
 	o1 = cp1 - p;
 	dfloat u2 = refEdge.dot(o1);
+	
 	dfloat lambda = u1/(u1-u2);
+	
+	if( fabs(lambda) > 1e5 )
+	{
+		return;
+	}
 	
 	if( u1 < 0.0f ) 
 	{

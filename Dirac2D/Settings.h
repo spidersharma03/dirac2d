@@ -19,6 +19,8 @@ BEGIN_NAMESPACE_DIRAC2D
 #define MAX_POLY_VERTICES 20
 // Allowed penetration for collision
 #define ALLOWED_PENETRATION 0.01f
+// Maximum nuber of Contact Points in the Physical World
+#define MAX_CONTACT_POINTS 100
 
 END_NAMESPACE_DIRAC2D
 

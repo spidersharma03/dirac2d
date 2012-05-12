@@ -63,7 +63,7 @@ struct MassAttributes
 	
 	MassAttributes()
 	{
-		m_Density = 1.0f;
+		m_Density = 1000.0f;
 		m_Mass = m_I = 0.0f;
 	}
 };

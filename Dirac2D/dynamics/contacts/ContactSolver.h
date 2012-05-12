@@ -28,6 +28,8 @@ public:
 	// Solve for the Normal and Tangent(Frictional) impulses and apply them on to the physical bodies.
 	void correctVelocities();
 	
+	friend class PhysicalWorld;
+	
 private:
 	Contact *m_Contacts;
 	dint32 m_NumContacts;

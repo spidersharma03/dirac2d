@@ -17,7 +17,10 @@ void renderScene(void);
 
 PhysicalWorld* pWorld;
 
-dfloat dt = 1.0f/60.0f;
+dfloat dt = 1.0f/6000.0f;
+
+dint32 windowWidth   = 800;
+dint32 windowHeight = 600;
 
 void initScene()
 {
@@ -27,22 +30,22 @@ void initScene()
 	
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
-	pBodyGround->setPosition(Vector2f(0.2f,0.0f));
-	pBodyGround->setAngle(M_PI_4);
-	
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->setAngle(-M_PI_4/10);
 	pBodyGround->m_BodyType = EBT_STATIC;
+	
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 0.2f; dfloat groundHeight = 0.2f;
+	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
 	// Create Box
 	PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
-	pBodyBox->m_BodyType = EBT_STATIC;
-	pBodyBox->setPosition(Vector2f(-0.2f,0.0f));
-	pBodyBox->setAngle(M_PI_4/2);
-	dfloat boxWidth = 0.25f; dfloat boxHeight = 0.25f;
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBox->setPosition(Vector2f(-0.2f,-0.1f));
+	pBodyBox->setAngle(M_PI_4*0.9);
+	dfloat boxWidth = 0.21f; dfloat boxHeight = 0.051f;
 	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 	pBodyBox->createPhysicalShape(pApp);
@@ -50,9 +53,10 @@ void initScene()
 
 void changeSize(int w, int h) 
 {
-	
+	windowWidth = w;
+	windowHeight = h;
     // Prevent a divide by zero, when window is too short
-    float ratio;
+    dfloat ratio;
     if(h == 0)
         h = 1;
 	
@@ -71,7 +75,7 @@ void changeSize(int w, int h)
 	
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-	glOrtho(-1, 1, -1, 1, -0.01, 100);
+	glOrtho(-1*ratio, 1*ratio, -1, 1, -0.01, 100);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     //gluLookAt(0.0,0.0,5.0, 
@@ -85,8 +89,14 @@ void renderScene(void)
 {	
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
+	if(windowHeight == 0)
+        windowHeight = 1;
+	
+    dfloat ratio = 1.0* windowWidth / windowHeight;
+	
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	
+	glOrtho(-1*ratio, 1*ratio, -1, 1, -0.01, 100);
 	pWorld->Step(dt);
 	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -136,7 +146,7 @@ int main(int argc, char **argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(100,100);
-    glutInitWindowSize(512,512);
+    glutInitWindowSize(windowWidth,windowHeight);
     glutCreateWindow("Physics Engine - DIRAC2D");
 	glutDisplayFunc(renderScene);
     //glutIdleFunc(renderScene);

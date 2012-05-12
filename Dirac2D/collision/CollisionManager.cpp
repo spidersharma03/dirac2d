@@ -37,12 +37,16 @@ void CollisionManager::update()
 			dbool res = intersectShapes( body1->m_PhysicalShapeList->m_CollisionShape, body1->m_Transform, body2->m_PhysicalShapeList->m_CollisionShape, body2->m_Transform, &manifold);
 			if( res )
 			{
-				Contact& contact = m_ContactList[m_NumContacts];
-				contact.m_Manifold = manifold;
-				contact.m_PhysicalShape1 = body1->m_PhysicalShape;
-				contact.m_PhysicalShape2 = body2->m_PhysicalShape;
-				
-				m_NumContacts++;
+				for( dint32 i=0; i<manifold.m_NumContacts; i++ )
+				{
+					Contact& contact = m_ContactList[m_NumContacts];
+					contact.m_Manifold = manifold;
+					contact.m_PhysicalShape1 = body1->m_PhysicalShapeList;
+					contact.m_PhysicalShape2 = body2->m_PhysicalShapeList;
+					contact.m_ContactPoint = manifold.m_ContactPoints[i];
+					contact.m_ContactNormal = manifold.m_ContactNormal;
+					m_NumContacts++;
+				}
 			}
 		}
 	}
