@@ -25,7 +25,9 @@ void ContactSolver::buildJacobian()
 	{
 		Contact* contact = m_Contacts+c;
 		contact->m_NormalImpulse = 0.0f;
-
+		contact->m_TangentImpulse = 0.0f;
+		contact->m_PositionError = 0.0f;
+		
 		PhysicalShape* shape1 = contact->m_PhysicalShape1;
 		PhysicalShape* shape2 = contact->m_PhysicalShape2;		
 		PhysicalBody* body1 = shape1->m_ParentBody;
@@ -50,20 +52,15 @@ void ContactSolver::buildJacobian()
 			// Effective mass for Normal Impulses
 			contact->m_NormalMassMatrix[0] = 1.0f/JInvMJT + contact->m_CFM;
 			// Positional Error for Position Stabilization( Baumgarte )
-			contact->m_PositionError = -contact->m_ERP * MIN( 0.0f, depth + ALLOWED_PENETRATION);
-			
-			if( fabs(depth) > 1000 )
-			{
-				int test = 0;
-				test++;
-				printf("Pos Error=%f\n", depth);
-			}
-			
+			contact->m_PositionError = -contact->m_ERP * MIN( 0.0f, depth + ALLOWED_PENETRATION) * 600.0f;
 			dfloat r1cross_t = r1.cross(t);
 			dfloat r2cross_t = r2.cross(t);
 			JInvMJT = body1->m_InvMass + body2->m_InvMass + r1cross_t * r1cross_t * body1->m_InvI + r2cross_t * r2cross_t * body2->m_InvI; 
 			// Effective mass for Frictional Impulses
 			contact->m_FrictionMassMatrix[0] = 1.0f/JInvMJT;
+			
+			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
+			contact->m_VelocityBias = 0.8f*relvel.dot(contact->m_ContactNormal);
 		}
 	}
 }
@@ -94,15 +91,14 @@ void ContactSolver::correctVelocities()
 			
 			Cdot_Normal  = relvel.dot(contact->m_ContactNormal);
 			
+			// Clamp the Total Impulse, not the Corrective Impulse, which could be negative.
 			dfloat oldImpulseMag = contact->m_NormalImpulse;
-			dfloat correctiveImpulseMag = contact->m_NormalMassMatrix[0] * ( contact->m_PositionError + Cdot_Normal );
-			contact->m_NormalImpulse = MAX(oldImpulseMag + correctiveImpulseMag, 0.0f);
-			correctiveImpulseMag = contact->m_NormalImpulse - oldImpulseMag;
+			dfloat correctiveImpulseMag = contact->m_NormalMassMatrix[0] * ( contact->m_PositionError + Cdot_Normal + contact->m_VelocityBias );
 			
-			if( correctiveImpulseMag > 1000 )
-			{
-				printf("Impulse Mag=%f\n", correctiveImpulseMag);
-			}
+			// This Can't be negative.
+			contact->m_NormalImpulse = MAX(oldImpulseMag + correctiveImpulseMag, 0.0f);
+			// This Could be negative.
+			correctiveImpulseMag = contact->m_NormalImpulse - oldImpulseMag;
 			
 			Vector2f correctiveImpulse = contact->m_ContactNormal * correctiveImpulseMag;
 			
@@ -117,10 +113,10 @@ void ContactSolver::correctVelocities()
 			Cdot_Tangent = relvel.dot(tangent);
 
 			oldImpulseMag = contact->m_TangentImpulse;
-			dfloat mu = 0.9f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
+			dfloat mu = 0.25f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
 			dfloat maxFriction = contact->m_NormalImpulse * mu;
 			correctiveImpulseMag = contact->m_FrictionMassMatrix[0] * Cdot_Tangent;
-			contact->m_TangentImpulse = CLAMP(correctiveImpulseMag, -maxFriction, maxFriction);
+			contact->m_TangentImpulse = CLAMP(oldImpulseMag + correctiveImpulseMag, -maxFriction, maxFriction);
 			correctiveImpulseMag = contact->m_TangentImpulse - oldImpulseMag;
 
 			correctiveImpulse = tangent * correctiveImpulseMag;

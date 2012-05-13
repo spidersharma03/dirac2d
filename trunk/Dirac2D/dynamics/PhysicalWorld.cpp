@@ -106,7 +106,7 @@ void PhysicalWorld::draw()
 	
 	// Draw Contacts
 	m_Renderer->setColor(255, 0, 0);
-	m_Renderer->setPointSize(5.0f);
+	m_Renderer->setPointSize(4.0f);
 	Matrix3f I;
 	m_Renderer->setTransform(I);
 	Contact* contacts = 0;

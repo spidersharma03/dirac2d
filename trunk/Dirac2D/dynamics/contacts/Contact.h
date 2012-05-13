@@ -41,7 +41,7 @@ class Contact
 public:
 	Contact()
 	{
-		m_ERP = 0.3f;
+		m_ERP = 0.2f;
 		m_CFM = 0.0f;
 		m_NormalImpulse = 0.0f;
 		m_TangentImpulse = 0.0f;
@@ -70,6 +70,7 @@ public:
 	dfloat m_NormalImpulse;
 	dfloat m_TangentImpulse;
 	
+	dfloat m_VelocityBias;
 	dfloat m_PositionError;
 	// Error reduction parameter. this is used to make sure that the constarint dosent drift over time. should be less than 1.0f/timeStep.
 	dfloat m_ERP;
