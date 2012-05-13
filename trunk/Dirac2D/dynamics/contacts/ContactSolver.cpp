@@ -60,7 +60,7 @@ void ContactSolver::buildJacobian()
 			contact->m_FrictionMassMatrix[0] = 1.0f/JInvMJT;
 			
 			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
-			contact->m_VelocityBias = 0.8f*relvel.dot(contact->m_ContactNormal);
+			contact->m_VelocityBias = 0.0f*relvel.dot(contact->m_ContactNormal);
 		}
 	}
 }

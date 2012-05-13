@@ -27,7 +27,7 @@ END_NAMESPACE_DIRAC2D \
 
 #define EPSILON 1e-15
 
-#define PI 3.14159265358979
+#define PI 3.14159265358979f
 #define PI_4 (PI/4.0f)
 #define PI_2 (PI/2.0f)
 

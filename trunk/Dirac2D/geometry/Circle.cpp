@@ -14,7 +14,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 Circle::Circle(dfloat radius):m_Radius(radius)
 {
-	m_Area = M_PI * m_Radius * m_Radius;
+	m_Area = PI * m_Radius * m_Radius;
 }
 
 Circle::Circle(const Circle& other)
