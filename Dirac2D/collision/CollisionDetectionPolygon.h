@@ -7,6 +7,7 @@
  */
 
 #include <math.h>
+#include "../common.h"
 #include "../definitions.h"
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
@@ -126,6 +127,7 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	dint32 numVertices = poly->getNumVertices();
 	Vector2f* vertices = poly->getVertices();
 	
+	// Find the Vertex which is Farthest in Normal Direction
 	for( dint32 i=0; i<numVertices; i++ )
 	{
 		Vector2f& p =  vertices[i];
@@ -146,9 +148,11 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	edgeVertex2 = index2;
 	
 	Vector2f d = p2 - p1;
+	d.normalize();
 	dfloat dot = d.dot(normal);
 	dint32 edgeIndex = index;
 	newindex = index - 1;
+	index2 = newindex;
 	
 	if( index == 0 )
 	{
@@ -161,8 +165,9 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	p2 = vertices[index2];
 			
 	d = p2 - p1;
-	dfloat d1 = d.dot(normal);
-	if( fabs(dot) > fabs(d1) )
+	d.normalize();
+	dfloat dot1 = d.dot(normal);
+	if( fabs(dot) > fabs(dot1) )
 	{
 		edgeIndex = newindex;
 		edgeVertex1 = index1;
@@ -182,11 +187,6 @@ static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifol
 	dfloat u2 = refEdge.dot(o1);
 	
 	dfloat lambda = u1/(u1-u2);
-	
-	if( fabs(lambda) > 1e5 )
-	{
-		return;
-	}
 	
 	if( u1 < 0.0f ) 
 	{

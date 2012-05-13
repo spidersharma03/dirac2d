@@ -17,21 +17,17 @@ void renderScene(void);
 
 PhysicalWorld* pWorld;
 
-dfloat dt = 1.0f/6000.0f;
+dfloat dt = 1.0f/600.0f;
 
 dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
 
-void initScene()
+void demo1()
 {
-	pWorld = new PhysicalWorld();
-	GLRenderer* glRenderer = new GLRenderer(pWorld);
-	pWorld->setRenderer(glRenderer);
-	
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
 	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
-	pBodyGround->setAngle(-M_PI_4/10);
+	//pBodyGround->setAngle(M_PI_4/5);
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
@@ -43,12 +39,92 @@ void initScene()
 	// Create Box
 	PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 	//pBodyBox->m_BodyType = EBT_STATIC;
-	pBodyBox->setPosition(Vector2f(-0.2f,-0.1f));
+	pBodyBox->setPosition(Vector2f(0.0f,1.1f));
 	pBodyBox->setAngle(M_PI_4*0.9);
 	dfloat boxWidth = 0.21f; dfloat boxHeight = 0.051f;
 	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 	pBodyBox->createPhysicalShape(pApp);
+}
+
+void demo2()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Boxes
+	dfloat y = -0.8f;
+	for( int i=0; i<10; i++ )
+	{
+		PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+		//pBodyBox->m_BodyType = EBT_STATIC;
+		y += 0.2f;
+		pBodyBox->setPosition(Vector2f(0.0f,y));
+		//pBodyBox->setAngle(M_PI_4*0.9);
+		dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
+		Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
+		pBodyBox->createPhysicalShape(pApp);
+	}
+}
+
+void demo3()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Boxes
+	dfloat y = -0.8f;
+	dfloat x = -1.0f;
+	dint32 n = 10;
+	dfloat dx = 0.0f;
+	for(int j=0; j<10;j++ )
+	{
+		y += 0.2f;
+		x = -1.0 + dx;
+		dx += 0.1f;
+		for( int i=0; i<n; i++ )
+		{
+			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+			//pBodyBox->m_BodyType = EBT_STATIC;
+			x += 0.2f;
+			pBodyBox->setPosition(Vector2f(x,y));
+			//pBodyBox->setAngle(M_PI_4*0.9);
+			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
+			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+			pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
+			pBodyBox->createPhysicalShape(pApp);
+		}
+		n -= 1;
+	}
+}
+
+
+void initScene()
+{
+	pWorld = new PhysicalWorld();
+	GLRenderer* glRenderer = new GLRenderer(pWorld);
+	pWorld->setRenderer(glRenderer);
+	
+	demo3();
 }
 
 void changeSize(int w, int h) 
@@ -149,7 +225,7 @@ int main(int argc, char **argv) {
     glutInitWindowSize(windowWidth,windowHeight);
     glutCreateWindow("Physics Engine - DIRAC2D");
 	glutDisplayFunc(renderScene);
-    //glutIdleFunc(renderScene);
+    glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
 
 #ifndef WIN32
