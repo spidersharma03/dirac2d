@@ -53,6 +53,8 @@ void ContactSolver::buildJacobian()
 			contact->m_NormalMassMatrix[0] = 1.0f/JInvMJT + contact->m_CFM;
 			// Positional Error for Position Stabilization( Baumgarte )
 			contact->m_PositionError = -contact->m_ERP * MIN( 0.0f, depth + ALLOWED_PENETRATION) * 600.0f;
+			if( contact->m_PositionError > 10 )
+			printf("POS ERROR = %f\n", depth);
 			dfloat r1cross_t = r1.cross(t);
 			dfloat r2cross_t = r2.cross(t);
 			JInvMJT = body1->m_InvMass + body2->m_InvMass + r1cross_t * r1cross_t * body1->m_InvI + r2cross_t * r2cross_t * body2->m_InvI; 
@@ -60,7 +62,7 @@ void ContactSolver::buildJacobian()
 			contact->m_FrictionMassMatrix[0] = 1.0f/JInvMJT;
 			
 			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
-			contact->m_VelocityBias = 0.0f*relvel.dot(contact->m_ContactNormal);
+			contact->m_VelocityBias = 0.5f*relvel.dot(contact->m_ContactNormal);
 		}
 	}
 }
@@ -113,7 +115,7 @@ void ContactSolver::correctVelocities()
 			Cdot_Tangent = relvel.dot(tangent);
 
 			oldImpulseMag = contact->m_TangentImpulse;
-			dfloat mu = 0.25f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
+			dfloat mu = 0.4f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
 			dfloat maxFriction = contact->m_NormalImpulse * mu;
 			correctiveImpulseMag = contact->m_FrictionMassMatrix[0] * Cdot_Tangent;
 			contact->m_TangentImpulse = CLAMP(oldImpulseMag + correctiveImpulseMag, -maxFriction, maxFriction);

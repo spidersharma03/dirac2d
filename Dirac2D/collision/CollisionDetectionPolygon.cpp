@@ -79,8 +79,8 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	polygonXform2.transformAsVector(refEdge);
 	polygonXform1.transformAsVector(incidentEdge);
 	
-	//refEdge.normalize();
-	//incidentEdge.normalize();
+	refEdge.normalize();
+	incidentEdge.normalize();
 	
 	dot = refEdge.dot(collisionNormal);
 	dbool bFlip = false;
@@ -148,7 +148,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	
 	if( dot1 > 0.0f )
 	{
-		//contactPoints[0].m_Point = edgeVertex2;
+		contactPoints[0].m_Point = contactPoints[1].m_Point;
 		contactPoints[0].m_Depth = dot2;
 		contactManifold->m_NumContacts = 1;
 	}
@@ -156,7 +156,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	if( dot2 > 0.0f )
 	{
 		//contactPoints[0].m_Point = contactPoints[1].m_Point;
-		contactPoints[0].m_Depth = dot1;
+		//contactPoints[0].m_Depth = dot1;
 		contactManifold->m_NumContacts = 1;
 	}
 	

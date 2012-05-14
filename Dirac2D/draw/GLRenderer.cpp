@@ -66,6 +66,10 @@ void GLRenderer::drawPoint( Vector2f& point )
 	glEnd();
 }
 
+void GLRenderer::drawAABB( AABB2f& aabb )
+{
+}
+
 void GLRenderer::setTransform( Matrix3f& xform)
 {
 	xform.getPointer(data);

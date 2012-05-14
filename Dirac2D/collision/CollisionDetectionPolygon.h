@@ -152,12 +152,13 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	dfloat dot = d.dot(normal);
 	dint32 edgeIndex = index;
 	newindex = index - 1;
-	index2 = newindex;
+	index2 = index;
+	index1 = newindex;
 	
 	if( index == 0 )
 	{
 		newindex = numVertices-1;
-		index2 = index1;
+		index2 = index;
 		index1 = newindex;
 	}
 	

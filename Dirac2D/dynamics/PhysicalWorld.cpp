@@ -102,7 +102,6 @@ void PhysicalWorld::draw()
 		m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
 	}
 	// Draw Constraints/Joints
-	//return;
 	
 	// Draw Contacts
 	m_Renderer->setColor(255, 0, 0);
@@ -112,8 +111,7 @@ void PhysicalWorld::draw()
 	Contact* contacts = 0;
 	dint32 numContacts = 0;
 	m_CollisionManager->getContactList(&contacts, numContacts);
-	
-	
+		
 	for( dint32 c=0; c<numContacts; c++ )
 	{
 		Contact& contact = contacts[c];

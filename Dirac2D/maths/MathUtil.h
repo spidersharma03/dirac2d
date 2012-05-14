@@ -12,6 +12,7 @@
 #include "Vector3.h"
 #include "Matrix2.h"
 #include "Matrix3.h"
+#include "AABB2.h"
 
 #ifndef _MATH_UTIL_H_
 #define _MATH_UTIL_H_
@@ -150,10 +151,6 @@ public:
 };
 
 
-template< class T>
-class AABB2
-{
-};
 
 typedef AABB2<dfloat> AABB2f;
 typedef AABB2<ddouble> AABB2d;
