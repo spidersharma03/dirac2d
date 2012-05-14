@@ -44,6 +44,8 @@ public:
 	
 	virtual void drawPoint( Vector2f& point );
 	
+	virtual void drawAABB( AABB2f& aabb );
+
 	virtual void setTransform( Matrix3f& xform);
 
 protected:

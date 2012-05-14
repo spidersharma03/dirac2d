@@ -59,6 +59,8 @@ public:
 	
 	virtual void drawPoint( Vector2f& point ) = 0;
 	
+	virtual void drawAABB( AABB2f& aabb ) = 0;
+	
 	virtual void setTransform( Matrix3f& xform) = 0;
 	
 protected:

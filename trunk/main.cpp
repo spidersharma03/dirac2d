@@ -39,9 +39,9 @@ void demo1()
 	// Create Box
 	PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 	//pBodyBox->m_BodyType = EBT_STATIC;
-	pBodyBox->setPosition(Vector2f(0.0f,1.1f));
-	pBodyBox->setAngle(M_PI_4*0.9);
-	dfloat boxWidth = 0.21f; dfloat boxHeight = 0.051f;
+	pBodyBox->setPosition(Vector2f(0.0f,0.1f));
+	//pBodyBox->setAngle(PI_4*0.99);
+	dfloat boxWidth = 0.051f; dfloat boxHeight = 0.051f;
 	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 	pBodyBox->createPhysicalShape(pApp);
@@ -103,6 +103,7 @@ void demo3()
 		dx += 0.1f;
 		for( int i=0; i<n; i++ )
 		{
+			//if( i== 0 && j == 0 )continue;
 			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 			//pBodyBox->m_BodyType = EBT_STATIC;
 			x += 0.2f;
