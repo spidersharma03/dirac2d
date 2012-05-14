@@ -334,6 +334,9 @@
 			C27A86EC15614A80007AD13C /* PBXTextBookmark */ = C27A86EC15614A80007AD13C /* PBXTextBookmark */;
 			C27A86ED15614A80007AD13C /* PBXTextBookmark */ = C27A86ED15614A80007AD13C /* PBXTextBookmark */;
 			C27A86EE15614AEC007AD13C /* PBXTextBookmark */ = C27A86EE15614AEC007AD13C /* PBXTextBookmark */;
+			C27A86EF15614C04007AD13C /* PBXTextBookmark */ = C27A86EF15614C04007AD13C /* PBXTextBookmark */;
+			C27A86F015614C04007AD13C /* PBXTextBookmark */ = C27A86F015614C04007AD13C /* PBXTextBookmark */;
+			C27A86F115614C04007AD13C /* PBXTextBookmark */ = C27A86F115614C04007AD13C /* PBXTextBookmark */;
 			C2DD13BE15541F2400432320 = C2DD13BE15541F2400432320 /* PBXTextBookmark */;
 			C2DD164F155CE01200432320 = C2DD164F155CE01200432320 /* PBXTextBookmark */;
 			C2DD1653155CE01200432320 = C2DD1653155CE01200432320 /* PBXTextBookmark */;
@@ -792,14 +795,14 @@
 	};
 	C257F148154E71AE00270D77 /* ContactSolver.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1529, 1888}}";
-			sepNavSelRange = "{5329, 0}";
-			sepNavVisRange = "{2936, 2393}";
+			sepNavIntBoundsRect = "{{0, 0}, {1529, 2176}}";
+			sepNavSelRange = "{5222, 0}";
+			sepNavVisRange = "{501, 1890}";
 		};
 	};
 	C257F149154E71AE00270D77 /* ContactSolver.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1534, 685}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1529, 681}}";
 			sepNavSelRange = "{550, 0}";
 			sepNavVisRange = "{0, 638}";
 		};
@@ -3446,6 +3449,36 @@
 		rType = 0;
 		vrLen = 2393;
 		vrLoc = 2936;
+	};
+	C27A86EF15614C04007AD13C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F149154E71AE00270D77 /* ContactSolver.h */;
+		name = "ContactSolver.h: 32";
+		rLen = 0;
+		rLoc = 550;
+		rType = 0;
+		vrLen = 638;
+		vrLoc = 0;
+	};
+	C27A86F015614C04007AD13C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */;
+		name = "ContactSolver.cpp: 140";
+		rLen = 0;
+		rLoc = 5329;
+		rType = 0;
+		vrLen = 2393;
+		vrLoc = 2936;
+	};
+	C27A86F115614C04007AD13C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */;
+		name = "ContactSolver.cpp: 136";
+		rLen = 0;
+		rLoc = 5222;
+		rType = 0;
+		vrLen = 1890;
+		vrLoc = 501;
 	};
 	C2DD136A1553EAE100432320 /* Vector2.h */ = {
 		uiCtxt = {
