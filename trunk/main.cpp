@@ -222,7 +222,7 @@ static void timerCallback (int value)
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowPosition(100,100);
+    glutInitWindowPosition(100,10);
     glutInitWindowSize(windowWidth,windowHeight);
     glutCreateWindow("Physics Engine - DIRAC2D");
 	glutDisplayFunc(renderScene);
