@@ -59,6 +59,8 @@ public:
 
 	// friend classes
 	friend class PhysicalShape;
+	friend class PhysicalBody;
+	
 protected:
 	
 	virtual void findCentroid() = 0;

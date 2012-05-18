@@ -125,7 +125,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo3();
+	demo1();
 }
 
 void changeSize(int w, int h) 
@@ -229,9 +229,37 @@ int main(int argc, char **argv) {
     glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
 
+	
 #ifndef WIN32
 	glutTimerFunc(0, timerCallback, 0);
 #endif
+	
+	//MemoryAllocator<Vector2f> memAllocator(10);
+//	
+//	Vector2f *v1 = new (memAllocator.Allocate()) Vector2f(1,0);
+//	Vector2f *v2 = new (memAllocator.Allocate()) Vector2f(2,0);
+//	//memAllocator.Free(v2);
+//	Vector2f *v3 = new (memAllocator.Allocate()) Vector2f(3,0);
+//	memAllocator.Free(v3);
+//	Vector2f *v4 = new (memAllocator.Allocate()) Vector2f(4,0);
+//	memAllocator.Free(v4);
+	//Vector2f *v3 = new (memAllocator.Allocate()) Vector2f(3,0);
+	//memAllocator.Free(v2);
+	//Vector2f *v4 = new (memAllocator.Allocate()) Vector2f(4,0);
+
+	//memAllocator.Free(v3);
+	//memAllocator.Free(v4);
+	//Vector2f* temp = v3;
+
+	//Vector2f* v = memAllocator[0];
+//	v = memAllocator[1];
+//	v = memAllocator[2];
+//	v = memAllocator[3];
+//	
+//	
+//	v = memAllocator[0];
+//	v = memAllocator[1];
+//	v = memAllocator[2];
 	
 	initScene();
 	

@@ -20,7 +20,7 @@ Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
 PhysicalWorld::PhysicalWorld()
 {
 	m_CollisionManager = new CollisionManager(this);
-	m_ContactSolver    = new ContactSolver();
+	m_ContactSolver    = new ContactSolver(this);
 	m_Renderer		   = 0;
 	
 	m_bGravityOn = true;
@@ -30,6 +30,8 @@ PhysicalWorld::PhysicalWorld()
 	m_ERP = 0.0f;
 	
 	m_VelocityIterations = 10;
+	
+	m_ContactList = 0;
 }
 	
 PhysicalBody* PhysicalWorld::createPhysicalBody()
@@ -60,13 +62,6 @@ void PhysicalWorld::Step(dfloat dt)
 	}
 	// Collision detection	
 	m_CollisionManager->update();
-	
-	Contact* contacts = 0;
-	dint32 numContacts = 0;
-	m_CollisionManager->getContactList(&contacts, numContacts);
-	
-	m_ContactSolver->m_Contacts = contacts;
-	m_ContactSolver->m_NumContacts = numContacts;
 	
 	// Initialize the Solver.
 	m_ContactSolver->buildJacobian();
@@ -99,7 +94,12 @@ void PhysicalWorld::draw()
 			m_Renderer->setColor(255, 255, 255);
 		if( pBody->m_BodyType == EBT_STATIC )
 			m_Renderer->setColor(0, 255, 0);
-		m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
+		//m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
+		m_Renderer->setColor(255, 255, 0);
+		
+		Matrix3f Identity;
+		m_Renderer->setTransform(Identity);
+		m_Renderer->drawAABB(pBody->m_AABB);
 	}
 	// Draw Constraints/Joints
 	

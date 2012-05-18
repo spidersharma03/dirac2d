@@ -31,6 +31,12 @@ public:
 	{
 	}
 	
+	inline void operator=(Vector2<T> other)
+	{
+		x = other.x;
+		y = other.y;
+	}
+
 	inline T dot( Vector2<T>& other)
 	{
 		return x*other.x + y*other.y;

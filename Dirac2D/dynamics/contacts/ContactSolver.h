@@ -15,12 +15,13 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+class PhysicalWorld;
 class Contact;
 
 class ContactSolver
 {
 public:
-	ContactSolver();
+	ContactSolver(PhysicalWorld* pPhysicalWorld);
 
 	// Initialize the effective mass matrix data.
 	void buildJacobian();
@@ -31,6 +32,7 @@ public:
 	friend class PhysicalWorld;
 	
 private:
+	PhysicalWorld* m_PhysicalWorld;
 	Contact *m_Contacts;
 	dint32 m_NumContacts;
 };

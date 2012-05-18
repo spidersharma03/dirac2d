@@ -36,7 +36,11 @@ public:
 	
 	inline dbool intersectAABB( AABB2<T>& other )
 	{
-		return false;
+		//distance = min1 < min2 ? min2-max1 : min1-max2;
+		dfloat overLapX = m_LowerBounds.x < other.m_LowerBounds.x ? other.m_LowerBounds.x - m_UpperBounds.x : m_LowerBounds.x - other.m_UpperBounds.x;
+		dfloat overLapY = m_LowerBounds.y < other.m_LowerBounds.y ? other.m_LowerBounds.y - m_UpperBounds.y : m_LowerBounds.y - other.m_UpperBounds.y;	
+		//m_LowerBounds.x
+		return ( (overLapX < 0.0f) && (overLapY < 0.0f) );
 	}
 	
 public:
