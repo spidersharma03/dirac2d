@@ -21,6 +21,7 @@
 		C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9321552CCDA00270D77 /* Capsule.cpp */; };
 		C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */; };
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
+		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		C257F9381552CD6900270D77 /* RegularPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegularPolygon.cpp; sourceTree = "<group>"; };
 		C257F93A1552CD7A00270D77 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		C27A86A81561442D007AD13C /* AABB2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB2.h; sourceTree = "<group>"; };
+		C27A8ADD15661EDD007AD13C /* Contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contact.cpp; sourceTree = "<group>"; };
 		C2DD136A1553EAE100432320 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
 		C2DD136B1553EAEF00432320 /* Matrix2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2.h; sourceTree = "<group>"; };
 		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				C257F147154E71AE00270D77 /* Contact.h */,
 				C257F149154E71AE00270D77 /* ContactSolver.h */,
 				C257F148154E71AE00270D77 /* ContactSolver.cpp */,
+				C27A8ADD15661EDD007AD13C /* Contact.cpp */,
 			);
 			name = contacts;
 			path = Dirac2D/dynamics/contacts;
@@ -320,6 +323,7 @@
 				C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */,
 				C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */,
 				C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */,
+				C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

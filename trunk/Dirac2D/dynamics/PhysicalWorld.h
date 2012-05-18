@@ -11,6 +11,7 @@
 #include "../maths/MathUtil.h"
 #include "PhysicalAppearance.h"
 
+
 #include <vector>
 
 using namespace std;
@@ -23,6 +24,7 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
 class CollisionManager;
 class ContactSolver;
+class Contact;
 class Renderer;
 
 class PhysicalWorld
@@ -59,8 +61,11 @@ private:
 	CollisionManager* m_CollisionManager;
 	ContactSolver*	  m_ContactSolver;
 	Renderer*         m_Renderer;
+
+	Contact* m_ContactList;  // Doubly linked list of all the Contacts in this world.
 	
 	vector<PhysicalBody*> m_vecPhysicalBodies;
+
 	
 	static Vector2f GRAVITY;
 	
@@ -72,6 +77,8 @@ private:
 	dfloat m_GravityScale;
 	
 	dint16 m_VelocityIterations;
+	
+	dbool m_bDrawAABB;
 };
 
 END_NAMESPACE_DIRAC2D

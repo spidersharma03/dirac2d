@@ -46,6 +46,29 @@ dbool RegularPolygon::isPointInside(Point2f& p)
 
 void RegularPolygon::updateAABB(Matrix3f& xForm)
 {
+	dfloat min_x = 100000.0f;
+	dfloat min_y = 100000.0f;
+
+	dfloat max_x = -100000.0f;
+	dfloat max_y = -100000.0f;
+
+	for( dint32 v=0; v<m_NumVertices; v++ )
+	{
+		Vector2f p = m_Vertices[v];
+		xForm.transformAsPoint(p);
+		if( min_x > p.x )
+			min_x = p.x;
+		if( min_y > p.y )
+			min_y = p.y;
+		
+		if( max_x < p.x )
+			max_x = p.x;
+		if( max_y < p.y )
+			max_y = p.y;
+	}
+	
+	m_AABB.m_LowerBounds.set(min_x, min_y);
+	m_AABB.m_UpperBounds.set(max_x, max_y);
 }
 
 void RegularPolygon::findCentroid()
@@ -79,12 +102,13 @@ void RegularPolygon::findCentroid()
 	m_Centroid /= m_Area;
 }
 
+// From wikipedia.
 void RegularPolygon::findMomentOfInertia()
 {
 	dfloat denom     = 0.0f;
 	dfloat numerator = 0.0f;
 	
-	for( dint32 v=0; v<m_NumVertices; v++ )
+	for( dint32 v=0; v<m_NumVertices-1; v++ )
 	{
 		Vector2f p1 = m_Vertices[v] - m_Centroid;
 		Vector2f p2 = m_Vertices[v+1] - m_Centroid;

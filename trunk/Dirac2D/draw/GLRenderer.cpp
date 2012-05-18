@@ -68,6 +68,7 @@ void GLRenderer::drawPoint( Vector2f& point )
 
 void GLRenderer::drawAABB( AABB2f& aabb )
 {
+	glRectf(aabb.m_LowerBounds.x, aabb.m_LowerBounds.y, aabb.m_UpperBounds.x, aabb.m_UpperBounds.y);
 }
 
 void GLRenderer::setTransform( Matrix3f& xform)

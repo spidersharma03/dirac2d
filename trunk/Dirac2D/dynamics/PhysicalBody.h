@@ -68,6 +68,8 @@ public:
 		m_Transform = xForm;
 	}
 	
+	void updateAABB();
+	
 public:
 	Vector2f m_Centre;
 	Vector2f m_Velocity;
@@ -81,6 +83,7 @@ public:
 	dfloat m_I, m_InvI;
 	
 	Vector2f m_Force;
+	AABB2f m_AABB;
 	
 	friend class CollisionManager;
 	friend class ContactSolver;

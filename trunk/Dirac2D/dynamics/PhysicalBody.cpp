@@ -8,6 +8,7 @@
 
 #include "PhysicalBody.h"
 #include "PhysicalShape.h"
+#include "../geometry/CollisionShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -64,6 +65,7 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	m_PhysicalShapeList->m_NextShape = 0;
 	
 	calculateMassAttributes();
+	updateAABB();
 	
 	return pShape;
 }
@@ -72,6 +74,14 @@ void PhysicalBody::updateTransform()
 {
 	m_Transform.rotate(m_Angle);
 	m_Transform.translate(m_Centre);
+	m_PhysicalShapeList->m_CollisionShape->updateAABB(m_Transform);
+	m_AABB = m_PhysicalShapeList->m_CollisionShape->m_AABB;
+}
+
+void PhysicalBody::updateAABB()
+{
+	m_PhysicalShapeList->m_CollisionShape->updateAABB(m_Transform);
+	m_AABB = m_PhysicalShapeList->m_CollisionShape->m_AABB;
 }
 
 void PhysicalBody::calculateMassAttributes()
@@ -116,6 +126,7 @@ void PhysicalBody::calculateMassAttributes()
 		m_InvI    = 0.0f;
 	}
 
+	updateAABB();
 	m_Transform.transformAsPoint(m_Centre);
 }
 
