@@ -19,17 +19,56 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalShape;
 class CollisionShape;
 
+
+// Pair 
+struct ContactPair
+{
+	ContactPair( PhysicalShape* shape1, PhysicalShape* shape2 )
+	{
+		if( shape1 < shape2 )
+		{
+			m_Shape1 = shape1;
+			m_Shape2 = shape2;
+		}
+		else 
+		{
+			m_Shape1 = shape2;
+			m_Shape2 = shape1;
+		}
+
+	}
+	PhysicalShape* m_Shape1;
+	PhysicalShape* m_Shape2;
+};
+
+
+inline bool operator < (const ContactPair& p1, const ContactPair& p2)
+{
+	if (p1.m_Shape1 < p2.m_Shape1)
+		return true;
+	
+	if (p1.m_Shape1 == p2.m_Shape1 && p1.m_Shape2 < p2.m_Shape2)
+		return true;
+	
+	return false;
+}
+
+
 // Contact ID's are for comparing contacts. used for caching contacts.  
-// To make sure that the ID is uniquely defined for the two shapes, 
 union ContactID
 {
-	void operator=( ContactID& other )
+	ContactID()
 	{
+		m_Key = 0;
 	}
-	duchar m_Index1; // Index on Physical Shape 1.
-	duchar m_Index2; // Index on Physical Shape 2.
-	duchar m_Type1; // Type of Contact on Shape 1.( Vertex/Edge )
-	duchar m_Type2; // Type of Contact on Shape 2.( Vertex/Edge )
+	struct EdgeIndex
+	{
+		//duchar m_Type1; // Type of Contact on Shape 1.( Vertex/Edge )
+		//duchar m_Type2; // Type of Contact on Shape 2.( Vertex/Edge )
+		duint16 m_Index1; // Index on Physical Shape 1.
+		duint16 m_Index2; // Index on Physical Shape 2.
+	};
+	EdgeIndex edgeIndex;
 	duint32 m_Key;
 };
 
@@ -139,7 +178,7 @@ public:
 	// Effective mass matrix for frictional impulses.if the number of contacts are one then first diagonal element is used. if it is two then first two elements are used.
 	Matrix2f m_FrictionMassMatrix;
 	
-	ContactConstraint m_ContactConstraint[MAX_CONTACT_POINTS];
+	ContactConstraint m_ContactConstraint[MAX_CONTACTS];
 	dchar m_NumContactConstraints;
 	
 	// Error reduction parameter. this is used to make sure that the constarint dosent drift over time. should be less than 1.0f/timeStep.

@@ -11,6 +11,7 @@
 #include "PhysicalShape.h"
 #include "../collision/CollisionManager.h"
 #include "../dynamics/contacts/ContactSolver.h"
+#include "../dynamics/contacts/Contact.h"
 #include "../draw/Renderer.h"
 
 BEGIN_NAMESPACE_DIRAC2D
@@ -65,6 +66,7 @@ void PhysicalWorld::Step(dfloat dt)
 	
 	// Initialize the Solver.
 	m_ContactSolver->buildJacobian();
+	
 	// Correct the velocities.
 	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
 		m_ContactSolver->correctVelocities();
@@ -79,6 +81,7 @@ void PhysicalWorld::Step(dfloat dt)
 			m_vecPhysicalBodies[b]->updateTransform();
 		}
 	}
+	
 }
 
 void PhysicalWorld::draw()
@@ -94,12 +97,12 @@ void PhysicalWorld::draw()
 			m_Renderer->setColor(255, 255, 255);
 		if( pBody->m_BodyType == EBT_STATIC )
 			m_Renderer->setColor(0, 255, 0);
-		//m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
+		m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
 		m_Renderer->setColor(255, 255, 0);
 		
 		Matrix3f Identity;
 		m_Renderer->setTransform(Identity);
-		m_Renderer->drawAABB(pBody->m_AABB);
+		//m_Renderer->drawAABB(pBody->m_AABB);
 	}
 	// Draw Constraints/Joints
 	
@@ -108,16 +111,22 @@ void PhysicalWorld::draw()
 	m_Renderer->setPointSize(4.0f);
 	Matrix3f I;
 	m_Renderer->setTransform(I);
-	Contact* contacts = 0;
-	dint32 numContacts = 0;
-	m_CollisionManager->getContactList(&contacts, numContacts);
 		
-	for( dint32 c=0; c<numContacts; c++ )
+	Contact* contact = m_ContactList;
+	
+	while(contact)
 	{
-		Contact& contact = contacts[c];
-		m_Renderer->drawPoint(contact.m_Manifold.m_ContactPoints[0].m_Point);
-		if( contact.m_Manifold.m_NumContacts > 1 )
-			m_Renderer->drawPoint(contact.m_Manifold.m_ContactPoints[1].m_Point);			
+		if( contact->m_NumContactConstraints == 0 )
+		{
+			contact = contact->m_Next;
+			continue;
+		}
+		
+		m_Renderer->drawPoint(contact->m_Manifold.m_ContactPoints[0].m_Point);
+		if( contact->m_NumContactConstraints > 1 )
+			m_Renderer->drawPoint(contact->m_Manifold.m_ContactPoints[1].m_Point);
+		
+		contact = contact->m_Next;
 	}
 }
 

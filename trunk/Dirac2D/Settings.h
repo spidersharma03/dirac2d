@@ -22,6 +22,9 @@ BEGIN_NAMESPACE_DIRAC2D
 // Maximum nuber of Contact Points in the Physical World
 #define MAX_CONTACT_POINTS 1000
 
+// Below this velocity the collision are considered inelastic
+#define VELOCITY_BIAS_THRESHOLD 0.5f
+
 END_NAMESPACE_DIRAC2D
 
 #endif

@@ -103,18 +103,17 @@ void demo3()
 		dx += 0.1f;
 		for( int i=0; i<n; i++ )
 		{
-			//if( i== 0 && j == 0 )continue;
 			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 			//pBodyBox->m_BodyType = EBT_STATIC;
 			x += 0.2f;
 			pBodyBox->setPosition(Vector2f(x,y));
-			//pBodyBox->setAngle(M_PI_4*0.9);
+			//pBodyBox->setAngle(PI_4*0.9);
 			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
 			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 			pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 			pBodyBox->createPhysicalShape(pApp);
 		}
-		n -= 1;
+		n--;
 	}
 }
 
@@ -125,7 +124,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo1();
+	demo2();
 }
 
 void changeSize(int w, int h) 
@@ -233,33 +232,6 @@ int main(int argc, char **argv) {
 #ifndef WIN32
 	glutTimerFunc(0, timerCallback, 0);
 #endif
-	
-	//MemoryAllocator<Vector2f> memAllocator(10);
-//	
-//	Vector2f *v1 = new (memAllocator.Allocate()) Vector2f(1,0);
-//	Vector2f *v2 = new (memAllocator.Allocate()) Vector2f(2,0);
-//	//memAllocator.Free(v2);
-//	Vector2f *v3 = new (memAllocator.Allocate()) Vector2f(3,0);
-//	memAllocator.Free(v3);
-//	Vector2f *v4 = new (memAllocator.Allocate()) Vector2f(4,0);
-//	memAllocator.Free(v4);
-	//Vector2f *v3 = new (memAllocator.Allocate()) Vector2f(3,0);
-	//memAllocator.Free(v2);
-	//Vector2f *v4 = new (memAllocator.Allocate()) Vector2f(4,0);
-
-	//memAllocator.Free(v3);
-	//memAllocator.Free(v4);
-	//Vector2f* temp = v3;
-
-	//Vector2f* v = memAllocator[0];
-//	v = memAllocator[1];
-//	v = memAllocator[2];
-//	v = memAllocator[3];
-//	
-//	
-//	v = memAllocator[0];
-//	v = memAllocator[1];
-//	v = memAllocator[2];
 	
 	initScene();
 	
