@@ -37,7 +37,7 @@ public:
 		m_pFreeMemoryBlock->pPrev = 0;
 		
 		// Connect the doubly linked Memory Nodes.
-		for( duint32 o=1; o<m_MaxObjects; o++ )
+		for( dint32 o=1; o<m_MaxObjects; o++ )
 		{
 			MemoryLinkNode* ptr = (MemoryLinkNode*)((dchar*)m_pMemoryChunk + o * ( sizeof(T) + sizeof(MemoryLinkNode) ) );
 			m_pFreeMemoryBlock->pNext = ptr;

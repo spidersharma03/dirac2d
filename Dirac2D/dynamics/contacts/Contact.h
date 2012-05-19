@@ -126,7 +126,7 @@ public:
 	
 public:
 	ContactManifold m_Manifold;
-	ContactPoint m_ContactPoint[MAX_CONTACT_POINTS];
+	ContactPoint m_ContactPoint[MAX_CONTACTS];
 	Vector2f     m_ContactNormal;
 	
 	// Colliding Shapes
