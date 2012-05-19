@@ -194,6 +194,10 @@
 					Name="contacts"
 					>
 					<File
+						RelativePath=".\Dirac2D\dynamics\contacts\Contact.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\contacts\ContactSolver.cpp"
 						>
 					</File>
