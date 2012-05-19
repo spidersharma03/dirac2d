@@ -46,12 +46,14 @@ void ContactSolver::buildJacobian()
 			constraint.m_PositionError = 0.0f;
 			
 			Vector2f& p = contact->m_ContactPoint[i].m_Point;
+
 			Vector2f r1 = p - c1;
 			Vector2f r2 = p - c2;
 			dfloat r1cross_n = r1.cross(n);
 			dfloat r2cross_n = r2.cross(n);
 			dfloat JInvMJT = body1->m_InvMass + body2->m_InvMass + r1cross_n * r1cross_n * body1->m_InvI + r2cross_n * r2cross_n * body2->m_InvI; 
 			
+			//dfloat depth = contact->m_ContactPoint[i].m_Depth;
 			dfloat depth = contact->m_ContactPoint[i].m_Depth;
 			
 			// Effective mass for Normal Impulses
@@ -66,7 +68,12 @@ void ContactSolver::buildJacobian()
 			contact->m_FrictionMassMatrix[i] = 1.0f/JInvMJT;
 			
 			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
-			constraint.m_VelocityBias = 0.0f*relvel.dot(contact->m_ContactNormal);
+			dfloat velBias = 0.0f*relvel.dot(contact->m_ContactNormal);
+						
+			if( velBias > VELOCITY_BIAS_THRESHOLD )
+				constraint.m_VelocityBias = velBias;
+			else
+				constraint.m_VelocityBias = 0.0f;				
 		}
 		contact = contact->m_Next;
 	}
@@ -91,6 +98,8 @@ void ContactSolver::correctVelocities()
 		{
 			ContactConstraint& constraint = contact->m_ContactConstraint[i];
 			Vector2f& p = contact->m_ContactPoint[i].m_Point;
+			//Vector2f& p = contact->m_Manifold.m_ContactPoints[i].m_Point;
+
 			Vector2f r1 = p - c1;
 			Vector2f r2 = p - c2;
 			

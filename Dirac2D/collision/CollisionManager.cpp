@@ -11,6 +11,8 @@
 #include "CollisionDetection.h"
 #include "../dynamics/PhysicalBody.h"
 #include "../dynamics/PhysicalShape.h"
+#include "../dynamics/contacts/Contact.h"
+
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -19,14 +21,12 @@ CollisionManager::CollisionManager(PhysicalWorld* world) : m_PhysicalWorld(world
 	m_ContactPool = new MemoryAllocator<Contact>(MAX_CONTACT_POINTS);
 }
 	
-
 void CollisionManager::update()
 {
 	updateCollision();
 	
-	updateContacts();
+	updateContacts();	
 }
-
 
 void CollisionManager::updateCollision()
 {
@@ -43,10 +43,10 @@ void CollisionManager::updateCollision()
 			if( body1 == body2 )continue;
 						
 			dbool res = true;
-			
+						
 			res = body1->m_AABB.intersectAABB(body2->m_AABB);
 			
-			if( res )
+			if( res && (m_ContactPairSet.insert( ContactPair(body1->m_PhysicalShapeList, body2->m_PhysicalShapeList) )).second)
 			{
 				Contact* contact = createContact();
 				contact->m_PhysicalShape1 = body1->m_PhysicalShapeList;
@@ -74,6 +74,8 @@ void CollisionManager::updateContacts()
 		// Destroy the Contact if it dosen't persist
 		if( !body1->m_AABB.intersectAABB(body2->m_AABB) )
 		{
+			// Erase Contact pair.
+			m_ContactPairSet.erase(ContactPair(body1->m_PhysicalShapeList, body2->m_PhysicalShapeList));
 			deleteContact(contact);
 		}
 		else 
@@ -81,7 +83,7 @@ void CollisionManager::updateContacts()
 			contact->update();
 		}
 
-		contact = contactList->m_Next;
+		contact = contact->m_Next;
 	}
 }
 
@@ -111,11 +113,17 @@ void CollisionManager::deleteContact(Contact* contact)
 	{
 		prevContact->m_Next = nextContact;
 	}
+	else 
+	{
+		m_PhysicalWorld->m_ContactList = nextContact;
+	}
+
 
 	if( nextContact )
 	{
 		nextContact->m_Prev = prevContact;
 	}
+	
 	
 	m_ContactPool->Free(contact);
 }

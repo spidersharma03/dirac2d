@@ -28,7 +28,8 @@ public:
 	{
 		m_NumObjects = 0;
 		// Allocate contiguous memory for the entire pool.
-		m_pMemoryChunk = malloc(m_MaxObjects * sizeof(T) + sizeof(MemoryLinkNode) );
+		dint32 chunkSize = m_MaxObjects * ( sizeof(T) + sizeof(MemoryLinkNode) );
+		m_pMemoryChunk = malloc( chunkSize );
 		
 		dAssert(m_pMemoryChunk);
 		
@@ -48,7 +49,6 @@ public:
 				ptr->pNext = 0;
 		}
 		m_pFreeMemoryBlock		= (MemoryLinkNode*)m_pMemoryChunk;
-		m_pAllocatedMemoryBlock = m_pFreeMemoryBlock;
 	}
 	
 	~MemoryAllocator()
@@ -63,6 +63,7 @@ public:
 		MemoryLinkNode* pLinkNode = m_pFreeMemoryBlock;
 		if( m_pFreeMemoryBlock->pNext )
 			m_pFreeMemoryBlock = m_pFreeMemoryBlock->pNext;	
+
 		return (T*)((dchar*)pLinkNode + sizeof(MemoryLinkNode));
 	}
 	
@@ -89,7 +90,7 @@ public:
 			pNextFreeNode->pPrev = pLinkNode;
 			
 		pLinkNode->pNext = pNextFreeNode;
-		
+
 		m_NumObjects--;
 	}
 	
@@ -106,7 +107,6 @@ public:
 protected:
 	void* m_pMemoryChunk; // Pointer to the Entire Memory Allocated for this pool.
 	MemoryLinkNode* m_pFreeMemoryBlock; // Pointer to Free Memory.
-	MemoryLinkNode* m_pAllocatedMemoryBlock; // Pointer to Allocated Memory.
 	
 	dint32 m_MaxObjects;
 	dint32 m_NumObjects;
