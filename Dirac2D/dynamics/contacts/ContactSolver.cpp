@@ -41,9 +41,6 @@ void ContactSolver::buildJacobian()
 		for( dint32 i=0; i<contact->m_NumContactConstraints; i++ )
 		{
 			ContactConstraint& constraint = contact->m_ContactConstraint[i];
-			constraint.m_NormalImpulse = 0.0f;
-			constraint.m_TangentImpulse = 0.0f;
-			constraint.m_PositionError = 0.0f;
 			
 			Vector2f& p = contact->m_ContactPoint[i].m_Point;
 
@@ -73,8 +70,25 @@ void ContactSolver::buildJacobian()
 			if( velBias > VELOCITY_BIAS_THRESHOLD )
 				constraint.m_VelocityBias = velBias;
 			else
-				constraint.m_VelocityBias = 0.0f;				
+				constraint.m_VelocityBias = 0.0f;
+			
+			// Apply Corrective impulse on the bodies due to Tangent/Frictional Impulses
+			if( m_PhysicalWorld->m_bWarmStart )
+			{
+				Vector2f totalImpulse = contact->m_ContactNormal * constraint.m_NormalImpulse + t * constraint.m_TangentImpulse;
+				body1->m_Velocity        +=  totalImpulse * body1->m_InvMass;
+				body1->m_AngularVelocity += body1->m_InvI * Vector2f::cross( r1, totalImpulse);
+				
+				body2->m_Velocity        -= totalImpulse * body2->m_InvMass;
+				body2->m_AngularVelocity -= body2->m_InvI * Vector2f::cross( r2, totalImpulse);
+			}
+			else 
+			{
+				
+			}
+
 		}
+		
 		contact = contact->m_Next;
 	}
 }

@@ -30,6 +30,8 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 {
 	Vector2f* vertices1 = poly1->getVertices();
 	Vector2f* vertices2 = poly2->getVertices();
+	dint32 numVertices1 = poly1->getNumVertices();
+	dint32 numVertices2 = poly2->getNumVertices();
 	
 	float minDistance = 10000.0f; //Initialize the length of the collision vector to a relatively large value
 	Vector2f collisionNormal;
@@ -107,23 +109,37 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 		temp = p2;
 		p2 = p4;
 		p4 = temp;
+		
+		temp = numVertices1;
+		numVertices1 = numVertices2;
+		numVertices2 = temp;
 	}
 	
 	
 	contactManifold->m_ContactPoints[0].m_Point = Xform1 * vertices1[p3];
+	contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Index1 = (p3==0 ? numVertices1-1 : p3-1);
+	contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Index2 = p3;
+	contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Type1 = ECT_VERTEX;
+	contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Type2 = ECT_VERTEX;
+	
 	contactManifold->m_ContactPoints[1].m_Point = Xform1 * vertices1[p4];
+	contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Index1 = p4;
+	contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Index2 = (p4==0 ? numVertices1-1 : p4-1);
+	contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Type1 = ECT_VERTEX;
+	contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Type2 = ECT_VERTEX;
 	
 	contactManifold->m_NumContacts = 2;
 	
 	// Clip Against first Edge Plane of Reference Edge
 	Vector2f edgeVertex1 = Xform2 * vertices2[p1];
-	clip(refEdge, edgeVertex1, contactManifold);
+	dint32 refIndex = ( p1==0 ? numVertices2-1 : p1-1 );
+	clip(refEdge, edgeVertex1, contactManifold, refIndex);
 
 	Vector2f refNegEdge = -refEdge;
 
 	// Clip Against Second Edge Plane of Reference Edge
 	Vector2f edgeVertex2 = Xform2 * vertices2[p2];
-	clip(refNegEdge, edgeVertex2, contactManifold);
+	clip(refNegEdge, edgeVertex2, contactManifold, p2);
 
 	// Clip the ContactPoints against the Reference Edge Normal.
 	Vector2f refNormal( refEdge.y, -refEdge.x);
