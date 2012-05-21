@@ -33,6 +33,7 @@ PhysicalWorld::PhysicalWorld()
 	m_VelocityIterations = 10;
 	
 	m_ContactList = 0;
+	m_bWarmStart = true;
 }
 	
 PhysicalBody* PhysicalWorld::createPhysicalBody()

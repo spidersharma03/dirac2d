@@ -177,7 +177,7 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 }
 
 // Clip Against Edge Plane
-static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifold)
+static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifold, dint32 refIndex)
 {
 	Vector2f& cp0 = contactManifold->m_ContactPoints[0].m_Point;
 	Vector2f& cp1 = contactManifold->m_ContactPoints[1].m_Point;
@@ -193,11 +193,15 @@ static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifol
 	{
 		cp0.x = cp0.x + lambda*(cp1.x - cp0.x); 
 		cp0.y = cp0.y + lambda*(cp1.y - cp0.y); 
+		contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Index1 = refIndex;
+		contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Type1  = ECT_VERTEX;
 	}
 	if( u2 < 0.0f ) 
 	{
 		cp1.x = cp0.x + lambda*(cp1.x - cp0.x); 
 		cp1.y = cp0.y + lambda*(cp1.y - cp0.y); 
+		contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Index1 = refIndex;
+		contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Type1  = ECT_VERTEX;
 	}
 }
 

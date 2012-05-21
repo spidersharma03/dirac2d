@@ -40,7 +40,7 @@ void demo1()
 	PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 	//pBodyBox->m_BodyType = EBT_STATIC;
 	pBodyBox->setPosition(Vector2f(0.0f,0.1f));
-	//pBodyBox->setAngle(PI_4*0.99);
+	pBodyBox->setAngle(-PI_2);
 	dfloat boxWidth = 0.051f; dfloat boxHeight = 0.051f;
 	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
@@ -124,7 +124,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo2();
+	demo3();
 }
 
 void changeSize(int w, int h) 
@@ -181,6 +181,23 @@ void renderScene(void)
     glutSwapBuffers();
 }
 
+static bool bWarmStart = true;
+
+void keyProcessor(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+		case 27:
+			exit(0);
+			break;
+			
+		case 'a':
+			bWarmStart = !bWarmStart;
+			pWorld->setWarmStart(bWarmStart);
+			break;
+	}
+}
+	
 #ifndef WIN32
 static void timerCallback (int value)
 {
@@ -224,6 +241,7 @@ int main(int argc, char **argv) {
     glutInitWindowPosition(100,10);
     glutInitWindowSize(windowWidth,windowHeight);
     glutCreateWindow("Physics Engine - DIRAC2D");
+	glutKeyboardFunc(keyProcessor);
 	glutDisplayFunc(renderScene);
     glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);

@@ -52,6 +52,10 @@ public:
 		m_TotalForce += fext;
 	}
 	
+	void setWarmStart( dbool bWarmStart )
+	{
+		m_bWarmStart = bWarmStart;
+	}
 public:
 	
 	friend class CollisionManager;
@@ -79,6 +83,8 @@ private:
 	dint16 m_VelocityIterations;
 	
 	dbool m_bDrawAABB;
+	
+	dbool m_bWarmStart;
 };
 
 END_NAMESPACE_DIRAC2D

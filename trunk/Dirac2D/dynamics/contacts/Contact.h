@@ -54,7 +54,8 @@ inline bool operator < (const ContactPair& p1, const ContactPair& p2)
 }
 
 
-// Contact ID's are for comparing contacts. used for caching contacts.  
+// Contact ID's are for comparing contacts. used for caching contacts. 
+enum ContactType { ECT_VERTEX, ECT_EDGE };
 union ContactID
 {
 	ContactID()
@@ -63,10 +64,10 @@ union ContactID
 	}
 	struct EdgeIndex
 	{
-		//duchar m_Type1; // Type of Contact on Shape 1.( Vertex/Edge )
-		//duchar m_Type2; // Type of Contact on Shape 2.( Vertex/Edge )
-		duint16 m_Index1; // Index on Physical Shape 1.
-		duint16 m_Index2; // Index on Physical Shape 2.
+		duchar m_Type1; // Type of Contact on Shape 1.( Vertex/Edge )
+		duchar m_Type2; // Type of Contact on Shape 2.( Vertex/Edge )
+		duchar m_Index1; // Edge Index1.
+		duchar m_Index2; // Edge Index2.
 	};
 	EdgeIndex edgeIndex;
 	duint32 m_Key;
