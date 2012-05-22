@@ -22,6 +22,7 @@
 		C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */; };
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
+		C2B6C7DC156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */; };
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,8 @@
 		C257F93A1552CD7A00270D77 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		C27A86A81561442D007AD13C /* AABB2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB2.h; sourceTree = "<group>"; };
 		C27A8ADD15661EDD007AD13C /* Contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contact.cpp; sourceTree = "<group>"; };
+		C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionCirclePolygon.h; sourceTree = "<group>"; };
+		C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetectionCirclePolygon.cpp; sourceTree = "<group>"; };
 		C2DD136A1553EAE100432320 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
 		C2DD136B1553EAEF00432320 /* Matrix2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2.h; sourceTree = "<group>"; };
 		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */,
 				C257F1A5154E76CD00270D77 /* CollisionDetection.h */,
 				C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */,
+				C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */,
+				C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */,
 			);
 			name = collision;
 			path = Dirac2D/collision;
@@ -324,6 +329,7 @@
 				C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */,
 				C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */,
 				C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */,
+				C2B6C7DC156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

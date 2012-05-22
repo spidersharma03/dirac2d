@@ -48,9 +48,10 @@ public:
 	Vector2f m_Position;
 	dfloat m_Angle;
 
-protected:
 	// pointer to the next shape from the parent body.
-	PhysicalShape* m_NextShape;
+	PhysicalShape* m_Next;
+protected:
+
 	
 public:
 	friend class PhysicalBody;

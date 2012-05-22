@@ -30,33 +30,54 @@ void CollisionManager::update()
 
 void CollisionManager::updateCollision()
 {
-	// clear Contact list.
-	m_NumContacts = 0;
 	// n2 Collision test
-	for( duint32 b1=0; b1<m_PhysicalWorld->m_vecPhysicalBodies.size(); b1++ )
+	PhysicalBody* pBody1 = m_PhysicalWorld->m_PhysicalBodyList;
+	while( pBody1 )
 	{
-		PhysicalBody* body1 = m_PhysicalWorld->m_vecPhysicalBodies[b1];
-		for( duint32 b2=b1; b2<m_PhysicalWorld->m_vecPhysicalBodies.size(); b2++ )
+		PhysicalShape* pShape1 = pBody1->m_PhysicalShapeList;
+		while( pShape1 )
 		{
-			PhysicalBody* body2 = m_PhysicalWorld->m_vecPhysicalBodies[b2];
-
-			if( body1 == body2 )continue;
-
-			if( body1->m_BodyType == EBT_STATIC && body2->m_BodyType == EBT_STATIC )
+			pShape1 = pShape1->m_Next;
+		}
+		
+		
+		PhysicalBody* pBody2 = pBody1;
+		while( pBody2 )
+		{
+			if( pBody1 == pBody2 )
+			{
+				pBody2 = pBody2->m_Next;
 				continue;
+			}
+
+			PhysicalShape* pShape2 = pBody2->m_PhysicalShapeList;
+			while( pShape2 )
+			{
+				pShape2 = pShape2->m_Next;
+			}
+			
+			if( pBody1->m_BodyType == EBT_STATIC && pBody2->m_BodyType == EBT_STATIC )
+			{
+				pBody2 = pBody2->m_Next;
+				continue;
+			}
 						
 			dbool res = true;
 						
-			res = body1->m_AABB.intersectAABB(body2->m_AABB);
+			res = pBody1->m_AABB.intersectAABB(pBody2->m_AABB);
 			
-			if( res && (m_ContactPairSet.insert( ContactPair(body1->m_PhysicalShapeList, body2->m_PhysicalShapeList) )).second)
+			if( res && (m_ContactPairSet.insert( ContactPair(pBody1->m_PhysicalShapeList, pBody2->m_PhysicalShapeList) )).second)
 			{
 				Contact* contact = createContact();
-				contact->m_PhysicalShape1 = body1->m_PhysicalShapeList;
-				contact->m_PhysicalShape2 = body2->m_PhysicalShapeList;
-				m_NumContacts++;
+				contact->m_PhysicalShape1 = pBody1->m_PhysicalShapeList;
+				contact->m_PhysicalShape2 = pBody2->m_PhysicalShapeList;
+				// Awake the Bodies
+				pBody1->setSleeping(false);
+				pBody2->setSleeping(false);
 			}
+			pBody2 = pBody2->m_Next;
 		}
+		pBody1 = pBody1->m_Next;
 	}
 }
 
@@ -80,6 +101,9 @@ void CollisionManager::updateContacts()
 			// Erase Contact pair.
 			m_ContactPairSet.erase(ContactPair(body1->m_PhysicalShapeList, body2->m_PhysicalShapeList));
 			deleteContact(contact);
+			// Awake the Bodies
+			body1->setSleeping(false);
+			body2->setSleeping(false);
 		}
 		else 
 		{

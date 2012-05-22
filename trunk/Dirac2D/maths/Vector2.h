@@ -14,6 +14,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 
 template< class T > class Matrix2;
+template< class T > class Matrix3;
 
 template< class T >
 class Vector2
@@ -41,7 +42,7 @@ public:
 	{
 		return x*other.x + y*other.y;
 	}
-	
+
 	inline T cross( Vector2<T>& other )
 	{
 		return x*other.y - y*other.x;
@@ -65,6 +66,34 @@ public:
 	static inline T cross( Vector2<T>& v1, Vector2<T>& v2 )
 	{
 		return  v1.x * v2.y - v1.y * v2.x;
+	}
+	
+	inline T distanceSquared( Vector2<T>& other)
+	{
+		T dx = x-other.x;
+		T dy = y-other.y;
+		return  dx*dx + dy*dy;
+	}
+	
+	inline T distance( Vector2<T>& other)
+	{
+		T dx = x-other.x;
+		T dy = y-other.y;
+		return  sqrt(dx*dx + dy*dy);
+	}
+	
+	static inline T distanceSquared( Vector2<T>& v1, Vector2<T>& v2)
+	{
+		T dx = v1.x-v2.x;
+		T dy = v1.y-v2.y;
+		return  dx*dx + dy*dy;
+	}
+	
+	static inline T distance( Vector2<T>& v1, Vector2<T>& v2)
+	{
+		T dx = v1.x-v2.x;
+		T dy = v1.y-v2.y;
+		return  sqrt(dx*dx + dy*dy);
 	}
 	
 	inline T length()
@@ -125,9 +154,36 @@ public:
 		return Vector2<T>(x*other.x, y*other.y);
 	}
 	
+	// Right Multiply By a 2x2 Matrix( this is same as out = AT * v )
 	inline Vector2<T> operator*( const Matrix2<T>& matrix )
 	{
 		return Vector2<T>(matrix.a11*x + matrix.a21*y, matrix.a12*x + matrix.a22*y);
+	}
+	
+	// Right Multiply By a 3x3 Matrix( this is same as out = AInv * v )
+	inline Vector2<T> operator*( const Matrix3<T>& matrix )
+	{
+		dfloat tx  = -matrix.col1.x * matrix.col3.x - matrix.col1.y * matrix.col3.y;
+		dfloat ty  = -matrix.col2.x * matrix.col3.x - matrix.col2.y * matrix.col3.y;
+		
+		return Vector2<T>(matrix.col1.x * x + matrix.col1.y * y + tx , matrix.col2.x * x + matrix.col2.y * y + ty );
+	}
+	
+	// Right Multiply By a 2x2 Matrix( this is same as this = AT * v )
+	inline void operator*=( const Matrix2<T>& matrix )
+	{
+		dfloat tx = matrix.a11 * x + matrix.a21 * y;
+		y = matrix.a12 * x + matrix.a22 * y;
+		x = tx;
+	}
+	
+	// Right Multiply By a 3x3 Matrix( this is same as this = AInv * v )
+	inline void operator*=( const Matrix3<T>& matrix )
+	{
+		dfloat tx  = -matrix.col1.x * matrix.col3.x - matrix.col1.y * matrix.col3.y;
+		dfloat ty  = -matrix.col2.x * matrix.col3.x - matrix.col2.y * matrix.col3.y;
+		x = matrix.col1.x * x + matrix.col1.y * y + tx;
+		y = matrix.col2.x * x + matrix.col2.y * y + ty;
 	}
 	
 	inline Vector2<T> operator*( const T d )

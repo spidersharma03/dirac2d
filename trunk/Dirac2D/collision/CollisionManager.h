@@ -36,7 +36,6 @@ protected:
 	
 private:
 	PhysicalWorld *m_PhysicalWorld;
-	dint32 m_NumContacts;
 	MemoryAllocator<Contact> *m_ContactPool;
 	set<ContactPair> m_ContactPairSet;
 };

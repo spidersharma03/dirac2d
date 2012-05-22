@@ -68,6 +68,20 @@ public:
 		m_Transform = xForm;
 	}
 	
+	inline void setSleepingPolicy(dbool bSleepingPolicy)
+	{
+		m_bSleepingPolicy = bSleepingPolicy;
+	}
+	
+	inline void setSleeping(dbool bSleep)
+	{
+		if( !bSleep )
+			m_SleepTime = 0.0f;
+		m_bSleeping = bSleep;
+	}
+	
+	void updateSleepingStatus(dfloat dt);
+	
 	void updateAABB();
 	
 public:
@@ -82,6 +96,10 @@ public:
 	dfloat m_Mass, m_InvMass;
 	dfloat m_I, m_InvI;
 	
+	dbool m_bSleepingPolicy;
+	dbool m_bSleeping;
+	dfloat m_SleepTime;
+	
 	Vector2f m_Force;
 	AABB2f m_AABB;
 	
@@ -91,6 +109,8 @@ public:
 	
 protected:
 	
+	PhysicalBody* m_Next;
+	PhysicalBody* m_Prev;
 	// Calculates MassAttributes( mass, moment of inertia, centre of mass) of this Body from the Physical Shapes associated with this Body.
 	void calculateMassAttributes();
 	

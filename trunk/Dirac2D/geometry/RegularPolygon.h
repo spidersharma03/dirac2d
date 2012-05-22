@@ -13,6 +13,9 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct ContactManifold;
+class Circle;
+
 class RegularPolygon : public CollisionShape
 {
 public:
@@ -41,9 +44,13 @@ protected:
 	
 	virtual void findMomentOfInertia();
 
+	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2);
+	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
+
 protected:
 	dint32 m_NumVertices;
 	Vector2f m_Vertices[MAX_POLY_VERTICES];
+	Vector2f m_Normals[MAX_POLY_VERTICES];
 	dfloat m_Radius;
 };
 

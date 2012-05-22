@@ -13,6 +13,10 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+
+struct ContactManifold;
+class RegularPolygon;
+
 class Circle : public CollisionShape
 {
 public:
@@ -26,6 +30,11 @@ public:
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
+	inline dfloat getRadius() const
+	{
+		return m_Radius;
+	}
+	
 protected:
 	
 	virtual void findCentroid();
@@ -34,6 +43,12 @@ protected:
 
 protected:
 	dfloat m_Radius;
+	
+	friend dbool intersectCircles( Circle* circle1, Matrix3f& xform1, Circle* circle2, Matrix3f& xform2);
+	friend dbool intersectCircles( Circle* circle1, Matrix3f& xform1, Circle* circle2, Matrix3f& xform2, ContactManifold* contactManifold);
+	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2);
+	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
+
 };
 
 END_NAMESPACE_DIRAC2D

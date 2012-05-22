@@ -10,7 +10,7 @@
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
 #include "PhysicalAppearance.h"
-
+#include "../memory/memoryAllocator.h"
 
 #include <vector>
 
@@ -35,6 +35,8 @@ public:
 	PhysicalBody* createPhysicalBody();
 
 	PhysicalBody* createPhysicalBody(PhysicalAppearance& pApp);
+
+	void deletePhysicalBody(PhysicalBody* pBody);
 
 	void Step(dfloat dt);
 	
@@ -69,9 +71,6 @@ private:
 	Contact* m_ContactList;  // Doubly linked list of all the Contacts in this world.
 	
 	PhysicalBody* m_PhysicalBodyList;
-
-	vector<PhysicalBody*> m_vecPhysicalBodies;
-
 	
 	static Vector2f GRAVITY;
 	
@@ -87,6 +86,14 @@ private:
 	dbool m_bDrawAABB;
 	
 	dbool m_bWarmStart;
+	
+	MemoryAllocator<PhysicalBody> *m_PhysicalBodyPool;
+	
+	dbool m_bDrawShapes;
+	dbool m_bDrawBoundingBoxes;
+	dbool m_bDrawContacts;
+	dbool m_bDrawConstraints;
+	dbool m_bDrawCentreOfMass;
 };
 
 END_NAMESPACE_DIRAC2D

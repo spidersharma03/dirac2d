@@ -213,7 +213,6 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& xform1, RegularPolygon
 // Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
 dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& xform1, RegularPolygon* poly2, Matrix3f& xform2, ContactManifold* contactManifold);
 
-
 END_NAMESPACE_DIRAC2D
 
 #endif

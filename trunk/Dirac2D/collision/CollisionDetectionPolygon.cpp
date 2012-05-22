@@ -88,8 +88,11 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	Matrix3f Xform1 = polygonXform1;
 	Matrix3f Xform2 = polygonXform2;
 	
-	if( fabs(dot) > fabs(incidentEdge.dot(collisionNormal)) )
+	// Bias the selection of Incident and Reference Edge.
+	dfloat FUZZINESS_FACTOR = 1e-03f;
+	if( fabs(dot) - fabs(incidentEdge.dot(collisionNormal)) > FUZZINESS_FACTOR)
 	{
+		//printf("Difference1=%f\n", fabs(dot) - fabs(incidentEdge.dot(collisionNormal)));
 		Matrix3f tempMat = Xform2;
 		Xform2 = Xform1;
 		Xform1 = tempMat;
