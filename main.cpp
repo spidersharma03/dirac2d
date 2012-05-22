@@ -117,6 +117,27 @@ void demo3()
 	}
 }
 
+void demo4()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->setAngle(M_PI_4/15);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Circle
+	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+	pBodyCircle->setPosition(Vector2f(0.0f,0.1f));
+	dfloat radius = 0.05f;
+	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
+	pBodyCircle->createPhysicalShape(pApp);
+}
 
 void initScene()
 {
@@ -124,7 +145,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo3();
+	demo4();
 }
 
 void changeSize(int w, int h) 

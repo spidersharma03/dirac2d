@@ -15,10 +15,21 @@ BEGIN_NAMESPACE_DIRAC2D
 Circle::Circle(dfloat radius):m_Radius(radius)
 {
 	m_Area = PI * m_Radius * m_Radius;
+	
+	m_ShapeType = EST_CIRCLE;
+
+	findMomentOfInertia();
+	
+	m_AABB.m_LowerBounds.x = -m_Radius;
+	m_AABB.m_LowerBounds.y = -m_Radius;
+
+	m_AABB.m_UpperBounds.x = m_Radius;
+	m_AABB.m_UpperBounds.y = m_Radius;
 }
 
 Circle::Circle(const Circle& other)
 {
+	findMomentOfInertia();
 }
 
 Vector2f Circle::getSupportPoint(Vector2f& d)
@@ -33,6 +44,8 @@ dbool Circle::isPointInside(Point2f& p)
 
 void Circle::updateAABB(Matrix3f& xForm)
 {
+	m_AABB.m_LowerBounds = xForm * Vector2f(-m_Radius, -m_Radius);
+	m_AABB.m_UpperBounds = xForm * Vector2f(m_Radius, m_Radius);
 }
 
 void Circle::findCentroid()

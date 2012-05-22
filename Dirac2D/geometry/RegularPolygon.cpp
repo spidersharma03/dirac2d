@@ -19,6 +19,16 @@ RegularPolygon::RegularPolygon(Vector2f* vertices, dint32 numVertices) : m_NumVe
 	for( dint32 v=0; v< m_NumVertices; v++ )
 		m_Vertices[v] = vertices[v];
 
+	for( dint32 v=0; v< m_NumVertices-1; v++ )
+	{
+		Vector2f edge = m_Vertices[v+1] - m_Vertices[v];
+		m_Normals[v].set(edge.y, -edge.x);
+		m_Normals[v].normalize();
+	}
+	Vector2f edge = m_Vertices[0] - m_Vertices[m_NumVertices-1];
+	m_Normals[m_NumVertices-1].set(edge.y, -edge.x);
+	m_Normals[m_NumVertices-1].normalize();
+	
 	m_ShapeType = EST_REGULARPOLY;
 	findCentroid();
 	findMomentOfInertia();
@@ -29,6 +39,10 @@ RegularPolygon::RegularPolygon(const RegularPolygon& other)
 	m_NumVertices = other.m_NumVertices;
 	for( dint32 v=0; v< m_NumVertices; v++ )
 		m_Vertices[v] = other.m_Vertices[v];
+	
+	for( dint32 v=0; v< m_NumVertices; v++ )
+		m_Normals[v] = other.m_Normals[v];
+	
 	m_I = other.m_I;
 	m_Centroid = other.m_Centroid;
 	m_Radius   = other.m_Radius;

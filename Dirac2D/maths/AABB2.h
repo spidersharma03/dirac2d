@@ -45,6 +45,9 @@ public:
 	Vector2<T> m_LowerBounds, m_UpperBounds;
 };
 
+typedef AABB2<dfloat> AABB2f;
+typedef AABB2<ddouble> AABB2d;
+
 END_NAMESPACE_DIRAC2D
 
 #endif

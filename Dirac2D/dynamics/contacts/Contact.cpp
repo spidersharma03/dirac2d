@@ -44,7 +44,7 @@ void Contact::update()
 		for( dint32 n=0; n<m_Manifold.m_NumContacts; n++ )
 		{
 			ContactPoint& cp_new = m_Manifold.m_ContactPoints[n];
-			//printf("%d  %d   ", cp_new.m_ID.edgeIndex.m_Index1, cp_new.m_ID.edgeIndex.m_Index2 );//, cp_new.m_ID.edgeIndex.m_Type1, cp_new.m_ID.edgeIndex.m_Type2);
+			
 			for( dint32 o=0; o<oldManifold.m_NumContacts; o++ )
 			{
 				ContactPoint& cp_old = oldManifold.m_ContactPoints[o];
@@ -52,17 +52,12 @@ void Contact::update()
 				{
 					m_ContactConstraint[n].m_NormalImpulse = oldConstraint[n].m_NormalImpulse;
 					m_ContactConstraint[n].m_TangentImpulse = oldConstraint[n].m_TangentImpulse;
-					//m_ContactConstraint[n].m_TangentImpulse = 0.0f;
-					//printf("Matched ID's %d\n", o);
-				}
-				else 
-				{
-					//printf("No Matching\n");
+					break;
 				}
 
 			}
+
 		}
-		//printf("\n");
 	}
 	else 
 	{

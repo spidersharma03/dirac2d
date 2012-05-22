@@ -151,10 +151,6 @@ public:
 };
 
 
-
-typedef AABB2<dfloat> AABB2f;
-typedef AABB2<ddouble> AABB2d;
-
 typedef Point2<dfloat> Point2f;
 typedef Point2<ddouble> Point2d;
 

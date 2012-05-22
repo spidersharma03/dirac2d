@@ -9,6 +9,7 @@
 #include "CollisionDetection.h"
 #include "../geometry/CollisionShape.h"
 #include "CollisionDetectionPolygon.h"
+#include "CollisionDetectionCirclePolygon.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -22,7 +23,20 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 // Find Whether two Shapes intersect. Also find the Contact Points if the Shapes intersect.
 dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2, ContactManifold* contactManifold)
 {
-	return intersectPolygons((RegularPolygon*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold); 
+	if( shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_REGULARPOLY )
+		return intersectPolygons((RegularPolygon*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
+	
+	if( (shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_CIRCLE) ) 
+		return intersectCirclePolygon((Circle*)shape2, xform2, (RegularPolygon*)shape1, xform1, contactManifold);
+
+	if( (shape1->getShapeType() == EST_CIRCLE && shape2->getShapeType() == EST_REGULARPOLY) )
+		return intersectCirclePolygon((Circle*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
+	
+	if( shape1->getShapeType() == EST_CIRCLE && shape2->getShapeType() == EST_CIRCLE )
+		return intersectCircles((Circle*)shape1, xform1, (Circle*)shape2, xform2, contactManifold);
+	
+	dAssert(0);
+	return false;
 }
 
 END_NAMESPACE_DIRAC2D
