@@ -273,6 +273,10 @@
 				RelativePath=".\Dirac2D\Settings.h"
 				>
 			</File>
+			<File
+				RelativePath=".\Dirac2D\STimer.h"
+				>
+			</File>
 			<Filter
 				Name="collision"
 				>
