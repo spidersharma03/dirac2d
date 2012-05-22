@@ -41,6 +41,9 @@ void CollisionManager::updateCollision()
 			PhysicalBody* body2 = m_PhysicalWorld->m_vecPhysicalBodies[b2];
 
 			if( body1 == body2 )continue;
+
+			if( body1->m_BodyType == EBT_STATIC && body2->m_BodyType == EBT_STATIC )
+				continue;
 						
 			dbool res = true;
 						

@@ -84,7 +84,8 @@ void ContactSolver::buildJacobian()
 			}
 			else 
 			{
-				
+				constraint.m_NormalImpulse = 0.0f;
+				constraint.m_TangentImpulse = 0.0f;
 			}
 
 		}

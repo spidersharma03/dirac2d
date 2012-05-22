@@ -77,7 +77,7 @@ public:
 		return (x*x + y*y);
 	}
 	
-	void normalize()
+	inline void normalize()
 	{
 		T len = length();
 		if( len > EPSILON )

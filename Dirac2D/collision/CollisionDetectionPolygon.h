@@ -194,14 +194,14 @@ static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifol
 		cp0.x = cp0.x + lambda*(cp1.x - cp0.x); 
 		cp0.y = cp0.y + lambda*(cp1.y - cp0.y); 
 		contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Index1 = refIndex;
-		contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Type1  = ECT_VERTEX;
+		contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Type1  = ECT_EDGE;
 	}
 	if( u2 < 0.0f ) 
 	{
 		cp1.x = cp0.x + lambda*(cp1.x - cp0.x); 
 		cp1.y = cp0.y + lambda*(cp1.y - cp0.y); 
 		contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Index1 = refIndex;
-		contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Type1  = ECT_VERTEX;
+		contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Type1  = ECT_EDGE;
 	}
 }
 

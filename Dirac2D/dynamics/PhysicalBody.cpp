@@ -126,7 +126,7 @@ void PhysicalBody::calculateMassAttributes()
 		m_InvI    = 0.0f;
 	}
 
-	updateAABB();
+	//updateAABB();
 	m_Transform.transformAsPoint(m_Centre);
 }
 
