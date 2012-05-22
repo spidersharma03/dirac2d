@@ -41,6 +41,7 @@ void Circle::findCentroid()
 
 void Circle::findMomentOfInertia()
 {
+	m_I = m_Radius * m_Radius * 0.5f;
 }
 
 END_NAMESPACE_DIRAC2D

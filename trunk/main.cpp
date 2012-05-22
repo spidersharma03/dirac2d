@@ -191,7 +191,8 @@ void keyProcessor(unsigned char key, int x, int y)
 			exit(0);
 			break;
 			
-		case 'a':
+		case 'w':
+		case 'W':
 			bWarmStart = !bWarmStart;
 			pWorld->setWarmStart(bWarmStart);
 			break;

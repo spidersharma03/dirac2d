@@ -68,6 +68,8 @@ private:
 
 	Contact* m_ContactList;  // Doubly linked list of all the Contacts in this world.
 	
+	PhysicalBody* m_PhysicalBodyList;
+
 	vector<PhysicalBody*> m_vecPhysicalBodies;
 
 	

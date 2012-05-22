@@ -124,7 +124,7 @@ class Contact
 public:
 	Contact()
 	{
-		m_ERP = 0.2f;
+		m_ERP = 0.99f;
 		m_CFM = 0.0f;
 	}
 	
