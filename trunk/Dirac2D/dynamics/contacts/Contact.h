@@ -89,17 +89,24 @@ struct ContactPoint
 
 struct ContactManifold
 {
+	ContactManifold()
+	{
+		m_bFlipShapes = false;
+	}
+	
 	void operator=( ContactManifold other )
 	{
 		m_ContactPoints[0] = other.m_ContactPoints[0];
 		m_ContactPoints[1] = other.m_ContactPoints[1];
 		m_ContactNormal    = other.m_ContactNormal;
 		m_NumContacts      = other.m_NumContacts;
+		m_bFlipShapes	   = other.m_bFlipShapes;
 	}
 	
 	ContactPoint m_ContactPoints[MAX_CONTACTS];
 	Vector2f m_ContactNormal;
 	dchar m_NumContacts;
+	dchar m_bFlipShapes;
 };
 
 // This Structure holds the necessary data for each contact point.

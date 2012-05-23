@@ -17,6 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 void Contact::update()
 {
+	m_Manifold.m_bFlipShapes = false;
 	ContactManifold oldManifold = m_Manifold;
 	ContactConstraint oldConstraint[MAX_CONTACTS];
 	oldConstraint[0].m_NormalImpulse = m_ContactConstraint[0].m_NormalImpulse;
@@ -26,6 +27,15 @@ void Contact::update()
 	oldConstraint[1].m_TangentImpulse = m_ContactConstraint[1].m_TangentImpulse;
 	
 	dbool bRes = intersectShapes(m_PhysicalShape1->m_CollisionShape, m_PhysicalShape1->m_ParentBody->m_Transform, m_PhysicalShape2->m_CollisionShape, m_PhysicalShape2->m_ParentBody->m_Transform, &m_Manifold);
+	
+	// Flip the Physical Shapes.
+	if( m_Manifold.m_bFlipShapes )
+	{
+		PhysicalShape* temp = m_PhysicalShape2;
+		m_PhysicalShape2 = m_PhysicalShape1;
+		m_PhysicalShape1  = temp;
+	}
+	
 	if( bRes )
 	{
 		m_ContactNormal = m_Manifold.m_ContactNormal;

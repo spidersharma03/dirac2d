@@ -108,7 +108,7 @@ void demo3()
 			x += 0.2f;
 			pBodyBox->setPosition(Vector2f(x,y));
 			//pBodyBox->setAngle(PI_4*0.9);
-			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
+			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.031f;
 			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 			pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 			pBodyBox->createPhysicalShape(pApp);
@@ -122,7 +122,7 @@ void demo4()
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
 	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
-	pBodyGround->setAngle(M_PI_4/15);
+	//pBodyGround->setAngle(-M_PI_4/15);
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
@@ -131,12 +131,135 @@ void demo4()
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
-	// Create Circle
-	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
-	pBodyCircle->setPosition(Vector2f(0.0f,0.1f));
-	dfloat radius = 0.05f;
-	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
-	pBodyCircle->createPhysicalShape(pApp);
+	// Create Circles
+	dfloat y = -0.3f;
+	for( int i=0; i<10; i++ )
+	{
+		PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+		//pBodyCircle->m_BodyType = EBT_STATIC;
+		pBodyCircle->setPosition(Vector2f(0.0f,y));
+		dfloat radius = 0.051f;
+		pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
+		pBodyCircle->createPhysicalShape(pApp);
+		y += 0.3f;
+	}
+	
+	// Create Boxes
+	y = -0.3f;
+	for( int i=0; i<10; i++ )
+	{
+		PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+		//pBodyBox->m_BodyType = EBT_STATIC;
+		y += 0.2f;
+		pBodyBox->setPosition(Vector2f(0.1f,y));
+		//pBodyBox->setAngle(-PI_2*1.0);
+		dfloat boxWidth = 0.05f; dfloat boxHeight = 0.05f;
+		Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
+		pBodyBox->createPhysicalShape(pApp);
+	}
+}
+
+void demo5()
+{
+	{
+		// Create Ground Body
+		PhysicalBody* pBodyGround1 = pWorld->createPhysicalBody();
+		pBodyGround1->setPosition(Vector2f(1.5f,1.0f));
+		pBodyGround1->setAngle(M_PI_4/5);
+		pBodyGround1->m_BodyType = EBT_STATIC;
+		
+		PhysicalAppearance pApp;
+		dfloat groundWidth = 0.4f; dfloat groundHeight = 0.02f;
+		Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
+		pBodyGround1->createPhysicalShape(pApp);
+		
+		PhysicalBody* pBodyGround2 = pWorld->createPhysicalBody();
+		pBodyGround2->setPosition(Vector2f(0.0f,-0.0f));
+		pBodyGround2->m_BodyType = EBT_STATIC;
+		groundWidth = 1.50f;
+		Vector2f vertices2[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices2, 4);
+		pBodyGround2->createPhysicalShape(pApp);
+		
+		PhysicalBody* pBodyGround3 = pWorld->createPhysicalBody();
+		pBodyGround3->setPosition(Vector2f(0.0f,-1.0f));
+		pBodyGround3->m_BodyType = EBT_STATIC;
+		groundWidth = 2.50f;
+		Vector2f vertices3[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices3, 4);
+		pBodyGround3->createPhysicalShape(pApp);
+		
+		PhysicalBody* pBodyGround4 = pWorld->createPhysicalBody();
+		pBodyGround4->setPosition(Vector2f(-1.6f,-0.3f));
+		pBodyGround4->setAngle(-PI_4);
+		pBodyGround4->m_BodyType = EBT_STATIC;
+		groundWidth = 0.20f;
+		Vector2f vertices4[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices4, 4);
+		pBodyGround4->createPhysicalShape(pApp);
+		
+		// Create Boxes
+		dfloat y = 0.35f;
+		dfloat x = -1.3f;
+		dint32 n = 10;
+		for(int j=0; j<n;j++ )
+		{
+			x += 0.2f;
+			for( int i=0; i<1; i++ )
+			{
+				PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+				//pBodyBox->m_BodyType = EBT_STATIC;
+				pBodyBox->setPosition(Vector2f(x,y));
+				//pBodyBox->setAngle(PI_4*0.9);
+				dfloat boxWidth = 0.02f; dfloat boxHeight = 0.2f;
+				Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+				pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
+				pBodyBox->createPhysicalShape(pApp);
+			}
+		}
+		
+		// Create Boxes
+		y = -0.75f;
+		x = -1.3f;
+		n = 10;
+		for(int j=0; j<n;j++ )
+		{
+			x += 0.3f;
+			for( int i=0; i<1; i++ )
+			{
+				PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+				//pBodyBox->m_BodyType = EBT_STATIC;
+				pBodyBox->setPosition(Vector2f(x,y));
+				//pBodyBox->setAngle(PI_4*0.9);
+				dfloat boxWidth = 0.02f; dfloat boxHeight = 0.2f;
+				Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+				pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
+				pBodyBox->createPhysicalShape(pApp);
+			}
+		}
+		
+		// Create Circles
+		y = 1.2f;
+		for( int i=0; i<1; i++ )
+		{
+			PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+			//pBodyCircle->m_BodyType = EBT_STATIC;
+			pBodyCircle->setPosition(Vector2f(1.5f,y));
+			dfloat radius = 0.1f;
+			pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
+			pBodyCircle->createPhysicalShape(pApp);
+			y += 0.3f;
+		}
+		
+		PhysicalBody* pBodyCircle2 = pWorld->createPhysicalBody();
+		//pBodyCircle->m_BodyType = EBT_STATIC;
+		pBodyCircle2->setPosition(Vector2f(-1.5f,y));
+		dfloat radius = 0.1f;
+		pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
+		pBodyCircle2->createPhysicalShape(pApp);
+	}
 }
 
 void initScene()
@@ -172,7 +295,7 @@ void changeSize(int w, int h)
 	
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-	glOrtho(-1*ratio, 1*ratio, -1, 1, -0.01, 100);
+	glOrtho(-1.5*ratio, 1.5*ratio, -1.5, 1.5, -0.01, 100);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     //gluLookAt(0.0,0.0,5.0, 
@@ -193,7 +316,7 @@ void renderScene(void)
 	
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	
-	glOrtho(-1*ratio, 1*ratio, -1, 1, -0.01, 100);
+	glOrtho(-1.5*ratio, 1.5*ratio, -1.5, 1.5, -0.01, 100);
 	pWorld->Step(dt);
 	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

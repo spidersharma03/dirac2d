@@ -44,8 +44,8 @@ dbool Circle::isPointInside(Point2f& p)
 
 void Circle::updateAABB(Matrix3f& xForm)
 {
-	m_AABB.m_LowerBounds = xForm * Vector2f(-m_Radius, -m_Radius);
-	m_AABB.m_UpperBounds = xForm * Vector2f(m_Radius, m_Radius);
+	m_AABB.m_LowerBounds.set(-m_Radius + xForm.col3.x, -m_Radius + xForm.col3.y);
+	m_AABB.m_UpperBounds.set(m_Radius + xForm.col3.x, m_Radius + xForm.col3.y);
 }
 
 void Circle::findCentroid()
