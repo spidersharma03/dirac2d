@@ -182,8 +182,9 @@ public:
 	{
 		dfloat tx  = -matrix.col1.x * matrix.col3.x - matrix.col1.y * matrix.col3.y;
 		dfloat ty  = -matrix.col2.x * matrix.col3.x - matrix.col2.y * matrix.col3.y;
-		x = matrix.col1.x * x + matrix.col1.y * y + tx;
+		dfloat temp = matrix.col1.x * x + matrix.col1.y * y + tx;
 		y = matrix.col2.x * x + matrix.col2.y * y + ty;
+		x = temp;
 	}
 	
 	inline Vector2<T> operator*( const T d )

@@ -42,16 +42,16 @@ dbool intersectCircles( Circle* circle1, Matrix3f& xform1, Circle* circle2, Matr
 	contactManifold->m_ContactNormal.normalize();
 	contactManifold->m_NumContacts = 1;
 	c1 -= contactManifold->m_ContactNormal * circle1->m_Radius;
-	c2 += contactManifold->m_ContactNormal * -circle2->m_Radius;
+	c2 += contactManifold->m_ContactNormal * circle2->m_Radius;
 	
 	contactManifold->m_ContactPoints[0].m_Point = ( c1 + c2 ) * 0.5f;
-	contactManifold->m_ContactPoints[0].m_Depth = -Vector2f::distance(c2,c1);
+	contactManifold->m_ContactPoints[0].m_Depth = -Vector2f::distance(c2,c1)*0.5f;
 	contactManifold->m_ContactPoints[0].m_ID.m_Key = 0;
 	
 	return true;
 }
 
-// Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
+// Find Whether  Circle/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
 dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2)
 {
 	return false;
@@ -91,6 +91,7 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* 
 	// Circle Centre inside Polygon
 	if( minDistance < EPSILON )
 	{
+		dAssert(0);
 		return true;
 	}
 	
@@ -107,35 +108,37 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* 
 	dfloat u2 = (c-v2).dot(edge);
 	
 	// Left of Edge vertex v1. so v1 is the closest point from the centre of the circle. Region 1.
-	if( u1 < EPSILON )
+	if( u1 < 0.0f )
 	{
 		if( c.distanceSquared(v1) > radius*radius )
 		{
 			return false;
 		}
 		contactManifold->m_NumContacts = 1;
-		contactManifold->m_ContactNormal = xform2 * (c - v1);
+		contactManifold->m_ContactNormal = (c - v1);
 		contactManifold->m_ContactNormal.normalize();
-		Vector2f cWorld = xform1 * circle->m_Centroid;
-		cWorld += contactManifold->m_ContactNormal * radius;
-		contactManifold->m_ContactPoints[0].m_Point = (cWorld + v1 ) * 0.5f;
-		contactManifold->m_ContactPoints[0].m_Depth = (cWorld - v1 ).length() * 0.5f;
+		c -= contactManifold->m_ContactNormal * radius;
+		contactManifold->m_ContactPoints[0].m_Point = (c + v1 ) * 0.5f;
+		xform2.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
+		contactManifold->m_ContactPoints[0].m_Depth = -(c - v1 ).length() * 0.5f;
+		xform2.transformAsVector(contactManifold->m_ContactNormal);
 		return true;
 	}
 	// Left of Edge vertex v2. so v2 is the closest point from the centre of the circle. Region 2.
-	else if( u2 < EPSILON )
+	else if( u2 < 0.0f )
 	{
 		if( c.distanceSquared(v2) > radius*radius )
 		{
 			return false;
 		}
 		contactManifold->m_NumContacts = 1;
-		contactManifold->m_ContactNormal = xform2 * (c - v2);
+		contactManifold->m_ContactNormal = (c - v2);
 		contactManifold->m_ContactNormal.normalize();
-		Vector2f cWorld = xform1 * circle->m_Centroid;
-		cWorld += contactManifold->m_ContactNormal * radius;
-		contactManifold->m_ContactPoints[0].m_Point = (cWorld + v2 ) * 0.5f;
-		contactManifold->m_ContactPoints[0].m_Depth = (cWorld - v2 ).length() * 0.5f;
+		c -= contactManifold->m_ContactNormal * radius;
+		contactManifold->m_ContactPoints[0].m_Point = (c + v2 ) * 0.5f;
+		xform2.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
+		contactManifold->m_ContactPoints[0].m_Depth = -(c - v2 ).length() * 0.5f;
+		xform2.transformAsVector(contactManifold->m_ContactNormal);
 		return true;
 		
 	}
@@ -151,10 +154,10 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* 
 		contactManifold->m_ContactNormal = normals[index];
 		xform2.transformAsVector(contactManifold->m_ContactNormal);
 		Vector2f cWorld = xform1 * circle->m_Centroid;
-		cWorld += contactManifold->m_ContactNormal * radius;
-		Vector2f closestPoint = cWorld + contactManifold->m_ContactNormal * shortestDistance;
+		Vector2f closestPoint = cWorld - contactManifold->m_ContactNormal * shortestDistance;
+		cWorld -= contactManifold->m_ContactNormal * radius;
 		contactManifold->m_ContactPoints[0].m_Point = (cWorld + closestPoint ) * 0.5f;
-		contactManifold->m_ContactPoints[0].m_Depth = (cWorld - closestPoint ).length() * 0.5f;
+		contactManifold->m_ContactPoints[0].m_Depth = -(radius - shortestDistance) * 0.5f;
 		return true;
 		
 	}

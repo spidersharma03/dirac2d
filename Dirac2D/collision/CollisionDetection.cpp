@@ -27,7 +27,10 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 		return intersectPolygons((RegularPolygon*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
 	
 	if( (shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_CIRCLE) ) 
+	{
+		contactManifold->m_bFlipShapes = true;
 		return intersectCirclePolygon((Circle*)shape2, xform2, (RegularPolygon*)shape1, xform1, contactManifold);
+	}
 
 	if( (shape1->getShapeType() == EST_CIRCLE && shape2->getShapeType() == EST_REGULARPOLY) )
 		return intersectCirclePolygon((Circle*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
