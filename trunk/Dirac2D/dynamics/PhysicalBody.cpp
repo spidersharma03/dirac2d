@@ -72,7 +72,7 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	PhysicalShape* pShape = new PhysicalShape();
 	pShape->m_ParentBody = this;
 	pShape->m_Next = 0;
-	pShape->m_Elasticity = pApp.m_PhysicalAttributes.m_Elasticity;
+	pShape->m_Restitution = pApp.m_PhysicalAttributes.m_Restitution;
 	pShape->m_Friction = pApp.m_PhysicalAttributes.m_Friction;
 	pShape->m_Angle = pApp.m_PhysicalAttributes.m_Angle;
 	pShape->m_Position = pApp.m_PhysicalAttributes.m_Position;
@@ -82,6 +82,10 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	pShape->m_CollisionShape = pApp.m_CollisionAttributes.m_Shape;
 	pShape->m_CollisionFilter = pApp.m_CollisionAttributes.m_Filter;
 	
+	Matrix3f xForm;
+	xForm.translate(pShape->m_Position);
+	xForm.rotate(pShape->m_Angle);
+	pShape->m_CollisionShape->updateShape(xForm);
 	//pShape->m_Prev = 0;
 	//pShape->m_Next = m_PhysicalShapeList;
 	
@@ -89,7 +93,6 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	{
 		//m_PhysicalBodyList->m_Prev = pBody;
 	}
-	m_PhysicalShapeList = pShape;
 	m_PhysicalShapeList = pShape;
 	m_PhysicalShapeList->m_Next = 0;
 	

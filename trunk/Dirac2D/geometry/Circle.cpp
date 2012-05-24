@@ -48,6 +48,11 @@ void Circle::updateAABB(Matrix3f& xForm)
 	m_AABB.m_UpperBounds.set(m_Radius + xForm.col3.x, m_Radius + xForm.col3.y);
 }
 
+void Circle::updateShape(Matrix3f& xForm)
+{
+	xForm.transformAsVector(m_Centroid);
+}
+
 void Circle::findCentroid()
 {
 }

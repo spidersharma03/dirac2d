@@ -38,6 +38,8 @@ public:
 	
 protected:
 	
+	virtual void updateShape(Matrix3f& xForm);
+
 	virtual void findCentroid();
 	
 	virtual void findMomentOfInertia();

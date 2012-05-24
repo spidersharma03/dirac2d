@@ -36,6 +36,38 @@ dbool Capsule::isPointInside(Point2f& p)
 
 void Capsule::updateAABB(Matrix3f& xForm)
 {
+	Vector2f p0(-m_Height*0.5f - m_Radius, m_Radius), p1(m_Height*0.5f + m_Radius, m_Radius); 
+	Vector2f p2(-m_Height*0.5f - m_Radius, -m_Radius), p3(m_Height*0.5f + m_Radius, -m_Radius); 
+		
+	xForm.transformAsPoint(p0);
+	xForm.transformAsPoint(p1);
+	xForm.transformAsPoint(p2);
+	xForm.transformAsPoint(p3);
+
+	Vector2f vertices[4] = {p0, p1, p2, p3};
+
+	dfloat min_x = 100000.0f;
+	dfloat min_y = 100000.0f;
+	
+	dfloat max_x = -100000.0f;
+	dfloat max_y = -100000.0f;
+	
+	for( dint32 v=0; v<4; v++ )
+	{
+		Vector2f p = vertices[v];
+		if( min_x > p.x )
+			min_x = p.x;
+		if( min_y > p.y )
+			min_y = p.y;
+		
+		if( max_x < p.x )
+			max_x = p.x;
+		if( max_y < p.y )
+			max_y = p.y;
+	}
+	
+	m_AABB.m_LowerBounds.set(min_x, min_y);
+	m_AABB.m_UpperBounds.set(max_x, max_y);
 }
 
 void Capsule::findCentroid()

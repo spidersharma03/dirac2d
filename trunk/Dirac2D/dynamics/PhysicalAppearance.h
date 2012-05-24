@@ -29,13 +29,13 @@ struct PhysicalAttributes
 	Vector2f m_Position;
 	dfloat m_Angle;
 	dfloat m_Friction;
-	dfloat m_Elasticity;
+	dfloat m_Restitution;
 	
 	PhysicalAttributes()
 	{
 		m_Angle = 0.0f;
 		m_Friction = 0.0f;
-		m_Elasticity = 0.0f;
+		m_Restitution = 0.0f;
 	}
 };
 

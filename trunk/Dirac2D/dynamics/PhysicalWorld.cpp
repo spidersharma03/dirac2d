@@ -36,10 +36,10 @@ PhysicalWorld::PhysicalWorld()
 	m_bWarmStart = true;
 
 	m_bDrawShapes = true;
-	m_bDrawBoundingBoxes = false;
+	m_bDrawBoundingBoxes = true;
 	m_bDrawContacts = true;
 	m_bDrawConstraints = false;
-	m_bDrawCentreOfMass = false;
+	m_bDrawCentreOfMass = true;
 	
 	m_PhysicalBodyList = 0;
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
