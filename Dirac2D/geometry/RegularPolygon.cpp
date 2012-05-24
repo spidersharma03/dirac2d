@@ -85,6 +85,15 @@ void RegularPolygon::updateAABB(Matrix3f& xForm)
 	m_AABB.m_UpperBounds.set(max_x, max_y);
 }
 
+void RegularPolygon::updateShape(Matrix3f& xForm)
+{
+	for( dint32 v=0; v<m_NumVertices; v++ )
+	{
+		xForm.transformAsVector(m_Vertices[v]);
+	}	
+	xForm.transformAsPoint(m_Centroid);
+}
+
 void RegularPolygon::findCentroid()
 {
 	m_Centroid.set(0.0f, 0.0f);

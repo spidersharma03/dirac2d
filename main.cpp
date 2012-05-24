@@ -262,13 +262,38 @@ void demo5()
 	}
 }
 
+void demo6()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Box
+	PhysicalBody* pBodyCapsule = pWorld->createPhysicalBody();
+	//pBodyCapsule->m_BodyType = EBT_STATIC;
+	//pBodyBox->setPosition(Vector2f(0.0f,0.0f));
+	pBodyCapsule->setAngle(PI_4);
+	dfloat capsuleRadius = 0.1f; dfloat capsuleHeight = 0.2f;
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius, capsuleHeight);
+	pBodyCapsule->createPhysicalShape(pApp);
+	
+}
+
 void initScene()
 {
 	pWorld = new PhysicalWorld();
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo4();
+	demo6();
 }
 
 void changeSize(int w, int h) 

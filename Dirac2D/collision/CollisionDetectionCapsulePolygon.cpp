@@ -69,7 +69,54 @@ dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* 
 // Find Whether two Capsule/ConvexPolygons intersect.
 dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold)
 {
-	return 0;
+	// Transform Capsule to Poly's frame
+	Vector2f c = xform2 * capsule->m_Centroid;
+	c *= xform1;
+	dfloat capsuleHeight = capsule->m_Height;
+	dfloat capsuleRadius = capsule->m_Radius;
+	Vector2f axis(1.0f, 0.0f);
+	Vector2f p0, p1;
+    xform2.transformAsVector(axis);
+	axis = xform1.getRotationMatrixTransposed() * axis;
+	
+	p0 = c + axis * capsuleHeight*0.5f;
+	p1 = c - axis * capsuleHeight*0.5f;
+	
+	
+	dint32 numVertices = poly->getNumVertices();
+	Vector2f* vertices = poly->getVertices();
+	
+	Vector2f closestPointOnCapsuleAxis;
+	Vector2f closestPointOnPolyEdge;
+	
+	dbool bRes = false;
+	for( dint32 v=0; v<numVertices; v++ )
+	{
+		dint32 i = (v==numVertices-1) ? 0 : v+1; 
+		
+		//findClosestPoint(vertices[v], vertices[i], p0, closestPointOnPolyEdge);
+		findClosestPoints(vertices[v], vertices[i], p0, p1, closestPointOnPolyEdge, closestPointOnCapsuleAxis);
+		dfloat d2 = closestPointOnPolyEdge.distanceSquared(closestPointOnCapsuleAxis);
+		if( d2 > capsuleRadius*capsuleRadius )
+			continue;
+		bRes = true;	
+		contactManifold->m_NumContacts = 1;
+		contactManifold->m_ContactNormal = closestPointOnPolyEdge - closestPointOnCapsuleAxis;
+		contactManifold->m_ContactNormal.normalize();
+		
+		Vector2f closestPointOnCapsule = closestPointOnCapsuleAxis + contactManifold->m_ContactNormal * capsuleRadius;
+		
+		contactManifold->m_ContactPoints[0].m_Point = (closestPointOnCapsule + closestPointOnPolyEdge) * 0.5f;
+		xform1.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
+		
+		dfloat d = (closestPointOnPolyEdge - closestPointOnCapsuleAxis).dot(contactManifold->m_ContactNormal);
+		contactManifold->m_ContactPoints[0].m_Depth = -(capsuleRadius - d);
+		
+		xform1.transformAsVector(contactManifold->m_ContactNormal);
+
+		dAssert(contactManifold->m_ContactPoints[0].m_Depth < 0.0f);
+	}
+	return bRes;
 }
 
 END_NAMESPACE_DIRAC2D

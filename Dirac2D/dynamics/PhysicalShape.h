@@ -38,20 +38,19 @@ public:
 	PhysicalBody* m_ParentBody;
 
 	dfloat m_Friction;
-	dfloat m_Elasticity;
+	dfloat m_Restitution;
 	
 	MassAttributes m_MassAttributes;
 	
 	CollisionShape* m_CollisionShape;
 	CollisionFilter m_CollisionFilter;
-	
-	Vector2f m_Position;
-	dfloat m_Angle;
 
 	// pointer to the next shape from the parent body.
 	PhysicalShape* m_Next;
 protected:
 
+	Vector2f m_Position;
+	dfloat m_Angle;
 	
 public:
 	friend class PhysicalBody;

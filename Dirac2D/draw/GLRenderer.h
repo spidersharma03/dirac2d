@@ -46,6 +46,8 @@ public:
 	
 	virtual void drawAABB( AABB2f& aabb );
 
+	virtual void drawCapsule( dfloat width, dfloat height);
+	
 	virtual void setTransform( Matrix3f& xform);
 
 protected:

@@ -30,6 +30,16 @@ public:
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
+	inline dfloat getRadius() const
+	{
+		return m_Radius;
+	}
+	
+	inline dfloat getHeight() const
+	{
+		return m_Height;
+	}
+	
 protected:
 	
 	virtual void findCentroid();

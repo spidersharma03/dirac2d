@@ -10,6 +10,7 @@
 #include "../geometry/CollisionShape.h"
 #include "../geometry/RegularPolygon.h"
 #include "../geometry/Circle.h"
+#include "../geometry/Capsule.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -22,6 +23,9 @@ void GLRenderer::drawShape(CollisionShape* shape)
 			break;
 		case EST_CIRCLE:
 			drawCircle( ((Circle*)shape)->getRadius() );
+			break;
+		case EST_CAPSULE:
+			drawCapsule( ((Capsule*)shape)->getRadius() , ((Capsule*)shape)->getHeight() );
 			break;
 		case EST_REGULARPOLY:
 			drawPolygon( ((RegularPolygon*)shape)->getVertices() , ((RegularPolygon*)shape)->getNumVertices() );
@@ -48,6 +52,41 @@ void GLRenderer::drawCircle( dfloat radius )
 	glBegin(GL_LINES);
 	glVertex2f(0.0f, 0.0f);
 	glVertex2f(radius, 0.0f);
+	glEnd();
+}
+
+void GLRenderer::drawCapsule( dfloat radius, dfloat height)
+{
+	// Draw Capsule Box
+	glBegin(GL_LINES);
+		glVertex2f(-height*0.5f, radius);
+		glVertex2f( height*0.5f, radius);
+		glVertex2f(-height*0.5f, -radius);
+		glVertex2f( height*0.5f, -radius);
+	glEnd();
+	// Draw Capsule Caps.
+	glBegin(GL_LINE_LOOP);
+	dfloat angle = -PI_2;
+	dfloat dAngle = PI/10;
+	for( dint32 v=0; v<11; v++ )
+	{
+		dfloat x = radius * cos(angle) + height*0.5f;
+		dfloat y = radius * sin(angle);
+		glVertex2f(x, y);
+		angle += dAngle;
+	}
+	glEnd();
+	
+	glBegin(GL_LINE_LOOP);
+	angle = -3*PI_2;
+	dAngle = PI/10;
+	for( dint32 v=0; v<11; v++ )
+	{
+		dfloat x = radius * cos(angle) - height*0.5f;
+		dfloat y = radius * sin(angle);
+		glVertex2f(x, y);
+		angle += dAngle;
+	}
 	glEnd();
 }
 
