@@ -145,8 +145,12 @@ public:
 		m_PhysicalShape1 = other.m_PhysicalShape1;
 		m_PhysicalShape2 = other.m_PhysicalShape2;
 		
-		m_NormalMassMatrix = other.m_NormalMassMatrix;
-		m_FrictionMassMatrix = other.m_FrictionMassMatrix;
+		//m_NormalMassMatrix = other.m_NormalMassMatrix;
+		//m_FrictionMassMatrix = other.m_FrictionMassMatrix;
+		m_NormalMass[0] = other.m_NormalMass[0];
+		m_NormalMass[1] = other.m_NormalMass[1];
+		m_FrictionalMass[0] = other.m_FrictionalMass[0];
+		m_FrictionalMass[1] = other.m_FrictionalMass[1];
 		
 		m_ERP = other.m_ERP;
 		m_ERP = other.m_ERP;
@@ -162,9 +166,12 @@ public:
 		m_PhysicalShape1 = other.m_PhysicalShape1;
 		m_PhysicalShape2 = other.m_PhysicalShape2;
 		
-		m_NormalMassMatrix = other.m_NormalMassMatrix;
-		m_FrictionMassMatrix = other.m_FrictionMassMatrix;
-		
+		//m_NormalMassMatrix = other.m_NormalMassMatrix;
+		//m_FrictionMassMatrix = other.m_FrictionMassMatrix;
+		m_NormalMass[0] = other.m_NormalMass[0];
+		m_NormalMass[1] = other.m_NormalMass[1];
+		m_FrictionalMass[0] = other.m_FrictionalMass[0];
+		m_FrictionalMass[1] = other.m_FrictionalMass[1];
 		m_ERP = other.m_ERP;
 		m_ERP = other.m_ERP;
 	}
@@ -182,10 +189,12 @@ public:
 	
 	// Effective mass matrix for Normal impulses. if the number of contacts are one then first element is used. if it is two then based upon the solution strategy the full matrix or the 
 	// first two elements are used.
-	Matrix2f m_NormalMassMatrix;
+	//Matrix2f m_NormalMassMatrix;
+	dfloat m_NormalMass[MAX_CONTACTS];
 	// Effective mass matrix for frictional impulses.if the number of contacts are one then first diagonal element is used. if it is two then first two elements are used.
-	Matrix2f m_FrictionMassMatrix;
-	
+	//Matrix2f m_FrictionMassMatrix;
+	dfloat m_FrictionalMass[MAX_CONTACTS];
+
 	ContactConstraint m_ContactConstraint[MAX_CONTACTS];
 	dchar m_NumContactConstraints;
 	

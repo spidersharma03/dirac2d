@@ -15,6 +15,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 struct ContactManifold;
 class Circle;
+class Capsule;
 
 class RegularPolygon : public CollisionShape
 {
@@ -48,6 +49,7 @@ protected:
 
 	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2);
 	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
+	friend dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
 
 protected:
 	dint32 m_NumVertices;
@@ -55,6 +57,25 @@ protected:
 	Vector2f m_Normals[MAX_POLY_VERTICES];
 	dfloat m_Radius;
 };
+
+#define PROJECT_POLYGON( POLYGON, NUMVERTICES, AXIS, MININDEX , MAXINDEX ) \
+{ \
+Vector2f* VERTICES = POLYGON->getVertices();	\
+float dot = AXIS.dot(VERTICES[0]); \
+dfloat min = dot; dfloat max = dot; \
+for( dint32 i = 1; i < NUMVERTICES; i++ ) \
+{ \
+dot = AXIS.dot(VERTICES[i]); \
+if( dot < min ){ \
+min = dot; \
+MININDEX = i; \
+} \
+if( dot > max ){ \
+max = dot; \
+MAXINDEX = i; \
+} \
+} \
+} \
 
 END_NAMESPACE_DIRAC2D
 

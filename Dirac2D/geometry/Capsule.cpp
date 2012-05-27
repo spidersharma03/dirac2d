@@ -77,8 +77,11 @@ void Capsule::findCentroid()
 void Capsule::findMomentOfInertia()
 {
 	m_I = 0.0f;
-	m_I += ( m_Height * m_Height + 4.0f * m_Radius * m_Radius ); // Moment of the rect box about the centre
-	m_I += ( 2.0f * ( m_Radius * m_Radius/18.0f + (m_Height*0.5f + 2.0f*m_Radius/3.0f)*(m_Height*0.5f + 2.0f*m_Radius/3.0f) ) ); // Moment of the half circles about the centre.
+	dfloat rectCapsulemassRatio = 2.0f * m_Height * m_Radius/m_Area;
+	dfloat circleCapsulemassRatio = PI * m_Radius * m_Radius/m_Area;
+	
+	m_I += ( ( m_Height * m_Height + 4.0f * m_Radius * m_Radius ) * rectCapsulemassRatio/12.0f ); // Moment of the rect box about the centre
+	m_I += ( ( ( m_Radius * m_Radius/18.0f + (m_Height*0.5f + 2.0f*m_Radius/3.0f)*(m_Height*0.5f + 2.0f*m_Radius/3.0f) ) ) * circleCapsulemassRatio ); // Moment of the half circles about the centre.
 }
 
 END_NAMESPACE_DIRAC2D
