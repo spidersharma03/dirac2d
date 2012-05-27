@@ -22,36 +22,6 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-
-// Clip Against Edge Plane
-static void clip1(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifold, dint32 refIndex, dfloat capsuleRadius)
-{
-	Vector2f& cp0 = contactManifold->m_ContactPoints[0].m_Point;
-	Vector2f& cp1 = contactManifold->m_ContactPoints[1].m_Point;
-	
-	Vector2f o1 = cp0 - p;
-	dfloat u1 = refEdge.dot(o1);
-	o1 = cp1 - p;
-	dfloat u2 = refEdge.dot(o1);
-	
-	dfloat lambda = u1/(u1-u2);
-	
-	if( u1 + capsuleRadius < 0.0f ) 
-	{
-		cp0.x = cp0.x + lambda*(cp1.x - cp0.x); 
-		cp0.y = cp0.y + lambda*(cp1.y - cp0.y); 
-		contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Index1 = refIndex;
-		contactManifold->m_ContactPoints[0].m_ID.edgeIndex.m_Type1  = ECT_EDGE;
-	}
-	if( u2 + capsuleRadius < 0.0f ) 
-	{
-		cp1.x = cp0.x + lambda*(cp1.x - cp0.x); 
-		cp1.y = cp0.y + lambda*(cp1.y - cp0.y); 
-		contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Index1 = refIndex;
-		contactManifold->m_ContactPoints[1].m_ID.edgeIndex.m_Type1  = ECT_EDGE;
-	}
-}
-
 // Finds the Closest points of two line segments.
 static void findClosestPoints(Vector2f& p0, Vector2f& p1, Vector2f& p2, Vector2f& p3, Vector2f& outPoint0, Vector2f& outPoint1)
 {
@@ -98,30 +68,6 @@ static inline void findClosestPoint(Vector2f& p0, Vector2f& p1, Vector2f& point,
 	
 	outPoint = p0 + (p1-p0) * u;
 }
-
-// Finds the Closest point on the Line from a Point.
-//static void findClosestPoint(Vector2f& p0, Vector2f& p1, Vector2f& point, Vector2f& outPoint)
-//{
-//	Vector2f d = p1-p0;
-//	dfloat dot = (point-p0).dot(d);
-//	if( dot < 0.0f )
-//	{
-//		outPoint = p0;
-//		return;
-//	}
-//	d = -d;
-//	dot = (point-p1).dot(d);
-//	if( dot < 0.0f )
-//	{
-//		outPoint = p1;
-//		return;
-//	}
-//	Vector2f n(d.y, -d.x);
-//	n.normalize();
-//	dot = (point-p0).dot(n);
-//	outPoint = point + n * -dot;
-//}
-
 
 
 // Find Whether two Capsules intersect.
