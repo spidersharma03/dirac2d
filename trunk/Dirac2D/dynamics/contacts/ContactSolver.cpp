@@ -54,7 +54,7 @@ void ContactSolver::buildJacobian()
 			dfloat depth = contact->m_ContactPoint[i].m_Depth;
 			
 			// Effective mass for Normal Impulses
-			contact->m_NormalMassMatrix[i] = 1.0f/JInvMJT + contact->m_CFM;
+			contact->m_NormalMass[i] = 1.0f/JInvMJT + contact->m_CFM;
 			// Positional Error for Position Stabilization( Baumgarte )
 			constraint.m_PositionError = -contact->m_ERP * MIN( 0.0f, depth + ALLOWED_PENETRATION) * 600.0f;
 			
@@ -62,7 +62,7 @@ void ContactSolver::buildJacobian()
 			dfloat r2cross_t = r2.cross(t);
 			JInvMJT = body1->m_InvMass + body2->m_InvMass + r1cross_t * r1cross_t * body1->m_InvI + r2cross_t * r2cross_t * body2->m_InvI; 
 			// Effective mass for Frictional Impulses
-			contact->m_FrictionMassMatrix[i] = 1.0f/JInvMJT;
+			contact->m_FrictionalMass[i] = 1.0f/JInvMJT;
 			
 			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
 			dfloat velBias = 0.0f*relvel.dot(contact->m_ContactNormal);
@@ -126,10 +126,11 @@ void ContactSolver::correctVelocities()
 			
 			// Clamp the Total Impulse, not the Corrective Impulse, which could be negative.
 			dfloat oldImpulseMag = constraint.m_NormalImpulse;
-			dfloat correctiveImpulseMag = contact->m_NormalMassMatrix[i] * ( constraint.m_PositionError + Cdot_Normal + constraint.m_VelocityBias );
+			dfloat correctiveImpulseMag = contact->m_NormalMass[i] * ( constraint.m_PositionError + Cdot_Normal + constraint.m_VelocityBias );
 			
 			// This Can't be negative.
-			constraint.m_NormalImpulse = MAX(oldImpulseMag + correctiveImpulseMag, 0.0f);
+			constraint.m_NormalImpulse = max(oldImpulseMag + correctiveImpulseMag, 0.0f);
+			
 			// This Could be negative.
 			correctiveImpulseMag = constraint.m_NormalImpulse - oldImpulseMag;
 			
@@ -146,10 +147,13 @@ void ContactSolver::correctVelocities()
 			Cdot_Tangent = relvel.dot(tangent);
 
 			oldImpulseMag = constraint.m_TangentImpulse;
-			dfloat mu = 0.4f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
+			dfloat mu = 0.9f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
 			dfloat maxFriction = constraint.m_NormalImpulse * mu;
-			correctiveImpulseMag = contact->m_FrictionMassMatrix[i] * Cdot_Tangent;
+			correctiveImpulseMag = contact->m_FrictionalMass[i] * Cdot_Tangent;
+			
+			
 			constraint.m_TangentImpulse = CLAMP(oldImpulseMag + correctiveImpulseMag, -maxFriction, maxFriction);
+			
 			correctiveImpulseMag = constraint.m_TangentImpulse - oldImpulseMag;
 
 			correctiveImpulse = tangent * correctiveImpulseMag;

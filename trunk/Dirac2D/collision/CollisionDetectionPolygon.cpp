@@ -152,10 +152,10 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	refNormal.normalize();
 	
 	Vector2f T = contactPoints[0].m_Point - edgeVertex1;
-	float dot1 = refNormal.dot(T);
+	dfloat dot1 = refNormal.dot(T);
 	
 	T = contactPoints[1].m_Point - edgeVertex2;
-	float dot2 = refNormal.dot(T);
+	dfloat dot2 = refNormal.dot(T);
 	
 	contactPoints[0].m_Depth = dot1;
 	contactPoints[1].m_Depth = dot2;

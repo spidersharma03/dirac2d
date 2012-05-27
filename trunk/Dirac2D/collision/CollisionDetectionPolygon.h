@@ -30,25 +30,6 @@ BEGIN_NAMESPACE_DIRAC2D
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-#define PROJECT_POLYGON( POLYGON, NUMVERTICES, AXIS, MININDEX , MAXINDEX ) \
-{ \
-  Vector2f* VERTICES = POLYGON->getVertices();	\
-  float dot = AXIS.dot(VERTICES[0]); \
-  dfloat min = dot; dfloat max = dot; \
-  for( dint32 i = 1; i < NUMVERTICES; i++ ) \
-  { \
-	dot = AXIS.dot(VERTICES[i]); \
-	if( dot < min ){ \
-	  min = dot; \
-	 MININDEX = i; \
-	} \
-    if( dot > max ){ \
-	  max = dot; \
-      MAXINDEX = i; \
-	} \
-  } \
-} \
-
 // Project both the Polygons on to the list of seperating axis of Polygon 1. if there is an Axis which seperates the Polygons, then return.
 static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, RegularPolygon* poly2, Matrix3f& polyxForm2, dfloat& minDistance, Vector2f& collisionNormal )
 {

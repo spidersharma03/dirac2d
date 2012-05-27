@@ -94,12 +94,12 @@ void demo3()
 	// Create Boxes
 	dfloat y = -0.8f;
 	dfloat x = -1.0f;
-	dint32 n = 10;
+	dint32 n = 20;
 	dfloat dx = 0.0f;
-	for(int j=0; j<10;j++ )
+	for(int j=0; j<20;j++ )
 	{
 		y += 0.2f;
-		x = -1.0 + dx;
+		x = -2.0 + dx;
 		dx += 0.1f;
 		for( int i=0; i<n; i++ )
 		{
@@ -108,9 +108,9 @@ void demo3()
 			x += 0.2f;
 			pBodyBox->setPosition(Vector2f(x,y));
 			//pBodyBox->setAngle(PI_4*0.9);
-			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.031f;
+			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.071f;
 			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
-			pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
+			pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox,4);
 			pBodyBox->createPhysicalShape(pApp);
 		}
 		n--;
@@ -271,20 +271,70 @@ void demo6()
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.02f;
+	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
-	// Create Box
+	// Create Boxes
+	dfloat y = -0.85f;
+	dfloat x = -1.0f;
+	dint32 n = 20;
+	dfloat dx = 0.0f;
+	for(int j=0; j<20;j++ )
+	{
+		y += 0.2f;
+		x = -2.0 + dx;
+		dx += 0.1f;
+		for( int i=0; i<n; i++ )
+		{
+			PhysicalBody* pBodyCapsule = pWorld->createPhysicalBody();
+			//pBodyCapsule->m_BodyType = EBT_STATIC;
+			x += 0.2f;
+			pBodyCapsule->setPosition(Vector2f(x,y));
+			//pBodyCapsule->setAngle(PI_4*0.9);
+			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.05f;
+			boxWidth += ( (float)rand()/RAND_MAX - 0.5f )*0.0f;
+			if( i%2==0)
+			pApp.m_CollisionAttributes.m_Shape = new Capsule(boxWidth,boxHeight);
+			pBodyCapsule->createPhysicalShape(pApp);
+		}
+		n--;
+	}
+}
+
+void demo7()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Capsule
+	dfloat y = 0.5f;
+	dfloat x = -0.0f;
 	PhysicalBody* pBodyCapsule = pWorld->createPhysicalBody();
 	//pBodyCapsule->m_BodyType = EBT_STATIC;
-	//pBodyBox->setPosition(Vector2f(0.0f,0.0f));
-	pBodyCapsule->setAngle(PI_4);
-	dfloat capsuleRadius = 0.1f; dfloat capsuleHeight = 0.2f;
-	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius, capsuleHeight);
+	pBodyCapsule->setPosition(Vector2f(x,y));
+	//pBodyCapsule->setAngle(PI_4*0.9);
+	dfloat capsuleRadius = 0.07f; dfloat capsuleHeight = 0.15f;
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius,capsuleHeight);
 	pBodyCapsule->createPhysicalShape(pApp);
 	
+	// Create Circle
+	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+	//pBodyCapsule->m_BodyType = EBT_STATIC;
+	pBodyCircle->setPosition(Vector2f(0.0f,0.0f));
+	dfloat radius = 0.15f;
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(radius, radius);
+	pBodyCircle->createPhysicalShape(pApp);
 }
 
 void initScene()
@@ -331,7 +381,7 @@ void changeSize(int w, int h)
 }
 
 void renderScene(void) 
-{	
+{		
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 	if(windowHeight == 0)
