@@ -166,7 +166,7 @@ void demo5()
 		// Create Ground Body
 		PhysicalBody* pBodyGround1 = pWorld->createPhysicalBody();
 		pBodyGround1->setPosition(Vector2f(1.5f,1.0f));
-		pBodyGround1->setAngle(M_PI_4/5);
+		pBodyGround1->setAngle(PI_4/5);
 		pBodyGround1->m_BodyType = EBT_STATIC;
 		
 		PhysicalAppearance pApp;
@@ -396,7 +396,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo8();
+	demo6();
 }
 
 void changeSize(int w, int h) 
