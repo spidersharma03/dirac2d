@@ -24,8 +24,11 @@
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
 		C2B6C7DC156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */; };
 		C2B6D19C156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */; };
+		C2B6D881157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */; };
+		C2B6D8B4157398D600E31E38 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D8B3157398D600E31E38 /* Edge.cpp */; };
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
+		C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,12 +89,19 @@
 		C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetectionCirclePolygon.cpp; sourceTree = "<group>"; };
 		C2B6D19A156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionCapsulePolygon.h; sourceTree = "<group>"; };
 		C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetectionCapsulePolygon.cpp; sourceTree = "<group>"; };
+		C2B6D87F157358D600E31E38 /* CollisionDetectionEdgePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionEdgePolygon.h; sourceTree = "<group>"; };
+		C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetectionEdgePolygon.cpp; sourceTree = "<group>"; };
+		C2B6D8B2157398D600E31E38 /* Edge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Edge.h; sourceTree = "<group>"; };
+		C2B6D8B3157398D600E31E38 /* Edge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Edge.cpp; sourceTree = "<group>"; };
+		C2B6D90E1573A6DB00E31E38 /* Point2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point2.h; sourceTree = "<group>"; };
 		C2DD136A1553EAE100432320 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
 		C2DD136B1553EAEF00432320 /* Matrix2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2.h; sourceTree = "<group>"; };
 		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
 		C2DD136D1553EC7C00432320 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		C2DD149C1558102700432320 /* PhysicalShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicalShape.cpp; sourceTree = "<group>"; };
 		C2DD14FF1558E6A300432320 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		C2EB2C2E1573C48600E92679 /* EdgeChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EdgeChain.h; sourceTree = "<group>"; };
+		C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EdgeChain.cpp; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,16 +167,18 @@
 		C257F13E154E71AE00270D77 /* collision */ = {
 			isa = PBXGroup;
 			children = (
+				C257F1A5154E76CD00270D77 /* CollisionDetection.h */,
+				C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */,
 				C257F140154E71AE00270D77 /* CollisionManager.cpp */,
 				C257F141154E71AE00270D77 /* CollisionManager.h */,
 				C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */,
 				C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */,
-				C257F1A5154E76CD00270D77 /* CollisionDetection.h */,
-				C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */,
 				C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */,
 				C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */,
 				C2B6D19A156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.h */,
 				C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */,
+				C2B6D87F157358D600E31E38 /* CollisionDetectionEdgePolygon.h */,
+				C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */,
 			);
 			name = collision;
 			path = Dirac2D/collision;
@@ -223,6 +235,10 @@
 				C257F9321552CCDA00270D77 /* Capsule.cpp */,
 				C257F9381552CD6900270D77 /* RegularPolygon.cpp */,
 				C257F93A1552CD7A00270D77 /* Circle.cpp */,
+				C2B6D8B2157398D600E31E38 /* Edge.h */,
+				C2B6D8B3157398D600E31E38 /* Edge.cpp */,
+				C2EB2C2E1573C48600E92679 /* EdgeChain.h */,
+				C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */,
 			);
 			name = geometry;
 			path = Dirac2D/geometry;
@@ -237,6 +253,7 @@
 				C2DD136B1553EAEF00432320 /* Matrix2.h */,
 				C2DD136C1553EAFD00432320 /* Matrix3.h */,
 				C27A86A81561442D007AD13C /* AABB2.h */,
+				C2B6D90E1573A6DB00E31E38 /* Point2.h */,
 			);
 			name = maths;
 			path = Dirac2D/maths;
@@ -336,6 +353,9 @@
 				C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */,
 				C2B6C7DC156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp in Sources */,
 				C2B6D19C156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp in Sources */,
+				C2B6D881157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp in Sources */,
+				C2B6D8B4157398D600E31E38 /* Edge.cpp in Sources */,
+				C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

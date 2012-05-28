@@ -82,6 +82,9 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	pShape->m_CollisionShape = pApp.m_CollisionAttributes.m_Shape;
 	pShape->m_CollisionFilter = pApp.m_CollisionAttributes.m_Filter;
 	
+	if( pShape->m_CollisionShape->m_ShapeType == EST_EDGE )
+		m_BodyType = EBT_STATIC;
+	
 	Matrix3f xForm;
 	xForm.translate(pShape->m_Position);
 	xForm.rotate(pShape->m_Angle);
@@ -122,16 +125,18 @@ void PhysicalBody::calculateMassAttributes()
 	// Calculate Centre of Mass of the PhysicalBody.
 	Vector2f sum_mr;
 	dfloat sum_m = 0.0f;
-	while( shape != 0 )
+	if( m_BodyType == EBT_DYNAMIC )
 	{
-		shape->calculateMassAttributes();
-		sum_m  += shape->m_MassAttributes.m_Mass;
-		sum_mr += shape->m_MassAttributes.m_C * shape->m_MassAttributes.m_Mass;
-		shape = m_PhysicalShapeList->m_Next;
+		while( shape != 0 )
+		{
+			shape->calculateMassAttributes();
+			sum_m  += shape->m_MassAttributes.m_Mass;
+			sum_mr += shape->m_MassAttributes.m_C * shape->m_MassAttributes.m_Mass;
+			shape = m_PhysicalShapeList->m_Next;
+		}
+		dAssert( sum_m > 0.0f );
+		m_Centre = sum_mr/sum_m;
 	}
-	dAssert( sum_m > 0.0f );
-	m_Centre = sum_mr/sum_m;
-	
 	// Calculate Moment of Inertia and Mass of the PhysicalBody.
 	shape = m_PhysicalShapeList;
 	m_I = 0.0f;
