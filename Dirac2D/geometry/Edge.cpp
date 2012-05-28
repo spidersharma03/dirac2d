@@ -7,7 +7,7 @@
  */
 
 #include "Edge.h"
-#include "MathUtil.h"
+#include "../maths/MathUtil.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

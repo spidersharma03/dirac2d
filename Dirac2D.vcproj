@@ -215,6 +215,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetectionCapsulePolygon.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetectionCirclePolygon.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetectionEdgePolygon.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Dirac2D\collision\CollisionDetectionPolygon.cpp"
 					>
 				</File>
@@ -236,6 +248,14 @@
 				</File>
 				<File
 					RelativePath=".\Dirac2D\geometry\Circle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\Edge.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\EdgeChain.cpp"
 					>
 				</File>
 				<File
@@ -282,6 +302,18 @@
 				>
 				<File
 					RelativePath=".\Dirac2D\collision\CollisionDetection.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetectionCapsulePolygon.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetectionCirclePolygon.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\CollisionDetectionEdgePolygon.h"
 					>
 				</File>
 				<File
@@ -357,6 +389,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Dirac2D\geometry\Edge.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\EdgeChain.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Dirac2D\geometry\RegularPolygon.h"
 					>
 				</File>
@@ -378,6 +418,10 @@
 				</File>
 				<File
 					RelativePath=".\Dirac2D\maths\Matrix3.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\maths\Point2.h"
 					>
 				</File>
 				<File
