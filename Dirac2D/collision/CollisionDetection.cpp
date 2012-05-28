@@ -11,6 +11,7 @@
 #include "CollisionDetectionPolygon.h"
 #include "CollisionDetectionCirclePolygon.h"
 #include "CollisionDetectionCapsulePolygon.h"
+#include "CollisionDetectionEdgePolygon.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -59,6 +60,24 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 	
 	if( shape1->getShapeType() == EST_CAPSULE && shape2->getShapeType() == EST_CAPSULE )
 		return intersectCapsules((Capsule*)shape1, xform1, (Capsule*)shape2, xform2, contactManifold);
+
+	if( shape1->getShapeType() == EST_EDGE && shape2->getShapeType() == EST_CAPSULE )
+		return intersectEdgeCapsule((Edge*)shape1, xform1, (Capsule*)shape2, xform2, contactManifold);
+	
+	if( shape1->getShapeType() == EST_CAPSULE && shape2->getShapeType() == EST_EDGE )
+	{
+		contactManifold->m_bFlipShapes = true;
+		return intersectEdgeCapsule((Edge*)shape2, xform2, (Capsule*)shape1, xform1, contactManifold);
+	}
+	
+	if( shape1->getShapeType() == EST_EDGE && shape2->getShapeType() == EST_CIRCLE )
+		return intersectEdgeCircle((Edge*)shape1, xform1, (Circle*)shape2, xform2, contactManifold);
+
+	if( shape1->getShapeType() == EST_CIRCLE && shape2->getShapeType() == EST_EDGE )
+	{
+		contactManifold->m_bFlipShapes = true;
+		return intersectEdgeCircle((Edge*)shape2, xform2, (Circle*)shape1, xform1, contactManifold);
+	}
 	
 	dAssert(0);
 	return false;

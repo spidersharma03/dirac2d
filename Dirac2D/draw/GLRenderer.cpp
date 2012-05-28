@@ -11,6 +11,7 @@
 #include "../geometry/RegularPolygon.h"
 #include "../geometry/Circle.h"
 #include "../geometry/Capsule.h"
+#include "../geometry/Edge.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -20,6 +21,9 @@ void GLRenderer::drawShape(CollisionShape* shape)
 	switch ( shape->getShapeType() )
 	{
 		case EST_BOX:
+			break;
+		case EST_EDGE:
+			drawLine( ((Edge*)shape)->m_Vertex1, ((Edge*)shape)->m_Vertex2);
 			break;
 		case EST_CIRCLE:
 			drawCircle( ((Circle*)shape)->getRadius() );

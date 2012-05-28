@@ -17,6 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 struct ContactManifold;
 class RegularPolygon;
 class Capsule;
+class Edge;
 
 class Circle : public CollisionShape
 {
@@ -53,6 +54,8 @@ protected:
 	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
 	friend dbool intersectCapsuleCircle( Circle* circle, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2);
 	friend dbool intersectCapsuleCircle( Circle* circle, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
+	friend dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3f& xform2);
+	friend dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3f& xform2, ContactManifold* contactManifold);
 	
 };
 
