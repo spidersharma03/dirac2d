@@ -39,6 +39,8 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 	Vector2f* vertices1 = poly1->getVertices();
 	Vector2f* vertices2 = poly2->getVertices();
 	
+	Vector2f* normals = poly1->getNormals();
+	
 	Vector2f v1 = vertices1[0];
 	Vector2f v2 = vertices1[0];
 	Matrix2f xForm1, xForm2;
@@ -46,17 +48,12 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 	xForm1 = polyxForm1.getRotationMatrix();
 	xForm2 = polyxForm2.getRotationMatrixTransposed();
 	xForm2 *= xForm1;
-	Vector2f axisNormalLocal, axisNormalWorld;
+	Vector2f axisNormalLocal = normals[0];
+	Vector2f axisNormalWorld;
 	
 	for( dint32 i=0; i<numVertices1; i++ )
 	{
-		v1 = vertices1[i];
-		dint32 j = i;
-		if( i == numVertices1-1)
-			j = -1;
-		v2 = vertices1[j+1];
-		
-		axisNormalLocal.set(v1.x - v2.x, v2.y - v1.y); //Calculate the perpendicular to this edge
+		axisNormalLocal = normals[i];
 		// Normal in world space.
 		axisNormalWorld = xForm1 * axisNormalLocal;
 		

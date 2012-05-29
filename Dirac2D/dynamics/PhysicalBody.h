@@ -40,13 +40,13 @@ public:
 	
 	void setPosition(Vector2f& position)
 	{
-		m_Centre = position;
+		m_Position = position;
 		updateTransform();
 	}
 	
 	void setPosition(Vector2f position)
 	{
-		m_Centre = position;
+		m_Position = position;
 		m_Transform.translate(position);
 	}
 	
@@ -85,7 +85,7 @@ public:
 	void updateAABB();
 	
 public:
-	Vector2f m_Centre;
+	Vector2f m_Centre, m_Position;
 	Vector2f m_Velocity;
 	dfloat m_AngularVelocity;
 	dfloat m_Angle;
