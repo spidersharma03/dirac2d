@@ -44,6 +44,12 @@ public:
 		col3.y = translation.y;
 	}
 	
+	void translate( T tx, T ty )
+	{
+		col3.x = tx;
+		col3.y = ty;
+	}
+	
 	Vector2<T> operator*( const Vector2<T>& v )
 	{
 		return Vector2<T>( col1.x*v.x + col2.x*v.y + col3.x,  col1.y*v.x + col2.y*v.y + col3.y);
@@ -93,6 +99,58 @@ public:
 		data[8] = 0.0;    data[9] = 0.0;    data[10] = 1.0;    data[11] = 0.0;
 		data[12] = col3.x; data[13] = col3.y; data[14] = 0.0;    data[15] = 1.0;
 	}
+	
+	Matrix3<T> operator*( Matrix3<T>& other )
+	{
+		Matrix3<T> outMatrix;
+		outMatrix.col1.x = col1.x * other.col1.x + col2.x * other.col1.y + col3.x * other.col1.z;
+		outMatrix.col2.x = col1.x * other.col2.x + col2.x * other.col2.y + col3.x * other.col2.z;
+		outMatrix.col3.x = col1.x * other.col3.x + col2.x * other.col3.y + col3.x * other.col3.z;
+		
+		outMatrix.col1.y = col1.y * other.col1.x + col2.y * other.col1.y + col3.y * other.col1.z;
+		outMatrix.col2.y = col1.y * other.col2.x + col2.y * other.col2.y + col3.y * other.col2.z;
+		outMatrix.col3.y = col1.y * other.col3.x + col2.y * other.col3.y + col3.y * other.col3.z;
+		
+		outMatrix.col1.z = col1.z * other.col1.x + col2.z * other.col1.y + col3.z * other.col1.z;
+		outMatrix.col2.z = col1.z * other.col2.x + col2.z * other.col2.y + col3.z * other.col2.z;
+		outMatrix.col3.z = col1.z * other.col3.x + col2.z * other.col3.y + col3.z * other.col3.z;
+		
+		return outMatrix;
+	}
+	
+	void operator*=( Matrix3<T>& other )
+	{
+		Matrix3<T> outMatrix;
+		outMatrix.col1.x = col1.x * other.col1.x + col2.x * other.col1.y + col3.x * other.col1.z;
+		outMatrix.col2.x = col1.x * other.col2.x + col2.x * other.col2.y + col3.x * other.col2.z;
+		outMatrix.col3.x = col1.x * other.col3.x + col2.x * other.col3.y + col3.x * other.col3.z;
+		
+		outMatrix.col1.y = col1.y * other.col1.x + col2.y * other.col1.y + col3.y * other.col1.z;
+		outMatrix.col2.y = col1.y * other.col2.x + col2.y * other.col2.y + col3.y * other.col2.z;
+		outMatrix.col3.y = col1.y * other.col3.x + col2.y * other.col3.y + col3.y * other.col3.z;
+		
+		outMatrix.col1.z = col1.z * other.col1.x + col2.z * other.col1.y + col3.z * other.col1.z;
+		outMatrix.col2.z = col1.z * other.col2.x + col2.z * other.col2.y + col3.z * other.col2.z;
+		outMatrix.col3.z = col1.z * other.col3.x + col2.z * other.col3.y + col3.z * other.col3.z;
+
+		*this = outMatrix;
+	}
+	
+	void multiply( Matrix3<T>& m1, Matrix3<T>& m2 )
+	{
+		col1.x = m1.col1.x * m2.col1.x + m1.col2.x * m2.col1.y + m1.col3.x * m2.col1.z;
+		col2.x = m1.col1.x * m2.col2.x + m1.col2.x * m2.col2.y + m1.col3.x * m2.col2.z;
+		col3.x = m1.col1.x * m2.col3.x + m1.col2.x * m2.col3.y + m1.col3.x * m2.col3.z;
+		
+		col1.y = m1.col1.y * m2.col1.x + m1.col2.y * m2.col1.y + m1.col3.y * m2.col1.z;
+		col2.y = m1.col1.y * m2.col2.x + m1.col2.y * m2.col2.y + m1.col3.y * m2.col2.z;
+		col3.y = m1.col1.y * m2.col3.x + m1.col2.y * m2.col3.y + m1.col3.y * m2.col3.z;
+		
+		col1.z = m1.col1.z * m2.col1.x + m1.col2.z * m2.col1.y + m1.col3.z * m2.col1.z;
+		col2.z = m1.col1.z * m2.col2.x + m1.col2.z * m2.col2.y + m1.col3.z * m2.col2.z;
+		col3.z = m1.col1.z * m2.col3.x + m1.col2.z * m2.col3.y + m1.col3.z * m2.col3.z;
+	}
+	
 	
 public:
 	Vector3<T> col1, col2, col3;

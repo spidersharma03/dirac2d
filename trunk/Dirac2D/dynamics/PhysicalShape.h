@@ -47,11 +47,14 @@ public:
 
 	// pointer to the next shape from the parent body.
 	PhysicalShape* m_Next;
+	PhysicalShape* m_Prev;
+
+	Matrix3f m_OffsetTransform;
+	
 protected:
 
 	Vector2f m_Position;
 	dfloat m_Angle;
-	
 public:
 	friend class PhysicalBody;
 };

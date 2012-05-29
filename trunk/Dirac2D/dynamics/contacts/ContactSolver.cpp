@@ -33,6 +33,14 @@ void ContactSolver::buildJacobian()
 		PhysicalBody* body2 = shape2->m_ParentBody;
 		Vector2f c1 = body1->m_Centre;
 		Vector2f c2 = body2->m_Centre;
+
+		//shape1->m_RotOffsetTransform.transformAsPoint(c1);
+		//body1->m_Transform.transformAsPoint(c1);
+		//shape1->m_OffsetTransform.transformAsPoint(c1);
+		
+		//shape2->m_RotOffsetTransform.transformAsPoint(c2);
+		//body2->m_Transform.transformAsPoint(c2);
+		//shape2->m_OffsetTransform.transformAsPoint(c2);
 		
 		Vector2f n = contact->m_ContactNormal;
 		Vector2f t;
@@ -107,6 +115,14 @@ void ContactSolver::correctVelocities()
 		Vector2f c1 = body1->m_Centre;
 		Vector2f c2 = body2->m_Centre;
 		
+		//shape1->m_RotOffsetTransform.transformAsPoint(c1);
+		//body1->m_Transform.transformAsPoint(c1);
+		//shape1->m_OffsetTransform.transformAsPoint(c1);
+
+		//shape2->m_RotOffsetTransform.transformAsPoint(c2);
+		//body2->m_Transform.transformAsPoint(c2);
+		//shape2->m_OffsetTransform.transformAsPoint(c2);
+		
 		Vector2f tangent = contact->m_ContactNormal.cross(-1.0f);
 		
 		for( dint32 i=0; i<contact->m_NumContactConstraints; i++ )
@@ -147,7 +163,7 @@ void ContactSolver::correctVelocities()
 			Cdot_Tangent = relvel.dot(tangent);
 
 			oldImpulseMag = constraint.m_TangentImpulse;
-			dfloat mu = 0.4f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
+			dfloat mu = 0.94f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
 			dfloat maxFriction = constraint.m_NormalImpulse * mu;
 			correctiveImpulseMag = contact->m_FrictionalMass[i] * Cdot_Tangent;
 			

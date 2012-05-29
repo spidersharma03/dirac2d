@@ -39,7 +39,7 @@ PhysicalWorld::PhysicalWorld()
 	m_bDrawBoundingBoxes = false;
 	m_bDrawContacts = true;
 	m_bDrawConstraints = false;
-	m_bDrawCentreOfMass = false;
+	m_bDrawCentreOfMass = true;
 	
 	m_PhysicalBodyList = 0;
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
@@ -124,8 +124,8 @@ void PhysicalWorld::Step(dfloat dt)
 		
 		if( pBody->m_BodyType == EBT_DYNAMIC && !pBody->m_bSleeping)
 		{
-			pBody->m_Centre += pBody->m_Velocity * dt;
-			pBody->m_Angle  += pBody->m_AngularVelocity * dt;
+			pBody->m_Position += pBody->m_Velocity * dt;
+			pBody->m_Angle    += pBody->m_AngularVelocity * dt;
 			pBody->updateTransform();
 		}
 		pBody = pBody->m_Next;
@@ -145,28 +145,24 @@ void PhysicalWorld::draw()
 
 	while( pBody )
 	{
-		if( m_bDrawShapes )
+		PhysicalShape* pShape = pBody->m_PhysicalShapeList;
+		while( pShape )
 		{
-			m_Renderer->setTransform(pBody->m_Transform);
-			if( pBody->m_BodyType == EBT_DYNAMIC )
-				m_Renderer->setColor(255, 255, 255);
-			if( pBody->m_bSleeping )
-				m_Renderer->setColor(0, 255, 255);
-			if( pBody->m_BodyType == EBT_STATIC )
-				m_Renderer->setColor(0, 255, 0);
+			if( m_bDrawShapes )
+			{
+				Matrix3f xForm =  pShape->m_OffsetTransform * pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+				m_Renderer->setTransform(xForm);
+				if( pBody->m_BodyType == EBT_DYNAMIC )
+					m_Renderer->setColor(255, 255, 255);
+				if( pBody->m_bSleeping )
+					m_Renderer->setColor(0, 255, 255);
+				if( pBody->m_BodyType == EBT_STATIC )
+					m_Renderer->setColor(0, 255, 0);
+				
+				m_Renderer->drawShape(pShape->m_CollisionShape);
+			}
 			
-			m_Renderer->drawShape(pBody->m_PhysicalShapeList->m_CollisionShape);
-		}
-		// draw centre of mass
-		if( m_bDrawCentreOfMass )
-		{
-			m_Renderer->setTransform(Identity);
-			m_Renderer->setColor(0, 255, 0);
-			p0 = pBody->m_Centre - Vector2f(0.01f, 0.0f); p1 = pBody->m_Centre + Vector2f(0.01f, 0.0f);
-			m_Renderer->drawLine(p0, p1);
-			p0 = pBody->m_Centre - Vector2f(0.0f, 0.01f); p1 = pBody->m_Centre + Vector2f(0.0f, 0.01f);
-			m_Renderer->setColor(255, 0, 0);
-			m_Renderer->drawLine(p0, p1);
+			pShape = pShape->m_Next;
 		}
 		
 		if( m_bDrawBoundingBoxes )
@@ -175,6 +171,19 @@ void PhysicalWorld::draw()
 			m_Renderer->setColor(255, 255, 0);
 			m_Renderer->drawAABB(pBody->m_AABB);
 		}
+		// draw centre of mass of the Body
+		if( m_bDrawCentreOfMass )
+		{
+			Matrix3f xForm;// =  pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+			m_Renderer->setTransform(xForm);
+			m_Renderer->setColor(0, 255, 0);
+			p0 = pBody->m_Centre - Vector2f(0.01f, 0.0f); p1 = pBody->m_Centre + Vector2f(0.01f, 0.0f);
+			m_Renderer->drawLine(p0, p1);
+			p0 = pBody->m_Centre - Vector2f(0.0f, 0.01f); p1 = pBody->m_Centre + Vector2f(0.0f, 0.01f);
+			m_Renderer->setColor(255, 0, 0);
+			m_Renderer->drawLine(p0, p1);
+		}
+		
 		pBody = pBody->m_Next;
 	}
 	// Draw Constraints/Joints

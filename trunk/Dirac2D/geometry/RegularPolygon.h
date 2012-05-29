@@ -39,6 +39,12 @@ public:
 	{
 		return m_Vertices;
 	}
+	
+	Vector2f* getNormals()
+	{
+		return m_Normals;
+	}
+	
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);
