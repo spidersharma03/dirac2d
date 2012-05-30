@@ -26,10 +26,10 @@ void GLRenderer::drawShape(CollisionShape* shape)
 			drawLine( ((Edge*)shape)->m_Vertex1, ((Edge*)shape)->m_Vertex2);
 			break;
 		case EST_CIRCLE:
-			drawCircle( ((Circle*)shape)->getRadius() );
+			drawCircle( shape->m_Centroid.x, shape->m_Centroid.y, ((Circle*)shape)->getRadius());
 			break;
 		case EST_CAPSULE:
-			drawCapsule( ((Capsule*)shape)->getRadius() , ((Capsule*)shape)->getHeight() );
+			drawCapsule( shape->m_Centroid.x, shape->m_Centroid.y, ((Capsule*)shape)->getRadius() , ((Capsule*)shape)->getHeight() );
 			break;
 		case EST_REGULARPOLY:
 			drawPolygon( ((RegularPolygon*)shape)->getVertices() , ((RegularPolygon*)shape)->getNumVertices() );
@@ -39,8 +39,9 @@ void GLRenderer::drawShape(CollisionShape* shape)
 	}
 }
 
-void GLRenderer::drawCircle( dfloat radius )
+void GLRenderer::drawCircle( dfloat cx, dfloat cy, dfloat radius )
 {
+	glTranslatef(cx, cy, 0.0f);
 	glBegin(GL_LINE_LOOP);
 	dfloat angle = 0.0f;
 	dfloat dAngle = 2.0f*PI/20;
@@ -59,9 +60,10 @@ void GLRenderer::drawCircle( dfloat radius )
 	glEnd();
 }
 
-void GLRenderer::drawCapsule( dfloat radius, dfloat height)
+void GLRenderer::drawCapsule( dfloat cx, dfloat cy, dfloat radius, dfloat height)
 {
 	// Draw Capsule Box
+	glTranslatef(cx, cy, 0.0f);
 	glBegin(GL_LINES);
 		glVertex2f(-height*0.5f, radius);
 		glVertex2f( height*0.5f, radius);

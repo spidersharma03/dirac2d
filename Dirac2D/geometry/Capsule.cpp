@@ -36,9 +36,9 @@ dbool Capsule::isPointInside(Point2f& p)
 
 void Capsule::updateAABB(Matrix3f& xForm)
 {
-	Vector2f p0(-m_Height*0.5f - m_Radius, m_Radius), p1(m_Height*0.5f + m_Radius, m_Radius); 
-	Vector2f p2(-m_Height*0.5f - m_Radius, -m_Radius), p3(m_Height*0.5f + m_Radius, -m_Radius); 
-		
+	Vector2f p0(-m_Height*0.5f + m_Centroid.x - m_Radius, m_Radius + m_Centroid.y), p1(m_Height*0.5f + m_Radius + m_Centroid.x, m_Radius+ m_Centroid.y); 
+	Vector2f p2(-m_Height*0.5f + m_Centroid.x - m_Radius, -m_Radius+ m_Centroid.y), p3(m_Height*0.5f + m_Radius + m_Centroid.x, -m_Radius+ m_Centroid.y); 
+	
 	xForm.transformAsPoint(p0);
 	xForm.transformAsPoint(p1);
 	xForm.transformAsPoint(p2);
@@ -68,6 +68,11 @@ void Capsule::updateAABB(Matrix3f& xForm)
 	
 	m_AABB.m_LowerBounds.set(min_x, min_y);
 	m_AABB.m_UpperBounds.set(max_x, max_y);
+}
+
+void Capsule::updateShape(Matrix3f& xForm)
+{
+	xForm.transformAsPoint(m_Centroid);
 }
 
 void Capsule::findCentroid()

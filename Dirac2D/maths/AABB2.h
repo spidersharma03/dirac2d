@@ -24,14 +24,23 @@ public:
 	
 	AABB2(const AABB2<T>& other)
 	{
+		m_LowerBounds = other.m_LowerBounds;
+		m_UpperBounds = other.m_UpperBounds;
 	}
 	
 	AABB2(Vector2<T>& lower, Vector2<T>& upper)
 	{
+		m_LowerBounds = lower;
+		m_UpperBounds = upper;
 	}
 	
 	AABB2(T lowerX, T lowerY, T upperX, T upperY)
 	{
+		m_LowerBounds.x = lowerX;
+		m_LowerBounds.y = lowerY;
+
+		m_UpperBounds.x = upperX;
+		m_UpperBounds.y = upperY;
 	}
 	
 	inline dbool intersectAABB( AABB2<T>& other )

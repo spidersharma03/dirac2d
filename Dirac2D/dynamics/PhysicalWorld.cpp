@@ -9,6 +9,7 @@
 #include "PhysicalWorld.h"
 #include "PhysicalBody.h"
 #include "PhysicalShape.h"
+#include "../geometry/CollisionShape.h"
 #include "../collision/CollisionManager.h"
 #include "../dynamics/contacts/ContactSolver.h"
 #include "../dynamics/contacts/Contact.h"
@@ -39,7 +40,7 @@ PhysicalWorld::PhysicalWorld()
 	m_bDrawBoundingBoxes = false;
 	m_bDrawContacts = true;
 	m_bDrawConstraints = false;
-	m_bDrawCentreOfMass = true;
+	m_bDrawCentreOfMass = false;
 	
 	m_PhysicalBodyList = 0;
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
@@ -150,7 +151,7 @@ void PhysicalWorld::draw()
 		{
 			if( m_bDrawShapes )
 			{
-				Matrix3f xForm =  pShape->m_OffsetTransform * pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+				Matrix3f xForm =  pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
 				m_Renderer->setTransform(xForm);
 				if( pBody->m_BodyType == EBT_DYNAMIC )
 					m_Renderer->setColor(255, 255, 255);
@@ -161,7 +162,13 @@ void PhysicalWorld::draw()
 				
 				m_Renderer->drawShape(pShape->m_CollisionShape);
 			}
-			
+			if( m_bDrawBoundingBoxes )
+			{
+				m_Renderer->setTransform(Identity);
+				m_Renderer->setColor(255, 255, 0);
+				AABB2f& aabb = pShape->m_CollisionShape->getAABB();
+				m_Renderer->drawAABB(aabb);
+			}
 			pShape = pShape->m_Next;
 		}
 		
@@ -174,7 +181,7 @@ void PhysicalWorld::draw()
 		// draw centre of mass of the Body
 		if( m_bDrawCentreOfMass )
 		{
-			Matrix3f xForm;// =  pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+			Matrix3f xForm = pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
 			m_Renderer->setTransform(xForm);
 			m_Renderer->setColor(0, 255, 0);
 			p0 = pBody->m_Centre - Vector2f(0.01f, 0.0f); p1 = pBody->m_Centre + Vector2f(0.01f, 0.0f);

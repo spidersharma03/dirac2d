@@ -34,7 +34,7 @@ void PhysicalShape::calculateMassAttributes()
 	dAssert( m_MassAttributes.m_Density > 0.0f );
 	m_MassAttributes.m_Mass = m_MassAttributes.m_Density * m_CollisionShape->m_Area;
 	m_MassAttributes.m_I = m_MassAttributes.m_Mass * m_CollisionShape->m_I;
-	m_MassAttributes.m_C = m_OffsetTransform * m_CollisionShape->m_Centroid;
+	m_MassAttributes.m_C =  m_CollisionShape->m_Centroid;
 }
 
 END_NAMESPACE_DIRAC2D

@@ -7,7 +7,6 @@
  */
 
 #include "CollisionDetectionPolygon.h"
-#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -49,8 +48,8 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	//printf("Collision Detected %f\n", minDistance);
 	//collisionNormal.normalize();
 	
-	Vector2f c1;// = poly1->m_Centroid;
-	Vector2f c2;// = poly2->m_Centroid;
+	Vector2f c1 = poly1->m_Centroid;
+	Vector2f c2 = poly2->m_Centroid;
 	polygonXform1.transformAsPoint(c1);
 	polygonXform2.transformAsPoint(c2);
 		

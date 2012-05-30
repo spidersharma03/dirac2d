@@ -47,6 +47,10 @@ public:
 		return m_ShapeType;
 	}
 	
+	inline AABB2f& getAABB()
+	{
+		return m_AABB;
+	}
 	// For GJK/EPA 
 	// returns Local Support Point on the Shape.
 	virtual Vector2f getSupportPoint(Vector2f& d) = 0;

@@ -41,6 +41,8 @@ void Edge::updateAABB(Matrix3f& xForm)
 
 void Edge::updateShape(Matrix3f& xForm)
 {
+	xForm.transformAsPoint(m_Vertex1);
+	xForm.transformAsPoint(m_Vertex2);
 }
 
 void Edge::findCentroid()
@@ -49,6 +51,7 @@ void Edge::findCentroid()
 
 void Edge::findMomentOfInertia()
 {
+	m_I = m_Vertex1.distanceSquared(m_Vertex2)/12.0f;
 }
 
 END_NAMESPACE_DIRAC2D

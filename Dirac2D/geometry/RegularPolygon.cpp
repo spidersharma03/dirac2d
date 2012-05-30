@@ -89,10 +89,10 @@ void RegularPolygon::updateShape(Matrix3f& xForm)
 {
 	for( dint32 v=0; v<m_NumVertices; v++ )
 	{
-		xForm.transformAsVector(m_Vertices[v]);
+		xForm.transformAsPoint(m_Vertices[v]);
 		xForm.transformAsVector(m_Normals[v]);
 	}	
-	//xForm.transformAsVector(m_Centroid);
+	xForm.transformAsPoint(m_Centroid);
 }
 
 void RegularPolygon::findCentroid()

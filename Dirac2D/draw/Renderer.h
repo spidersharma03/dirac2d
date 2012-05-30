@@ -49,7 +49,7 @@ public:
 
 	virtual void drawShape(CollisionShape*) = 0;
 	
-	virtual void drawCircle( dfloat radius ) = 0;
+	virtual void drawCircle( dfloat cx, dfloat cy, dfloat radius ) = 0;
 	
 	virtual void drawBox( dfloat width, dfloat height) = 0;
 	
@@ -61,6 +61,8 @@ public:
 	
 	virtual void drawAABB( AABB2f& aabb ) = 0;
 	
+	virtual void drawCapsule( dfloat cx, dfloat cy, dfloat width, dfloat height) = 0;
+
 	virtual void setTransform( Matrix3f& xform) = 0;
 	
 protected:

@@ -15,7 +15,6 @@
 #include "../geometry/RegularPolygon.h"
 #include "../dynamics/contacts/Contact.h"
 
-#include <stdio.h>
 
 #ifndef _COLLISION_DETECTION_POLYGON_H_
 #define _COLLISION_DETECTION_POLYGON_H_
