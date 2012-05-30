@@ -31,6 +31,8 @@ public:
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
+	virtual void updateShape(Matrix3f& xForm);
+
 	inline dfloat getRadius() const
 	{
 		return m_Radius;

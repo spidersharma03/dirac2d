@@ -34,7 +34,7 @@ public:
 	
 	virtual void drawShape(CollisionShape*);
 	
-	virtual void drawCircle( dfloat radius );
+	virtual void drawCircle( dfloat cx, dfloat cy, dfloat radius );
 	
 	virtual void drawBox( dfloat width, dfloat height);
 	
@@ -45,10 +45,10 @@ public:
 	virtual void drawPoint( Vector2f& point );
 	
 	virtual void drawAABB( AABB2f& aabb );
-
-	virtual void drawCapsule( dfloat width, dfloat height);
 	
 	virtual void setTransform( Matrix3f& xform);
+
+	virtual void drawCapsule( dfloat cx, dfloat cy, dfloat width, dfloat height);
 
 protected:
 	dfloat data[16];

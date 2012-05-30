@@ -17,7 +17,7 @@ void renderScene(void);
 
 PhysicalWorld* pWorld;
 
-dfloat dt = 1.0f/6000.0f;
+dfloat dt = 1.0f/600.0f;
 
 dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
@@ -356,40 +356,32 @@ void demo8()
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
-	Vector2f v1(-1.5f,0.01f), v2(1.5f,0.0f);
-	pApp.m_CollisionAttributes.m_Shape = new Edge(v1, v2);
+	dfloat groundWidth = 1.5f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
 	// Create Capsule
 	dfloat y = 0.5f;
-	dfloat x = -0.0f;
-	PhysicalBody* pBodyCapsule = pWorld->createPhysicalBody();
+	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
 	//pBodyCapsule->m_BodyType = EBT_STATIC;
-	pBodyCapsule->setPosition(Vector2f(x+0.1,y));
-	pBodyCapsule->setAngle(PI_4*0.9);
-	dfloat capsuleRadius = 0.15f; dfloat capsuleHeight = 0.14079f;
+	pBodyCompound->setPosition(Vector2f(0.0,y));
+	//pBodyCapsule->setAngle(PI_4*0.9);
+	dfloat capsuleRadius = 0.15f; dfloat capsuleHeight = 0.1f;
 	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius,capsuleHeight);
-	pBodyCapsule->createPhysicalShape(pApp);
+	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCompound->createPhysicalShape(pApp);
 	
 	// Create Circle
-	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
-	//pBodyCircle->m_BodyType = EBT_STATIC;
-	pBodyCircle->setPosition(Vector2f(0.0f,0.0f));
-	dfloat radius = 0.15f;
+	dfloat radius = 0.1f;
 	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
-	pBodyCircle->createPhysicalShape(pApp);
-	
-	// Create Box
-	//PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
-//	//pBodyBox->m_BodyType = EBT_STATIC;
-//	pBodyBox->setPosition(Vector2f(0.0f,1.0f));
-//	dfloat boxWidth = 0.15f; dfloat boxHeight = 0.15f;
-//	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
-//	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);	
-//	pBodyBox->createPhysicalShape(pApp);
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f, 0.9f);
+	pBodyCompound->createPhysicalShape(pApp);
 	
 }
 
+// Compound Shapes
 void demo9()
 {
 	// Create Ground Body
@@ -399,48 +391,168 @@ void demo9()
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.02f;
+	dfloat groundWidth = 1.5f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
-	// Create Capsule
-	//dfloat y = 0.5f;
-//	dfloat x = -0.0f;
-//	PhysicalBody* pBodyCapsule = pWorld->createPhysicalBody();
-//	//pBodyCapsule->m_BodyType = EBT_STATIC;
-//	pBodyCapsule->setPosition(Vector2f(x+0.1,y));
-//	pBodyCapsule->setAngle(PI_4*0.9);
-//	dfloat capsuleRadius = 0.15f; dfloat capsuleHeight = 0.14079f;
-//	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius,capsuleHeight);
-//	pBodyCapsule->createPhysicalShape(pApp);
-//	
-//	// Create Circle
-//	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
-//	//pBodyCircle->m_BodyType = EBT_STATIC;
-//	pBodyCircle->setPosition(Vector2f(0.0f,0.0f));
-//	dfloat radius = 0.15f;
-//	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
-//	pBodyCircle->createPhysicalShape(pApp);
-	
-	// Create Box
-	PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+	dfloat y = 0.0f;
+	// Create D
+	PhysicalBody* pBodyBoxD = pWorld->createPhysicalBody();
 	//pBodyBox->m_BodyType = EBT_STATIC;
-	pBodyBox->setPosition(Vector2f(0.0f,0.0f));
-	pBodyBox->setAngle(PI_4);
-	dfloat boxWidth = 0.02f; dfloat boxHeight = 0.2f;
+	pBodyBoxD->setPosition(Vector2f(-0.8f,y));
+	//pBodyBox->setAngle(PI_4);
+	dfloat boxWidth = 0.025f; dfloat boxHeight = 0.25f;
 	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);	
-	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,0.0f);
-	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
-	pBodyBox->createPhysicalShape(pApp);
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/4;
+	pBodyBoxD->createPhysicalShape(pApp);
 	
-	boxWidth = 0.02f; boxHeight = 0.2f;
+	boxWidth = 0.025f; boxHeight = 0.1f;
 	Vector2f verticesBox1[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox1, 4);	
-	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.3f,0.2f);
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,0.2f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/2*0.9;
+	pBodyBoxD->createPhysicalShape(pApp);
+	
+	boxWidth = 0.025f; boxHeight = 0.1f;
+	Vector2f verticesBox2[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new Circle(0.05f);	
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox2, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,-0.2f);
+	pApp.m_PhysicalAttributes.m_Angle = -PI/2*0.9;
+	pBodyBoxD->createPhysicalShape(pApp);
+	
+	boxWidth = 0.025f; boxHeight = 0.2f;
+	Vector2f verticesBox3[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox3, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.2f,0.0f);
+	pApp.m_PhysicalAttributes.m_Angle = 0.0f;
+	pBodyBoxD->createPhysicalShape(pApp);
+	
+	
+	// Create I
+	PhysicalBody* pBodyBoxI = pWorld->createPhysicalBody();
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBoxI->setPosition(Vector2f(-0.3f,y));
+	//pBodyBox->setAngle(PI_4);
+	boxWidth = 0.025f; boxHeight = 0.25f;
+	Vector2f verticesBox4[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox4, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/4;
+	pBodyBoxI->createPhysicalShape(pApp);
+	
+	boxWidth = 0.025f; boxHeight = 0.1f;
+	Vector2f verticesBox5[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox5, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,0.25f);
 	pApp.m_PhysicalAttributes.m_Angle = PI/2;
-	pBodyBox->createPhysicalShape(pApp);
+	pBodyBoxI->createPhysicalShape(pApp);
+	
+	boxWidth = 0.025f; boxHeight = 0.1f;
+	Vector2f verticesBox6[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox6, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,-0.25f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyBoxI->createPhysicalShape(pApp);
+	
+	
+	// Create R
+	PhysicalBody* pBodyBoxR = pWorld->createPhysicalBody();
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBoxR->setPosition(Vector2f(0.0f,y));
+	//pBodyBox->setAngle(PI_4);
+	boxWidth = 0.025f; boxHeight = 0.25f;
+	Vector2f verticesBox7[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox7, 4);
+	//pApp.m_CollisionAttributes.m_Shape = new Capsule(boxWidth, boxHeight);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,0.0f);
+	pApp.m_PhysicalAttributes.m_Angle = 0.0f;
+	pBodyBoxR->createPhysicalShape(pApp);
+	
+	boxWidth = 0.03f; boxHeight = 0.1f;
+	Vector2f verticesBox8[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox8, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,0.25f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyBoxR->createPhysicalShape(pApp);
+	
+	boxWidth = 0.025f; boxHeight = 0.1f;
+	Vector2f verticesBox9[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox9, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.2f,0.15f);
+	pApp.m_PhysicalAttributes.m_Angle = 0.0f;
+	pBodyBoxR->createPhysicalShape(pApp);
+	
+	boxWidth = 0.03f; boxHeight = 0.1f;
+	Vector2f verticesBox10[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox10, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,0.05f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyBoxR->createPhysicalShape(pApp);
+	
+	boxWidth = 0.03f; boxHeight = 0.17f;
+	Vector2f verticesBox11[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox11, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.15f,-0.1f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/4;
+	pBodyBoxR->createPhysicalShape(pApp);
+	
+	
+	// Create A
+	PhysicalBody* pBodyBoxA = pWorld->createPhysicalBody();
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBoxA->setPosition(Vector2f(0.4f,y));
+	//pBodyBox->setAngle(PI_4);
+	boxWidth = 0.025f;  boxHeight = 0.25f;
+	Vector2f verticesBox12[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox12, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,0.0f);
+	pApp.m_PhysicalAttributes.m_Angle = 0.0f;
+	pBodyBoxA->createPhysicalShape(pApp);
+	
+	boxWidth = 0.025f; boxHeight = 0.25f;
+	Vector2f verticesBox13[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox13, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.2f,0.01f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/4;
+	pBodyBoxA->createPhysicalShape(pApp);
+	
+	boxWidth = 0.025f; boxHeight = 0.1f;
+	Vector2f verticesBox14[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox14, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.05f,0.0f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/2*1.5;
+	pBodyBoxA->createPhysicalShape(pApp);
+	
+	// Create C
+	PhysicalBody* pBodyBoxC = pWorld->createPhysicalBody();
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBoxC->setPosition(Vector2f(0.9f,y));
+	//pBodyBox->setAngle(PI_4);
+	boxWidth = 0.025f;  boxHeight = 0.25f;
+	Vector2f verticesBox16[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox16, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,0.0f);
+	pApp.m_PhysicalAttributes.m_Angle = 0.0f;
+	pBodyBoxC->createPhysicalShape(pApp);
+	
+	boxWidth = 0.03f; boxHeight = 0.1f;
+	Vector2f verticesBox17[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox17, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,0.22f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyBoxC->createPhysicalShape(pApp);
+	
+	boxWidth = 0.03f; boxHeight = 0.1f;
+	Vector2f verticesBox18[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox18, 4);	
+	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,-0.22f);
+	pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyBoxC->createPhysicalShape(pApp);
+	
 }
 
 void initScene()
@@ -449,7 +561,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo9();
+	demo8();
 }
 
 void changeSize(int w, int h) 

@@ -44,13 +44,19 @@ dbool Circle::isPointInside(Point2f& p)
 
 void Circle::updateAABB(Matrix3f& xForm)
 {
-	m_AABB.m_LowerBounds.set(-m_Radius + xForm.col3.x, -m_Radius + xForm.col3.y);
-	m_AABB.m_UpperBounds.set(m_Radius + xForm.col3.x, m_Radius + xForm.col3.y);
+	Vector2f p0(m_Centroid);
+	Vector2f p1;
+	
+	xForm.transformAsPoint(p0);
+	p1 = p0;
+	
+	m_AABB.m_LowerBounds.set(p0.x-m_Radius, p0.y-m_Radius);
+	m_AABB.m_UpperBounds.set(p1.x+m_Radius, p1.y+m_Radius);
 }
 
 void Circle::updateShape(Matrix3f& xForm)
 {
-	xForm.transformAsVector(m_Centroid);
+	xForm.transformAsPoint(m_Centroid);
 }
 
 void Circle::findCentroid()

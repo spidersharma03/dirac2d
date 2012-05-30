@@ -86,12 +86,8 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 		m_BodyType = EBT_STATIC;
 	
 	Matrix3f xForm;
-	xForm.translate(pShape->m_Position);
-	pShape->m_OffsetTransform = xForm;
-	
-	xForm.setIdentity();
+	xForm.translate(pShape->m_Position);	
 	xForm.rotate(pShape->m_Angle);
-	//pShape->m_RotOffsetTransform = xForm;
 
 	pShape->m_CollisionShape->updateShape(xForm);
 	
@@ -123,8 +119,7 @@ void PhysicalBody::updateAABB()
 	PhysicalShape* pShape = m_PhysicalShapeList;
 	while( pShape )
 	{
-		Matrix3f xForm = pShape->m_OffsetTransform * m_Transform;
-		pShape->m_CollisionShape->updateAABB(xForm);
+		pShape->m_CollisionShape->updateAABB(m_Transform);
 		pShape = pShape->m_Next;
 	}
 	
@@ -138,7 +133,7 @@ void PhysicalBody::updateAABB()
 	
 	dint32 i = 0;
 	
-	Vector2f vertices[100];
+	Vector2f vertices[50];
 	
 	while( pShape )
 	{
@@ -162,12 +157,10 @@ void PhysicalBody::updateAABB()
 			max_x = p.x;
 		if( max_y < p.y )
 			max_y = p.y;
-		
 	}
 	
 	m_AABB.m_LowerBounds.set(min_x, min_y);
 	m_AABB.m_UpperBounds.set(max_x, max_y);	
-	m_Centre = (m_AABB.m_LowerBounds + m_AABB.m_UpperBounds ) * 0.5f;
 }
 
 void PhysicalBody::calculateMassAttributes()

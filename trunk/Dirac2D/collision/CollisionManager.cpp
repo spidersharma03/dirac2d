@@ -12,7 +12,7 @@
 #include "../dynamics/PhysicalBody.h"
 #include "../dynamics/PhysicalShape.h"
 #include "../dynamics/contacts/Contact.h"
-
+#include "../geometry/CollisionShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -55,11 +55,14 @@ void CollisionManager::updateCollision()
 				PhysicalShape* pShape2 = pBody2->m_PhysicalShapeList;
 				while( pShape2 )
 				{
-					dbool res = true;
+					dbool bRes = true;
 					
-					res = pBody1->m_AABB.intersectAABB(pBody2->m_AABB);
+					AABB2f& aabb1 = pShape1->m_CollisionShape->getAABB();
+					AABB2f& aabb2 = pShape2->m_CollisionShape->getAABB();
 					
-					if( res && (m_ContactPairSet.insert( ContactPair(pShape1, pShape2) )).second)
+					bRes = aabb1.intersectAABB(aabb2);
+					
+					if( bRes && (m_ContactPairSet.insert(ContactPair(pShape1, pShape2) )).second )
 					{
 						Contact* contact = createContact();
 						contact->m_PhysicalShape1 = pShape1;
@@ -94,11 +97,18 @@ void CollisionManager::updateContacts()
 		PhysicalBody* body1 = contact->m_PhysicalShape1->m_ParentBody;
 		PhysicalBody* body2 = contact->m_PhysicalShape2->m_ParentBody;
 		
+		PhysicalShape* pShape1 = contact->m_PhysicalShape1;
+		PhysicalShape* pShape2 = contact->m_PhysicalShape2;
+		
+		AABB2f& aabb1 = pShape1->m_CollisionShape->getAABB();
+		AABB2f& aabb2 = pShape2->m_CollisionShape->getAABB();
+		
 		// Destroy the Contact if it dosen't persist
-		if( !body1->m_AABB.intersectAABB(body2->m_AABB) )
+		if( !aabb1.intersectAABB(aabb2) )
 		{
 			// Erase Contact pair.
-			m_ContactPairSet.erase(ContactPair(body1->m_PhysicalShapeList, body2->m_PhysicalShapeList));
+			m_ContactPairSet.erase(ContactPair(pShape1, pShape2));
+		
 			deleteContact(contact);
 			// Awake the Bodies
 			body1->setSleeping(false);

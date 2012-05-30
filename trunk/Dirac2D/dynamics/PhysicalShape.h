@@ -48,8 +48,6 @@ public:
 	// pointer to the next shape from the parent body.
 	PhysicalShape* m_Next;
 	PhysicalShape* m_Prev;
-
-	Matrix3f m_OffsetTransform;
 	
 protected:
 

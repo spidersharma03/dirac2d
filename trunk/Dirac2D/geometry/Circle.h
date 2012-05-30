@@ -37,6 +37,7 @@ public:
 		return m_Radius;
 	}
 	
+	
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);

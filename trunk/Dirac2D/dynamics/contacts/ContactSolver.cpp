@@ -12,7 +12,6 @@
 #include "../PhysicalBody.h"
 #include "../PhysicalWorld.h"
 
-#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -34,13 +33,8 @@ void ContactSolver::buildJacobian()
 		Vector2f c1 = body1->m_Centre;
 		Vector2f c2 = body2->m_Centre;
 
-		//shape1->m_RotOffsetTransform.transformAsPoint(c1);
-		//body1->m_Transform.transformAsPoint(c1);
-		//shape1->m_OffsetTransform.transformAsPoint(c1);
-		
-		//shape2->m_RotOffsetTransform.transformAsPoint(c2);
-		//body2->m_Transform.transformAsPoint(c2);
-		//shape2->m_OffsetTransform.transformAsPoint(c2);
+		body1->m_Transform.transformAsPoint(c1);
+		body2->m_Transform.transformAsPoint(c2);
 		
 		Vector2f n = contact->m_ContactNormal;
 		Vector2f t;
@@ -115,13 +109,8 @@ void ContactSolver::correctVelocities()
 		Vector2f c1 = body1->m_Centre;
 		Vector2f c2 = body2->m_Centre;
 		
-		//shape1->m_RotOffsetTransform.transformAsPoint(c1);
-		//body1->m_Transform.transformAsPoint(c1);
-		//shape1->m_OffsetTransform.transformAsPoint(c1);
-
-		//shape2->m_RotOffsetTransform.transformAsPoint(c2);
-		//body2->m_Transform.transformAsPoint(c2);
-		//shape2->m_OffsetTransform.transformAsPoint(c2);
+		body1->m_Transform.transformAsPoint(c1);
+		body2->m_Transform.transformAsPoint(c2);
 		
 		Vector2f tangent = contact->m_ContactNormal.cross(-1.0f);
 		

@@ -122,6 +122,11 @@ public:
 		x = inx; y = iny;
 	}
 	
+	inline void set( Vector2<T>& other )
+	{
+		x = other.x; y = other.y;
+	}
+	
 	inline void add( Vector2<T>& other )
 	{
 		x += other.x;

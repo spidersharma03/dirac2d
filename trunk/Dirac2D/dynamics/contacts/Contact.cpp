@@ -11,7 +11,6 @@
 #include "../PhysicalBody.h"
 #include "../../collision/CollisionDetection.h"
 
-#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -26,10 +25,7 @@ void Contact::update()
 	oldConstraint[1].m_NormalImpulse = m_ContactConstraint[1].m_NormalImpulse;
 	oldConstraint[1].m_TangentImpulse = m_ContactConstraint[1].m_TangentImpulse;
 	
-	Matrix3f xForm1 = m_PhysicalShape1->m_OffsetTransform * m_PhysicalShape1->m_ParentBody->m_Transform;// * m_PhysicalShape1->m_RotOffsetTransform;
-	Matrix3f xForm2 = m_PhysicalShape2->m_OffsetTransform * m_PhysicalShape2->m_ParentBody->m_Transform;// * m_PhysicalShape2->m_RotOffsetTransform;
-	
-	dbool bRes = intersectShapes(m_PhysicalShape1->m_CollisionShape, xForm1, m_PhysicalShape2->m_CollisionShape, xForm2, &m_Manifold);
+	dbool bRes = intersectShapes(m_PhysicalShape1->m_CollisionShape, m_PhysicalShape1->m_ParentBody->m_Transform, m_PhysicalShape2->m_CollisionShape, m_PhysicalShape2->m_ParentBody->m_Transform, &m_Manifold);
 	
 	// Flip the Physical Shapes.
 	if( m_Manifold.m_bFlipShapes )
