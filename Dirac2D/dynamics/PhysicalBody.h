@@ -118,6 +118,8 @@ protected:
 
 	PhysicalShape* m_PhysicalShapeList;
 	PhysicalShape* m_PhysicalShape;
+	
+	PhysicalWorld* m_PhysicalWorld;
 };
 
 END_NAMESPACE_DIRAC2D

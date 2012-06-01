@@ -29,6 +29,8 @@
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 		C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
+		C2F30F661578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F30F621578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp */; };
+		C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -102,6 +104,10 @@
 		C2DD14FF1558E6A300432320 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C2EB2C2E1573C48600E92679 /* EdgeChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EdgeChain.h; sourceTree = "<group>"; };
 		C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EdgeChain.cpp; sourceTree = "<group>"; };
+		C2F30F621578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BroadPhaseCollisionAlgorithm.cpp; path = Dirac2D/collision/broadPhase/BroadPhaseCollisionAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
+		C2F30F631578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BroadPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/BroadPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
+		C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NaiveBoradPhaseCollisionAlgorithm.cpp; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
+		C2F30F651578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NaiveBoradPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +173,7 @@
 		C257F13E154E71AE00270D77 /* collision */ = {
 			isa = PBXGroup;
 			children = (
+				C2F30F611578FE6D00D4F2F4 /* broadPhase */,
 				C257F1A5154E76CD00270D77 /* CollisionDetection.h */,
 				C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */,
 				C257F140154E71AE00270D77 /* CollisionManager.cpp */,
@@ -279,6 +286,18 @@
 			path = Dirac2D/draw;
 			sourceTree = SOURCE_ROOT;
 		};
+		C2F30F611578FE6D00D4F2F4 /* broadPhase */ = {
+			isa = PBXGroup;
+			children = (
+				C2F30F621578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp */,
+				C2F30F631578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.h */,
+				C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */,
+				C2F30F651578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.h */,
+			);
+			name = broadPhase;
+			path = Dirac2D/collision/broadPhase;
+			sourceTree = SOURCE_ROOT;
+		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +375,8 @@
 				C2B6D881157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp in Sources */,
 				C2B6D8B4157398D600E31E38 /* Edge.cpp in Sources */,
 				C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */,
+				C2F30F661578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp in Sources */,
+				C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

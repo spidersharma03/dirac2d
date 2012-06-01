@@ -561,7 +561,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo8();
+	demo3();
 }
 
 void changeSize(int w, int h) 

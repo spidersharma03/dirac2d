@@ -10,10 +10,15 @@ using namespace std;
 
 BEGIN_NAMESPACE_DIRAC2D
 
+class BroadPhaseCollisionAlgorithm;
 class PhysicalWorld;
+class PhysicalShape;
 class ContactSolver;
 class Contact;
 struct ContactPair;
+
+typedef set<ContactPair> ContactPairPool;
+
 
 class CollisionManager
 {
@@ -21,8 +26,15 @@ public:
 	CollisionManager(PhysicalWorld*);
 
 	void update();
+	
+	void addContact(PhysicalShape* pShape1, PhysicalShape* pShape2);
 
-	friend class ContactSolver;
+	void addContactPair(ContactPair& contactPair);
+
+	ContactPairPool& getContactPairPool()
+	{
+		return m_ContactPairSet;
+	}
 	
 protected:
 	
@@ -33,11 +45,12 @@ protected:
 	Contact* createContact();
 	
 	void deleteContact(Contact* contact);
+
 	
 private:
 	PhysicalWorld *m_PhysicalWorld;
 	MemoryAllocator<Contact> *m_ContactPool;
-	set<ContactPair> m_ContactPairSet;
+	ContactPairPool m_ContactPairSet;
 };
 
 END_NAMESPACE_DIRAC2D

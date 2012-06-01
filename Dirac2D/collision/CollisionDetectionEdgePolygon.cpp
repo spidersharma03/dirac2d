@@ -27,7 +27,20 @@ dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, 
 // Find Whether Edge/Circle intersect.
 dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3f& xform2)
 {
-	return false;
+	// Transform the Circle into Edge's Frame
+	Vector2f c = xform2 * circle->m_Centroid;
+	c *= xform1;
+	
+	// Find Closest Distance between Edge and Circle.
+	Vector2f outPoint;
+	findClosestPoint(edge->m_Vertex1, edge->m_Vertex2, c, outPoint);
+	dfloat D2 = c.distanceSquared(outPoint);
+	
+	if( D2 > circle->m_Radius * circle->m_Radius )
+	{
+		return false;
+	}
+	return true;
 }
 // Find Whether Edge/Circle intersect. Also find the Contact Points if the Edge/Circle intersect.
 dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3f& xform2, ContactManifold* contactManifold)
@@ -35,7 +48,6 @@ dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3
 	// Transform the Circle into Edge's Frame
 	Vector2f c = xform2 * circle->m_Centroid;
 	c *= xform1;
-	
 	
 	// Find Closest Distance between Edge and Circle.
 	Vector2f outPoint;
@@ -49,11 +61,12 @@ dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3
 	
 	contactManifold->m_NumContacts = 1;
 	contactManifold->m_ContactNormal = outPoint - c; // Contact Normal points from Shape2(Circle) to Shape1(Edge)
-	contactManifold->m_ContactNormal.normalize();
-
+	dfloat d = contactManifold->m_ContactNormal.length();
+	contactManifold->m_ContactNormal /= d;
+	
 	c += contactManifold->m_ContactNormal * circle->m_Radius;
 	contactManifold->m_ContactPoints[0].m_Point = ( c + outPoint ) * 0.5f;
-	contactManifold->m_ContactPoints[0].m_Depth = -0.5f * ( circle->m_Radius - sqrt(D2) );
+	contactManifold->m_ContactPoints[0].m_Depth = -0.5f * ( circle->m_Radius - d );
 	
 	// Transform to World Space
 	xform1.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
@@ -94,11 +107,8 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 	// Accept/Reject Points
 	contactManifold->m_NumContacts = 0;
 	
-	Vector2f v1, v2;
-	findClosestPoint(p0, p1, outPoint1, v1);
-	dfloat D1 = outPoint1.distanceSquared(v1);
-	findClosestPoint(p0, p1, outPoint2, v2);
-	dfloat D2 = outPoint2.distanceSquared(v2);
+	dfloat D1 = outPoint1.distanceSquared(p0);
+	dfloat D2 = outPoint2.distanceSquared(p1);
 	
 	dfloat R = capsuleRadius;
 	R *= R; 
@@ -106,29 +116,28 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 	// Contact Normal Points from Shape2(Capsule) to Shape1(Edge)
 	if( D1 < D2 )
 	{
-		contactManifold->m_ContactNormal = outPoint1 - v1;
+		contactManifold->m_ContactNormal = outPoint1 - p0;
 	}
 	else 
 	{
-		contactManifold->m_ContactNormal = outPoint2 - v2;
+		contactManifold->m_ContactNormal = outPoint2 - p1;
 	}
 	contactManifold->m_ContactNormal.normalize();
 	
-	
 	if( D1 < R )
 	{
-		v1 += contactManifold->m_ContactNormal * capsuleRadius;
+		p0 += contactManifold->m_ContactNormal * capsuleRadius;
 		
-		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v1+outPoint1)*0.5f;
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (p0+outPoint1)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D1) );
 		contactManifold->m_NumContacts++;
 	}
 	
 	if( D2 < R )
 	{
-		v2 += contactManifold->m_ContactNormal * capsuleRadius;
+		p1 += contactManifold->m_ContactNormal * capsuleRadius;
 		
-		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v2+outPoint2)*0.5f;
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (p1+outPoint2)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D2) );
 		contactManifold->m_NumContacts++;
 	}

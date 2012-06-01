@@ -13,6 +13,8 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+class Edge;
+
 class EdgeChain : public CollisionShape
 {
 public:
@@ -26,6 +28,8 @@ public:
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
+	Edge* getEdge(dint32 index);
+	
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);
@@ -37,6 +41,9 @@ protected:
 public:
 	Vector2f* m_Vertices;
 	Vector2f* m_Normals;
+	
+protected:
+	Edge* m_EdgeList;
 };
 
 END_NAMESPACE_DIRAC2D

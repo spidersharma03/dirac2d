@@ -6,13 +6,15 @@
  *
  */
 
+#include "PhysicalWorld.h"
 #include "PhysicalBody.h"
 #include "PhysicalShape.h"
 #include "../geometry/CollisionShape.h"
+#include "../collision/BroadPhaseCollisionAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
-PhysicalBody::PhysicalBody(PhysicalWorld* world)
+PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 {
 	m_Angle = 0.0f;
 	m_LinearDamping = 0.0f;
@@ -102,6 +104,8 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	
 	calculateMassAttributes();
 	updateAABB();
+	
+	m_PhysicalWorld->getBroadPhaseAlgorithm()->addBroadPhaseNode(pShape);
 	
 	return pShape;
 }

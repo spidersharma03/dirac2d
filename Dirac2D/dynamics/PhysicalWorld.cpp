@@ -11,6 +11,10 @@
 #include "PhysicalShape.h"
 #include "../geometry/CollisionShape.h"
 #include "../collision/CollisionManager.h"
+
+#include "../collision/BroadPhaseCollisionAlgorithm.h"
+#include "../collision/NaiveBoradPhaseCollisionAlgorithm.h"
+
 #include "../dynamics/contacts/ContactSolver.h"
 #include "../dynamics/contacts/Contact.h"
 #include "../draw/Renderer.h"
@@ -22,6 +26,7 @@ Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
 PhysicalWorld::PhysicalWorld()
 {
 	m_CollisionManager = new CollisionManager(this);
+	m_pBroadPhaseAlgorithm = new NaiveBroadPhaseCollisionAlgorithm(m_CollisionManager);
 	m_ContactSolver    = new ContactSolver(this);
 	m_Renderer		   = 0;
 	
@@ -107,6 +112,8 @@ void PhysicalWorld::Step(dfloat dt)
 			pBody->m_Velocity += totalForce * dt;
 		pBody = pBody->m_Next;
 	}
+	// Broad Phase
+	m_pBroadPhaseAlgorithm->update();
 	// Collision detection	
 	m_CollisionManager->update();
 	
