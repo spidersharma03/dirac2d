@@ -44,50 +44,43 @@ dbool intersectCapsules( Capsule* capsule1, Matrix3f& xform1, Capsule* capsule2,
 	// Accept/Reject Points
 	contactManifold->m_NumContacts = 0;
 	
-	Vector2f v1, v2;
-	findClosestPoint(p2, p3, outPoint1, v1);
-	dfloat D1 = outPoint1.distanceSquared(v1);
-	findClosestPoint(p2, p3, outPoint2, v2);
-	dfloat D2 = outPoint2.distanceSquared(v2);
+	dfloat D1 = outPoint1.distanceSquared(p2);
+	dfloat D2 = outPoint2.distanceSquared(p3);
 	
 	dfloat R = capsuleRadius1 + capsuleRadius2;
 	R *= R; 
 	
+	// Collision Normal Points from Shape2(Capsule2) to Shape1(Capsule1).
 	if( D1 < D2 )
 	{
-		contactManifold->m_ContactNormal = outPoint1 - v1;
+		contactManifold->m_ContactNormal = outPoint1 - p2;
 	}
 	else 
 	{
-		contactManifold->m_ContactNormal = outPoint2 - v2;
+		contactManifold->m_ContactNormal = outPoint2 - p3;
 	}
+	
 	contactManifold->m_ContactNormal.normalize();
 
 	
 	if( D1 < R )
 	{
-		v1		  += contactManifold->m_ContactNormal * -capsule1->m_Radius;
+		p2		  += contactManifold->m_ContactNormal * -capsule1->m_Radius;
 		outPoint1 += contactManifold->m_ContactNormal * capsule2->m_Radius;
 		
-		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v1+outPoint1)*0.5f;
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (p2+outPoint1)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius1 + capsuleRadius2 - sqrt(D1) );
 		contactManifold->m_NumContacts++;
 	}
 	
 	if( D2 < R )
 	{
-		v2		  += contactManifold->m_ContactNormal * -capsule1->m_Radius;
+		p3		  += contactManifold->m_ContactNormal * -capsule1->m_Radius;
 		outPoint2 += contactManifold->m_ContactNormal * capsule2->m_Radius;
 		
-		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v2+outPoint2)*0.5f;
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (p3+outPoint2)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius1 + capsuleRadius2 - sqrt(D2) );
 		contactManifold->m_NumContacts++;
-	}
-	
-	// Make sure that the Collision Normal Points from Shape2(Capsule2) to Shape1(Capsule1).
-	if( c.dot(contactManifold->m_ContactNormal) > 0.0f )
-	{
-		contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
 	}
 	
 	ContactPoint* contactPoints = contactManifold->m_ContactPoints;
@@ -225,10 +218,8 @@ dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* 
 
 	contactManifold->m_NumContacts = 0;
 	
-	Vector2f outPoint1, outPoint2;
 	// Accept/Reject Above Points
-	findClosestPoint(p0, p1, v1, outPoint1);
-	dfloat D1 = outPoint1.distanceSquared(v1);
+	dfloat D1 = p0.distanceSquared(v1);
 	if(  D1 < capsuleRadius * capsuleRadius )
 	{
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = v1;
@@ -236,8 +227,7 @@ dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* 
 		contactManifold->m_NumContacts++;
 	}
 	
-	findClosestPoint(p0, p1, v2, outPoint2);
-	dfloat D2 = outPoint2.distanceSquared(v2);
+	dfloat D2 = p1.distanceSquared(v2);
 	if( D2 < capsuleRadius * capsuleRadius )
 	{
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = v2;
@@ -247,11 +237,11 @@ dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* 
 	
 	if( D1 < D2 )
 	{
-		contactManifold->m_ContactNormal = v1 - outPoint1;
+		contactManifold->m_ContactNormal = v1 - p0;
 	}
 	else 
 	{
-		contactManifold->m_ContactNormal = v2 - outPoint2;
+		contactManifold->m_ContactNormal = v2 - p1;
 	}
 
 	contactManifold->m_ContactNormal.normalize();

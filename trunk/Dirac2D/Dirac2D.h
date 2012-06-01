@@ -77,6 +77,7 @@
 #include "collision/CollisionDetection.h"
 #include "collision/CollisionDetectionPolygon.h"
 #include "collision/CollisionManager.h"
+#include "collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 
 #include "draw/Renderer.h"
 #include "draw/GLRenderer.h"

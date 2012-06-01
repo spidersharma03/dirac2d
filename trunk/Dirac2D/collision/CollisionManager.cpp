@@ -8,11 +8,11 @@
 
 #include "../dynamics/PhysicalWorld.h"
 #include "CollisionManager.h"
-#include "CollisionDetection.h"
 #include "../dynamics/PhysicalBody.h"
 #include "../dynamics/PhysicalShape.h"
 #include "../dynamics/contacts/Contact.h"
 #include "../geometry/CollisionShape.h"
+#include "BroadPhaseCollisionAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -22,16 +22,14 @@ CollisionManager::CollisionManager(PhysicalWorld* world) : m_PhysicalWorld(world
 }
 	
 void CollisionManager::update()
-{
-	updateCollision();
-	
+{	
 	updateContacts();	
 }
 
 void CollisionManager::updateCollision()
 {
 	// n2 Collision test
-	PhysicalBody* pBody1 = m_PhysicalWorld->m_PhysicalBodyList;
+	/*PhysicalBody* pBody1 = m_PhysicalWorld->m_PhysicalBodyList;
 	while( pBody1 )
 	{
 		PhysicalShape* pShape1 = pBody1->m_PhysicalShapeList;
@@ -81,6 +79,7 @@ void CollisionManager::updateCollision()
 		} // Shape1 Loop
 		pBody1 = pBody1->m_Next;
 	} // Body1 Loop
+	*/
 }
 
 // Update all the contacts of the PhysicalWorld
@@ -121,6 +120,28 @@ void CollisionManager::updateContacts()
 
 		contact = contact->m_Next;
 	}
+}
+
+void CollisionManager::addContact(PhysicalShape* pShape1, PhysicalShape* pShape2)
+{
+	Contact* contact = createContact();
+	contact->m_PhysicalShape1 = pShape1;
+	contact->m_PhysicalShape2 = pShape2;
+	
+	// Awake the Bodies
+	contact->m_PhysicalShape1->m_ParentBody->setSleeping(false);
+	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);
+}
+
+void CollisionManager::addContactPair(ContactPair& contactPair)
+{
+	Contact* contact = createContact();
+	contact->m_PhysicalShape1 = contactPair.m_Shape1;
+	contact->m_PhysicalShape2 = contactPair.m_Shape2;
+	
+	// Awake the Bodies
+	contact->m_PhysicalShape1->m_ParentBody->setSleeping(false);
+	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);
 }
 
 // Creates a new Contact by Allocating in the Contact Pool and inserting into the World linked list.

@@ -26,6 +26,7 @@ class CollisionManager;
 class ContactSolver;
 class Contact;
 class Renderer;
+class BroadPhaseCollisionAlgorithm;
 
 class PhysicalWorld
 {
@@ -58,6 +59,11 @@ public:
 	{
 		m_bWarmStart = bWarmStart;
 	}
+	
+	BroadPhaseCollisionAlgorithm* getBroadPhaseAlgorithm()
+	{
+		return m_pBroadPhaseAlgorithm;
+	}
 public:
 	
 	friend class CollisionManager;
@@ -65,6 +71,7 @@ public:
 	
 private:
 	CollisionManager* m_CollisionManager;
+	BroadPhaseCollisionAlgorithm* m_pBroadPhaseAlgorithm;
 	ContactSolver*	  m_ContactSolver;
 	Renderer*         m_Renderer;
 

@@ -6,11 +6,12 @@
  *
  */
 
+#include "../definitions.h"
+#include "../maths/MathUtil.h"
+
 #ifndef _COLLISION_DETECTION_H_
 #define _COLLISION_DETECTION_H_
 
-#include "../definitions.h"
-#include "../maths/MathUtil.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
