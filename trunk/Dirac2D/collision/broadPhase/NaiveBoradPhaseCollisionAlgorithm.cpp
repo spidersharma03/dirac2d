@@ -7,7 +7,7 @@
  */
 
 #include "NaiveBoradPhaseCollisionAlgorithm.h"
-#include "CollisionManager.h"
+#include "../CollisionManager.h"
 #include "../../dynamics/PhysicalShape.h"
 #include "../../dynamics/PhysicalBody.h"
 #include "../../geometry/CollisionShape.h"

@@ -234,6 +234,18 @@
 					RelativePath=".\Dirac2D\collision\CollisionManager.cpp"
 					>
 				</File>
+				<Filter
+					Name="broadPhase"
+					>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\BroadPhaseCollisionAlgorithm.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\NaiveBoradPhaseCollisionAlgorithm.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="geometry"
@@ -324,6 +336,18 @@
 					RelativePath=".\Dirac2D\collision\CollisionManager.h"
 					>
 				</File>
+				<Filter
+					Name="broadPhase"
+					>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\BroadPhaseCollisionAlgorithm.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\NaiveBoradPhaseCollisionAlgorithm.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="dynamics"
