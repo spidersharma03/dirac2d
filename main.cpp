@@ -555,13 +555,41 @@ void demo9()
 	
 }
 
+// Edge Chain
+void demo10()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	Vector2f vertices[5] = { Vector2f(-1.0f, 0.0f), Vector2f(-0.5f, 0.0f), Vector2f(0.0f, 0.0f)
+		, Vector2f(0.5f, 0.0f), Vector2f(1.0f,0.0f) };
+	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, 5);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Circle
+	dfloat y = 0.5f;
+	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
+	//pBodyCapsule->m_BodyType = EBT_STATIC;
+	pBodyCompound->setPosition(Vector2f(0.0,y));
+	//pBodyCapsule->setAngle(PI_4*0.9);
+	dfloat capsuleRadius = 0.15f;
+	pApp.m_CollisionAttributes.m_Shape = new Circle(capsuleRadius);
+	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCompound->createPhysicalShape(pApp);
+}
+
 void initScene()
 {
 	pWorld = new PhysicalWorld();
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo3();
+	demo9();
 }
 
 void changeSize(int w, int h) 

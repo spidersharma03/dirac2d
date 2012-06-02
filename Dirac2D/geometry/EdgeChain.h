@@ -18,7 +18,7 @@ class Edge;
 class EdgeChain : public CollisionShape
 {
 public:
-	EdgeChain(Vector2f* vertices);
+	EdgeChain(Vector2f* vertices, dint32 numVertices);
 	
 	EdgeChain(const EdgeChain& other);
 	
@@ -28,7 +28,12 @@ public:
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
-	Edge* getEdge(dint32 index);
+	Edge* getEdge(dint32 index) const;
+
+	inline dint32 getNumEdges() const
+	{
+		return m_NumEdges;
+	}
 	
 protected:
 	
@@ -39,10 +44,10 @@ protected:
 	virtual void findMomentOfInertia();
 	
 public:
-	Vector2f* m_Vertices;
 	Vector2f* m_Normals;
 	
 protected:
+	dint32 m_NumEdges;
 	Edge* m_EdgeList;
 };
 

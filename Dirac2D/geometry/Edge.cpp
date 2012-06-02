@@ -11,9 +11,16 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+Edge::Edge()
+{
+	m_ShapeType = EST_EDGE;
+	m_bHasPrev = m_bHasNext = false;
+}
+
 Edge::Edge(Vector2f& vertex1, Vector2f& vertex2) : m_Vertex1(vertex1), m_Vertex2(vertex2)
 {
 	m_ShapeType = EST_EDGE;
+	m_bHasPrev = m_bHasNext = false;
 }
 
 Edge::Edge(const Edge& other): m_Vertex1(other.m_Vertex1), m_Vertex2(other.m_Vertex2)

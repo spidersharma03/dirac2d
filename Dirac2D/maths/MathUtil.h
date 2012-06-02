@@ -90,7 +90,7 @@ static void findClosestPoints(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& p2, Ve
 	outPoint1 = p2 + (p3-p2) * u2;
 }
 
-// Finds the Closest point on the Line from a Point.
+// Finds the Closest point on the Line Segment p0-p1 from an Input Point.
 template<class T>
 static inline void findClosestPoint(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& point, Vector2<T>& outPoint)
 {
@@ -109,6 +109,21 @@ static inline void findClosestPoint(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& 
 	
 	outPoint = p0 + (p1-p0) * u;
 }
+
+// Finds the Barycentric Coordinate of the Closest Point on the Line Segment p0-p1 from an Input Point.
+template<class T>
+static inline void findBaryCentricCoordinate(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& point, T& u)
+{
+	T dx = p1.x - p0.x;
+	T dy = p1.y - p0.y;
+	T Denom = dx*dx + dy*dy;
+		
+	if( fabs(Denom) > EPSILON )
+	{
+		u = (dx * point.x + dy * point.y - dx * p0.x - dy * p0.y)/Denom;
+	}
+}
+
 
 END_NAMESPACE_DIRAC2D
 

@@ -10,7 +10,7 @@
 #include "PhysicalBody.h"
 #include "PhysicalShape.h"
 #include "../geometry/CollisionShape.h"
-#include "../collision/BroadPhaseCollisionAlgorithm.h"
+#include "../collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -84,7 +84,7 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	pShape->m_CollisionShape = pApp.m_CollisionAttributes.m_Shape;
 	pShape->m_CollisionFilter = pApp.m_CollisionAttributes.m_Filter;
 	
-	if( pShape->m_CollisionShape->m_ShapeType == EST_EDGE )
+	if( pShape->m_CollisionShape->m_ShapeType == EST_EDGE || pShape->m_CollisionShape->m_ShapeType == EST_EDGE_CHAIN )
 		m_BodyType = EBT_STATIC;
 	
 	Matrix3f xForm;
@@ -105,8 +105,8 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	calculateMassAttributes();
 	updateAABB();
 	
-	m_PhysicalWorld->getBroadPhaseAlgorithm()->addBroadPhaseNode(pShape);
-	
+	m_PhysicalWorld->addBroadPhaseNode(pShape);
+
 	return pShape;
 }
 

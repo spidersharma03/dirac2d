@@ -51,14 +51,36 @@ dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3
 	
 	// Find Closest Distance between Edge and Circle.
 	Vector2f outPoint;
-	findClosestPoint(edge->m_Vertex1, edge->m_Vertex2, c, outPoint);
+	dfloat u = 0.0f;
+	findBaryCentricCoordinate( edge->m_Vertex1, edge->m_Vertex2, c, u );
+	
+	// Centre of the Circle on the Left of the Line Segment
+	if( u < 0.0f )
+	{
+		if( edge->m_bHasPrev )
+			return false;
+		outPoint = edge->m_Vertex1;		
+	}
+	// Centre of the Circle on the Right of the Line Segment
+	else if( u > 1.0f )
+	{
+		if( edge->m_bHasNext )
+			return false;
+		outPoint = edge->m_Vertex2;
+	}
+	// Centre of the Circle inside the Line Segment.
+	else 
+	{
+		outPoint = edge->m_Vertex1 + (edge->m_Vertex2 - edge->m_Vertex1 ) * u;
+	}
+
+	
 	dfloat D2 = c.distanceSquared(outPoint);
 	
 	if( D2 > circle->m_Radius * circle->m_Radius )
 	{
 		return false;
 	}
-	
 	contactManifold->m_NumContacts = 1;
 	contactManifold->m_ContactNormal = outPoint - c; // Contact Normal points from Shape2(Circle) to Shape1(Edge)
 	dfloat d = contactManifold->m_ContactNormal.length();

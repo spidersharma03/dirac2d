@@ -108,7 +108,7 @@ static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& e
 	for( dint32 i=0; i<numVertices; i++ )
 	{
 		Vector2f& p =  vertices[i];
-		float dot = p.dot(normal);
+		dfloat dot = p.dot(normal);
 		if( dot > maxDot )
 		{
 			maxDot = dot;
