@@ -12,7 +12,7 @@
 #include "../dynamics/PhysicalShape.h"
 #include "../dynamics/contacts/Contact.h"
 #include "../geometry/CollisionShape.h"
-#include "BroadPhaseCollisionAlgorithm.h"
+#include "broadPhase/BroadPhaseCollisionAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
