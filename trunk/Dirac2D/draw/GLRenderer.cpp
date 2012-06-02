@@ -12,6 +12,7 @@
 #include "../geometry/Circle.h"
 #include "../geometry/Capsule.h"
 #include "../geometry/Edge.h"
+#include "../geometry/EdgeChain.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -25,6 +26,16 @@ void GLRenderer::drawShape(CollisionShape* shape)
 		case EST_EDGE:
 			drawLine( ((Edge*)shape)->m_Vertex1, ((Edge*)shape)->m_Vertex2);
 			break;
+		case EST_EDGE_CHAIN:
+		{
+			EdgeChain* edgeChain = ((EdgeChain*)shape);
+			for( dint32 e=0; e<edgeChain->getNumEdges(); e++ )
+			{
+				Edge* edge = edgeChain->getEdge(e);
+				drawLine( edge->m_Vertex1, edge->m_Vertex2);
+			}
+			break;
+		}
 		case EST_CIRCLE:
 			drawCircle( shape->m_Centroid.x, shape->m_Centroid.y, ((Circle*)shape)->getRadius());
 			break;

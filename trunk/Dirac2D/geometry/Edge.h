@@ -16,6 +16,8 @@ BEGIN_NAMESPACE_DIRAC2D
 class Edge : public CollisionShape
 {
 public:
+	Edge();
+	
 	Edge(Vector2f& vertex1, Vector2f& vertex2);
 	
 	Edge(const Edge& other);
@@ -34,8 +36,10 @@ protected:
 	
 	virtual void findMomentOfInertia();
 	
+	friend class EdgeChain;
 public:
 	Vector2f m_Vertex1, m_Vertex2;
+	duchar m_bHasPrev, m_bHasNext;
 	Vector2f m_Normal;
 };
 

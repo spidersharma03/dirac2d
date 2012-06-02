@@ -73,6 +73,7 @@
 #include "geometry/Box.h"
 #include "geometry/RegularPolygon.h"
 #include "geometry/Edge.h"
+#include "geometry/EdgeChain.h"
 
 #include "collision/CollisionDetection.h"
 #include "collision/CollisionDetectionPolygon.h"

@@ -24,6 +24,7 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalWorld;
 class CollisionManager;
 class PhysicalShape;
+class CollisionShape;
 
 // This structure is used by the BroadPhase as a Proxy to the PhysicalShape
 class BroadPhaseNode
@@ -38,6 +39,7 @@ public:
 	}
 	
 	PhysicalShape* m_PhysicalShape;
+	CollisionShape* m_CollisionShape;
 	BroadPhaseNode* m_Next;
 	BroadPhaseNode* m_Prev;
 };
@@ -49,14 +51,11 @@ public:
 	BroadPhaseCollisionAlgorithm(CollisionManager* collisionManager):m_pCollisionManager(collisionManager)
 	{
 		m_BroadPhaseNodeList = 0;
-		m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 	}
 	
 	// Adds a Physical Shape to the Broad Phase Node List
-	void addBroadPhaseNode(PhysicalShape* pShape)
+	void addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
 	{
-		BroadPhaseNode *pBroadPhaseNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
-		pBroadPhaseNode->m_PhysicalShape = pShape;
 		pBroadPhaseNode->m_Prev = 0;
 		pBroadPhaseNode->m_Next = m_BroadPhaseNodeList;
 		
@@ -68,25 +67,25 @@ public:
 	}
 
 	// Removes a Proxy from the Broad Phase Node List
-	void remove(PhysicalShape* pShape)
+	void removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
 	{
-//		BroadPhaseNode* prevNode = pShape->m_Prev;
-//		BroadPhaseProxy* nextProxy = pProxy->m_Next;
-//		
-//		if( prevProxy )
-//		{
-//			prevProxy->m_Next = nextProxy;
-//		}
-//		else 
-//		{
-//			m_ProxyList = nextProxy;
-//		}
-//		
-//		
-//		if( nextProxy )
-//		{
-//			nextProxy->m_Prev = prevProxy;
-//		}
+		BroadPhaseNode* prevNode = pBroadPhaseNode->m_Prev;
+		BroadPhaseNode* nextNode = pBroadPhaseNode->m_Next;
+		
+		if( prevNode )
+		{
+			prevNode->m_Next = nextNode;
+		}
+		else 
+		{
+			m_BroadPhaseNodeList = nextNode;
+		}
+		
+		
+		if( nextNode )
+		{
+			nextNode->m_Prev = prevNode;
+		}
 	}
 	
 	virtual void update() = 0;
@@ -95,7 +94,6 @@ public:
 protected:
 	
 	BroadPhaseNode* m_BroadPhaseNodeList; // List of All BroadPhase Nodes.
-	MemoryAllocator<BroadPhaseNode> *m_BroadPhaseNodePool;
 
 	PhysicalWorld* m_PhysicalWorld;
 	CollisionManager* m_pCollisionManager;
