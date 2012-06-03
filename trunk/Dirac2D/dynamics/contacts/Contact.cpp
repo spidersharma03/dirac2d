@@ -25,7 +25,7 @@ void Contact::update()
 	oldConstraint[1].m_NormalImpulse = m_ContactConstraint[1].m_NormalImpulse;
 	oldConstraint[1].m_TangentImpulse = m_ContactConstraint[1].m_TangentImpulse;
 	
-	dbool bRes = intersectShapes(m_PhysicalShape1->m_CollisionShape, m_PhysicalShape1->m_ParentBody->m_Transform, m_PhysicalShape2->m_CollisionShape, m_PhysicalShape2->m_ParentBody->m_Transform, &m_Manifold);
+	dbool bRes = intersectShapes(m_CollisionShape1, m_PhysicalShape1->m_ParentBody->m_Transform, m_CollisionShape2, m_PhysicalShape2->m_ParentBody->m_Transform, &m_Manifold);
 	
 	// Flip the Physical Shapes.
 	if( m_Manifold.m_bFlipShapes )

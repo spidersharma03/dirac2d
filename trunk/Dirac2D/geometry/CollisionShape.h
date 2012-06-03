@@ -32,17 +32,17 @@ public:
 		m_AABB      = other.m_AABB;		
 	}
 	
-	dfloat getArea() const
+	inline dfloat getArea() const
 	{
 		return m_Area;
 	}
 	
-	dfloat getMomentOfInertia() const
+	inline dfloat getMomentOfInertia() const
 	{
 		return m_I;
 	}
 	
-	inline SHAPE_TYPE getShapeType()
+	inline SHAPE_TYPE getShapeType() const
 	{
 		return m_ShapeType;
 	}

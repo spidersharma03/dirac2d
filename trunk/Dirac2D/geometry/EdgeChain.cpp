@@ -22,8 +22,9 @@ EdgeChain::EdgeChain(Vector2f* vertices, dint32 numVertices)
 	Edge* edge = m_EdgeList + e;
 	edge->m_Vertex1 = vertices[e];
 	edge->m_Vertex2 = vertices[e+1];
-	
-	for( e=1; e<m_NumEdges; e++ )
+	edge->m_bHasNext = true;
+
+	for( e=1; e<m_NumEdges-1; e++ )
 	{
 		edge = m_EdgeList + e;
 		edge->m_Vertex1 = vertices[e];
@@ -32,8 +33,11 @@ EdgeChain::EdgeChain(Vector2f* vertices, dint32 numVertices)
 		edge->m_bHasNext = true;
 	}
 	
+	edge = m_EdgeList + e;
+	edge->m_bHasPrev = true;
 	edge->m_Vertex1 = vertices[e];
 	edge->m_Vertex2 = vertices[e+1];
+	m_ShapeType = EST_EDGE_CHAIN;
 }
 
 EdgeChain::EdgeChain(const EdgeChain& other)
@@ -52,6 +56,8 @@ dbool EdgeChain::isPointInside(Point2f& p)
 
 void EdgeChain::updateAABB(Matrix3f& xForm)
 {
+	for( dint32 e=0; e<m_NumEdges; e++ )
+		(m_EdgeList+e)->updateAABB(xForm);
 }
 
 Edge* EdgeChain::getEdge(dint32 index) const

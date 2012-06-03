@@ -27,7 +27,7 @@ class ContactSolver;
 class Contact;
 class Renderer;
 class BroadPhaseCollisionAlgorithm;
-class BroadPhaseNode;
+class ContactNode;
 class PhysicalShape;
 
 class PhysicalWorld
@@ -74,7 +74,7 @@ public:
 	
 protected:
 	
-	void addBroadPhaseNode( PhysicalShape* pShape);
+	void addToBroadPhase( PhysicalShape* pShape);
 	
 private:
 	CollisionManager* m_CollisionManager;
@@ -102,7 +102,7 @@ private:
 	dbool m_bWarmStart;
 	
 	MemoryAllocator<PhysicalBody> *m_PhysicalBodyPool;
-	MemoryAllocator<BroadPhaseNode> *m_BroadPhaseNodePool;
+	MemoryAllocator<ContactNode> *m_BroadPhaseNodePool;
 
 	dbool m_bDrawShapes;
 	dbool m_bDrawBoundingBoxes;

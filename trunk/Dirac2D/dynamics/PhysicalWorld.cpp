@@ -10,6 +10,7 @@
 #include "PhysicalBody.h"
 #include "PhysicalShape.h"
 #include "../geometry/CollisionShape.h"
+#include "../geometry/Edge.h"
 #include "../geometry/EdgeChain.h"
 #include "../collision/CollisionManager.h"
 
@@ -43,14 +44,14 @@ PhysicalWorld::PhysicalWorld()
 	m_bWarmStart = true;
 
 	m_bDrawShapes = true;
-	m_bDrawBoundingBoxes = false;
+	m_bDrawBoundingBoxes = true;
 	m_bDrawContacts = true;
 	m_bDrawConstraints = false;
 	m_bDrawCentreOfMass = false;
 	
 	m_PhysicalBodyList = 0;
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
-	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
+	m_BroadPhaseNodePool = new MemoryAllocator<ContactNode>(MAX_PROXIES);
 }
 	
 PhysicalBody* PhysicalWorld::createPhysicalBody()
@@ -177,6 +178,16 @@ void PhysicalWorld::draw()
 				m_Renderer->setColor(255, 255, 0);
 				AABB2f& aabb = pShape->m_CollisionShape->getAABB();
 				m_Renderer->drawAABB(aabb);
+				
+				if( pShape->m_CollisionShape->getShapeType() == EST_EDGE_CHAIN )
+				{
+					EdgeChain* edgeChain = (EdgeChain*)pShape->m_CollisionShape;
+					for( dint32 e=0; e<edgeChain->getNumEdges(); e++ )
+					{
+						Edge* edge = edgeChain->getEdge(e);
+						m_Renderer->drawAABB(edge->getAABB());
+					}
+				}
 			}
 			pShape = pShape->m_Next;
 		}
@@ -235,25 +246,24 @@ void PhysicalWorld::setRenderer(Renderer* renderer)
 	m_Renderer = renderer;
 }
 	
-void PhysicalWorld::addBroadPhaseNode( PhysicalShape* pShape)
+void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 {
-	BroadPhaseNode* pNode = 0;
+	ContactNode* pNode = 0;
 	if( pShape->m_CollisionShape->getShapeType() == EST_EDGE_CHAIN )
 	{
 		EdgeChain* edgeChain = (EdgeChain*)pShape->m_CollisionShape;
 		dint32 numEdges = edgeChain->getNumEdges();
 		for (dint32 e=0; e<numEdges; e++) 
 		{
-			pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
+			pNode = new(m_BroadPhaseNodePool->Allocate()) ContactNode();
 			pNode->m_PhysicalShape = pShape;
 			pNode->m_CollisionShape = (CollisionShape*)edgeChain->getEdge(e);
-			m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 			m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 		}
 	}
 	else 
 	{
-		pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
+		pNode = new(m_BroadPhaseNodePool->Allocate()) ContactNode();
 		pNode->m_PhysicalShape = pShape;
 		pNode->m_CollisionShape = pShape->m_CollisionShape;
 		m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);

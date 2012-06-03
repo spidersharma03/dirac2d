@@ -27,12 +27,12 @@ void NaiveBroadPhaseCollisionAlgorithm::update()
 {
 	set<ContactPair>& contactPairPool = m_pCollisionManager->getContactPairPool();
 	// n2 Collision test
-	BroadPhaseNode* pNode1 = m_BroadPhaseNodeList;
+	ContactNode* pNode1 = m_BroadPhaseNodeList;
 	while( pNode1 )
 	{
 		PhysicalShape* pShape1 = pNode1->m_PhysicalShape;
 		PhysicalBody* pBody1 = pShape1->m_ParentBody;
-		BroadPhaseNode* pNode2 = pNode1;
+		ContactNode* pNode2 = pNode1;
 		while( pNode2 )
 		{
 			PhysicalShape* pShape2 = pNode2->m_PhysicalShape;
@@ -51,14 +51,14 @@ void NaiveBroadPhaseCollisionAlgorithm::update()
 			
 			dbool bRes = true;
 			
-			AABB2f& aabb1 = pShape1->m_CollisionShape->getAABB();
-			AABB2f& aabb2 = pShape2->m_CollisionShape->getAABB();
+			AABB2f& aabb1 = pNode1->m_CollisionShape->getAABB();
+			AABB2f& aabb2 = pNode2->m_CollisionShape->getAABB();
 			
 			bRes = aabb1.intersectAABB(aabb2);
 			
-			if( bRes  && (contactPairPool.insert(ContactPair(pShape1, pShape2) )).second )
+			if( bRes  && (contactPairPool.insert(ContactPair(pNode1->m_CollisionShape, pNode2->m_CollisionShape) )).second )
 			{
-				m_pCollisionManager->addContact(pShape1, pShape2);
+				m_pCollisionManager->addContactPair(pNode1, pNode2);
 			}
 			pNode2 = pNode2->m_Next;
 		}  		

@@ -56,7 +56,7 @@ void ContactSolver::buildJacobian()
 			dfloat depth = contact->m_ContactPoint[i].m_Depth;
 			
 			// Effective mass for Normal Impulses
-			contact->m_NormalMass[i] = 1.0f/JInvMJT + contact->m_CFM;
+			contact->m_NormalMass[i] = 1.0f/JInvMJT;
 			// Positional Error for Position Stabilization( Baumgarte )
 			constraint.m_PositionError = -contact->m_ERP * MIN( 0.0f, depth + ALLOWED_PENETRATION) * 600.0f;
 			
