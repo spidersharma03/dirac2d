@@ -26,22 +26,14 @@ class CollisionManager;
 class PhysicalShape;
 class CollisionShape;
 
-// This structure is used by the BroadPhase as a Proxy to the PhysicalShape
-class BroadPhaseNode
+// This structure is used by the BroadPhase
+class ContactNode
 {
 public:
-	BroadPhaseNode()
-	{
-	}
-	
-	BroadPhaseNode(const BroadPhaseNode& other)
-	{
-	}
-	
 	PhysicalShape* m_PhysicalShape;
 	CollisionShape* m_CollisionShape;
-	BroadPhaseNode* m_Next;
-	BroadPhaseNode* m_Prev;
+	ContactNode* m_Next;
+	ContactNode* m_Prev;
 };
 
 
@@ -54,7 +46,7 @@ public:
 	}
 	
 	// Adds a Physical Shape to the Broad Phase Node List
-	void addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
+	void addBroadPhaseNode(ContactNode* pBroadPhaseNode)
 	{
 		pBroadPhaseNode->m_Prev = 0;
 		pBroadPhaseNode->m_Next = m_BroadPhaseNodeList;
@@ -67,10 +59,10 @@ public:
 	}
 
 	// Removes a Proxy from the Broad Phase Node List
-	void removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
+	void removeBroadPhaseNode(ContactNode* pBroadPhaseNode)
 	{
-		BroadPhaseNode* prevNode = pBroadPhaseNode->m_Prev;
-		BroadPhaseNode* nextNode = pBroadPhaseNode->m_Next;
+		ContactNode* prevNode = pBroadPhaseNode->m_Prev;
+		ContactNode* nextNode = pBroadPhaseNode->m_Next;
 		
 		if( prevNode )
 		{
@@ -80,7 +72,6 @@ public:
 		{
 			m_BroadPhaseNodeList = nextNode;
 		}
-		
 		
 		if( nextNode )
 		{
@@ -93,7 +84,7 @@ public:
 
 protected:
 	
-	BroadPhaseNode* m_BroadPhaseNodeList; // List of All BroadPhase Nodes.
+	ContactNode* m_BroadPhaseNodeList; // List of All BroadPhase Nodes.
 
 	PhysicalWorld* m_PhysicalWorld;
 	CollisionManager* m_pCollisionManager;

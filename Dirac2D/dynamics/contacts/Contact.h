@@ -23,7 +23,7 @@ class CollisionShape;
 // Pair 
 struct ContactPair
 {
-	ContactPair( PhysicalShape* shape1, PhysicalShape* shape2 )
+	ContactPair( CollisionShape* shape1, CollisionShape* shape2 )
 	{
 		if( shape1 < shape2 )
 		{
@@ -37,8 +37,8 @@ struct ContactPair
 		}
 
 	}
-	PhysicalShape* m_Shape1;
-	PhysicalShape* m_Shape2;
+	CollisionShape* m_Shape1;
+	CollisionShape* m_Shape2;
 };
 
 
@@ -132,7 +132,6 @@ public:
 	Contact()
 	{
 		m_ERP = 0.2f;
-		m_CFM = 0.0f;
 	}
 	
 	void operator= ( Contact& other )
@@ -153,7 +152,6 @@ public:
 		m_FrictionalMass[1] = other.m_FrictionalMass[1];
 		
 		m_ERP = other.m_ERP;
-		m_ERP = other.m_ERP;
 	}
 	
 	Contact(const Contact& other)
@@ -173,7 +171,6 @@ public:
 		m_FrictionalMass[0] = other.m_FrictionalMass[0];
 		m_FrictionalMass[1] = other.m_FrictionalMass[1];
 		m_ERP = other.m_ERP;
-		m_ERP = other.m_ERP;
 	}
 	
 	void update();
@@ -186,6 +183,8 @@ public:
 	// Colliding Shapes
 	PhysicalShape* m_PhysicalShape1;
 	PhysicalShape* m_PhysicalShape2;
+	CollisionShape* m_CollisionShape1;
+	CollisionShape* m_CollisionShape2;
 	
 	// Effective mass matrix for Normal impulses. if the number of contacts are one then first element is used. if it is two then based upon the solution strategy the full matrix or the 
 	// first two elements are used.
@@ -200,8 +199,6 @@ public:
 	
 	// Error reduction parameter. this is used to make sure that the constarint dosent drift over time. should be less than 1.0f/timeStep.
 	dfloat m_ERP;
-	// Constraint force mixing. this is used to soften the constraint and can be used as a softness parameter.
-	dfloat m_CFM;
 	
 	Contact* m_Prev;
 	Contact* m_Next;

@@ -96,11 +96,11 @@ void CollisionManager::updateContacts()
 		PhysicalBody* body1 = contact->m_PhysicalShape1->m_ParentBody;
 		PhysicalBody* body2 = contact->m_PhysicalShape2->m_ParentBody;
 		
-		PhysicalShape* pShape1 = contact->m_PhysicalShape1;
-		PhysicalShape* pShape2 = contact->m_PhysicalShape2;
+		CollisionShape* pShape1 = contact->m_CollisionShape1;
+		CollisionShape* pShape2 = contact->m_CollisionShape2;
 		
-		AABB2f& aabb1 = pShape1->m_CollisionShape->getAABB();
-		AABB2f& aabb2 = pShape2->m_CollisionShape->getAABB();
+		AABB2f& aabb1 = pShape1->getAABB();
+		AABB2f& aabb2 = pShape2->getAABB();
 		
 		// Destroy the Contact if it dosen't persist
 		if( !aabb1.intersectAABB(aabb2) )
@@ -133,12 +133,15 @@ void CollisionManager::addContact(PhysicalShape* pShape1, PhysicalShape* pShape2
 	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);
 }
 
-void CollisionManager::addContactPair(ContactPair& contactPair)
+void CollisionManager::addContactPair(ContactNode* pNode1, ContactNode* pNode2)
 {
 	Contact* contact = createContact();
-	contact->m_PhysicalShape1 = contactPair.m_Shape1;
-	contact->m_PhysicalShape2 = contactPair.m_Shape2;
-	
+	contact->m_PhysicalShape1 = pNode1->m_PhysicalShape;
+	contact->m_PhysicalShape2 = pNode2->m_PhysicalShape;
+
+	contact->m_CollisionShape1 = pNode1->m_CollisionShape;
+	contact->m_CollisionShape2 = pNode2->m_CollisionShape;
+
 	// Awake the Bodies
 	contact->m_PhysicalShape1->m_ParentBody->setSleeping(false);
 	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);

@@ -561,7 +561,7 @@ void demo10()
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
 	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
-	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->setAngle(M_PI_4/5);
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
@@ -573,7 +573,7 @@ void demo10()
 	// Create Circle
 	dfloat y = 0.5f;
 	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
-	//pBodyCapsule->m_BodyType = EBT_STATIC;
+	//pBodyCompound->m_BodyType = EBT_STATIC;
 	pBodyCompound->setPosition(Vector2f(0.0,y));
 	//pBodyCapsule->setAngle(PI_4*0.9);
 	dfloat capsuleRadius = 0.15f;
@@ -589,7 +589,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo9();
+	demo10();
 }
 
 void changeSize(int w, int h) 

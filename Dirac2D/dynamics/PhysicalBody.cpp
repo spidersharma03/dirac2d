@@ -76,8 +76,6 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	pShape->m_ParentBody = this;
 	pShape->m_Restitution = pApp.m_PhysicalAttributes.m_Restitution;
 	pShape->m_Friction = pApp.m_PhysicalAttributes.m_Friction;
-	pShape->m_Angle = pApp.m_PhysicalAttributes.m_Angle;
-	pShape->m_Position = pApp.m_PhysicalAttributes.m_Position;
 	
 	pShape->m_MassAttributes = pApp.m_MassAttributes;
 	
@@ -88,8 +86,8 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 		m_BodyType = EBT_STATIC;
 	
 	Matrix3f xForm;
-	xForm.translate(pShape->m_Position);	
-	xForm.rotate(pShape->m_Angle);
+	xForm.translate(pApp.m_PhysicalAttributes.m_Position);	
+	xForm.rotate(pApp.m_PhysicalAttributes.m_Angle);
 
 	pShape->m_CollisionShape->updateShape(xForm);
 	
@@ -105,7 +103,7 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	calculateMassAttributes();
 	updateAABB();
 	
-	m_PhysicalWorld->addBroadPhaseNode(pShape);
+	m_PhysicalWorld->addToBroadPhase(pShape);
 
 	return pShape;
 }

@@ -40,7 +40,6 @@ protected:
 public:
 	Vector2f m_Vertex1, m_Vertex2;
 	duchar m_bHasPrev, m_bHasNext;
-	Vector2f m_Normal;
 };
 
 END_NAMESPACE_DIRAC2D
