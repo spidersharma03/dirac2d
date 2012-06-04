@@ -33,6 +33,10 @@ void Contact::update()
 		PhysicalShape* temp = m_PhysicalShape2;
 		m_PhysicalShape2 = m_PhysicalShape1;
 		m_PhysicalShape1  = temp;
+		
+		CollisionShape* t = m_CollisionShape2;
+		m_CollisionShape2 = m_CollisionShape1;
+		m_CollisionShape1 = t;
 	}
 	
 	if( bRes )
