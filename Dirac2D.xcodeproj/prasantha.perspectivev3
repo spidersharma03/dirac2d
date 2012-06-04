@@ -277,19 +277,20 @@
 								<string>C257F146154E71AE00270D77</string>
 								<string>C257F14F154E71AE00270D77</string>
 								<string>C257F158154E71AE00270D77</string>
+								<string>1C77FABC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>56</integer>
-									<integer>43</integer>
+									<integer>28</integer>
+									<integer>11</integer>
 									<integer>2</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 195}, {317, 884}}</string>
+							<string>{{0, 200}, {317, 884}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -336,7 +337,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>C2D13A16157BA8310056341B</string>
+										<string>C2D143B4157CFC170056341B</string>
 										<key>history</key>
 										<array>
 											<string>C257EBEC154584EC00270D77</string>
@@ -365,7 +366,6 @@
 											<string>C2EB32A01574FDCC00E92679</string>
 											<string>C2EB379A157604B300E92679</string>
 											<string>C2EB37C4157606BB00E92679</string>
-											<string>C2F3097015762AF200D4F2F4</string>
 											<string>C2F30A0915762E4400D4F2F4</string>
 											<string>C2F30B5B1576421300D4F2F4</string>
 											<string>C2F30BC81576506E00D4F2F4</string>
@@ -373,10 +373,7 @@
 											<string>C2F30C0115765F5500D4F2F4</string>
 											<string>C2F30C0515765F5500D4F2F4</string>
 											<string>C2F30C16157660FA00D4F2F4</string>
-											<string>C2F30C17157660FA00D4F2F4</string>
-											<string>C2F30C9E15766C8600D4F2F4</string>
 											<string>C2F30D0B1578AF9A00D4F2F4</string>
-											<string>C2F30D0E1578AF9A00D4F2F4</string>
 											<string>C2F30E051578DF9600D4F2F4</string>
 											<string>C2F30E061578DF9600D4F2F4</string>
 											<string>C2F30E3F1578E40100D4F2F4</string>
@@ -386,32 +383,36 @@
 											<string>C2F30EF81578FB9E00D4F2F4</string>
 											<string>C2F30F101578FCA200D4F2F4</string>
 											<string>C2F30F9A157900A200D4F2F4</string>
-											<string>C2D1380B157B9A310056341B</string>
 											<string>C2D1380C157B9A310056341B</string>
 											<string>C2D1380D157B9A310056341B</string>
 											<string>C2D1380E157B9A310056341B</string>
-											<string>C2D1380F157B9A310056341B</string>
-											<string>C2D13810157B9A310056341B</string>
-											<string>C2D13811157B9A310056341B</string>
 											<string>C2D13812157B9A310056341B</string>
-											<string>C2D13813157B9A310056341B</string>
 											<string>C2D13814157B9A310056341B</string>
-											<string>C2D13815157B9A310056341B</string>
 											<string>C2D13841157B9ABC0056341B</string>
 											<string>C2D1389B157B9E0A0056341B</string>
-											<string>C2D138B9157B9EB20056341B</string>
-											<string>C2D138BA157B9EB20056341B</string>
 											<string>C2D138E9157B9F610056341B</string>
 											<string>C2D1391D157BA0790056341B</string>
-											<string>C2D1391F157BA0790056341B</string>
-											<string>C2D13930157BA0A80056341B</string>
-											<string>C2D13944157BA1020056341B</string>
-											<string>C2D139B9157BA44F0056341B</string>
-											<string>C2D139CA157BA4870056341B</string>
-											<string>C2D139F1157BA55F0056341B</string>
-											<string>C2D139F6157BA61A0056341B</string>
-											<string>C2D13A08157BA6980056341B</string>
-											<string>C2D13A15157BA8310056341B</string>
+											<string>C2D13A71157C89EA0056341B</string>
+											<string>C2D13A8E157C8BDB0056341B</string>
+											<string>C2D13AE5157C91EE0056341B</string>
+											<string>C2D13BB2157C9F570056341B</string>
+											<string>C2D13BB3157C9F570056341B</string>
+											<string>C2D13C02157CA1610056341B</string>
+											<string>C2D13C0E157CA1EC0056341B</string>
+											<string>C2D14245157CF1600056341B</string>
+											<string>C2D14246157CF1600056341B</string>
+											<string>C2D14247157CF1600056341B</string>
+											<string>C2D14248157CF1600056341B</string>
+											<string>C2D14249157CF1600056341B</string>
+											<string>C2D1424A157CF1600056341B</string>
+											<string>C2D1424B157CF1600056341B</string>
+											<string>C2D1424C157CF1600056341B</string>
+											<string>C2D1424D157CF1600056341B</string>
+											<string>C2D1431C157CF41C0056341B</string>
+											<string>C2D1435F157CF5CD0056341B</string>
+											<string>C2D143AA157CF7530056341B</string>
+											<string>C2D143B2157CFC170056341B</string>
+											<string>C2D143B3157CFC170056341B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -425,18 +426,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1566, 647}}</string>
+								<string>{{0, 0}, {1566, 717}}</string>
 								<key>RubberWindowFrame</key>
 								<string>1 115 1905 943 0 0 1920 1058 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>647pt</string>
+							<string>717pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>250pt</string>
+							<string>180pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -504,7 +505,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1566, 223}}</string>
+										<string>{{10, 27}, {1566, 153}}</string>
 										<key>RubberWindowFrame</key>
 										<string>1 115 1905 943 0 0 1920 1058 </string>
 									</dict>
@@ -729,7 +730,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>C2D13A17157BA8310056341B</string>
 		<string>C2D137B5157B7B190056341B</string>
 		<string>C2D137B6157B7B190056341B</string>
 		<string>/Users/prasantha/SVN/Dirac2d/Dirac2D.xcodeproj</string>

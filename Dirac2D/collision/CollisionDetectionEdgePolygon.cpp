@@ -54,21 +54,44 @@ dbool intersectEdgeCircle( Edge* edge, Matrix3f& xform1, Circle* circle, Matrix3
 	dfloat u = 0.0f;
 	findBaryCentricCoordinate( edge->m_Vertex1, edge->m_Vertex2, c, u );
 	
-	// Centre of the Circle on the Left of the Line Segment
+	// Centre of the Circle on the Left of the Edge
 	if( u < 0.0f )
 	{
-		if( edge->m_bHasPrev )
-			return false;
 		outPoint = edge->m_Vertex1;		
+		dfloat D2 = c.distanceSquared(outPoint);
+		if( D2 > circle->m_Radius * circle->m_Radius )
+		{
+			return false;
+		}
+		if( edge->m_bHasPrev )
+		{
+			// If this Edge is having a Previous Vertex, then find if the Circle Centre Lies within the Prev Edge.
+			Vector2f d = edge->m_Vertex1 - edge->m_PrevVertex;
+			dfloat lambda = (c - edge->m_Vertex1 ).dot(d);
+			// Return if the Circle Centre lies within the Prev Edge
+			if( lambda < 0.0f )
+				return false;
+		}
 	}
-	// Centre of the Circle on the Right of the Line Segment
+	// Centre of the Circle on the Right of the Edge
 	else if( u > 1.0f )
 	{
-		if( edge->m_bHasNext )
+		outPoint = edge->m_Vertex2;		
+		dfloat D2 = c.distanceSquared(outPoint);
+		if( D2 > circle->m_Radius * circle->m_Radius )
+		{
 			return false;
-		outPoint = edge->m_Vertex2;
+		}
+		if( edge->m_bHasNext )
+		{
+			// If this Edge is having a Next Vertex, then find if the Circle Centre Lies within the Next Edge.
+			Vector2f d = edge->m_Vertex2 - edge->m_NextVertex;
+			dfloat lambda = (c - edge->m_Vertex2 ).dot(d);
+			if( lambda < 0.0f )
+				return false;
+		}
 	}
-	// Centre of the Circle inside the Line Segment.
+	// Centre of the Circle inside the Edge.
 	else 
 	{
 		outPoint = edge->m_Vertex1 + (edge->m_Vertex2 - edge->m_Vertex1 ) * u;
@@ -122,44 +145,145 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 	p1 = c - axis * ( capsuleHeight*0.5f );
 	
 	Vector2f outPoint1, outPoint2;
+	
 	// Find Closest Points on Edge.
-	findClosestPoint(edge->m_Vertex1, edge->m_Vertex2, p0, outPoint1);
-	findClosestPoint(edge->m_Vertex1, edge->m_Vertex2, p1, outPoint2);
+	dfloat u1, u2;
+	findBaryCentricCoordinate(edge->m_Vertex1, edge->m_Vertex2, p0, u1);
+	findBaryCentricCoordinate(edge->m_Vertex1, edge->m_Vertex2, p1, u2);	
 	
 	// Accept/Reject Points
 	contactManifold->m_NumContacts = 0;
 	
-	dfloat D1 = outPoint1.distanceSquared(p0);
-	dfloat D2 = outPoint2.distanceSquared(p1);
+	dbool bRes = false;
+	Vector2f v1, v2;
+	dfloat D2;
 	
-	dfloat R = capsuleRadius;
-	R *= R; 
-	
-	// Contact Normal Points from Shape2(Capsule) to Shape1(Edge)
-	if( D1 < D2 )
+	// First Closest Point is on the Left of the Edge
+	if( u1 < 0.0f )
 	{
-		contactManifold->m_ContactNormal = outPoint1 - p0;
+		outPoint1 = edge->m_Vertex1;
+		findClosestPoint(p0, p1, outPoint1, v1);
+		D2 = v1.distanceSquared(outPoint1);
+		if( D2 < capsuleRadius * capsuleRadius )
+		{
+			if( edge->m_bHasPrev )
+			{
+				// If this Edge is having a Previous Vertex, then find if the First Closest Point on Capsule Lies within the Prev Edge.
+				Vector2f d = edge->m_Vertex1 - edge->m_PrevVertex;
+				dfloat lambda = (v1 - edge->m_Vertex1 ).dot(d);
+				// Return if the First Closest Point on Capsule Lies within the Prev Edge
+				if( lambda > 0.0f )
+					bRes = true;
+			}
+			else 
+				bRes = true;
+		}
 	}
+	// First Closest Point is on the Right of the Edge
+	else if( u1 > 1.0f )
+	{
+		outPoint1 = edge->m_Vertex2;
+		findClosestPoint(p0, p1, outPoint1, v1);
+		D2 = v1.distanceSquared(outPoint1);
+		if( D2 < capsuleRadius * capsuleRadius )
+		{
+			if( edge->m_bHasNext )
+			{
+				// If this Edge is having a Next Vertex, then find if the First Closest Point Lies within the Next Edge.
+				Vector2f d = edge->m_Vertex2 - edge->m_NextVertex;
+				dfloat lambda = (v1 - edge->m_Vertex2 ).dot(d);
+				// Return if the First Closest Point on Capsule Lies within the Next Edge
+				if( lambda > 0.0f )
+					bRes = true;
+			}
+			else 
+				bRes = true; 
+		}
+	}
+	// First Closest Point is in between the Edge
 	else 
 	{
-		contactManifold->m_ContactNormal = outPoint2 - p1;
+		outPoint1 = edge->m_Vertex1 + (edge->m_Vertex2 - edge->m_Vertex1 ) * u1;
+		findClosestPoint(p0, p1, outPoint1, v1);
+		D2 = v1.distanceSquared(outPoint1);
+		if( D2 < capsuleRadius * capsuleRadius )
+			bRes = true;
 	}
-	contactManifold->m_ContactNormal.normalize();
 	
-	if( D1 < R )
+	if( bRes )
 	{
-		p0 += contactManifold->m_ContactNormal * capsuleRadius;
+		contactManifold->m_ContactNormal = outPoint1 - v1;
+		contactManifold->m_ContactNormal.normalize();
 		
-		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (p0+outPoint1)*0.5f;
-		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D1) );
+		v1 += contactManifold->m_ContactNormal * capsuleRadius;
+		
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v1+outPoint1)*0.5f;
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D2) );
 		contactManifold->m_NumContacts++;
 	}
 	
-	if( D2 < R )
+	bRes = false;
+	
+	// Second Closest Point is on the Left of the Edge
+	if( u2 < 0.0f )
 	{
-		p1 += contactManifold->m_ContactNormal * capsuleRadius;
+		outPoint2 = edge->m_Vertex1;
+		findClosestPoint(p0, p1, outPoint2, v2);
+		dfloat D2 = v2.distanceSquared(outPoint2);
+		if( D2 < capsuleRadius * capsuleRadius )
+		{
+			if( edge->m_bHasPrev )
+			{
+				// If this Edge is having a Previous Vertex, then find if the Second Closest Point Lies within the Previous Edge.
+				Vector2f d = edge->m_Vertex1 - edge->m_PrevVertex;
+				dfloat lambda = (v1 - edge->m_Vertex1 ).dot(d);
+				// Return if the Second Closest Point on Capsule Lies within the Prev Edge
+				if( lambda > 0.0f )
+					bRes = true;
+			}
+			else 
+				bRes = true;
+		}	
+	}
+	// Second Closest Point is on the Right of the Edge
+	else if( u2 > 1.0f )
+	{
+		outPoint2 = edge->m_Vertex2;
+		findClosestPoint(p0, p1, outPoint2, v2);
+		dfloat D2 = v2.distanceSquared(outPoint2);
+		if( D2 < capsuleRadius * capsuleRadius )
+		{
+			if( edge->m_bHasNext )
+			{
+				// If this Edge is having a Next Vertex, then find if the Second Closest Point Lies within the Next Edge.
+				Vector2f d = edge->m_Vertex2 - edge->m_NextVertex;
+				dfloat lambda = (v1 - edge->m_Vertex2 ).dot(d);
+				// Return if the Second Closest Point on Capsule Lies within the Next Edge
+				if( lambda > 0.0f )
+					bRes = true;
+			}
+			else 
+				bRes = true;
+		}
+	}
+	// Second Closest Point is in between the Edge
+	else 
+	{
+		outPoint2 = edge->m_Vertex1 + (edge->m_Vertex2 - edge->m_Vertex1 ) * u2;
+		findClosestPoint(p0, p1, outPoint2, v2);
+		dfloat D2 = v2.distanceSquared(outPoint2);
+		if( D2 < capsuleRadius * capsuleRadius )
+			bRes = true;
+	}
+	
+	if( bRes )
+	{
+		contactManifold->m_ContactNormal = outPoint2 - v2;
+		contactManifold->m_ContactNormal.normalize();
 		
-		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (p1+outPoint2)*0.5f;
+		v2 += contactManifold->m_ContactNormal * capsuleRadius;
+		
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v2+outPoint2)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D2) );
 		contactManifold->m_NumContacts++;
 	}

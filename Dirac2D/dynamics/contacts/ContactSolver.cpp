@@ -152,7 +152,7 @@ void ContactSolver::correctVelocities()
 			Cdot_Tangent = relvel.dot(tangent);
 
 			oldImpulseMag = constraint.m_TangentImpulse;
-			dfloat mu = 0.94f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
+			dfloat mu = 0.4f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
 			dfloat maxFriction = constraint.m_NormalImpulse * mu;
 			correctiveImpulseMag = contact->m_FrictionalMass[i] * Cdot_Tangent;
 			
