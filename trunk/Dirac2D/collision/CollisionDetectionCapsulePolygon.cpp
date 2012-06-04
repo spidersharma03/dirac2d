@@ -219,36 +219,29 @@ dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* 
 	contactManifold->m_NumContacts = 0;
 	
 	// Accept/Reject Above Points
-	dfloat D1 = p0.distanceSquared(v1);
+	// Find First Closest Point on Capsule
+	findClosestPoint(p0, p1, v1, outPoint);
+
+	dfloat D1 = outPoint.distanceSquared(v1);
 	if(  D1 < capsuleRadius * capsuleRadius )
 	{
+		contactManifold->m_ContactNormal = v1 - outPoint;
+		contactManifold->m_ContactNormal.normalize();
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = v1;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -( capsuleRadius - sqrt(D1) );
 		contactManifold->m_NumContacts++;
 	}
 	
-	dfloat D2 = p1.distanceSquared(v2);
+	// Find Second Closest Point on Capsule
+	findClosestPoint(p0, p1, v2, outPoint);
+	dfloat D2 = outPoint.distanceSquared(v2);
 	if( D2 < capsuleRadius * capsuleRadius )
 	{
+		contactManifold->m_ContactNormal = v2 - outPoint;
+		contactManifold->m_ContactNormal.normalize();
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = v2;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -( capsuleRadius - sqrt(D2) );
 		contactManifold->m_NumContacts++;
-	}
-	
-	if( D1 < D2 )
-	{
-		contactManifold->m_ContactNormal = v1 - p0;
-	}
-	else 
-	{
-		contactManifold->m_ContactNormal = v2 - p1;
-	}
-
-	contactManifold->m_ContactNormal.normalize();
-	// Make sure that the Collision Normal Points from Shape2(Capsule) to Shape1(Poly).
-	if( (poly->m_Centroid-c).dot(contactManifold->m_ContactNormal) < 0.0f )
-	{
-			contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
 	}
 	
 	ContactPoint* contactPoints = contactManifold->m_ContactPoints;

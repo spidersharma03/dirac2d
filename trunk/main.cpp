@@ -555,26 +555,37 @@ void demo9()
 	
 }
 
-// Edge Chain
+// Edge Chain - Circle
 void demo10()
 {
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
 	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
-	pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->setAngle(PI_4/115);
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
-	Vector2f vertices[5] = { Vector2f(-1.0f, 0.0f), Vector2f(-0.5f, 0.15f), Vector2f(0.0f, 0.0f)
-		, Vector2f(0.5f, 0.0f), Vector2f(1.0f,0.0f) };
-	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, 5);
+	dint32 edgeCount = 30;
+	Vector2f vertices[edgeCount];
+	dfloat chainLength = 3.0f;
+	dfloat ex = -chainLength/2;
+	dfloat ey = 0.0f;
+	dfloat dx = chainLength/(edgeCount-1);
+	for( dint32 e=0; e<edgeCount; e++ )
+	{
+		vertices[e] = Vector2f(ex,ey);
+		ex += dx;
+		ey = 0.05*sin(e);
+	}
+	
+	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, edgeCount);
 	pBodyGround->createPhysicalShape(pApp);
 	
 	// Create Circle
-	dfloat y = 0.5f;
+	dfloat y = 0.3f;
 	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
 	//pBodyCompound->m_BodyType = EBT_STATIC;
-	pBodyCompound->setPosition(Vector2f(0.35,y));
+	pBodyCompound->setPosition(Vector2f(1.2,y));
 	//pBodyCapsule->setAngle(PI_4*0.9);
 	dfloat capsuleRadius = 0.15f;
 	pApp.m_CollisionAttributes.m_Shape = new Circle(capsuleRadius);
@@ -583,13 +594,86 @@ void demo10()
 	pBodyCompound->createPhysicalShape(pApp);
 }
 
+// Edge Chain - Capsule
+void demo11()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->setAngle(-PI_4/12);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dint32 edgeCount = 30;
+	Vector2f vertices[edgeCount];
+	dfloat chainLength = 3.0f;
+	dfloat ex = chainLength/2;
+	dfloat ey = 0.0f;
+	dfloat dx = chainLength/(edgeCount-1);
+	
+	vertices[0] = Vector2f(-ex,0.0f);
+	vertices[1] = Vector2f(0.0f,0.8f);
+	vertices[2] = Vector2f(ex,0.0f);
+
+	for( dint32 e=0; e<edgeCount; e++ )
+	{
+		vertices[e] = Vector2f(ex,ey);
+		ex -= dx;
+		ey = -0.02*sin(e*1.39);
+	}
+	
+	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, edgeCount);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Capsule
+	dfloat y = 0.4f;
+	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
+	//pBodyCompound->m_BodyType = EBT_STATIC;
+	pBodyCompound->setPosition(Vector2f(-1.2,y));
+	//pBodyCompound->setAngle(PI_4*0.9);
+	dfloat capsuleRadius = 0.15f;
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius*1.0,1.0f*capsuleRadius);
+	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCompound->createPhysicalShape(pApp);
+}
+
+// Capsule Polygon
+void demo12()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.5f));
+	pBodyGround->setAngle(PI_4);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 0.4f; dfloat groundHeight = 0.4f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Capsule
+	dfloat y = 0.4f;
+	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
+	//pBodyCompound->m_BodyType = EBT_STATIC;
+	pBodyCompound->setPosition(Vector2f(0.01,y));
+	//pBodyCompound->setAngle(PI_4*0.9);
+	dfloat capsuleRadius = 0.15f;
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius,4.2f*capsuleRadius);
+	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCompound->createPhysicalShape(pApp);
+}
+
+
 void initScene()
 {
 	pWorld = new PhysicalWorld();
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo10();
+	demo11();
 }
 
 void changeSize(int w, int h) 

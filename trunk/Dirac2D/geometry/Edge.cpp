@@ -42,8 +42,34 @@ void Edge::updateAABB(Matrix3f& xForm)
 	Vector2f v1 = xForm * m_Vertex1;
 	Vector2f v2 = xForm * m_Vertex2;
 	
-	m_AABB.m_LowerBounds = v1;
-	m_AABB.m_UpperBounds = v2;
+	dfloat min_x = 100000.0f;
+	dfloat min_y = 100000.0f;
+	
+	dfloat max_x = -100000.0f;
+	dfloat max_y = -100000.0f;
+	
+	if( min_x > v1.x )
+		min_x = v1.x;
+	if( min_y > v1.y )
+		min_y = v1.y;
+	
+	if( max_x < v1.x )
+		max_x = v1.x;
+	if( max_y < v1.y )
+		max_y = v1.y;
+	
+	if( min_x > v2.x )
+		min_x = v2.x;
+	if( min_y > v2.y )
+		min_y = v2.y;
+	
+	if( max_x < v2.x )
+		max_x = v2.x;
+	if( max_y < v2.y )
+		max_y = v2.y;
+	
+	m_AABB.m_LowerBounds.set(min_x, min_y);
+	m_AABB.m_UpperBounds.set(max_x, max_y);
 }
 
 void Edge::updateShape(Matrix3f& xForm)

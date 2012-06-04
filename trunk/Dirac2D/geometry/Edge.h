@@ -39,6 +39,7 @@ protected:
 	friend class EdgeChain;
 public:
 	Vector2f m_Vertex1, m_Vertex2;
+	Vector2f m_PrevVertex, m_NextVertex;
 	duchar m_bHasPrev, m_bHasNext;
 };
 
