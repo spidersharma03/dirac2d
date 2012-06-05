@@ -61,6 +61,15 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 	if( shape1->getShapeType() == EST_CAPSULE && shape2->getShapeType() == EST_CAPSULE )
 		return intersectCapsules((Capsule*)shape1, xform1, (Capsule*)shape2, xform2, contactManifold);
 
+	if( shape1->getShapeType() == EST_EDGE && shape2->getShapeType() == EST_REGULARPOLY )
+		return intersectEdgePolygon((Edge*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
+	
+	if( shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_EDGE )
+	{
+		contactManifold->m_bFlipShapes = true;
+		return intersectEdgePolygon((Edge*)shape2, xform2, (RegularPolygon*)shape1, xform1, contactManifold);
+	}
+	
 	if( shape1->getShapeType() == EST_EDGE && shape2->getShapeType() == EST_CAPSULE )
 		return intersectEdgeCapsule((Edge*)shape1, xform1, (Capsule*)shape2, xform2, contactManifold);
 	

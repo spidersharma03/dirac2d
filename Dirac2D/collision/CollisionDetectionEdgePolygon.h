@@ -23,6 +23,12 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+// Find Whether Edges intersect.
+dbool intersectEdgeEdge( Edge* edge1, Matrix3f& xform1, Edge* edge2, Matrix3f& xform2);
+
+// Find Whether Edges intersect. Also find the Contact Points if the Edges intersect.
+dbool intersectEdgeEdge( Edge* edge1, Matrix3f& xform1, Edge* edge2, Matrix3f& xform2, ContactManifold* contactManifold);
+
 
 // Find Whether Edge/ConvexPolygons intersect.
 dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2);

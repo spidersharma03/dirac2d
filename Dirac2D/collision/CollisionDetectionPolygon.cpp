@@ -7,6 +7,7 @@
  */
 
 #include "CollisionDetectionPolygon.h"
+#include "PolygonHelper.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -73,7 +74,7 @@ dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, Regular
 	
 	findCandidateEdge( poly1, negNormal , p3, p4 );
 	
-	// Find Reference and incident Edges
+	// Find Reference and incident Edges. Reference Edge is the Edge which is most perpendicular to the collision normal.
 	Vector2f refEdge      = vertices2[p2] - vertices2[p1];
 	Vector2f incidentEdge = vertices1[p4] - vertices1[p3];
 	
