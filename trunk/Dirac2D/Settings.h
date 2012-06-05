@@ -16,7 +16,7 @@ BEGIN_NAMESPACE_DIRAC2D
 // Maximum Contact Points a manifold can hold.
 #define MAX_CONTACTS 2
 // Maximum Number of vertices a Polygon can have
-#define MAX_POLY_VERTICES 20
+#define MAX_POLY_VERTICES 10
 // Allowed penetration for collision
 #define ALLOWED_PENETRATION 0.001f
 // Maximum nuber of Contact Points in the Physical World

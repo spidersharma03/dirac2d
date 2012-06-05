@@ -16,6 +16,8 @@ BEGIN_NAMESPACE_DIRAC2D
 RegularPolygon::RegularPolygon(Vector2f* vertices, dint32 numVertices) : m_NumVertices(numVertices)
 {
 	dAssert(m_NumVertices > 2);
+	dAssert(m_NumVertices<MAX_POLY_VERTICES);
+	
 	for( dint32 v=0; v< m_NumVertices; v++ )
 		m_Vertices[v] = vertices[v];
 

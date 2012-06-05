@@ -23,19 +23,17 @@ BEGIN_NAMESPACE_DIRAC2D
 template< typename T >
 inline T MIN( T a, T b )
 {
-	T min = a < b ? a : b;
-	return min;
+	return a < b ? a : b;
 }
 
 template< typename T >
 inline T MAX( T a, T b )
 {
-	T max = a > b ? a : b;
-	return max;
+	return a > b ? a : b;
 }
 
 template< typename T >
-inline void SWAP( T a, T b )
+inline void SWAP( T& a, T& b )
 {
 	T temp = a;
 	a = b;

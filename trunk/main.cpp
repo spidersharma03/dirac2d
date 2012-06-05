@@ -17,7 +17,7 @@ void renderScene(void);
 
 PhysicalWorld* pWorld;
 
-dfloat dt = 1.0f/600.0f;
+dfloat dt = 1.0f/6000.0f;
 
 dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
@@ -666,6 +666,63 @@ void demo12()
 	pBodyCompound->createPhysicalShape(pApp);
 }
 
+// Capsule Capsule
+void demo13()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.5f));
+	pBodyGround->setAngle(PI_4);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	//Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(0.1, 0.2);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Capsule
+	dfloat y = 0.4f;
+	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
+	//pBodyCompound->m_BodyType = EBT_STATIC;
+	pBodyCompound->setPosition(Vector2f(0.01,y));
+	//pBodyCompound->setAngle(PI_4*0.9);
+	dfloat capsuleRadius = 0.15f;
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(capsuleRadius*0.5,14*capsuleRadius);
+	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCompound->createPhysicalShape(pApp);
+}
+
+// EdgeChain Polygon
+void demo14()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.5f));
+	//pBodyGround->setAngle(PI_4/112);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.0f;
+	Vector2f vertices[2] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new Edge(vertices[0], vertices[1]);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Capsule
+	dfloat y = 0.4f;
+	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
+	//pBodyCompound->m_BodyType = EBT_STATIC;
+	pBodyCompound->setPosition(Vector2f(0.9,y));
+	pBodyCompound->setAngle(PI_4*0.999);
+	groundWidth = 0.2f;  groundHeight = 0.2f;
+	Vector2f vertices1[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices1,4);
+	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCompound->createPhysicalShape(pApp);
+}
+
+
 
 void initScene()
 {
@@ -673,7 +730,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo11();
+	demo14();
 }
 
 void changeSize(int w, int h) 
