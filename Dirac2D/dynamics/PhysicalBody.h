@@ -26,6 +26,12 @@ class PhysicalBody
 {
 
 public:	
+	PhysicalBody(const PhysicalBody& other);
+	
+	void operator=(const PhysicalBody& other);
+	
+	PhysicalBody* clone();
+	
 	void applyForce( Vector2f& force );	
 	
 	void applyForce( Vector2f& force, Vector2f& point );	
@@ -117,7 +123,6 @@ protected:
 	PhysicalBody(PhysicalWorld* world);
 
 	PhysicalShape* m_PhysicalShapeList;
-	PhysicalShape* m_PhysicalShape;
 	
 	PhysicalWorld* m_PhysicalWorld;
 };

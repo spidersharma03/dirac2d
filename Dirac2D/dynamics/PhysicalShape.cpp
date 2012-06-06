@@ -14,6 +14,19 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+PhysicalShape::PhysicalShape(const PhysicalShape& other)
+{
+}
+
+void PhysicalShape::operator=(PhysicalShape& other)
+{
+}
+
+PhysicalShape* PhysicalShape::clone()
+{
+	return 0;
+}
+
 void PhysicalShape::setAsBox(dfloat width, dfloat height)
 {
 	m_CollisionShape = new Box(width, height);

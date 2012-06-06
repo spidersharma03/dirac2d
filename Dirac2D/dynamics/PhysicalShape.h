@@ -26,6 +26,12 @@ protected:
 	{
 	}
 	
+	PhysicalShape(const PhysicalShape& other);
+
+	void operator=(PhysicalShape& other);
+
+	PhysicalShape* clone();
+
 	void setAsBox(dfloat width, dfloat height);
 	
 	void setAsCircle(dfloat radius);

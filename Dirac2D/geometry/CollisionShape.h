@@ -22,6 +22,8 @@ class CollisionShape
 public:
 	CollisionShape()
 	{
+		m_Area = 0.0f;
+		m_I = 0.0f;
 	}
 
 	CollisionShape( const CollisionShape& other )

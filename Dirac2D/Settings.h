@@ -29,7 +29,8 @@ BEGIN_NAMESPACE_DIRAC2D
 // Below this velocity the collision are considered inelastic
 #define VELOCITY_BIAS_THRESHOLD 0.5f
 
-
+// 
+#define EDGE_THICKNESS 0.01f
 // if the sleeping flag for a Physical Body is on, the body will go to sleep when (body->m_SleepTime >  SLEEPING_THRESHOLD)
 #define SLEEPING_THRESHOLD 1.0f
 // Below this kinetic energy, the Physical body may go to sleep.

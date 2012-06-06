@@ -88,7 +88,10 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 		return intersectEdgeCircle((Edge*)shape2, xform2, (Circle*)shape1, xform1, contactManifold);
 	}
 	
-	dAssert(0);
+	if( shape1->getShapeType() == EST_EDGE && shape2->getShapeType() == EST_EDGE )
+		return intersectEdgeEdge((Edge*)shape1, xform1, (Edge*)shape2, xform2, contactManifold);
+	
+	//dAssert(0);
 	return false;
 }
 

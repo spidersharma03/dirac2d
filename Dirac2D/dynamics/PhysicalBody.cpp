@@ -30,6 +30,69 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 	m_PhysicalShapeList = 0;
 }
 
+PhysicalBody::PhysicalBody(const PhysicalBody& other)
+{
+	m_Centre = other.m_Centre;
+	m_Position = other.m_Position;
+	m_Velocity = other.m_Velocity;
+	m_AngularVelocity = other.m_AngularVelocity;
+	m_Angle = other.m_Angle;
+	m_LinearDamping = other.m_LinearDamping;
+	m_AngularDamping = other.m_AngularDamping;
+	m_Transform = other.m_Transform;
+	m_BodyType = other.m_BodyType;
+	m_Mass = other.m_Mass;
+	m_InvMass = other.m_InvMass;
+	m_I = other.m_I;
+	m_InvI = other.m_InvI;
+		
+	m_bSleepingPolicy = other.m_bSleepingPolicy;
+	m_bSleeping = other.m_bSleeping;
+	m_SleepTime = other.m_SleepTime;
+		
+	m_Force = other.m_Force;
+	m_AABB = other.m_AABB;
+		
+	m_Next = other.m_Next;
+	m_Prev = other.m_Prev;
+	
+	m_PhysicalShapeList = other.m_PhysicalShapeList;
+}
+
+void PhysicalBody::operator=(const PhysicalBody& other)
+{
+	m_Centre = other.m_Centre;
+	m_Position = other.m_Position;
+	m_Velocity = other.m_Velocity;
+	m_AngularVelocity = other.m_AngularVelocity;
+	m_Angle = other.m_Angle;
+	m_LinearDamping = other.m_LinearDamping;
+	m_AngularDamping = other.m_AngularDamping;
+	m_Transform = other.m_Transform;
+	m_BodyType = other.m_BodyType;
+	m_Mass = other.m_Mass;
+	m_InvMass = other.m_InvMass;
+	m_I = other.m_I;
+	m_InvI = other.m_InvI;
+	
+	m_bSleepingPolicy = other.m_bSleepingPolicy;
+	m_bSleeping = other.m_bSleeping;
+	m_SleepTime = other.m_SleepTime;
+	
+	m_Force = other.m_Force;
+	m_AABB = other.m_AABB;
+	
+	m_Next = other.m_Next;
+	m_Prev = other.m_Prev;
+	
+	m_PhysicalShapeList = other.m_PhysicalShapeList;
+}
+
+PhysicalBody* PhysicalBody::clone()
+{
+	return new(m_PhysicalWorld->m_PhysicalBodyPool->Allocate()) PhysicalBody(*this);
+}
+
 void PhysicalBody::applyForce( Vector2f& force )
 {
 }
@@ -82,7 +145,7 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	pShape->m_CollisionShape = pApp.m_CollisionAttributes.m_Shape;
 	pShape->m_CollisionFilter = pApp.m_CollisionAttributes.m_Filter;
 	
-	if( pShape->m_CollisionShape->m_ShapeType == EST_EDGE || pShape->m_CollisionShape->m_ShapeType == EST_EDGE_CHAIN )
+	if( pShape->m_CollisionShape->m_ShapeType == EST_EDGE  )
 		m_BodyType = EBT_STATIC;
 	
 	Matrix3f xForm;
@@ -195,10 +258,10 @@ void PhysicalBody::calculateMassAttributes()
 			dfloat r2 = R.lengthSquared();
 			m_I += ( shape->m_MassAttributes.m_I + shape->m_MassAttributes.m_Mass * r2);
 			m_Mass += shape->m_MassAttributes.m_Mass;
+			dAssert( m_I > 0.0f );
+			dAssert( m_Mass > 0.0f );
 			shape = shape->m_Next;
 		}
-		dAssert( m_Mass > 0.0f );
-		dAssert( m_I > 0.0f );
 		
 		m_InvMass = 1.0f/m_Mass;
 		m_InvI    = 1.0f/m_I;
