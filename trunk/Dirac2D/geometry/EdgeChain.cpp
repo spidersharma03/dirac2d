@@ -52,6 +52,10 @@ EdgeChain::EdgeChain(Vector2f* vertices, dint32 numVertices)
 	edge->m_Vertex1 = vertices[e];
 	edge->m_Vertex2 = vertices[e+1];
 	m_ShapeType = EST_EDGE_CHAIN;
+	
+	findCentroid();
+	
+	findMomentOfInertia();
 }
 
 EdgeChain::EdgeChain(const EdgeChain& other)
@@ -87,10 +91,37 @@ void EdgeChain::updateShape(Matrix3f& xForm)
 
 void EdgeChain::findCentroid()
 {
+	m_Centroid.set(0.0f, 0.0f);
+	m_Area = 0.0f;
+	for( dint32 e=0; e<m_NumEdges; e++ )
+	{
+		Edge* edge = m_EdgeList + e;
+		Vector2f& v1 = edge->m_Vertex1;
+		Vector2f& v2 = edge->m_Vertex2;
+		Vector2f c = ( v1 + v2 ) * 0.5f;
+		dfloat edgeLength = v1.distance(v2);
+		m_Area += edgeLength;
+		m_Centroid += c;
+	}
+	dAssert(m_Area > 0.0f );
+	m_Centroid /= m_NumEdges;
 }
 
 void EdgeChain::findMomentOfInertia()
 {
+	m_I = 0.0f;
+	for( dint32 e=0; e<m_NumEdges; e++ )
+	{
+		Edge* edge = m_EdgeList + e;
+		Vector2f& v1 = edge->m_Vertex1;
+		Vector2f& v2 = edge->m_Vertex2;
+		Vector2f c = ( v1 + v2 ) * 0.5f;
+		dfloat edgeLength = v1.distance(v2);
+		dfloat I = edgeLength/m_Area * edgeLength*edgeLength/12.0f;
+		Vector2f d = c - m_Centroid;
+		m_I += ( I + edgeLength/m_Area * d.lengthSquared() ); 
+	}
+	dAssert(m_I == m_I);
 }
 
 END_NAMESPACE_DIRAC2D

@@ -22,7 +22,48 @@ dbool intersectEdgeEdge( Edge* edge1, Matrix3f& xform1, Edge* edge2, Matrix3f& x
 // Find Whether Edges intersect. Also find the Contact Points if the Edges intersect.
 dbool intersectEdgeEdge( Edge* edge1, Matrix3f& xform1, Edge* edge2, Matrix3f& xform2, ContactManifold* contactManifold)
 {
-	return false;
+	Vector2f e1_v1 = xform1 * edge1->m_Vertex1;
+	Vector2f e1_v2 = xform1 * edge1->m_Vertex2;
+	Vector2f e2_v1 = xform2 * edge2->m_Vertex1;
+	Vector2f e2_v2 = xform2 * edge2->m_Vertex2;
+
+	Vector2f outPoint1, outPoint2; // Closest Points on Edge 1
+	findClosestPoint(e1_v1, e1_v2, e2_v1, outPoint1);
+	findClosestPoint(e1_v1, e1_v2, e2_v2, outPoint2);
+
+	Vector2f v1, v2; // Closest Points on Edge 2
+	findClosestPoint(e2_v1, e2_v2, outPoint1, v1);
+	findClosestPoint(e2_v1, e2_v2, outPoint2, v2);
+	
+	dfloat D1 = v1.distanceSquared(outPoint1);
+	dfloat D2 = v2.distanceSquared(outPoint2);
+	
+	contactManifold->m_NumContacts = 0;
+
+	// Contact Normal Points from Shape2( Edge2 ) to Shape1( Edge1 )
+	if( D1 < EDGE_THICKNESS * EDGE_THICKNESS )
+	{
+		contactManifold->m_ContactNormal = outPoint1 - v1;
+		contactManifold->m_ContactNormal.normalize();
+		v1 += contactManifold->m_ContactNormal * EDGE_THICKNESS;
+		outPoint1 += contactManifold->m_ContactNormal * -EDGE_THICKNESS;
+
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v1 + outPoint1 ) * 0.5f;
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = 0.5f * (sqrt(D1) - EDGE_THICKNESS);
+		contactManifold->m_NumContacts++;
+	}
+	if( D2 < EDGE_THICKNESS * EDGE_THICKNESS )
+	{
+		contactManifold->m_ContactNormal = outPoint2 - v2; 
+		contactManifold->m_ContactNormal.normalize();
+		v2 += contactManifold->m_ContactNormal * EDGE_THICKNESS;
+		outPoint2 += contactManifold->m_ContactNormal * -EDGE_THICKNESS;
+
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v2 + outPoint2 ) * 0.5f;
+		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = 0.5f * (sqrt(D2) - EDGE_THICKNESS);
+		contactManifold->m_NumContacts++;
+	}
+	return contactManifold->m_NumContacts > 0;
 }
 
 // Find Whether Edge/ConvexPolygons intersect.
@@ -39,7 +80,7 @@ dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, 
 	v1 *= xform2;
 	Vector2f v2 = xform1 * edge->m_Vertex2;
 	v2 *= xform2;
-	
+
 	dint32 numVertices = poly->getNumVertices();
 	Vector2f* polyVertices = poly->getVertices();
 	Vector2f* polyNormals  = poly->getNormals();
@@ -51,14 +92,14 @@ dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, 
 	// Find Seperating Axis from poly's seperating axis(normals) list
 	dfloat minDistance = 100000.0f;
 	Vector2f collisionNormal;
-	dint32 edgeIndex = 0;
-	
+		
 	for( dint32 i=0; i<numVertices; i++ )
 	{
 		Vector2f& normal = polyNormals[i];
 		dfloat min1 = 100000.0f, min2 = 100000.0f, max1 = -100000.0f, max2 = -100000.0f; 
 		dint32 minIndex = 0, maxIndex = 0;
 		
+				
 		PROJECT_POLYGON( poly, numVertices, normal, minIndex , maxIndex );
 		Vector2f p1 = polyVertices[minIndex];
 		Vector2f p2 = polyVertices[maxIndex];
@@ -78,11 +119,29 @@ dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, 
 		
 		if( fabs( distance ) < minDistance )
 		{
-			edgeIndex = minIndex;
+			/*if( edge->m_bHasPrev )
+			{
+				Vector2f prevEdge = ( edge->m_Vertex1 - edge->m_PrevVertex);
+				xform1.transformAsVector(prevEdge);
+				prevEdge = xform2.getRotationMatrixTransposed() * prevEdge;
+				prevEdge.normalize();
+				Vector2f prevNormal( -prevEdge.y, prevEdge.x);
+				if( fabs(normal.dot(prevNormal)) < 0.9f )
+					continue;
+			}
+			if( edge->m_bHasNext )
+			{
+				Vector2f nextEdge = ( edge->m_Vertex2 - edge->m_NextVertex);
+				xform1.transformAsVector(nextEdge);
+				nextEdge = xform2.getRotationMatrixTransposed() * nextEdge;
+				nextEdge.normalize();
+				Vector2f nextNormal( -nextEdge.y, nextEdge.x);
+				if( fabs(normal.dot(nextNormal)) < 0.9f )
+					continue;
+			}*/
 			minDistance = fabs( distance );
 			collisionNormal = normal; //Save collision information for later
 		}
-		
 	}
 	// Find Seperating Axis from Edge's Normal
 	dfloat min1 = 100000.0f, min2 = 100000.0f, max1 = -100000.0f, max2 = -100000.0f; 
@@ -98,13 +157,22 @@ dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, 
 	dfloat distance; //Calculate the distance between the two intervals
 	distance = min1 < min2 ? min2-max1 : min1-max2;
 	
+	// Check for Containment of Projection intervals
+	if( (min2 > min1 && min2 < max1) || (min2 > max1 && min2 < min1) )
+	{
+		dfloat d1 = fabs(min1 - min2);
+		dfloat d2 = fabs(max1 - min2);
+		distance = d1 < d2 ? -d1 : -d2;
+	}
+	
 	if( distance > 0.0f ) //If the intervals don't overlap, return, since there is no collision
 		return false;
 	
 	dfloat absDist = fabs( distance );
 	if( absDist < minDistance )
 	{
-		edgeIndex = maxIndex;
+		minDistance = fabs( distance );
+		collisionNormal = edgeNormal; 
 	}
 	
 	dint32 vertexIndex1;
@@ -126,11 +194,6 @@ dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, 
 	
 	if( absDist < minDistance )
 	{
-		minDistance = fabs( distance );
-		collisionNormal = edgeNormal; 
-		
-		//SWAP(refEdge, incEdge);
-		
 		Vector2f temp = incEdge;
 		incEdge = refEdge;
 		refEdge = temp;

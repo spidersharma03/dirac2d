@@ -68,8 +68,8 @@ void Edge::updateAABB(Matrix3f& xForm)
 	if( max_y < v2.y )
 		max_y = v2.y;
 	
-	m_AABB.m_LowerBounds.set(min_x, min_y);
-	m_AABB.m_UpperBounds.set(max_x, max_y);
+	m_AABB.m_LowerBounds.set(min_x - EDGE_THICKNESS, min_y - EDGE_THICKNESS);
+	m_AABB.m_UpperBounds.set(max_x + EDGE_THICKNESS, max_y + EDGE_THICKNESS);
 }
 
 void Edge::updateShape(Matrix3f& xForm)

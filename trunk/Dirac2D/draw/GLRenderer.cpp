@@ -32,7 +32,11 @@ void GLRenderer::drawShape(CollisionShape* shape)
 			for( dint32 e=0; e<edgeChain->getNumEdges(); e++ )
 			{
 				Edge* edge = edgeChain->getEdge(e);
+				setColor(255, 255, 255);
 				drawLine( edge->m_Vertex1, edge->m_Vertex2);
+				setColor(255, 255, 0);
+				drawPoint(edge->m_Vertex1);
+				drawPoint(edge->m_Vertex2);
 			}
 			break;
 		}

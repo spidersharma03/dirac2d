@@ -67,7 +67,7 @@ void ContactSolver::buildJacobian()
 			contact->m_FrictionalMass[i] = 1.0f/JInvMJT;
 			
 			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
-			dfloat velBias = 0.0f*relvel.dot(contact->m_ContactNormal);
+			dfloat velBias = 0.5f*relvel.dot(contact->m_ContactNormal);
 						
 			if( velBias > VELOCITY_BIAS_THRESHOLD )
 				constraint.m_VelocityBias = velBias;
@@ -89,9 +89,7 @@ void ContactSolver::buildJacobian()
 				constraint.m_NormalImpulse = 0.0f;
 				constraint.m_TangentImpulse = 0.0f;
 			}
-
 		}
-		
 		contact = contact->m_Next;
 	}
 }
@@ -152,7 +150,7 @@ void ContactSolver::correctVelocities()
 			Cdot_Tangent = relvel.dot(tangent);
 
 			oldImpulseMag = constraint.m_TangentImpulse;
-			dfloat mu = 0.0f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
+			dfloat mu = 0.4f;//( shape1->m_Friction + shape2->m_Friction ) * 0.5f + 0.9f; 
 			dfloat maxFriction = constraint.m_NormalImpulse * mu;
 			correctiveImpulseMag = contact->m_FrictionalMass[i] * Cdot_Tangent;
 			
