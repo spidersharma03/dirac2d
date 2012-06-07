@@ -23,6 +23,7 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 	m_BodyType = EBT_DYNAMIC;
 	m_Mass = m_InvMass = 1.0f;
 	m_I = m_InvI = 1.0f;
+	m_bIsAlive = false;
 	
 	m_SleepTime = 0.0f;
 	m_bSleeping    = false;
@@ -45,18 +46,35 @@ PhysicalBody::PhysicalBody(const PhysicalBody& other)
 	m_InvMass = other.m_InvMass;
 	m_I = other.m_I;
 	m_InvI = other.m_InvI;
+	m_bIsAlive = other.m_bIsAlive;
 		
 	m_bSleepingPolicy = other.m_bSleepingPolicy;
 	m_bSleeping = other.m_bSleeping;
 	m_SleepTime = other.m_SleepTime;
+	m_PhysicalWorld = other.m_PhysicalWorld;
+	
+	PhysicalShape* pShape = other.m_PhysicalShapeList;
+	
+	m_PhysicalShapeList = 0;
+	
+	// Clone All the Physical Shapes attached to this PhysicalBody
+	while (pShape) 
+	{
+		PhysicalShape* cloneShape = pShape->clone();
+		cloneShape->m_Next = m_PhysicalShapeList;
 		
+		if( m_PhysicalShapeList )
+			m_PhysicalShapeList->m_Prev = cloneShape;
+		
+		m_PhysicalShapeList = cloneShape;
+		cloneShape->m_ParentBody = this;
+		// Add to Broad Phase
+		m_PhysicalWorld->addToBroadPhase(cloneShape);	
+		pShape = pShape->m_Next;
+	}
+
 	m_Force = other.m_Force;
 	m_AABB = other.m_AABB;
-		
-	m_Next = other.m_Next;
-	m_Prev = other.m_Prev;
-	
-	m_PhysicalShapeList = other.m_PhysicalShapeList;
 }
 
 void PhysicalBody::operator=(const PhysicalBody& other)
@@ -74,23 +92,76 @@ void PhysicalBody::operator=(const PhysicalBody& other)
 	m_InvMass = other.m_InvMass;
 	m_I = other.m_I;
 	m_InvI = other.m_InvI;
+	m_bIsAlive = other.m_bIsAlive;
+
 	
 	m_bSleepingPolicy = other.m_bSleepingPolicy;
 	m_bSleeping = other.m_bSleeping;
 	m_SleepTime = other.m_SleepTime;
+	m_PhysicalWorld = other.m_PhysicalWorld;
+
+	PhysicalShape* pShape = other.m_PhysicalShapeList;
+	
+	m_PhysicalShapeList = 0;
+	
+	while (pShape) 
+	{
+		PhysicalShape* cloneShape = pShape;
+		cloneShape->m_Next = m_PhysicalShapeList;
+		
+		if( m_PhysicalShapeList )
+			m_PhysicalShapeList->m_Prev = cloneShape;
+		
+		m_PhysicalShapeList = cloneShape;
+		
+		pShape = pShape->m_Next;
+	}
 	
 	m_Force = other.m_Force;
-	m_AABB = other.m_AABB;
-	
-	m_Next = other.m_Next;
-	m_Prev = other.m_Prev;
-	
-	m_PhysicalShapeList = other.m_PhysicalShapeList;
+	m_AABB = other.m_AABB;	
 }
 
 PhysicalBody* PhysicalBody::clone()
 {
-	return new(m_PhysicalWorld->m_PhysicalBodyPool->Allocate()) PhysicalBody(*this);
+	// Create a Clone of the Body
+	PhysicalBody* pBody = new(m_PhysicalWorld->m_PhysicalBodyPool->Allocate()) PhysicalBody(*this);
+	// Body is not added to the world.
+	pBody->m_bIsAlive = false;
+	return pBody;
+}
+
+// Adds this Body to PhysicalWorld.
+void PhysicalBody::addToPhysicalWorld(PhysicalWorld* pWorld)
+{
+	if( m_bIsAlive ) // return if the body was already added.
+		return;
+	
+	m_bIsAlive = true;
+	this->m_Prev = 0;
+	this->m_Next = pWorld->m_PhysicalBodyList;
+	
+	if( pWorld->m_PhysicalBodyList )
+	{
+		pWorld->m_PhysicalBodyList->m_Prev = this;
+	}
+	pWorld->m_PhysicalBodyList = this;
+}
+
+void PhysicalBody::removeFromPhysicalWorld(PhysicalWorld* pWorld)
+{
+	if( m_Prev )
+	{
+		m_Prev->m_Next = m_Next;
+	}
+	else 
+	{
+		pWorld->m_PhysicalBodyList = m_Next;
+	}
+	if( m_Next )
+	{
+		m_Next->m_Prev = m_Prev;
+	}
+	m_bIsAlive = false;
 }
 
 void PhysicalBody::applyForce( Vector2f& force )
@@ -177,6 +248,15 @@ void PhysicalBody::updateTransform()
 	m_Transform.translate(m_Position);
 	
 	updateAABB();	
+}
+
+PhysicalBody::~PhysicalBody()
+{
+	PhysicalShape* pShape = m_PhysicalShapeList;
+	while (pShape) 
+	{
+		delete pShape;
+	}
 }
 
 void PhysicalBody::updateAABB()

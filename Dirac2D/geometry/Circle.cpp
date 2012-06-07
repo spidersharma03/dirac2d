@@ -27,9 +27,19 @@ Circle::Circle(dfloat radius):m_Radius(radius)
 	m_AABB.m_UpperBounds.y = m_Radius;
 }
 
-Circle::Circle(const Circle& other)
+Circle::Circle(const Circle& other) : CollisionShape(other)
 {
-	findMomentOfInertia();
+	m_Radius = other.m_Radius;
+}
+
+void Circle::operator= ( Circle& other)
+{
+	m_Radius = other.m_Radius;
+}
+
+CollisionShape* Circle::clone()
+{
+	return new Circle(*this);
 }
 
 Vector2f Circle::getSupportPoint(Vector2f& d)

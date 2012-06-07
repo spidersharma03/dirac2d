@@ -40,6 +40,7 @@ protected:
 	
 	void calculateMassAttributes();
 	
+	virtual ~PhysicalShape();
 public:
 	PhysicalBody* m_ParentBody;
 

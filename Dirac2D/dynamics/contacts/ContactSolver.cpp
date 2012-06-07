@@ -67,7 +67,7 @@ void ContactSolver::buildJacobian()
 			contact->m_FrictionalMass[i] = 1.0f/JInvMJT;
 			
 			Vector2f relvel = ( body2->m_Velocity + Vector2f::cross(body2->m_AngularVelocity, r2) - body1->m_Velocity - Vector2f::cross(body1->m_AngularVelocity, r1) );
-			dfloat velBias = 0.5f*relvel.dot(contact->m_ContactNormal);
+			dfloat velBias = 0.0f*relvel.dot(contact->m_ContactNormal);
 						
 			if( velBias > VELOCITY_BIAS_THRESHOLD )
 				constraint.m_VelocityBias = velBias;

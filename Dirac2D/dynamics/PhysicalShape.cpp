@@ -16,15 +16,33 @@ BEGIN_NAMESPACE_DIRAC2D
 
 PhysicalShape::PhysicalShape(const PhysicalShape& other)
 {
+	m_Friction = other.m_Friction;
+	m_Restitution = other.m_Restitution;
+	m_MassAttributes = other.m_MassAttributes;
+	m_CollisionFilter = other.m_CollisionFilter;
+	m_CollisionShape = other.m_CollisionShape->clone();
+	m_ParentBody     = other.m_ParentBody;
 }
 
 void PhysicalShape::operator=(PhysicalShape& other)
 {
+	m_Friction = other.m_Friction;
+	m_Restitution = other.m_Restitution;
+	m_MassAttributes = other.m_MassAttributes;
+	m_CollisionFilter = other.m_CollisionFilter;
+	m_CollisionShape = other.m_CollisionShape;
+	m_ParentBody     = other.m_ParentBody;
+}
+
+
+PhysicalShape::~PhysicalShape()
+{
+	delete m_CollisionShape;
 }
 
 PhysicalShape* PhysicalShape::clone()
 {
-	return 0;
+	return new PhysicalShape(*this);
 }
 
 void PhysicalShape::setAsBox(dfloat width, dfloat height)

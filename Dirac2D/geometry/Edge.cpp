@@ -23,8 +23,29 @@ Edge::Edge(Vector2f& vertex1, Vector2f& vertex2) : m_Vertex1(vertex1), m_Vertex2
 	m_bHasPrev = m_bHasNext = false;
 }
 
-Edge::Edge(const Edge& other): m_Vertex1(other.m_Vertex1), m_Vertex2(other.m_Vertex2)
+Edge::Edge(const Edge& other):CollisionShape(other)
 {
+	m_Vertex1 = other.m_Vertex1;
+	m_Vertex2 = other.m_Vertex2;
+	m_PrevVertex = other.m_PrevVertex;
+	m_NextVertex = other.m_NextVertex;
+	m_bHasPrev = other.m_bHasPrev;
+	m_bHasNext = other.m_bHasNext;
+}
+
+void Edge::operator= ( Edge& other)
+{
+	m_Vertex1 = other.m_Vertex1;
+	m_Vertex2 = other.m_Vertex2;
+	m_PrevVertex = other.m_PrevVertex;
+	m_NextVertex = other.m_NextVertex;
+	m_bHasPrev = other.m_bHasPrev;
+	m_bHasNext = other.m_bHasNext;
+}
+
+CollisionShape* Edge::clone()
+{
+	return new Edge(*this);
 }
 
 Vector2f Edge::getSupportPoint(Vector2f& d) 

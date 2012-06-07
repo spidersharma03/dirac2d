@@ -23,13 +23,17 @@ public:
 	RegularPolygon(Vector2f* vertices, dint32 numVertices);
 	
 	RegularPolygon(const RegularPolygon& other);
-		
+	
+	void operator=( RegularPolygon& other);
+
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
 	virtual dbool isPointInside(Point2f& p);
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
+	virtual CollisionShape* clone();
+
 	inline dint32 getNumVertices()
 	{
 		return m_NumVertices;

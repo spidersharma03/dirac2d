@@ -32,6 +32,12 @@ public:
 	
 	PhysicalBody* clone();
 	
+	// adds this Body to the physical World. only useful for adding Clones to the Physical World. if this body is already part of the world it wont get added.
+	void addToPhysicalWorld(PhysicalWorld* pWorld);
+
+	// Removes this Body from the physical World.
+	void removeFromPhysicalWorld(PhysicalWorld* pWorld);
+
 	void applyForce( Vector2f& force );	
 	
 	void applyForce( Vector2f& force, Vector2f& point );	
@@ -90,6 +96,7 @@ public:
 	
 	void updateAABB();
 	
+	virtual ~PhysicalBody();
 public:
 	Vector2f m_Centre, m_Position;
 	Vector2f m_Velocity;
@@ -114,6 +121,7 @@ public:
 	friend class PhysicalWorld;
 	
 protected:
+	duchar m_bIsAlive; // Is the Body inside the PhysicalWorld.
 	
 	PhysicalBody* m_Next;
 	PhysicalBody* m_Prev;

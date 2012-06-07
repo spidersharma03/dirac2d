@@ -201,9 +201,6 @@ dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, 
 		bFlip = true;
 	}
 	
-	if( bFlip && c1c2.dot(collisionNormal) < 0.0f )
-		collisionNormal = -collisionNormal;
-	
 	contactManifold->m_NumContacts = 2;
 	dfloat dot1, dot2;
 	
