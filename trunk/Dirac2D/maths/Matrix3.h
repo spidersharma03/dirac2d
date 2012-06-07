@@ -75,6 +75,10 @@ public:
 	{
 	}
 	
+	void getInverse(Matrix3<T>& other)
+	{
+	}
+	
 	inline Matrix2<T> getRotationMatrix()
 	{
 		return Matrix2<T>(col1.x, col1.y, col2.x, col2.y);

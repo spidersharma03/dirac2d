@@ -22,6 +22,7 @@
 		C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */; };
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
+		C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
 		C2B6C7DC156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */; };
 		C2B6D19C156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */; };
 		C2B6D881157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */; };
@@ -87,6 +88,9 @@
 		C257F93A1552CD7A00270D77 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		C27A86A81561442D007AD13C /* AABB2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB2.h; sourceTree = "<group>"; };
 		C27A8ADD15661EDD007AD13C /* Contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contact.cpp; sourceTree = "<group>"; };
+		C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GJKAlgorithm.cpp; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
+		C299B45E1580D26D0040896A /* GJKAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GJKAlgorithm.h; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.h; sourceTree = SOURCE_ROOT; };
+		C299B4601580D26D0040896A /* Simplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Simplex.h; path = Dirac2D/collision/GJK_EPA/Simplex.h; sourceTree = SOURCE_ROOT; };
 		C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionCirclePolygon.h; sourceTree = "<group>"; };
 		C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetectionCirclePolygon.cpp; sourceTree = "<group>"; };
 		C2B6D19A156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionCapsulePolygon.h; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 		C257F13E154E71AE00270D77 /* collision */ = {
 			isa = PBXGroup;
 			children = (
+				C299B45C1580D26D0040896A /* GJK_EPA */,
 				C2F30F611578FE6D00D4F2F4 /* broadPhase */,
 				C2D14730157E533C0056341B /* PolygonHelper.h */,
 				C257F1A5154E76CD00270D77 /* CollisionDetection.h */,
@@ -288,6 +293,17 @@
 			path = Dirac2D/draw;
 			sourceTree = SOURCE_ROOT;
 		};
+		C299B45C1580D26D0040896A /* GJK_EPA */ = {
+			isa = PBXGroup;
+			children = (
+				C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */,
+				C299B45E1580D26D0040896A /* GJKAlgorithm.h */,
+				C299B4601580D26D0040896A /* Simplex.h */,
+			);
+			name = GJK_EPA;
+			path = Dirac2D/collision/GJK_EPA;
+			sourceTree = SOURCE_ROOT;
+		};
 		C2F30F611578FE6D00D4F2F4 /* broadPhase */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +395,7 @@
 				C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */,
 				C2F30F661578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp in Sources */,
 				C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */,
+				C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

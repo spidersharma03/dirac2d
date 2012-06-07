@@ -20,8 +20,15 @@ Capsule::Capsule(dfloat radius, dfloat height):m_Radius(radius), m_Height(height
 	findMomentOfInertia();
 }
 
-Capsule::Capsule(const Capsule& other)
+Capsule::Capsule(const Capsule& other) : CollisionShape(other)
 {
+	m_Radius = other.m_Radius;
+	m_Height = other.m_Height;
+}
+
+CollisionShape* Capsule::clone()
+{
+	return new Capsule(*this);
 }
 
 Vector2f Capsule::getSupportPoint(Vector2f& d)

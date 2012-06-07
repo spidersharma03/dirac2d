@@ -34,6 +34,14 @@ public:
 		m_AABB      = other.m_AABB;		
 	}
 	
+	void operator= ( CollisionShape& other)
+	{
+		m_Centroid  = other.m_Centroid;
+		m_Area	    = other.m_Area;
+		m_ShapeType = other.m_ShapeType;
+		m_AABB      = other.m_AABB;
+	}
+	
 	inline dfloat getArea() const
 	{
 		return m_Area;
@@ -60,6 +68,10 @@ public:
 	virtual dbool isPointInside(Point2f& p) = 0;
 	
 	virtual void updateAABB(Matrix3f& xForm) = 0;
+	
+	virtual CollisionShape* clone() = 0;
+	
+	virtual ~CollisionShape(){};
 	
 	Vector2f m_Centroid;
 

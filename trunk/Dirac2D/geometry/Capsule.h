@@ -24,7 +24,11 @@ public:
 	Capsule(dfloat radius, dfloat height);
 	
 	Capsule(const Capsule& other);
-		
+	
+	void operator=( Capsule& other);
+	
+	virtual CollisionShape* clone();
+	
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
 	virtual dbool isPointInside(Point2f& p);

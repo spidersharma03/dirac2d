@@ -22,12 +22,15 @@ public:
 	
 	Edge(const Edge& other);
 	
+	void operator= ( Edge& other);
+
 	virtual Vector2f getSupportPoint(Vector2f& d);
 	
 	virtual dbool isPointInside(Point2f& p);
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
+	virtual CollisionShape* clone();
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);

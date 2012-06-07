@@ -37,8 +37,6 @@ public:
 	
 	PhysicalBody* createPhysicalBody();
 
-	PhysicalBody* createPhysicalBody(PhysicalAppearance& pApp);
-
 	void deletePhysicalBody(PhysicalBody* pBody);
 
 	void Step(dfloat dt);

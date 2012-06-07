@@ -36,7 +36,7 @@ RegularPolygon::RegularPolygon(Vector2f* vertices, dint32 numVertices) : m_NumVe
 	findMomentOfInertia();
 }
 
-RegularPolygon::RegularPolygon(const RegularPolygon& other)
+RegularPolygon::RegularPolygon(const RegularPolygon& other) : CollisionShape(other)
 {
 	m_NumVertices = other.m_NumVertices;
 	for( dint32 v=0; v< m_NumVertices; v++ )
@@ -48,6 +48,25 @@ RegularPolygon::RegularPolygon(const RegularPolygon& other)
 	m_I = other.m_I;
 	m_Centroid = other.m_Centroid;
 	m_Radius   = other.m_Radius;
+}
+
+void RegularPolygon::operator=( RegularPolygon& other)
+{
+	m_NumVertices = other.m_NumVertices;
+	for( dint32 v=0; v< m_NumVertices; v++ )
+		m_Vertices[v] = other.m_Vertices[v];
+	
+	for( dint32 v=0; v< m_NumVertices; v++ )
+		m_Normals[v] = other.m_Normals[v];
+	
+	m_I = other.m_I;
+	m_Centroid = other.m_Centroid;
+	m_Radius   = other.m_Radius;
+}
+
+CollisionShape* RegularPolygon::clone()
+{
+	return new RegularPolygon(*this);
 }
 
 Vector2f RegularPolygon::getSupportPoint(Vector2f& d)

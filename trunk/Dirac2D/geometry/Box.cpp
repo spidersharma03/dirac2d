@@ -21,6 +21,11 @@ Box::Box(const Box& other)
 	m_Height = other.m_Height;
 }
 
+CollisionShape* Box::clone()
+{
+	return 0;
+}
+
 Vector2f Box::getSupportPoint(Vector2f& d)
 {
 	return Vector2f();

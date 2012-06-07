@@ -47,7 +47,7 @@ PhysicalWorld::PhysicalWorld()
 	m_bDrawBoundingBoxes = false;
 	m_bDrawContacts = true;
 	m_bDrawConstraints = false;
-	m_bDrawCentreOfMass = false;
+	m_bDrawCentreOfMass = true;
 	
 	m_PhysicalBodyList = 0;
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
@@ -57,48 +57,16 @@ PhysicalWorld::PhysicalWorld()
 PhysicalBody* PhysicalWorld::createPhysicalBody()
 {
 	PhysicalBody* pBody = new(m_PhysicalBodyPool->Allocate()) PhysicalBody(this);
-	
-	pBody->m_Prev = 0;
-	pBody->m_Next = m_PhysicalBodyList;
-	
-	if( m_PhysicalBodyList )
-	{
-		m_PhysicalBodyList->m_Prev = pBody;
-	}
-	m_PhysicalBodyList = pBody;
-	
+	pBody->addToPhysicalWorld(this);
 	return pBody;
 }
 
 void PhysicalWorld::deletePhysicalBody(PhysicalBody* pBody)
 {
-	PhysicalBody* prevBody = pBody->m_Prev;
-	PhysicalBody* nextBody = pBody->m_Next;
-	
-	if( prevBody )
-	{
-		prevBody->m_Next = nextBody;
-	}
-	else 
-	{
-		m_PhysicalBodyList = nextBody;
-	}
-	
-	
-	if( nextBody )
-	{
-		nextBody->m_Prev = prevBody;
-	}
-	
-	
+	pBody->removeFromPhysicalWorld(this);	
+	// Release Memory. do not call delete on this as we didnt allocate it through new operator.
+	pBody->~PhysicalBody();
 	m_PhysicalBodyPool->Free(pBody);
-}
-
-PhysicalBody* PhysicalWorld::createPhysicalBody(PhysicalAppearance& pApp)
-{
-	PhysicalBody* pBody = new(m_PhysicalBodyPool->Allocate()) PhysicalBody(this);
-	
-	return pBody;
 }
 
 void PhysicalWorld::Step(dfloat dt)

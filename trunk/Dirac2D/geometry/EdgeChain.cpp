@@ -58,8 +58,24 @@ EdgeChain::EdgeChain(Vector2f* vertices, dint32 numVertices)
 	findMomentOfInertia();
 }
 
-EdgeChain::EdgeChain(const EdgeChain& other)
+EdgeChain::EdgeChain(const EdgeChain& other) : CollisionShape(other)
 {
+	m_NumEdges = other.m_NumEdges;
+	m_EdgeList = new Edge[m_NumEdges];
+	for( dint32 e=0; e<m_NumEdges; e++ )
+		m_EdgeList[e] = other.m_EdgeList[e];
+}
+
+void EdgeChain::operator= ( EdgeChain& other)
+{
+	m_NumEdges = other.m_NumEdges;
+	for( dint32 e=0; e<m_NumEdges; e++ )
+		m_EdgeList[e] = other.m_EdgeList[e];
+}
+
+CollisionShape* EdgeChain::clone()
+{
+	return new EdgeChain(*this);
 }
 
 Vector2f EdgeChain::getSupportPoint(Vector2f& d)
@@ -121,7 +137,7 @@ void EdgeChain::findMomentOfInertia()
 		Vector2f d = c - m_Centroid;
 		m_I += ( I + edgeLength/m_Area * d.lengthSquared() ); 
 	}
-	dAssert(m_I == m_I);
+	dAssert( m_I > 0.0f );
 }
 
 END_NAMESPACE_DIRAC2D

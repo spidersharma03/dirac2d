@@ -28,6 +28,8 @@ public:
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
+	virtual CollisionShape* clone();
+
 protected:
 	
 	virtual void findCentroid();

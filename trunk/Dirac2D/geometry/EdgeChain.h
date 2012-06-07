@@ -22,6 +22,8 @@ public:
 	
 	EdgeChain(const EdgeChain& other);
 	
+	void operator= ( EdgeChain& other);
+
 	virtual Vector2f getSupportPoint(Vector2f& d);
 	
 	virtual dbool isPointInside(Point2f& p);
@@ -29,6 +31,8 @@ public:
 	virtual void updateAABB(Matrix3f& xForm);
 	
 	Edge* getEdge(dint32 index) const;
+
+	virtual CollisionShape* clone();
 
 	inline dint32 getNumEdges() const
 	{
