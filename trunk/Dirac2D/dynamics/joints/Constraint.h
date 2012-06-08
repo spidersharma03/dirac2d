@@ -26,7 +26,7 @@ public:
 	{
 		m_PhysicalBody1 = 0;
 		m_PhysicalBody2 = 0;
-		m_Erp = 0.0f;
+		m_Erp = 0.50f;
 		m_Cfm = 0.0f;
 		m_Next = m_Prev = 0;
 	};

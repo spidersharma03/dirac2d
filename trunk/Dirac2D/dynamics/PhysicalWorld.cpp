@@ -239,11 +239,20 @@ void PhysicalWorld::draw()
 	Constraint* pConstraint = m_ConstraintList;
 	while (pConstraint) 
 	{
-		pConstraint = pConstraint->m_Next;
+		Matrix3f xForm;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+		m_Renderer->setTransform(xForm);
+
 		if( pConstraint->m_Type == ECT_DISTANCE )
 		{
-			
+			DistanceConstraint* dc = (DistanceConstraint*)pConstraint;
+			Vector2f p0, p1;
+			if( dc->m_PhysicalBody1 )
+			  p0 = dc->m_PhysicalBody1->getTransform() * dc->m_Anchor1;
+			if( dc->m_PhysicalBody2 )
+				p1 = dc->m_PhysicalBody2->getTransform() * dc->m_Anchor2;
+			m_Renderer->drawLine(p0, p1);
 		}
+		pConstraint = pConstraint->m_Next;
 	}
 	// Draw Contacts
 	if( m_bDrawContacts )

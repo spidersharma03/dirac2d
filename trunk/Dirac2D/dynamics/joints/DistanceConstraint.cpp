@@ -42,14 +42,14 @@ void DistanceConstraint::buildJacobian()
 	if( body1 )
 	{
 		body1->m_Transform.transformAsPoint(R1);
-		body1->m_Transform.transformAsPoint(m_r1);
+		body1->m_Transform.transformAsVector(m_r1);
 		m1Inv = body1->m_InvMass;
 		i1Inv = body1->m_InvI;
 	}
 	if( body2 )
 	{
 		body2->m_Transform.transformAsPoint(R2);
-		body2->m_Transform.transformAsPoint(m_r2);
+		body2->m_Transform.transformAsVector(m_r2);
 		m2Inv = body2->m_InvMass;
 		i2Inv = body2->m_InvI;
 	}

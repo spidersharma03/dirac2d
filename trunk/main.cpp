@@ -977,7 +977,8 @@ void demo16()
 	
 	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	dc->m_PhysicalBody1 = pBodyCircle;
-	Vector2f d(0.1,y);
+	dc->m_Anchor1 = Vector2f(0.0f,0.1f);
+	Vector2f d = Vector2f(0.0,0.1) - Vector2f(0.1,y);
 	dc->m_FixedDistance = d.length();
 	
 	// Create Circle2
@@ -989,11 +990,11 @@ void demo16()
 	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
 	pBodyCircle1->createPhysicalShape(pApp);
 	
-	//DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-//	dc1->m_PhysicalBody1 = pBodyCircle;
-//	dc1->m_PhysicalBody2 = pBodyCircle1;
-//	d = Vector2f(0.4,y) - Vector2f(0.1,y);
-//	dc1->m_FixedDistance = d.length();
+	DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc1->m_PhysicalBody1 = pBodyCircle;
+	dc1->m_PhysicalBody2 = pBodyCircle1;
+	d = Vector2f(0.4,y) - Vector2f(0.1,y);
+	dc1->m_FixedDistance = d.length();
 	//dc->m_PhysicalShape1
 }
 
