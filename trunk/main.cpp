@@ -951,46 +951,50 @@ void demo15()
 }
 
 
-// Edge Edge
+// Distance Constraint
 void demo16()
 {
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
-	pBodyGround->setPosition(Vector2f(0.0f,-0.5f));
-	//pBodyGround->setAngle(PI_4/112);
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->setAngle(PI_4/112);
 	pBodyGround->m_BodyType = EBT_STATIC;
-	
+	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.0f;
-	dint32 vertexCount = 3;
-	Vector2f vertices[vertexCount];
-	dfloat dx = groundWidth/(vertexCount-1);
-	dfloat ex = -groundWidth/2,ey = 0.0f;
-	
-	for( dint32 v=0; v<vertexCount-1; v++ )
-	{
-		vertices[v].x = ex;
-		vertices[v].y = ey;
-		ex += dx;
-		vertices[v+1].x = ex;
-		vertices[v+1].y = ey;
-	}
-	
-	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, vertexCount);
+	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
-	// Create Capsule
-	dfloat y = 0.4f;
-	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
-	//pBodyCompound->m_BodyType = EBT_STATIC;
-	pBodyCompound->setPosition(Vector2f(0.0,y));
-	pBodyCompound->setAngle(PI_4);
-	groundWidth = 0.2f;  groundHeight = 0.2f;
-	Vector2f vertices1[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight) };
-	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices1, 2);
+	// Create Circle1
+	dfloat y = 0.1f;
+	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+	//pBodyCircle->m_BodyType = EBT_STATIC;
+	pBodyCircle->setPosition(Vector2f(0.1,y));
+	pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
 	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
 	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
-	pBodyCompound->createPhysicalShape(pApp);
+	pBodyCircle->createPhysicalShape(pApp);
+	
+	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc->m_PhysicalBody1 = pBodyCircle;
+	Vector2f d(0.1,y);
+	dc->m_FixedDistance = d.length();
+	
+	// Create Circle2
+	PhysicalBody* pBodyCircle1 = pWorld->createPhysicalBody();
+	//pBodyCircle1->m_BodyType = EBT_STATIC;
+	pBodyCircle1->setPosition(Vector2f(0.4,y));
+	pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
+	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
+	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCircle1->createPhysicalShape(pApp);
+	
+	//DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+//	dc1->m_PhysicalBody1 = pBodyCircle;
+//	dc1->m_PhysicalBody2 = pBodyCircle1;
+//	d = Vector2f(0.4,y) - Vector2f(0.1,y);
+//	dc1->m_FixedDistance = d.length();
+	//dc->m_PhysicalShape1
 }
 
 void initScene()
@@ -999,7 +1003,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo15();
+	demo16();
 }
 
 void changeSize(int w, int h) 

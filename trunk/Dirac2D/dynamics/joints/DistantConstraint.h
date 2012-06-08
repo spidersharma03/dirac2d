@@ -17,15 +17,19 @@ class DistanceConstraint : public Constraint
 {
 public:
 	DistanceConstraint();
-	
-	DistanceConstraint(const Constraint& other);
-	
+		
 	virtual void buildJacobian();
 	
 	virtual void correctVelocities();
 	
 public:
 	Vector2f m_Anchor1, m_Anchor2;
+	Vector2f m_ImpulseDirection;
+	Vector2f m_r1, m_r2; // Local Anchor Points on the Bodies.
+	dfloat m_FixedDistance;
+	dfloat m_EffectiveMass;
+	dfloat m_ImpulseMagnitude;
+	dfloat m_PositionError;
 };
 
 END_NAMESPACE_DIRAC2D

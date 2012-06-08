@@ -23,6 +23,7 @@
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
 		C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
+		C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B5361581CA820040896A /* DistanceConstraint.cpp */; };
 		C2B6C7DC156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */; };
 		C2B6D19C156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */; };
 		C2B6D881157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */; };
@@ -91,6 +92,7 @@
 		C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GJKAlgorithm.cpp; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
 		C299B45E1580D26D0040896A /* GJKAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GJKAlgorithm.h; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.h; sourceTree = SOURCE_ROOT; };
 		C299B4601580D26D0040896A /* Simplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Simplex.h; path = Dirac2D/collision/GJK_EPA/Simplex.h; sourceTree = SOURCE_ROOT; };
+		C299B5361581CA820040896A /* DistanceConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DistanceConstraint.cpp; sourceTree = "<group>"; };
 		C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionCirclePolygon.h; sourceTree = "<group>"; };
 		C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetectionCirclePolygon.cpp; sourceTree = "<group>"; };
 		C2B6D19A156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionCapsulePolygon.h; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				C257F248154E9CAD00270D77 /* Constraint.h */,
 				C257F53E154FDF2900270D77 /* DistantConstraint.h */,
+				C299B5361581CA820040896A /* DistanceConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -396,6 +399,7 @@
 				C2F30F661578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp in Sources */,
 				C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */,
 				C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */,
+				C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

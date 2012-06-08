@@ -11,6 +11,8 @@
 #include "../maths/MathUtil.h"
 #include "PhysicalAppearance.h"
 #include "../memory/memoryAllocator.h"
+#include "joints/Constraint.h"
+
 
 #include <vector>
 
@@ -29,12 +31,17 @@ class Renderer;
 class BroadPhaseCollisionAlgorithm;
 class ContactNode;
 class PhysicalShape;
+class DistanceConstraint;
 
 class PhysicalWorld
 {
 public:
 	PhysicalWorld();
 	
+	Constraint* createConstraint(CONSTRAINT_TYPE constraintType);
+
+	void deleteConstraint(Constraint* pConstraint);
+
 	PhysicalBody* createPhysicalBody();
 
 	void deletePhysicalBody(PhysicalBody* pBody);
@@ -82,7 +89,9 @@ private:
 
 	Contact* m_ContactList;  // Doubly linked list of all the Contacts in this world.
 	
-	PhysicalBody* m_PhysicalBodyList;
+	PhysicalBody* m_PhysicalBodyList; // Doubly linked list of all the Bodies in this world.
+	
+	Constraint* m_ConstraintList; // Doubly linked list of all the Constraints in this world.
 	
 	static Vector2f GRAVITY;
 	
@@ -101,6 +110,7 @@ private:
 	
 	MemoryAllocator<PhysicalBody> *m_PhysicalBodyPool;
 	MemoryAllocator<ContactNode> *m_BroadPhaseNodePool;
+	MemoryAllocator<DistanceConstraint> *m_DistanceConstraintPool;
 
 	dbool m_bDrawShapes;
 	dbool m_bDrawBoundingBoxes;

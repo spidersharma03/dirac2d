@@ -15,27 +15,38 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class PhysicalShape;
+class PhysicalBody;
+
+enum CONSTRAINT_TYPE { ECT_DISTANCE };
 
 class Constraint
 {
 public:
-	Constraint();
-	
-	Constraint(const Constraint& other);
+	Constraint()
+	{
+		m_PhysicalBody1 = 0;
+		m_PhysicalBody2 = 0;
+		m_Erp = 0.0f;
+		m_Cfm = 0.0f;
+		m_Next = m_Prev = 0;
+	};
 	
 	virtual void buildJacobian() = 0;
 	
 	virtual void correctVelocities() = 0;
 	
-	// References of the Physical bodies attached to this joint
-	PhysicalShape* m_PhysicalShape1;
-	PhysicalShape* m_PhysicalShape2;
-
+	// References of the Physical bodies attached to this Constraint
+	PhysicalBody* m_PhysicalBody1;
+	PhysicalBody* m_PhysicalBody2;
+	
+	Constraint* m_Next;
+	Constraint* m_Prev;
 	// Error reduction parameter. this is used to make sure that the constarint dosent drift over time. should be less than 1.0f/timeStep.
-	dfloat erp;
+	dfloat m_Erp;
 	// Constraint force mixing. this is used to soften the constraint and can be used as a softness parameter.
-	dfloat cfm;
+	dfloat m_Cfm;
+	
+	CONSTRAINT_TYPE m_Type;
 };
 
 END_NAMESPACE_DIRAC2D
