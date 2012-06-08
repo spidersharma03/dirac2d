@@ -252,8 +252,9 @@ void PhysicalBody::updateTransform()
 
 PhysicalBody::~PhysicalBody()
 {
+	dAssert(0);
 	PhysicalShape* pShape = m_PhysicalShapeList;
-	while (pShape) 
+	while( pShape ) 
 	{
 		delete pShape;
 	}

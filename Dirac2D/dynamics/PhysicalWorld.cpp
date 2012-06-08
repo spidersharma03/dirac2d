@@ -19,6 +19,9 @@
 
 #include "../dynamics/contacts/ContactSolver.h"
 #include "../dynamics/contacts/Contact.h"
+
+#include "../dynamics/joints/DistantConstraint.h"
+
 #include "../draw/Renderer.h"
 
 BEGIN_NAMESPACE_DIRAC2D
@@ -40,7 +43,6 @@ PhysicalWorld::PhysicalWorld()
 	
 	m_VelocityIterations = 10;
 	
-	m_ContactList = 0;
 	m_bWarmStart = true;
 
 	m_bDrawShapes = true;
@@ -50,7 +52,11 @@ PhysicalWorld::PhysicalWorld()
 	m_bDrawCentreOfMass = true;
 	
 	m_PhysicalBodyList = 0;
+	m_ConstraintList   = 0;
+	m_ContactList	   = 0;
+	
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
+	m_DistanceConstraintPool = new MemoryAllocator<DistanceConstraint>(MAX_BODIES/10);
 	m_BroadPhaseNodePool = new MemoryAllocator<ContactNode>(MAX_PROXIES);
 }
 	
@@ -67,6 +73,35 @@ void PhysicalWorld::deletePhysicalBody(PhysicalBody* pBody)
 	// Release Memory. do not call delete on this as we didnt allocate it through new operator.
 	pBody->~PhysicalBody();
 	m_PhysicalBodyPool->Free(pBody);
+}
+
+Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
+{
+	Constraint* constraint;
+	// Create Constraint from the Pool.
+	switch (constraintType) 
+	{
+		case ECT_DISTANCE:
+			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint();
+			break;
+		default:
+			break;
+	}
+	// Add this Constraint to the world list.
+	constraint->m_Prev = 0;
+	constraint->m_Next = m_ConstraintList;
+	
+	if( m_ConstraintList )
+	{
+		m_ConstraintList->m_Prev = constraint;
+	}
+	m_ConstraintList = constraint;
+	
+	return constraint;
+}
+
+void PhysicalWorld::deleteConstraint(Constraint* pConstraint)
+{
 }
 
 void PhysicalWorld::Step(dfloat dt)
@@ -94,6 +129,25 @@ void PhysicalWorld::Step(dfloat dt)
 	// Correct the velocities.
 	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
 		m_ContactSolver->correctVelocities();
+	
+	// Initialize all the Constraints.
+	Constraint* pConstraint = m_ConstraintList;
+	while (pConstraint) 
+	{
+		pConstraint->buildJacobian();
+		pConstraint = pConstraint->m_Next;
+	}
+
+	// Correct the velocities of Physical Bodies due to Constraints.
+	pConstraint = m_ConstraintList;
+	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
+	{
+		while (pConstraint) 
+		{
+			pConstraint->correctVelocities();
+			pConstraint = pConstraint->m_Next;
+		}
+	}
 	
 	// Integrate/Advance the positions by time step. 
 	pBody = m_PhysicalBodyList;
@@ -182,7 +236,15 @@ void PhysicalWorld::draw()
 		pBody = pBody->m_Next;
 	}
 	// Draw Constraints/Joints
-	
+	Constraint* pConstraint = m_ConstraintList;
+	while (pConstraint) 
+	{
+		pConstraint = pConstraint->m_Next;
+		if( pConstraint->m_Type == ECT_DISTANCE )
+		{
+			
+		}
+	}
 	// Draw Contacts
 	if( m_bDrawContacts )
 	{
