@@ -13,26 +13,42 @@ BEGIN_NAMESPACE_DIRAC2D
 
 DistanceConstraint::DistanceConstraint():Constraint()
 {
-	m_FixedDistance = m_Anchor1.distance(m_Anchor2);
 	m_Type = ECT_DISTANCE;
 }
-	
+
+void DistanceConstraint::initialize()
+{
+	Vector2f a1, a2;
+	// Add the local offset of the bodies to the anchor points as user defines the anchor point wrt the local centre of the body.
+	if( m_PhysicalBody1 )
+	{
+		//m_Anchor1 += m_PhysicalBody1->m_Centre;
+		a1 = m_PhysicalBody1->getTransform() * ( m_Anchor1  + m_PhysicalBody1->m_Centre);
+	}
+	if( m_PhysicalBody2 )
+	{
+		//m_Anchor2 += m_PhysicalBody2->m_Centre;
+		a2 = m_PhysicalBody2->getTransform() * ( m_Anchor2  + m_PhysicalBody2->m_Centre );
+	}
+	m_Distance = a1.distance(a2);
+}
+
 void DistanceConstraint::buildJacobian()
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		
 	
-	Vector2f c1; Vector2f c2;
+	if( body1 )
+		m_r1 = m_Anchor1 + body1->m_Centre; // World radius vector on body 1.
+	if( body2 )
+		m_r2 = m_Anchor2 + body2->m_Centre; // World radius vector on body 2.
+	
+	Vector2f R1, R2;
 	
 	if( body1 )
-		c1 = body1->m_Centre;
+	    R1 = m_Anchor1 + body1->m_Centre; // World Anchor Point of Body 1.
 	if( body2 )
-		c2 = body2->m_Centre;
-	
-	m_r1 = m_Anchor1 - c1; // Local Anchor Point on body 1.
-	m_r2 = m_Anchor2 - c2; // Local Anchor Point on body 2.
-	Vector2f R1 = c1 + m_Anchor1; // World Anchor Point of Body 1.
-	Vector2f R2 = c2 + m_Anchor2; // World Anchor Point of Body 2.
+		R2 = m_Anchor2 + body2->m_Centre; // World Anchor Point of Body 2.
 	
 	dfloat m1Inv = 0.0f;
 	dfloat m2Inv = 0.0f;
@@ -66,7 +82,7 @@ void DistanceConstraint::buildJacobian()
 	
 	dfloat JInvMJT = ( m1Inv + m2Inv ) + r1cross_d * r1cross_d * i1Inv + r2cross_d * r2cross_d * i2Inv; 
 	
-	dfloat cerror = fabs(distance - m_FixedDistance);
+	dfloat cerror = fabs(distance - m_Distance);
 	
 	// Effective mass for the Constraint.
 	m_EffectiveMass = 1.0f/(JInvMJT + m_Cfm);

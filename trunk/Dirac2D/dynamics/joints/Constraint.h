@@ -35,6 +35,8 @@ public:
 	
 	virtual void correctVelocities() = 0;
 	
+	virtual void initialize() = 0;
+
 	// References of the Physical bodies attached to this Constraint
 	PhysicalBody* m_PhysicalBody1;
 	PhysicalBody* m_PhysicalBody2;

@@ -22,11 +22,14 @@ public:
 	
 	virtual void correctVelocities();
 	
+	virtual void initialize();
+	
 public:
+	// the Anchor points are always assumed in the local coordinate frames of the PhysicalBodies.
 	Vector2f m_Anchor1, m_Anchor2;
 	Vector2f m_ImpulseDirection;
 	Vector2f m_r1, m_r2; // Local Anchor Points on the Bodies.
-	dfloat m_FixedDistance;
+	dfloat m_Distance;
 	dfloat m_EffectiveMass;
 	dfloat m_ImpulseMagnitude;
 	dfloat m_PositionError;

@@ -239,17 +239,18 @@ void PhysicalWorld::draw()
 	Constraint* pConstraint = m_ConstraintList;
 	while (pConstraint) 
 	{
-		Matrix3f xForm;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+		Matrix3f xForm;
 		m_Renderer->setTransform(xForm);
+		m_Renderer->setColor(200, 200, 150);
 
 		if( pConstraint->m_Type == ECT_DISTANCE )
 		{
 			DistanceConstraint* dc = (DistanceConstraint*)pConstraint;
 			Vector2f p0, p1;
 			if( dc->m_PhysicalBody1 )
-			  p0 = dc->m_PhysicalBody1->getTransform() * dc->m_Anchor1;
+				p0 = dc->m_PhysicalBody1->getTransform() * ( dc->m_Anchor1 + dc->m_PhysicalBody1->m_Centre );
 			if( dc->m_PhysicalBody2 )
-				p1 = dc->m_PhysicalBody2->getTransform() * dc->m_Anchor2;
+				p1 = dc->m_PhysicalBody2->getTransform() * ( dc->m_Anchor2 + dc->m_PhysicalBody2->m_Centre );
 			m_Renderer->drawLine(p0, p1);
 		}
 		pConstraint = pConstraint->m_Next;
