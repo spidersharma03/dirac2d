@@ -31,31 +31,31 @@ public:
 		col3 = other.col3;
 	}
 	
-	void rotate(T angle)
+	inline void rotate(T angle)
 	{
 		T cs = cos(angle); T sn = sin(angle);
 		col1.x = cs; col2.x = -sn;
 		col1.y = sn; col2.y = cs;
 	}
 	
-	void translate( Vector2<T>& translation )
+	inline void translate( Vector2<T>& translation )
 	{
 		col3.x = translation.x;
 		col3.y = translation.y;
 	}
 	
-	void translate( T tx, T ty )
+	inline void translate( T tx, T ty )
 	{
 		col3.x = tx;
 		col3.y = ty;
 	}
 	
-	Vector2<T> operator*( const Vector2<T>& v )
+	inline Vector2<T> operator*( const Vector2<T>& v )
 	{
 		return Vector2<T>( col1.x*v.x + col2.x*v.y + col3.x,  col1.y*v.x + col2.y*v.y + col3.y);
 	}
 	
-	void transformAsPoint(Vector2<T>& v)
+	inline void transformAsPoint(Vector2<T>& v)
 	{
 		dfloat x = col1.x*v.x + col2.x*v.y + col3.x;
 		dfloat y = col1.y*v.x + col2.y*v.y + col3.y;
@@ -63,7 +63,7 @@ public:
 		v.y = y;
 	}
 	
-	void transformAsVector(Vector2<T>& v)
+	inline void transformAsVector(Vector2<T>& v)
 	{
 		dfloat x = col1.x*v.x + col2.x*v.y;
 		dfloat y = col1.y*v.x + col2.y*v.y;
@@ -89,7 +89,7 @@ public:
 		return Matrix2<T>(col1.x, col2.x, col1.y, col2.y);
 	}
 	
-	void setIdentity()
+	inline void setIdentity()
 	{
 		col1.x = 1.0f; col2.x = 0.0f; col3.x = 0.0f;
 		col1.y = 0.0f; col2.y = 1.0f; col3.y = 0.0f;

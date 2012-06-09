@@ -62,16 +62,20 @@ void demo2()
 	pBodyGround->createPhysicalShape(pApp);
 	
 	// Create Boxes
-	dfloat y = -0.8f;
+	dfloat y = -0.5f;
 	for( int i=0; i<10; i++ )
 	{
 		PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 		//pBodyBox->m_BodyType = EBT_STATIC;
 		y += 0.2f;
 		pBodyBox->setPosition(Vector2f(0.0f,y));
-		//pBodyBox->setAngle(M_PI_4*0.9);
+		pBodyBox->setAngle(M_PI_4*0.9);
 		dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
 		Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		for( dint32 i=0; i<4; i++ )
+		{
+			verticesBox[i] += Vector2f(0.5f,0.0f);
+		}
 		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 		pBodyBox->createPhysicalShape(pApp);
 	}
@@ -88,6 +92,7 @@ void demo3()
 	PhysicalAppearance pApp;
 	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
@@ -110,6 +115,7 @@ void demo3()
 			//pBodyBox->setAngle(PI_4*0.9);
 			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.071f;
 			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+			
 			pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox,4);
 			pBodyBox->createPhysicalShape(pApp);
 		}
@@ -386,7 +392,7 @@ void demo9()
 {
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
-	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->setPosition(Vector2f(0.0f,-1.4f));
 	//pBodyGround->setAngle(M_PI_4/5);
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
@@ -394,7 +400,7 @@ void demo9()
 	dfloat groundWidth = 2.5f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
-	//pBodyGround->createPhysicalShape(pApp);
+	pBodyGround->createPhysicalShape(pApp);
 	
 	dfloat y = 0.0f;
 	// Create D
@@ -461,11 +467,15 @@ void demo9()
 	
 	// Create R
 	PhysicalBody* pBodyBoxR = pWorld->createPhysicalBody();
-	//pBodyBox->m_BodyType = EBT_STATIC;
+	//pBodyBoxR->m_BodyType = EBT_STATIC;
 	pBodyBoxR->setPosition(Vector2f(0.0f,y));
 	//pBodyBox->setAngle(PI_4);
 	boxWidth = 0.025f; boxHeight = 0.25f;
 	Vector2f verticesBox7[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	for( dint32 i=0; i<4; i++ )
+	{
+		verticesBox7[i] += Vector2f(0, 0);
+	}
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox7, 4);
 	//pApp.m_CollisionAttributes.m_Shape = new Capsule(boxWidth, boxHeight);	
 	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.0f,0.0f);
@@ -474,6 +484,10 @@ void demo9()
 	
 	boxWidth = 0.03f; boxHeight = 0.1f;
 	Vector2f verticesBox8[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	for( dint32 i=0; i<4; i++ )
+	{
+		verticesBox8[i] += Vector2f(0, 0);
+	}
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox8, 4);	
 	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,0.25f);
 	pApp.m_PhysicalAttributes.m_Angle = PI/2;
@@ -481,6 +495,10 @@ void demo9()
 	
 	boxWidth = 0.025f; boxHeight = 0.1f;
 	Vector2f verticesBox9[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	for( dint32 i=0; i<4; i++ )
+	{
+		verticesBox9[i] += Vector2f(0, 0);
+	}
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox9, 4);	
 	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.2f,0.15f);
 	pApp.m_PhysicalAttributes.m_Angle = 0.0f;
@@ -488,6 +506,10 @@ void demo9()
 	
 	boxWidth = 0.03f; boxHeight = 0.1f;
 	Vector2f verticesBox10[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	for( dint32 i=0; i<4; i++ )
+	{
+		verticesBox10[i] += Vector2f(0, 0);
+	}
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox10, 4);	
 	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,0.05f);
 	pApp.m_PhysicalAttributes.m_Angle = PI/2;
@@ -495,6 +517,10 @@ void demo9()
 	
 	boxWidth = 0.03f; boxHeight = 0.17f;
 	Vector2f verticesBox11[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	for( dint32 i=0; i<4; i++ )
+	{
+		verticesBox11[i] += Vector2f(0, 0);
+	}
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox11, 4);	
 	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.15f,-0.1f);
 	pApp.m_PhysicalAttributes.m_Angle = PI/4;
@@ -554,8 +580,9 @@ void demo9()
 	pBodyBoxC->createPhysicalShape(pApp);
 	
 	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc->m_PhysicalBody1 = pBodyBoxR;
-	dc->m_Anchor1 = Vector2f(0.0f,0.0f);
+	dc->m_PhysicalBody1 = pBodyBoxI;
+	dc->m_Anchor1 = Vector2f(0.0f,0.25f);
+	dc->m_Anchor2 = Vector2f(1.0f,2.2f);
 	dc->initialize();
 	
 	//PhysicalBody* pBodyBoxD2 = pBodyBoxD->clone();
@@ -957,7 +984,7 @@ void demo15()
 	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	dc->m_PhysicalBody1 = pBodyA;
 	dc->m_PhysicalBody2 = pBodyR;
-	//dc->m_Anchor1 = Vector2f(0.0f,-0.1f);
+	//dc->m_Anchor1 = Vector2f(0.0f,0.0f);
 	dc->initialize();
 }
 
@@ -1003,7 +1030,7 @@ void demo16()
 	DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	dc1->m_PhysicalBody1 = pBodyCircle;
 	dc1->m_PhysicalBody2 = pBodyCircle1;
-	dc1->m_Anchor2 = Vector2f(0.0f,-0.1f);
+	dc1->m_Anchor2 = Vector2f(0.0f,-0.05f);
 	dc1->initialize();
 	//dc->m_PhysicalShape1
 }
@@ -1014,7 +1041,7 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo16();
+	demo15();
 }
 
 void changeSize(int w, int h) 
