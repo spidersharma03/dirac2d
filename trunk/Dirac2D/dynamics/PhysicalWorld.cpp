@@ -246,11 +246,17 @@ void PhysicalWorld::draw()
 		if( pConstraint->m_Type == ECT_DISTANCE )
 		{
 			DistanceConstraint* dc = (DistanceConstraint*)pConstraint;
-			Vector2f p0, p1;
+			Vector2f p0 = dc->m_Anchor1, p1 = dc->m_Anchor2;
 			if( dc->m_PhysicalBody1 )
-				p0 = dc->m_PhysicalBody1->getTransform() * ( dc->m_Anchor1 + dc->m_PhysicalBody1->m_Centre );
+			{
+				p0 += dc->m_PhysicalBody1->m_Centre;
+				dc->m_PhysicalBody1->getTransform().transformAsPoint(p0);
+			}
 			if( dc->m_PhysicalBody2 )
-				p1 = dc->m_PhysicalBody2->getTransform() * ( dc->m_Anchor2 + dc->m_PhysicalBody2->m_Centre );
+			{
+				p1 += dc->m_PhysicalBody2->m_Centre;
+				dc->m_PhysicalBody2->getTransform().transformAsPoint(p1);
+			}
 			m_Renderer->drawLine(p0, p1);
 		}
 		pConstraint = pConstraint->m_Next;

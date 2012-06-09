@@ -242,10 +242,24 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	return pShape;
 }
 
+// Update the Body Transform.
+/*
+  we need to be careful as there might be offsets in the vertices defined for a Shape.
+  So the Body Transform should be::
+  Tinv * PositionXform * RotXform * T
+  where T, Tinv are the local centre offset transforms.
+  PositionXform represents the Body's position
+  RotXform represents the Body's Angle.
+  Implementation Below is the less readable form of the above concatenation only.
+ */
 void PhysicalBody::updateTransform()
-{
-	m_Transform.rotate(m_Angle);
-	m_Transform.translate(m_Position);
+{	
+	dfloat cs = cos(m_Angle); dfloat sn = sin(m_Angle);
+	
+	m_Transform.col1.x = cs; m_Transform.col2.x = -sn;
+	m_Transform.col1.y = sn; m_Transform.col2.y = cs;
+	m_Transform.col3.x = -cs * m_Centre.x + sn * m_Centre.y + m_Centre.x + m_Position.x;
+	m_Transform.col3.y = -sn * m_Centre.x - cs * m_Centre.y + m_Centre.y + m_Position.y;
 	
 	updateAABB();	
 }
