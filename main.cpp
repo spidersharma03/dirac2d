@@ -394,7 +394,7 @@ void demo9()
 	dfloat groundWidth = 2.5f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
-	pBodyGround->createPhysicalShape(pApp);
+	//pBodyGround->createPhysicalShape(pApp);
 	
 	dfloat y = 0.0f;
 	// Create D
@@ -552,6 +552,11 @@ void demo9()
 	pApp.m_PhysicalAttributes.m_Position = Vector2f(0.1f,-0.22f);
 	pApp.m_PhysicalAttributes.m_Angle = PI/2;
 	pBodyBoxC->createPhysicalShape(pApp);
+	
+	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc->m_PhysicalBody1 = pBodyBoxR;
+	dc->m_Anchor1 = Vector2f(0.0f,0.0f);
+	dc->initialize();
 	
 	//PhysicalBody* pBodyBoxD2 = pBodyBoxD->clone();
 	//pBodyBoxD2->setPosition(Vector2f(1.2f,0.0f));
@@ -948,6 +953,12 @@ void demo15()
 	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
 	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
 	pBodyCompound->createPhysicalShape(pApp);
+	
+	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc->m_PhysicalBody1 = pBodyA;
+	dc->m_PhysicalBody2 = pBodyR;
+	//dc->m_Anchor1 = Vector2f(0.0f,-0.1f);
+	dc->initialize();
 }
 
 
@@ -978,13 +989,12 @@ void demo16()
 	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	dc->m_PhysicalBody1 = pBodyCircle;
 	dc->m_Anchor1 = Vector2f(0.0f,0.1f);
-	Vector2f d = Vector2f(0.0,0.1) - Vector2f(0.1,y);
-	dc->m_FixedDistance = d.length();
+	dc->initialize();
 	
 	// Create Circle2
 	PhysicalBody* pBodyCircle1 = pWorld->createPhysicalBody();
 	//pBodyCircle1->m_BodyType = EBT_STATIC;
-	pBodyCircle1->setPosition(Vector2f(0.4,y));
+	pBodyCircle1->setPosition(Vector2f(0.3,y));
 	pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
 	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
 	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
@@ -993,8 +1003,8 @@ void demo16()
 	DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	dc1->m_PhysicalBody1 = pBodyCircle;
 	dc1->m_PhysicalBody2 = pBodyCircle1;
-	d = Vector2f(0.4,y) - Vector2f(0.1,y);
-	dc1->m_FixedDistance = d.length();
+	dc1->m_Anchor2 = Vector2f(0.0f,-0.1f);
+	dc1->initialize();
 	//dc->m_PhysicalShape1
 }
 
