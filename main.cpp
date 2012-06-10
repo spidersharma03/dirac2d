@@ -626,7 +626,7 @@ void demo10()
 	
 	PhysicalAppearance pApp;
 	dint32 edgeCount = 30;
-	Vector2f vertices[edgeCount];
+	Vector2f vertices[30];
 	dfloat chainLength = 3.0f;
 	dfloat ex = -chainLength/2;
 	dfloat ey = 0.0f;
@@ -635,7 +635,7 @@ void demo10()
 	{
 		vertices[e] = Vector2f(ex,ey);
 		ex += dx;
-		ey = 0.05*sin(e);
+		ey = 0.05*sinf(e);
 	}
 	
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, edgeCount);
@@ -665,7 +665,7 @@ void demo11()
 	
 	PhysicalAppearance pApp;
 	dint32 edgeCount = 30;
-	Vector2f vertices[edgeCount];
+	Vector2f vertices[30];
 	dfloat chainLength = 3.0f;
 	dfloat ex = chainLength/2;
 	dfloat ey = 0.0f;
@@ -765,7 +765,7 @@ void demo14()
 	PhysicalAppearance pApp;
 	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.0f;
 	dint32 vertexCount = 3;
-	Vector2f vertices[vertexCount];
+	Vector2f vertices[3];
 	dfloat dx = groundWidth/(vertexCount-1);
 	dfloat ex = -groundWidth/2,ey = 0.0f;
 	
@@ -808,7 +808,7 @@ void demo15()
 	PhysicalAppearance pApp;
 	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.0f;
 	dint32 vertexCount = 15;
-	Vector2f verticesD[vertexCount];
+	Vector2f verticesD[15];
 	
 	dfloat Height = 0.4f;
 	
@@ -842,7 +842,7 @@ void demo15()
 	PhysicalBody* pBodyI = pWorld->createPhysicalBody();
 	pBodyI->setPosition(Vector2f(bodyX,y));
 	vertexCount = 13;
-	Vector2f verticesI[vertexCount];
+	Vector2f verticesI[13];
 		
 	verticesI[0].x = -WIDTH/4; verticesI[0].y = Height/2 - Height/4;
 	verticesI[1].x = -WIDTH/4; verticesI[1].y = -Height/2 + Height/4;
@@ -873,7 +873,7 @@ void demo15()
 	bodyX += bodyDx;
 	pBodyR->setPosition(Vector2f(bodyX,y));
 	vertexCount = 14;
-	Vector2f verticesR[vertexCount];
+	Vector2f verticesR[14];
 	
 	verticesR[0].x = 0.0f; verticesR[0].y = Height/4;
 
@@ -910,7 +910,7 @@ void demo15()
 	bodyX += bodyDx;
 	pBodyA->setPosition(Vector2f(bodyX,y));
 	vertexCount = 7;
-	Vector2f verticesA[vertexCount];
+	Vector2f verticesA[7];
 	
 	verticesA[0].x = 0.0f;                verticesA[0].y = Height/2;
 	verticesA[1].x = WIDTH/1.5;           verticesA[1].y = -Height/2;
@@ -935,7 +935,7 @@ void demo15()
 	bodyX += bodyDx;
 	pBodyC->setPosition(Vector2f(bodyX,y));
 	vertexCount = 18;
-	Vector2f verticesC[vertexCount];
+	Vector2f verticesC[18];
 	
 	angle = 0.0f;
 	dAngle = PI/7;
@@ -979,7 +979,7 @@ void demo15()
 	pBody2->setAngle(PI_4*0.5f);
 
 	vertexCount = 21;
-	Vector2f vertices2[vertexCount];
+	Vector2f vertices2[21];
 	angle = 0.0f;
 	dAngle = PI/7;
 	for( dint32 v=0; v<8; v++ )

@@ -17,7 +17,7 @@ class DistanceConstraint : public Constraint
 {
 public:
 	DistanceConstraint();
-		
+	
 	virtual void buildJacobian();
 	
 	virtual void correctVelocities();
