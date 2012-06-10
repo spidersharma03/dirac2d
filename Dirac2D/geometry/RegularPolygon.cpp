@@ -74,9 +74,16 @@ Vector2f RegularPolygon::getSupportPoint(Vector2f& d)
 	return Vector2f();
 }
 
-dbool RegularPolygon::isPointInside(Point2f& p)
+dbool RegularPolygon::isPointInside(Vector2f& p)
 {
-	return 0;
+	for (dint32 v=0; v<m_NumVertices; v++)
+	{
+		Vector2f& n = m_Normals[v];
+		Vector2f& vertex = m_Vertices[v];
+		if( (p - vertex).dot(n) > 0.0f )
+			return false;
+	}
+	return true;
 }
 
 void RegularPolygon::updateAABB(Matrix3f& xForm)

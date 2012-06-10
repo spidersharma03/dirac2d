@@ -48,6 +48,8 @@ public:
 
 	void Step(dfloat dt);
 	
+	PhysicalBody* pickBodyFromPoint(Vector2f p);
+	
 	void draw();
 	
 	void setRenderer(Renderer*);

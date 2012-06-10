@@ -83,7 +83,7 @@ Vector2f EdgeChain::getSupportPoint(Vector2f& d)
 	return Vector2f();
 }
 
-dbool EdgeChain::isPointInside(Point2f& p)
+dbool EdgeChain::isPointInside(Vector2f& p)
 {
 	return false;
 }

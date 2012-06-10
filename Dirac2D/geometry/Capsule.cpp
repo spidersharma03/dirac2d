@@ -36,9 +36,12 @@ Vector2f Capsule::getSupportPoint(Vector2f& d)
 	return Vector2f();
 }
 
-dbool Capsule::isPointInside(Point2f& p)
+dbool Capsule::isPointInside(Vector2f& p)
 {
-	return 0;
+	Vector2f p0(-m_Height*0.5f + m_Centroid.x, 0.0f), p1(m_Height*0.5f + m_Centroid.x, 0.0f); 
+	Vector2f outPoint;
+	findClosestPoint(p0, p1, p, outPoint);
+	return p.distanceSquared(outPoint) < m_Radius * m_Radius;
 }
 
 void Capsule::updateAABB(Matrix3f& xForm)

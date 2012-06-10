@@ -31,7 +31,7 @@ Vector2f Box::getSupportPoint(Vector2f& d)
 	return Vector2f();
 }
 
-dbool Box::isPointInside(Point2f& p)
+dbool Box::isPointInside(Vector2f& p)
 {
 	return 0;
 }

@@ -17,7 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class PhysicalBody;
 
-enum CONSTRAINT_TYPE { ECT_DISTANCE };
+enum CONSTRAINT_TYPE { ECT_DISTANCE, ECT_HINGE };
 
 class Constraint
 {
@@ -26,8 +26,8 @@ public:
 	{
 		m_PhysicalBody1 = 0;
 		m_PhysicalBody2 = 0;
-		m_Erp = 1.0f;
-		m_Cfm = 0.0f;
+		m_Erp = 0.5f;
+		m_Cfm = 0.1f;
 		m_Next = m_Prev = 0;
 	};
 	

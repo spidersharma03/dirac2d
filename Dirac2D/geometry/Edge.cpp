@@ -53,7 +53,7 @@ Vector2f Edge::getSupportPoint(Vector2f& d)
 	return Vector2f();
 }
 
-dbool Edge::isPointInside(Point2f& p)
+dbool Edge::isPointInside(Vector2f& p)
 {
 	return false;
 }

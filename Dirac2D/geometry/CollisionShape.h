@@ -65,7 +65,7 @@ public:
 	// returns Local Support Point on the Shape.
 	virtual Vector2f getSupportPoint(Vector2f& d) = 0;
 	
-	virtual dbool isPointInside(Point2f& p) = 0;
+	virtual dbool isPointInside(Vector2f& p) = 0;
 	
 	virtual void updateAABB(Matrix3f& xForm) = 0;
 	

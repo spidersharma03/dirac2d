@@ -41,6 +41,8 @@ void Contact::update()
 	
 	if( bRes )
 	{
+		// Friction mixing
+		m_Friction = sqrt(m_PhysicalShape1->m_Friction * m_PhysicalShape2->m_Friction);
 		m_ContactNormal = m_Manifold.m_ContactNormal;
 		m_NumContactConstraints = m_Manifold.m_NumContacts;
 		m_ContactConstraint[0].m_NormalImpulse = 0.0f;
