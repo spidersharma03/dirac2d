@@ -50,6 +50,16 @@ public:
 
 	PhysicalShape* createPhysicalShape(PhysicalAppearance& pApp);
 	
+	Vector2f getLocalPoint(Vector2f& worldPosition)
+	{
+		return worldPosition * m_Transform;
+	}
+	
+	Vector2f getWorldPoint(Vector2f& localPosition)
+	{
+		return m_Transform * localPosition;
+	}
+	
 	void setPosition(Vector2f& position)
 	{
 		m_Position = position;

@@ -24,7 +24,7 @@ public:
 	// For GJK/EPA 
 	virtual Vector2f getSupportPoint(Vector2f& d);
 	
-	virtual dbool isPointInside(Point2f& p);
+	virtual dbool isPointInside(Vector2f& p);
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	

@@ -44,12 +44,12 @@ CollisionShape* Circle::clone()
 
 Vector2f Circle::getSupportPoint(Vector2f& d)
 {
-	return Vector2f();
+	return m_Centroid + d * m_Radius;
 }
 
-dbool Circle::isPointInside(Point2f& p)
+dbool Circle::isPointInside(Vector2f& p)
 {
-	return 0;
+	return p.distanceSquared(m_Centroid) < m_Radius * m_Radius;
 }
 
 void Circle::updateAABB(Matrix3f& xForm)

@@ -48,8 +48,8 @@ PhysicalWorld::PhysicalWorld()
 	m_bDrawShapes = true;
 	m_bDrawBoundingBoxes = false;
 	m_bDrawContacts = true;
-	m_bDrawConstraints = false;
-	m_bDrawCentreOfMass = true;
+	m_bDrawConstraints = true;
+	m_bDrawCentreOfMass = false;
 	
 	m_PhysicalBodyList = 0;
 	m_ConstraintList   = 0;
@@ -236,30 +236,33 @@ void PhysicalWorld::draw()
 		pBody = pBody->m_Next;
 	}
 	// Draw Constraints/Joints
-	Constraint* pConstraint = m_ConstraintList;
-	while (pConstraint) 
+	if( m_bDrawConstraints )
 	{
-		Matrix3f xForm;
-		m_Renderer->setTransform(xForm);
-		m_Renderer->setColor(200, 200, 150);
-
-		if( pConstraint->m_Type == ECT_DISTANCE )
+		Constraint* pConstraint = m_ConstraintList;
+		while (pConstraint) 
 		{
-			DistanceConstraint* dc = (DistanceConstraint*)pConstraint;
-			Vector2f p0 = dc->m_Anchor1, p1 = dc->m_Anchor2;
-			if( dc->m_PhysicalBody1 )
+			Matrix3f xForm;
+			m_Renderer->setTransform(xForm);
+			m_Renderer->setColor(200, 200, 150);
+			
+			if( pConstraint->m_Type == ECT_DISTANCE )
 			{
-				p0 += dc->m_PhysicalBody1->m_Centre;
-				dc->m_PhysicalBody1->getTransform().transformAsPoint(p0);
+				DistanceConstraint* dc = (DistanceConstraint*)pConstraint;
+				Vector2f p0 = dc->m_Anchor1, p1 = dc->m_Anchor2;
+				if( dc->m_PhysicalBody1 )
+				{
+					p0 += dc->m_PhysicalBody1->m_Centre;
+					dc->m_PhysicalBody1->getTransform().transformAsPoint(p0);
+				}
+				if( dc->m_PhysicalBody2 )
+				{
+					p1 += dc->m_PhysicalBody2->m_Centre;
+					dc->m_PhysicalBody2->getTransform().transformAsPoint(p1);
+				}
+				m_Renderer->drawLine(p0, p1);
 			}
-			if( dc->m_PhysicalBody2 )
-			{
-				p1 += dc->m_PhysicalBody2->m_Centre;
-				dc->m_PhysicalBody2->getTransform().transformAsPoint(p1);
-			}
-			m_Renderer->drawLine(p0, p1);
+			pConstraint = pConstraint->m_Next;
 		}
-		pConstraint = pConstraint->m_Next;
 	}
 	// Draw Contacts
 	if( m_bDrawContacts )
@@ -314,6 +317,28 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 		pNode->m_CollisionShape = pShape->m_CollisionShape;
 		m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 	}
+}
+
+PhysicalBody* PhysicalWorld::pickBodyFromPoint(Vector2f p)
+{
+	PhysicalBody* pBody = m_PhysicalBodyList;
+	while (pBody) 
+	{
+		Matrix3f xForm = pBody->getTransform();
+		//xForm.transformAsPoint(p);
+		Vector2f testPoint = p;
+		testPoint *= xForm;
+		PhysicalShape* pShape = pBody->m_PhysicalShapeList;
+		while (pShape) 
+		{
+			dbool bRes = pShape->m_CollisionShape->isPointInside(testPoint);
+			if( bRes )
+				return pBody;
+			pShape = pShape->m_Next;
+		}
+		pBody = pBody->m_Next;
+	}
+	return 0;
 }
 
 END_NAMESPACE_DIRAC2D

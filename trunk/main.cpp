@@ -22,6 +22,8 @@ dfloat dt = 1.0f/600.0f;
 dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
 
+DistanceConstraint *mouseJoint;
+
 void demo1()
 {
 	// Create Ground Body
@@ -69,12 +71,12 @@ void demo2()
 		//pBodyBox->m_BodyType = EBT_STATIC;
 		y += 0.2f;
 		pBodyBox->setPosition(Vector2f(0.0f,y));
-		pBodyBox->setAngle(M_PI_4*0.9);
+		//pBodyBox->setAngle(M_PI_4*0.9);
 		dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
 		Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		for( dint32 i=0; i<4; i++ )
 		{
-			verticesBox[i] += Vector2f(0.5f,0.0f);
+			//verticesBox[i] += Vector2f(0.5f,0.0f);
 		}
 		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox, 4);
 		pBodyBox->createPhysicalShape(pApp);
@@ -579,11 +581,33 @@ void demo9()
 	pApp.m_PhysicalAttributes.m_Angle = PI/2;
 	pBodyBoxC->createPhysicalShape(pApp);
 	
-	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc->m_PhysicalBody1 = pBodyBoxI;
-	dc->m_Anchor1 = Vector2f(0.0f,0.25f);
-	dc->m_Anchor2 = Vector2f(1.0f,2.2f);
-	dc->initialize();
+	DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc1->m_PhysicalBody1 = pBodyBoxD;
+	dc1->m_PhysicalBody2 = pBodyBoxI;
+	dc1->m_Anchor1 = Vector2f(0.0f,0.0f);
+	dc1->m_Anchor2 = Vector2f(0.0f,0.0f);
+	dc1->initialize();
+	
+	DistanceConstraint* dc2 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc2->m_PhysicalBody1 = pBodyBoxI;
+	dc2->m_PhysicalBody2 = pBodyBoxR;
+	dc2->m_Anchor1 = Vector2f(0.0f,0.0f);
+	dc2->m_Anchor2 = Vector2f(0.0f,0.0f);
+	dc2->initialize();
+	
+	DistanceConstraint* dc3 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc3->m_PhysicalBody1 = pBodyBoxR;
+	dc3->m_PhysicalBody2 = pBodyBoxA;
+	dc3->m_Anchor1 = Vector2f(0.0f,0.0f);
+	dc3->m_Anchor2 = Vector2f(0.0f,0.0f);
+	dc3->initialize();
+	
+	DistanceConstraint* dc4 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc4->m_PhysicalBody1 = pBodyBoxA;
+	dc4->m_PhysicalBody2 = pBodyBoxC;
+	dc4->m_Anchor1 = Vector2f(0.0f,0.0f);
+	dc4->m_Anchor2 = Vector2f(0.0f,0.0f);
+	dc4->initialize();
 	
 	//PhysicalBody* pBodyBoxD2 = pBodyBoxD->clone();
 	//pBodyBoxD2->setPosition(Vector2f(1.2f,0.0f));
@@ -807,6 +831,10 @@ void demo15()
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(verticesD, vertexCount);
 	pBodyD->createPhysicalShape(pApp);
 	
+	DistanceConstraint* dcD = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dcD->m_PhysicalBody1 = pBodyD;
+	dcD->m_Anchor2 = Vector2f(bodyX,y+0.5);
+	dcD->initialize();
 	
 	// CREATE I
 	dfloat WIDTH = 0.25f;
@@ -833,6 +861,11 @@ void demo15()
 	
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(verticesI, vertexCount);
 	pBodyI->createPhysicalShape(pApp);
+	
+	DistanceConstraint* dcI = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dcI->m_PhysicalBody1 = pBodyI;
+	dcI->m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	dcI->initialize();
 	
 	// CREATE R
 	PhysicalBody* pBodyR = pWorld->createPhysicalBody();
@@ -866,6 +899,11 @@ void demo15()
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(verticesR, vertexCount);
 	pBodyR->createPhysicalShape(pApp);
 
+	DistanceConstraint* dcR = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dcR->m_PhysicalBody1 = pBodyR;
+	dcR->m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	dcR->initialize();
+	
 	// CREATE A
 	PhysicalBody* pBodyA = pWorld->createPhysicalBody();
 	//pBodyA->m_BodyType = EBT_STATIC;
@@ -885,6 +923,11 @@ void demo15()
 	
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(verticesA, vertexCount);
 	pBodyA->createPhysicalShape(pApp);
+	
+	DistanceConstraint* dcA = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dcA->m_PhysicalBody1 = pBodyA;
+	dcA->m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	dcA->initialize();
 	
 	// CREATE C
 	PhysicalBody* pBodyC = pWorld->createPhysicalBody();
@@ -921,6 +964,12 @@ void demo15()
 
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(verticesC, vertexCount);
 	pBodyC->createPhysicalShape(pApp);
+	
+	DistanceConstraint* dcC = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dcC->m_PhysicalBody1 = pBodyC;
+	dcC->m_Anchor1 = Vector2f(0.0f,0.5f);
+	dcC->m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	dcC->initialize();
 	
 	// CREATE 2
 	PhysicalBody* pBody2 = pWorld->createPhysicalBody();
@@ -962,11 +1011,23 @@ void demo15()
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices2, vertexCount);
 	pBody2->createPhysicalShape(pApp);
 	
+	DistanceConstraint* dc2 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc2->m_PhysicalBody1 = pBody2;
+	dc2->m_Anchor1 = Vector2f(0.0f,0.5f);
+	dc2->m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	dc2->initialize();
+	
 	// CREATE CLONE OF D
 	bodyX += bodyDx*0.9;
 	PhysicalBody* pBodyD2 = pBodyD->clone();
 	pBodyD2->setPosition(Vector2f(bodyX,y));
 	pBodyD2->addToPhysicalWorld(pWorld);
+	
+	DistanceConstraint* dcD2 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dcD2->m_PhysicalBody1 = pBodyD2;
+	dcD2->m_Anchor1 = Vector2f(0.0f,0.5f);
+	dcD2->m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	dcD2->initialize();
 	
 	// Create Capsule
 	y = -0.4f;
@@ -981,11 +1042,13 @@ void demo15()
 	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
 	pBodyCompound->createPhysicalShape(pApp);
 	
-	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc->m_PhysicalBody1 = pBodyA;
-	dc->m_PhysicalBody2 = pBodyR;
-	//dc->m_Anchor1 = Vector2f(0.0f,0.0f);
-	dc->initialize();
+
+	
+	//DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+//	dc->m_PhysicalBody1 = pBodyA;
+//	dc->m_PhysicalBody2 = pBodyR;
+//	//dc->m_Anchor1 = Vector2f(0.0f,0.0f);
+//	dc->initialize();
 }
 
 
@@ -994,7 +1057,7 @@ void demo16()
 {
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
-	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->setPosition(Vector2f(0.0f,-1.5f));
 	pBodyGround->setAngle(PI_4/112);
 	pBodyGround->m_BodyType = EBT_STATIC;
 	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
@@ -1003,35 +1066,45 @@ void demo16()
 	pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
-	// Create Circle1
-	dfloat y = 0.1f;
+	// Create Circle Chain
+	dfloat y = 1.1f;
+	dint32 n = 15;
+	dfloat radius = 0.06f;
 	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
-	//pBodyCircle->m_BodyType = EBT_STATIC;
-	pBodyCircle->setPosition(Vector2f(0.1,y));
-	pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
-	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
-	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
+	pBodyCircle->setPosition(Vector2f(0.0,y));
+	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
 	pBodyCircle->createPhysicalShape(pApp);
 	
+	dfloat erp = 1.0f; dfloat cfm = 0.0f;
 	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	dc->m_Erp = erp;
+	dc->m_Cfm = cfm;
 	dc->m_PhysicalBody1 = pBodyCircle;
-	dc->m_Anchor1 = Vector2f(0.0f,0.1f);
+	dc->m_Anchor1 = Vector2f(0.0f,0.0f);
+	dc->m_Anchor2 = Vector2f(0.0f,y+0.1f);
 	dc->initialize();
+	PhysicalBody* pPrevCircle = pBodyCircle;
+	for( dint32 i=1; i<n; i++ )
+	{
+		y -= 0.15f;
+		PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+		pBodyCircle->setPosition(Vector2f(0.0,y));
+		pApp.m_CollisionAttributes.m_Shape = new Circle(radius);//,radius*0.5f);
+		pBodyCircle->createPhysicalShape(pApp);
+		
+		
+		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+		dc->m_Erp = erp;
+		dc->m_Cfm = cfm;
+		dc->m_PhysicalBody1 = pBodyCircle;
+		dc->m_PhysicalBody2 = pPrevCircle;
+		dc->m_Anchor1 = Vector2f(0.0f,0.0f);
+		dc->m_Anchor2 = Vector2f(0.0f,0.0f);
+		dc->initialize();
+		
+		pPrevCircle = pBodyCircle;
+	}
 	
-	// Create Circle2
-	PhysicalBody* pBodyCircle1 = pWorld->createPhysicalBody();
-	//pBodyCircle1->m_BodyType = EBT_STATIC;
-	pBodyCircle1->setPosition(Vector2f(0.3,y));
-	pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
-	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
-	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
-	pBodyCircle1->createPhysicalShape(pApp);
-	
-	DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc1->m_PhysicalBody1 = pBodyCircle;
-	dc1->m_PhysicalBody2 = pBodyCircle1;
-	dc1->m_Anchor2 = Vector2f(0.0f,-0.05f);
-	dc1->initialize();
 	//dc->m_PhysicalShape1
 }
 
@@ -1041,7 +1114,10 @@ void initScene()
 	GLRenderer* glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
-	demo15();
+	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+	mouseJoint->m_Erp = 2.0f;
+	mouseJoint->m_Cfm = 1.0f;
+	demo16();
 }
 
 void changeSize(int w, int h) 
@@ -1115,7 +1191,74 @@ void keyProcessor(unsigned char key, int x, int y)
 			break;
 	}
 }
+
+int _button = -1;
+dbool bPicked = false;
+
+void MouseButton(int button, int state, int x, int y)
+{	
+	_button = button;
 	
+	if(windowHeight == 0)
+        windowHeight = 1;
+	y = windowHeight - y;
+    dfloat ratio = 1.0* windowWidth / windowHeight;
+	
+	dfloat px = 2.0f * (dfloat)x/windowWidth - 1;
+	dfloat py = 2.0f * (dfloat)y/windowHeight - 1;
+	px *= 1.5f*ratio;
+	py *= 1.5f;
+	
+	Vector2f p(px,py);
+	if (button == GLUT_LEFT_BUTTON)
+    {
+		PhysicalBody* pBody = pWorld->pickBodyFromPoint(p);
+		if( pBody )
+		{
+			bPicked = true;
+			Vector2f posLocal = pBody->getLocalPoint(p);
+			mouseJoint->m_PhysicalBody1 = pBody;
+			mouseJoint->m_Anchor1 = posLocal;
+			mouseJoint->m_Anchor2 = p;
+			mouseJoint->initialize();
+		}
+		else 
+		{
+			bPicked = false;
+			mouseJoint->m_PhysicalBody1 = 0;
+		}
+
+    }
+	if( state == GLUT_UP && button == GLUT_LEFT_BUTTON )
+	{
+		mouseJoint->m_PhysicalBody1 = 0;
+		mouseJoint->m_Anchor1 = Vector2f();
+		mouseJoint->m_Anchor2 = Vector2f();
+	}
+}
+
+void MouseMotion(int x, int y)
+{
+	if( !bPicked )
+		return;
+	
+	if(windowHeight == 0)
+        windowHeight = 1;
+	y = windowHeight - y;
+    dfloat ratio = 1.0* windowWidth / windowHeight;
+	
+	dfloat px = 2.0f * (dfloat)x/windowWidth - 1;
+	dfloat py = 2.0f * (dfloat)y/windowHeight - 1;
+	px *= 1.5f*ratio;
+	py *= 1.5f;
+	
+	Vector2f p(px,py);
+	if (_button == GLUT_LEFT_BUTTON)
+    {
+		mouseJoint->m_Anchor2 = p;
+	}
+}
+
 #ifndef WIN32
 static void timerCallback (int value)
 {
@@ -1160,6 +1303,8 @@ int main(int argc, char **argv) {
     glutInitWindowSize(windowWidth,windowHeight);
     glutCreateWindow("Physics Engine - DIRAC2D");
 	glutKeyboardFunc(keyProcessor);
+	glutMouseFunc (MouseButton);
+	glutMotionFunc (MouseMotion);
 	glutDisplayFunc(renderScene);
     glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);

@@ -197,6 +197,8 @@ public:
 	ContactConstraint m_ContactConstraint[MAX_CONTACTS];
 	dchar m_NumContactConstraints;
 	
+	// Friction due to the Physical Shapes Attached to this Contact.
+	dfloat m_Friction;
 	// Error reduction parameter. this is used to make sure that the constarint dosent drift over time. should be less than 1.0f/timeStep.
 	dfloat m_ERP;
 	

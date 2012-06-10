@@ -81,7 +81,7 @@ void DistanceConstraint::buildJacobian()
 	
 	dfloat JInvMJT = ( m1Inv + m2Inv ) + r1cross_d * r1cross_d * i1Inv + r2cross_d * r2cross_d * i2Inv; 
 	
-	dfloat cerror = fabs(distance - m_Distance);
+	dfloat cerror = (distance - m_Distance);
 	
 	// Effective mass for the Constraint.
 	m_EffectiveMass = 1.0f/(JInvMJT + m_Cfm);
@@ -89,7 +89,7 @@ void DistanceConstraint::buildJacobian()
 	m_PositionError = m_Erp * cerror;
 	
 	// Apply Corrective impulse on the bodies
-	if( 0 )//body1->m_PhysicalWorld->m_bWarmStart )
+	if( 1 )//body1->m_PhysicalWorld->m_bWarmStart )
 	{
 		Vector2f totalImpulse = m_ImpulseDirection * m_ImpulseMagnitude;
 		if( body1 )
@@ -102,7 +102,6 @@ void DistanceConstraint::buildJacobian()
 			body2->m_Velocity        += totalImpulse * m2Inv;
 			body2->m_AngularVelocity += i2Inv * Vector2f::cross( m_r2, totalImpulse);
 		}
-		m_ImpulseMagnitude = 0.0f;
 	}
 	else 
 	{
