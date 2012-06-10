@@ -175,10 +175,6 @@
 				RelativePath=".\main.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\Dirac2D\STimer.cpp"
-				>
-			</File>
 			<Filter
 				Name="dynamics"
 				>
@@ -203,6 +199,14 @@
 					</File>
 					<File
 						RelativePath=".\Dirac2D\dynamics\contacts\ContactSolver.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="joints"
+					>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\DistanceConstraint.cpp"
 						>
 					</File>
 				</Filter>
@@ -243,6 +247,14 @@
 					</File>
 					<File
 						RelativePath=".\Dirac2D\collision\broadPhase\NaiveBoradPhaseCollisionAlgorithm.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="GJK_EPA"
+					>
+					<File
+						RelativePath=".\Dirac2D\collision\GJK_EPA\GJKAlgorithm.cpp"
 						>
 					</File>
 				</Filter>
@@ -305,10 +317,6 @@
 				RelativePath=".\Dirac2D\Settings.h"
 				>
 			</File>
-			<File
-				RelativePath=".\Dirac2D\STimer.h"
-				>
-			</File>
 			<Filter
 				Name="collision"
 				>
@@ -336,6 +344,10 @@
 					RelativePath=".\Dirac2D\collision\CollisionManager.h"
 					>
 				</File>
+				<File
+					RelativePath=".\Dirac2D\collision\PolygonHelper.h"
+					>
+				</File>
 				<Filter
 					Name="broadPhase"
 					>
@@ -345,6 +357,18 @@
 					</File>
 					<File
 						RelativePath=".\Dirac2D\collision\broadPhase\NaiveBoradPhaseCollisionAlgorithm.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="GJK_EPA"
+					>
+					<File
+						RelativePath=".\Dirac2D\collision\GJK_EPA\GJKAlgorithm.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\collision\GJK_EPA\Simplex.h"
 						>
 					</File>
 				</Filter>
