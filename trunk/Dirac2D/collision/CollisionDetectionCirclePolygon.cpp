@@ -91,7 +91,12 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* 
 	// Circle Centre inside Polygon
 	if( minDistance < EPSILON )
 	{
-		dAssert(0);
+		contactManifold->m_NumContacts = 1;
+		contactManifold->m_ContactNormal = normals[index];
+		contactManifold->m_ContactPoints[0].m_Point = (c + contactManifold->m_ContactNormal * -minDistance ) * 0.5f;
+		xform2.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
+		contactManifold->m_ContactPoints[0].m_Depth = minDistance;
+		xform2.transformAsVector(contactManifold->m_ContactNormal);		
 		return true;
 	}
 	

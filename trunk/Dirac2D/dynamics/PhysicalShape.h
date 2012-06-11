@@ -24,6 +24,10 @@ class PhysicalShape
 protected:
 	PhysicalShape()
 	{
+		m_Friction = 0.0f;
+		m_Restitution = 0.0f;
+		m_Next = m_Prev = 0;
+		m_CollisionShape = 0;
 	}
 	
 	PhysicalShape(const PhysicalShape& other);
