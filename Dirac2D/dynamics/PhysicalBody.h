@@ -60,6 +60,11 @@ public:
 		return m_Transform * localPosition;
 	}
 	
+	Vector2f getVelocityAtPosition( Vector2f& localPosition )
+	{
+		return m_Velocity + Vector2f::cross(m_AngularVelocity, localPosition);
+	}
+	
 	void setPosition(Vector2f& position)
 	{
 		m_Position = position;

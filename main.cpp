@@ -1068,8 +1068,8 @@ void demo16()
 	
 	// Create Circle Chain
 	dfloat y = 1.1f;
-	dint32 n = 15;
-	dfloat radius = 0.06f;
+	dint32 n = 25;
+	dfloat radius = 0.035f;
 	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
 	pBodyCircle->setPosition(Vector2f(0.0,y));
 	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
@@ -1084,12 +1084,18 @@ void demo16()
 	dc->m_Anchor2 = Vector2f(0.0f,y+0.1f);
 	dc->initialize();
 	PhysicalBody* pPrevCircle = pBodyCircle;
+	dfloat dy = radius*3;
+	dfloat boxHeight = 2*radius; dfloat boxWidth = 2*radius;
+	Vector2f verticesBox[4] = {Vector2f(boxWidth/2, boxHeight/2), Vector2f(-boxWidth/2, boxHeight/2), Vector2f(-boxWidth/2, -boxHeight/2), Vector2f(boxWidth/2, -boxHeight/2) };
 	for( dint32 i=1; i<n; i++ )
 	{
-		y -= 0.15f;
+		y -= dy;
 		PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+		pBodyCircle->m_LinearDamping = 0.5f;
+		pBodyCircle->m_AngularDamping = 0.5f;
 		pBodyCircle->setPosition(Vector2f(0.0,y));
 		pApp.m_CollisionAttributes.m_Shape = new Circle(radius);//,radius*0.5f);
+		pApp.m_CollisionAttributes.m_Shape = new RegularPolygon(verticesBox,  4);
 		pBodyCircle->createPhysicalShape(pApp);
 		
 		
@@ -1098,14 +1104,12 @@ void demo16()
 		dc->m_Cfm = cfm;
 		dc->m_PhysicalBody1 = pBodyCircle;
 		dc->m_PhysicalBody2 = pPrevCircle;
-		dc->m_Anchor1 = Vector2f(0.0f,0.0f);
-		dc->m_Anchor2 = Vector2f(0.0f,0.0f);
+		dc->m_Anchor1 = Vector2f(0.0f,radius/2);
+		dc->m_Anchor2 = Vector2f(0.0f,-radius/2);
 		dc->initialize();
 		
 		pPrevCircle = pBodyCircle;
-	}
-	
-	//dc->m_PhysicalShape1
+	}	
 }
 
 void initScene()

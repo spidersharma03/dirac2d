@@ -34,7 +34,7 @@ struct PhysicalAttributes
 	PhysicalAttributes()
 	{
 		m_Angle = 0.0f;
-		m_Friction = 0.0f;
+		m_Friction = 0.4f;
 		m_Restitution = 0.0f;
 	}
 };

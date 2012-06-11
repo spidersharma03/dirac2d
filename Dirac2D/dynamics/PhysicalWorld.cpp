@@ -153,6 +153,10 @@ void PhysicalWorld::Step(dfloat dt)
 	pBody = m_PhysicalBodyList;
 	while( pBody )
 	{
+		// Introduce Damping. this is implicit euler based damping. for semi implicit euler use v = v * ( 1 - k * h ), h is time step and k is damping constant.
+		pBody->m_Velocity		 = pBody->m_Velocity / ( 1.0f + pBody->m_LinearDamping * dt );
+		pBody->m_AngularVelocity = pBody->m_AngularVelocity / ( 1.0f + pBody->m_AngularDamping * dt );
+		
 		pBody->updateSleepingStatus(dt);
 		
 		if( pBody->m_BodyType == EBT_DYNAMIC && !pBody->m_bSleeping)
@@ -325,8 +329,8 @@ PhysicalBody* PhysicalWorld::pickBodyFromPoint(Vector2f p)
 	while (pBody) 
 	{
 		Matrix3f xForm = pBody->getTransform();
-		//xForm.transformAsPoint(p);
 		Vector2f testPoint = p;
+		// Transform the Point into Body's space.
 		testPoint *= xForm;
 		PhysicalShape* pShape = pBody->m_PhysicalShapeList;
 		while (pShape) 
