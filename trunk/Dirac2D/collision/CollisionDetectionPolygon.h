@@ -12,7 +12,7 @@
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
 #include "../geometry/CollisionShape.h"
-#include "../geometry/RegularPolygon.h"
+#include "../geometry/ConvexPolygon.h"
 #include "../dynamics/contacts/Contact.h"
 
 
@@ -30,7 +30,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 
 // Project both the Polygons on to the list of seperating axis of Polygon 1. if there is an Axis which seperates the Polygons, then return.
-static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, RegularPolygon* poly2, Matrix3f& polyxForm2, dfloat& minDistance, Vector2f& collisionNormal )
+static dbool findSeperationAxis(ConvexPolygon* poly1, Matrix3f& polyxForm1, ConvexPolygon* poly2, Matrix3f& polyxForm2, dfloat& minDistance, Vector2f& collisionNormal )
 {
 	dint32 numVertices1 = poly1->getNumVertices();
 	dint32 numVertices2 = poly2->getNumVertices();
@@ -97,11 +97,11 @@ static dbool findSeperationAxis(RegularPolygon* poly1, Matrix3f& polyxForm1, Reg
 
 
 // Find Whether two Regular/ConvexPolygons intersect.
-dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& xform1, RegularPolygon* poly2, Matrix3f& xform2);
+dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& xform1, ConvexPolygon* poly2, Matrix3f& xform2);
 
 
 // Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& xform1, RegularPolygon* poly2, Matrix3f& xform2, ContactManifold* contactManifold);
+dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& xform1, ConvexPolygon* poly2, Matrix3f& xform2, ContactManifold* contactManifold);
 
 END_NAMESPACE_DIRAC2D
 

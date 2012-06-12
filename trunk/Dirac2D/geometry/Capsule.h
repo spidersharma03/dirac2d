@@ -14,7 +14,7 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 struct ContactManifold;
-class RegularPolygon;
+class ConvexPolygon;
 class Circle;
 class Edge;
 
@@ -58,8 +58,8 @@ protected:
 	friend dbool intersectCapsules( Capsule* capsule1, Matrix3f& xform1, Capsule* capsule2, Matrix3f& xform2, ContactManifold* contactManifold);
 	friend dbool intersectCapsuleCircle( Circle* circle, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2);
 	friend dbool intersectCapsuleCircle( Circle* circle, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
-	friend dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2);
-	friend dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
+	friend dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2);
+	friend dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
 	friend dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2);
 	friend dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
 	

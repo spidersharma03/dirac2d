@@ -15,7 +15,7 @@ class PhysicalWorld;
 class PhysicalShape;
 class ContactSolver;
 class Contact;
-class ContactNode;
+class BroadPhaseNode;
 struct ContactPair;
 
 typedef set<ContactPair> ContactPairPool;
@@ -30,7 +30,7 @@ public:
 	
 	void addContact(PhysicalShape* pShape1, PhysicalShape* pShape2);
 
-	void addContactPair(ContactNode* pNode1, ContactNode* pNode2);
+	void addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pNode2);
 	
 	ContactPairPool& getContactPairPool()
 	{

@@ -29,9 +29,10 @@ class ContactSolver;
 class Contact;
 class Renderer;
 class BroadPhaseCollisionAlgorithm;
-class ContactNode;
+class BroadPhaseNode;
 class PhysicalShape;
 class DistanceConstraint;
+class HingeConstraint;
 
 class PhysicalWorld
 {
@@ -111,9 +112,12 @@ private:
 	dbool m_bWarmStart;
 	
 	MemoryAllocator<PhysicalBody> *m_PhysicalBodyPool;
-	MemoryAllocator<ContactNode> *m_BroadPhaseNodePool;
+	MemoryAllocator<BroadPhaseNode> *m_BroadPhaseNodePool;
+	// Constraint Pools
 	MemoryAllocator<DistanceConstraint> *m_DistanceConstraintPool;
+	MemoryAllocator<HingeConstraint> *m_HingeConstraintPool;
 
+	
 	dbool m_bDrawShapes;
 	dbool m_bDrawBoundingBoxes;
 	dbool m_bDrawContacts;

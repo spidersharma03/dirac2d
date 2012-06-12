@@ -19,14 +19,14 @@ BEGIN_NAMESPACE_DIRAC2D
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Find Whether two Regular/ConvexPolygons intersect.
-dbool intersectPolygons( RegularPolygon& poly1, Matrix3f& xform1, RegularPolygon& poly2, Matrix3f& xform2)
+dbool intersectPolygons( ConvexPolygon& poly1, Matrix3f& xform1, ConvexPolygon& poly2, Matrix3f& xform2)
 {
 	return 0;
 }
 
 
 // Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectPolygons( RegularPolygon* poly1, Matrix3f& polygonXform1, RegularPolygon* poly2, Matrix3f& polygonXform2, ContactManifold* contactManifold)
+dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& polygonXform1, ConvexPolygon* poly2, Matrix3f& polygonXform2, ContactManifold* contactManifold)
 {
 	Vector2f* vertices1 = poly1->getVertices();
 	Vector2f* vertices2 = poly2->getVertices();

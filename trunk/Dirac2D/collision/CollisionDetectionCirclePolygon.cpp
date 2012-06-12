@@ -52,12 +52,12 @@ dbool intersectCircles( Circle* circle1, Matrix3f& xform1, Circle* circle2, Matr
 }
 
 // Find Whether  Circle/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2)
+dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2)
 {
 	return false;
 }
 
-dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold)
+dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold)
 {
 	// Transform the Circle in the local coordinate frame of the Polygon.
 	Vector2f c = xform1 * circle->m_Centroid;

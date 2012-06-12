@@ -12,7 +12,7 @@
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
 #include "../geometry/CollisionShape.h"
-#include "../geometry/RegularPolygon.h"
+#include "../geometry/ConvexPolygon.h"
 #include "../geometry/Circle.h"
 #include "../geometry/Capsule.h"
 #include "../dynamics/contacts/Contact.h"
@@ -38,10 +38,10 @@ dbool intersectCapsuleCircle( Circle* circle, Matrix3f& xform1, Capsule* capsule
 
 
 // Find Whether two Capsule/ConvexPolygons intersect.
-dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2);
+dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2);
 
 // Find Whether two Capsule/ConvexPolygons intersect.
-dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
+dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
 
 END_NAMESPACE_DIRAC2D
 

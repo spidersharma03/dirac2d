@@ -67,13 +67,13 @@ dbool intersectEdgeEdge( Edge* edge1, Matrix3f& xform1, Edge* edge2, Matrix3f& x
 }
 
 // Find Whether Edge/ConvexPolygons intersect.
-dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2)
+dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2)
 {
 	return false;
 }
 
 // Find Whether Edge/ConvexPolygons intersect. Also find the Contact Points if the Edge/ConvexPolygons intersect.
-dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold)
+dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold)
 {
 	// Transform Edge to Poly's Frame.
 	Vector2f v1 = xform1 * edge->m_Vertex1;

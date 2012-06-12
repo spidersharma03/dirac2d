@@ -11,7 +11,7 @@
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
 #include "../geometry/CollisionShape.h"
-#include "../geometry/RegularPolygon.h"
+#include "../geometry/ConvexPolygon.h"
 #include "../geometry/Circle.h"
 #include "../dynamics/contacts/Contact.h"
 
@@ -29,10 +29,10 @@ dbool intersectCircles( Circle* circle1, Matrix3f& xform1, Circle* circle2, Matr
 
 
 // Find Whether two Circle/ConvexPolygons intersect.
-dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2);
+dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2);
 
 // Find Whether two Circle/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
+dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
 
 
 END_NAMESPACE_DIRAC2D

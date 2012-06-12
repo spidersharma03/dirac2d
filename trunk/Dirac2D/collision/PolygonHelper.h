@@ -15,7 +15,7 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 // Finds an Edge on the Shape which is most perpendicular to the input Normal
-static void findCandidateEdge( RegularPolygon* poly, Vector2f& normal, dint32& edgeVertex1, dint32& edgeVertex2 )
+static void findCandidateEdge( ConvexPolygon* poly, Vector2f& normal, dint32& edgeVertex1, dint32& edgeVertex2 )
 {
 	// Find the candidate vertex which is farthest in normal direction
 	dfloat maxDot = -100000.0f;

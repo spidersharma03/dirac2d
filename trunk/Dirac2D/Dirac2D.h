@@ -66,12 +66,13 @@
 
 #include "dynamics/joints/Constraint.h"
 #include "dynamics/joints/DistantConstraint.h"
+#include "dynamics/joints/HingeConstraint.h"
 
 #include "geometry/CollisionShape.h"
 #include "geometry/Circle.h"
 #include "geometry/Capsule.h"
 #include "geometry/Box.h"
-#include "geometry/RegularPolygon.h"
+#include "geometry/ConvexPolygon.h"
 #include "geometry/Edge.h"
 #include "geometry/EdgeChain.h"
 

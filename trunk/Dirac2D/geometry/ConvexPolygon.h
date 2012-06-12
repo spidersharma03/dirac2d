@@ -1,13 +1,13 @@
 /*
- *  RegularPolygon.h
+ *  ConvexPolygon.h
  *  Dirac2D
  *
  *  Created by Prashant on 24/04/12.
  *
  */
 
-#ifndef _REGULAR_POLYGON_H_
-#define _REGULAR_POLYGON_H_
+#ifndef _CONVEX_POLYGON_H_
+#define _CONVEX_POLYGON_H_
 
 #include "CollisionShape.h"
 
@@ -17,15 +17,17 @@ struct ContactManifold;
 class Circle;
 class Capsule;
 
-class RegularPolygon : public CollisionShape
+class ConvexPolygon : public CollisionShape
 {
 public:
-	RegularPolygon(Vector2f* vertices, dint32 numVertices);
+	ConvexPolygon(Vector2f* vertices, dint32 numVertices);
 	
-	RegularPolygon(const RegularPolygon& other);
+	ConvexPolygon(const ConvexPolygon& other);
 	
-	void operator=( RegularPolygon& other);
+	void operator=( ConvexPolygon& other);
 
+	static ConvexPolygon* createRegularPolygon( dint32 numSides, dfloat radius); 
+						 
 	virtual Vector2f getSupportPoint(Vector2f& d);
 
 	virtual dbool isPointInside(Vector2f& p);
@@ -57,9 +59,9 @@ protected:
 	
 	virtual void findMomentOfInertia();
 
-	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2);
-	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
-	friend dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
+	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2);
+	friend dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
+	friend dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold);
 
 protected:
 	dint32 m_NumVertices;

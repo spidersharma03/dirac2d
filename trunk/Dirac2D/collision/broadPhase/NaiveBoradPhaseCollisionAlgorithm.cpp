@@ -27,12 +27,12 @@ void NaiveBroadPhaseCollisionAlgorithm::update()
 {
 	set<ContactPair>& contactPairPool = m_pCollisionManager->getContactPairPool();
 	// n2 Collision test
-	ContactNode* pNode1 = m_BroadPhaseNodeList;
+	BroadPhaseNode* pNode1 = m_BroadPhaseNodeList;
 	while( pNode1 )
 	{
 		PhysicalShape* pShape1 = pNode1->m_PhysicalShape;
 		PhysicalBody* pBody1 = pShape1->m_ParentBody;
-		ContactNode* pNode2 = pNode1;
+		BroadPhaseNode* pNode2 = pNode1;
 		while( pNode2 )
 		{
 			PhysicalShape* pShape2 = pNode2->m_PhysicalShape;

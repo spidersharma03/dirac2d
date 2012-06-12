@@ -21,6 +21,7 @@
 #include "../dynamics/contacts/Contact.h"
 
 #include "../dynamics/joints/DistantConstraint.h"
+#include "../dynamics/joints/HingeConstraint.h"
 
 #include "../draw/Renderer.h"
 
@@ -56,8 +57,11 @@ PhysicalWorld::PhysicalWorld()
 	m_ContactList	   = 0;
 	
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
+	
 	m_DistanceConstraintPool = new MemoryAllocator<DistanceConstraint>(MAX_BODIES/10);
-	m_BroadPhaseNodePool = new MemoryAllocator<ContactNode>(MAX_PROXIES);
+	m_HingeConstraintPool	 = new MemoryAllocator<HingeConstraint>(MAX_BODIES/10);
+	
+	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
 	
 PhysicalBody* PhysicalWorld::createPhysicalBody()
@@ -301,14 +305,14 @@ void PhysicalWorld::setRenderer(Renderer* renderer)
 	
 void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 {
-	ContactNode* pNode = 0;
+	BroadPhaseNode* pNode = 0;
 	if( pShape->m_CollisionShape->getShapeType() == EST_EDGE_CHAIN )
 	{
 		EdgeChain* edgeChain = (EdgeChain*)pShape->m_CollisionShape;
 		dint32 numEdges = edgeChain->getNumEdges();
 		for (dint32 e=0; e<numEdges; e++) 
 		{
-			pNode = new(m_BroadPhaseNodePool->Allocate()) ContactNode();
+			pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
 			pNode->m_PhysicalShape = pShape;
 			pNode->m_CollisionShape = (CollisionShape*)edgeChain->getEdge(e);
 			m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
@@ -316,7 +320,7 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 	}
 	else 
 	{
-		pNode = new(m_BroadPhaseNodePool->Allocate()) ContactNode();
+		pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
 		pNode->m_PhysicalShape = pShape;
 		pNode->m_CollisionShape = pShape->m_CollisionShape;
 		m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);

@@ -134,13 +134,13 @@ dbool intersectCapsuleCircle( Circle* circle, Matrix3f& xform1, Capsule* capsule
 }
 
 // Find Whether two Capsule/ConvexPolygons intersect.
-dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2)
+dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2)
 {
 	return 0;
 }
 
 // Find Whether two Capsule/ConvexPolygons intersect.
-dbool intersectCapsulePolygon( RegularPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold)
+dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* capsule, Matrix3f& xform2, ContactManifold* contactManifold)
 {
 	// Transform Capsule to Poly's frame
 	Vector2f c = xform2 * capsule->m_Centroid;
