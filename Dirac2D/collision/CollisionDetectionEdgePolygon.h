@@ -12,7 +12,7 @@
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
 #include "../geometry/CollisionShape.h"
-#include "../geometry/RegularPolygon.h"
+#include "../geometry/ConvexPolygon.h"
 #include "../geometry/Circle.h"
 #include "../geometry/Capsule.h"
 #include "../geometry/Edge.h"
@@ -31,10 +31,10 @@ dbool intersectEdgeEdge( Edge* edge1, Matrix3f& xform1, Edge* edge2, Matrix3f& x
 
 
 // Find Whether Edge/ConvexPolygons intersect.
-dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2);
+dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2);
 
 // Find Whether Edge/ConvexPolygons intersect. Also find the Contact Points if the Edge/ConvexPolygons intersect.
-dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, RegularPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
+dbool intersectEdgePolygon( Edge* edge, Matrix3f& xform1, ConvexPolygon* poly, Matrix3f& xform2, ContactManifold* contactManifold);
 
 
 

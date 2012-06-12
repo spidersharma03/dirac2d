@@ -133,7 +133,7 @@ void CollisionManager::addContact(PhysicalShape* pShape1, PhysicalShape* pShape2
 	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);
 }
 
-void CollisionManager::addContactPair(ContactNode* pNode1, ContactNode* pNode2)
+void CollisionManager::addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pNode2)
 {
 	Contact* contact = createContact();
 	contact->m_PhysicalShape1 = pNode1->m_PhysicalShape;

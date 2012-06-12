@@ -21,6 +21,21 @@ class CollisionManager;
 
 class SAPAlgorithm : public BroadPhaseCollisionAlgorithm
 {
+	struct SAP_Box;
+	
+	struct EndPoint
+	{
+		SAP_Box* m_Box;
+		dfloat m_Value;
+		dint32 m_bIsMin;
+	};
+	
+	struct SAP_Box 
+	{
+		EndPoint* m_Min[2];
+		EndPoint* m_Max[2];
+	};
+	
 public:
 	SAPAlgorithm(CollisionManager* collisionManager);
 	

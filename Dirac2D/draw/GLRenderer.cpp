@@ -8,7 +8,7 @@
 
 #include "GLRenderer.h"
 #include "../geometry/CollisionShape.h"
-#include "../geometry/RegularPolygon.h"
+#include "../geometry/ConvexPolygon.h"
 #include "../geometry/Circle.h"
 #include "../geometry/Capsule.h"
 #include "../geometry/Edge.h"
@@ -47,7 +47,7 @@ void GLRenderer::drawShape(CollisionShape* shape)
 			drawCapsule( shape->m_Centroid.x, shape->m_Centroid.y, ((Capsule*)shape)->getRadius() , ((Capsule*)shape)->getHeight() );
 			break;
 		case EST_REGULARPOLY:
-			drawPolygon( ((RegularPolygon*)shape)->getVertices() , ((RegularPolygon*)shape)->getNumVertices() );
+			drawPolygon( ((ConvexPolygon*)shape)->getVertices() , ((ConvexPolygon*)shape)->getNumVertices() );
 			break;
 		default:
 			break;

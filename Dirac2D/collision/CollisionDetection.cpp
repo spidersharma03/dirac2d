@@ -26,16 +26,16 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2, ContactManifold* contactManifold)
 {
 	if( shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_REGULARPOLY )
-		return intersectPolygons((RegularPolygon*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
+		return intersectPolygons((ConvexPolygon*)shape1, xform1, (ConvexPolygon*)shape2, xform2, contactManifold);
 	
 	if( (shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_CIRCLE) ) 
 	{
 		contactManifold->m_bFlipShapes = true;
-		return intersectCirclePolygon((Circle*)shape2, xform2, (RegularPolygon*)shape1, xform1, contactManifold);
+		return intersectCirclePolygon((Circle*)shape2, xform2, (ConvexPolygon*)shape1, xform1, contactManifold);
 	}
 
 	if( (shape1->getShapeType() == EST_CIRCLE && shape2->getShapeType() == EST_REGULARPOLY) )
-		return intersectCirclePolygon((Circle*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
+		return intersectCirclePolygon((Circle*)shape1, xform1, (ConvexPolygon*)shape2, xform2, contactManifold);
 	
 	if( shape1->getShapeType() == EST_CIRCLE && shape2->getShapeType() == EST_CIRCLE )
 		return intersectCircles((Circle*)shape1, xform1, (Circle*)shape2, xform2, contactManifold);
@@ -52,22 +52,22 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 	if( shape1->getShapeType() == EST_CAPSULE && shape2->getShapeType() == EST_REGULARPOLY )
 	{
 		contactManifold->m_bFlipShapes = true;
-		return intersectCapsulePolygon((RegularPolygon*)shape2, xform2, (Capsule*)shape1, xform1, contactManifold);
+		return intersectCapsulePolygon((ConvexPolygon*)shape2, xform2, (Capsule*)shape1, xform1, contactManifold);
 	}
 	
 	if( shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_CAPSULE )
-		return intersectCapsulePolygon((RegularPolygon*)shape1, xform1, (Capsule*)shape2, xform2, contactManifold);
+		return intersectCapsulePolygon((ConvexPolygon*)shape1, xform1, (Capsule*)shape2, xform2, contactManifold);
 	
 	if( shape1->getShapeType() == EST_CAPSULE && shape2->getShapeType() == EST_CAPSULE )
 		return intersectCapsules((Capsule*)shape1, xform1, (Capsule*)shape2, xform2, contactManifold);
 
 	if( shape1->getShapeType() == EST_EDGE && shape2->getShapeType() == EST_REGULARPOLY )
-		return intersectEdgePolygon((Edge*)shape1, xform1, (RegularPolygon*)shape2, xform2, contactManifold);
+		return intersectEdgePolygon((Edge*)shape1, xform1, (ConvexPolygon*)shape2, xform2, contactManifold);
 	
 	if( shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_EDGE )
 	{
 		contactManifold->m_bFlipShapes = true;
-		return intersectEdgePolygon((Edge*)shape2, xform2, (RegularPolygon*)shape1, xform1, contactManifold);
+		return intersectEdgePolygon((Edge*)shape2, xform2, (ConvexPolygon*)shape1, xform1, contactManifold);
 	}
 	
 	if( shape1->getShapeType() == EST_EDGE && shape2->getShapeType() == EST_CAPSULE )

@@ -19,7 +19,6 @@
 		C257F8361552A23500270D77 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C257F8351552A23500270D77 /* OpenGL.framework */; };
 		C257F85C1552BEF400270D77 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F85B1552BEF400270D77 /* Box.cpp */; };
 		C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9321552CCDA00270D77 /* Capsule.cpp */; };
-		C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9381552CD6900270D77 /* RegularPolygon.cpp */; };
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
 		C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
@@ -29,6 +28,8 @@
 		C2B6D881157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */; };
 		C2B6D8B4157398D600E31E38 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D8B3157398D600E31E38 /* Edge.cpp */; };
 		C2D19C161585DF840042A724 /* SAP_Algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19C151585DF840042A724 /* SAP_Algorithm.cpp */; };
+		C2D19CC3158782D40042A724 /* HingeConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19CC2158782D40042A724 /* HingeConstraint.cpp */; };
+		C2D19CD41587853F0042A724 /* ConvexPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */; };
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 		C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
@@ -69,7 +70,6 @@
 		C257F151154E71AE00270D77 /* Capsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Capsule.h; path = Dirac2D/geometry/Capsule.h; sourceTree = SOURCE_ROOT; };
 		C257F152154E71AE00270D77 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = Dirac2D/geometry/Circle.h; sourceTree = SOURCE_ROOT; };
 		C257F153154E71AE00270D77 /* CollisionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionShape.h; path = Dirac2D/geometry/CollisionShape.h; sourceTree = SOURCE_ROOT; };
-		C257F154154E71AE00270D77 /* RegularPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularPolygon.h; path = Dirac2D/geometry/RegularPolygon.h; sourceTree = SOURCE_ROOT; };
 		C257F157154E71AE00270D77 /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathUtil.h; path = Dirac2D/maths/MathUtil.h; sourceTree = SOURCE_ROOT; };
 		C257F159154E71AE00270D77 /* memoryAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memoryAllocator.h; path = Dirac2D/memory/memoryAllocator.h; sourceTree = SOURCE_ROOT; };
 		C257F15A154E71AE00270D77 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Dirac2D/Settings.h; sourceTree = SOURCE_ROOT; };
@@ -86,7 +86,6 @@
 		C257F8351552A23500270D77 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C257F85B1552BEF400270D77 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		C257F9321552CCDA00270D77 /* Capsule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Capsule.cpp; sourceTree = "<group>"; };
-		C257F9381552CD6900270D77 /* RegularPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegularPolygon.cpp; sourceTree = "<group>"; };
 		C257F93A1552CD7A00270D77 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		C27A86A81561442D007AD13C /* AABB2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB2.h; sourceTree = "<group>"; };
 		C27A8ADD15661EDD007AD13C /* Contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contact.cpp; sourceTree = "<group>"; };
@@ -106,6 +105,10 @@
 		C2D14730157E533C0056341B /* PolygonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonHelper.h; sourceTree = "<group>"; };
 		C2D19C141585DF840042A724 /* SAP_Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAP_Algorithm.h; sourceTree = "<group>"; };
 		C2D19C151585DF840042A724 /* SAP_Algorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SAP_Algorithm.cpp; sourceTree = "<group>"; };
+		C2D19CC1158782D40042A724 /* HingeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HingeConstraint.h; sourceTree = "<group>"; };
+		C2D19CC2158782D40042A724 /* HingeConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HingeConstraint.cpp; sourceTree = "<group>"; };
+		C2D19CD21587853F0042A724 /* ConvexPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvexPolygon.h; path = Dirac2D/geometry/ConvexPolygon.h; sourceTree = SOURCE_ROOT; };
+		C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConvexPolygon.cpp; path = Dirac2D/geometry/ConvexPolygon.cpp; sourceTree = SOURCE_ROOT; };
 		C2DD136A1553EAE100432320 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
 		C2DD136B1553EAEF00432320 /* Matrix2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2.h; sourceTree = "<group>"; };
 		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				C257F248154E9CAD00270D77 /* Constraint.h */,
 				C257F53E154FDF2900270D77 /* DistantConstraint.h */,
 				C299B5361581CA820040896A /* DistanceConstraint.cpp */,
+				C2D19CC1158782D40042A724 /* HingeConstraint.h */,
+				C2D19CC2158782D40042A724 /* HingeConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -246,14 +251,14 @@
 		C257F14F154E71AE00270D77 /* geometry */ = {
 			isa = PBXGroup;
 			children = (
+				C2D19CD21587853F0042A724 /* ConvexPolygon.h */,
+				C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */,
 				C257F153154E71AE00270D77 /* CollisionShape.h */,
 				C257F150154E71AE00270D77 /* Box.h */,
 				C257F151154E71AE00270D77 /* Capsule.h */,
 				C257F152154E71AE00270D77 /* Circle.h */,
-				C257F154154E71AE00270D77 /* RegularPolygon.h */,
 				C257F85B1552BEF400270D77 /* Box.cpp */,
 				C257F9321552CCDA00270D77 /* Capsule.cpp */,
-				C257F9381552CD6900270D77 /* RegularPolygon.cpp */,
 				C257F93A1552CD7A00270D77 /* Circle.cpp */,
 				C2B6D8B2157398D600E31E38 /* Edge.h */,
 				C2B6D8B3157398D600E31E38 /* Edge.cpp */,
@@ -392,7 +397,6 @@
 				C257F80F15529CBC00270D77 /* GLRenderer.cpp in Sources */,
 				C257F85C1552BEF400270D77 /* Box.cpp in Sources */,
 				C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */,
-				C257F9391552CD6900270D77 /* RegularPolygon.cpp in Sources */,
 				C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */,
 				C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */,
 				C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */,
@@ -406,6 +410,8 @@
 				C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */,
 				C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */,
 				C2D19C161585DF840042A724 /* SAP_Algorithm.cpp in Sources */,
+				C2D19CC3158782D40042A724 /* HingeConstraint.cpp in Sources */,
+				C2D19CD41587853F0042A724 /* ConvexPolygon.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

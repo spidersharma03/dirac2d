@@ -1,5 +1,5 @@
 /*
- *  RegularPolygon.cpp
+ *  ConvexPolygon.cpp
  *  Dirac2D
  *
  *  Created by Prashant on 03/05/12.
@@ -7,13 +7,13 @@
  */
 
 
-#include "RegularPolygon.h"
+#include "ConvexPolygon.h"
 #include "../common.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
 
-RegularPolygon::RegularPolygon(Vector2f* vertices, dint32 numVertices) : m_NumVertices(numVertices)
+ConvexPolygon::ConvexPolygon(Vector2f* vertices, dint32 numVertices) : m_NumVertices(numVertices)
 {
 	dAssert(m_NumVertices > 2);
 	dAssert(m_NumVertices<MAX_POLY_VERTICES);
@@ -36,7 +36,7 @@ RegularPolygon::RegularPolygon(Vector2f* vertices, dint32 numVertices) : m_NumVe
 	findMomentOfInertia();
 }
 
-RegularPolygon::RegularPolygon(const RegularPolygon& other) : CollisionShape(other)
+ConvexPolygon::ConvexPolygon(const ConvexPolygon& other) : CollisionShape(other)
 {
 	m_NumVertices = other.m_NumVertices;
 	for( dint32 v=0; v< m_NumVertices; v++ )
@@ -50,7 +50,7 @@ RegularPolygon::RegularPolygon(const RegularPolygon& other) : CollisionShape(oth
 	m_Radius   = other.m_Radius;
 }
 
-void RegularPolygon::operator=( RegularPolygon& other)
+void ConvexPolygon::operator=( ConvexPolygon& other)
 {
 	m_NumVertices = other.m_NumVertices;
 	for( dint32 v=0; v< m_NumVertices; v++ )
@@ -64,17 +64,39 @@ void RegularPolygon::operator=( RegularPolygon& other)
 	m_Radius   = other.m_Radius;
 }
 
-CollisionShape* RegularPolygon::clone()
+ConvexPolygon* ConvexPolygon::createRegularPolygon( dint32 numSides, dfloat radius)
 {
-	return new RegularPolygon(*this);
+	dAssert(numSides > 2);
+	dAssert(numSides < MAX_POLY_VERTICES);
+	Vector2f *vertices = new Vector2f[numSides];
+	dfloat angle = 0.0f;
+	dfloat dAngle = 2*PI/(numSides);
+	dfloat x, y;
+	
+	for( dint32 v=0; v<numSides; v++ )
+	{
+		x = radius * cos(angle);
+		y = radius * sin(angle);
+		vertices[v].x = x;
+		vertices[v].y = y;
+		angle += dAngle;
+	}
+	ConvexPolygon* convexPoly = new ConvexPolygon(vertices, numSides);
+	delete[] vertices;
+	return convexPoly;
 }
 
-Vector2f RegularPolygon::getSupportPoint(Vector2f& d)
+CollisionShape* ConvexPolygon::clone()
+{
+	return new ConvexPolygon(*this);
+}
+
+Vector2f ConvexPolygon::getSupportPoint(Vector2f& d)
 {
 	return Vector2f();
 }
 
-dbool RegularPolygon::isPointInside(Vector2f& p)
+dbool ConvexPolygon::isPointInside(Vector2f& p)
 {
 	for (dint32 v=0; v<m_NumVertices; v++)
 	{
@@ -86,7 +108,7 @@ dbool RegularPolygon::isPointInside(Vector2f& p)
 	return true;
 }
 
-void RegularPolygon::updateAABB(Matrix3f& xForm)
+void ConvexPolygon::updateAABB(Matrix3f& xForm)
 {
 	dfloat min_x = 100000.0f;
 	dfloat min_y = 100000.0f;
@@ -113,7 +135,7 @@ void RegularPolygon::updateAABB(Matrix3f& xForm)
 	m_AABB.m_UpperBounds.set(max_x, max_y);
 }
 
-void RegularPolygon::updateShape(Matrix3f& xForm)
+void ConvexPolygon::updateShape(Matrix3f& xForm)
 {
 	for( dint32 v=0; v<m_NumVertices; v++ )
 	{
@@ -123,7 +145,7 @@ void RegularPolygon::updateShape(Matrix3f& xForm)
 	xForm.transformAsPoint(m_Centroid);
 }
 
-void RegularPolygon::findCentroid()
+void ConvexPolygon::findCentroid()
 {
 	m_Centroid.set(0.0f, 0.0f);
 	dint32 i = 0;
@@ -155,7 +177,7 @@ void RegularPolygon::findCentroid()
 }
 
 // From wikipedia.
-void RegularPolygon::findMomentOfInertia()
+void ConvexPolygon::findMomentOfInertia()
 {
 	dfloat denom     = 0.0f;
 	dfloat numerator = 0.0f;
