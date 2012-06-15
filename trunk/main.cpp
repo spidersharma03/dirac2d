@@ -16,6 +16,7 @@ void changeSize(int w, int h);
 void renderScene(void);
 
 PhysicalWorld* pWorld;
+GLRenderer* glRenderer;
 
 dfloat dt = 1.0f/600.0f;
 
@@ -1141,16 +1142,63 @@ void demo17()
 	}
 }
 
+// Dynamic Tree Test.
+DynamicTree* dynamicTree = new DynamicTree();
+
+void demo18()
+{	
+	dint32 numBoxes = 4;
+	Vector2f boxLocations[] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.15f), Vector2f(1.0f, 0.15f), Vector2f(1.0f, -0.15f) };
+	// Create Boxes
+	for( dint32 i=0; i< numBoxes; i++ )
+	{
+		PhysicalBody* pBox = pWorld->createPhysicalBody();
+		//Vector2f loc
+		pBox->setPosition(boxLocations[i]);
+		pBox->m_BodyType = EBT_STATIC;
+		
+		PhysicalAppearance pApp;
+		dfloat boxWidth = 0.06f; dfloat boxHeight = 0.06f;
+		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pBox->createPhysicalShape(pApp);
+		
+		dynamicTree->createProxy(pBox->m_AABB);
+	}
+}
+
+void renderDynamicTree(DynamicTreeNode* pNode)
+{
+	if( pNode->isLeaf() )
+	{
+		glRenderer->setColor(255, 255, 0);
+		glRenderer->setLineWidth(2.0f);
+	}
+	else
+	{
+		glRenderer->setColor(255, 255, 255);
+		glRenderer->setLineWidth(1.0f);
+	}
+		
+	glRenderer->drawAABB(pNode->m_AABB);
+	
+	if( pNode->isLeaf() )
+		return;
+	
+	renderDynamicTree( dynamicTree->getNode(pNode->m_Child1) );
+	renderDynamicTree( dynamicTree->getNode(pNode->m_Child2) );
+}
+
 void initScene()
 {
 	pWorld = new PhysicalWorld();
-	GLRenderer* glRenderer = new GLRenderer(pWorld);
+	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo17();
+	demo18();
 }
 
 void changeSize(int w, int h) 
@@ -1183,8 +1231,6 @@ void changeSize(int w, int h)
     //gluLookAt(0.0,0.0,5.0, 
 //			  0.0,0.0,-1.0,
 //			  0.0f,1.0f,0.0f);
-	
-	
 }
 
 void renderScene(void) 
@@ -1203,6 +1249,7 @@ void renderScene(void)
 	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	pWorld->draw();
+	renderDynamicTree(dynamicTree->getRootNode() );
 	
     glutSwapBuffers();
 }

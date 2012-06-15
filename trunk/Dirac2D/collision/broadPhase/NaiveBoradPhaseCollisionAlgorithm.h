@@ -24,10 +24,12 @@ class NaiveBroadPhaseCollisionAlgorithm : public BroadPhaseCollisionAlgorithm
 public:
 	NaiveBroadPhaseCollisionAlgorithm(CollisionManager* collisionManager);
 	
-	virtual void update();
+	virtual void addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode);
 	
-protected:
-	PhysicalWorld* m_PhysicalWorld;
+	virtual void removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode);
+	
+	virtual void update();
+
 };
 
 END_NAMESPACE_DIRAC2D

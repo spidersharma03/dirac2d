@@ -43,6 +43,8 @@ public:
 	
 	virtual void setPointSize(dfloat size) = 0;
 	
+	virtual void setLineWidth(dfloat width) = 0;
+
 	virtual void setColor( dchar r, dchar g, dchar b, dchar a ) = 0;
 
 	virtual void setColor( dchar r, dchar g, dchar b ) = 0;

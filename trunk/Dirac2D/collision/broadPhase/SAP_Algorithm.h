@@ -39,10 +39,12 @@ class SAPAlgorithm : public BroadPhaseCollisionAlgorithm
 public:
 	SAPAlgorithm(CollisionManager* collisionManager);
 	
-	virtual void update();
+	virtual void addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode);
 	
-protected:
-	PhysicalWorld* m_PhysicalWorld;
+	virtual void removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode);
+	
+	virtual void update();
+
 };
 
 END_NAMESPACE_DIRAC2D

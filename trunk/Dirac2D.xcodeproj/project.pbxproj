@@ -30,6 +30,8 @@
 		C2D19C161585DF840042A724 /* SAP_Algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19C151585DF840042A724 /* SAP_Algorithm.cpp */; };
 		C2D19CC3158782D40042A724 /* HingeConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19CC2158782D40042A724 /* HingeConstraint.cpp */; };
 		C2D19CD41587853F0042A724 /* ConvexPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */; };
+		C2D19DE21588D9CD0042A724 /* DynamicTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19DE11588D9CD0042A724 /* DynamicTree.cpp */; };
+		C2D19F39158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19F38158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp */; };
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 		C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
@@ -109,6 +111,10 @@
 		C2D19CC2158782D40042A724 /* HingeConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HingeConstraint.cpp; sourceTree = "<group>"; };
 		C2D19CD21587853F0042A724 /* ConvexPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvexPolygon.h; path = Dirac2D/geometry/ConvexPolygon.h; sourceTree = SOURCE_ROOT; };
 		C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConvexPolygon.cpp; path = Dirac2D/geometry/ConvexPolygon.cpp; sourceTree = SOURCE_ROOT; };
+		C2D19DE01588D9CD0042A724 /* DynamicTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicTree.h; sourceTree = "<group>"; };
+		C2D19DE11588D9CD0042A724 /* DynamicTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicTree.cpp; sourceTree = "<group>"; };
+		C2D19F37158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicTreeBroadPhaseAlgorithm.h; sourceTree = "<group>"; };
+		C2D19F38158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicTreeBroadPhaseAlgorithm.cpp; sourceTree = "<group>"; };
 		C2DD136A1553EAE100432320 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
 		C2DD136B1553EAEF00432320 /* Matrix2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix2.h; sourceTree = "<group>"; };
 		C2DD136C1553EAFD00432320 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
@@ -324,6 +330,10 @@
 				C2F30F651578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.h */,
 				C2D19C141585DF840042A724 /* SAP_Algorithm.h */,
 				C2D19C151585DF840042A724 /* SAP_Algorithm.cpp */,
+				C2D19DE01588D9CD0042A724 /* DynamicTree.h */,
+				C2D19DE11588D9CD0042A724 /* DynamicTree.cpp */,
+				C2D19F37158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.h */,
+				C2D19F38158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp */,
 			);
 			name = broadPhase;
 			path = Dirac2D/collision/broadPhase;
@@ -412,6 +422,8 @@
 				C2D19C161585DF840042A724 /* SAP_Algorithm.cpp in Sources */,
 				C2D19CC3158782D40042A724 /* HingeConstraint.cpp in Sources */,
 				C2D19CD41587853F0042A724 /* ConvexPolygon.cpp in Sources */,
+				C2D19DE21588D9CD0042A724 /* DynamicTree.cpp in Sources */,
+				C2D19F39158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

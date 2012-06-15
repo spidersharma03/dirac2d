@@ -46,38 +46,10 @@ public:
 	}
 	
 	// Adds a Physical Shape to the Broad Phase Node List
-	void addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
-	{
-		pBroadPhaseNode->m_Prev = 0;
-		pBroadPhaseNode->m_Next = m_BroadPhaseNodeList;
-		
-		if( m_BroadPhaseNodeList )
-		{
-			m_BroadPhaseNodeList->m_Prev = pBroadPhaseNode;
-		}
-		m_BroadPhaseNodeList = pBroadPhaseNode;
-	}
-
+	virtual void addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode) = 0;
+	
 	// Removes a Proxy from the Broad Phase Node List
-	void removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
-	{
-		BroadPhaseNode* prevNode = pBroadPhaseNode->m_Prev;
-		BroadPhaseNode* nextNode = pBroadPhaseNode->m_Next;
-		
-		if( prevNode )
-		{
-			prevNode->m_Next = nextNode;
-		}
-		else 
-		{
-			m_BroadPhaseNodeList = nextNode;
-		}
-		
-		if( nextNode )
-		{
-			nextNode->m_Prev = prevNode;
-		}
-	}
+	virtual void removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode) = 0;
 	
 	virtual void update() = 0;
 	
