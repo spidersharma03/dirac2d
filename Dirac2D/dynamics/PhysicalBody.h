@@ -50,25 +50,22 @@ public:
 
 	PhysicalShape* createPhysicalShape(PhysicalAppearance& pApp);
 	
+	// Gets the worldPosition in Local Coordinate Frame of the Body.
 	Vector2f getLocalPoint(Vector2f& worldPosition)
 	{
-		return worldPosition * m_Transform;
+		return  ( worldPosition * m_Transform - m_Centre);
 	}
 	
+	// Gets the localPosition in World Coordinate Frame. localPosition is assumed to be given from the centre of mass of the Body.  
 	Vector2f getWorldPoint(Vector2f& localPosition)
 	{
-		return m_Transform * localPosition;
+		return m_Transform * ( localPosition + m_Centre );
 	}
 	
+	// Gets the velocity at the given local Coordinate of the body.
 	Vector2f getVelocityAtPosition( Vector2f& localPosition )
 	{
 		return m_Velocity + Vector2f::cross(m_AngularVelocity, localPosition);
-	}
-	
-	void setPosition(Vector2f& position)
-	{
-		m_Position = position;
-		updateTransform();
 	}
 	
 	void setPosition(Vector2f position)

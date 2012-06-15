@@ -43,6 +43,80 @@ public:
 		m_UpperBounds.y = upperY;
 	}
 	
+	inline T getArea()
+	{
+		return ( m_UpperBounds.x - m_LowerBounds.x ) * ( m_UpperBounds.y - m_LowerBounds.y );
+	}
+	
+	inline T getPerimeter()
+	{
+		return 2.0 * ( ( m_UpperBounds.x - m_LowerBounds.x ) + ( m_UpperBounds.y - m_LowerBounds.y ) );
+	}
+	
+	inline void combine( const AABB2<T>& other )
+	{
+		dfloat min_x = 100000.0f;
+		dfloat min_y = 100000.0f;
+		
+		dfloat max_x = -100000.0f;
+		dfloat max_y = -100000.0f;
+		
+		if( min_x > m_LowerBounds.x )
+			min_x = m_LowerBounds.x;
+		if( min_y > m_LowerBounds.y )
+			min_y = m_LowerBounds.y;
+			
+		if( max_x < m_UpperBounds.x )
+			max_x = m_UpperBounds.x;
+		if( max_y < m_UpperBounds.y )
+			max_y = m_UpperBounds.y;
+		
+		if( min_x > other.m_LowerBounds.x )
+			min_x = other.m_LowerBounds.x;
+		if( min_y > other.m_LowerBounds.y )
+			min_y = other.m_LowerBounds.y;
+		
+		if( max_x < other.m_UpperBounds.x )
+			max_x = other.m_UpperBounds.x;
+		if( max_y < other.m_UpperBounds.y )
+			max_y = other.m_UpperBounds.y;
+		
+		m_LowerBounds.set(min_x, min_y);
+		m_UpperBounds.set(max_x, max_y);
+	}
+	
+	inline void combine( const AABB2<T>& one, const AABB2<T>& two )
+	{
+		dfloat min_x = 100000.0f;
+		dfloat min_y = 100000.0f;
+		
+		dfloat max_x = -100000.0f;
+		dfloat max_y = -100000.0f;
+		
+		if( min_x > one.m_LowerBounds.x )
+			min_x = one.m_LowerBounds.x;
+		if( min_y > one.m_LowerBounds.y )
+			min_y = one.m_LowerBounds.y;
+		
+		if( max_x < one.m_UpperBounds.x )
+			max_x = one.m_UpperBounds.x;
+		if( max_y < one.m_UpperBounds.y )
+			max_y = one.m_UpperBounds.y;
+		
+		if( min_x > two.m_LowerBounds.x )
+			min_x = two.m_LowerBounds.x;
+		if( min_y > two.m_LowerBounds.y )
+			min_y = two.m_LowerBounds.y;
+		
+		if( max_x < two.m_UpperBounds.x )
+			max_x = two.m_UpperBounds.x;
+		if( max_y < two.m_UpperBounds.y )
+			max_y = two.m_UpperBounds.y;
+		
+		m_LowerBounds.set(min_x, min_y);
+		m_UpperBounds.set(max_x, max_y);
+	}
+	
 	inline dbool intersectAABB( AABB2<T>& other )
 	{
 		dfloat overLapX = m_LowerBounds.x < other.m_LowerBounds.x ? other.m_LowerBounds.x - m_UpperBounds.x : m_LowerBounds.x - other.m_UpperBounds.x;

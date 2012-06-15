@@ -85,6 +85,14 @@ Vector2f EdgeChain::getSupportPoint(Vector2f& d)
 
 dbool EdgeChain::isPointInside(Vector2f& p)
 {
+	if( !isClosed() )
+		return false;
+	
+	for( dint32 e=0; e<m_NumEdges; e++ )
+	{
+		Edge* edge = m_EdgeList + e;
+		edge->m_Vertex1;
+	}
 	return false;
 }
 

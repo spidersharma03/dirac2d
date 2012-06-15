@@ -28,6 +28,8 @@ public:
 	
 	virtual void setPointSize(dfloat size);
 
+	virtual void setLineWidth(dfloat width);
+
 	virtual void setColor( dchar r, dchar g, dchar b, dchar a );
 	
 	virtual void setColor( dchar r, dchar g, dchar b );

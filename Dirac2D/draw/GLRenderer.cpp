@@ -173,4 +173,9 @@ void GLRenderer::setPointSize(dfloat size)
 	glPointSize(size);
 }
 
+void GLRenderer::setLineWidth(dfloat width)
+{
+	glLineWidth(width);
+}
+
 END_NAMESPACE_DIRAC2D

@@ -80,6 +80,8 @@
 #include "collision/CollisionDetectionPolygon.h"
 #include "collision/CollisionManager.h"
 #include "collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
+#include "collision/broadPhase/DynamicTreeBroadPhaseAlgorithm.h"
+#include "collision/broadPhase/DynamicTree.h"
 
 #include "draw/Renderer.h"
 #include "draw/GLRenderer.h"

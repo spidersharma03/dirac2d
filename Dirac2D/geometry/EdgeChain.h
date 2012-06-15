@@ -39,6 +39,12 @@ public:
 		return m_NumEdges;
 	}
 	
+	inline dbool isClosed() const
+	{
+		return ( m_EdgeList->m_Vertex1 == (m_EdgeList+m_NumEdges)->m_Vertex1
+				&& (m_EdgeList->m_Vertex2 == (m_EdgeList+m_NumEdges)->m_Vertex2) );
+	}
+	
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);

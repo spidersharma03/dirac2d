@@ -15,6 +15,14 @@ BroadPhaseCollisionAlgorithm(collisionManager)
 {
 }
 
+void SAPAlgorithm::addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
+{
+}
+
+void SAPAlgorithm::removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)
+{
+}
+
 void SAPAlgorithm::update()
 {
 }
