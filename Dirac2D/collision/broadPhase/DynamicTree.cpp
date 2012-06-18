@@ -36,10 +36,11 @@ DynamicTree::DynamicTree()
 	m_RootNode = Null_Node;
 }
 
-dint32 DynamicTree::createProxy( AABB2f& nodeAABB )
+dint32 DynamicTree::createProxy( AABB2f& nodeAABB, void* userData )
 {
 	dint32 newNode = allocateNode();
 	m_Nodes[newNode].m_AABB = nodeAABB;
+	m_Nodes[newNode].m_UserData = userData;
 	
 	insertNode(nodeAABB, newNode);
 	return newNode;

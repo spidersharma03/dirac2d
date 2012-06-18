@@ -45,6 +45,9 @@ public:
 	
 	virtual void update();
 
+	virtual void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack );
+	
+	virtual void intersectRay( RayIntersectionCallBackClass* callBack);
 };
 
 END_NAMESPACE_DIRAC2D

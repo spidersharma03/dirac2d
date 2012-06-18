@@ -27,4 +27,13 @@ void SAPAlgorithm::update()
 {
 }
 
+void SAPAlgorithm::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
+{
+}
+
+void SAPAlgorithm::intersectRay( RayIntersectionCallBackClass* callBack)
+{
+}
+
+
 END_NAMESPACE_DIRAC2D

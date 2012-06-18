@@ -8,11 +8,14 @@
 
 #include "../../definitions.h"
 #include "../../maths/MathUtil.h"
+#include "../../CallBacks.h"
 
 #ifndef _DYNAMIC_TREE_H_
 #define _DYNAMIC_TREE_H_
 
 BEGIN_NAMESPACE_DIRAC2D
+
+class QueryCallBack;
 
 #define Null_Node -1
 
@@ -52,12 +55,17 @@ public:
 	
 	~DynamicTree();
 	
-	dint32 createProxy(AABB2f& nodeAABB);
+	dint32 createProxy(AABB2f& nodeAABB, void* userData);
 	
 	void removeProxy(dint32 proxyID );
 	
 	void updateProxy(AABB2f& nodeAABB);
-		
+	
+	inline void* getUserData( dint32 proxyID ) const
+	{
+		return m_Nodes[proxyID].m_UserData;
+	}
+	
 	inline DynamicTreeNode* getNode(dint32 index) const
 	{
 		return m_Nodes + index;
@@ -68,11 +76,22 @@ public:
 		return m_Nodes + m_RootNode;
 	}
 
-	// check whether given AABB intersects with any AABB leaf of the tree
-	dbool intersectAABB( AABB2f& queryAABB, INTERSECT_QUERY_CALL_BACK callBack )
+	// check whether given queryAABB overlaps with any AABB leaf of the tree. for any overlap, the callBack class will be reported.
+	dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
 	{
-		return 0;
+		if( callBack )
+			callBack->overlapCallBack(0);
+		return false;
 	}
+	
+	//
+	dbool intersectRay(RayIntersectionCallBackClass* callBack)
+	{
+		if( callBack )
+			callBack->rayIntersectionCallBack(0);
+		return false;
+	}
+	
 protected:
 
 	void insertNode(const AABB2f& node, dint32 nodeID);

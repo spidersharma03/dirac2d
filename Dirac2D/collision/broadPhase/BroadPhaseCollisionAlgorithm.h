@@ -6,6 +6,7 @@
  *
  */
 
+#include "../../CallBacks.h"
 #include "../../definitions.h"
 #include "../../maths/MathUtil.h"
 #include "../../memory/memoryAllocator.h"
@@ -38,7 +39,7 @@ public:
 };
 
 
-class BroadPhaseCollisionAlgorithm
+class BroadPhaseCollisionAlgorithm 
 {
 public:
 	BroadPhaseCollisionAlgorithm(CollisionManager* collisionManager):m_pCollisionManager(collisionManager)
@@ -54,7 +55,9 @@ public:
 	
 	virtual void update() = 0;
 	
-
+	virtual void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack ) = 0;
+	
+	virtual void intersectRay( RayIntersectionCallBackClass* callBack) = 0;
 protected:
 	
 	BroadPhaseNode* m_BroadPhaseNodeList; // List of All BroadPhase Nodes.

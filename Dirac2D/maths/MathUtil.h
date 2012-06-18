@@ -14,6 +14,7 @@
 #include "Matrix2.h"
 #include "Matrix3.h"
 #include "AABB2.h"
+#include "Ray2.h"
 #include <stdlib.h>
 
 #ifndef _MATH_UTIL_H_
