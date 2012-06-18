@@ -494,7 +494,6 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 		
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v1+outPoint1)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D2) );
-		dAssert(contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth<0.0f);
 
 		contactManifold->m_NumContacts++;
 	}
