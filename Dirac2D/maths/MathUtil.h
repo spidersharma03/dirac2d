@@ -14,6 +14,7 @@
 #include "Matrix2.h"
 #include "Matrix3.h"
 #include "AABB2.h"
+#include <stdlib.h>
 
 #ifndef _MATH_UTIL_H_
 #define _MATH_UTIL_H_
@@ -53,7 +54,12 @@ inline T CLAMP( T a, T lo, T hi )
 	return a;
 }
 
-
+// Creates a random number between low and high limits
+template< typename T >
+T RANDOM_NUMBER( T low, T high )
+{
+	return low + (T)rand()/RAND_MAX * ( high - low );
+}
 // Finds the Closest points of two line segments.
 template<class T>
 static void findClosestPoints(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& p2, Vector2<T>& p3, Vector2<T>& outPoint0, Vector2<T>& outPoint1)

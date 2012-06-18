@@ -38,9 +38,7 @@ public:
 	}
 	
 protected:
-	
-	void updateCollision();
-	
+		
 	void updateContacts();
 	
 	Contact* createContact();

@@ -122,9 +122,9 @@ void PhysicalWorld::Step(dfloat dt)
 			pBody->m_Velocity += totalForce * dt;
 		pBody = pBody->m_Next;
 	}
-	// Broad Phase
+	// Broad Phase. here the potential contact pairs are created/culled.
 	m_pBroadPhaseAlgorithm->update();
-	// Collision detection	
+	// Collision detection. here the contacts are created/removed.
 	m_CollisionManager->update();
 	
 	// Initialize the Solver.

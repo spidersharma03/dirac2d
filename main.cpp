@@ -1147,14 +1147,17 @@ DynamicTree* dynamicTree = new DynamicTree();
 
 void demo18()
 {	
-	dint32 numBoxes = 4;
-	Vector2f boxLocations[] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.15f), Vector2f(1.0f, 0.15f), Vector2f(1.0f, -0.15f) };
+	dint32 numBoxes = 15;
+	
 	// Create Boxes
 	for( dint32 i=0; i< numBoxes; i++ )
 	{
 		PhysicalBody* pBox = pWorld->createPhysicalBody();
 		//Vector2f loc
-		pBox->setPosition(boxLocations[i]);
+		dfloat x = RANDOM_NUMBER( -1.0f, 1.0f );
+		dfloat y = RANDOM_NUMBER( -1.0f, 1.0f );
+		
+		pBox->setPosition(Vector2f(x,y));
 		pBox->m_BodyType = EBT_STATIC;
 		
 		PhysicalAppearance pApp;
@@ -1198,7 +1201,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo18();
+	demo3();
 }
 
 void changeSize(int w, int h) 
@@ -1249,7 +1252,7 @@ void renderScene(void)
 	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	pWorld->draw();
-	renderDynamicTree(dynamicTree->getRootNode() );
+	//renderDynamicTree(dynamicTree->getRootNode() );
 	
     glutSwapBuffers();
 }

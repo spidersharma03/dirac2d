@@ -25,6 +25,7 @@ BEGIN_NAMESPACE_DIRAC2D
  this cost function decides the way in which the new node is inserted in the tree. see the paper for details.
  */
 
+
 struct DynamicTreeNode
 {
 	inline dbool isLeaf()
@@ -40,6 +41,7 @@ struct DynamicTreeNode
 		dint32 m_Parent;
 	};
 	
+	void* m_UserData;
 	dint32 m_Depth;
 };
 
@@ -50,26 +52,34 @@ public:
 	
 	~DynamicTree();
 	
-	void createProxy(AABB2f& nodeAABB);
+	dint32 createProxy(AABB2f& nodeAABB);
 	
 	void removeProxy(dint32 proxyID );
 	
-	DynamicTreeNode* getNode(dint32 index)
+	void updateProxy(AABB2f& nodeAABB);
+		
+	inline DynamicTreeNode* getNode(dint32 index) const
 	{
 		return m_Nodes + index;
 	}
 	
-	DynamicTreeNode* getRootNode()
+	inline DynamicTreeNode* getRootNode() const
 	{
 		return m_Nodes + m_RootNode;
 	}
-	
+
+	// check whether given AABB intersects with any AABB leaf of the tree
+	dbool intersectAABB( AABB2f& queryAABB, INTERSECT_QUERY_CALL_BACK callBack )
+	{
+		return 0;
+	}
 protected:
 
 	void insertNode(const AABB2f& node, dint32 nodeID);
 	
 	void removeNode(dint32 nodeID);
 	
+	// Allocates a new node from the pool.
 	dint32 allocateNode();
 	
 	void deleteNode(dint32 nodeID);
@@ -82,6 +92,10 @@ protected:
 	
 	dint32 m_RootNode;
 };
+
+
+//dbool DynamicTree::intersectAABB( AABB2f& queryAABB, void* callBack )
+
 
 END_NAMESPACE_DIRAC2D
 

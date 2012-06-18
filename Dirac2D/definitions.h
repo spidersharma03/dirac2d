@@ -31,6 +31,8 @@ END_NAMESPACE_DIRAC2D \
 #define PI_4 (PI/4.0f)
 #define PI_2 (PI/2.0f)
 
+typedef void (*INTERSECT_QUERY_CALL_BACK)();
+
 typedef long dint64;
 typedef unsigned long duint64;
 typedef int dint32;

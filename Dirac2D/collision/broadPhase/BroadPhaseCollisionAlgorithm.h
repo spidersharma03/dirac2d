@@ -34,6 +34,7 @@ public:
 	CollisionShape* m_CollisionShape;
 	BroadPhaseNode* m_Next;
 	BroadPhaseNode* m_Prev;
+	dint32 m_ID;
 };
 
 

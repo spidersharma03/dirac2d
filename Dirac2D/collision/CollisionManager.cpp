@@ -26,62 +26,6 @@ void CollisionManager::update()
 	updateContacts();	
 }
 
-void CollisionManager::updateCollision()
-{
-	// n2 Collision test
-	/*PhysicalBody* pBody1 = m_PhysicalWorld->m_PhysicalBodyList;
-	while( pBody1 )
-	{
-		PhysicalShape* pShape1 = pBody1->m_PhysicalShapeList;
-		while( pShape1 )
-		{
-			PhysicalBody* pBody2 = pBody1;
-			while( pBody2 )
-			{
-				if( pBody1 == pBody2 )
-				{
-					pBody2 = pBody2->m_Next;
-					continue;
-				}
-				
-				if( pBody1->m_BodyType == EBT_STATIC && pBody2->m_BodyType == EBT_STATIC )
-				{
-					pBody2 = pBody2->m_Next;
-					continue;
-				}
-				
-				PhysicalShape* pShape2 = pBody2->m_PhysicalShapeList;
-				while( pShape2 )
-				{
-					dbool bRes = true;
-					
-					AABB2f& aabb1 = pShape1->m_CollisionShape->getAABB();
-					AABB2f& aabb2 = pShape2->m_CollisionShape->getAABB();
-					
-					bRes = aabb1.intersectAABB(aabb2);
-					
-					if( bRes && (m_ContactPairSet.insert(ContactPair(pShape1, pShape2) )).second )
-					{
-						Contact* contact = createContact();
-						contact->m_PhysicalShape1 = pShape1;
-						contact->m_PhysicalShape2 = pShape2;
-						// Awake the Bodies
-						pBody1->setSleeping(false);
-						pBody2->setSleeping(false);
-					}
-					pShape2 = pShape2->m_Next;
-					
-				} // Shape2 Loop
-				pBody2 = pBody2->m_Next;
-			}  // Body2 Loop
-			pShape1 = pShape1->m_Next;
-			
-		} // Shape1 Loop
-		pBody1 = pBody1->m_Next;
-	} // Body1 Loop
-	*/
-}
-
 // Update all the contacts of the PhysicalWorld
 void CollisionManager::updateContacts()
 {
