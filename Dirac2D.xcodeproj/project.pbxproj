@@ -35,7 +35,6 @@
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 		C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
-		C2F30F661578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F30F621578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp */; };
 		C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +103,8 @@
 		C2B6D8B2157398D600E31E38 /* Edge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Edge.h; sourceTree = "<group>"; };
 		C2B6D8B3157398D600E31E38 /* Edge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Edge.cpp; sourceTree = "<group>"; };
 		C2B6D90E1573A6DB00E31E38 /* Point2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point2.h; sourceTree = "<group>"; };
+		C2C9E1A8158F0F1A0083F1EC /* CallBacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallBacks.h; sourceTree = "<group>"; };
+		C2C9E236158F649C0083F1EC /* Ray2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray2.h; sourceTree = "<group>"; };
 		C2D14730157E533C0056341B /* PolygonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonHelper.h; sourceTree = "<group>"; };
 		C2D19C141585DF840042A724 /* SAP_Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAP_Algorithm.h; sourceTree = "<group>"; };
 		C2D19C151585DF840042A724 /* SAP_Algorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SAP_Algorithm.cpp; sourceTree = "<group>"; };
@@ -123,7 +124,6 @@
 		C2DD14FF1558E6A300432320 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C2EB2C2E1573C48600E92679 /* EdgeChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EdgeChain.h; sourceTree = "<group>"; };
 		C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EdgeChain.cpp; sourceTree = "<group>"; };
-		C2F30F621578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BroadPhaseCollisionAlgorithm.cpp; path = Dirac2D/collision/broadPhase/BroadPhaseCollisionAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
 		C2F30F631578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BroadPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/BroadPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
 		C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NaiveBoradPhaseCollisionAlgorithm.cpp; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
 		C2F30F651578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NaiveBoradPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
@@ -178,6 +178,7 @@
 				C257F142154E71AE00270D77 /* common.h */,
 				C257F15A154E71AE00270D77 /* Settings.h */,
 				C257F143154E71AE00270D77 /* definitions.h */,
+				C2C9E1A8158F0F1A0083F1EC /* CallBacks.h */,
 				C257F144154E71AE00270D77 /* Dirac2D.h */,
 				C257F80C15529C4000270D77 /* draw */,
 				C257F13E154E71AE00270D77 /* collision */,
@@ -285,6 +286,7 @@
 				C2DD136C1553EAFD00432320 /* Matrix3.h */,
 				C27A86A81561442D007AD13C /* AABB2.h */,
 				C2B6D90E1573A6DB00E31E38 /* Point2.h */,
+				C2C9E236158F649C0083F1EC /* Ray2.h */,
 			);
 			name = maths;
 			path = Dirac2D/maths;
@@ -324,16 +326,15 @@
 		C2F30F611578FE6D00D4F2F4 /* broadPhase */ = {
 			isa = PBXGroup;
 			children = (
-				C2F30F621578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp */,
 				C2F30F631578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.h */,
 				C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */,
 				C2F30F651578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.h */,
 				C2D19C141585DF840042A724 /* SAP_Algorithm.h */,
 				C2D19C151585DF840042A724 /* SAP_Algorithm.cpp */,
-				C2D19DE01588D9CD0042A724 /* DynamicTree.h */,
-				C2D19DE11588D9CD0042A724 /* DynamicTree.cpp */,
 				C2D19F37158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.h */,
 				C2D19F38158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp */,
+				C2D19DE01588D9CD0042A724 /* DynamicTree.h */,
+				C2D19DE11588D9CD0042A724 /* DynamicTree.cpp */,
 			);
 			name = broadPhase;
 			path = Dirac2D/collision/broadPhase;
@@ -415,7 +416,6 @@
 				C2B6D881157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp in Sources */,
 				C2B6D8B4157398D600E31E38 /* Edge.cpp in Sources */,
 				C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */,
-				C2F30F661578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.cpp in Sources */,
 				C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */,
 				C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */,
 				C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */,
