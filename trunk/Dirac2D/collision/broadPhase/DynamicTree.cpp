@@ -36,16 +36,24 @@ DynamicTree::DynamicTree()
 	m_RootNode = Null_Node;
 }
 
-void DynamicTree::createProxy( AABB2f& nodeAABB )
+dint32 DynamicTree::createProxy( AABB2f& nodeAABB )
 {
 	dint32 newNode = allocateNode();
 	m_Nodes[newNode].m_AABB = nodeAABB;
 	
 	insertNode(nodeAABB, newNode);
+	return newNode;
 }
 
 void DynamicTree::removeProxy(dint32 proxyID)
 {
+	removeNode(proxyID);
+	deleteNode(proxyID);
+}
+
+void DynamicTree::updateProxy(AABB2f& nodeAABB)
+{
+	
 }
 
 dint32 DynamicTree::allocateNode()
@@ -198,18 +206,70 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 	m_Nodes[insertionLocation].m_Parent = newParentNodeIndex;
 	m_Nodes[nodeID].m_Parent = newParentNodeIndex;	
 	
-	// Now Change the AABB's of the tree up to the parent.
-	pNode = newParentNode;
-	while ( pNode->m_Parent != -1 ) 
+	// Reset the Bounding Boxes of the tree
+	dint32 index = m_Nodes[nodeID].m_Parent;
+	while ( index != Null_Node ) 
 	{
-		DynamicTreeNode* parentNode = m_Nodes + pNode->m_Parent;
-		parentNode->m_AABB.combine( pNode->m_AABB);
-		pNode = m_Nodes + pNode->m_Parent;
+		dint32 child1Index = m_Nodes[index].m_Child1;
+		dint32 child2Index = m_Nodes[index].m_Child2;
+		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
+		index = m_Nodes[index].m_Parent;
 	}
 }
 
 void DynamicTree::removeNode(dint32 nodeID)
 {
+	// Return if there is no parent.
+	if( m_Nodes[nodeID].m_Parent = Null_Node )
+	{
+		return;
+	}
+	
+	dint32 parentNodeIndex = m_Nodes[nodeID].m_Parent;
+	dint32 grandParentNodeIndex = m_Nodes[m_Nodes[parentNodeIndex].m_Parent].m_Parent;
+	
+	// This is the child which should be moved up in the hierarchy.
+	dint32 childNodeIndex;
+	if( m_Nodes[parentNodeIndex].m_Child1 == nodeID )
+	{
+		childNodeIndex = m_Nodes[parentNodeIndex].m_Child2;
+	}
+	else 
+	{
+		childNodeIndex = m_Nodes[parentNodeIndex].m_Child1;
+	}
+
+	// set the new child as the child of the grandParent.
+	if( grandParentNodeIndex != Null_Node )
+	{
+		if( m_Nodes[grandParentNodeIndex].m_Child2 == parentNodeIndex )
+		{
+			m_Nodes[grandParentNodeIndex].m_Child2 = childNodeIndex;
+		}
+		else 
+		{
+			m_Nodes[grandParentNodeIndex].m_Child1 = childNodeIndex;
+		}
+		m_Nodes[childNodeIndex].m_Parent = grandParentNodeIndex;
+	}
+	else 
+	{
+		m_RootNode = childNodeIndex;
+		m_Nodes[childNodeIndex].m_Parent = Null_Node;
+	}
+	
+	// Remove the Parent node.
+	deleteNode(parentNodeIndex);
+	
+	// Reset the Bounding Boxes of the tree
+	dint32 index = grandParentNodeIndex;
+	while ( index != Null_Node ) 
+	{
+		dint32 child1Index = m_Nodes[index].m_Child1;
+		dint32 child2Index = m_Nodes[index].m_Child2;
+		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
+		index = m_Nodes[index].m_Parent;
+	}
 }
 
 

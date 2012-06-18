@@ -29,6 +29,10 @@ public:
 	virtual void update();
 	
 protected:
+	
+	void updatePair();
+	
+protected:
 	DynamicTree* m_DynamicTree;
 };
 
