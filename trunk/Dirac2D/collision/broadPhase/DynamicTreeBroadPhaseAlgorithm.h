@@ -17,7 +17,7 @@ class PhysicalWorld;
 class CollisionManager;
 class DynamicTree;
 
-class DynamicTreeBroadPhaseAlgorithm : public BroadPhaseCollisionAlgorithm
+class DynamicTreeBroadPhaseAlgorithm : public BroadPhaseCollisionAlgorithm, OverlapCallBackClass
 {	
 public:
 	DynamicTreeBroadPhaseAlgorithm(CollisionManager* collisionManager);
@@ -27,13 +27,15 @@ public:
 	virtual void removeBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode);
 	
 	virtual void update();
+		
+	virtual void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack );
 	
-protected:
+	virtual void intersectRay( RayIntersectionCallBackClass* callBack);
 	
-	void updatePair();
-	
+	virtual void overlapCallBack(dint32 overlapNodeID);
 protected:
 	DynamicTree* m_DynamicTree;
+	dint32 m_QueryID;
 };
 
 
