@@ -494,6 +494,8 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 		
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v1+outPoint1)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D2) );
+		dAssert(contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth<0.0f);
+
 		contactManifold->m_NumContacts++;
 	}
 	
@@ -504,7 +506,7 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 	{
 		outPoint2 = edge->m_Vertex1;
 		findClosestPoint(p0, p1, outPoint2, v2);
-		dfloat D2 = v2.distanceSquared(outPoint2);
+		D2 = v2.distanceSquared(outPoint2);
 		if( D2 < capsuleRadius * capsuleRadius )
 		{
 			if( edge->m_bHasPrev )
@@ -525,7 +527,7 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 	{
 		outPoint2 = edge->m_Vertex2;
 		findClosestPoint(p0, p1, outPoint2, v2);
-		dfloat D2 = v2.distanceSquared(outPoint2);
+		D2 = v2.distanceSquared(outPoint2);
 		if( D2 < capsuleRadius * capsuleRadius )
 		{
 			if( edge->m_bHasNext )
@@ -546,7 +548,7 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 	{
 		outPoint2 = edge->m_Vertex1 + (edge->m_Vertex2 - edge->m_Vertex1 ) * u2;
 		findClosestPoint(p0, p1, outPoint2, v2);
-		dfloat D2 = v2.distanceSquared(outPoint2);
+		D2 = v2.distanceSquared(outPoint2);
 		if( D2 < capsuleRadius * capsuleRadius )
 			bRes = true;
 	}
@@ -560,6 +562,7 @@ dbool intersectEdgeCapsule( Edge* edge, Matrix3f& xform1, Capsule* capsule, Matr
 		
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Point = (v2+outPoint2)*0.5f;
 		contactManifold->m_ContactPoints[contactManifold->m_NumContacts].m_Depth = -0.5f*( capsuleRadius - sqrt(D2) );
+		
 		contactManifold->m_NumContacts++;
 	}
 	
