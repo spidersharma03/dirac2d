@@ -43,6 +43,14 @@ dint32 DynamicTree::createProxy( AABB2f& nodeAABB, void* userData )
 	m_Nodes[newNode].m_UserData = userData;
 	
 	insertNode(nodeAABB, newNode);
+	
+	DynamicTreeNode* node = getRootNode();
+	if( !node->isLeaf() )
+	{
+		DynamicTreeNode* child1 = m_Nodes + node->m_Child1;
+		DynamicTreeNode* child2 = m_Nodes + node->m_Child2;
+		printf("Balance = %d\n", child1->m_Height - child2->m_Height);
+	}
 	return newNode;
 }
 
@@ -225,7 +233,7 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
-		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child1Index].m_Height);
+		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child2Index].m_Height);
 		index = m_Nodes[index].m_Parent;
 	}
 }
@@ -281,7 +289,7 @@ void DynamicTree::removeNode(dint32 nodeID)
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
-		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child1Index].m_Height);
+		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child2Index].m_Height);
 		index = m_Nodes[index].m_Parent;
 	}
 }
