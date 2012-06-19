@@ -1143,19 +1143,13 @@ void demo17()
 }
 
 // Dynamic Tree Test.
-DynamicTree* dynamicTree = new DynamicTree();
-
-class TestClass : public OverlapCallBackClass
-{
-	virtual void overlapCallBack(dint32 overlapNodeID)
-	{
-	}
-};
+DynamicTree* dynamicTree = 0;
 
 void demo18()
 {	
 	dint32 numBoxes = 15;
 	
+	dynamicTree = new DynamicTree();
 	// Create Boxes
 	for( dint32 i=0; i< numBoxes; i++ )
 	{
@@ -1174,33 +1168,38 @@ void demo18()
 		pBox->createPhysicalShape(pApp);
 		
 		dynamicTree->createProxy(pBox->m_AABB, 0);
-		
-		AABB2f aabb;
-		TestClass* testClass = new TestClass();
-		dynamicTree->overlapAABB(aabb, testClass);
 	}
+	dynamicTree->removeProxy(13);
+	dynamicTree->removeProxy(17);
+	dynamicTree->removeProxy(15);
+	dynamicTree->removeProxy(19);
+	dynamicTree->removeProxy(21);
+
 }
+
+DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
 {
+	return;
 	if( pNode->isLeaf() )
 	{
 		glRenderer->setColor(255, 255, 0);
-		glRenderer->setLineWidth(2.0f);
+		glRenderer->setLineWidth(1.0f);
 	}
 	else
 	{
 		glRenderer->setColor(255, 255, 255);
-		glRenderer->setLineWidth(1.0f);
+		glRenderer->setLineWidth(2.0f);
 	}
-		
+
 	glRenderer->drawAABB(pNode->m_AABB);
-	
+
 	if( pNode->isLeaf() )
 		return;
-	
-	renderDynamicTree( dynamicTree->getNode(pNode->m_Child1) );
-	renderDynamicTree( dynamicTree->getNode(pNode->m_Child2) );
+
+	renderDynamicTree( pAlgo->getDynamicTree()->getNode(pNode->m_Child1) );
+	renderDynamicTree( pAlgo->getDynamicTree()->getNode(pNode->m_Child2) );
 }
 
 void initScene()
@@ -1208,11 +1207,11 @@ void initScene()
 	pWorld = new PhysicalWorld();
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
-	
+	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo18();
+	demo3();
 }
 
 void changeSize(int w, int h) 
@@ -1263,7 +1262,11 @@ void renderScene(void)
 	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	pWorld->draw();
-	renderDynamicTree(dynamicTree->getRootNode() );
+	
+	DynamicTreeBroadPhaseAlgorithm* pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
+	
+	if( pAlgo->getDynamicTree() )
+		renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
 	
     glutSwapBuffers();
 }

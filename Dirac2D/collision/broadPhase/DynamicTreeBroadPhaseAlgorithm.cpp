@@ -71,7 +71,7 @@ void DynamicTreeBroadPhaseAlgorithm::update()
 	{
 		m_QueryID = pNode->m_ID;
 		PhysicalShape* pShape = pNode->m_PhysicalShape;
-		m_DynamicTree->updateProxy(pShape->m_CollisionShape->getAABB());
+		m_DynamicTree->updateProxy(pShape->m_CollisionShape->getAABB(), pNode->m_ID);
 		pNode = pNode->m_Next;
 	} 
 	
