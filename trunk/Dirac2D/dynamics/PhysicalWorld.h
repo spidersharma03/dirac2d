@@ -34,6 +34,8 @@ class PhysicalShape;
 class DistanceConstraint;
 class HingeConstraint;
 
+enum BROAD_PHASE_ALGORITHM { EBPA_NAIVE, EBPA_SAP, EBPA_DYNAMIC_TREE };
+
 class PhysicalWorld
 {
 public:
@@ -122,7 +124,7 @@ private:
 	dbool m_bDrawBoundingBoxes;
 	dbool m_bDrawContacts;
 	dbool m_bDrawConstraints;
-	dbool m_bDrawCentreOfMass;
+	dbool m_bDrawCentreOfMass;	
 };
 
 END_NAMESPACE_DIRAC2D

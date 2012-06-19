@@ -33,6 +33,11 @@ public:
 	virtual void intersectRay( RayIntersectionCallBackClass* callBack);
 	
 	virtual void overlapCallBack(dint32 overlapNodeID);
+	
+	DynamicTree* getDynamicTree()
+	{
+		return m_DynamicTree;
+	}
 protected:
 	DynamicTree* m_DynamicTree;
 	dint32 m_QueryID;

@@ -6,6 +6,7 @@
  *
  */
 
+#include "../../common.h"
 #include "../../definitions.h"
 #include "../../maths/MathUtil.h"
 #include "../../CallBacks.h"
@@ -45,7 +46,7 @@ struct DynamicTreeNode
 	};
 	
 	void* m_UserData;
-	dint32 m_Depth;
+	dint32 m_Height;
 };
 
 class DynamicTree
@@ -59,7 +60,11 @@ public:
 	
 	void removeProxy(dint32 proxyID );
 	
-	void updateProxy(AABB2f& nodeAABB);
+	void updateProxy(AABB2f& nodeAABB, dint32 proxyID);
+	
+	dint32 balance(dint32 rootID);
+	
+	dint32 calculateHeight(dint32 nodeID);
 	
 	inline void* getUserData( dint32 proxyID ) const
 	{
@@ -77,11 +82,34 @@ public:
 	}
 
 	// check whether given queryAABB overlaps with any AABB leaf of the tree. for any overlap, the callBack class will be reported.
-	dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
+	inline dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
 	{
-		if( callBack )
-			callBack->overlapCallBack(0);
-		return false;
+		dStack<dint32> nodeStack(100);
+		
+		nodeStack.push(m_RootNode);
+		
+		dbool bResult = false;
+		
+		while ( nodeStack.getSize() != 0 ) 
+		{
+			dint32 nodeID = nodeStack.pop();
+						
+			if( queryAABB.intersectAABB(m_Nodes[nodeID].m_AABB) )
+			{
+				if( m_Nodes[nodeID].isLeaf() )
+				{
+					bResult = true;
+					if( callBack )
+						callBack->overlapCallBack(nodeID);
+				}
+				else 
+				{
+					nodeStack.push( m_Nodes[nodeID].m_Child1 );
+					nodeStack.push( m_Nodes[nodeID].m_Child2 );
+				}
+			}
+		}
+		return bResult;
 	}
 	
 	//

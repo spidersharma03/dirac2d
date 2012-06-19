@@ -16,6 +16,7 @@
 
 #include "../collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 #include "../collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h"
+#include "../collision/broadPhase/DynamicTreeBroadPhaseAlgorithm.h"
 
 #include "../dynamics/contacts/ContactSolver.h"
 #include "../dynamics/contacts/Contact.h"
@@ -32,7 +33,8 @@ Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
 PhysicalWorld::PhysicalWorld()
 {
 	m_CollisionManager = new CollisionManager(this);
-	m_pBroadPhaseAlgorithm = new NaiveBroadPhaseCollisionAlgorithm(m_CollisionManager);
+	m_pBroadPhaseAlgorithm = new DynamicTreeBroadPhaseAlgorithm(m_CollisionManager);
+	//m_pBroadPhaseAlgorithm = new NaiveBroadPhaseCollisionAlgorithm(m_CollisionManager);
 	m_ContactSolver    = new ContactSolver(this);
 	m_Renderer		   = 0;
 	
