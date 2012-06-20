@@ -230,8 +230,12 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 	dint32 index = m_Nodes[nodeID].m_Parent;
 	while ( index != Null_Node ) 
 	{
+		index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
+		DynamicTreeNode* node1 = m_Nodes + child1Index;
+		DynamicTreeNode* node2 = m_Nodes + child2Index;
+		
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
 		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child2Index].m_Height);
 		index = m_Nodes[index].m_Parent;
@@ -286,6 +290,7 @@ void DynamicTree::removeNode(dint32 nodeID)
 	dint32 index = grandParentNodeIndex;
 	while ( index != Null_Node ) 
 	{
+		index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
@@ -304,6 +309,10 @@ dint32 DynamicTree::balance(dint32 rootID)
 {
 	dAssert( rootID != Null_Node );
 	
+	if( m_Nodes[rootID].isLeaf() || m_Nodes[rootID].m_Height < 2 )
+		return rootID;
+	
+	dint32 parentIndex = m_Nodes[rootID].m_Parent;
 	dint32 rootchild1Index = m_Nodes[rootID].m_Child1;
 	dint32 rootchild2Index = m_Nodes[rootID].m_Child2;
 	
@@ -313,12 +322,12 @@ dint32 DynamicTree::balance(dint32 rootID)
 	dint32 diffHeight = rootChild1->m_Height - rootChild2->m_Height;
 	
 	// Pivot node will become the new root.
-	dint32 pivotNode;
+	dint32 pivotNode = rootID;
 	// Left subtree is having larger depth than Right subtree. in this case we need to do a RIGHT ROTATION on this root node.
 	if( diffHeight > 1 )
 	{
 		dint32 child1Index = rootChild1->m_Child1;
-		dint32 child2Index = rootChild2->m_Child2;
+		dint32 child2Index = rootChild1->m_Child2;
 		
 		DynamicTreeNode* child1 = m_Nodes + child1Index;
 		DynamicTreeNode* child2 = m_Nodes + child2Index;
@@ -329,10 +338,13 @@ dint32 DynamicTree::balance(dint32 rootID)
 		{
 			pivotNode = rootchild1Index;
 			m_Nodes[rootID].m_Child1 = m_Nodes[pivotNode].m_Child2;
+			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootID;
+
 			m_Nodes[pivotNode].m_Child2 = rootID;
-			
 			m_Nodes[rootID].m_Parent = pivotNode;
-			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = m_Nodes[rootID].m_Child1;
+			
+			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild2Index].m_Height, m_Nodes[child2Index].m_Height);
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child1Index].m_Height);
 		}
 		// LEFT-RIGHT case
 		// here we first need to do a left rotation amd then the right rotation
@@ -340,27 +352,96 @@ dint32 DynamicTree::balance(dint32 rootID)
 		{
 			// Left rotate
 			pivotNode = child2Index;
-			m_Nodes[child1Index].m_Child2 = m_Nodes[pivotNode].m_Child1;
-			m_Nodes[pivotNode].m_Child1 = child1Index;
+			m_Nodes[rootchild1Index].m_Child2 = m_Nodes[pivotNode].m_Child1;
+			m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = rootchild1Index;
+
+			m_Nodes[pivotNode].m_Child1 = rootchild1Index;
+			m_Nodes[rootchild1Index].m_Parent = pivotNode;
 			
 			// Right rotate.
 			m_Nodes[rootID].m_Child1 = m_Nodes[pivotNode].m_Child2;
+			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootID;
+
 			m_Nodes[pivotNode].m_Child2 = rootID;
-			
 			m_Nodes[rootID].m_Parent = pivotNode;
 		}
 		
+		// Make root's old parent new parent of pivot node.
+		m_Nodes[pivotNode].m_Parent = parentIndex;
+		if( parentIndex != Null_Node )
+		{
+			DynamicTreeNode* oldParent = m_Nodes + parentIndex;
+			if ( oldParent->m_Child1 == rootID )
+			{
+				oldParent->m_Child1 = pivotNode;
+			}
+			else 
+			{
+				oldParent->m_Child2 = pivotNode;
+			}
+
+		}
 		return pivotNode;
 	}
 	// Right subtree is having larger depth than Left subtree. in this case we need to do a LEFT ROTATION on this root node.
 	if( diffHeight < -1 )
 	{
-		//pivotNode = child2Index;
-		m_Nodes[rootID].m_Child2 = m_Nodes[pivotNode].m_Child1;
-		m_Nodes[pivotNode].m_Child1 = rootID;
+		dint32 child1Index = rootChild2->m_Child1;
+		dint32 child2Index = rootChild2->m_Child2;
 		
-		m_Nodes[rootID].m_Parent = m_Nodes[pivotNode].m_Child1;
-		m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = m_Nodes[rootID].m_Child2;
+		DynamicTreeNode* child1 = m_Nodes + child1Index;
+		DynamicTreeNode* child2 = m_Nodes + child2Index;
+		
+		// RIGHT-RIGHT case.
+		// here we do one Left rotation on the root node
+		if( child2->m_Height > child1->m_Height )
+		{
+			pivotNode = rootchild2Index;
+			m_Nodes[rootID].m_Child2 = m_Nodes[pivotNode].m_Child1;
+			m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = rootID;
+			
+			m_Nodes[pivotNode].m_Child1 = rootID;
+			m_Nodes[rootID].m_Parent = pivotNode;
+			
+			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild1Index].m_Height, m_Nodes[child1Index].m_Height);
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child2Index].m_Height);			
+		}
+		// RIGHT-LEFT case
+		// here we first need to do a right rotation amd then the left rotation
+		else 
+		{
+			// Right rotate
+			pivotNode = child1Index;
+			m_Nodes[rootchild2Index].m_Child1 = m_Nodes[pivotNode].m_Child2;
+			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootchild2Index;
+			
+			m_Nodes[pivotNode].m_Child2 = rootchild2Index;
+			m_Nodes[rootchild2Index].m_Parent = pivotNode;
+			
+			// Left rotate.
+			m_Nodes[rootID].m_Child2 = m_Nodes[pivotNode].m_Child1;
+			m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = rootID;
+			
+			m_Nodes[pivotNode].m_Child1 = rootID;
+			m_Nodes[rootID].m_Parent = pivotNode;
+		}
+		
+		// Make root's old parent new parent of pivot node.
+		m_Nodes[pivotNode].m_Parent = parentIndex;
+		if( parentIndex != Null_Node )
+		{
+			DynamicTreeNode* oldParent = m_Nodes + parentIndex;
+			if ( oldParent->m_Child1 == rootID )
+			{
+				oldParent->m_Child1 = pivotNode;
+			}
+			else 
+			{
+				oldParent->m_Child2 = pivotNode;
+			}
+			
+		}
+		return pivotNode;
 	}
 	return pivotNode;
 }
