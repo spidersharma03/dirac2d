@@ -66,7 +66,7 @@ void demo2()
 	
 	// Create Boxes
 	dfloat y = -0.5f;
-	for( int i=0; i<10; i++ )
+	for( int i=0; i<3; i++ )
 	{
 		PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 		//pBodyBox->m_BodyType = EBT_STATIC;
@@ -1211,7 +1211,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo3();
+	demo2();
 }
 
 void changeSize(int w, int h) 
