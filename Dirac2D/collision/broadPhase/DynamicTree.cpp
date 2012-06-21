@@ -233,8 +233,8 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 		index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
-		DynamicTreeNode* node1 = m_Nodes + child1Index;
-		DynamicTreeNode* node2 = m_Nodes + child2Index;
+		//DynamicTreeNode* node1 = m_Nodes + child1Index;
+		//DynamicTreeNode* node2 = m_Nodes + child2Index;
 		
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
 		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child2Index].m_Height);
@@ -355,15 +355,22 @@ dint32 DynamicTree::balance(dint32 rootID)
 			m_Nodes[rootchild1Index].m_Child2 = m_Nodes[pivotNode].m_Child1;
 			m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = rootchild1Index;
 
+			m_Nodes[rootchild1Index].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height, m_Nodes[child1Index].m_Height);
+
 			m_Nodes[pivotNode].m_Child1 = rootchild1Index;
 			m_Nodes[rootchild1Index].m_Parent = pivotNode;
 			
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child2].m_Height, m_Nodes[rootchild1Index].m_Height);
+
 			// Right rotate.
 			m_Nodes[rootID].m_Child1 = m_Nodes[pivotNode].m_Child2;
 			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootID;
 
 			m_Nodes[pivotNode].m_Child2 = rootID;
 			m_Nodes[rootID].m_Parent = pivotNode;
+			
+			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild2Index].m_Height, m_Nodes[child1Index].m_Height);
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child2Index].m_Height);
 		}
 		
 		// Make root's old parent new parent of pivot node.
@@ -414,16 +421,21 @@ dint32 DynamicTree::balance(dint32 rootID)
 			pivotNode = child1Index;
 			m_Nodes[rootchild2Index].m_Child1 = m_Nodes[pivotNode].m_Child2;
 			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootchild2Index;
-			
+			m_Nodes[rootchild2Index].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height, m_Nodes[child2Index].m_Height);
+
 			m_Nodes[pivotNode].m_Child2 = rootchild2Index;
 			m_Nodes[rootchild2Index].m_Parent = pivotNode;
-			
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height, m_Nodes[rootchild2Index].m_Height);
+
 			// Left rotate.
 			m_Nodes[rootID].m_Child2 = m_Nodes[pivotNode].m_Child1;
 			m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = rootID;
 			
 			m_Nodes[pivotNode].m_Child1 = rootID;
 			m_Nodes[rootID].m_Parent = pivotNode;
+			
+			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild1Index].m_Height, m_Nodes[child2Index].m_Height);
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child1Index].m_Height);
 		}
 		
 		// Make root's old parent new parent of pivot node.
