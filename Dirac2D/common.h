@@ -44,12 +44,13 @@ public:
 			memcpy(newData, m_Data, m_CurrentCount * sizeof(T) );
 			m_Data = newData;
 		}
-		m_Data[m_CurrentCount++] = value;
+		m_Data[m_CurrentCount] = value;
+		m_CurrentCount++;
 	}
 	
 	T pop()
 	{
-		m_CurrentCount--;
+		--m_CurrentCount;
 		return m_Data[m_CurrentCount];
 	}
 	

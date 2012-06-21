@@ -38,6 +38,7 @@ public:
 	dint32 m_ID;
 };
 
+enum ALGORITHM_TYPE { EAT_NAIVE, EAT_DYNAMIC_TREE, EAT_SAP };
 
 class BroadPhaseCollisionAlgorithm 
 {
@@ -58,13 +59,18 @@ public:
 	virtual void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack ) = 0;
 	
 	virtual void intersectRay( RayIntersectionCallBackClass* callBack) = 0;
+	
+	ALGORITHM_TYPE getAlgorithmType()
+	{
+		return m_AlgorithmType;
+	}
 protected:
 	
 	BroadPhaseNode* m_BroadPhaseNodeList; // List of All BroadPhase Nodes.
 
 	PhysicalWorld* m_PhysicalWorld;
 	CollisionManager* m_pCollisionManager;
-	
+	ALGORITHM_TYPE m_AlgorithmType;
 };
 
 END_NAMESPACE_DIRAC2D

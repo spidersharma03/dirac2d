@@ -7,6 +7,9 @@
  */
 
 #include "BroadPhaseCollisionAlgorithm.h"
+#include <vector>
+
+using namespace std;
 
 #ifndef _DYNAMIC_TREE_BROAD_PHASE_ALGORITHM_H_
 #define _DYNAMIC_TREE_BROAD_PHASE_ALGORITHM_H_
@@ -41,6 +44,7 @@ public:
 protected:
 	DynamicTree* m_DynamicTree;
 	dint32 m_QueryID;
+	vector<dint32> m_vecOverlappedId;
 };
 
 
