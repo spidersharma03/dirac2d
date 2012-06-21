@@ -17,6 +17,7 @@ void renderScene(void);
 
 PhysicalWorld* pWorld;
 GLRenderer* glRenderer;
+DTimer timer;
 
 dfloat dt = 1.0f/600.0f;
 
@@ -1211,7 +1212,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo6();
+	demo3();
 }
 
 void changeSize(int w, int h) 
@@ -1247,9 +1248,20 @@ void changeSize(int w, int h)
 }
 
 void renderScene(void) 
-{		
+{	
+#ifndef WIN32
+	timeval t1, t2;
+    static double elapsedTime;
+    double FPS = 0;
+    
+    static int frameCnt = 0;
+    
+    // start timer
+    gettimeofday(&t1, NULL);
+#endif
+	
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
+	
 	if(windowHeight == 0)
         windowHeight = 1;
 	
@@ -1273,6 +1285,25 @@ void renderScene(void)
 	}
 	
     glutSwapBuffers();
+	
+#ifndef WIN32
+	frameCnt ++;
+    
+    // stop timer
+    gettimeofday(&t2, NULL);
+    
+    // compute and print the elapsed time in millisec
+    elapsedTime += (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
+    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
+    
+    if( frameCnt >=1000 )
+    {
+        frameCnt=0;
+        FPS = 1000 /(elapsedTime * 0.001);
+        printf("\n FPS = %f", FPS);
+        elapsedTime = 0;
+    }
+#endif
 }
 
 static bool bWarmStart = true;
@@ -1412,7 +1443,7 @@ int main(int argc, char **argv) {
 
 	
 #ifndef WIN32
-	glutTimerFunc(0, timerCallback, 0);
+	//glutTimerFunc(0, timerCallback, 0);
 #endif
 	
 	initScene();

@@ -1,41 +1,54 @@
-#include "STimer.h"
+#include "DTimer.h"
 #include <stdio.h>
 
-namespace spider3d
-{
+BEGIN_NAMESPACE_DIRAC2D
 
 //sf32 STimer::currentTime = 0.0f;
 //sf32 STimer::startTime = 0.0f;
 //sf32 STimer::diffTime = 0.0f;
 //sf32 STimer::increasingDuration = 0.0f;
 //sf32 STimer::decreasingDuration = 0.0f;
+#ifdef WIN32
 static LARGE_INTEGER HighPerformanceFreq;
 static BOOL HighPerformanceTimerSupport = FALSE;
+#else
 
-STimer::STimer()
+#endif
+
+DTimer::DTimer()
 {
 	initTimer();
 }
 
-STimer::STimer(unsigned loopCount , float increasingDuration)
+DTimer::DTimer(duint32 loopCount , dfloat increasingDuration)
 {
 	initTimer();
-	STimer::increasingDuration = increasingDuration;
+	DTimer::increasingDuration = increasingDuration;
 }
 
-void STimer::initTimer()
+void DTimer::initTimer()
 {
 	diffTime = 0.0f;
 	decreasingDuration = 0.0f;
 
-	increasingDuration = 1000;
+	increasingDuration = 100;
+#ifdef WIN32
 	startTime = GetTickCount();
+#else
+	timeval t;
+    gettimeofday(&t, NULL);
+	startTime = (t.tv_usec - t.tv_usec) / 1000.0;   // us to ms
+#endif
 	currentTime = startTime;
+#ifdef WIN32
 	HighPerformanceTimerSupport = QueryPerformanceFrequency(&HighPerformanceFreq);
+#endif
+	
 }
 
-void STimer::tick()
+void DTimer::tick()
 {
+#ifdef WIN32
 	LARGE_INTEGER nTime;
 	
 	if ( HighPerformanceTimerSupport )
@@ -49,7 +62,11 @@ void STimer::tick()
 	{
 	currentTime = GetTickCount();
 	}
-	
+#else
+	timeval t;
+    gettimeofday(&t, NULL);
+	currentTime = (t.tv_usec - t.tv_usec) / 1000.0;   // us to ms
+#endif
 	static int count = 0;
 	count++;
 	if ( diffTime > increasingDuration )
@@ -62,14 +79,15 @@ void STimer::tick()
 	diffTime = ( currentTime - startTime );
 }
 
-void STimer::setCurrentTime(float time)
+void DTimer::setCurrentTime(float time)
 {
 	startTime = time;
 }
 
-float STimer::getCurrentTime()
+float DTimer::getCurrentTime()
 {
-	float time;
+	dfloat time;
+#ifdef WIN32
 	LARGE_INTEGER nTime;
 
 	if ( HighPerformanceTimerSupport )
@@ -83,38 +101,42 @@ float STimer::getCurrentTime()
 	{
 		time = GetTickCount();
 	}
-
+#else
+	timeval t;
+    gettimeofday(&t, NULL);
+	time = (t.tv_usec - t.tv_usec) / 1000.0;   // us to ms
+#endif
 	return time;
 }
 
-void STimer::stop()
+void DTimer::stop()
 {
   
 }
 
-float STimer::value()
+float DTimer::value()
 {
   return diffTime / increasingDuration;
 }
 
-void STimer::setIncreasingDuration(float increasingDuration)
+void DTimer::setIncreasingDuration(float increasingDuration)
 {
-	STimer::increasingDuration = increasingDuration;
+	DTimer::increasingDuration = increasingDuration;
 }
 
-float STimer::getIncreasingDuration()
+float DTimer::getIncreasingDuration()
 {
 	return increasingDuration;
 }
 
-void STimer::setDecreasingDuration(float decreasingDuration)
+void DTimer::setDecreasingDuration(float decreasingDuration)
 {
-	STimer::decreasingDuration = decreasingDuration;
+	DTimer::decreasingDuration = decreasingDuration;
 }
 
-float STimer::getDecreasingDuration()
+float DTimer::getDecreasingDuration()
 {
 	return decreasingDuration;
 }
 
-}
+END_NAMESPACE_DIRAC2D

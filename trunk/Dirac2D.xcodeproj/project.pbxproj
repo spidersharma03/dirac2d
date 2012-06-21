@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
 		C257F15B154E71AE00270D77 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
@@ -53,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DTimer.cpp; path = Dirac2D/DTimer.cpp; sourceTree = SOURCE_ROOT; };
+		758921F213B0E3DF0005E1E2 /* DTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTimer.h; path = Dirac2D/DTimer.h; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* Dirac2D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dirac2D; sourceTree = BUILT_PRODUCTS_DIR; };
 		C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionDetectionPolygon.h; path = Dirac2D/collision/CollisionDetectionPolygon.h; sourceTree = SOURCE_ROOT; };
 		C257F140154E71AE00270D77 /* CollisionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionManager.cpp; path = Dirac2D/collision/CollisionManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -175,6 +178,8 @@
 		C257F13D154E71AE00270D77 /* Dirac2D */ = {
 			isa = PBXGroup;
 			children = (
+				758921F113B0E3DF0005E1E2 /* DTimer.cpp */,
+				758921F213B0E3DF0005E1E2 /* DTimer.h */,
 				C257F142154E71AE00270D77 /* common.h */,
 				C257F15A154E71AE00270D77 /* Settings.h */,
 				C257F143154E71AE00270D77 /* definitions.h */,
@@ -424,6 +429,7 @@
 				C2D19CD41587853F0042A724 /* ConvexPolygon.cpp in Sources */,
 				C2D19DE21588D9CD0042A724 /* DynamicTree.cpp in Sources */,
 				C2D19F39158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp in Sources */,
+				758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
