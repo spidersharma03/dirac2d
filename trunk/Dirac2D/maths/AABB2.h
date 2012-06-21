@@ -53,6 +53,16 @@ public:
 		return 2.0 * ( ( m_UpperBounds.x - m_LowerBounds.x ) + ( m_UpperBounds.y - m_LowerBounds.y ) );
 	}
 	
+	inline dbool contains(AABB2<T>& other)
+	{
+		dbool bRes = true;
+		bRes = bRes && m_LowerBounds.x <= other.m_LowerBounds.x;
+		bRes = bRes && m_LowerBounds.y <= other.m_LowerBounds.y;
+		bRes = bRes && other.m_UpperBounds.x <= m_UpperBounds.x;
+		bRes = bRes && other.m_UpperBounds.y <= m_UpperBounds.y;
+		return bRes;
+	}
+	
 	inline void combine( const AABB2<T>& other )
 	{
 		dfloat min_x = 100000.0f;
@@ -122,6 +132,18 @@ public:
 		dfloat overLapX = m_LowerBounds.x < other.m_LowerBounds.x ? other.m_LowerBounds.x - m_UpperBounds.x : m_LowerBounds.x - other.m_UpperBounds.x;
 		dfloat overLapY = m_LowerBounds.y < other.m_LowerBounds.y ? other.m_LowerBounds.y - m_UpperBounds.y : m_LowerBounds.y - other.m_UpperBounds.y;	
 		return ( (overLapX < 0.0f) && (overLapY < 0.0f) );
+		
+		Vector2f d1, d2;
+		d1 = other.m_LowerBounds - m_UpperBounds;
+		d2 = m_LowerBounds - other.m_UpperBounds;
+		
+		if (d1.x > 0.0f || d1.y > 0.0f)
+			return false;
+		
+		if (d2.x > 0.0f || d2.y > 0.0f)
+			return false;
+		
+		return true;
 	}
 	
 public:

@@ -59,14 +59,14 @@ void demo2()
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
+	dfloat groundWidth = 1.5f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
 	pBodyGround->createPhysicalShape(pApp);
 	
 	// Create Boxes
 	dfloat y = -0.5f;
-	for( int i=0; i<3; i++ )
+	for( int i=0; i<10; i++ )
 	{
 		PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 		//pBodyBox->m_BodyType = EBT_STATIC;
@@ -116,7 +116,7 @@ void demo3()
 			x += 0.2f;
 			pBodyBox->setPosition(Vector2f(x,y));
 			//pBodyBox->setAngle(PI_4*0.9);
-			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.071f;
+			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
 			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 			
 			pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox,4);
@@ -1211,7 +1211,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo2();
+	demo6();
 }
 
 void changeSize(int w, int h) 
@@ -1265,8 +1265,12 @@ void renderScene(void)
 	
 	DynamicTreeBroadPhaseAlgorithm* pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
 	
-	if( pAlgo->getDynamicTree() )
-		renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
+	if( pAlgo->getAlgorithmType() == EAT_DYNAMIC_TREE )
+	{
+		//printf("Height=%d\n", pAlgo->getDynamicTree()->getRootNode()->m_Height);
+		if( pAlgo->getDynamicTree() )
+			renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
+	}
 	
     glutSwapBuffers();
 }

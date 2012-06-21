@@ -13,6 +13,7 @@ BEGIN_NAMESPACE_DIRAC2D
 SAPAlgorithm::SAPAlgorithm(CollisionManager* collisionManager):
 BroadPhaseCollisionAlgorithm(collisionManager)
 {
+	m_AlgorithmType = EAT_SAP;
 }
 
 void SAPAlgorithm::addBroadPhaseNode(BroadPhaseNode* pBroadPhaseNode)

@@ -21,6 +21,7 @@ BEGIN_NAMESPACE_DIRAC2D
 NaiveBroadPhaseCollisionAlgorithm::NaiveBroadPhaseCollisionAlgorithm(CollisionManager* collisionManager):
 BroadPhaseCollisionAlgorithm(collisionManager)
 {
+	m_AlgorithmType = EAT_NAIVE;
 }
 
 // Adds a Physical Shape to the Broad Phase Node List

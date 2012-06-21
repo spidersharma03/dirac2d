@@ -11,6 +11,10 @@
 #include "../../maths/MathUtil.h"
 #include "../../CallBacks.h"
 
+#include <vector>
+
+using namespace std;
+
 #ifndef _DYNAMIC_TREE_H_
 #define _DYNAMIC_TREE_H_
 
@@ -66,6 +70,8 @@ public:
 	
 	dint32 calculateHeight(dint32 nodeID);
 	
+	void validateTree(dint32 index);
+
 	inline void* getUserData( dint32 proxyID ) const
 	{
 		return m_Nodes[proxyID].m_UserData;
@@ -83,35 +89,43 @@ public:
 
 	// check whether given queryAABB overlaps with any AABB leaf of the tree. for any overlap, the callBack class will be reported.
 	inline dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
-	{
-		dStack<dint32> nodeStack(100);
-		
-		nodeStack.push(m_RootNode);
+	{	
+		dint32 nodeCount = 0;
+		nodeVector[nodeCount++] = m_RootNode;
 		
 		dbool bResult = false;
 		
-		while ( nodeStack.getSize() != 0 ) 
-		{
-			dint32 nodeID = nodeStack.pop();
-						
+		while ( nodeCount != 0 ) 
+		{		
+			dint32 nodeID;
+			
+			nodeCount--;
+			nodeID = nodeVector[nodeCount];
+			
+			if( nodeID == Null_Node )
+				continue;
+			
 			if( queryAABB.intersectAABB(m_Nodes[nodeID].m_AABB) )
 			{
 				if( m_Nodes[nodeID].isLeaf() )
 				{
 					bResult = true;
+					
 					if( callBack )
 						callBack->overlapCallBack(nodeID);
 				}
 				else 
 				{
-					nodeStack.push( m_Nodes[nodeID].m_Child1 );
-					nodeStack.push( m_Nodes[nodeID].m_Child2 );
+					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
+					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
 				}
 			}
 		}
 		return bResult;
 	}
 	
+	// check whether given queryAABB overlaps with any AABB leaf of the tree. a vector of overlapped aabb is filled here.
+	dbool overlapAABB( AABB2f& queryAABB, vector<dint32>& vecOverlappedIDs );
 	//
 	dbool intersectRay(RayIntersectionCallBackClass* callBack)
 	{
@@ -121,6 +135,7 @@ public:
 	}
 	
 protected:
+	dint32 nodeVector[50];
 
 	void insertNode(const AABB2f& node, dint32 nodeID);
 	

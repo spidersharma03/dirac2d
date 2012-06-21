@@ -39,18 +39,15 @@ DynamicTree::DynamicTree()
 dint32 DynamicTree::createProxy( AABB2f& nodeAABB, void* userData )
 {
 	dint32 newNode = allocateNode();
-	m_Nodes[newNode].m_AABB = nodeAABB;
 	m_Nodes[newNode].m_UserData = userData;
 	
-	insertNode(nodeAABB, newNode);
+	// Extend AABB.
+	Vector2f d(AABB_EXTENSION_FACTOR, AABB_EXTENSION_FACTOR);
 	
-	DynamicTreeNode* node = getRootNode();
-	if( !node->isLeaf() )
-	{
-		DynamicTreeNode* child1 = m_Nodes + node->m_Child1;
-		DynamicTreeNode* child2 = m_Nodes + node->m_Child2;
-		printf("Balance = %d\n", child1->m_Height - child2->m_Height);
-	}
+	m_Nodes[newNode].m_AABB.m_LowerBounds = nodeAABB.m_LowerBounds - d;
+	m_Nodes[newNode].m_AABB.m_UpperBounds = nodeAABB.m_UpperBounds + d;
+	
+	insertNode(nodeAABB, newNode);
 	return newNode;
 }
 
@@ -67,9 +64,21 @@ void DynamicTree::removeProxy(dint32 proxyID)
 
 void DynamicTree::updateProxy(AABB2f& nodeAABB, dint32 proxyID)
 {
+	if (m_Nodes[proxyID].m_AABB.contains(nodeAABB))
+	{
+		return;
+	}
+		
 	removeNode(proxyID);
-	m_Nodes[proxyID].m_AABB = nodeAABB;
-	insertNode(nodeAABB, proxyID);
+	
+	// Extend AABB.
+	AABB2f fatAABB = nodeAABB;
+	Vector2f d(AABB_EXTENSION_FACTOR, AABB_EXTENSION_FACTOR);
+	fatAABB.m_LowerBounds = fatAABB.m_LowerBounds - d;
+	fatAABB.m_UpperBounds = fatAABB.m_UpperBounds + d;
+	
+	m_Nodes[proxyID].m_AABB = fatAABB;
+	insertNode(fatAABB, proxyID);
 }
 
 dint32 DynamicTree::allocateNode()
@@ -105,7 +114,8 @@ dint32 DynamicTree::allocateNode()
 	m_Nodes[node].m_Child1 = Null_Node;
 	m_Nodes[node].m_Child2 = Null_Node;
 	m_Nodes[node].m_Height = 0;
-	
+	m_Nodes[node].m_UserData = 0;
+
 	m_FreeNode = m_Nodes[node].m_Next;
 	m_CurrentNodeCount++;
 	return node;
@@ -116,6 +126,8 @@ void DynamicTree::deleteNode(dint32 nodeID)
 	dAssert( nodeID < m_NodeCapacity && nodeID >= 0);
 	m_Nodes[nodeID].m_Next = m_FreeNode;
 	m_Nodes[nodeID].m_Height = -1;
+	m_Nodes[nodeID].m_Child1 = Null_Node;
+	m_Nodes[nodeID].m_Child2 = Null_Node;
 	m_FreeNode = nodeID;
 	m_CurrentNodeCount--;
 }
@@ -203,6 +215,7 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 	newParentNode->m_AABB.combine(nodeAABB, m_Nodes[insertionLocation].m_AABB);
 	// Height of the new parent
 	newParentNode->m_Height = m_Nodes[insertionLocation].m_Height + 1;
+	newParentNode->m_UserData = 0;
 	
 	dint32 oldParentIndex = m_Nodes[insertionLocation].m_Parent;
 	
@@ -240,6 +253,8 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child2Index].m_Height);
 		index = m_Nodes[index].m_Parent;
 	}
+	
+	//validateTree(m_RootNode);
 }
 
 void DynamicTree::removeNode(dint32 nodeID)
@@ -297,6 +312,8 @@ void DynamicTree::removeNode(dint32 nodeID)
 		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child2Index].m_Height);
 		index = m_Nodes[index].m_Parent;
 	}
+	
+	//validateTree(m_RootNode);
 }
 
 dint32 DynamicTree::calculateHeight(dint32 nodeID)
@@ -337,14 +354,17 @@ dint32 DynamicTree::balance(dint32 rootID)
 		if( child1->m_Height > child2->m_Height )
 		{
 			pivotNode = rootchild1Index;
-			m_Nodes[rootID].m_Child1 = m_Nodes[pivotNode].m_Child2;
-			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootID;
+			m_Nodes[rootID].m_Child1 = child2Index;
+			m_Nodes[child2Index].m_Parent = rootID;
 
 			m_Nodes[pivotNode].m_Child2 = rootID;
 			m_Nodes[rootID].m_Parent = pivotNode;
 			
 			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild2Index].m_Height, m_Nodes[child2Index].m_Height);
+			m_Nodes[rootID].m_AABB.combine( m_Nodes[rootchild2Index].m_AABB, m_Nodes[child2Index].m_AABB);
+			
 			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child1Index].m_Height);
+			m_Nodes[pivotNode].m_AABB.combine( m_Nodes[rootID].m_AABB, m_Nodes[child1Index].m_AABB);
 		}
 		// LEFT-RIGHT case
 		// here we first need to do a left rotation amd then the right rotation
@@ -354,23 +374,27 @@ dint32 DynamicTree::balance(dint32 rootID)
 			pivotNode = child2Index;
 			m_Nodes[rootchild1Index].m_Child2 = m_Nodes[pivotNode].m_Child1;
 			m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = rootchild1Index;
-
 			m_Nodes[rootchild1Index].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height, m_Nodes[child1Index].m_Height);
+			m_Nodes[rootchild1Index].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child1].m_AABB, m_Nodes[child1Index].m_AABB);
 
 			m_Nodes[pivotNode].m_Child1 = rootchild1Index;
 			m_Nodes[rootchild1Index].m_Parent = pivotNode;
 			
 			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child2].m_Height, m_Nodes[rootchild1Index].m_Height);
+			m_Nodes[pivotNode].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child2].m_AABB, m_Nodes[rootchild1Index].m_AABB);
 
 			// Right rotate.
 			m_Nodes[rootID].m_Child1 = m_Nodes[pivotNode].m_Child2;
 			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootID;
 
+			m_Nodes[rootID].m_Height = 1 + MAX( m_Nodes[m_Nodes[pivotNode].m_Child2].m_Height, m_Nodes[rootchild2Index].m_Height);
+			m_Nodes[rootID].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child2].m_AABB, m_Nodes[child1Index].m_AABB);
+			
 			m_Nodes[pivotNode].m_Child2 = rootID;
 			m_Nodes[rootID].m_Parent = pivotNode;
-			
-			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild2Index].m_Height, m_Nodes[child1Index].m_Height);
-			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child2Index].m_Height);
+
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height);
+			m_Nodes[pivotNode].m_AABB.combine( m_Nodes[rootID].m_AABB, m_Nodes[m_Nodes[pivotNode].m_Child1].m_AABB);
 		}
 		
 		// Make root's old parent new parent of pivot node.
@@ -388,6 +412,11 @@ dint32 DynamicTree::balance(dint32 rootID)
 			}
 
 		}
+		else 
+		{
+			m_RootNode = pivotNode;
+		}
+
 		return pivotNode;
 	}
 	// Right subtree is having larger depth than Left subtree. in this case we need to do a LEFT ROTATION on this root node.
@@ -411,7 +440,10 @@ dint32 DynamicTree::balance(dint32 rootID)
 			m_Nodes[rootID].m_Parent = pivotNode;
 			
 			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild1Index].m_Height, m_Nodes[child1Index].m_Height);
-			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child2Index].m_Height);			
+			m_Nodes[rootID].m_AABB.combine( m_Nodes[rootchild1Index].m_AABB, m_Nodes[child1Index].m_AABB);
+
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child2Index].m_Height);		
+			m_Nodes[pivotNode].m_AABB.combine( m_Nodes[rootID].m_AABB, m_Nodes[child2Index].m_AABB);
 		}
 		// RIGHT-LEFT case
 		// here we first need to do a right rotation amd then the left rotation
@@ -421,21 +453,27 @@ dint32 DynamicTree::balance(dint32 rootID)
 			pivotNode = child1Index;
 			m_Nodes[rootchild2Index].m_Child1 = m_Nodes[pivotNode].m_Child2;
 			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootchild2Index;
-			m_Nodes[rootchild2Index].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height, m_Nodes[child2Index].m_Height);
+			m_Nodes[rootchild2Index].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child2].m_Height, m_Nodes[child2Index].m_Height);
+			m_Nodes[rootchild2Index].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child2].m_AABB, m_Nodes[child2Index].m_AABB);
 
 			m_Nodes[pivotNode].m_Child2 = rootchild2Index;
 			m_Nodes[rootchild2Index].m_Parent = pivotNode;
 			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height, m_Nodes[rootchild2Index].m_Height);
+			m_Nodes[pivotNode].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child1].m_AABB, m_Nodes[rootchild2Index].m_AABB);
 
 			// Left rotate.
 			m_Nodes[rootID].m_Child2 = m_Nodes[pivotNode].m_Child1;
 			m_Nodes[m_Nodes[pivotNode].m_Child1].m_Parent = rootID;
 			
+			m_Nodes[rootID].m_Height = 1 + MAX( m_Nodes[m_Nodes[pivotNode].m_Child1].m_Height, m_Nodes[rootchild1Index].m_Height);
+			m_Nodes[rootID].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child1].m_AABB, m_Nodes[rootchild1Index].m_AABB);
+			
+			
 			m_Nodes[pivotNode].m_Child1 = rootID;
 			m_Nodes[rootID].m_Parent = pivotNode;
 			
-			m_Nodes[rootID].m_Height = 1 + MAX(m_Nodes[rootchild1Index].m_Height, m_Nodes[child2Index].m_Height);
-			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[child1Index].m_Height);
+			m_Nodes[pivotNode].m_Height = 1 + MAX(m_Nodes[rootID].m_Height, m_Nodes[m_Nodes[pivotNode].m_Child2].m_Height);
+			m_Nodes[pivotNode].m_AABB.combine( m_Nodes[rootID].m_AABB, m_Nodes[m_Nodes[pivotNode].m_Child2].m_AABB);
 		}
 		
 		// Make root's old parent new parent of pivot node.
@@ -451,11 +489,118 @@ dint32 DynamicTree::balance(dint32 rootID)
 			{
 				oldParent->m_Child2 = pivotNode;
 			}
-			
 		}
+		else 
+		{
+			m_RootNode = pivotNode;
+		}
+
 		return pivotNode;
 	}
+	m_RootNode = pivotNode;
 	return pivotNode;
+}
+
+// check whether given queryAABB overlaps with any AABB leaf of the tree. for any overlap, the callBack class will be reported.
+dbool DynamicTree::overlapAABB( AABB2f& queryAABB, vector<dint32>& vecOverlappedIDs )
+{
+	dint32 nodeCount = 0;
+	nodeVector[nodeCount++] = m_RootNode;
+	
+	dbool bResult = false;
+	
+	while ( nodeCount != 0 ) 
+	{		
+		dint32 nodeID;
+		
+		nodeCount--;
+		nodeID = nodeVector[nodeCount];
+		
+		if( queryAABB.intersectAABB(m_Nodes[nodeID].m_AABB) )
+		{
+			if( m_Nodes[nodeID].isLeaf() )
+			{
+				bResult = true;
+				
+				vecOverlappedIDs.push_back(nodeID);
+			}
+			else 
+			{
+				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
+				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
+			}
+		}
+	}
+	return bResult;
+}
+
+//dbool DynamicTree::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
+//{
+//	dStack<dint32> nodeStack(10);
+//	
+//	nodeStack.push(m_RootNode);
+//	
+//	dbool bResult = false;
+//	
+//	while ( nodeStack.getSize() != 0 ) 
+//	{
+//		dint32 nodeID = nodeStack.pop();
+//		
+//		if( nodeID == Null_Node )
+//			continue;
+//		
+//		if( queryAABB.intersectAABB(m_Nodes[nodeID].m_AABB) )
+//		{
+//			if( m_Nodes[nodeID].isLeaf() )
+//			{
+//				bResult = true;
+//				
+//				if( callBack )
+//					callBack->overlapCallBack(nodeID);
+//			}
+//			else 
+//			{
+//				nodeStack.push( m_Nodes[nodeID].m_Child1 );
+//				nodeStack.push( m_Nodes[nodeID].m_Child2 );
+//			}
+//		}
+//	}
+//	return bResult;
+//}
+
+void DynamicTree::validateTree(dint32 index)
+{
+	if (index == Null_Node)
+	{
+		return;
+	}
+	
+	if (index == m_RootNode)
+	{
+		dAssert(m_Nodes[index].m_Parent == Null_Node);
+	}
+	
+	DynamicTreeNode* node = m_Nodes + index;
+	
+	dint32 child1 = node->m_Child1;
+	dint32 child2 = node->m_Child2;
+	
+	if (node->isLeaf())
+	{
+		dAssert(child1 == Null_Node);
+		dAssert(child2 == Null_Node);
+		dAssert(node->m_Height == 0);
+		return;
+	}
+	
+	dAssert(0 <= child1 && child1 < m_NodeCapacity);
+	dAssert(0 <= child2 && child2 < m_NodeCapacity);
+	
+	dAssert(m_Nodes[child1].m_Parent == index);
+	dAssert(m_Nodes[child2].m_Parent == index);
+	
+	validateTree(child1);
+	validateTree(child2);
 }
 
 DynamicTree::~DynamicTree()
