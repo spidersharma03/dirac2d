@@ -51,6 +51,7 @@
 #include "definitions.h"
 #include "Common.h"
 #include "CallBacks.h"
+#include "DTimer.h"
 
 #include "memory/memoryAllocator.h"
 

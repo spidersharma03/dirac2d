@@ -1,13 +1,17 @@
-#ifndef _STIMER_H
+#ifndef _DTIMER_H_
+#define _DTIMER_H_
 
-#define _STIMER_H
+#include "definitions.h"
 
+#ifdef WIN32
 #include <windows.h>
+#else
+#include <sys/time.h>
+#endif
 
-namespace spider3d
-{
+BEGIN_NAMESPACE_DIRAC2D
 
-class STimer
+class DTimer
 {
 public:
 
@@ -17,39 +21,39 @@ public:
 
     void tick();
 
-	float value();
+	dfloat value();
     
-	void setCurrentTime(float time);
+	void setCurrentTime(dfloat time);
 
-	float getCurrentTime();
+	dfloat getCurrentTime();
 
-	float getIncreasingDuration();
+	dfloat getIncreasingDuration();
 
-	float getDecreasingDuration();
+	dfloat getDecreasingDuration();
 	
-	void setIncreasingDuration(float);
+	void setIncreasingDuration(dfloat);
 
-	void setDecreasingDuration(float);
+	void setDecreasingDuration(dfloat);
 
-	STimer();
+	DTimer();
 
-	STimer(unsigned , float);
+	DTimer(duint32 , dfloat);
 
-	float fps;
+	dfloat fps;
 
 private:
 
-	float currentTime , startTime;
-    float diffTime;
-	unsigned loopCount;
-	float increasingDuration;
-	float decreasingDuration;
+	dfloat currentTime , startTime;
+    dfloat diffTime;
+	duint32 loopCount;
+	dfloat increasingDuration;
+	dfloat decreasingDuration;
 
 	void initTimer();
 
 
 };
 
-}
+END_NAMESPACE_DIRAC2D
 
 #endif

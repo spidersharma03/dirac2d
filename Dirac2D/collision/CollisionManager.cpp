@@ -23,6 +23,7 @@ CollisionManager::CollisionManager(PhysicalWorld* world) : m_PhysicalWorld(world
 	
 void CollisionManager::update()
 {	
+	//printf("NumContacts = %d\n",  m_ContactPairSet.size() );
 	updateContacts();	
 }
 
