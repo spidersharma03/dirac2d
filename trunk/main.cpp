@@ -127,6 +127,49 @@ void demo3()
 	}
 }
 
+void demo3_()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Boxes
+	dfloat y = -0.8f;
+	dfloat x = -1.0f;
+	dint32 n = 40;
+	dfloat dx = 0.0f;
+	for(int j=0; j<40;j++ )
+	{
+		y += 0.1f;
+		x = -2.0 + dx;
+		dx += 0.05f;
+		for( int i=0; i<n; i++ )
+		{
+			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+			//pBodyBox->m_BodyType = EBT_STATIC;
+			x += 0.1f;
+			pBodyBox->setPosition(Vector2f(x,y));
+			//pBodyBox->setAngle(PI_4*0.9);
+			dfloat boxWidth = 0.035f; dfloat boxHeight = 0.035f;
+			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+			
+			pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox,4);
+			pBodyBox->createPhysicalShape(pApp);
+		}
+		n--;
+	}
+}
+
+
 void demo4()
 {
 	// Create Ground Body
@@ -1212,7 +1255,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo3();
+	demo3_();
 }
 
 void changeSize(int w, int h) 

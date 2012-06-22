@@ -135,7 +135,7 @@ public:
 	}
 	
 protected:
-	dint32 nodeVector[150];
+	dint32 nodeVector[250];
 
 	void insertNode(const AABB2f& node, dint32 nodeID);
 	
