@@ -117,15 +117,19 @@ void DynamicTreeBroadPhaseAlgorithm::removeBroadPhaseNode(BroadPhaseNode* pBroad
 
 void DynamicTreeBroadPhaseAlgorithm::update()
 {
-	// Update all the Proxy AABB's in the Dynamic Tree.
+	// Update all the Proxy AABB's in the Broad Phase Nodes.
 	BroadPhaseNode* pNode = m_BroadPhaseNodeList;
 	while( pNode )
-	{
-		m_QueryID = pNode->m_ID;
-		
-		PhysicalShape* pShape = pNode->m_PhysicalShape;
-		
-		m_DynamicTree->updateProxy(pShape->m_CollisionShape->getAABB(), pNode->m_ID);
+	{		
+		pNode->m_AABB = pNode->m_CollisionShape->getAABB();
+		pNode = pNode->m_Next;
+	} 
+	
+	// Update all the Proxy AABB's in the Dynamic Tree.
+	pNode = m_BroadPhaseNodeList;
+	while( pNode )
+	{			
+		m_DynamicTree->updateProxy(pNode->m_AABB, pNode->m_ID);
 		pNode = pNode->m_Next;
 	} 
 	
@@ -134,8 +138,7 @@ void DynamicTreeBroadPhaseAlgorithm::update()
 	while( pNode )
 	{
 		m_QueryID = pNode->m_ID;
-		PhysicalShape* pShape = pNode->m_PhysicalShape;
-		m_DynamicTree->overlapAABB(pShape->m_CollisionShape->getAABB(), this );
+		m_DynamicTree->overlapAABB(pNode->m_AABB, this );
 		pNode = pNode->m_Next;
 	} 
 }
@@ -157,7 +160,7 @@ void DynamicTreeBroadPhaseAlgorithm::overlapCallBack(dint32 overlapNodeID)
 	
 	set<ContactPair>& contactPairPool = m_pCollisionManager->getContactPairPool();
 
-	if( pNode1->m_CollisionShape->getAABB().intersectAABB(pNode2->m_CollisionShape->getAABB()) 
+	if( pNode1->m_AABB.intersectAABB(pNode2->m_CollisionShape->getAABB()) 
 	   && (contactPairPool.insert(ContactPair(pNode1->m_CollisionShape, pNode2->m_CollisionShape) )).second )
 	{
 		m_pCollisionManager->addContactPair(pNode1, pNode2);

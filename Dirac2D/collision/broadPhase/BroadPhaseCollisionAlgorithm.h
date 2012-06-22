@@ -31,6 +31,7 @@ class CollisionShape;
 class BroadPhaseNode
 {
 public:
+	AABB2f m_AABB;
 	PhysicalShape* m_PhysicalShape;
 	CollisionShape* m_CollisionShape;
 	BroadPhaseNode* m_Next;

@@ -317,6 +317,7 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 			pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
 			pNode->m_PhysicalShape = pShape;
 			pNode->m_CollisionShape = (CollisionShape*)edgeChain->getEdge(e);
+			pNode->m_AABB = pNode->m_CollisionShape->getAABB();
 			m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 		}
 	}
@@ -325,6 +326,7 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 		pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
 		pNode->m_PhysicalShape = pShape;
 		pNode->m_CollisionShape = pShape->m_CollisionShape;
+		pNode->m_AABB = pShape->m_CollisionShape->getAABB();
 		m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 	}
 }

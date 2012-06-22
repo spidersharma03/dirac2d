@@ -88,7 +88,7 @@ public:
 	}
 
 	// check whether given queryAABB overlaps with any AABB leaf of the tree. for any overlap, the callBack class will be reported.
-	inline dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
+	dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
 	{	
 		dint32 nodeCount = 0;
 		nodeVector[nodeCount++] = m_RootNode;
@@ -104,8 +104,8 @@ public:
 			
 			if( nodeID == Null_Node )
 				continue;
-			
-			if( queryAABB.intersectAABB(m_Nodes[nodeID].m_AABB) )
+
+			if( queryAABB.intersectAABB( m_Nodes[nodeID].m_AABB) )
 			{
 				if( m_Nodes[nodeID].isLeaf() )
 				{
