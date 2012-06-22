@@ -246,8 +246,6 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 		index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
-		//DynamicTreeNode* node1 = m_Nodes + child1Index;
-		//DynamicTreeNode* node2 = m_Nodes + child2Index;
 		
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
 		m_Nodes[index].m_Height = 1 + MAX(m_Nodes[child1Index].m_Height, m_Nodes[child2Index].m_Height);
