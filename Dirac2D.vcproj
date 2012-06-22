@@ -113,8 +113,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
+				Optimization="3"
+				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
+				FavorSizeOrSpeed="0"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -172,6 +174,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Dirac2D\DTimer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
 				>
 			</File>
@@ -207,6 +213,10 @@
 					>
 					<File
 						RelativePath=".\Dirac2D\dynamics\joints\DistanceConstraint.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\HingeConstraint.cpp"
 						>
 					</File>
 				</Filter>
@@ -246,7 +256,19 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\DynamicTree.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\DynamicTreeBroadPhaseAlgorithm.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\collision\broadPhase\NaiveBoradPhaseCollisionAlgorithm.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\SAP_Algorithm.cpp"
 						>
 					</File>
 				</Filter>
@@ -275,15 +297,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Dirac2D\geometry\ConvexPolygon.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Dirac2D\geometry\Edge.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Dirac2D\geometry\EdgeChain.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Dirac2D\geometry\RegularPolygon.cpp"
 					>
 				</File>
 			</Filter>
@@ -302,6 +324,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Dirac2D\CallBacks.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Dirac2D\common.h"
 				>
 			</File>
@@ -311,6 +337,10 @@
 			</File>
 			<File
 				RelativePath=".\Dirac2D\Dirac2D.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Dirac2D\DTimer.h"
 				>
 			</File>
 			<File
@@ -356,7 +386,19 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\DynamicTree.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\DynamicTreeBroadPhaseAlgorithm.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\collision\broadPhase\NaiveBoradPhaseCollisionAlgorithm.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\collision\broadPhase\SAP_Algorithm.h"
 						>
 					</File>
 				</Filter>
@@ -403,6 +445,10 @@
 						RelativePath=".\Dirac2D\dynamics\joints\DistantConstraint.h"
 						>
 					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\HingeConstraint.h"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="contacts"
@@ -437,15 +483,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Dirac2D\geometry\ConvexPolygon.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Dirac2D\geometry\Edge.h"
 					>
 				</File>
 				<File
 					RelativePath=".\Dirac2D\geometry\EdgeChain.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Dirac2D\geometry\RegularPolygon.h"
 					>
 				</File>
 			</Filter>
