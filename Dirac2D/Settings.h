@@ -20,7 +20,7 @@ BEGIN_NAMESPACE_DIRAC2D
 // Allowed penetration for collision
 #define ALLOWED_PENETRATION 0.001f
 // Maximum nuber of Contact Points in the Physical World
-#define MAX_CONTACT_POINTS 1000
+#define MAX_CONTACT_POINTS 2000
 // Maximum number of bodies in the Physical world.
 #define MAX_BODIES 1000
 // Maximum number of Proxies in Boroad Phase
