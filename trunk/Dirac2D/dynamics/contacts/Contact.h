@@ -109,6 +109,7 @@ struct ContactManifold
 	dchar m_bFlipShapes;
 };
 
+
 // This Structure holds the necessary data for each contact point.
 struct ContactConstraint
 {
@@ -124,6 +125,15 @@ struct ContactConstraint
 	
 	dfloat m_VelocityBias;
 	dfloat m_PositionError;
+};
+
+class Contact;
+
+struct ContactEdge
+{
+	Contact* contact;
+	ContactEdge* m_Next;
+	ContactEdge* m_Prev;
 };
 
 class Contact
@@ -205,7 +215,10 @@ public:
 	Contact* m_Prev;
 	Contact* m_Next;
 	
+	ContactEdge m_ContactEdge1;
+	ContactEdge m_ContactEdge2;
 };
+
 
 END_NAMESPACE_DIRAC2D
 

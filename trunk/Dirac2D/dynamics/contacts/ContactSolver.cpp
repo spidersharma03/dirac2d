@@ -155,8 +155,10 @@ void ContactSolver::correctVelocities()
 			correctiveImpulseMag = contact->m_FrictionalMass[i] * Cdot_Tangent;
 			
 			
-			constraint.m_TangentImpulse = CLAMP(oldImpulseMag + correctiveImpulseMag, -maxFriction, maxFriction);
-			
+			//constraint.m_TangentImpulse = CLAMP(oldImpulseMag + correctiveImpulseMag, -maxFriction, maxFriction);
+			constraint.m_TangentImpulse = max(oldImpulseMag + correctiveImpulseMag, -maxFriction);
+			constraint.m_TangentImpulse = min(constraint.m_TangentImpulse, maxFriction);
+
 			correctiveImpulseMag = constraint.m_TangentImpulse - oldImpulseMag;
 
 			correctiveImpulse = tangent * correctiveImpulseMag;

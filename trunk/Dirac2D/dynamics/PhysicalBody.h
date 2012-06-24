@@ -19,6 +19,8 @@ class PhysicalWorld;
 class CollisionShape;
 class PhysicalShape;
 class PhysicalAppearance;
+class Contact;
+class ContactEdge;
 
 enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
 
@@ -128,6 +130,8 @@ public:
 	Vector2f m_Force;
 	AABB2f m_AABB;
 	
+	ContactEdge* m_ContactEdgeList;
+
 	friend class CollisionManager;
 	friend class ContactSolver;
 	friend class PhysicalWorld;
@@ -143,7 +147,7 @@ protected:
 	PhysicalBody(PhysicalWorld* world);
 
 	PhysicalShape* m_PhysicalShapeList;
-	
+		
 	PhysicalWorld* m_PhysicalWorld;
 };
 

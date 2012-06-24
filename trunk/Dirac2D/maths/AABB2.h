@@ -129,10 +129,6 @@ public:
 	
 	inline dbool intersectAABB( AABB2<T>& other )
 	{
-		dfloat overLapX = m_LowerBounds.x < other.m_LowerBounds.x ? other.m_LowerBounds.x - m_UpperBounds.x : m_LowerBounds.x - other.m_UpperBounds.x;
-		dfloat overLapY = m_LowerBounds.y < other.m_LowerBounds.y ? other.m_LowerBounds.y - m_UpperBounds.y : m_LowerBounds.y - other.m_UpperBounds.y;	
-		return ( (overLapX < 0.0f) && (overLapY < 0.0f) );
-		
 		Vector2f d1, d2;
 		d1 = other.m_LowerBounds - m_UpperBounds;
 		d2 = m_LowerBounds - other.m_UpperBounds;

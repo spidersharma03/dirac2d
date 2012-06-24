@@ -9,6 +9,7 @@
 #include "PhysicalWorld.h"
 #include "PhysicalBody.h"
 #include "PhysicalShape.h"
+#include "contacts/Contact.h"
 #include "../geometry/CollisionShape.h"
 #include "../collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 
@@ -29,6 +30,7 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 	m_bSleeping    = false;
 	m_bSleepingPolicy = false;
 	m_PhysicalShapeList = 0;
+	m_ContactEdgeList = 0;
 }
 
 PhysicalBody::PhysicalBody(const PhysicalBody& other)
@@ -56,7 +58,8 @@ PhysicalBody::PhysicalBody(const PhysicalBody& other)
 	PhysicalShape* pShape = other.m_PhysicalShapeList;
 	
 	m_PhysicalShapeList = 0;
-	
+	m_ContactEdgeList = 0;
+
 	// Clone All the Physical Shapes attached to this PhysicalBody
 	while (pShape) 
 	{
