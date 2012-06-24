@@ -56,7 +56,7 @@ void demo2()
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
 	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
-	//pBodyGround->setAngle(M_PI_4/5);
+	//pBodyGround->setAngle(-PI);
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
@@ -73,7 +73,6 @@ void demo2()
 		//pBodyBox->m_BodyType = EBT_STATIC;
 		y += 0.2f;
 		pBodyBox->setPosition(Vector2f(0.0f,y));
-		//pBodyBox->setAngle(M_PI_4*0.9);
 		dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
 		Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		for( dint32 i=0; i<4; i++ )
@@ -1255,7 +1254,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo3_();
+	demo2();
 }
 
 void changeSize(int w, int h) 

@@ -88,41 +88,7 @@ public:
 	}
 
 	// check whether given queryAABB overlaps with any AABB leaf of the tree. for any overlap, the callBack class will be reported.
-	dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
-	{	
-		dint32 nodeCount = 0;
-		nodeVector[nodeCount++] = m_RootNode;
-		
-		dbool bResult = false;
-		
-		while ( nodeCount != 0 ) 
-		{		
-			dint32 nodeID;
-			
-			nodeCount--;
-			nodeID = nodeVector[nodeCount];
-			
-			if( nodeID == Null_Node )
-				continue;
-
-			if( queryAABB.intersectAABB( m_Nodes[nodeID].m_AABB) )
-			{
-				if( m_Nodes[nodeID].isLeaf() )
-				{
-					bResult = true;
-					
-					if( callBack )
-						callBack->overlapCallBack(nodeID);
-				}
-				else 
-				{
-					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
-					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
-				}
-			}
-		}
-		return bResult;
-	}
+	dbool overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack );
 	
 	// check whether given queryAABB overlaps with any AABB leaf of the tree. a vector of overlapped aabb is filled here.
 	dbool overlapAABB( AABB2f& queryAABB, vector<dint32>& vecOverlappedIDs );
@@ -135,7 +101,7 @@ public:
 	}
 	
 protected:
-	dint32 nodeVector[250];
+	dint32 nodeVector[256];
 
 	void insertNode(const AABB2f& node, dint32 nodeID);
 	

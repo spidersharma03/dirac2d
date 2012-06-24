@@ -14,7 +14,7 @@
 
 #include "DynamicTreeBroadPhaseAlgorithm.h"
 #include "DynamicTree.h"
-#include <set>
+#include <algorithm>
 
 using namespace std;
 
@@ -117,6 +117,7 @@ void DynamicTreeBroadPhaseAlgorithm::removeBroadPhaseNode(BroadPhaseNode* pBroad
 
 void DynamicTreeBroadPhaseAlgorithm::update()
 {
+	m_PairCount = 0;
 	// Update all the Proxy AABB's in the Broad Phase Nodes.
 	BroadPhaseNode* pNode = m_BroadPhaseNodeList;
 	while( pNode )
@@ -141,6 +142,14 @@ void DynamicTreeBroadPhaseAlgorithm::update()
 		m_DynamicTree->overlapAABB(pNode->m_AABB, this );
 		pNode = pNode->m_Next;
 	} 
+	
+		// 
+	for( dint32 p=0; p<m_PairCount; p++ )
+	{
+		BroadPhasePair& pair = m_Pairs[p];
+		m_pCollisionManager->addContactPair(pair.m_Node1, pair.m_Node2);
+	}
+
 }
 
 
@@ -152,19 +161,24 @@ void DynamicTreeBroadPhaseAlgorithm::overlapCallBack(dint32 overlapNodeID)
 	BroadPhaseNode* pNode1 = (BroadPhaseNode*)m_DynamicTree->getUserData(m_QueryID);
 	BroadPhaseNode* pNode2 = (BroadPhaseNode*)m_DynamicTree->getUserData(overlapNodeID);
 	
-	PhysicalBody* pBody1 = pNode1->m_PhysicalShape->m_ParentBody;
-	PhysicalBody* pBody2 = pNode2->m_PhysicalShape->m_ParentBody;
-	
-	if( pBody1 == pBody2 )
-		return;
-	
-	set<ContactPair>& contactPairPool = m_pCollisionManager->getContactPairPool();
-
-	if( pNode1->m_AABB.intersectAABB(pNode2->m_CollisionShape->getAABB()) 
-	   && (contactPairPool.insert(ContactPair(pNode1->m_CollisionShape, pNode2->m_CollisionShape) )).second )
+	if( m_PairCount >= m_PairCapacity )
 	{
-		m_pCollisionManager->addContactPair(pNode1, pNode2);
+		m_PairCapacity *= 2;
+		BroadPhasePair* newPairs = (BroadPhasePair*)malloc(m_PairCapacity*sizeof(BroadPhasePair));
+		memcpy(newPairs, m_Pairs, m_PairCount * sizeof(BroadPhasePair));
+		free(m_Pairs);
+		m_Pairs = newPairs;
 	}
+	m_Pairs[m_PairCount].m_Node1 = pNode1;
+	m_Pairs[m_PairCount].m_Node2 = pNode2;
+
+	m_PairCount++;
+	
+//	if( pNode1->m_AABB.intersectAABB(pNode2->m_CollisionShape->getAABB()) 
+//	   && (contactPairPool.insert(ContactPair(pNode1->m_CollisionShape, pNode2->m_CollisionShape) )).second )
+//	{
+//		m_pCollisionManager->addContactPair(pNode1, pNode2);
+//	}
 	
 }
 

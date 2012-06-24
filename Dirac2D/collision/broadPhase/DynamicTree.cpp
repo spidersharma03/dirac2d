@@ -532,39 +532,41 @@ dbool DynamicTree::overlapAABB( AABB2f& queryAABB, vector<dint32>& vecOverlapped
 	return bResult;
 }
 
-//dbool DynamicTree::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
-//{
-//	dStack<dint32> nodeStack(10);
-//	
-//	nodeStack.push(m_RootNode);
-//	
-//	dbool bResult = false;
-//	
-//	while ( nodeStack.getSize() != 0 ) 
-//	{
-//		dint32 nodeID = nodeStack.pop();
-//		
-//		if( nodeID == Null_Node )
-//			continue;
-//		
-//		if( queryAABB.intersectAABB(m_Nodes[nodeID].m_AABB) )
-//		{
-//			if( m_Nodes[nodeID].isLeaf() )
-//			{
-//				bResult = true;
-//				
-//				if( callBack )
-//					callBack->overlapCallBack(nodeID);
-//			}
-//			else 
-//			{
-//				nodeStack.push( m_Nodes[nodeID].m_Child1 );
-//				nodeStack.push( m_Nodes[nodeID].m_Child2 );
-//			}
-//		}
-//	}
-//	return bResult;
-//}
+
+dbool DynamicTree::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
+{	
+	dint32 nodeCount = 0;
+	nodeVector[nodeCount++] = m_RootNode;
+	
+	dbool bResult = false;
+	
+	while ( nodeCount != 0 ) 
+	{		
+		dint32 nodeID;
+		
+		nodeCount--;
+		nodeID = nodeVector[nodeCount];
+		
+		
+		if( queryAABB.intersectAABB( m_Nodes[nodeID].m_AABB) )
+		{
+			if( m_Nodes[nodeID].isLeaf() )
+			{
+				bResult = true;
+				
+				if( callBack )
+					callBack->overlapCallBack(nodeID);
+			}
+			else 
+			{
+				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
+				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
+			}
+		}
+	}
+	return bResult;
+}
+
 
 void DynamicTree::validateTree(dint32 index)
 {

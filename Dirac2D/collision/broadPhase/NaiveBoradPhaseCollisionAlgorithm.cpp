@@ -60,7 +60,7 @@ void NaiveBroadPhaseCollisionAlgorithm::removeBroadPhaseNode(BroadPhaseNode* pBr
 
 void NaiveBroadPhaseCollisionAlgorithm::update()
 {
-	set<ContactPair>& contactPairPool = m_pCollisionManager->getContactPairPool();
+	m_PairCount = 0;
 	// n2 Collision test
 	BroadPhaseNode* pNode1 = m_BroadPhaseNodeList;
 	while( pNode1 )
@@ -91,14 +91,31 @@ void NaiveBroadPhaseCollisionAlgorithm::update()
 			
 			bRes = aabb1.intersectAABB(aabb2);
 			
-			if( bRes  && (contactPairPool.insert(ContactPair(pNode1->m_CollisionShape, pNode2->m_CollisionShape) )).second )
+			if( bRes )
 			{
-				m_pCollisionManager->addContactPair(pNode1, pNode2);
+				if( m_PairCount >= m_PairCapacity )
+				{
+					m_PairCapacity *= 2;
+					BroadPhasePair* newPairs = (BroadPhasePair*)malloc(m_PairCapacity*sizeof(BroadPhasePair));
+					memcpy(newPairs, m_Pairs, m_PairCount * sizeof(BroadPhasePair));
+					free(m_Pairs);
+					m_Pairs = newPairs;
+				}
+				m_Pairs[m_PairCount].m_Node1 = pNode1;
+				m_Pairs[m_PairCount].m_Node2 = pNode2;
+				m_PairCount++;
+				
 			}
 			pNode2 = pNode2->m_Next;
 		}  		
 		pNode1 = pNode1->m_Next;
 	} 
+	
+	for( dint32 p=0; p<m_PairCount; p++ )
+	{
+		BroadPhasePair& pair = m_Pairs[p];
+		m_pCollisionManager->addContactPair(pair.m_Node1, pair.m_Node2);
+	}
 }
 
 

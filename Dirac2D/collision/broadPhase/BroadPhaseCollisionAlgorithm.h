@@ -39,6 +39,12 @@ public:
 	dint32 m_ID;
 };
 
+struct BroadPhasePair
+{
+	BroadPhaseNode* m_Node1;
+	BroadPhaseNode* m_Node2;
+};
+
 enum ALGORITHM_TYPE { EAT_NAIVE, EAT_DYNAMIC_TREE, EAT_SAP };
 
 class BroadPhaseCollisionAlgorithm 
@@ -47,6 +53,9 @@ public:
 	BroadPhaseCollisionAlgorithm(CollisionManager* collisionManager):m_pCollisionManager(collisionManager)
 	{
 		m_BroadPhaseNodeList = 0;
+		m_PairCapacity = 64;
+		m_PairCount = 0;
+		m_Pairs = (BroadPhasePair*)malloc(m_PairCapacity*sizeof(BroadPhasePair));
 	}
 	
 	// Adds a Physical Shape to the Broad Phase Node List
@@ -68,7 +77,9 @@ public:
 protected:
 	
 	BroadPhaseNode* m_BroadPhaseNodeList; // List of All BroadPhase Nodes.
-
+	BroadPhasePair* m_Pairs;
+	dint32 m_PairCount, m_PairCapacity;
+	
 	PhysicalWorld* m_PhysicalWorld;
 	CollisionManager* m_pCollisionManager;
 	ALGORITHM_TYPE m_AlgorithmType;
