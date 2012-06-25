@@ -90,6 +90,9 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 		case ECT_DISTANCE:
 			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint();
 			break;
+		case ECT_HINGE:
+			constraint = new( m_HingeConstraintPool->Allocate() )HingeConstraint();
+			break;
 		default:
 			break;
 	}
@@ -270,6 +273,30 @@ void PhysicalWorld::draw()
 					dc->m_PhysicalBody2->getTransform().transformAsPoint(p1);
 				}
 				m_Renderer->drawLine(p0, p1);
+			}
+			if( pConstraint->m_Type == ECT_HINGE )
+			{
+				HingeConstraint* hc = (HingeConstraint*)pConstraint;
+				Vector2f anchorPoint = hc->m_Anchor;
+				Vector2f p0, p1;
+				if( hc->m_PhysicalBody1 )
+				{
+					Vector2f c = hc->m_PhysicalBody1->m_Centre;
+					hc->m_PhysicalBody1->getTransform().transformAsPoint(c);
+					hc->m_PhysicalBody1->getTransform().transformAsVector(anchorPoint);
+					p0 = c;
+					anchorPoint += c;
+				}
+				if( hc->m_PhysicalBody2 )
+				{
+					Vector2f c = hc->m_PhysicalBody2->m_Centre;
+					hc->m_PhysicalBody2->getTransform().transformAsPoint(c);
+					p1 = c;
+				}
+				if( hc->m_PhysicalBody1 )
+					m_Renderer->drawLine(p0, anchorPoint);
+				if( hc->m_PhysicalBody2 )
+					m_Renderer->drawLine(p1, anchorPoint);
 			}
 			pConstraint = pConstraint->m_Next;
 		}

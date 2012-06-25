@@ -62,6 +62,34 @@ public:
 		a22 = d;
 	}
 
+	inline void invert()
+	{
+		T det = a11 * a22 - a21 * a12;
+		if( fabs(det) > EPSILON )
+		{
+			det = 1.0f/det;
+		
+			dfloat a11_ = a22 * det; dfloat a12_ = -a21 * det;
+			dfloat a21_ = -a12 * det; dfloat a22_ = a11 * det;
+			a11 = a11_; a12 = a12_;
+			a21 = a21_; a22 = a22_;
+		}
+	}
+	
+	inline Matrix2<T> getInverse()
+	{
+		Matrix2<T> outMatrix;
+		T det = a11 * a22 - a21 * a12;
+		if( fabs(det) > EPSILON )
+		{
+			det = 1.0f/det;
+			
+			outMatrix.a11 = a22 * det; outMatrix.a12 = -a21 * det;
+			outMatrix.a21 = -a12 * det; outMatrix.a22 = a11 * det;
+		}
+		return outMatrix;
+	}
+	
 	inline T determinant()
 	{
 		return a11 * a22 - a21 * a12;
@@ -70,6 +98,17 @@ public:
 	inline T& operator[] ( dint32 index )
 	{
 		return (&a11)[index];
+	}
+	
+	// Solve a System like A * x = rhs. returns result in x.
+	void solve( Vector2<T>& rhs, Vector2<T>& x )
+	{
+	}
+	
+	Vector2<T> solve( Vector2<T>& rhs )
+	{
+		Vector2<T> solution;
+		return solution;
 	}
 	
 public:	

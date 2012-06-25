@@ -102,21 +102,21 @@ void demo3()
 	// Create Boxes
 	dfloat y = -0.8f;
 	dfloat x = -1.0f;
-	dint32 n = 20;
+	dint32 n = 40;
 	dfloat dx = 0.0f;
-	for(int j=0; j<20;j++ )
+	for(int j=0; j<40;j++ )
 	{
-		y += 0.2f;
+		y += 0.1f;
 		x = -2.0 + dx;
-		dx += 0.1f;
+		dx += 0.05f;
 		for( int i=0; i<n; i++ )
 		{
 			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 			//pBodyBox->m_BodyType = EBT_STATIC;
-			x += 0.2f;
+			x += 0.1f;
 			pBodyBox->setPosition(Vector2f(x,y));
 			//pBodyBox->setAngle(PI_4*0.9);
-			dfloat boxWidth = 0.07f; dfloat boxHeight = 0.07f;
+			dfloat boxWidth = 0.035f; dfloat boxHeight = 0.035f;
 			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 			
 			pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox,4);
@@ -1220,6 +1220,45 @@ void demo18()
 
 }
 
+
+// Hinge/Revolute Constraint
+void demo19()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-1.0f));
+	pBodyGround->m_BodyType = EBT_STATIC;
+	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	for( dint32 i=0; i< 1; i++ )
+	{
+		PhysicalBody* pBox1 = pWorld->createPhysicalBody();
+		PhysicalBody* pBox2 = pWorld->createPhysicalBody();
+		
+		pBox1->setPosition(Vector2f(0.0f,0.0f));		
+		pBox2->setPosition(Vector2f(0.2f,0.0f));		
+
+		PhysicalAppearance pApp;
+		dfloat boxWidth = 0.06f; dfloat boxHeight = 0.2f;
+		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pBox1->createPhysicalShape(pApp);
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pBox2->createPhysicalShape(pApp);
+		
+		HingeConstraint* hc = (HingeConstraint*)pWorld->createConstraint(ECT_HINGE);
+		hc->m_PhysicalBody1 = pBox1;
+		hc->m_PhysicalBody2 = pBox2;
+		hc->m_Anchor = Vector2f(0.0f,0.31f);
+		hc->initialize();
+	}
+	// Create Circle Chain
+}
+
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
@@ -1254,7 +1293,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo2();
+	demo19();
 }
 
 void changeSize(int w, int h) 

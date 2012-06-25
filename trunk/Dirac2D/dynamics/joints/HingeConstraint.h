@@ -25,9 +25,9 @@ public:
 	virtual void initialize();
 	
 public:
-	Vector2f m_Anchor;
-	Vector2f m_ImpulseDirection;
-	Vector2f m_r1, m_r2; // Local Anchor Points on the Bodies.
+	Vector2f m_Anchor;    // Anchor Point. this is always deffined locally wrt the first body.
+	Vector2f m_Impulse;
+	Vector2f m_r1, m_r2; // Radius Vectors wrt the Bodies centres.
 	Matrix2f m_EffectiveMass;
 	Vector2f m_PositionError;
 };
