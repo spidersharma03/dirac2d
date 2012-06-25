@@ -257,7 +257,7 @@ dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& polygonXform1, ConvexPo
 		
 	// Bias the selection of Incident and Reference Edge.
 	dfloat FUZZINESS_FACTOR = 1e-03f;
-	if( fabs(dot) - fabs(incidentEdge.dot(collisionNormal)) > FUZZINESS_FACTOR)
+	if( fabs(dot) - fabs(incidentEdge.dot(collisionNormal)) > FUZZINESS_FACTOR )
 	{
 		//printf("Difference1=%f\n", fabs(dot) - fabs(incidentEdge.dot(collisionNormal)));
 		Matrix3f tempMat = Xform2;

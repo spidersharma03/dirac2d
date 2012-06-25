@@ -41,7 +41,6 @@
  3.  Find the Impulses by solving the constraint equations.
  
  
- 
  */
 
 #ifndef _DIRAC_2D_H_
