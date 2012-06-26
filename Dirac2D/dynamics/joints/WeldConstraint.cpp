@@ -1,36 +1,36 @@
 /*
- *  HingeConstraint.cpp
+ *  WeldConstraint.cpp
  *  Dirac2D
  *
- *  Created by Prashant on 12/06/12.
+ *  Created by Prashant on 26/06/12.
  *
  */
 
-#include "HingeConstraint.h"
+#include "WeldConstraint.h"
 #include "../PhysicalBody.h"
 #include "../PhysicalShape.h"
-#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
-HingeConstraint::HingeConstraint()
+WeldConstraint::WeldConstraint()
 {
-	m_Type = ECT_HINGE;
+	m_Type = ECT_WELD;
 }
 
-void HingeConstraint::initialize()
+void WeldConstraint::initialize()
 {
 	if( m_PhysicalBody1 )
 		m_Anchor1 = m_PhysicalBody1->getLocalPoint(m_Anchor);
 	if( m_PhysicalBody2 )
 		m_Anchor2 = m_PhysicalBody2->getLocalPoint(m_Anchor);
+	m_InitialAngle = m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle;
 }
 
-void HingeConstraint::buildJacobian()
+void WeldConstraint::buildJacobian()
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		
-		
+	
 	Vector2f c1, c2;
 	
 	if( body1 )
@@ -60,16 +60,23 @@ void HingeConstraint::buildJacobian()
 		i2Inv = body2->m_InvI;
 	}
 	
-	m_EffectiveMass.a11 = m1Inv + m2Inv + i1Inv * m_r1.y * m_r1.y + i2Inv * m_r2.y * m_r2.y;
-	m_EffectiveMass.a21 = - i1Inv * m_r1.y * m_r1.x - i2Inv * m_r2.y * m_r2.x;
-	m_EffectiveMass.a12 =	m_EffectiveMass.a21;
-	m_EffectiveMass.a22 = m1Inv + m2Inv + i1Inv * m_r1.x * m_r1.x + i2Inv * m_r2.x * m_r2.x;
-	
+	m_EffectiveMass.col1.x = m1Inv + m2Inv + i1Inv * m_r1.y * m_r1.y + i2Inv * m_r2.y * m_r2.y;
+	m_EffectiveMass.col1.y = - i1Inv * m_r1.y * m_r1.x - i2Inv * m_r2.y * m_r2.x;
+	m_EffectiveMass.col1.z = - i1Inv * m_r1.y - i2Inv * m_r2.y;
+
+	m_EffectiveMass.col2.x = m_EffectiveMass.col1.y;
+	m_EffectiveMass.col2.y = m1Inv + m2Inv + i1Inv * m_r1.x * m_r1.x + i2Inv * m_r2.x * m_r2.x;
+	m_EffectiveMass.col2.z = i1Inv * m_r1.x + i2Inv * m_r2.x;
+
+	m_EffectiveMass.col3.x = m_EffectiveMass.col1.z;
+	m_EffectiveMass.col3.y = m_EffectiveMass.col2.z;
+	m_EffectiveMass.col3.z = i1Inv + i2Inv;
+
 	m_EffectiveMass.invert();
 	
 	// Positional Error for Position Stabilization( Baumgarte )
 	m_PositionError = ( c2 + m_r2 - c1 - m_r1 ) * m_Erp;
-	//printf(" Error = %f  %f\n", m_PositionError.x, m_PositionError.y);
+	m_AngleError    =  m_InitialAngle - ( m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle );
 	// Apply Corrective impulse on the bodies
 	if( 0 )//body1->m_PhysicalWorld->m_bWarmStart )
 	{
@@ -92,7 +99,7 @@ void HingeConstraint::buildJacobian()
 	
 }
 
-void HingeConstraint::correctVelocities()
+void WeldConstraint::correctVelocities()
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;
@@ -125,7 +132,7 @@ void HingeConstraint::correctVelocities()
 	Cdot += m_PositionError;
 	Vector2f correctiveImpulse = -( m_EffectiveMass * Cdot );
 	m_Impulse += correctiveImpulse;
-		
+	
 	// Apply Corrective impulse on the bodies due to Normal Impulse
 	if( body1 )
 	{

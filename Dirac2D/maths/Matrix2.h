@@ -69,8 +69,8 @@ public:
 		{
 			det = 1.0f/det;
 		
-			dfloat a11_ = a22 * det; dfloat a12_ = -a21 * det;
-			dfloat a21_ = -a12 * det; dfloat a22_ = a11 * det;
+			dfloat a11_ = a22 * det; dfloat a12_ = -a12 * det;
+			dfloat a21_ = -a21 * det; dfloat a22_ = a11 * det;
 			a11 = a11_; a12 = a12_;
 			a21 = a21_; a22 = a22_;
 		}
@@ -84,8 +84,8 @@ public:
 		{
 			det = 1.0f/det;
 			
-			outMatrix.a11 = a22 * det; outMatrix.a12 = -a21 * det;
-			outMatrix.a21 = -a12 * det; outMatrix.a22 = a11 * det;
+			outMatrix.a11 = a22 * det; outMatrix.a12 = -a12 * det;
+			outMatrix.a21 = -a21 * det; outMatrix.a22 = a11 * det;
 		}
 		return outMatrix;
 	}
@@ -103,11 +103,27 @@ public:
 	// Solve a System like A * x = rhs. returns result in x.
 	void solve( Vector2<T>& rhs, Vector2<T>& x )
 	{
+		T det = a11 * a22 - a21 * a12;
+		if( fabs(det) > EPSILON )
+		{
+			det = 1.0f/det;
+			
+			x.x = det * ( a22 * rhs.x - a12 * rhs.y );
+			x.y = det * ( -a21 * rhs.x + a11 * rhs.y );
+		}
 	}
 	
 	Vector2<T> solve( Vector2<T>& rhs )
 	{
 		Vector2<T> solution;
+		T det = a11 * a22 - a21 * a12;
+		if( fabs(det) > EPSILON )
+		{
+			det = 1.0f/det;
+			
+			solution.x = det * ( a22 * rhs.x - a12 * rhs.y );
+			solution.y = det * ( -a21 * rhs.x + a11 * rhs.y );
+		}
 		return solution;
 	}
 	

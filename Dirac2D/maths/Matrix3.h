@@ -71,14 +71,6 @@ public:
 		v.y = y;
 	}
 	
-	Matrix3<T> getInverse()
-	{
-	}
-	
-	void getInverse(Matrix3<T>& other)
-	{
-	}
-	
 	inline Matrix2<T> getRotationMatrix()
 	{
 		return Matrix2<T>(col1.x, col1.y, col2.x, col2.y);
@@ -153,6 +145,36 @@ public:
 		col1.z = m1.col1.z * m2.col1.x + m1.col2.z * m2.col1.y + m1.col3.z * m2.col1.z;
 		col2.z = m1.col1.z * m2.col2.x + m1.col2.z * m2.col2.y + m1.col3.z * m2.col2.z;
 		col3.z = m1.col1.z * m2.col3.x + m1.col2.z * m2.col3.y + m1.col3.z * m2.col3.z;
+	}
+	
+	inline void invert()
+	{
+	}
+	
+	inline void getInverse(Matrix3<T>& other)
+	{
+	}
+		
+	inline Matrix3<T> getInverse()
+	{
+		Matrix3<T> outMatrix;
+		return outMatrix;
+	}
+	
+	inline T determinant()
+	{
+		return 0.0;
+	}
+	
+	// Solve a System like A * x = rhs. returns result in x.
+	void solve( Vector3<T>& rhs, Vector3<T>& x )
+	{
+	}
+	
+	Vector3<T> solve( Vector3<T>& rhs )
+	{
+		Vector3<T> solution;
+		return solution;
 	}
 	
 	
