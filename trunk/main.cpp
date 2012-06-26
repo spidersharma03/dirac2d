@@ -1226,7 +1226,7 @@ void demo19()
 {
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
-	pBodyGround->setPosition(Vector2f(0.0f,-1.0f));
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
 	pBodyGround->m_BodyType = EBT_STATIC;
 	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
@@ -1238,9 +1238,11 @@ void demo19()
 	{
 		PhysicalBody* pBox1 = pWorld->createPhysicalBody();
 		PhysicalBody* pBox2 = pWorld->createPhysicalBody();
+		//pBox2->setAngle(PI_4*2);
+		//pBox2->m_BodyType = EBT_STATIC;
 		
 		pBox1->setPosition(Vector2f(0.0f,0.0f));		
-		pBox2->setPosition(Vector2f(0.2f,0.0f));		
+		pBox2->setPosition(Vector2f(0.3f,0.0f));		
 
 		PhysicalAppearance pApp;
 		dfloat boxWidth = 0.06f; dfloat boxHeight = 0.2f;
@@ -1251,9 +1253,10 @@ void demo19()
 		pBox2->createPhysicalShape(pApp);
 		
 		HingeConstraint* hc = (HingeConstraint*)pWorld->createConstraint(ECT_HINGE);
+		//hc->m_Erp = 0.0f;
 		hc->m_PhysicalBody1 = pBox1;
 		hc->m_PhysicalBody2 = pBox2;
-		hc->m_Anchor = Vector2f(0.0f,0.31f);
+		hc->m_Anchor = Vector2f(0.0f,0.4f);
 		hc->initialize();
 	}
 	// Create Circle Chain

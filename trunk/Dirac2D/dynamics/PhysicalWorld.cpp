@@ -132,13 +132,6 @@ void PhysicalWorld::Step(dfloat dt)
 	// Collision detection. here the contacts are created/removed.
 	m_CollisionManager->update();
 	
-	// Initialize the Solver.
-	m_ContactSolver->buildJacobian();
-	
-	// Correct the velocities.
-	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
-		m_ContactSolver->correctVelocities();
-	
 	// Initialize all the Constraints.
 	Constraint* pConstraint = m_ConstraintList;
 	while (pConstraint) 
@@ -147,16 +140,23 @@ void PhysicalWorld::Step(dfloat dt)
 		pConstraint = pConstraint->m_Next;
 	}
 
+	// Initialize the Contact Solver.
+	m_ContactSolver->buildJacobian();
+	
 	// Correct the velocities of Physical Bodies due to Constraints.
-	pConstraint = m_ConstraintList;
 	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
 	{
+		pConstraint = m_ConstraintList;
 		while (pConstraint) 
 		{
 			pConstraint->correctVelocities();
 			pConstraint = pConstraint->m_Next;
 		}
 	}
+	
+	// Correct the velocities.
+	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
+		m_ContactSolver->correctVelocities();
 	
 	// Integrate/Advance the positions by time step. 
 	pBody = m_PhysicalBodyList;
