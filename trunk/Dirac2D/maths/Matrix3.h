@@ -55,6 +55,13 @@ public:
 		return Vector2<T>( col1.x*v.x + col2.x*v.y + col3.x,  col1.y*v.x + col2.y*v.y + col3.y);
 	}
 	
+	inline Vector3<T> operator*( const Vector3<T>& v )
+	{
+		return Vector3<T>( col1.x*v.x + col2.x*v.y + col3.x*v.z,
+						   col1.y*v.x + col2.y*v.y + col3.y*v.z, 
+						   col1.z*v.x + col2.z*v.y + col3.z*v.z);
+	}
+	
 	inline void transformAsPoint(Vector2<T>& v)
 	{
 		dfloat x = col1.x*v.x + col2.x*v.y + col3.x;
@@ -149,21 +156,90 @@ public:
 	
 	inline void invert()
 	{
+		dfloat det = ( col1.x * ( col2.y * col3.z  - col2.z * col3.y ) 
+					  - col2.x * ( col1.y * col3.z - col1.z * col3.y ) 
+					  + col3.x * ( col1.y * col2.z - col1.z * col2.y ) );
+		
+		if ( fabs(det) < EPSILON ) 
+			return;
+		
+		det = 1.0f / det;
+		
+		dfloat m00 = ( col2.y * col3.z  - col2.z * col3.y ) * det;
+		dfloat m10 = -( col1.y * col3.z  - col1.z * col3.y ) * det;
+		dfloat m20 = ( col1.y * col2.z  - col1.z * col2.y ) * det;
+		
+		dfloat m01 = -( col2.x * col3.z  - col2.z * col3.x ) * det;
+		dfloat m11 = ( col1.x * col3.z  - col3.x * col1.z ) * det;
+		dfloat m21 = -( col1.x * col2.z  - col1.z * col2.x ) * det;
+		
+		dfloat m02 = ( col2.x * col3.y  - col2.y * col3.x ) * det;
+		dfloat m12 = -( col1.x * col3.y  - col1.y * col3.x ) * det;
+		dfloat m22 = ( col1.x * col2.y  - col1.y * col2.x ) * det;
+		
+		col1.x = m00; col2.x = m01; col3.x = m02;		
+		col1.y = m10; col2.y = m11; col3.y = m12;		
+		col1.z = m20; col2.z = m21; col3.z = m22;		
 	}
+	
 	
 	inline void getInverse(Matrix3<T>& other)
 	{
+		dfloat det = ( col1.x * ( col2.y * col3.z  - col2.z * col3.y ) 
+					  - col2.x * ( col1.y * col3.z - col1.z * col3.y ) 
+					  + col3.x * ( col1.y * col2.z - col1.z * col2.y ) );
+		
+		if ( fabs(det) < EPSILON ) 
+			return;
+		
+		det = 1.0f / det;
+		
+		other.col1.x = ( col2.y * col3.z  - col2.z * col3.y ) * det;
+		other.col1.y = -( col1.y * col3.z  - col1.z * col3.y ) * det;
+		other.col1.z = ( col1.y * col2.z  - col1.z * col2.y ) * det;
+		
+		other.col2.x = -( col2.x * col3.z  - col2.z * col3.x ) * det;
+		other.col2.y = ( col1.x * col3.z  - col3.x * col1.z ) * det;
+		other.col2.z = -( col1.x * col2.z  - col1.z * col2.x ) * det;
+		
+		other.col3.x = ( col2.x * col3.y  - col2.y * col3.x ) * det;
+		other.col3.y = -( col1.x * col3.y  - col1.y * col3.x ) * det;
+		other.col3.z = ( col1.x * col2.y  - col1.y * col2.x ) * det;
 	}
 		
 	inline Matrix3<T> getInverse()
 	{
 		Matrix3<T> outMatrix;
+		
+		dfloat det = ( col1.x * ( col2.y * col3.z  - col2.z * col3.y ) 
+					  - col2.x * ( col1.y * col3.z - col1.z * col3.y ) 
+					  + col3.x * ( col1.y * col2.z - col1.z * col2.y ) );
+		
+		if ( fabs(det) < EPSILON ) 
+			return;
+		
+		det = 1.0f / det;
+		
+		outMatrix.col1.x = ( col2.y * col3.z  - col2.z * col3.y ) * det;
+		outMatrix.col1.y = -( col1.y * col3.z  - col1.z * col3.y ) * det;
+		outMatrix.col1.z = ( col1.y * col2.z  - col1.z * col2.y ) * det;
+		
+		outMatrix.col2.x = -( col2.x * col3.z  - col2.z * col3.x ) * det;
+		outMatrix.col2.y = ( col1.x * col3.z  - col3.x * col1.z ) * det;
+		outMatrix.col2.z = -( col1.x * col2.z  - col1.z * col2.x ) * det;
+		
+		outMatrix.col3.x = ( col2.x * col3.y  - col2.y * col3.x ) * det;
+		outMatrix.col3.y = -( col1.x * col3.y  - col1.y * col3.x ) * det;
+		outMatrix.col3.z = ( col1.x * col2.y  - col1.y * col2.x ) * det;
+		
 		return outMatrix;
 	}
 	
 	inline T determinant()
 	{
-		return 0.0;
+		return ( col1.x * ( col2.y * col3.z  - col2.z * col3.y ) 
+				- col2.x * ( col1.y * col3.z - col1.z * col3.y ) 
+				+ col3.x * ( col1.y * col2.z - col1.x * col1.z ) );
 	}
 	
 	// Solve a System like A * x = rhs. returns result in x.

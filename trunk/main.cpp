@@ -1249,7 +1249,9 @@ void demo19()
 		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
 		pBox1->createPhysicalShape(pApp);
-		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		//pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
+
 		pBox2->createPhysicalShape(pApp);
 		
 		HingeConstraint* hc = (HingeConstraint*)pWorld->createConstraint(ECT_HINGE);
@@ -1261,6 +1263,51 @@ void demo19()
 	}
 	// Create Circle Chain
 }
+
+
+// Weld Constraint
+void demo20()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->m_BodyType = EBT_STATIC;
+	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	for( dint32 i=0; i< 1; i++ )
+	{
+		PhysicalBody* pBox1 = pWorld->createPhysicalBody();
+		PhysicalBody* pBox2 = pWorld->createPhysicalBody();
+		//pBox2->setAngle(PI_4*2);
+		//pBox2->m_BodyType = EBT_STATIC;
+		
+		pBox1->setPosition(Vector2f(-0.1f,0.0f));		
+		//pBox1->setAngle(-1*PI_4);
+		pBox2->setPosition(Vector2f(0.5f,0.0f));		
+		//pBox2->setAngle(1*PI_4);
+		
+		PhysicalAppearance pApp;
+		dfloat boxWidth = 0.03f; dfloat boxHeight = 0.2f;
+		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pBox1->createPhysicalShape(pApp);
+		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.1f,0.1f);
+		pBox2->createPhysicalShape(pApp);
+		
+		WeldConstraint* wc = (WeldConstraint*)pWorld->createConstraint(ECT_WELD);
+		//hc->m_Erp = 0.0f;
+		wc->m_PhysicalBody1 = pBox1;
+		wc->m_PhysicalBody2 = pBox2;
+		wc->m_Anchor = Vector2f(0.1f,0.0f);
+		wc->initialize();
+	}
+	// Create Circle Chain
+}
+
 
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
@@ -1296,7 +1343,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo19();
+	demo20();
 }
 
 void changeSize(int w, int h) 

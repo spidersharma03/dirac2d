@@ -9,12 +9,15 @@
 #include "WeldConstraint.h"
 #include "../PhysicalBody.h"
 #include "../PhysicalShape.h"
+#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
 WeldConstraint::WeldConstraint()
 {
 	m_Type = ECT_WELD;
+	m_Cfm = 1300.4f;
+	m_Erp = 100.0f;
 }
 
 void WeldConstraint::initialize()
@@ -70,26 +73,27 @@ void WeldConstraint::buildJacobian()
 
 	m_EffectiveMass.col3.x = m_EffectiveMass.col1.z;
 	m_EffectiveMass.col3.y = m_EffectiveMass.col2.z;
-	m_EffectiveMass.col3.z = i1Inv + i2Inv;
+	m_EffectiveMass.col3.z = i1Inv + i2Inv + m_Cfm;
 
 	m_EffectiveMass.invert();
-	
-	// Positional Error for Position Stabilization( Baumgarte )
+		
+	// Positional and Angular Error for Position Stabilization( Baumgarte )
 	m_PositionError = ( c2 + m_r2 - c1 - m_r1 ) * m_Erp;
-	m_AngleError    =  m_InitialAngle - ( m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle );
+	m_AngleError    = (  ( m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle ) - m_InitialAngle ) * m_Erp;
+
 	// Apply Corrective impulse on the bodies
-	if( 0 )//body1->m_PhysicalWorld->m_bWarmStart )
+	if( 1 )//body1->m_PhysicalWorld->m_bWarmStart )
 	{
-		Vector2f totalImpulse = m_Impulse;
+		Vector2f impulse = Vector2f( m_Impulse.x, m_Impulse.y);
 		if( body1 )
 		{
-			body1->m_Velocity        -= totalImpulse * m1Inv;
-			body1->m_AngularVelocity -= i1Inv * Vector2f::cross( m_r1, totalImpulse);
+			body1->m_Velocity        -= impulse * m1Inv;
+			body1->m_AngularVelocity -= i1Inv * ( Vector2f::cross( m_r1, impulse) + m_Impulse.z );
 		}
 		if( body2 )
 		{
-			body2->m_Velocity        += totalImpulse * m2Inv;
-			body2->m_AngularVelocity += i2Inv * Vector2f::cross( m_r2, totalImpulse);
+			body2->m_Velocity        += impulse * m2Inv;
+			body2->m_AngularVelocity += i2Inv * ( Vector2f::cross( m_r2, impulse) + m_Impulse.z );
 		}
 	}
 	else 
@@ -126,24 +130,26 @@ void WeldConstraint::correctVelocities()
 		w2 = body2->m_AngularVelocity;
 	}
 	
-	// Relative Velocity = V2 -`int V1 = v2 + w2xr2 - v1 - w1xr1			
+	// Relative Velocity = V2 - V1 = v2 + w2xr2 - v1 - w1xr1			
 	Vector2f Cdot = v2 + Vector2f::cross(w2, m_r2) - v1 - Vector2f::cross(w1, m_r1);
-	
 	Cdot += m_PositionError;
-	Vector2f correctiveImpulse = -( m_EffectiveMass * Cdot );
+
+	Vector3f Rhs( Cdot, w2-w1 + m_AngleError + m_Cfm * m_Impulse.z);
+	
+	Vector3f correctiveImpulse = -( m_EffectiveMass * Rhs );
 	m_Impulse += correctiveImpulse;
 	
+	Vector2f impulse( correctiveImpulse.x, correctiveImpulse.y); 
 	// Apply Corrective impulse on the bodies due to Normal Impulse
 	if( body1 )
 	{
-		body1->m_Velocity        -= correctiveImpulse * m1Inv;
-		body1->m_AngularVelocity -= i1Inv * Vector2f::cross( m_r1, correctiveImpulse);
+		body1->m_Velocity        -= impulse * m1Inv;
+		body1->m_AngularVelocity -= i1Inv * ( Vector2f::cross( m_r1, impulse) + correctiveImpulse.z );
 	}
 	if( body2 )
 	{
-		body2->m_Velocity        += correctiveImpulse * m2Inv;
-		body2->m_AngularVelocity += i2Inv * Vector2f::cross( m_r2, correctiveImpulse);		
+		body2->m_Velocity        += impulse * m2Inv;
+		body2->m_AngularVelocity += i2Inv * ( Vector2f::cross( m_r2, impulse) + correctiveImpulse.z );		
 	}
 }
-
 END_NAMESPACE_DIRAC2D
