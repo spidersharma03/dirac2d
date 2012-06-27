@@ -68,6 +68,7 @@
 #include "dynamics/joints/Constraint.h"
 #include "dynamics/joints/DistantConstraint.h"
 #include "dynamics/joints/HingeConstraint.h"
+#include "dynamics/joints/WeldConstraint.h"
 
 #include "geometry/CollisionShape.h"
 #include "geometry/Circle.h"

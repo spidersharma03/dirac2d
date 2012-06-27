@@ -23,6 +23,7 @@
 
 #include "../dynamics/joints/DistantConstraint.h"
 #include "../dynamics/joints/HingeConstraint.h"
+#include "../dynamics/joints/WeldConstraint.h"
 
 #include "../draw/Renderer.h"
 
@@ -62,6 +63,7 @@ PhysicalWorld::PhysicalWorld()
 	
 	m_DistanceConstraintPool = new MemoryAllocator<DistanceConstraint>(MAX_BODIES/10);
 	m_HingeConstraintPool	 = new MemoryAllocator<HingeConstraint>(MAX_BODIES/10);
+	m_WeldConstraintPool     = new MemoryAllocator<WeldConstraint>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
@@ -92,6 +94,9 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 			break;
 		case ECT_HINGE:
 			constraint = new( m_HingeConstraintPool->Allocate() )HingeConstraint();
+			break;
+		case ECT_WELD:
+			constraint = new( m_WeldConstraintPool->Allocate() )WeldConstraint();
 			break;
 		default:
 			break;
@@ -274,7 +279,7 @@ void PhysicalWorld::draw()
 				}
 				m_Renderer->drawLine(p0, p1);
 			}
-			if( pConstraint->m_Type == ECT_HINGE )
+			if( pConstraint->m_Type == ECT_HINGE || pConstraint->m_Type == ECT_WELD )
 			{
 				HingeConstraint* hc = (HingeConstraint*)pConstraint;
 				Vector2f anchorPoint = hc->m_Anchor;

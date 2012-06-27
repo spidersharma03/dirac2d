@@ -24,6 +24,14 @@ public:
 	{
 	}
 	
+	Vector3( Vector2<T>& vec2, T z):x(vec2.x),y(vec2.y),z(z)
+	{
+	}
+	
+	Vector3( T x, Vector2<T>& vec2):x(x),y(vec2.x),z(vec2.y)
+	{
+	}
+	
 	Vector3( const Vector3<T>& other):x(other.x),y(other.y),z(other.z)
 	{
 	}

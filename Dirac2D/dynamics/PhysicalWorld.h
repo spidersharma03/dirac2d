@@ -33,6 +33,7 @@ class BroadPhaseNode;
 class PhysicalShape;
 class DistanceConstraint;
 class HingeConstraint;
+class WeldConstraint;
 
 enum BROAD_PHASE_ALGORITHM { EBPA_NAIVE, EBPA_SAP, EBPA_DYNAMIC_TREE };
 
@@ -118,6 +119,7 @@ private:
 	// Constraint Pools
 	MemoryAllocator<DistanceConstraint> *m_DistanceConstraintPool;
 	MemoryAllocator<HingeConstraint> *m_HingeConstraintPool;
+	MemoryAllocator<WeldConstraint> *m_WeldConstraintPool;
 
 	
 	dbool m_bDrawShapes;
