@@ -109,9 +109,7 @@ public:
 	void updateSleepingStatus(dfloat dt);
 	
 	void updateAABB();
-	
-	dint32 edgeCount;
-	
+		
 	virtual ~PhysicalBody();
 public:
 	Vector2f m_Centre, m_Position;

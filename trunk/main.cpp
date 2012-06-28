@@ -1300,7 +1300,6 @@ void demo20()
 		pBox2->createPhysicalShape(pApp);
 		
 		WeldConstraint* wc = (WeldConstraint*)pWorld->createConstraint(ECT_WELD);
-		//hc->m_Erp = 0.0f;
 		wc->m_PhysicalBody1 = pBox1;
 		wc->m_PhysicalBody2 = pBox2;
 		wc->m_Anchor = Vector2f(0.1f,0.0f);
@@ -1432,7 +1431,7 @@ void renderScene(void)
     {
         frameCnt=0;
         FPS = 1000 /(elapsedTime * 0.001);
-        printf("\n FPS = %f", FPS);
+        //printf("\n FPS = %f", FPS);
         elapsedTime = 0;
     }
 #endif

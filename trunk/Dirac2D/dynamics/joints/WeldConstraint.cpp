@@ -16,8 +16,8 @@ BEGIN_NAMESPACE_DIRAC2D
 WeldConstraint::WeldConstraint()
 {
 	m_Type = ECT_WELD;
-	m_Cfm = 1300.4f;
-	m_Erp = 100.0f;
+	m_Cfm = 1000.4f;
+	m_Erp = 300.0f;
 }
 
 void WeldConstraint::initialize()

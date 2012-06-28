@@ -59,7 +59,6 @@ public:
 	
 	T* Allocate()
 	{
-		//return (T*)malloc(sizeof(T));
 		dAssert( m_MaxObjects > ++m_NumObjects );
 		MemoryLinkNode* pLinkNode = m_pFreeMemoryBlock;
 		if( m_pFreeMemoryBlock->pNext )
@@ -70,8 +69,6 @@ public:
 	
 	void Free(T* ptr)
 	{
-		//free(ptr);
-		//return;
 		// Free the Node
 		MemoryLinkNode* pLinkNode = (MemoryLinkNode*)( (dchar*)ptr - sizeof(MemoryLinkNode) );
 		MemoryLinkNode* prevNode = pLinkNode->pPrev;
@@ -125,55 +122,3 @@ END_NAMESPACE_DIRAC2D
 #endif
 
 
-/*
- template< class T >
- class MemoryAllocator
- {	
- public:
- MemoryAllocator(dint32 nObjects) : m_MaxObjects( nObjects )
- {
- m_NumObjects = 0;
- // Allocate contiguous memory for the entire pool.
- m_pMemoryChunk = malloc(m_MaxObjects * sizeof(T) );
- m_pFreeMemory = m_pMemoryChunk;
- }
- 
- ~MemoryAllocator()
- {
- free(m_pMemoryChunk);
- }
- 
- T* Allocate()
- {
- m_pFreeMemory = (dchar*)m_pFreeMemory + sizeof(T);
- return (T*)( (dchar*)m_pMemoryChunk + m_NumObjects++ * sizeof(T) );
- }
- 
- void Free(T* ptr)
- {
- // Copy back the last free block in the current ptr location.
- T* freeObjectBlock = (T*)((dchar*)m_pMemoryChunk + (m_NumObjects-1) * sizeof(T));
- memcpy(ptr, freeObjectBlock, sizeof(T));
- m_pFreeMemory = (dchar*)m_pFreeMemory - sizeof(T);
- m_NumObjects--;
- }
- 
- inline T* operator[]( dint32 index )
- {
- return (T*)( (dchar*)m_pMemoryChunk + index * sizeof(T) );
- }
- //protected:
- void* m_pMemoryChunk; // Pointer to the Entire Memory Allocated for this pool.
- 
- void* m_pFreeMemory;
- 
- dint32 m_MaxObjects;
- dint32 m_NumObjects;
- }
- 
- 
- 
- class MemoryAllocator
- ;
- 
- */
