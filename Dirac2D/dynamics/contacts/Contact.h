@@ -132,12 +132,6 @@ class PhysicalBody;
 
 struct ContactEdge
 {
-	ContactEdge()
-	{
-		contact = 0;
-		m_Next = m_Prev = 0;
-		pBody = 0;
-	}
 	Contact* contact;
 	PhysicalBody* pBody;
 	ContactEdge* m_Next;
@@ -150,26 +144,15 @@ public:
 	Contact()
 	{
 		m_ERP = 0.2f;
-	}
-	
-	void operator= ( Contact& other )
-	{
-		m_Manifold = other.m_Manifold;
-		m_ContactPoint[0] = other.m_ContactPoint[0];
-		m_ContactPoint[1] = other.m_ContactPoint[1];
-		m_ContactNormal = other.m_ContactNormal;
+		m_ContactEdge1.contact = 0;
+		m_ContactEdge1.m_Next = 0;
+		m_ContactEdge1.m_Prev = 0;
+		m_ContactEdge1.pBody = 0;
 		
-		m_PhysicalShape1 = other.m_PhysicalShape1;
-		m_PhysicalShape2 = other.m_PhysicalShape2;
-		
-		//m_NormalMassMatrix = other.m_NormalMassMatrix;
-		//m_FrictionMassMatrix = other.m_FrictionMassMatrix;
-		m_NormalMass[0] = other.m_NormalMass[0];
-		m_NormalMass[1] = other.m_NormalMass[1];
-		m_FrictionalMass[0] = other.m_FrictionalMass[0];
-		m_FrictionalMass[1] = other.m_FrictionalMass[1];
-		
-		m_ERP = other.m_ERP;
+		m_ContactEdge2.contact = 0;
+		m_ContactEdge2.m_Next = 0;
+		m_ContactEdge2.m_Prev = 0;
+		m_ContactEdge2.pBody = 0;
 	}
 	
 	Contact(const Contact& other)

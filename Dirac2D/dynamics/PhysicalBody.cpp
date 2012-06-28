@@ -31,12 +31,10 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 	m_bSleepingPolicy = false;
 	m_PhysicalShapeList = 0;
 	m_ContactEdgeList = 0;
-	edgeCount = 0;
 }
 
 PhysicalBody::PhysicalBody(const PhysicalBody& other)
 {
-	edgeCount = 0;
 	m_Centre = other.m_Centre;
 	m_Position = other.m_Position;
 	m_Velocity = other.m_Velocity;
