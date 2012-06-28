@@ -128,10 +128,18 @@ struct ContactConstraint
 };
 
 class Contact;
+class PhysicalBody;
 
 struct ContactEdge
 {
+	ContactEdge()
+	{
+		contact = 0;
+		m_Next = m_Prev = 0;
+		pBody = 0;
+	}
 	Contact* contact;
+	PhysicalBody* pBody;
 	ContactEdge* m_Next;
 	ContactEdge* m_Prev;
 };

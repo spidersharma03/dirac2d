@@ -87,43 +87,60 @@ void CollisionManager::addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pN
 	if( pBody1 == pBody2 )
 		return;
 	
-	ContactEdge* contactList = pBody1->m_ContactEdgeList;
+	ContactEdge* contactList = pBody2->m_ContactEdgeList;
 	while (contactList) 
 	{
-		CollisionShape* pShape1 = contactList->contact->m_CollisionShape1;
-		CollisionShape* pShape2 = contactList->contact->m_CollisionShape2;
-		
-		if( pShape1 == pNode1->m_CollisionShape && pShape2 == pNode2->m_CollisionShape )
+		if( contactList->pBody == pBody1 )
 		{
-			return;
-		}
-		if( pShape2 == pNode1->m_CollisionShape && pShape1 == pNode2->m_CollisionShape )
-		{
-			return;
+			CollisionShape* pShape1 = contactList->contact->m_CollisionShape1;
+			CollisionShape* pShape2 = contactList->contact->m_CollisionShape2;
+			if( pShape1 == pNode1->m_CollisionShape && pShape2 == pNode2->m_CollisionShape )
+			{
+				return;
+			}
+			if( pShape2 == pNode1->m_CollisionShape && pShape1 == pNode2->m_CollisionShape )
+			{
+				return;
+			}
 		}
 		contactList = contactList->m_Next;
 	}
 	
 	Contact* contact = createContact();
+	//printf("Contact Created %d\n", contact);
 	contact->m_PhysicalShape1 = pNode1->m_PhysicalShape;
 	contact->m_PhysicalShape2 = pNode2->m_PhysicalShape;
 
+	contact->m_PhysicalShape1->m_ParentBody->edgeCount++;
+	contact->m_PhysicalShape2->m_ParentBody->edgeCount++;
+
+	printf("EdgeCount = %d\n", contact->m_PhysicalShape1->m_ParentBody->edgeCount);
 	contact->m_CollisionShape1 = pNode1->m_CollisionShape;
 	contact->m_CollisionShape2 = pNode2->m_CollisionShape;
 
 	contact->m_ContactEdge1.contact = contact;
+	contact->m_ContactEdge1.pBody = pBody2;
 	
 	contact->m_ContactEdge1.m_Prev = 0;
 	contact->m_ContactEdge1.m_Next = pBody1->m_ContactEdgeList;
-	
+	if(pBody1->m_ContactEdgeList )
+	{
+		dAssert( pBody1->m_ContactEdgeList != &contact->m_ContactEdge1 );
+	}
 	if( pBody1->m_ContactEdgeList )
 	{
 		pBody1->m_ContactEdgeList->m_Prev = &contact->m_ContactEdge1;
 	}
 	pBody1->m_ContactEdgeList = &contact->m_ContactEdge1;
 	
-	contact->m_ContactEdge2.contact = contact;
+	if(pBody1->m_ContactEdgeList )
+	{
+		dAssert( pBody1->m_ContactEdgeList != pBody1->m_ContactEdgeList->m_Next );
+	}
 	
+	contact->m_ContactEdge2.contact = contact;
+	contact->m_ContactEdge2.pBody = pBody1;
+
 	contact->m_ContactEdge2.m_Prev = 0;
 	contact->m_ContactEdge2.m_Next = pBody2->m_ContactEdgeList;
 	
@@ -133,6 +150,8 @@ void CollisionManager::addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pN
 	}
 	pBody2->m_ContactEdgeList = &contact->m_ContactEdge2;
 	
+	if(pBody2->m_ContactEdgeList )
+		dAssert( pBody2->m_ContactEdgeList != pBody2->m_ContactEdgeList->m_Next );
 	// Awake the Bodies
 	contact->m_PhysicalShape1->m_ParentBody->setSleeping(false);
 	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);
@@ -156,6 +175,13 @@ Contact* CollisionManager::createContact()
 // Remove a Contact from the world contact linked list and the Contact Pool.
 void CollisionManager::deleteContact(Contact* contact)
 {	
+	//printf("Contact Removed %d\n", contact);
+	dAssert(contact->m_PhysicalShape1->m_ParentBody->edgeCount>0);
+	dAssert(contact->m_PhysicalShape2->m_ParentBody->edgeCount>0);
+
+	contact->m_PhysicalShape1->m_ParentBody->edgeCount--;
+	contact->m_PhysicalShape2->m_ParentBody->edgeCount--;
+
 	Contact* prevContact = contact->m_Prev;
 	Contact* nextContact = contact->m_Next;
 	
@@ -204,6 +230,10 @@ void CollisionManager::deleteContact(Contact* contact)
 		contact->m_ContactEdge2.m_Next->m_Prev = contact->m_ContactEdge2.m_Prev;
 	}
 	
+	if( contact->m_PhysicalShape1->m_ParentBody->edgeCount == 0 )
+	{
+		dAssert( !contact->m_PhysicalShape1->m_ParentBody->m_ContactEdgeList );
+	}
 	m_ContactPool->Free(contact);
 }
 
