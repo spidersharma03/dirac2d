@@ -110,6 +110,8 @@ public:
 	
 	void updateAABB();
 	
+	dint32 edgeCount;
+	
 	virtual ~PhysicalBody();
 public:
 	Vector2f m_Centre, m_Position;

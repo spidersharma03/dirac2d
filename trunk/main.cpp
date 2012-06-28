@@ -1285,13 +1285,14 @@ void demo20()
 		//pBox2->setAngle(PI_4*2);
 		//pBox2->m_BodyType = EBT_STATIC;
 		
-		pBox1->setPosition(Vector2f(-0.1f,0.0f));		
+		pBox1->setPosition(Vector2f(-0.1f,0.0f));	
+		//pBox1->m_BodyType = EBT_STATIC;
 		//pBox1->setAngle(-1*PI_4);
 		pBox2->setPosition(Vector2f(0.5f,0.0f));		
 		//pBox2->setAngle(1*PI_4);
 		
 		PhysicalAppearance pApp;
-		dfloat boxWidth = 0.03f; dfloat boxHeight = 0.2f;
+		dfloat boxWidth = 0.03f; dfloat boxHeight = 0.52f;
 		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
 		pBox1->createPhysicalShape(pApp);

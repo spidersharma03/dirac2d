@@ -160,7 +160,7 @@ void DynamicTreeBroadPhaseAlgorithm::overlapCallBack(dint32 overlapNodeID)
 	
 	BroadPhaseNode* pNode1 = (BroadPhaseNode*)m_DynamicTree->getUserData(m_QueryID);
 	BroadPhaseNode* pNode2 = (BroadPhaseNode*)m_DynamicTree->getUserData(overlapNodeID);
-	
+		
 	if( m_PairCount >= m_PairCapacity )
 	{
 		m_PairCapacity *= 2;

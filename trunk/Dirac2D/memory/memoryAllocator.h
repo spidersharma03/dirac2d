@@ -59,6 +59,7 @@ public:
 	
 	T* Allocate()
 	{
+		//return (T*)malloc(sizeof(T));
 		dAssert( m_MaxObjects > ++m_NumObjects );
 		MemoryLinkNode* pLinkNode = m_pFreeMemoryBlock;
 		if( m_pFreeMemoryBlock->pNext )
@@ -69,6 +70,8 @@ public:
 	
 	void Free(T* ptr)
 	{
+		//free(ptr);
+		//return;
 		// Free the Node
 		MemoryLinkNode* pLinkNode = (MemoryLinkNode*)( (dchar*)ptr - sizeof(MemoryLinkNode) );
 		MemoryLinkNode* prevNode = pLinkNode->pPrev;
@@ -76,6 +79,11 @@ public:
 		
 		if( prevNode )
 			prevNode->pNext = nextNode;
+		else 
+		{
+			//m_pFreeMemoryBlock = nextNode;
+		}
+
 		
 		if( nextNode )
 			nextNode->pPrev = prevNode;
