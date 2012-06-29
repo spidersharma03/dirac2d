@@ -50,7 +50,7 @@ PhysicalWorld::PhysicalWorld()
 	m_bWarmStart = true;
 
 	m_bDrawShapes = true;
-	m_bDrawBoundingBoxes = true;
+	m_bDrawBoundingBoxes = false;
 	m_bDrawContacts = false;
 	m_bDrawConstraints = true;
 	m_bDrawCentreOfMass = false;

@@ -26,7 +26,6 @@ enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
 
 class PhysicalBody
 {
-
 public:	
 	PhysicalBody(const PhysicalBody& other);
 	

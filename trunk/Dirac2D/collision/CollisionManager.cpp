@@ -109,21 +109,12 @@ void CollisionManager::addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pN
 	
 	Contact* contact = createContact();
 	
-	printf("Contact Created %d  %d  %d  %d  %d\n", contact, pBody1, pBody1->m_ContactEdgeList, pBody2, pBody2->m_ContactEdgeList);
-
 	contact->m_PhysicalShape1 = pNode1->m_PhysicalShape;
 	contact->m_PhysicalShape2 = pNode2->m_PhysicalShape;
 
 	contact->m_CollisionShape1 = pNode1->m_CollisionShape;
 	contact->m_CollisionShape2 = pNode2->m_CollisionShape;
 
-	//if( contact->m_PhysicalShape1->m_ParentBody->m_BodyType == EBT_DYNAMIC && contact->m_PhysicalShape2->m_ParentBody->m_BodyType == EBT_DYNAMIC )
-	
-	if(pBody1->m_ContactEdgeList )
-	{
-		dAssert( pBody1->m_ContactEdgeList != &contact->m_ContactEdge1 );
-	}
-	
 	contact->m_ContactEdge1.contact = contact;
 	contact->m_ContactEdge1.pBody = pBody2;
 	
@@ -148,11 +139,9 @@ void CollisionManager::addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pN
 	}
 	pBody2->m_ContactEdgeList = &contact->m_ContactEdge2;
 	
-	if(pBody2->m_ContactEdgeList )
-		dAssert( pBody2->m_ContactEdgeList != pBody2->m_ContactEdgeList->m_Next );
 	// Awake the Bodies
 	contact->m_PhysicalShape1->m_ParentBody->setSleeping(false);
-	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);
+	contact->m_PhysicalShape2->m_ParentBody->setSleeping(false);	
 }
 
 // Creates a new Contact by Allocating in the Contact Pool and inserting into the World linked list.
@@ -173,12 +162,6 @@ Contact* CollisionManager::createContact()
 // Remove a Contact from the world contact linked list and the Contact Pool.
 void CollisionManager::deleteContact(Contact* contact)
 {	
-	//if( contact->m_PhysicalShape1->m_ParentBody->m_BodyType == EBT_DYNAMIC && contact->m_PhysicalShape2->m_ParentBody->m_BodyType == EBT_DYNAMIC )
-	//dAssert(contact->m_PhysicalShape1->m_ParentBody->edgeCount>0);
-	//dAssert(contact->m_PhysicalShape2->m_ParentBody->edgeCount>0);
-	printf("Before Contact Removal %d  %d  %d  %d  %d\n", contact, contact->m_PhysicalShape1->m_ParentBody, contact->m_PhysicalShape1->m_ParentBody->m_ContactEdgeList, 
-		   contact->m_PhysicalShape2->m_ParentBody, contact->m_PhysicalShape2->m_ParentBody->m_ContactEdgeList);
-
 	Contact* prevContact = contact->m_Prev;
 	Contact* nextContact = contact->m_Next;
 	
@@ -228,10 +211,6 @@ void CollisionManager::deleteContact(Contact* contact)
 	}
 	
 	m_ContactPool->Free(contact);
-	
-	printf("After Contact Removal %d  %d  %d  %d  %d\n", contact, contact->m_PhysicalShape1->m_ParentBody, contact->m_PhysicalShape1->m_ParentBody->m_ContactEdgeList, 
-		   contact->m_PhysicalShape2->m_ParentBody, contact->m_PhysicalShape2->m_ParentBody->m_ContactEdgeList);
-
 }
 
 END_NAMESPACE_DIRAC2D

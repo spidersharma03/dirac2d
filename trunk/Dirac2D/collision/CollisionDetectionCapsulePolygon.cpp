@@ -129,7 +129,8 @@ dbool intersectCapsuleCircle( Circle* circle, Matrix3f& xform1, Capsule* capsule
 	
 	xform2.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
 	xform2.transformAsVector(contactManifold->m_ContactNormal);
-	
+	if( contactManifold->m_bFlipShapes )
+		contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
 	return true;
 }
 
@@ -249,7 +250,9 @@ dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* c
 	xform1.transformAsPoint(contactPoints[0].m_Point);
 	xform1.transformAsPoint(contactPoints[1].m_Point);
 	xform1.transformAsVector(contactManifold->m_ContactNormal);
-		
+	if( contactManifold->m_bFlipShapes )
+		contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
+	
 	return contactManifold->m_NumContacts > 0;
 }
 

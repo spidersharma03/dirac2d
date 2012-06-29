@@ -27,18 +27,6 @@ void Contact::update()
 	
 	dbool bRes = intersectShapes(m_CollisionShape1, m_PhysicalShape1->m_ParentBody->m_Transform, m_CollisionShape2, m_PhysicalShape2->m_ParentBody->m_Transform, &m_Manifold);
 	
-	// Flip the Physical Shapes.
-	if( m_Manifold.m_bFlipShapes )
-	{
-		PhysicalShape* temp = m_PhysicalShape2;
-		m_PhysicalShape2 = m_PhysicalShape1;
-		m_PhysicalShape1  = temp;
-		
-		CollisionShape* t = m_CollisionShape2;
-		m_CollisionShape2 = m_CollisionShape1;
-		m_CollisionShape1 = t;
-	}
-	
 	if( bRes )
 	{
 		// Friction mixing

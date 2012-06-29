@@ -96,7 +96,9 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* p
 		contactManifold->m_ContactPoints[0].m_Point = (c + contactManifold->m_ContactNormal * -minDistance ) * 0.5f;
 		xform2.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
 		contactManifold->m_ContactPoints[0].m_Depth = minDistance;
-		xform2.transformAsVector(contactManifold->m_ContactNormal);		
+		xform2.transformAsVector(contactManifold->m_ContactNormal);	
+		if( contactManifold->m_bFlipShapes )
+			contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
 		return true;
 	}
 	
@@ -127,6 +129,8 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* p
 		xform2.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
 		contactManifold->m_ContactPoints[0].m_Depth = -(c - v1 ).length() * 0.5f;
 		xform2.transformAsVector(contactManifold->m_ContactNormal);
+		if( contactManifold->m_bFlipShapes )
+			contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
 		return true;
 	}
 	// Left of Edge vertex v2. so v2 is the closest point from the centre of the circle. Region 2.
@@ -144,6 +148,8 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* p
 		xform2.transformAsPoint(contactManifold->m_ContactPoints[0].m_Point);
 		contactManifold->m_ContactPoints[0].m_Depth = -(c - v2 ).length() * 0.5f;
 		xform2.transformAsVector(contactManifold->m_ContactNormal);
+		if( contactManifold->m_bFlipShapes )
+			contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
 		return true;
 		
 	}
@@ -163,6 +169,8 @@ dbool intersectCirclePolygon( Circle* circle, Matrix3f& xform1, ConvexPolygon* p
 		cWorld -= contactManifold->m_ContactNormal * radius;
 		contactManifold->m_ContactPoints[0].m_Point = (cWorld + closestPoint ) * 0.5f;
 		contactManifold->m_ContactPoints[0].m_Depth = -(radius - shortestDistance) * 0.5f;
+		if( contactManifold->m_bFlipShapes )
+			contactManifold->m_ContactNormal = -contactManifold->m_ContactNormal;
 		return true;
 		
 	}
