@@ -61,8 +61,14 @@ void NaiveBroadPhaseCollisionAlgorithm::removeBroadPhaseNode(BroadPhaseNode* pBr
 void NaiveBroadPhaseCollisionAlgorithm::update()
 {
 	m_PairCount = 0;
-	// n2 Collision test
 	BroadPhaseNode* pNode1 = m_BroadPhaseNodeList;
+	while( pNode1 )
+	{
+		pNode1->m_AABB = pNode1->m_CollisionShape->getAABB();
+		pNode1 = pNode1->m_Next;
+	}
+	// n2 Collision test
+	pNode1 = m_BroadPhaseNodeList;
 	while( pNode1 )
 	{
 		PhysicalShape* pShape1 = pNode1->m_PhysicalShape;
@@ -86,10 +92,7 @@ void NaiveBroadPhaseCollisionAlgorithm::update()
 			
 			dbool bRes = true;
 			
-			AABB2f& aabb1 = pNode1->m_CollisionShape->getAABB();
-			AABB2f& aabb2 = pNode2->m_CollisionShape->getAABB();
-			
-			bRes = aabb1.intersectAABB(aabb2);
+			bRes = pNode1->m_AABB.intersectAABB(pNode2->m_AABB);
 			
 			if( bRes )
 			{

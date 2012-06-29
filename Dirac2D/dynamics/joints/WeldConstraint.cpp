@@ -9,7 +9,6 @@
 #include "WeldConstraint.h"
 #include "../PhysicalBody.h"
 #include "../PhysicalShape.h"
-#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 

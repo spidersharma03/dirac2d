@@ -1431,7 +1431,7 @@ void renderScene(void)
     {
         frameCnt=0;
         FPS = 1000 /(elapsedTime * 0.001);
-        //printf("\n FPS = %f", FPS);
+        printf("\n FPS = %f", FPS);
         elapsedTime = 0;
     }
 #endif
