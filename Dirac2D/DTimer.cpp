@@ -31,7 +31,7 @@ void DTimer::initTimer()
 	diffTime = 0.0f;
 	decreasingDuration = 0.0f;
 
-	increasingDuration = 100;
+	increasingDuration = 1000;
 #ifdef WIN32
 	startTime = GetTickCount();
 #else
