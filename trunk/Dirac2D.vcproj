@@ -219,6 +219,10 @@
 						RelativePath=".\Dirac2D\dynamics\joints\HingeConstraint.cpp"
 						>
 					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\WeldConstraint.cpp"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -449,6 +453,10 @@
 						RelativePath=".\Dirac2D\dynamics\joints\HingeConstraint.h"
 						>
 					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\WeldConstraint.h"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="contacts"
@@ -516,6 +524,10 @@
 				</File>
 				<File
 					RelativePath=".\Dirac2D\maths\Point2.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\maths\Ray2.h"
 					>
 				</File>
 				<File

@@ -35,6 +35,7 @@ void CollisionManager::updateContacts()
 	if( !contact )
 		return;
 	
+	dint32 contactCount = 0;
 	while(contact)
 	{
 		PhysicalBody* body1 = contact->m_PhysicalShape1->m_ParentBody;
@@ -60,11 +61,13 @@ void CollisionManager::updateContacts()
 		}
 		else 
 		{
+			contactCount++;
 			contact->update();
 		}
 
 		contact = contact->m_Next;
 	}
+	printf("ContactCount= %d\n", contactCount); 
 }
 
 void CollisionManager::addContact(PhysicalShape* pShape1, PhysicalShape* pShape2)

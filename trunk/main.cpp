@@ -1343,7 +1343,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo20();
+	demo3_();
 }
 
 void changeSize(int w, int h) 
@@ -1434,6 +1434,8 @@ void renderScene(void)
         printf("\n FPS = %f", FPS);
         elapsedTime = 0;
     }
+#else
+	timer.tick();
 #endif
 }
 
