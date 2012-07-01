@@ -173,7 +173,7 @@ void PhysicalWorld::Step(dfloat dt)
 		
 		pBody->updateSleepingStatus(dt);
 		
-		if( pBody->m_BodyType == EBT_DYNAMIC && !pBody->m_bSleeping)
+		if( ( pBody->m_BodyType == EBT_DYNAMIC || pBody->m_BodyType == EBT_KINEMATIC )  && !pBody->m_bSleeping)
 		{
 			pBody->m_Position += pBody->m_Velocity * dt;
 			pBody->m_Angle    += pBody->m_AngularVelocity * dt;
@@ -209,6 +209,8 @@ void PhysicalWorld::draw()
 					m_Renderer->setColor(0, 255, 255);
 				if( pBody->m_BodyType == EBT_STATIC )
 					m_Renderer->setColor(0, 255, 0);
+				if( pBody->m_BodyType == EBT_KINEMATIC )
+					m_Renderer->setColor(0, 255, 255);
 				
 				m_Renderer->drawShape(pShape->m_CollisionShape);
 			}
@@ -282,26 +284,29 @@ void PhysicalWorld::draw()
 			if( pConstraint->m_Type == ECT_HINGE || pConstraint->m_Type == ECT_WELD )
 			{
 				HingeConstraint* hc = (HingeConstraint*)pConstraint;
-				Vector2f anchorPoint = hc->m_Anchor;
+				Vector2f anchorPoint;// = hc->m_Anchor;
 				Vector2f p0, p1;
 				if( hc->m_PhysicalBody1 )
 				{
 					Vector2f c = hc->m_PhysicalBody1->m_Centre;
 					hc->m_PhysicalBody1->getTransform().transformAsPoint(c);
-					hc->m_PhysicalBody1->getTransform().transformAsVector(anchorPoint);
 					p0 = c;
-					anchorPoint += c;
+					anchorPoint = c + hc->m_r1;
 				}
 				if( hc->m_PhysicalBody2 )
 				{
 					Vector2f c = hc->m_PhysicalBody2->m_Centre;
 					hc->m_PhysicalBody2->getTransform().transformAsPoint(c);
 					p1 = c;
+					anchorPoint = c + hc->m_r2;
 				}
 				if( hc->m_PhysicalBody1 )
 					m_Renderer->drawLine(p0, anchorPoint);
 				if( hc->m_PhysicalBody2 )
 					m_Renderer->drawLine(p1, anchorPoint);
+				m_Renderer->setColor(255, 0, 255);
+				m_Renderer->setPointSize(3.0f);
+				m_Renderer->drawPoint(anchorPoint);
 			}
 			pConstraint = pConstraint->m_Next;
 		}

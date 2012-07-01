@@ -111,23 +111,29 @@ public:
 		
 	virtual ~PhysicalBody();
 public:
-	Vector2f m_Centre, m_Position;
 	Vector2f m_Velocity;
 	dfloat m_AngularVelocity;
+	dfloat m_InvMass, m_InvI;
+	Vector2f m_Centre;
+	
+	Matrix3f m_Transform;
+
 	dfloat m_Angle;
 	dfloat m_LinearDamping;
 	dfloat m_AngularDamping;
-	Matrix3f m_Transform;
-	BODY_TYPE m_BodyType;
-	dfloat m_Mass, m_InvMass;
-	dfloat m_I, m_InvI;
+	
+	Vector2f m_Position;
+
+	dfloat m_Mass, m_I;
 	
 	dbool m_bSleepingPolicy;
 	dbool m_bSleeping;
 	dfloat m_SleepTime;
 	
-	Vector2f m_Force;
 	AABB2f m_AABB;
+	BODY_TYPE m_BodyType;
+	Vector2f m_Force;
+
 	
 	ContactEdge* m_ContactEdgeList;
 

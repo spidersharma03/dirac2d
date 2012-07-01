@@ -41,6 +41,8 @@ struct PhysicalAttributes
 
 struct CollisionFilter
 {
+	duint32 m_CollisionBit;
+	duint32 m_CollisionMask;
 };
 
 struct CollisionAttributes
