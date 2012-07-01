@@ -71,7 +71,7 @@ void HingeConstraint::buildJacobian()
 	m_PositionError = ( c2 + m_r2 - c1 - m_r1 ) * m_Erp;
 	//printf(" Error = %f  %f\n", m_PositionError.x, m_PositionError.y);
 	// Apply Corrective impulse on the bodies
-	if( 0 )//body1->m_PhysicalWorld->m_bWarmStart )
+	if( 1 )//body1->m_PhysicalWorld->m_bWarmStart )
 	{
 		Vector2f totalImpulse = m_Impulse;
 		if( body1 )

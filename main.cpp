@@ -146,6 +146,7 @@ void demo3_()
 	dfloat x = -1.0f;
 	dint32 n = 40;
 	dfloat dx = 0.0f;
+												
 	for(int j=0; j<40;j++ )
 	{
 		y += 0.1f;
@@ -1308,6 +1309,55 @@ void demo20()
 	// Create Circle Chain
 }
 
+PhysicalBody* stick = 0;
+PhysicalBody* limb2 = 0;
+
+void demo21()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->m_BodyType = EBT_STATIC;
+	dfloat groundWidth = 1.5f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	{
+		// Create Balancing Stick
+		stick = pWorld->createPhysicalBody();
+		//pBox2->setAngle(PI_4*2);
+		//pBox2->m_BodyType = EBT_STATIC;
+		
+		stick->setPosition(Vector2f(0.9f,0.1f));		
+		stick->setAngle(PI_4/10);
+		PhysicalAppearance pApp;
+		dfloat boxWidth = 0.01f; dfloat boxHeight = 0.525f;
+		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pApp.m_PhysicalAttributes.m_Friction = 0.8f;
+		stick->createPhysicalShape(pApp);
+		
+		limb2 = pWorld->createPhysicalBody();
+		limb2->m_BodyType = EBT_KINEMATIC;
+		limb2->setPosition(Vector2f(0.5f,-0.45f));
+		limb2->setAngle(PI_2);
+		boxWidth = 0.02f;  boxHeight = 0.5f;
+		Vector2f vertices2[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices2, 4);
+		limb2->createPhysicalShape(pApp);
+		
+		//DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
+//		dc->m_PhysicalBody2 = stick;
+//		dc->m_PhysicalBody1 = limb2;
+//		dc->m_Erp = 10.0f;
+//		dc->m_Anchor2 = Vector2f(0.0f,-0.525f);
+//		dc->m_Anchor1 = Vector2f(0.025f,-0.45f);
+//		dc->initialize();
+	}
+	// Create Circle Chain
+}
 
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
@@ -1343,7 +1393,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo3_();
+	demo21();
 }
 
 void changeSize(int w, int h) 
@@ -1390,6 +1440,25 @@ void renderScene(void)
     // start timer
     gettimeofday(&t1, NULL);
 #endif
+	
+	static dfloat time = 0.0f;
+	time += dt;
+	// Find Anchor Point Position
+	Vector2f ap(0.025f,-0.45f);
+	limb2->m_Transform.transformAsPoint(ap);
+	dfloat angle = stick->m_Angle;
+	Vector2f c = stick->m_Position;
+	dfloat r = c.distance(ap);
+	dfloat R = r * sin(angle);
+	dfloat random = RANDOM_NUMBER(60.0f, 100.0f);
+	dfloat tau = dt*random;
+	Vector2f A (-R/(tau*tau), 0.0f );
+	{
+	if( fabs(R) < 0.05f ) 
+		limb2->m_Velocity.x += A.x * dt;
+	else
+		limb2->m_Velocity.x = 0.0f;
+	}
 	
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
