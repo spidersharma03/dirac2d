@@ -1359,6 +1359,50 @@ void demo21()
 	// Create Circle Chain
 }
 
+// Weld Constraint
+void demo22()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->m_BodyType = EBT_STATIC;
+	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	//pBodyGround->createPhysicalShape(pApp);
+	
+	for( dint32 i=0; i< 1; i++ )
+	{
+		PhysicalBody* pBox = pWorld->createPhysicalBody();
+		//pBox2->setAngle(PI_4*2);
+		//pBox2->m_BodyType = EBT_STATIC;
+		
+		pBox->setPosition(Vector2f(0.0f,-0.02f));	
+		pBox->m_LinearDamping = 0.1f;
+		pBox->m_AngularDamping = 0.5f;
+		//pBox2->setAngle(1*PI_4);
+		
+		PhysicalAppearance pApp;
+		
+		dfloat boxWidth = 0.05f; dfloat boxHeight = 0.05f;
+		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pBox->createPhysicalShape(pApp);
+		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.1f,0.1f);
+		
+		CatenaryConstraint* cc = (CatenaryConstraint*)pWorld->createConstraint(ECT_CATENARY);
+		cc->m_PhysicalBody1 = pBox;
+		cc->m_FixedPoint1 = Vector2f(-0.9f,0.0f);
+		cc->m_FixedPoint2 = Vector2f(0.9f,0.0f);
+		cc->m_Length = 2.0f;
+		cc->m_Anchor = Vector2f(0.0f,0.0f);
+		cc->initialize();
+	}
+	// Create Circle Chain
+}
+
+
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
@@ -1393,7 +1437,7 @@ void initScene()
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo21();
+	demo22();
 }
 
 void changeSize(int w, int h) 
@@ -1428,6 +1472,26 @@ void changeSize(int w, int h)
 //			  0.0f,1.0f,0.0f);
 }
 
+
+//static dfloat time = 0.0f;
+//time += dt;
+//// Find Anchor Point Position
+//Vector2f ap(0.025f,-0.45f);
+//limb2->m_Transform.transformAsPoint(ap);
+//dfloat angle = stick->m_Angle;
+//Vector2f c = stick->m_Position;
+//dfloat r = c.distance(ap);
+//dfloat R = r * sin(angle);
+//dfloat random = RANDOM_NUMBER(60.0f, 100.0f);
+//dfloat tau = dt*random;
+//Vector2f A (-R/(tau*tau), 0.0f );
+//{
+//	if( fabs(R) < 0.1f ) 
+//		limb2->m_Velocity.x += A.x * dt;
+//		else
+//			limb2->m_Velocity.x = 0.0f;
+//			}
+
 void renderScene(void) 
 {	
 #ifndef WIN32
@@ -1441,25 +1505,7 @@ void renderScene(void)
     gettimeofday(&t1, NULL);
 #endif
 	
-	static dfloat time = 0.0f;
-	time += dt;
-	// Find Anchor Point Position
-	Vector2f ap(0.025f,-0.45f);
-	limb2->m_Transform.transformAsPoint(ap);
-	dfloat angle = stick->m_Angle;
-	Vector2f c = stick->m_Position;
-	dfloat r = c.distance(ap);
-	dfloat R = r * sin(angle);
-	dfloat random = RANDOM_NUMBER(60.0f, 100.0f);
-	dfloat tau = dt*random;
-	Vector2f A (-R/(tau*tau), 0.0f );
-	{
-	if( fabs(R) < 0.05f ) 
-		limb2->m_Velocity.x += A.x * dt;
-	else
-		limb2->m_Velocity.x = 0.0f;
-	}
-	
+		
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	if(windowHeight == 0)
