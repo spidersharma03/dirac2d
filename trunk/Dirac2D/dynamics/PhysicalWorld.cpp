@@ -24,6 +24,7 @@
 #include "../dynamics/joints/DistantConstraint.h"
 #include "../dynamics/joints/HingeConstraint.h"
 #include "../dynamics/joints/WeldConstraint.h"
+#include "../dynamics/joints/CatenaryConstraint.h"
 
 #include "../draw/Renderer.h"
 
@@ -64,6 +65,7 @@ PhysicalWorld::PhysicalWorld()
 	m_DistanceConstraintPool = new MemoryAllocator<DistanceConstraint>(MAX_BODIES/10);
 	m_HingeConstraintPool	 = new MemoryAllocator<HingeConstraint>(MAX_BODIES/10);
 	m_WeldConstraintPool     = new MemoryAllocator<WeldConstraint>(MAX_BODIES/10);
+	m_CatenaryConstraintPool     = new MemoryAllocator<CatenaryConstraint>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
@@ -97,6 +99,9 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 			break;
 		case ECT_WELD:
 			constraint = new( m_WeldConstraintPool->Allocate() )WeldConstraint();
+			break;
+		case ECT_CATENARY:
+			constraint = new( m_CatenaryConstraintPool->Allocate() )CatenaryConstraint();
 			break;
 		default:
 			break;
@@ -307,6 +312,23 @@ void PhysicalWorld::draw()
 				m_Renderer->setColor(255, 0, 255);
 				m_Renderer->setPointSize(3.0f);
 				m_Renderer->drawPoint(anchorPoint);
+			}
+			if( pConstraint->m_Type == ECT_CATENARY )
+			{
+				CatenaryConstraint* cc = (CatenaryConstraint*)pConstraint;
+				m_Renderer->setColor(255, 0, 255);
+				m_Renderer->setPointSize(3.0f);
+				m_Renderer->drawPoint(cc->m_FixedPoint1);
+				m_Renderer->drawPoint(cc->m_FixedPoint2);
+				m_Renderer->setPointSize(1.0f);
+				
+				Vector2f c = cc->m_PhysicalBody1->m_Position;
+				Vector2f ap = cc->m_Anchor;
+				cc->m_PhysicalBody1->getTransform().transformAsVector(ap);
+				c += ap;
+				m_Renderer->setColor(255, 255, 255);
+				m_Renderer->drawLine(c, cc->m_FixedPoint1);
+				m_Renderer->drawLine(c, cc->m_FixedPoint2);
 			}
 			pConstraint = pConstraint->m_Next;
 		}

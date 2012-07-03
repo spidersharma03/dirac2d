@@ -10,6 +10,7 @@
 		758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
+		C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
 		C257F15B154E71AE00270D77 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
 		C257F15C154E71AE00270D77 /* ContactSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */; };
 		C257F198154E75F400270D77 /* CollisionDetectionPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */; };
@@ -58,6 +59,8 @@
 		758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DTimer.cpp; path = Dirac2D/DTimer.cpp; sourceTree = SOURCE_ROOT; };
 		758921F213B0E3DF0005E1E2 /* DTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTimer.h; path = Dirac2D/DTimer.h; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* Dirac2D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dirac2D; sourceTree = BUILT_PRODUCTS_DIR; };
+		C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatenaryConstraint.h; sourceTree = "<group>"; };
+		C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatenaryConstraint.cpp; sourceTree = "<group>"; };
 		C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionDetectionPolygon.h; path = Dirac2D/collision/CollisionDetectionPolygon.h; sourceTree = SOURCE_ROOT; };
 		C257F140154E71AE00270D77 /* CollisionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionManager.cpp; path = Dirac2D/collision/CollisionManager.cpp; sourceTree = SOURCE_ROOT; };
 		C257F141154E71AE00270D77 /* CollisionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionManager.h; path = Dirac2D/collision/CollisionManager.h; sourceTree = SOURCE_ROOT; };
@@ -260,6 +263,8 @@
 				C2D19CC2158782D40042A724 /* HingeConstraint.cpp */,
 				C2AD46CB1599EC2C009C4951 /* WeldConstraint.h */,
 				C2AD46CC1599EC2C009C4951 /* WeldConstraint.cpp */,
+				C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */,
+				C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -436,6 +441,7 @@
 				C2D19F39158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp in Sources */,
 				758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */,
 				C2AD46CD1599EC2C009C4951 /* WeldConstraint.cpp in Sources */,
+				C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

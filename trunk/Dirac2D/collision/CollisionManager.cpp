@@ -67,7 +67,6 @@ void CollisionManager::updateContacts()
 
 		contact = contact->m_Next;
 	}
-	printf("ContactCount= %d\n", contactCount); 
 }
 
 void CollisionManager::addContact(PhysicalShape* pShape1, PhysicalShape* pShape2)
