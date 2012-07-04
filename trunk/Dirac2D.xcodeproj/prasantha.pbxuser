@@ -186,6 +186,122 @@
 			C250BC8015A33498009C9A37 /* PBXTextBookmark */ = C250BC8015A33498009C9A37 /* PBXTextBookmark */;
 			C250BC8115A33498009C9A37 /* PBXTextBookmark */ = C250BC8115A33498009C9A37 /* PBXTextBookmark */;
 			C250BC8315A334AB009C9A37 /* PBXTextBookmark */ = C250BC8315A334AB009C9A37 /* PBXTextBookmark */;
+			C250BC8615A40AD4009C9A37 /* PBXTextBookmark */ = C250BC8615A40AD4009C9A37 /* PBXTextBookmark */;
+			C250BC8915A40B07009C9A37 /* PBXTextBookmark */ = C250BC8915A40B07009C9A37 /* PBXTextBookmark */;
+			C250BC8F15A40B68009C9A37 /* PBXTextBookmark */ = C250BC8F15A40B68009C9A37 /* PBXTextBookmark */;
+			C250BC9315A40B77009C9A37 /* PBXTextBookmark */ = C250BC9315A40B77009C9A37 /* PBXTextBookmark */;
+			C250BC9715A40BC1009C9A37 /* PBXTextBookmark */ = C250BC9715A40BC1009C9A37 /* PBXTextBookmark */;
+			C250BC9815A40BC1009C9A37 /* PBXTextBookmark */ = C250BC9815A40BC1009C9A37 /* PBXTextBookmark */;
+			C250BC9915A40BC1009C9A37 /* PBXTextBookmark */ = C250BC9915A40BC1009C9A37 /* PBXTextBookmark */;
+			C250BC9F15A40BFA009C9A37 /* PBXTextBookmark */ = C250BC9F15A40BFA009C9A37 /* PBXTextBookmark */;
+			C250BCA315A40C06009C9A37 /* PBXTextBookmark */ = C250BCA315A40C06009C9A37 /* PBXTextBookmark */;
+			C250BCA715A40C0E009C9A37 /* PBXTextBookmark */ = C250BCA715A40C0E009C9A37 /* PBXTextBookmark */;
+			C250BCAB15A40C17009C9A37 /* PBXTextBookmark */ = C250BCAB15A40C17009C9A37 /* PBXTextBookmark */;
+			C250BCB315A40C42009C9A37 /* PBXTextBookmark */ = C250BCB315A40C42009C9A37 /* PBXTextBookmark */;
+			C250BCB915A40C68009C9A37 /* PBXTextBookmark */ = C250BCB915A40C68009C9A37 /* PBXTextBookmark */;
+			C250BCBA15A40C68009C9A37 /* PBXTextBookmark */ = C250BCBA15A40C68009C9A37 /* PBXTextBookmark */;
+			C250BCBB15A40C68009C9A37 /* PBXTextBookmark */ = C250BCBB15A40C68009C9A37 /* PBXTextBookmark */;
+			C250BCC115A40CA2009C9A37 /* PBXTextBookmark */ = C250BCC115A40CA2009C9A37 /* PBXTextBookmark */;
+			C250BCC215A40CA2009C9A37 /* PBXTextBookmark */ = C250BCC215A40CA2009C9A37 /* PBXTextBookmark */;
+			C250BCC315A40CA2009C9A37 /* PBXTextBookmark */ = C250BCC315A40CA2009C9A37 /* PBXTextBookmark */;
+			C250BCC715A40CB8009C9A37 /* PBXTextBookmark */ = C250BCC715A40CB8009C9A37 /* PBXTextBookmark */;
+			C250BCCB15A40CC3009C9A37 /* PBXTextBookmark */ = C250BCCB15A40CC3009C9A37 /* PBXTextBookmark */;
+			C250BCD115A40CFD009C9A37 /* PBXTextBookmark */ = C250BCD115A40CFD009C9A37 /* PBXTextBookmark */;
+			C250BCD215A40CFD009C9A37 /* PBXTextBookmark */ = C250BCD215A40CFD009C9A37 /* PBXTextBookmark */;
+			C250BCD315A40CFD009C9A37 /* PBXTextBookmark */ = C250BCD315A40CFD009C9A37 /* PBXTextBookmark */;
+			C250BCD915A40D3E009C9A37 /* PBXTextBookmark */ = C250BCD915A40D3E009C9A37 /* PBXTextBookmark */;
+			C250BCDA15A40D3E009C9A37 /* PBXTextBookmark */ = C250BCDA15A40D3E009C9A37 /* PBXTextBookmark */;
+			C250BCE215A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE215A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCE315A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE315A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCE415A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE415A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCE515A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE515A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCE615A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE615A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCE715A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE715A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCE815A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE815A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCE915A40DF6009C9A37 /* PBXTextBookmark */ = C250BCE915A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCEA15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCEA15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCEB15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCEB15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCEC15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCEC15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCED15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCED15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCEE15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCEE15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCEF15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCEF15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF015A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF015A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF115A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF115A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF215A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF215A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF315A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF315A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF415A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF415A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF515A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF515A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF615A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF615A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF715A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF715A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF815A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF815A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCF915A40DF6009C9A37 /* PBXTextBookmark */ = C250BCF915A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCFA15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCFA15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCFB15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCFB15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCFC15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCFC15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCFD15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCFD15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCFE15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCFE15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BCFF15A40DF6009C9A37 /* PBXTextBookmark */ = C250BCFF15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0015A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0015A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0115A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0115A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0215A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0215A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0315A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0315A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0415A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0415A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0515A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0515A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0615A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0615A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0715A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0715A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0815A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0815A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0915A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0915A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0A15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0A15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0B15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0B15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0C15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0C15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0D15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0D15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0E15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0E15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD0F15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD0F15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1015A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1015A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1115A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1115A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1215A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1215A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1315A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1315A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1415A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1415A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1515A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1515A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1615A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1615A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1715A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1715A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1815A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1815A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1915A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1915A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1A15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1A15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1B15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1B15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1C15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1C15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1D15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1D15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1E15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1E15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD1F15A40DF6009C9A37 /* PBXTextBookmark */ = C250BD1F15A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2015A40DF6009C9A37 /* PBXTextBookmark */ = C250BD2015A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2115A40DF6009C9A37 /* PBXTextBookmark */ = C250BD2115A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2215A40DF6009C9A37 /* PBXTextBookmark */ = C250BD2215A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2315A40DF6009C9A37 /* PBXTextBookmark */ = C250BD2315A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2415A40DF6009C9A37 /* PBXTextBookmark */ = C250BD2415A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2515A40DF6009C9A37 /* PBXTextBookmark */ = C250BD2515A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2615A40DF6009C9A37 /* PBXTextBookmark */ = C250BD2615A40DF6009C9A37 /* PBXTextBookmark */;
+			C250BD2A15A40DFF009C9A37 /* PBXTextBookmark */ = C250BD2A15A40DFF009C9A37 /* PBXTextBookmark */;
+			C250BD2E15A40E6C009C9A37 /* PBXTextBookmark */ = C250BD2E15A40E6C009C9A37 /* PBXTextBookmark */;
+			C250BD3315A40E75009C9A37 /* PBXTextBookmark */ = C250BD3315A40E75009C9A37 /* PBXTextBookmark */;
+			C250BD3715A40E87009C9A37 /* PBXTextBookmark */ = C250BD3715A40E87009C9A37 /* PBXTextBookmark */;
+			C250BD3D15A40EBF009C9A37 /* PBXTextBookmark */ = C250BD3D15A40EBF009C9A37 /* PBXTextBookmark */;
+			C250BD4315A40ED7009C9A37 /* PBXTextBookmark */ = C250BD4315A40ED7009C9A37 /* PBXTextBookmark */;
+			C250BD7415A423A0009C9A37 /* PBXTextBookmark */ = C250BD7415A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7515A423A0009C9A37 /* PBXTextBookmark */ = C250BD7515A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7615A423A0009C9A37 /* PBXTextBookmark */ = C250BD7615A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7715A423A0009C9A37 /* PBXTextBookmark */ = C250BD7715A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7815A423A0009C9A37 /* PBXTextBookmark */ = C250BD7815A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7915A423A0009C9A37 /* PBXTextBookmark */ = C250BD7915A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7A15A423A0009C9A37 /* PBXTextBookmark */ = C250BD7A15A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7B15A423A0009C9A37 /* PBXTextBookmark */ = C250BD7B15A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7C15A423A0009C9A37 /* PBXTextBookmark */ = C250BD7C15A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7D15A423A0009C9A37 /* PBXTextBookmark */ = C250BD7D15A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7E15A423A0009C9A37 /* PBXTextBookmark */ = C250BD7E15A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD7F15A423A0009C9A37 /* PBXTextBookmark */ = C250BD7F15A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD8015A423A0009C9A37 /* PBXTextBookmark */ = C250BD8015A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD8115A423A0009C9A37 /* PBXTextBookmark */ = C250BD8115A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD8215A423A0009C9A37 /* PBXTextBookmark */ = C250BD8215A423A0009C9A37 /* PBXTextBookmark */;
+			C250BD8615A423CB009C9A37 /* PBXTextBookmark */ = C250BD8615A423CB009C9A37 /* PBXTextBookmark */;
 			C257EBEC154584EC00270D77 = C257EBEC154584EC00270D77 /* PBXTextBookmark */;
 			C257EC281545890400270D77 = C257EC281545890400270D77 /* PBXTextBookmark */;
 			C257EC3C1545894200270D77 = C257EC3C1545894200270D77 /* PBXTextBookmark */;
@@ -273,10 +389,24 @@
 	};
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 25289}}";
-			sepNavSelRange = "{50901, 0}";
-			sepNavVisRange = "{47834, 1636}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 25814}}";
+			sepNavSelRange = "{52516, 0}";
+			sepNavVisRange = "{51671, 1056}";
 			sepNavWindowFrame = "{{6, 60}, {1914, 997}}";
+		};
+	};
+	758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2042}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 923}";
+		};
+	};
+	758921F213B0E3DF0005E1E2 /* DTimer.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 860}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 560}";
 		};
 	};
 	8DD76F620486A84900D96B5E /* Dirac2D */ = {
@@ -297,16 +427,16 @@
 	};
 	C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 671}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{572, 50}";
 			sepNavVisRange = "{0, 771}";
 		};
 	};
 	C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1816}}";
-			sepNavSelRange = "{352, 0}";
-			sepNavVisRange = "{0, 865}";
+			sepNavIntBoundsRect = "{{0, 0}, {1859, 1825}}";
+			sepNavSelRange = "{495, 0}";
+			sepNavVisRange = "{287, 502}";
 		};
 	};
 	C218452A15A2D12E00164BD4 /* PBXTextBookmark */ = {
@@ -434,7 +564,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 55";
 		rLen = 0;
-		rLoc = 1108;
+		rLoc = 1036;
 		rType = 0;
 		vrLen = 1059;
 		vrLoc = 450;
@@ -444,7 +574,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 66";
 		rLen = 0;
-		rLoc = 1389;
+		rLoc = 1325;
 		rType = 0;
 		vrLen = 1210;
 		vrLoc = 690;
@@ -507,7 +637,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 61";
 		rLen = 0;
-		rLoc = 1293;
+		rLoc = 1229;
 		rType = 0;
 		vrLen = 1085;
 		vrLoc = 731;
@@ -517,7 +647,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 61";
 		rLen = 0;
-		rLoc = 1293;
+		rLoc = 1229;
 		rType = 0;
 		vrLen = 1085;
 		vrLoc = 731;
@@ -542,7 +672,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 61";
 		rLen = 0;
-		rLoc = 1293;
+		rLoc = 1229;
 		rType = 0;
 		vrLen = 630;
 		vrLoc = 891;
@@ -552,7 +682,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 57";
 		rLen = 0;
-		rLoc = 1156;
+		rLoc = 1084;
 		rType = 0;
 		vrLen = 1060;
 		vrLoc = 671;
@@ -562,7 +692,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 57";
 		rLen = 0;
-		rLoc = 1156;
+		rLoc = 1084;
 		rType = 0;
 		vrLen = 1060;
 		vrLoc = 671;
@@ -587,7 +717,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 57";
 		rLen = 0;
-		rLoc = 1156;
+		rLoc = 1084;
 		rType = 0;
 		vrLen = 574;
 		vrLoc = 826;
@@ -597,7 +727,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 58";
 		rLen = 0;
-		rLoc = 1209;
+		rLoc = 1085;
 		rType = 0;
 		vrLen = 1141;
 		vrLoc = 792;
@@ -607,7 +737,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 56";
 		rLen = 0;
-		rLoc = 1155;
+		rLoc = 1083;
 		rType = 0;
 		vrLen = 1110;
 		vrLoc = 862;
@@ -617,7 +747,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 65";
 		rLen = 0;
-		rLoc = 1387;
+		rLoc = 1323;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 792;
@@ -627,7 +757,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 65";
 		rLen = 0;
-		rLoc = 1387;
+		rLoc = 1323;
 		rType = 0;
 		vrLen = 1143;
 		vrLoc = 792;
@@ -637,7 +767,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 65";
 		rLen = 0;
-		rLoc = 1387;
+		rLoc = 1323;
 		rType = 0;
 		vrLen = 686;
 		vrLoc = 990;
@@ -647,7 +777,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 65";
 		rLen = 0;
-		rLoc = 1387;
+		rLoc = 1323;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 792;
@@ -657,7 +787,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 65";
 		rLen = 0;
-		rLoc = 1387;
+		rLoc = 1323;
 		rType = 0;
 		vrLen = 1143;
 		vrLoc = 792;
@@ -667,7 +797,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 65";
 		rLen = 0;
-		rLoc = 1387;
+		rLoc = 1323;
 		rType = 0;
 		vrLen = 686;
 		vrLoc = 990;
@@ -677,7 +807,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 50";
 		rLen = 0;
-		rLoc = 1004;
+		rLoc = 935;
 		rType = 0;
 		vrLen = 1132;
 		vrLoc = 792;
@@ -687,7 +817,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 50";
 		rLen = 0;
-		rLoc = 1004;
+		rLoc = 935;
 		rType = 0;
 		vrLen = 1129;
 		vrLoc = 792;
@@ -697,7 +827,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 50";
 		rLen = 0;
-		rLoc = 1004;
+		rLoc = 935;
 		rType = 0;
 		vrLen = 646;
 		vrLoc = 1028;
@@ -707,7 +837,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 75";
 		rLen = 0;
-		rLoc = 1570;
+		rLoc = 1526;
 		rType = 0;
 		vrLen = 1046;
 		vrLoc = 920;
@@ -717,7 +847,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 108";
 		rLen = 0;
-		rLoc = 2445;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1213;
 		vrLoc = 1530;
@@ -727,7 +857,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 108";
 		rLen = 0;
-		rLoc = 2445;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1211;
 		vrLoc = 1530;
@@ -737,7 +867,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 51";
 		rLen = 0;
-		rLoc = 967;
+		rLoc = 935;
 		rType = 0;
 		vrLen = 1121;
 		vrLoc = 775;
@@ -747,7 +877,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2445;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1332;
 		vrLoc = 1388;
@@ -757,7 +887,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2445;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1330;
 		vrLoc = 1388;
@@ -767,7 +897,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2445;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1330;
 		vrLoc = 1388;
@@ -777,7 +907,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2445;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1310;
 		vrLoc = 1386;
@@ -787,7 +917,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2540;
 		rType = 0;
 		vrLen = 1313;
 		vrLoc = 1386;
@@ -797,7 +927,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 78";
 		rLen = 0;
-		rLoc = 1570;
+		rLoc = 1526;
 		rType = 0;
 		vrLen = 1173;
 		vrLoc = 777;
@@ -807,7 +937,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 78";
 		rLen = 0;
-		rLoc = 1570;
+		rLoc = 1526;
 		rType = 0;
 		vrLen = 1087;
 		vrLoc = 777;
@@ -817,7 +947,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 78";
 		rLen = 0;
-		rLoc = 1570;
+		rLoc = 1526;
 		rType = 0;
 		vrLen = 728;
 		vrLoc = 1219;
@@ -827,7 +957,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2540;
 		rType = 0;
 		vrLen = 1331;
 		vrLoc = 1388;
@@ -837,7 +967,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2540;
 		rType = 0;
 		vrLen = 1331;
 		vrLoc = 1388;
@@ -857,7 +987,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1383";
 		rLen = 0;
-		rLoc = 50906;
+		rLoc = 50910;
 		rType = 0;
 		vrLen = 1609;
 		vrLoc = 50056;
@@ -867,7 +997,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2540;
 		rType = 0;
 		vrLen = 1333;
 		vrLoc = 1386;
@@ -877,7 +1007,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 106";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2540;
 		rType = 0;
 		vrLen = 1311;
 		vrLoc = 1386;
@@ -887,7 +1017,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 59";
 		rLen = 0;
-		rLoc = 1108;
+		rLoc = 1036;
 		rType = 0;
 		vrLen = 928;
 		vrLoc = 450;
@@ -897,7 +1027,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 74";
 		rLen = 0;
-		rLoc = 1570;
+		rLoc = 1526;
 		rType = 0;
 		vrLen = 1074;
 		vrLoc = 775;
@@ -907,7 +1037,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 74";
 		rLen = 0;
-		rLoc = 1570;
+		rLoc = 1526;
 		rType = 0;
 		vrLen = 1103;
 		vrLoc = 775;
@@ -917,7 +1047,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1383";
 		rLen = 0;
-		rLoc = 50906;
+		rLoc = 50910;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 50032;
@@ -927,7 +1057,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1382";
 		rLen = 0;
-		rLoc = 50871;
+		rLoc = 50875;
 		rType = 0;
 		vrLen = 1630;
 		vrLoc = 50032;
@@ -937,7 +1067,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1607;
 		vrLoc = 50059;
@@ -947,7 +1077,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1607;
 		vrLoc = 50059;
@@ -957,7 +1087,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1607;
 		vrLoc = 50059;
@@ -967,7 +1097,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51507;
+		rLoc = 51511;
 		rType = 0;
 		vrLen = 1607;
 		vrLoc = 50059;
@@ -977,7 +1107,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1651;
 		vrLoc = 50059;
@@ -987,7 +1117,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1607;
 		vrLoc = 50059;
@@ -997,7 +1127,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 775;
 		vrLoc = 50934;
@@ -1029,7 +1159,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 28";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 495;
 		rType = 0;
 		vrLen = 495;
 		vrLoc = 280;
@@ -1039,7 +1169,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 28";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 495;
 		rType = 0;
 		vrLen = 862;
 		vrLoc = 0;
@@ -1049,7 +1179,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1608;
 		vrLoc = 50058;
@@ -1059,7 +1189,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1608;
 		vrLoc = 50056;
@@ -1069,7 +1199,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1399";
 		rLen = 0;
-		rLoc = 51613;
+		rLoc = 51617;
 		rType = 0;
 		vrLen = 1608;
 		vrLoc = 50056;
@@ -1079,7 +1209,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1399";
 		rLen = 0;
-		rLoc = 51613;
+		rLoc = 51617;
 		rType = 0;
 		vrLen = 1609;
 		vrLoc = 50056;
@@ -1089,7 +1219,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1399";
 		rLen = 0;
-		rLoc = 51613;
+		rLoc = 51617;
 		rType = 0;
 		vrLen = 1608;
 		vrLoc = 50056;
@@ -1099,7 +1229,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1399";
 		rLen = 0;
-		rLoc = 51613;
+		rLoc = 51617;
 		rType = 0;
 		vrLen = 1610;
 		vrLoc = 50056;
@@ -1109,7 +1239,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 28";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 495;
 		rType = 0;
 		vrLen = 862;
 		vrLoc = 0;
@@ -1119,7 +1249,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 20";
 		rLen = 0;
-		rLoc = 337;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 826;
 		vrLoc = 0;
@@ -1129,7 +1259,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 20";
 		rLen = 0;
-		rLoc = 337;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 826;
 		vrLoc = 0;
@@ -1139,7 +1269,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 20";
 		rLen = 0;
-		rLoc = 337;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 862;
 		vrLoc = 0;
@@ -1149,7 +1279,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1399";
 		rLen = 0;
-		rLoc = 51613;
+		rLoc = 51617;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 50032;
@@ -1159,7 +1289,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1630;
 		vrLoc = 50032;
@@ -1169,7 +1299,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 20";
 		rLen = 0;
-		rLoc = 337;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 1029;
 		vrLoc = 357;
@@ -1179,7 +1309,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1396";
 		rLen = 0;
-		rLoc = 51509;
+		rLoc = 51513;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 50032;
@@ -1189,7 +1319,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1398";
 		rLen = 0;
-		rLoc = 51574;
+		rLoc = 51578;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 50032;
@@ -1199,7 +1329,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 85";
 		rLen = 0;
-		rLoc = 1883;
+		rLoc = 1839;
 		rType = 0;
 		vrLen = 1084;
 		vrLoc = 891;
@@ -1209,7 +1339,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1398";
 		rLen = 0;
-		rLoc = 51574;
+		rLoc = 51578;
 		rType = 0;
 		vrLen = 1634;
 		vrLoc = 50032;
@@ -1219,7 +1349,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1399";
 		rLen = 0;
-		rLoc = 51613;
+		rLoc = 51617;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 50032;
@@ -1229,7 +1359,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1383";
 		rLen = 0;
-		rLoc = 50901;
+		rLoc = 50905;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 50032;
@@ -1239,7 +1369,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1383";
 		rLen = 0;
-		rLoc = 50901;
+		rLoc = 50905;
 		rType = 0;
 		vrLen = 1636;
 		vrLoc = 47834;
@@ -1249,7 +1379,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 85";
 		rLen = 0;
-		rLoc = 1883;
+		rLoc = 1839;
 		rType = 0;
 		vrLen = 1084;
 		vrLoc = 891;
@@ -1259,7 +1389,7 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 21";
 		rLen = 0;
-		rLoc = 352;
+		rLoc = 334;
 		rType = 0;
 		vrLen = 829;
 		vrLoc = 0;
@@ -1269,10 +1399,1185 @@
 		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
 		name = "CatenaryConstraint.cpp: 21";
 		rLen = 0;
-		rLoc = 352;
+		rLoc = 334;
 		rType = 0;
 		vrLen = 865;
 		vrLoc = 0;
+	};
+	C250BC8615A40AD4009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 20";
+		rLen = 0;
+		rLoc = 321;
+		rType = 0;
+		vrLen = 865;
+		vrLoc = 0;
+	};
+	C250BC8915A40B07009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 25";
+		rLen = 0;
+		rLoc = 381;
+		rType = 0;
+		vrLen = 829;
+		vrLoc = 0;
+	};
+	C250BC8F15A40B68009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 98";
+		rLen = 0;
+		rLoc = 2301;
+		rType = 0;
+		vrLen = 1437;
+		vrLoc = 1313;
+	};
+	C250BC9315A40B77009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 105";
+		rLen = 0;
+		rLoc = 2513;
+		rType = 0;
+		vrLen = 1386;
+		vrLoc = 1389;
+	};
+	C250BC9715A40BC1009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */;
+		name = "ContactSolver.cpp: 111";
+		rLen = 0;
+		rLoc = 3654;
+		rType = 0;
+		vrLen = 2078;
+		vrLoc = 3533;
+	};
+	C250BC9815A40BC1009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 105";
+		rLen = 0;
+		rLoc = 2513;
+		rType = 0;
+		vrLen = 1389;
+		vrLoc = 1386;
+	};
+	C250BC9915A40BC1009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 99";
+		rLen = 0;
+		rLoc = 2324;
+		rType = 0;
+		vrLen = 1366;
+		vrLoc = 1386;
+	};
+	C250BC9F15A40BFA009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 20";
+		rLen = 0;
+		rLoc = 315;
+		rType = 0;
+		vrLen = 830;
+		vrLoc = 0;
+	};
+	C250BCA315A40C06009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 20";
+		rLen = 0;
+		rLoc = 315;
+		rType = 0;
+		vrLen = 830;
+		vrLoc = 0;
+	};
+	C250BCA715A40C0E009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 20";
+		rLen = 0;
+		rLoc = 314;
+		rType = 0;
+		vrLen = 831;
+		vrLoc = 0;
+	};
+	C250BCAB15A40C17009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 20";
+		rLen = 0;
+		rLoc = 314;
+		rType = 0;
+		vrLen = 830;
+		vrLoc = 0;
+	};
+	C250BCB315A40C42009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 27";
+		rLen = 0;
+		rLoc = 463;
+		rType = 0;
+		vrLen = 871;
+		vrLoc = 82;
+	};
+	C250BCB915A40C68009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1362";
+		rLen = 0;
+		rLoc = 50070;
+		rType = 0;
+		vrLen = 1885;
+		vrLoc = 49470;
+	};
+	C250BCBA15A40C68009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 27";
+		rLen = 0;
+		rLoc = 463;
+		rType = 0;
+		vrLen = 873;
+		vrLoc = 82;
+	};
+	C250BCBB15A40C68009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 65";
+		rLen = 0;
+		rLoc = 1197;
+		rType = 0;
+		vrLen = 1123;
+		vrLoc = 764;
+	};
+	C250BCC115A40CA2009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 52";
+		rLen = 0;
+		rLoc = 935;
+		rType = 0;
+		vrLen = 1120;
+		vrLoc = 812;
+	};
+	C250BCC215A40CA2009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1362";
+		rLen = 0;
+		rLoc = 50070;
+		rType = 0;
+		vrLen = 1882;
+		vrLoc = 49470;
+	};
+	C250BCC315A40CA2009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1390";
+		rLen = 0;
+		rLoc = 51185;
+		rType = 0;
+		vrLen = 1616;
+		vrLoc = 50056;
+	};
+	C250BCC715A40CB8009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1397";
+		rLen = 0;
+		rLoc = 51556;
+		rType = 0;
+		vrLen = 1616;
+		vrLoc = 50056;
+	};
+	C250BCCB15A40CC3009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1399";
+		rLen = 0;
+		rLoc = 51617;
+		rType = 0;
+		vrLen = 1616;
+		vrLoc = 50056;
+	};
+	C250BCD115A40CFD009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1399";
+		rLen = 0;
+		rLoc = 51617;
+		rType = 0;
+		vrLen = 1618;
+		vrLoc = 50056;
+	};
+	C250BCD215A40CFD009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 52";
+		rLen = 0;
+		rLoc = 935;
+		rType = 0;
+		vrLen = 1075;
+		vrLoc = 812;
+	};
+	C250BCD315A40CFD009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 74";
+		rLen = 0;
+		rLoc = 1576;
+		rType = 0;
+		vrLen = 1075;
+		vrLoc = 840;
+	};
+	C250BCD915A40D3E009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 74";
+		rLen = 0;
+		rLoc = 1576;
+		rType = 0;
+		vrLen = 1117;
+		vrLoc = 840;
+	};
+	C250BCDA15A40D3E009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 49";
+		rLen = 0;
+		rLoc = 935;
+		rType = 0;
+		vrLen = 1138;
+		vrLoc = 574;
+	};
+	C250BCE215A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2C9E236158F649C0083F1EC /* Ray2.h */;
+		name = "Ray2.h: 52";
+		rLen = 0;
+		rLoc = 710;
+		rType = 0;
+		vrLen = 649;
+		vrLoc = 201;
+	};
+	C250BCE315A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D90E1573A6DB00E31E38 /* Point2.h */;
+		name = "Point2.h: 116";
+		rLen = 0;
+		rLoc = 1628;
+		rType = 0;
+		vrLen = 725;
+		vrLoc = 933;
+	};
+	C250BCE415A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C27A86A81561442D007AD13C /* AABB2.h */;
+		name = "AABB2.h: 62";
+		rLen = 0;
+		rLoc = 1176;
+		rType = 0;
+		vrLen = 1122;
+		vrLoc = 463;
+	};
+	C250BCE515A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2DD136C1553EAFD00432320 /* Matrix3.h */;
+		name = "Matrix3.h: 67";
+		rLen = 0;
+		rLoc = 1122;
+		rType = 0;
+		vrLen = 972;
+		vrLoc = 521;
+	};
+	C250BCE615A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2DD136B1553EAEF00432320 /* Matrix2.h */;
+		name = "Matrix2.h: 125";
+		rLen = 0;
+		rLoc = 2339;
+		rType = 0;
+		vrLen = 827;
+		vrLoc = 1703;
+	};
+	C250BCE715A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2DD136D1553EC7C00432320 /* Vector3.h */;
+		name = "Vector3.h: 31";
+		rLen = 0;
+		rLoc = 419;
+		rType = 0;
+		vrLen = 648;
+		vrLoc = 0;
+	};
+	C250BCE815A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2DD136A1553EAE100432320 /* Vector2.h */;
+		name = "Vector2.h: 51";
+		rLen = 32;
+		rLoc = 647;
+		rType = 0;
+		vrLen = 745;
+		vrLoc = 349;
+	};
+	C250BCE915A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F157154E71AE00270D77 /* MathUtil.h */;
+		name = "MathUtil.h: 34";
+		rLen = 0;
+		rLoc = 465;
+		rType = 0;
+		vrLen = 639;
+		vrLoc = 0;
+	};
+	C250BCEA15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */;
+		name = "EdgeChain.cpp: 82";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 826;
+		vrLoc = 1232;
+	};
+	C250BCEB15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2EB2C2E1573C48600E92679 /* EdgeChain.h */;
+		name = "EdgeChain.h: 45";
+		rLen = 0;
+		rLoc = 806;
+		rType = 0;
+		vrLen = 836;
+		vrLoc = 233;
+	};
+	C250BCEC15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D8B3157398D600E31E38 /* Edge.cpp */;
+		name = "Edge.cpp: 46";
+		rLen = 0;
+		rLoc = 886;
+		rType = 0;
+		vrLen = 917;
+		vrLoc = 126;
+	};
+	C250BCED15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D8B2157398D600E31E38 /* Edge.h */;
+		name = "Edge.h: 33";
+		rLen = 0;
+		rLoc = 500;
+		rType = 0;
+		vrLen = 730;
+		vrLoc = 69;
+	};
+	C250BCEE15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F93A1552CD7A00270D77 /* Circle.cpp */;
+		name = "Circle.cpp: 40";
+		rLen = 0;
+		rLoc = 597;
+		rType = 0;
+		vrLen = 765;
+		vrLoc = 509;
+	};
+	C250BCEF15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F9321552CCDA00270D77 /* Capsule.cpp */;
+		name = "Capsule.cpp: 77";
+		rLen = 0;
+		rLoc = 1687;
+		rType = 0;
+		vrLen = 895;
+		vrLoc = 1050;
+	};
+	C250BCF015A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F85B1552BEF400270D77 /* Box.cpp */;
+		name = "Box.cpp: 24";
+		rLen = 0;
+		rLoc = 327;
+		rType = 0;
+		vrLen = 553;
+		vrLoc = 0;
+	};
+	C250BCF115A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F152154E71AE00270D77 /* Circle.h */;
+		name = "Circle.h: 59";
+		rLen = 0;
+		rLoc = 1216;
+		rType = 0;
+		vrLen = 1508;
+		vrLoc = 290;
+	};
+	C250BCF215A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F151154E71AE00270D77 /* Capsule.h */;
+		name = "Capsule.h: 62";
+		rLen = 13;
+		rLoc = 1485;
+		rType = 0;
+		vrLen = 1515;
+		vrLoc = 404;
+	};
+	C250BCF315A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F150154E71AE00270D77 /* Box.h */;
+		name = "Box.h: 31";
+		rLen = 14;
+		rLoc = 434;
+		rType = 0;
+		vrLen = 616;
+		vrLoc = 0;
+	};
+	C250BCF415A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F153154E71AE00270D77 /* CollisionShape.h */;
+		name = "CollisionShape.h: 62";
+		rLen = 0;
+		rLoc = 1030;
+		rType = 0;
+		vrLen = 804;
+		vrLoc = 616;
+	};
+	C250BCF515A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */;
+		name = "ConvexPolygon.cpp: 74";
+		rLen = 0;
+		rLoc = 1781;
+		rType = 0;
+		vrLen = 1031;
+		vrLoc = 1176;
+	};
+	C250BCF615A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2D19CD21587853F0042A724 /* ConvexPolygon.h */;
+		name = "ConvexPolygon.h: 29";
+		rLen = 0;
+		rLoc = 488;
+		rType = 0;
+		vrLen = 801;
+		vrLoc = 23;
+	};
+	C250BCF715A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */;
+		name = "PhysicalShape.cpp: 33";
+		rLen = 0;
+		rLoc = 794;
+		rType = 0;
+		vrLen = 1045;
+		vrLoc = 25;
+	};
+	C250BCF815A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F8021552996600270D77 /* PhysicalBody.cpp */;
+		name = "PhysicalBody.cpp: 38";
+		rLen = 0;
+		rLoc = 780;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 326;
+	};
+	C250BCF915A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F7C815528EE500270D77 /* PhysicalWorld.cpp */;
+		name = "PhysicalWorld.cpp: 331";
+		rLen = 0;
+		rLoc = 9662;
+		rType = 0;
+		vrLen = 1283;
+		vrLoc = 8742;
+	};
+	C250BCFA15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F14E154E71AE00270D77 /* PhysicalWorld.h */;
+		name = "PhysicalWorld.h: 124";
+		rLen = 24;
+		rLoc = 2604;
+		rType = 0;
+		vrLen = 1194;
+		vrLoc = 1603;
+	};
+	C250BCFB15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F14D154E71AE00270D77 /* PhysicalShape.h */;
+		name = "PhysicalShape.h: 30";
+		rLen = 0;
+		rLoc = 467;
+		rType = 0;
+		vrLen = 787;
+		vrLoc = 356;
+	};
+	C250BCFC15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F14C154E71AE00270D77 /* PhysicalBody.h */;
+		name = "PhysicalBody.h: 111";
+		rLen = 0;
+		rLoc = 2417;
+		rType = 0;
+		vrLen = 698;
+		vrLoc = 1992;
+	};
+	C250BCFD15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F14B154E71AE00270D77 /* PhysicalAppearance.h */;
+		name = "PhysicalAppearance.h: 81";
+		rLen = 42;
+		rLoc = 1379;
+		rType = 0;
+		vrLen = 576;
+		vrLoc = 956;
+	};
+	C250BCFE15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 49";
+		rLen = 0;
+		rLoc = 935;
+		rType = 0;
+		vrLen = 1115;
+		vrLoc = 464;
+	};
+	C250BCFF15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */;
+		name = "CatenaryConstraint.h: 32";
+		rLen = 50;
+		rLoc = 572;
+		rType = 0;
+		vrLen = 771;
+		vrLoc = 0;
+	};
+	C250BD0015A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2AD46CC1599EC2C009C4951 /* WeldConstraint.cpp */;
+		name = "WeldConstraint.cpp: 110";
+		rLen = 0;
+		rLoc = 2780;
+		rType = 0;
+		vrLen = 1211;
+		vrLoc = 2759;
+	};
+	C250BD0115A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2AD46CB1599EC2C009C4951 /* WeldConstraint.h */;
+		name = "WeldConstraint.h: 29";
+		rLen = 0;
+		rLoc = 470;
+		rType = 0;
+		vrLen = 739;
+		vrLoc = 0;
+	};
+	C250BD0215A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2D19CC2158782D40042A724 /* HingeConstraint.cpp */;
+		name = "HingeConstraint.cpp: 119";
+		rLen = 0;
+		rLoc = 2686;
+		rType = 0;
+		vrLen = 1118;
+		vrLoc = 2267;
+	};
+	C250BD0315A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2D19CC1158782D40042A724 /* HingeConstraint.h */;
+		name = "HingeConstraint.h: 33";
+		rLen = 0;
+		rLoc = 655;
+		rType = 0;
+		vrLen = 694;
+		vrLoc = 0;
+	};
+	C250BD0415A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C299B5361581CA820040896A /* DistanceConstraint.cpp */;
+		name = "DistanceConstraint.cpp: 134";
+		rLen = 0;
+		rLoc = 3149;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 1312;
+	};
+	C250BD0515A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F53E154FDF2900270D77 /* DistantConstraint.h */;
+		name = "DistantConstraint.h: 35";
+		rLen = 0;
+		rLoc = 696;
+		rType = 0;
+		vrLen = 738;
+		vrLoc = 0;
+	};
+	C250BD0615A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F248154E9CAD00270D77 /* Constraint.h */;
+		name = "Constraint.h: 20";
+		rLen = 12;
+		rLoc = 320;
+		rType = 0;
+		vrLen = 1017;
+		vrLoc = 15;
+	};
+	C250BD0715A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */;
+		name = "Contact.cpp: 33";
+		rLen = 13;
+		rLoc = 916;
+		rType = 0;
+		vrLen = 1353;
+		vrLoc = 868;
+	};
+	C250BD0815A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */;
+		name = "ContactSolver.cpp: 111";
+		rLen = 0;
+		rLoc = 3654;
+		rType = 0;
+		vrLen = 2078;
+		vrLoc = 3533;
+	};
+	C250BD0915A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F149154E71AE00270D77 /* ContactSolver.h */;
+		name = "ContactSolver.h: 18";
+		rLen = 0;
+		rLoc = 275;
+		rType = 0;
+		vrLen = 721;
+		vrLoc = 0;
+	};
+	C250BD0A15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F147154E71AE00270D77 /* Contact.h */;
+		name = "Contact.h: 160";
+		rLen = 0;
+		rLoc = 2791;
+		rType = 0;
+		vrLen = 1565;
+		vrLoc = 2278;
+	};
+	C250BD0B15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */;
+		name = "CollisionDetectionEdgePolygon.cpp: 76";
+		rLen = 0;
+		rLoc = 2697;
+		rType = 0;
+		vrLen = 1820;
+		vrLoc = 329;
+	};
+	C250BD0C15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D87F157358D600E31E38 /* CollisionDetectionEdgePolygon.h */;
+		name = "CollisionDetectionEdgePolygon.h: 37";
+		rLen = 0;
+		rLoc = 1212;
+		rType = 0;
+		vrLen = 1845;
+		vrLoc = 185;
+	};
+	C250BD0D15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */;
+		name = "CollisionDetectionCapsulePolygon.cpp: 140";
+		rLen = 0;
+		rLoc = 4751;
+		rType = 0;
+		vrLen = 1289;
+		vrLoc = 4397;
+	};
+	C250BD0E15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D19A156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.h */;
+		name = "CollisionDetectionCapsulePolygon.h: 44";
+		rLen = 0;
+		rLoc = 1598;
+		rType = 0;
+		vrLen = 1684;
+		vrLoc = 42;
+	};
+	C250BD0F15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */;
+		name = "CollisionDetectionCirclePolygon.cpp: 60";
+		rLen = 13;
+		rLoc = 1708;
+		rType = 0;
+		vrLen = 1535;
+		vrLoc = 881;
+	};
+	C250BD1015A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */;
+		name = "CollisionDetectionCirclePolygon.h: 32";
+		rLen = 13;
+		rLoc = 977;
+		rType = 0;
+		vrLen = 1296;
+		vrLoc = 0;
+	};
+	C250BD1115A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */;
+		name = "CollisionDetectionPolygon.cpp: 260";
+		rLen = 0;
+		rLoc = 8646;
+		rType = 0;
+		vrLen = 1232;
+		vrLoc = 7991;
+	};
+	C250BD1215A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */;
+		name = "CollisionDetectionPolygon.h: 30";
+		rLen = 0;
+		rLoc = 1223;
+		rType = 0;
+		vrLen = 1011;
+		vrLoc = 6269;
+	};
+	C250BD1315A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F141154E71AE00270D77 /* CollisionManager.h */;
+		name = "CollisionManager.h: 21";
+		rLen = 16;
+		rLoc = 387;
+		rType = 0;
+		vrLen = 730;
+		vrLoc = 113;
+	};
+	C250BD1415A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */;
+		name = "CollisionManager.cpp: 70";
+		rLen = 0;
+		rLoc = 1596;
+		rType = 0;
+		vrLen = 1105;
+		vrLoc = 1171;
+	};
+	C250BD1515A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */;
+		name = "CollisionDetection.cpp: 70";
+		rLen = 13;
+		rLoc = 3027;
+		rType = 0;
+		vrLen = 2288;
+		vrLoc = 361;
+	};
+	C250BD1615A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F1A5154E76CD00270D77 /* CollisionDetection.h */;
+		name = "CollisionDetection.h: 16";
+		rLen = 23;
+		rLoc = 214;
+		rType = 0;
+		vrLen = 697;
+		vrLoc = 0;
+	};
+	C250BD1715A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C299B4601580D26D0040896A /* Simplex.h */;
+		name = "Simplex.h: 81";
+		rLen = 0;
+		rLoc = 1757;
+		rType = 0;
+		vrLen = 679;
+		vrLoc = 17;
+	};
+	C250BD1815A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C299B45E1580D26D0040896A /* GJKAlgorithm.h */;
+		name = "GJKAlgorithm.h: 20";
+		rLen = 0;
+		rLoc = 228;
+		rType = 0;
+		vrLen = 968;
+		vrLoc = 0;
+	};
+	C250BD1915A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */;
+		name = "GJKAlgorithm.cpp: 165";
+		rLen = 0;
+		rLoc = 4003;
+		rType = 0;
+		vrLen = 1189;
+		vrLoc = 3354;
+	};
+	C250BD1A15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F80E15529CBC00270D77 /* GLRenderer.cpp */;
+		name = "GLRenderer.cpp: 176";
+		rLen = 0;
+		rLoc = 3817;
+		rType = 0;
+		vrLen = 1007;
+		vrLoc = 1520;
+	};
+	C250BD1B15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F81E15529F4700270D77 /* GLRenderer.h */;
+		name = "GLRenderer.h: 54";
+		rLen = 0;
+		rLoc = 1073;
+		rType = 0;
+		vrLen = 964;
+		vrLoc = 165;
+	};
+	C250BD1C15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F80D15529CBC00270D77 /* Renderer.h */;
+		name = "Renderer.h: 52";
+		rLen = 46;
+		rLoc = 842;
+		rType = 0;
+		vrLen = 1037;
+		vrLoc = 366;
+	};
+	C250BD1D15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F144154E71AE00270D77 /* Dirac2D.h */;
+		name = "Dirac2D.h: 72";
+		rLen = 0;
+		rLoc = 2497;
+		rType = 0;
+		vrLen = 1260;
+		vrLoc = 1819;
+	};
+	C250BD1E15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2C9E1A8158F0F1A0083F1EC /* CallBacks.h */;
+		name = "CallBacks.h: 29";
+		rLen = 0;
+		rLoc = 798;
+		rType = 0;
+		vrLen = 948;
+		vrLoc = 0;
+	};
+	C250BD1F15A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F143154E71AE00270D77 /* definitions.h */;
+		name = "definitions.h: 34";
+		rLen = 0;
+		rLoc = 624;
+		rType = 0;
+		vrLen = 904;
+		vrLoc = 0;
+	};
+	C250BD2015A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F15A154E71AE00270D77 /* Settings.h */;
+		name = "Settings.h: 44";
+		rLen = 0;
+		rLoc = 1186;
+		rType = 0;
+		vrLen = 1186;
+		vrLoc = 0;
+	};
+	C250BD2115A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F142154E71AE00270D77 /* common.h */;
+		name = "common.h: 46";
+		rLen = 0;
+		rLoc = 733;
+		rType = 0;
+		vrLen = 723;
+		vrLoc = 268;
+	};
+	C250BD2215A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 758921F213B0E3DF0005E1E2 /* DTimer.h */;
+		name = "DTimer.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 560;
+		vrLoc = 0;
+	};
+	C250BD2315A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */;
+		name = "DTimer.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 923;
+		vrLoc = 0;
+	};
+	C250BD2415A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2D14730157E533C0056341B /* PolygonHelper.h */;
+		name = "PolygonHelper.h: 18";
+		rLen = 0;
+		rLoc = 353;
+		rType = 0;
+		vrLen = 1158;
+		vrLoc = 850;
+	};
+	C250BD2515A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1399";
+		rLen = 0;
+		rLoc = 51617;
+		rType = 0;
+		vrLen = 1617;
+		vrLoc = 50056;
+	};
+	C250BD2615A40DF6009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1398";
+		rLen = 0;
+		rLoc = 51578;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 50032;
+	};
+	C250BD2A15A40DFF009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1396";
+		rLen = 0;
+		rLoc = 51513;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 50032;
+	};
+	C250BD2E15A40E6C009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1398";
+		rLen = 0;
+		rLoc = 51578;
+		rType = 0;
+		vrLen = 1667;
+		vrLoc = 50098;
+	};
+	C250BD3315A40E75009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1398";
+		rLen = 0;
+		rLoc = 51580;
+		rType = 0;
+		vrLen = 1667;
+		vrLoc = 50098;
+	};
+	C250BD3715A40E87009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1398";
+		rLen = 0;
+		rLoc = 51580;
+		rType = 0;
+		vrLen = 1667;
+		vrLoc = 50098;
+	};
+	C250BD3D15A40EBF009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1396";
+		rLen = 0;
+		rLoc = 51513;
+		rType = 0;
+		vrLen = 1667;
+		vrLoc = 50098;
+	};
+	C250BD4315A40ED7009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1390";
+		rLen = 0;
+		rLoc = 51185;
+		rType = 0;
+		vrLen = 1665;
+		vrLoc = 50098;
+	};
+	C250BD4815A41D4E009C9A37 /* CircleSweep.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 760}}";
+			sepNavSelRange = "{761, 0}";
+			sepNavVisRange = "{3, 876}";
+		};
+	};
+	C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1486}}";
+			sepNavSelRange = "{974, 0}";
+			sepNavVisRange = "{1006, 683}";
+			sepNavWindowFrame = "{{6, 60}, {1914, 997}}";
+		};
+	};
+	C250BD7415A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */;
+		name = "CatenaryConstraint.cpp: 81";
+		rLen = 0;
+		rLoc = 1839;
+		rType = 0;
+		vrLen = 1405;
+		vrLoc = 1325;
+	};
+	C250BD7515A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2D19CD21587853F0042A724 /* ConvexPolygon.h */;
+		name = "ConvexPolygon.h: 29";
+		rLen = 0;
+		rLoc = 488;
+		rType = 0;
+		vrLen = 799;
+		vrLoc = 167;
+	};
+	C250BD7615A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F150154E71AE00270D77 /* Box.h */;
+		name = "Box.h: 24";
+		rLen = 0;
+		rLoc = 285;
+		rType = 0;
+		vrLen = 616;
+		vrLoc = 0;
+	};
+	C250BD7715A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D8B2157398D600E31E38 /* Edge.h */;
+		name = "Edge.h: 9";
+		rLen = 725;
+		rLoc = 74;
+		rType = 0;
+		vrLen = 730;
+		vrLoc = 69;
+	};
+	C250BD7815A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F144154E71AE00270D77 /* Dirac2D.h */;
+		name = "Dirac2D.h: 81";
+		rLen = 0;
+		rLoc = 2749;
+		rType = 0;
+		vrLen = 1253;
+		vrLoc = 1861;
+	};
+	C250BD7915A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F9321552CCDA00270D77 /* Capsule.cpp */;
+		name = "Capsule.cpp: 77";
+		rLen = 0;
+		rLoc = 1687;
+		rType = 0;
+		vrLen = 1183;
+		vrLoc = 79;
+	};
+	C250BD7A15A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */;
+		name = "ConvexPolygon.cpp: 48";
+		rLen = 0;
+		rLoc = 1110;
+		rType = 0;
+		vrLen = 1191;
+		vrLoc = 411;
+	};
+	C250BD7B15A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2EB2C2E1573C48600E92679 /* EdgeChain.h */;
+		name = "EdgeChain.h: 21";
+		rLen = 40;
+		rLoc = 253;
+		rType = 0;
+		vrLen = 884;
+		vrLoc = 192;
+	};
+	C250BD7C15A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F153154E71AE00270D77 /* CollisionShape.h */;
+		name = "CollisionShape.h: 18";
+		rLen = 16;
+		rLoc = 341;
+		rType = 0;
+		vrLen = 912;
+		vrLoc = 0;
+	};
+	C250BD7D15A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C250BD4815A41D4E009C9A37 /* CircleSweep.h */;
+		name = "CircleSweep.h: 45";
+		rLen = 0;
+		rLoc = 761;
+		rType = 0;
+		vrLen = 876;
+		vrLoc = 3;
+	};
+	C250BD7E15A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */;
+		name = "CircleSweep.cpp: 50";
+		rLen = 0;
+		rLoc = 974;
+		rType = 0;
+		vrLen = 683;
+		vrLoc = 1006;
+	};
+	C250BD7F15A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */;
+		name = "EdgeChain.cpp: 58";
+		rLen = 0;
+		rLoc = 1089;
+		rType = 0;
+		vrLen = 1030;
+		vrLoc = 441;
+	};
+	C250BD8015A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */;
+		name = "CollisionDetectionEdgePolygon.cpp: 40";
+		rLen = 0;
+		rLoc = 1135;
+		rType = 0;
+		vrLen = 2093;
+		vrLoc = 208;
+	};
+	C250BD8115A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1390";
+		rLen = 0;
+		rLoc = 51185;
+		rType = 0;
+		vrLen = 1741;
+		vrLoc = 50059;
+	};
+	C250BD8215A423A0009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1440";
+		rLen = 0;
+		rLoc = 52516;
+		rType = 0;
+		vrLen = 1056;
+		vrLoc = 51671;
+	};
+	C250BD8615A423CB009C9A37 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1440";
+		rLen = 0;
+		rLoc = 52516;
+		rType = 0;
+		vrLen = 1056;
+		vrLoc = 51671;
 	};
 	C257EBEA154584EC00270D77 /* Contact.h */ = {
 		isa = PBXFileReference;
@@ -1354,63 +2659,63 @@
 	};
 	C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1859, 3281}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 3388}}";
 			sepNavSelRange = "{1223, 0}";
-			sepNavVisRange = "{443, 1559}";
+			sepNavVisRange = "{6269, 1011}";
 		};
 	};
 	C257F140154E71AE00270D77 /* CollisionManager.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1859, 3284}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 3269}}";
 			sepNavSelRange = "{1596, 0}";
-			sepNavVisRange = "{1325, 471}";
+			sepNavVisRange = "{1171, 1105}";
 		};
 	};
 	C257F141154E71AE00270D77 /* CollisionManager.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 849}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 821}}";
 			sepNavSelRange = "{387, 16}";
 			sepNavVisRange = "{113, 730}";
 		};
 	};
 	C257F142154E71AE00270D77 /* common.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1859, 1029}}";
-			sepNavSelRange = "{181, 6}";
-			sepNavVisRange = "{0, 329}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1029}}";
+			sepNavSelRange = "{733, 0}";
+			sepNavVisRange = "{268, 723}";
 		};
 	};
 	C257F143154E71AE00270D77 /* definitions.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 670}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{624, 0}";
 			sepNavVisRange = "{0, 904}";
 		};
 	};
 	C257F144154E71AE00270D77 /* Dirac2D.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1288}}";
-			sepNavSelRange = "{2497, 0}";
-			sepNavVisRange = "{1819, 1260}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1303}}";
+			sepNavSelRange = "{2749, 0}";
+			sepNavVisRange = "{1861, 1253}";
 		};
 	};
 	C257F147154E71AE00270D77 /* Contact.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 3011}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 3111}}";
 			sepNavSelRange = "{2791, 0}";
-			sepNavVisRange = "{2380, 1019}";
+			sepNavVisRange = "{2278, 1565}";
 		};
 	};
 	C257F148154E71AE00270D77 /* ContactSolver.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 2611}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2656}}";
 			sepNavSelRange = "{3654, 0}";
-			sepNavVisRange = "{3721, 2320}";
+			sepNavVisRange = "{3533, 2078}";
 		};
 	};
 	C257F149154E71AE00270D77 /* ContactSolver.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 642}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{275, 0}";
 			sepNavVisRange = "{0, 721}";
 		};
@@ -1424,56 +2729,56 @@
 	};
 	C257F14C154E71AE00270D77 /* PhysicalBody.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 2323}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2442}}";
 			sepNavSelRange = "{2417, 0}";
-			sepNavVisRange = "{2070, 768}";
+			sepNavVisRange = "{1992, 698}";
 		};
 	};
 	C257F14D154E71AE00270D77 /* PhysicalShape.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1002}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1015}}";
 			sepNavSelRange = "{467, 0}";
-			sepNavVisRange = "{322, 791}";
+			sepNavVisRange = "{356, 787}";
 		};
 	};
 	C257F14E154E71AE00270D77 /* PhysicalWorld.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1987}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1974}}";
 			sepNavSelRange = "{2604, 24}";
 			sepNavVisRange = "{1603, 1194}";
 		};
 	};
 	C257F150154E71AE00270D77 /* Box.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 655}}";
-			sepNavSelRange = "{434, 14}";
-			sepNavVisRange = "{0, 615}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
+			sepNavSelRange = "{285, 0}";
+			sepNavVisRange = "{0, 616}";
 		};
 	};
 	C257F151154E71AE00270D77 /* Capsule.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1090}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1090}}";
 			sepNavSelRange = "{1485, 13}";
-			sepNavVisRange = "{679, 1240}";
+			sepNavVisRange = "{404, 1515}";
 		};
 	};
 	C257F152154E71AE00270D77 /* Circle.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1015}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1015}}";
 			sepNavSelRange = "{1216, 0}";
-			sepNavVisRange = "{383, 1415}";
+			sepNavVisRange = "{290, 1508}";
 		};
 	};
 	C257F153154E71AE00270D77 /* CollisionShape.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1422}}";
-			sepNavSelRange = "{1012, 0}";
-			sepNavVisRange = "{616, 804}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1452}}";
+			sepNavSelRange = "{341, 16}";
+			sepNavVisRange = "{0, 912}";
 		};
 	};
 	C257F157154E71AE00270D77 /* MathUtil.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 2260}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2260}}";
 			sepNavSelRange = "{465, 0}";
 			sepNavVisRange = "{0, 639}";
 		};
@@ -1488,21 +2793,21 @@
 	};
 	C257F15A154E71AE00270D77 /* Settings.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 650}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{1186, 0}";
 			sepNavVisRange = "{0, 1186}";
 		};
 	};
 	C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1859, 5368}}";
-			sepNavSelRange = "{8645, 0}";
-			sepNavVisRange = "{8253, 750}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 5096}}";
+			sepNavSelRange = "{8646, 0}";
+			sepNavVisRange = "{7991, 1232}";
 		};
 	};
 	C257F1A5154E76CD00270D77 /* CollisionDetection.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 697}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{214, 23}";
 			sepNavVisRange = "{0, 697}";
 		};
@@ -1511,19 +2816,19 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 1452}}";
 			sepNavSelRange = "{3027, 13}";
-			sepNavVisRange = "{362, 2287}";
+			sepNavVisRange = "{361, 2288}";
 		};
 	};
 	C257F248154E9CAD00270D77 /* Constraint.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 790}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 805}}";
 			sepNavSelRange = "{320, 12}";
-			sepNavVisRange = "{15, 1032}";
+			sepNavVisRange = "{15, 1017}";
 		};
 	};
 	C257F53E154FDF2900270D77 /* DistantConstraint.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 648}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{696, 0}";
 			sepNavVisRange = "{0, 738}";
 		};
@@ -1537,23 +2842,23 @@
 	};
 	C257F7C815528EE500270D77 /* PhysicalWorld.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 6271}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 6301}}";
 			sepNavSelRange = "{9662, 0}";
-			sepNavVisRange = "{8556, 1362}";
+			sepNavVisRange = "{8742, 1283}";
 		};
 	};
 	C257F8021552996600270D77 /* PhysicalBody.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1859, 5521}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 5506}}";
 			sepNavSelRange = "{780, 0}";
-			sepNavVisRange = "{524, 700}";
+			sepNavVisRange = "{326, 1164}";
 		};
 	};
 	C257F80D15529CBC00270D77 /* Renderer.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1122}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1107}}";
 			sepNavSelRange = "{842, 46}";
-			sepNavVisRange = "{389, 1012}";
+			sepNavVisRange = "{366, 1037}";
 			sepNavWindowFrame = "{{6, 60}, {1914, 997}}";
 		};
 	};
@@ -1561,35 +2866,35 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 2701}}";
 			sepNavSelRange = "{3817, 0}";
-			sepNavVisRange = "{1550, 957}";
+			sepNavVisRange = "{1520, 1007}";
 		};
 	};
 	C257F81E15529F4700270D77 /* GLRenderer.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 889}}";
 			sepNavSelRange = "{1073, 0}";
-			sepNavVisRange = "{188, 941}";
+			sepNavVisRange = "{165, 964}";
 		};
 	};
 	C257F85B1552BEF400270D77 /* Box.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 751}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 766}}";
 			sepNavSelRange = "{327, 0}";
-			sepNavVisRange = "{3, 548}";
+			sepNavVisRange = "{0, 553}";
 		};
 	};
 	C257F9321552CCDA00270D77 /* Capsule.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1520, 1531}}";
 			sepNavSelRange = "{1687, 0}";
-			sepNavVisRange = "{1202, 691}";
+			sepNavVisRange = "{79, 1183}";
 		};
 	};
 	C257F93A1552CD7A00270D77 /* Circle.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1186}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1201}}";
 			sepNavSelRange = "{597, 0}";
-			sepNavVisRange = "{552, 683}";
+			sepNavVisRange = "{509, 765}";
 		};
 	};
 	C257F9541552CF8000270D77 /* PBXTextBookmark */ = {
@@ -1621,16 +2926,16 @@
 	};
 	C27A86A81561442D007AD13C /* AABB2.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 2247}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2217}}";
 			sepNavSelRange = "{1176, 0}";
-			sepNavVisRange = "{571, 1083}";
+			sepNavVisRange = "{463, 1122}";
 		};
 	};
 	C27A8ADD15661EDD007AD13C /* Contact.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1261}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1081}}";
 			sepNavSelRange = "{916, 13}";
-			sepNavVisRange = "{1174, 1336}";
+			sepNavVisRange = "{868, 1353}";
 		};
 	};
 	C27A8B1A15662321007AD13C /* PBXTextBookmark */ = {
@@ -1744,23 +3049,23 @@
 	};
 	C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 3918}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 3993}}";
 			sepNavSelRange = "{4003, 0}";
 			sepNavVisRange = "{3354, 1189}";
 		};
 	};
 	C299B45E1580D26D0040896A /* GJKAlgorithm.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 867}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 779}}";
 			sepNavSelRange = "{228, 0}";
-			sepNavVisRange = "{0, 959}";
+			sepNavVisRange = "{0, 968}";
 		};
 	};
 	C299B4601580D26D0040896A /* Simplex.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 3106}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 3106}}";
 			sepNavSelRange = "{1757, 0}";
-			sepNavVisRange = "{0, 696}";
+			sepNavVisRange = "{17, 679}";
 		};
 	};
 	C299B5021580F4ED0040896A /* PBXTextBookmark */ = {
@@ -1775,9 +3080,9 @@
 	};
 	C299B5361581CA820040896A /* DistanceConstraint.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 2431}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2446}}";
 			sepNavSelRange = "{3149, 0}";
-			sepNavVisRange = "{1315, 1269}";
+			sepNavVisRange = "{1312, 1349}";
 		};
 	};
 	C299B62515820AED0040896A /* PBXTextBookmark */ = {
@@ -1802,16 +3107,16 @@
 	};
 	C2AD46CB1599EC2C009C4951 /* WeldConstraint.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 650}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{470, 0}";
 			sepNavVisRange = "{0, 739}";
 		};
 	};
 	C2AD46CC1599EC2C009C4951 /* WeldConstraint.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 2173}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2296}}";
 			sepNavSelRange = "{2780, 0}";
-			sepNavVisRange = "{2629, 1153}";
+			sepNavVisRange = "{2759, 1211}";
 		};
 	};
 	C2AD4762159AF834009C4951 /* PBXTextBookmark */ = {
@@ -2033,7 +3338,7 @@
 		rLen = 13;
 		rLoc = 916;
 		rType = 0;
-		vrLen = 1336;
+		vrLen = 1047;
 		vrLoc = 1174;
 	};
 	C2AD4D89159C7831009C4951 /* PBXTextBookmark */ = {
@@ -2095,16 +3400,16 @@
 	};
 	C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 572}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{977, 13}";
-			sepNavVisRange = "{100, 1196}";
+			sepNavVisRange = "{0, 1296}";
 		};
 	};
 	C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 2697}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2772}}";
 			sepNavSelRange = "{1708, 13}";
-			sepNavVisRange = "{881, 1566}";
+			sepNavVisRange = "{881, 1535}";
 		};
 	};
 	C2B6CE27156CC6B900E31E38 /* PBXTextBookmark */ = {
@@ -2126,16 +3431,16 @@
 	};
 	C2B6D19A156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 701}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 701}}";
 			sepNavSelRange = "{1598, 0}";
-			sepNavVisRange = "{338, 1388}";
+			sepNavVisRange = "{42, 1684}";
 		};
 	};
 	C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 6545}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 6784}}";
 			sepNavSelRange = "{4751, 0}";
-			sepNavVisRange = "{4143, 1192}";
+			sepNavVisRange = "{4397, 1289}";
 		};
 	};
 	C2B6D75B156FCE1500E31E38 /* CollisionDetectionCapsulePolygon.h:23 */ = {
@@ -2157,37 +3462,37 @@
 	};
 	C2B6D87F157358D600E31E38 /* CollisionDetectionEdgePolygon.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 821}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 834}}";
 			sepNavSelRange = "{1212, 0}";
-			sepNavVisRange = "{360, 1410}";
+			sepNavVisRange = "{185, 1845}";
 		};
 	};
 	C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 8618}}";
-			sepNavSelRange = "{2697, 0}";
-			sepNavVisRange = "{208, 1941}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 8543}}";
+			sepNavSelRange = "{1135, 0}";
+			sepNavVisRange = "{208, 2093}";
 		};
 	};
 	C2B6D8B2157398D600E31E38 /* Edge.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 717}}";
-			sepNavSelRange = "{500, 0}";
-			sepNavVisRange = "{0, 733}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 745}}";
+			sepNavSelRange = "{74, 725}";
+			sepNavVisRange = "{69, 730}";
 		};
 	};
 	C2B6D8B3157398D600E31E38 /* Edge.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1651}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1666}}";
 			sepNavSelRange = "{886, 0}";
-			sepNavVisRange = "{150, 890}";
+			sepNavVisRange = "{126, 917}";
 		};
 	};
 	C2B6D90E1573A6DB00E31E38 /* Point2.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1811}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1765}}";
 			sepNavSelRange = "{1628, 0}";
-			sepNavVisRange = "{997, 661}";
+			sepNavVisRange = "{933, 725}";
 		};
 	};
 	C2B6D9181573A92C00E31E38 /* PBXTextBookmark */ = {
@@ -2202,16 +3507,16 @@
 	};
 	C2C9E1A8158F0F1A0083F1EC /* CallBacks.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 605}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{798, 0}";
 			sepNavVisRange = "{0, 948}";
 		};
 	};
 	C2C9E236158F649C0083F1EC /* Ray2.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 925}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 925}}";
 			sepNavSelRange = "{710, 0}";
-			sepNavVisRange = "{247, 604}";
+			sepNavVisRange = "{201, 649}";
 		};
 	};
 	C2C9E247158F66F90083F1EC /* PBXTextBookmark */ = {
@@ -2269,7 +3574,7 @@
 		fRef = C257F153154E71AE00270D77 /* CollisionShape.h */;
 		name = "CollisionShape.h: 62";
 		rLen = 0;
-		rLoc = 1012;
+		rLoc = 1030;
 		rType = 0;
 		vrLen = 804;
 		vrLoc = 616;
@@ -2424,9 +3729,9 @@
 	};
 	C2D14730157E533C0056341B /* PolygonHelper.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1585}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2262}}";
 			sepNavSelRange = "{353, 0}";
-			sepNavVisRange = "{0, 1102}";
+			sepNavVisRange = "{850, 1158}";
 		};
 	};
 	C2D14821157F26CD0056341B /* CollisionDetectionEdgePolygon.cpp:210 */ = {
@@ -2483,7 +3788,7 @@
 	};
 	C2D19CC1158782D40042A724 /* HingeConstraint.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 650}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 666}}";
 			sepNavSelRange = "{655, 0}";
 			sepNavVisRange = "{0, 694}";
 		};
@@ -2492,21 +3797,21 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 2116}}";
 			sepNavSelRange = "{2686, 0}";
-			sepNavVisRange = "{2307, 1078}";
+			sepNavVisRange = "{2267, 1118}";
 		};
 	};
 	C2D19CD21587853F0042A724 /* ConvexPolygon.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1572}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1362}}";
 			sepNavSelRange = "{488, 0}";
-			sepNavVisRange = "{75, 744}";
+			sepNavVisRange = "{167, 799}";
 		};
 	};
 	C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1859, 2926}}";
-			sepNavSelRange = "{1868, 0}";
-			sepNavVisRange = "{528, 528}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2911}}";
+			sepNavSelRange = "{1110, 0}";
+			sepNavVisRange = "{411, 1191}";
 		};
 	};
 	C2D19CF7158788BC0042A724 /* PBXTextBookmark */ = {
@@ -2679,7 +3984,7 @@
 	};
 	C2DD136A1553EAE100432320 /* Vector2.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 4077}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 4062}}";
 			sepNavSelRange = "{647, 32}";
 			sepNavVisRange = "{349, 745}";
 		};
@@ -2688,26 +3993,26 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 2080}}";
 			sepNavSelRange = "{2339, 0}";
-			sepNavVisRange = "{1676, 824}";
+			sepNavVisRange = "{1703, 827}";
 		};
 	};
 	C2DD136C1553EAFD00432320 /* Matrix3.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 4602}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 4587}}";
 			sepNavSelRange = "{1122, 0}";
 			sepNavVisRange = "{521, 972}";
 		};
 	};
 	C2DD136D1553EC7C00432320 /* Vector3.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 2335}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2275}}";
 			sepNavSelRange = "{419, 0}";
-			sepNavVisRange = "{3, 642}";
+			sepNavVisRange = "{0, 648}";
 		};
 	};
 	C2DD149C1558102700432320 /* PhysicalShape.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 1051}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1096}}";
 			sepNavSelRange = "{794, 0}";
 			sepNavVisRange = "{25, 1045}";
 		};
@@ -2798,16 +4103,16 @@
 	};
 	C2EB2C2E1573C48600E92679 /* EdgeChain.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 970}}";
-			sepNavSelRange = "{806, 0}";
-			sepNavVisRange = "{243, 803}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 970}}";
+			sepNavSelRange = "{253, 40}";
+			sepNavVisRange = "{192, 884}";
 		};
 	};
 	C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1520, 2362}}";
-			sepNavSelRange = "{1592, 0}";
-			sepNavVisRange = "{1311, 699}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 2266}}";
+			sepNavSelRange = "{1089, 0}";
+			sepNavVisRange = "{441, 1030}";
 		};
 	};
 	C2EB2CD815749E8600E92679 /* PBXTextBookmark */ = {

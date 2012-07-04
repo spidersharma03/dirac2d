@@ -78,6 +78,7 @@
 #include "geometry/ConvexPolygon.h"
 #include "geometry/Edge.h"
 #include "geometry/EdgeChain.h"
+#include "geometry/CircleSweep.h"
 
 #include "collision/CollisionDetection.h"
 #include "collision/CollisionDetectionPolygon.h"
