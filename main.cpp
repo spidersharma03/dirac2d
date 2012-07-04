@@ -1359,7 +1359,7 @@ void demo21()
 	// Create Circle Chain
 }
 
-// Weld Constraint
+// Catenary Constraint
 void demo22()
 {
 	// Create Ground Body
@@ -1388,15 +1388,15 @@ void demo22()
 		dfloat boxWidth = 0.05f; dfloat boxHeight = 0.05f;
 		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
-		pBox->createPhysicalShape(pApp);
 		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.1f,0.1f);
+		pBox->createPhysicalShape(pApp);
 		
 		CatenaryConstraint* cc = (CatenaryConstraint*)pWorld->createConstraint(ECT_CATENARY);
 		cc->m_PhysicalBody1 = pBox;
-		cc->m_FixedPoint1 = Vector2f(-0.9f,0.0f);
+		cc->m_FixedPoint1 = Vector2f(-0.9f,0.5f);
 		cc->m_FixedPoint2 = Vector2f(0.9f,0.0f);
-		cc->m_Length = 2.0f;
-		cc->m_Anchor = Vector2f(0.0f,0.0f);
+		cc->m_Length = 2.1f;
+		cc->m_Anchor = Vector2f(0.0f,0.1f);
 		cc->initialize();
 	}
 	// Create Circle Chain
