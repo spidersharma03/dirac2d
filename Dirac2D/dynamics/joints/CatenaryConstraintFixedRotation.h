@@ -1,22 +1,23 @@
 /*
- *  CatenaryConstraint.h
+ *  CatenaryConstraintFixedRotation.h
  *  Dirac2D
  *
- *  Created by Prashant on 03/07/12.
+ *  Created by Prashant on 06/07/12.
  *
  */
 
-#ifndef _CATENARY_CONSTRAINT_H_
-#define _CATENARY_CONSTRAINT_H_
+
+#ifndef _CATENARY_CONSTRAINT_FIXED_ROTATION_H_
+#define _CATENARY_CONSTRAINT_FIXED_ROTATION_H_
 
 #include "Constraint.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class CatenaryConstraint : public Constraint
+class CatenaryConstraintFixedRotation : public Constraint
 {
 public:
-	CatenaryConstraint();
+	CatenaryConstraintFixedRotation();
 	
 	virtual void buildJacobian();
 	
@@ -33,9 +34,11 @@ public:
 	dfloat m_Distance;
 	dfloat m_TotalLength;
 	dfloat m_FixedLength;
-	dfloat m_EffectiveMass;
-	dfloat m_ImpulseMagnitude;
+	Matrix2f m_EffectiveMassMatrix;
+	Vector2f m_Impulse;
 	dfloat m_PositionError;
+	dfloat m_AngularError;
+	dfloat m_ReferenceAngle;
 };
 
 END_NAMESPACE_DIRAC2D

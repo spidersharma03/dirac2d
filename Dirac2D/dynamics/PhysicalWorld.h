@@ -35,6 +35,7 @@ class DistanceConstraint;
 class HingeConstraint;
 class WeldConstraint;
 class CatenaryConstraint;
+class CatenaryConstraintFixedRotation;
 
 enum BROAD_PHASE_ALGORITHM { EBPA_NAIVE, EBPA_SAP, EBPA_DYNAMIC_TREE };
 
@@ -122,6 +123,7 @@ private:
 	MemoryAllocator<HingeConstraint> *m_HingeConstraintPool;
 	MemoryAllocator<WeldConstraint> *m_WeldConstraintPool;
 	MemoryAllocator<CatenaryConstraint> *m_CatenaryConstraintPool;
+	MemoryAllocator<CatenaryConstraintFixedRotation> *m_CatenaryConstraintFixedRotationPool;
 
 	
 	dbool m_bDrawShapes;
