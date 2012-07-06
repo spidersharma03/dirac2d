@@ -12,6 +12,7 @@
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
 		C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
 		C250BD4A15A41D4E009C9A37 /* CircleSweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */; };
+		C250C1B615A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250C1B515A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp */; };
 		C257F15B154E71AE00270D77 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
 		C257F15C154E71AE00270D77 /* ContactSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */; };
 		C257F198154E75F400270D77 /* CollisionDetectionPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */; };
@@ -64,6 +65,8 @@
 		C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatenaryConstraint.cpp; sourceTree = "<group>"; };
 		C250BD4815A41D4E009C9A37 /* CircleSweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSweep.h; sourceTree = "<group>"; };
 		C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleSweep.cpp; sourceTree = "<group>"; };
+		C250C1B415A6D622009C9A37 /* CatenaryConstraintFixedRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatenaryConstraintFixedRotation.h; sourceTree = "<group>"; };
+		C250C1B515A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatenaryConstraintFixedRotation.cpp; sourceTree = "<group>"; };
 		C257F13F154E71AE00270D77 /* CollisionDetectionPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionDetectionPolygon.h; path = Dirac2D/collision/CollisionDetectionPolygon.h; sourceTree = SOURCE_ROOT; };
 		C257F140154E71AE00270D77 /* CollisionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionManager.cpp; path = Dirac2D/collision/CollisionManager.cpp; sourceTree = SOURCE_ROOT; };
 		C257F141154E71AE00270D77 /* CollisionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionManager.h; path = Dirac2D/collision/CollisionManager.h; sourceTree = SOURCE_ROOT; };
@@ -268,6 +271,8 @@
 				C2AD46CC1599EC2C009C4951 /* WeldConstraint.cpp */,
 				C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */,
 				C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */,
+				C250C1B415A6D622009C9A37 /* CatenaryConstraintFixedRotation.h */,
+				C250C1B515A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -448,6 +453,7 @@
 				C2AD46CD1599EC2C009C4951 /* WeldConstraint.cpp in Sources */,
 				C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */,
 				C250BD4A15A41D4E009C9A37 /* CircleSweep.cpp in Sources */,
+				C250C1B615A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -274,21 +274,22 @@
 								<string>C257F145154E71AE00270D77</string>
 								<string>C257F146154E71AE00270D77</string>
 								<string>C257F14A154E71AE00270D77</string>
-								<string>C257F14F154E71AE00270D77</string>
-								<string>C257F156154E71AE00270D77</string>
 								<string>C257F158154E71AE00270D77</string>
 								<string>1C77FABC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>77</integer>
+									<integer>44</integer>
+									<integer>33</integer>
+									<integer>27</integer>
+									<integer>2</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 486}, {318, 884}}</string>
+							<string>{{0, 230}, {318, 884}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -323,7 +324,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>C21DD0BD1526FAC30008ADD0</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>main.cpp</string>
+								<string>CatenaryConstraintFixedRotation.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -331,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>C21DD0BE1526FAC30008ADD0</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>main.cpp</string>
+										<string>CatenaryConstraintFixedRotation.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>C250BD8615A423CB009C9A37</string>
+										<string>C250C41915A71FF2009C9A37</string>
 										<key>history</key>
 										<array>
 											<string>C257EBEC154584EC00270D77</string>
@@ -369,10 +370,7 @@
 											<string>C250BCE215A40DF6009C9A37</string>
 											<string>C250BCE315A40DF6009C9A37</string>
 											<string>C250BCE415A40DF6009C9A37</string>
-											<string>C250BCE515A40DF6009C9A37</string>
-											<string>C250BCE615A40DF6009C9A37</string>
 											<string>C250BCE715A40DF6009C9A37</string>
-											<string>C250BCE815A40DF6009C9A37</string>
 											<string>C250BCE915A40DF6009C9A37</string>
 											<string>C250BCEC15A40DF6009C9A37</string>
 											<string>C250BCEE15A40DF6009C9A37</string>
@@ -380,20 +378,12 @@
 											<string>C250BCF115A40DF6009C9A37</string>
 											<string>C250BCF215A40DF6009C9A37</string>
 											<string>C250BCF715A40DF6009C9A37</string>
-											<string>C250BCF815A40DF6009C9A37</string>
-											<string>C250BCF915A40DF6009C9A37</string>
-											<string>C250BCFA15A40DF6009C9A37</string>
 											<string>C250BCFB15A40DF6009C9A37</string>
 											<string>C250BCFC15A40DF6009C9A37</string>
 											<string>C250BCFD15A40DF6009C9A37</string>
-											<string>C250BCFF15A40DF6009C9A37</string>
-											<string>C250BD0015A40DF6009C9A37</string>
 											<string>C250BD0115A40DF6009C9A37</string>
-											<string>C250BD0215A40DF6009C9A37</string>
 											<string>C250BD0315A40DF6009C9A37</string>
-											<string>C250BD0415A40DF6009C9A37</string>
 											<string>C250BD0515A40DF6009C9A37</string>
-											<string>C250BD0615A40DF6009C9A37</string>
 											<string>C250BD0715A40DF6009C9A37</string>
 											<string>C250BD0815A40DF6009C9A37</string>
 											<string>C250BD0915A40DF6009C9A37</string>
@@ -419,23 +409,36 @@
 											<string>C250BD1F15A40DF6009C9A37</string>
 											<string>C250BD2015A40DF6009C9A37</string>
 											<string>C250BD2115A40DF6009C9A37</string>
-											<string>C250BD2215A40DF6009C9A37</string>
 											<string>C250BD2315A40DF6009C9A37</string>
 											<string>C250BD2415A40DF6009C9A37</string>
-											<string>C250BD7415A423A0009C9A37</string>
 											<string>C250BD7515A423A0009C9A37</string>
 											<string>C250BD7615A423A0009C9A37</string>
 											<string>C250BD7715A423A0009C9A37</string>
-											<string>C250BD7815A423A0009C9A37</string>
 											<string>C250BD7915A423A0009C9A37</string>
 											<string>C250BD7A15A423A0009C9A37</string>
 											<string>C250BD7B15A423A0009C9A37</string>
 											<string>C250BD7C15A423A0009C9A37</string>
 											<string>C250BD7D15A423A0009C9A37</string>
 											<string>C250BD7E15A423A0009C9A37</string>
-											<string>C250BD7F15A423A0009C9A37</string>
 											<string>C250BD8015A423A0009C9A37</string>
-											<string>C250BD8115A423A0009C9A37</string>
+											<string>C250BD9315A58026009C9A37</string>
+											<string>C250BE1E15A5A81A009C9A37</string>
+											<string>C250BEB815A5B6E0009C9A37</string>
+											<string>C250BEB915A5B6E0009C9A37</string>
+											<string>C250C1D515A6F93C009C9A37</string>
+											<string>C250C1DA15A6F93C009C9A37</string>
+											<string>C250C1DB15A6F93C009C9A37</string>
+											<string>C250C1DC15A6F93C009C9A37</string>
+											<string>C250C1DD15A6F93C009C9A37</string>
+											<string>C250C1E815A6F95A009C9A37</string>
+											<string>C250C20215A703CF009C9A37</string>
+											<string>C250C29315A70FEE009C9A37</string>
+											<string>C250C2D015A71259009C9A37</string>
+											<string>C250C31B15A715D8009C9A37</string>
+											<string>C250C31C15A715D8009C9A37</string>
+											<string>C250C39F15A71B38009C9A37</string>
+											<string>C250C3F515A71F09009C9A37</string>
+											<string>C250C40415A71F82009C9A37</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -753,7 +756,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>C250BD8715A423CB009C9A37</string>
+		<string>C250C41A15A71FF2009C9A37</string>
 		<string>C250BB9215A3253D009C9A37</string>
 		<string>C250BB9315A3253D009C9A37</string>
 		<string>/Users/prasantha/SVN/Dirac2d/Dirac2D.xcodeproj</string>

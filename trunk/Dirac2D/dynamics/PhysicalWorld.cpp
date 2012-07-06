@@ -25,6 +25,7 @@
 #include "../dynamics/joints/HingeConstraint.h"
 #include "../dynamics/joints/WeldConstraint.h"
 #include "../dynamics/joints/CatenaryConstraint.h"
+#include "../dynamics/joints/CatenaryConstraintFixedRotation.h"
 
 #include "../draw/Renderer.h"
 
@@ -66,6 +67,7 @@ PhysicalWorld::PhysicalWorld()
 	m_HingeConstraintPool	 = new MemoryAllocator<HingeConstraint>(MAX_BODIES/10);
 	m_WeldConstraintPool     = new MemoryAllocator<WeldConstraint>(MAX_BODIES/10);
 	m_CatenaryConstraintPool     = new MemoryAllocator<CatenaryConstraint>(MAX_BODIES/10);
+	m_CatenaryConstraintFixedRotationPool     = new MemoryAllocator<CatenaryConstraintFixedRotation>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
@@ -102,6 +104,9 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 			break;
 		case ECT_CATENARY:
 			constraint = new( m_CatenaryConstraintPool->Allocate() )CatenaryConstraint();
+			break;
+		case ECT_CATENARY_FIXED_ROTATION:
+			constraint = new( m_CatenaryConstraintFixedRotationPool->Allocate() )CatenaryConstraintFixedRotation();
 			break;
 		default:
 			break;
@@ -313,7 +318,7 @@ void PhysicalWorld::draw()
 				m_Renderer->setPointSize(3.0f);
 				m_Renderer->drawPoint(anchorPoint);
 			}
-			if( pConstraint->m_Type == ECT_CATENARY )
+			if( pConstraint->m_Type == ECT_CATENARY || pConstraint->m_Type == ECT_CATENARY_FIXED_ROTATION )
 			{
 				CatenaryConstraint* cc = (CatenaryConstraint*)pConstraint;
 				m_Renderer->setColor(255, 0, 255);

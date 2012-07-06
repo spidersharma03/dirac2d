@@ -70,6 +70,7 @@
 #include "dynamics/joints/HingeConstraint.h"
 #include "dynamics/joints/WeldConstraint.h"
 #include "dynamics/joints/CatenaryConstraint.h"
+#include "dynamics/joints/CatenaryConstraintFixedRotation.h"
 
 #include "geometry/CollisionShape.h"
 #include "geometry/Circle.h"
