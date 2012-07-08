@@ -31,11 +31,15 @@ class Renderer;
 class BroadPhaseCollisionAlgorithm;
 class BroadPhaseNode;
 class PhysicalShape;
+
 class DistanceConstraint;
 class HingeConstraint;
 class WeldConstraint;
 class CatenaryConstraint;
 class CatenaryConstraintFixedRotation;
+class LineConstraint;
+class PrismaticConstraint;
+class WheelConstraint;
 
 enum BROAD_PHASE_ALGORITHM { EBPA_NAIVE, EBPA_SAP, EBPA_DYNAMIC_TREE };
 
@@ -124,6 +128,7 @@ private:
 	MemoryAllocator<WeldConstraint> *m_WeldConstraintPool;
 	MemoryAllocator<CatenaryConstraint> *m_CatenaryConstraintPool;
 	MemoryAllocator<CatenaryConstraintFixedRotation> *m_CatenaryConstraintFixedRotationPool;
+	MemoryAllocator<LineConstraint> *m_LineConstraintPool;
 
 	
 	dbool m_bDrawShapes;

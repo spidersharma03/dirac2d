@@ -71,6 +71,9 @@
 #include "dynamics/joints/WeldConstraint.h"
 #include "dynamics/joints/CatenaryConstraint.h"
 #include "dynamics/joints/CatenaryConstraintFixedRotation.h"
+#include "dynamics/joints/LineConstraint.h"
+#include "dynamics/joints/PrismaticConstraint.h"
+#include "dynamics/joints/WheelConstraint.h"
 
 #include "geometry/CollisionShape.h"
 #include "geometry/Circle.h"

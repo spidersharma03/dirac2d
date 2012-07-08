@@ -32,64 +32,64 @@ public:
 	{
 	}
 	
-	inline void operator=(Vector2<T> other)
+	inline void operator=(const Vector2<T> other)
 	{
 		x = other.x;
 		y = other.y;
 	}
 
-	inline T dot( Vector2<T>& other)
+	inline T dot( const Vector2<T>& other)
 	{
 		return x*other.x + y*other.y;
 	}
 
-	inline T cross( Vector2<T>& other )
+	inline T cross( const Vector2<T>& other )
 	{
 		return x*other.y - y*other.x;
 	}
 	
-	inline Vector2<T> cross( T d )
+	inline Vector2<T> cross( const T d )
 	{
 		return Vector2<T>(d*y, -d*x);
 	}
 	
-	static inline Vector2<T> cross( Vector2<T>& v, T d )
+	static inline Vector2<T> cross( const Vector2<T>& v, const T d )
 	{
 		return Vector2<T>(d * v.y, -d * v.x);
 	}
 	
-	static inline Vector2<T> cross( T d, Vector2<T>& v )
+	static inline Vector2<T> cross( const T d, const Vector2<T>& v )
 	{
 		return Vector2<T>(-d * v.y, d * v.x);
 	}
 	
-	static inline T cross( Vector2<T>& v1, Vector2<T>& v2 )
+	static inline T cross( const Vector2<T>& v1, const Vector2<T>& v2 )
 	{
 		return  v1.x * v2.y - v1.y * v2.x;
 	}
 	
-	inline T distanceSquared( Vector2<T>& other)
+	inline T distanceSquared( const Vector2<T>& other)
 	{
 		T dx = x-other.x;
 		T dy = y-other.y;
 		return  dx*dx + dy*dy;
 	}
 	
-	inline T distance( Vector2<T>& other)
+	inline T distance( const Vector2<T>& other)
 	{
 		T dx = x-other.x;
 		T dy = y-other.y;
 		return  sqrt(dx*dx + dy*dy);
 	}
 	
-	static inline T distanceSquared( Vector2<T>& v1, Vector2<T>& v2)
+	static inline T distanceSquared( const Vector2<T>& v1, const Vector2<T>& v2)
 	{
 		T dx = v1.x-v2.x;
 		T dy = v1.y-v2.y;
 		return  dx*dx + dy*dy;
 	}
 	
-	static inline T distance( Vector2<T>& v1, Vector2<T>& v2)
+	static inline T distance( const Vector2<T>& v1, const Vector2<T>& v2)
 	{
 		T dx = v1.x-v2.x;
 		T dy = v1.y-v2.y;
@@ -117,23 +117,28 @@ public:
 		}
 	}
 	
-	inline void set( T inx, T iny)
+	inline void setZero()
+	{
+		x = y = (T)0.0;
+	}
+	
+	inline void set( const T inx, const T iny)
 	{
 		x = inx; y = iny;
 	}
 	
-	inline void set( Vector2<T>& other )
+	inline void set( const Vector2<T>& other )
 	{
 		x = other.x; y = other.y;
 	}
 	
-	inline void add( Vector2<T>& other )
+	inline void add( const Vector2<T>& other )
 	{
 		x += other.x;
 		y += other.y;
 	}
 	
-	inline void sub( Vector2<T>& other )
+	inline void sub( const Vector2<T>& other )
 	{
 		x -= other.x;
 		y -= other.y;

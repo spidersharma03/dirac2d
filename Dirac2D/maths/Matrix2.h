@@ -101,7 +101,7 @@ public:
 	}
 	
 	// Solve a System like A * x = rhs. returns result in x.
-	void solve( Vector2<T>& rhs, Vector2<T>& x )
+	void solve( const Vector2<T>& rhs, Vector2<T>& x )
 	{
 		T det = a11 * a22 - a21 * a12;
 		if( fabs(det) > EPSILON )
@@ -113,7 +113,7 @@ public:
 		}
 	}
 	
-	Vector2<T> solve( Vector2<T>& rhs )
+	Vector2<T> solve( const Vector2<T>& rhs )
 	{
 		Vector2<T> solution;
 		T det = a11 * a22 - a21 * a12;
