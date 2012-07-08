@@ -1503,12 +1503,20 @@ void demo24()
 		lc1->m_PhysicalBody2 = circle1;
 		lc1->m_Anchor = Vector2f(0.2f,0.0f);
 		lc1->m_LocalAxis = Vector2f(1.0f,0.0f);
+		lc1->m_LowerLimit = -0.5f;
+		lc1->m_UpperLimit = 0.5f;		
 		lc1->initialize();
 		
 		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 		dc->m_PhysicalBody1 = pBox1;
 		dc->m_Erp = 100.0f;
 		dc->initialize();
+		
+		MotorConstraint* mc = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
+		mc->m_PhysicalBody1 = pBox1;
+		mc->m_MaxTorque = 10.0f;
+		mc->m_Speed = 7.0f;
+		mc->initialize();
 		//LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
 //		lc2->m_PhysicalBody1 = pBox1;
 //		lc2->m_PhysicalBody2 = circle2;

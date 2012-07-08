@@ -29,6 +29,7 @@
 #include "../dynamics/joints/LineConstraint.h"
 #include "../dynamics/joints/PrismaticConstraint.h"
 #include "../dynamics/joints/WheelConstraint.h"
+#include "../dynamics/joints/MotorConstraint.h"
 
 #include "../draw/Renderer.h"
 
@@ -72,6 +73,7 @@ PhysicalWorld::PhysicalWorld()
 	m_CatenaryConstraintPool     = new MemoryAllocator<CatenaryConstraint>(MAX_BODIES/10);
 	m_CatenaryConstraintFixedRotationPool     = new MemoryAllocator<CatenaryConstraintFixedRotation>(MAX_BODIES/10);
 	m_LineConstraintPool     = new MemoryAllocator<LineConstraint>(MAX_BODIES/10);
+	m_MotorConstraintPool    = new MemoryAllocator<MotorConstraint>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
@@ -114,6 +116,9 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 			break;
 		case ECT_LINE:
 			constraint = new( m_LineConstraintPool->Allocate() )LineConstraint();
+			break;
+		case ECT_MOTOR:
+			constraint = new( m_MotorConstraintPool->Allocate() )MotorConstraint();
 			break;
 		default:
 			break;

@@ -74,6 +74,7 @@
 #include "dynamics/joints/LineConstraint.h"
 #include "dynamics/joints/PrismaticConstraint.h"
 #include "dynamics/joints/WheelConstraint.h"
+#include "dynamics/joints/MotorConstraint.h"
 
 #include "geometry/CollisionShape.h"
 #include "geometry/Circle.h"
