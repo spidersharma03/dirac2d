@@ -16,6 +16,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class CatenaryConstraintFixedRotation : public Constraint
 {
+	enum LENGTH_LIMIT_STATE { ELLS_LOWER, ELLS_NONE };
 public:
 	CatenaryConstraintFixedRotation();
 	
@@ -39,6 +40,7 @@ public:
 	dfloat m_PositionError;
 	dfloat m_AngularError;
 	dfloat m_ReferenceAngle;
+	LENGTH_LIMIT_STATE m_LengthLimitState;
 };
 
 END_NAMESPACE_DIRAC2D

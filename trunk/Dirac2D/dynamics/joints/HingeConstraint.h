@@ -15,6 +15,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class HingeConstraint : public Constraint
 {
+	enum ANGLE_LIMIT_STATE { EALS_LOWER, EALS_UPPER, EALS_LOWER_UPPER, EALS_NONE };
 public:
 	HingeConstraint();
 	
@@ -26,11 +27,15 @@ public:
 	
 public:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
-	Vector2f m_Impulse;
+	Vector3f m_Impulse;
 	Vector2f m_Anchor1, m_Anchor2; // Local Anchor Points
 	Vector2f m_r1, m_r2; // Radius Vectors wrt the Bodies centres.
-	Matrix2f m_EffectiveMass;
+	Matrix3f m_EffectiveMass;
 	Vector2f m_PositionError;
+	dfloat m_AngularError;
+	dfloat m_LowerAngle, m_UpperAngle;
+	dfloat m_ReferenceAngle;
+	ANGLE_LIMIT_STATE m_AngleLimitState;
 };
 
 END_NAMESPACE_DIRAC2D

@@ -237,19 +237,65 @@ public:
 	
 	inline T determinant()
 	{
-		return ( col1.x * ( col2.y * col3.z  - col2.z * col3.y ) 
-				- col2.x * ( col1.y * col3.z - col1.z * col3.y ) 
-				+ col3.x * ( col1.y * col2.z - col1.x * col1.z ) );
+		// Volume of a Parallelepid with col1, col2 and col3 as axis.
+		return col1.dot( col2.cross(col3) );
 	}
 	
 	// Solve a System like A * x = rhs. returns result in x.
 	void solve( Vector3<T>& rhs, Vector3<T>& x )
-	{
+	{		
+		T det = col1.dot( col2.cross(col3) );
+		if (det != 0.0f)
+		{
+			det = 1.0f / det;
+		}
+		// Cramer's Rule solution
+		x.x = det * rhs.dot(col2.cross(col3));
+		x.y = det * col1.dot(rhs.cross(col3));
+		x.z = det * col1.dot(col2.cross(rhs));
 	}
 	
 	Vector3<T> solve( Vector3<T>& rhs )
 	{
 		Vector3<T> solution;
+		
+		T det = col1.dot( col2.cross(col3) );
+		if (det != 0.0f)
+		{
+			det = 1.0f / det;
+		}
+		// Cramer's Rule solution
+		solution.x = det * rhs.dot(col2.cross(col3));
+		solution.y = det * col1.dot(rhs.cross(col3));
+		solution.z = det * col1.dot(col2.cross(rhs));
+		return solution;
+	}
+	
+	// Solve a System like A * x = rhs. returns result in x.
+	void solve22( const Vector2<T>& rhs, Vector2<T>& x )
+	{		
+		T det = col1.x * col2.y - col1.y * col2.x;
+		if( det != 0.0 )
+		{
+			det = 1.0f/det;
+			
+			x.x = det * ( col2.y * rhs.x - col2.x * rhs.y );
+			x.y = det * ( -col1.y * rhs.x + col1.x * rhs.y );
+		}
+	}
+	
+	Vector2<T> solve22( const Vector2<T>& rhs )
+	{
+		Vector2<T> solution;
+		
+		T det = col1.x * col2.y - col1.y * col2.x;
+		if( det != 0.0 )
+		{
+			det = 1.0f/det;
+			
+			solution.x = det * ( col2.y * rhs.x - col2.x * rhs.y );
+			solution.y = det * ( -col1.y * rhs.x + col1.x * rhs.y );
+		}
 		return solution;
 	}
 	

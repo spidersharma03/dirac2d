@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
+		75BD79A413C6E94700D8A086 /* LineConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD79A313C6E94700D8A086 /* LineConstraint.cpp */; };
+		75BD7B2613C7268600D8A086 /* PrismaticConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2513C7268600D8A086 /* PrismaticConstraint.cpp */; };
+		75BD7B2913C7269800D8A086 /* WheelConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */; };
+		75BD7C8613C76A3800D8A086 /* MotorConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
 		C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
@@ -60,6 +64,14 @@
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DTimer.cpp; path = Dirac2D/DTimer.cpp; sourceTree = SOURCE_ROOT; };
 		758921F213B0E3DF0005E1E2 /* DTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTimer.h; path = Dirac2D/DTimer.h; sourceTree = SOURCE_ROOT; };
+		75BD79A213C6E94700D8A086 /* LineConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineConstraint.h; sourceTree = "<group>"; };
+		75BD79A313C6E94700D8A086 /* LineConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LineConstraint.cpp; sourceTree = "<group>"; };
+		75BD7B2413C7268600D8A086 /* PrismaticConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrismaticConstraint.h; sourceTree = "<group>"; };
+		75BD7B2513C7268600D8A086 /* PrismaticConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PrismaticConstraint.cpp; sourceTree = "<group>"; };
+		75BD7B2713C7269800D8A086 /* WheelConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelConstraint.h; sourceTree = "<group>"; };
+		75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WheelConstraint.cpp; sourceTree = "<group>"; };
+		75BD7C8413C76A3800D8A086 /* MotorConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotorConstraint.h; sourceTree = "<group>"; };
+		75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotorConstraint.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* Dirac2D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dirac2D; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatenaryConstraint.h; sourceTree = "<group>"; };
 		C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatenaryConstraint.cpp; sourceTree = "<group>"; };
@@ -273,6 +285,14 @@
 				C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */,
 				C250C1B415A6D622009C9A37 /* CatenaryConstraintFixedRotation.h */,
 				C250C1B515A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp */,
+				75BD79A213C6E94700D8A086 /* LineConstraint.h */,
+				75BD79A313C6E94700D8A086 /* LineConstraint.cpp */,
+				75BD7B2413C7268600D8A086 /* PrismaticConstraint.h */,
+				75BD7B2513C7268600D8A086 /* PrismaticConstraint.cpp */,
+				75BD7B2713C7269800D8A086 /* WheelConstraint.h */,
+				75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */,
+				75BD7C8413C76A3800D8A086 /* MotorConstraint.h */,
+				75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -454,6 +474,10 @@
 				C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */,
 				C250BD4A15A41D4E009C9A37 /* CircleSweep.cpp in Sources */,
 				C250C1B615A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp in Sources */,
+				75BD79A413C6E94700D8A086 /* LineConstraint.cpp in Sources */,
+				75BD7B2613C7268600D8A086 /* PrismaticConstraint.cpp in Sources */,
+				75BD7B2913C7269800D8A086 /* WheelConstraint.cpp in Sources */,
+				75BD7C8613C76A3800D8A086 /* MotorConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
