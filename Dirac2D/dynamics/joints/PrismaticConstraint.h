@@ -29,18 +29,16 @@ public:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
 	Vector2f m_LocalAxis; // Local Axis for the Line Constraint wrt Body1.
 	Vector2f m_LocalPerpendicularAxis; // Perpendicular axis to the local Axis
-	dfloat m_ImpulseMagnitude;
-	dfloat m_ImpulseMagnitudeParallel;
-	Vector2f m_ImpulseDirection;
+	Vector3f m_Impulse;
 	Vector2f m_Anchor1, m_Anchor2; // Local Anchor Points
 	Vector2f m_r1, m_r2; // Radius Vectors wrt the Bodies centres.
-	dfloat m_EffectiveMass;
-	dfloat m_EffectiveMassParallel;
-	Matrix2f m_EffectiveMassMatrix;
-	dfloat m_PositionError, m_PositionErrorParallel;
+	Matrix3f m_EffectiveMassMatrix;
+	dfloat m_PositionError, m_PositionErrorParallel, m_AngularError;
 	Vector2f m_WorldPerpendicularAxis;
 	Vector2f m_WorldAxis;
 	Vector2f d;
+	dfloat m_ReferenceAngle;
+	dfloat m_LowerLimit, m_UpperLimit;
 	PRISMATIC_CONSTRAINT_LIMIT_STATE m_LimitState;
 };
 

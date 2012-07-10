@@ -1441,14 +1441,14 @@ void demo23()
 
 		circle2->createPhysicalShape(pApp);
 		
-		LineConstraint* lc1 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
+		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
 		lc1->m_PhysicalBody1 = pBox1;
 		lc1->m_PhysicalBody2 = circle1;
 		lc1->m_Anchor = Vector2f(0.2f,0.2f);
 		lc1->m_LocalAxis = Vector2f(1.0f,0.0f);
 		lc1->initialize();
 		
-		LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
+		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
 		lc2->m_PhysicalBody1 = pBox1;
 		lc2->m_PhysicalBody2 = circle2;
 		lc2->m_Anchor = Vector2f(0.2f,-0.2f);
@@ -1515,7 +1515,7 @@ void demo24()
 		MotorConstraint* mc = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
 		mc->m_PhysicalBody1 = pBox1;
 		mc->m_MaxTorque = 10.0f;
-		mc->m_Speed = 7.0f;
+		mc->m_Speed = 3.0f;
 		mc->initialize();
 		//LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
 //		lc2->m_PhysicalBody1 = pBox1;
@@ -1523,6 +1523,81 @@ void demo24()
 //		lc2->m_Anchor = Vector2f(0.2f,-0.2f);
 //		lc2->m_LocalAxis = Vector2f(1.0f,0.0f);
 //		lc2->initialize();
+		
+	}
+	// Create Circle Chain
+}
+
+
+// Prismatic Constraint
+void demo25()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->m_BodyType = EBT_STATIC;
+	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	for( dint32 i=0; i< 1; i++ )
+	{
+		PhysicalBody* pBox1 = pWorld->createPhysicalBody();
+		PhysicalBody* circle1 = pWorld->createPhysicalBody();
+		//PhysicalBody* circle2 = pWorld->createPhysicalBody();
+		
+		//pBox1->setAngle(PI_4);
+		pBox1->m_BodyType = EBT_STATIC;
+		
+		pBox1->setPosition(Vector2f(0.0f,0.0f));		
+		circle1->setPosition(Vector2f(0.4f,0.0f));		
+		//circle2->setPosition(Vector2f(0.2f,-0.2f));		
+		
+		PhysicalAppearance pApp;
+		dfloat boxWidth = 0.06f; dfloat boxHeight = 0.06f;
+		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pBox1->createPhysicalShape(pApp);
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		
+		circle1->createPhysicalShape(pApp);
+		
+		//pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
+		
+		//circle2->createPhysicalShape(pApp);
+		
+		if(1)
+		{
+		PrismaticConstraint* pc1 = (PrismaticConstraint*)pWorld->createConstraint(ECT_PRISMATIC);
+		pc1->m_PhysicalBody1 = pBox1;
+		pc1->m_PhysicalBody2 = circle1;
+		pc1->m_Anchor = Vector2f(0.4f,0.20f);
+		pc1->m_LocalAxis = Vector2f(1.0f,1.0f);
+		pc1->m_LowerLimit = -110.1f;
+		pc1->m_UpperLimit = 110.5f;		
+		pc1->initialize();
+		}
+		else {
+			LineConstraint* pc1 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
+			pc1->m_PhysicalBody1 = pBox1;
+			pc1->m_PhysicalBody2 = circle1;
+			pc1->m_Anchor = Vector2f(0.4f,0.40f);
+			pc1->m_LocalAxis = Vector2f(1.0f,1.0f);
+			pc1->m_LowerLimit = -0.1f;
+			pc1->m_UpperLimit = 0.5f;		
+			pc1->initialize();
+		}
+
+		
+		
+				//LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
+		//		lc2->m_PhysicalBody1 = pBox1;
+		//		lc2->m_PhysicalBody2 = circle2;
+		//		lc2->m_Anchor = Vector2f(0.2f,-0.2f);
+		//		lc2->m_LocalAxis = Vector2f(1.0f,0.0f);
+		//		lc2->initialize();
 		
 	}
 	// Create Circle Chain
@@ -1560,15 +1635,16 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
+	demo25();
+
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
-	demo24();
 }
 
 void changeSize(int w, int h) 
 {
-	windowWidth = w;
+	windowWidth  = w;
 	windowHeight = h;
     // Prevent a divide by zero, when window is too short
     dfloat ratio;
@@ -1716,7 +1792,7 @@ void MouseButton(int button, int state, int x, int y)
 	py *= 1.5f;
 	
 	Vector2f p(px,py);
-	if (button == GLUT_LEFT_BUTTON)
+	if (state == GLUT_DOWN && button == GLUT_LEFT_BUTTON)
     {
 		PhysicalBody* pBody = pWorld->pickBodyFromPoint(p);
 		if( pBody )
@@ -1737,6 +1813,7 @@ void MouseButton(int button, int state, int x, int y)
     }
 	if( state == GLUT_UP && button == GLUT_LEFT_BUTTON )
 	{
+		bPicked = false;
 		mouseJoint->m_PhysicalBody1 = 0;
 		mouseJoint->m_Anchor1 = Vector2f();
 		mouseJoint->m_Anchor2 = Vector2f();

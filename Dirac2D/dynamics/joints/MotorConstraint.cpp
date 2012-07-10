@@ -37,7 +37,7 @@ void MotorConstraint::buildJacobian()
 	if( JInvmJT != 0.0f )
 		m_EffectiveMass = 1.0f/JInvmJT;
 	
-	printf("Angular Speed = %f\n", m_PhysicalBody1->m_AngularVelocity);
+	//printf("Angular Speed = %f\n", m_PhysicalBody1->m_AngularVelocity);
 	
 	if( 1 )
 	{

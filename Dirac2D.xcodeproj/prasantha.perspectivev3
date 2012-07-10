@@ -280,7 +280,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>44</integer>
+									<integer>48</integer>
 									<integer>33</integer>
 									<integer>27</integer>
 									<integer>2</integer>
@@ -289,7 +289,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 230}, {318, 884}}</string>
+							<string>{{0, 324}, {318, 884}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -324,7 +324,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>C21DD0BD1526FAC30008ADD0</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>CatenaryConstraintFixedRotation.cpp</string>
+								<string>PrismaticConstraint.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -332,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>C21DD0BE1526FAC30008ADD0</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>CatenaryConstraintFixedRotation.cpp</string>
+										<string>PrismaticConstraint.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>C250C41915A71FF2009C9A37</string>
+										<string>C2B20CAF15AC6BAC00FCE7A5</string>
 										<key>history</key>
 										<array>
 											<string>C257EBEC154584EC00270D77</string>
@@ -422,23 +422,29 @@
 											<string>C250BD7E15A423A0009C9A37</string>
 											<string>C250BD8015A423A0009C9A37</string>
 											<string>C250BD9315A58026009C9A37</string>
-											<string>C250BE1E15A5A81A009C9A37</string>
-											<string>C250BEB815A5B6E0009C9A37</string>
 											<string>C250BEB915A5B6E0009C9A37</string>
-											<string>C250C1D515A6F93C009C9A37</string>
 											<string>C250C1DA15A6F93C009C9A37</string>
-											<string>C250C1DB15A6F93C009C9A37</string>
 											<string>C250C1DC15A6F93C009C9A37</string>
 											<string>C250C1DD15A6F93C009C9A37</string>
-											<string>C250C1E815A6F95A009C9A37</string>
 											<string>C250C20215A703CF009C9A37</string>
 											<string>C250C29315A70FEE009C9A37</string>
-											<string>C250C2D015A71259009C9A37</string>
 											<string>C250C31B15A715D8009C9A37</string>
 											<string>C250C31C15A715D8009C9A37</string>
-											<string>C250C39F15A71B38009C9A37</string>
-											<string>C250C3F515A71F09009C9A37</string>
-											<string>C250C40415A71F82009C9A37</string>
+											<string>C2B201E615AAEA6700FCE7A5</string>
+											<string>C2B201E715AAEA6700FCE7A5</string>
+											<string>C2B201E815AAEA6700FCE7A5</string>
+											<string>C2B2031A15AB033700FCE7A5</string>
+											<string>C2B2042115AB200300FCE7A5</string>
+											<string>C2B2044515AB20F700FCE7A5</string>
+											<string>C2B2072515AC127600FCE7A5</string>
+											<string>C2B2075015AC13AF00FCE7A5</string>
+											<string>C2B2085815AC30FD00FCE7A5</string>
+											<string>C2B2095C15AC47E200FCE7A5</string>
+											<string>C2B20B5E15AC55B300FCE7A5</string>
+											<string>C2B20BB215AC5C8100FCE7A5</string>
+											<string>C2B20C8615AC66CE00FCE7A5</string>
+											<string>C2B20C8715AC66CE00FCE7A5</string>
+											<string>C2B20C8815AC66CE00FCE7A5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -452,18 +458,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1580, 770}}</string>
+								<string>{{0, 0}, {1580, 767}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 115 1920 943 0 0 1920 1058 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>770pt</string>
+							<string>767pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>127pt</string>
+							<string>130pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -477,7 +483,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1580, 100}}</string>
+										<string>{{10, 27}, {1580, 103}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 115 1920 943 0 0 1920 1058 </string>
 									</dict>
@@ -561,11 +567,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>C250BB8815A3253D009C9A37</string>
+				<string>C2B2017015AAAF1800FCE7A5</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>C250BB8915A3253D009C9A37</string>
+				<string>C2B2017115AAAF1800FCE7A5</string>
 				<string>C21DD0BD1526FAC30008ADD0</string>
-				<string>C250BB8A15A3253D009C9A37</string>
+				<string>C2B2017215AAAF1800FCE7A5</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -715,14 +721,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>C250BB8B15A3253D009C9A37</string>
+				<string>C2B2017315AAAF1800FCE7A5</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>C250BB8C15A3253D009C9A37</string>
-				<string>C250BB8D15A3253D009C9A37</string>
-				<string>C250BB8E15A3253D009C9A37</string>
-				<string>C250BB8F15A3253D009C9A37</string>
-				<string>C250BB9015A3253D009C9A37</string>
+				<string>C2B2017415AAAF1800FCE7A5</string>
+				<string>C2B2017515AAAF1800FCE7A5</string>
+				<string>C2B2017615AAAF1800FCE7A5</string>
+				<string>C2B2017715AAAF1800FCE7A5</string>
+				<string>C2B2017815AAAF1800FCE7A5</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>
@@ -756,9 +762,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>C250C41A15A71FF2009C9A37</string>
-		<string>C250BB9215A3253D009C9A37</string>
-		<string>C250BB9315A3253D009C9A37</string>
+		<string>C2B20CB015AC6BAC00FCE7A5</string>
+		<string>C2B2017A15AAAF1800FCE7A5</string>
+		<string>C2B2017B15AAAF1800FCE7A5</string>
 		<string>/Users/prasantha/SVN/Dirac2d/Dirac2D.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

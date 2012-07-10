@@ -15,8 +15,8 @@ BEGIN_NAMESPACE_DIRAC2D
 LineConstraint::LineConstraint()
 {
 	m_Type = ECT_LINE;
-	m_Erp = 100.0f;
-	m_Cfm = 100.0f;
+	m_Erp = 0.0f;
+	m_Cfm = 0.0f;
 	m_LowerLimit = -0.4f;
 	m_UpperLimit = 0.4f;
 }
@@ -232,7 +232,13 @@ void LineConstraint::correctVelocities()
 	}
 
 	
-	Vector2f impulse = m_WorldPerpendicularAxis * correctiveImpulse.x + m_WorldAxis * correctiveImpulse.y;
+	Vector2f linearImpulse = m_WorldPerpendicularAxis * correctiveImpulse.x;
+	Vector2f limitImpulse  = m_WorldAxis * correctiveImpulse.y;
+	
+	Vector2f impulse = linearImpulse + limitImpulse;
+	
+	//dfloat l1 = Vector2f::cross( m_r1 + d, linearImpulse) + Vector2f::cross( m_r1 + d, limitImpulse);
+	//dfloat l2 = Vector2f::cross( m_r2, linearImpulse) + Vector2f::cross( m_r2, limitImpulse);
 	
 	body1->m_Velocity        -= impulse * m1Inv;
 	body1->m_AngularVelocity -= i1Inv * Vector2f::cross( m_r1 + d, impulse);
