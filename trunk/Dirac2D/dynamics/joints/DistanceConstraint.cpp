@@ -8,6 +8,7 @@
 #include "DistantConstraint.h"
 #include "../PhysicalBody.h"
 #include "../PhysicalShape.h"
+#include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -84,7 +85,8 @@ void DistanceConstraint::buildJacobian()
 	dfloat cerror = (distance - m_Distance);
 	
 	// Effective mass for the Constraint.
-	m_EffectiveMass = 1.0f/(JInvMJT + m_Cfm);
+	if( JInvMJT != 0.0f )
+		m_EffectiveMass = 1.0f/(JInvMJT + m_Cfm);
 	// Positional Error for Position Stabilization( Baumgarte )
 	m_PositionError = m_Erp * cerror;
 	

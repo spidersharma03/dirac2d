@@ -73,7 +73,9 @@ PhysicalWorld::PhysicalWorld()
 	m_CatenaryConstraintPool     = new MemoryAllocator<CatenaryConstraint>(MAX_BODIES/10);
 	m_CatenaryConstraintFixedRotationPool     = new MemoryAllocator<CatenaryConstraintFixedRotation>(MAX_BODIES/10);
 	m_LineConstraintPool     = new MemoryAllocator<LineConstraint>(MAX_BODIES/10);
+	m_WheelConstraintPool    = new MemoryAllocator<WheelConstraint>(MAX_BODIES/10);
 	m_MotorConstraintPool    = new MemoryAllocator<MotorConstraint>(MAX_BODIES/10);
+	m_PrismaticConstraintPool = new MemoryAllocator<PrismaticConstraint>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
@@ -116,6 +118,12 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 			break;
 		case ECT_LINE:
 			constraint = new( m_LineConstraintPool->Allocate() )LineConstraint();
+			break;
+		case ECT_WHEEL:
+			constraint = new( m_WheelConstraintPool->Allocate() )WheelConstraint();
+			break;
+		case ECT_PRISMATIC:
+			constraint = new( m_PrismaticConstraintPool->Allocate() )PrismaticConstraint();
 			break;
 		case ECT_MOTOR:
 			constraint = new( m_MotorConstraintPool->Allocate() )MotorConstraint();
@@ -347,9 +355,63 @@ void PhysicalWorld::draw()
 				m_Renderer->drawLine(c, cc->m_FixedPoint1);
 				m_Renderer->drawLine(c, cc->m_FixedPoint2);
 			}
-			if( pConstraint->m_Type == ECT_LINE )
+			if( pConstraint->m_Type == ECT_LINE)
 			{
 				LineConstraint* lc = (LineConstraint*)pConstraint;
+				Vector2f anchorPoint;// = hc->m_Anchor;
+				Vector2f p0, p1;
+				if( lc->m_PhysicalBody1 )
+				{
+					Vector2f c = lc->m_PhysicalBody1->m_Centre;
+					lc->m_PhysicalBody1->getTransform().transformAsPoint(c);
+					p0 = c;
+					anchorPoint = c + lc->m_r1;
+				}
+				if( lc->m_PhysicalBody2 )
+				{
+					Vector2f c = lc->m_PhysicalBody2->m_Centre;
+					lc->m_PhysicalBody2->getTransform().transformAsPoint(c);
+					p1 = c;
+					anchorPoint = c + lc->m_r2;
+				}
+				if( lc->m_PhysicalBody1 )
+					m_Renderer->drawLine(p0, anchorPoint);
+				if( lc->m_PhysicalBody2 )
+					m_Renderer->drawLine(p1, anchorPoint);
+				m_Renderer->setColor(255, 0, 255);
+				m_Renderer->setPointSize(3.0f);
+				m_Renderer->drawPoint(anchorPoint);
+			}
+			if( pConstraint->m_Type == ECT_WHEEL )
+			{
+				WheelConstraint* lc = (WheelConstraint*)pConstraint;
+				Vector2f anchorPoint;// = hc->m_Anchor;
+				Vector2f p0, p1;
+				if( lc->m_PhysicalBody1 )
+				{
+					Vector2f c = lc->m_PhysicalBody1->m_Centre;
+					lc->m_PhysicalBody1->getTransform().transformAsPoint(c);
+					p0 = c;
+					anchorPoint = c + lc->m_r1;
+				}
+				if( lc->m_PhysicalBody2 )
+				{
+					Vector2f c = lc->m_PhysicalBody2->m_Centre;
+					lc->m_PhysicalBody2->getTransform().transformAsPoint(c);
+					p1 = c;
+					anchorPoint = c + lc->m_r2;
+				}
+				if( lc->m_PhysicalBody1 )
+					m_Renderer->drawLine(p0, anchorPoint);
+				if( lc->m_PhysicalBody2 )
+					m_Renderer->drawLine(p1, anchorPoint);
+				m_Renderer->setColor(255, 0, 255);
+				m_Renderer->setPointSize(3.0f);
+				m_Renderer->drawPoint(anchorPoint);
+			}
+			if( pConstraint->m_Type == ECT_PRISMATIC )
+			{
+				PrismaticConstraint* lc = (PrismaticConstraint*)pConstraint;
 				Vector2f anchorPoint;// = hc->m_Anchor;
 				Vector2f p0, p1;
 				if( lc->m_PhysicalBody1 )

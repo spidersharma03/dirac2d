@@ -130,7 +130,9 @@ private:
 	MemoryAllocator<CatenaryConstraint> *m_CatenaryConstraintPool;
 	MemoryAllocator<CatenaryConstraintFixedRotation> *m_CatenaryConstraintFixedRotationPool;
 	MemoryAllocator<LineConstraint> *m_LineConstraintPool;
+	MemoryAllocator<WheelConstraint> *m_WheelConstraintPool;
 	MemoryAllocator<MotorConstraint> *m_MotorConstraintPool;
+	MemoryAllocator<PrismaticConstraint> *m_PrismaticConstraintPool;
 	
 	dbool m_bDrawShapes;
 	dbool m_bDrawBoundingBoxes;
