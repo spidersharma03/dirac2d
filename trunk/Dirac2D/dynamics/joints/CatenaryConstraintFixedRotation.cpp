@@ -72,11 +72,11 @@ void CatenaryConstraintFixedRotation::buildJacobian()
 	
 	if( m_TotalLength - m_FixedLength <= 0.0f )
 	{
-		m_LengthLimitState = ELLS_LOWER;
+		m_LengthLimitState = ECLS_LOWER;
 	}
 	else
 	{
-		m_LengthLimitState = ELLS_NONE;
+		m_LengthLimitState = ECLS_NONE;
 		m_Impulse.x = 0.0f;
 	}
 

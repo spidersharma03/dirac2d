@@ -84,22 +84,22 @@ void LineConstraint::buildJacobian()
 	if( fabs(m_UpperLimit - m_LowerLimit) < LINEAR_ERROR )
 	{
 		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
-		m_LimitState = ELCLS_LOWER_UPPER;
+		m_LimitState = ECLS_LOWER_UPPER;
 	}
 	else if( constraintDisplacement >= m_UpperLimit )
 	{
 		m_PositionErrorParallel = ( constraintDisplacement - m_UpperLimit ) * m_Erp;
-		m_LimitState = ELCLS_UPPER;
+		m_LimitState = ECLS_UPPER;
 	}
 	else if( constraintDisplacement <= m_LowerLimit )
 	{
 		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
-		m_LimitState = ELCLS_LOWER;
+		m_LimitState = ECLS_LOWER;
 	}
 	else
 	{
 		m_Impulse.y = 0.0f;
-		m_LimitState = ELCLS_NONE;
+		m_LimitState = ECLS_NONE;
 	}
 		
 	m_EffectiveMassMatrix.a11 = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
@@ -167,19 +167,19 @@ void LineConstraint::correctVelocities()
 	
 	Vector2f correctiveImpulse;
 
-	if( m_LimitState != ELCLS_NONE )
+	if( m_LimitState != ECLS_NONE )
 	{		
 		// First Solve for the Complete 2x2 Jacobian Matrix( ie all constraints simultaneously).		
 		Vector2f Cdot = Vector2f( Cdot1,  Cdot2 );
 		correctiveImpulse = -( m_EffectiveMassMatrix.solve(Cdot) );
 		
 		// Both Lower and Upper Limits are Same. we need to only solve the Complete 2x2 Jacobian Matrix.
-		if( m_LimitState == ELCLS_LOWER_UPPER )
+		if( m_LimitState == ECLS_LOWER_UPPER )
 		{
 			m_Impulse += correctiveImpulse;
 		}
 		// Lower Limit.
-		else if ( m_LimitState == ELCLS_LOWER )
+		else if ( m_LimitState == ECLS_LOWER )
 		{
 			dfloat newImpulseY = m_Impulse.y + correctiveImpulse.y;
 			// we need to clamp the impulse to 0.0f as this impulse should not effect the Line Constraint. we should solve for 
@@ -200,7 +200,7 @@ void LineConstraint::correctVelocities()
 				m_Impulse += correctiveImpulse;
 			}
 		}
-		else if ( m_LimitState == ELCLS_UPPER )
+		else if ( m_LimitState == ECLS_UPPER )
 		{
 			dfloat newImpulseY = m_Impulse.y + correctiveImpulse.y;
 			// we need to clamp the impulse to 0.0f as this impulse should not effect the Hinge Constraint. we should solve for 

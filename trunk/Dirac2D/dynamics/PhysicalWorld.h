@@ -40,6 +40,7 @@ class CatenaryConstraintFixedRotation;
 class LineConstraint;
 class PrismaticConstraint;
 class WheelConstraint;
+class PulleyConstraint;
 class MotorConstraint;
 
 enum BROAD_PHASE_ALGORITHM { EBPA_NAIVE, EBPA_SAP, EBPA_DYNAMIC_TREE };
@@ -133,6 +134,7 @@ private:
 	MemoryAllocator<WheelConstraint> *m_WheelConstraintPool;
 	MemoryAllocator<MotorConstraint> *m_MotorConstraintPool;
 	MemoryAllocator<PrismaticConstraint> *m_PrismaticConstraintPool;
+	MemoryAllocator<PulleyConstraint> *m_PulleyConstraintPool;
 	
 	dbool m_bDrawShapes;
 	dbool m_bDrawBoundingBoxes;

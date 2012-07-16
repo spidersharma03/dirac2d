@@ -1,27 +1,36 @@
 /*
- *  PrismaticConstraint.cpp
+ *  CubicSplinePathConstraint.cpp
  *  Dirac2D
  *
- *  Created by Prashant on 08/07/11.
+ *  Created by Prashant on 14/07/11.
  *
  */
 
-#include "PrismaticConstraint.h"
+#include "CubicSplinePathConstraint.h"
 #include "../PhysicalBody.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
 
-PrismaticConstraint::PrismaticConstraint()
+CubicSplinePathConstraint::CubicSplinePathConstraint(Vector2f* splineVertices, int numVertices)
 {
-	m_Type = ECT_PRISMATIC;
+	m_NumSplineVertices = numVertices;
+	dAssert(m_NumSplineVertices>3);
+	m_SplineVertices = new Vector2f[numVertices];
+	for( dint32 v=0; v<numVertices; v++ )
+	{
+		m_SplineVertices[v] = splineVertices[v];
+	}
+	
+	
+	m_Type = ECT_CUBIC_SPLINE;
 	m_Erp = 0.0f;
 	m_Cfm = 0.0f;
 	m_LowerLimit = -0.4f;
 	m_UpperLimit = 0.4f;
 }
 
-void PrismaticConstraint::initialize()
+void CubicSplinePathConstraint::initialize()
 {
 	if( m_PhysicalBody1 )
 		m_Anchor1 = m_PhysicalBody1->getLocalPoint(m_Anchor);
@@ -32,10 +41,44 @@ void PrismaticConstraint::initialize()
 		m_LocalAxis.set(0.0f, 1.0f);
 	m_LocalAxis.normalize();
 	m_LocalPerpendicularAxis.set(-m_LocalAxis.y, m_LocalAxis.x);
-	m_ReferenceAngle = m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle;
+	
+	dfloat D[m_NumSplineVertices];
+	dfloat y[m_NumSplineVertices];
+	dfloat x[m_NumSplineVertices];
+	dfloat rhs[m_NumSplineVertices];
+	
+	for ( dint32 i = 0 ; i < m_NumSplineVertices ; i ++)
+	{
+        x[i] = m_SplineVertices[i].x;
+		y[i] = m_SplineVertices[i].y;
+	}
+	
+	for ( dint32 i = 1 ; i < m_NumSplineVertices ; i ++)
+	{
+        rhs[i] = 3 * ( y[i+1] - y[i-1] );
+	}
+	
+	rhs[0] = 3 * ( y[1] - y[0]);
+	rhs[m_NumSplineVertices-1] = 3 * ( y[m_NumSplineVertices-1] - y[m_NumSplineVertices-2]);
+	
+	tridia_sl(rhs, D, m_NumSplineVertices);
+	
+	//findSplineCoeff(spline, D, y);
+	
+	
+	//cubicSplinesy = new CubicSpline[count-1];
+	
+	//for ( int i = 0 ; i < count - 1 ; i ++){
+//        //cubicSplinesy[i] = new CubicSpline();
+//        cubicSplinesy[i].a = spline[i].a;
+//        cubicSplinesy[i].b = spline[i].b;
+//        cubicSplinesy[i].c = spline[i].c;
+//        cubicSplinesy[i].d = spline[i].d;
+//	}
+	
 }
 
-void PrismaticConstraint::buildJacobian()
+void CubicSplinePathConstraint::buildJacobian()
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		
@@ -78,10 +121,7 @@ void PrismaticConstraint::buildJacobian()
 	dfloat a_cross_r2 = m_WorldAxis.cross(m_r2);
 	
 	// Positional Error for Position Stabilization( Baumgarte )
-	m_PositionError	= d.dot(m_WorldPerpendicularAxis) * m_Erp;
-	m_AngularError	= (m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle - m_ReferenceAngle) * m_Erp;
-	
-	//printf("Angular Velocity = %f    %f\n", m_PhysicalBody1->m_AngularVelocity, m_PhysicalBody2->m_AngularVelocity);
+	m_PositionError			= d.dot(m_WorldPerpendicularAxis) * m_Erp;
 	
 	dfloat constraintDisplacement = d.dot(m_WorldAxis);
 	
@@ -102,36 +142,27 @@ void PrismaticConstraint::buildJacobian()
 	}
 	else
 	{
-		m_Impulse.z = 0.0f;
+		m_Impulse.y = 0.0f;
 		m_LimitState = ECLS_NONE;
 	}
 	
-	m_EffectiveMassMatrix.col1.x = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
-	m_EffectiveMassMatrix.col2.x = i1Inv * aperp_cross_s + i2Inv * aperp_cross_r2;
-	m_EffectiveMassMatrix.col3.x = i1Inv * aperp_cross_s * a_cross_s + i2Inv * aperp_cross_r2 * a_cross_r2;
-
-	m_EffectiveMassMatrix.col1.y = m_EffectiveMassMatrix.col2.x;
-	m_EffectiveMassMatrix.col2.y = i1Inv + i2Inv;
-	m_EffectiveMassMatrix.col3.y = i1Inv * a_cross_s + i2Inv * a_cross_r2;
-
-	m_EffectiveMassMatrix.col1.z = m_EffectiveMassMatrix.col3.x;
-	m_EffectiveMassMatrix.col2.z = m_EffectiveMassMatrix.col3.y;
-	m_EffectiveMassMatrix.col3.z = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2;
+	m_EffectiveMassMatrix.a11 = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
+	m_EffectiveMassMatrix.a21 = i1Inv * aperp_cross_s * a_cross_s + i2Inv * aperp_cross_r2 * a_cross_r2;
+	m_EffectiveMassMatrix.a12 = m_EffectiveMassMatrix.a21;
+	m_EffectiveMassMatrix.a22 = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2 + m_Cfm;
+	
+	//m_EffectiveMassMatrix.invert();
 	
 	// Apply Corrective impulse on the bodies
-	if( 0 )
+	if( 1 )
 	{
-		Vector2f linearImpulse = m_WorldPerpendicularAxis * m_Impulse.x;
-		Vector2f limitImpulse  = m_WorldAxis * m_Impulse.z;
-		Vector2f impulse =  linearImpulse + limitImpulse;
-		dfloat l1 = Vector2f::cross( linearImpulse , m_r1 + d ) + Vector2f::cross( limitImpulse , m_r1 + d );
-		dfloat l2 = Vector2f::cross( linearImpulse, m_r2 ) + Vector2f::cross( limitImpulse, m_r2 );
+		Vector2f impulse = m_WorldPerpendicularAxis * m_Impulse.x + m_WorldAxis * m_Impulse.y;
 		
 		body1->m_Velocity        -= impulse * m1Inv;
-		body1->m_AngularVelocity -= i1Inv * ( l1 + m_Impulse.y );
+		body1->m_AngularVelocity -= i1Inv * ( Vector2f::cross( m_r1 + d, impulse) );
 		
 		body2->m_Velocity        += impulse * m2Inv;
-		body2->m_AngularVelocity += i2Inv * ( l2 + m_Impulse.y );
+		body2->m_AngularVelocity += i2Inv * ( Vector2f::cross( m_r2, impulse) );
 	}
 	else 
 	{
@@ -140,7 +171,7 @@ void PrismaticConstraint::buildJacobian()
 	
 }
 
-void PrismaticConstraint::correctVelocities()
+void CubicSplinePathConstraint::correctVelocities()
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;
@@ -176,15 +207,14 @@ void PrismaticConstraint::correctVelocities()
 	dfloat Cdot2 = d.dot(Vector2f::cross(body1->m_AngularVelocity, m_WorldAxis))
 	+ relVel.dot(m_WorldAxis);
 	
-	Cdot2 += m_PositionErrorParallel;
+	Cdot2 += m_PositionErrorParallel + m_Impulse.y * m_Cfm;
 	
-	Vector3f correctiveImpulse;
+	Vector2f correctiveImpulse;
 	
 	if( m_LimitState != ECLS_NONE )
-	{	
-		// First Solve for the Complete 3x3 Jacobian Matrix( ie all constraints simultaneously).	
-		dfloat dw = m_PhysicalBody2->m_AngularVelocity - m_PhysicalBody1->m_AngularVelocity + m_AngularError;
-		Vector3f Cdot = Vector3f( Cdot1, dw ,Cdot2 );
+	{		
+		// First Solve for the Complete 2x2 Jacobian Matrix( ie all constraints simultaneously).		
+		Vector2f Cdot = Vector2f( Cdot1,  Cdot2 );
 		correctiveImpulse = -( m_EffectiveMassMatrix.solve(Cdot) );
 		
 		// Both Lower and Upper Limits are Same. we need to only solve the Complete 2x2 Jacobian Matrix.
@@ -195,20 +225,18 @@ void PrismaticConstraint::correctVelocities()
 		// Lower Limit.
 		else if ( m_LimitState == ECLS_LOWER )
 		{
-			dfloat newImpulseZ = m_Impulse.z + correctiveImpulse.z;
-			// we need to clamp the impulse to 0.0f as this impulse should not effect the Prismatic Constraint. we should solve for 
+			dfloat newImpulseY = m_Impulse.y + correctiveImpulse.y;
+			// we need to clamp the impulse to 0.0f as this impulse should not effect the Line Constraint. we should solve for 
 			// the new corrective impulse again as because of clamping the old solution has become invalid.
-			if( newImpulseZ < 0.0f )
+			if( newImpulseY < 0.0f )
 			{
-				Vector2f rhs = (-Vector2f(Cdot1, dw) + Vector2f(m_EffectiveMassMatrix.col3.x, m_EffectiveMassMatrix.col3.y) * m_Impulse.z);
-				Vector2f newCorrectiveImpulse = m_EffectiveMassMatrix.solve22(rhs);
-				correctiveImpulse.x = newCorrectiveImpulse.x;
-				correctiveImpulse.y = newCorrectiveImpulse.y;
-				correctiveImpulse.z = -m_Impulse.z;
+				dfloat rhs = (-Cdot1 + m_EffectiveMassMatrix.a12 * m_Impulse.y);
+				dfloat newCorrectiveImpulse = rhs/m_EffectiveMassMatrix.a11;
+				correctiveImpulse.x = newCorrectiveImpulse;
+				correctiveImpulse.y = -m_Impulse.y;
 				m_Impulse.x += correctiveImpulse.x;
-				m_Impulse.y += correctiveImpulse.y;
 				// clamp the impulse
-				m_Impulse.z = 0.0f;
+				m_Impulse.y = 0.0f;
 			}
 			// handle the Lower Linear Limit case.
 			else
@@ -218,56 +246,51 @@ void PrismaticConstraint::correctVelocities()
 		}
 		else if ( m_LimitState == ECLS_UPPER )
 		{
-			dfloat newImpulseZ = m_Impulse.z + correctiveImpulse.z;
-			// we need to clamp the impulse to 0.0f as this impulse should not effect the Prismatic Constraint. we should solve for 
+			dfloat newImpulseY = m_Impulse.y + correctiveImpulse.y;
+			// we need to clamp the impulse to 0.0f as this impulse should not effect the Hinge Constraint. we should solve for 
 			// the new corrective impulse again as because of clamping the old solution has become invalid.
-			if( newImpulseZ > 0.0f )
+			if( newImpulseY > 0.0f )
 			{
-				Vector2f rhs = (-Vector2f(Cdot1, dw) + Vector2f(m_EffectiveMassMatrix.col3.x, m_EffectiveMassMatrix.col3.y) * m_Impulse.z);
-				Vector2f newCorrectiveImpulse = m_EffectiveMassMatrix.solve22(rhs);
-				correctiveImpulse.x = newCorrectiveImpulse.x;
-				correctiveImpulse.y = newCorrectiveImpulse.y;
-				correctiveImpulse.z = -m_Impulse.z;
+				dfloat rhs = (-Cdot1 + m_EffectiveMassMatrix.a12 * m_Impulse.y);
+				dfloat newCorrectiveImpulse = rhs/m_EffectiveMassMatrix.a11;
+				correctiveImpulse.x = newCorrectiveImpulse;
+				correctiveImpulse.y = -m_Impulse.y;
 				m_Impulse.x += correctiveImpulse.x;
-				m_Impulse.y += correctiveImpulse.y;
 				// clamp the impulse
-				m_Impulse.z = 0.0f;
+				m_Impulse.y = 0.0f;
 			}
-			// handle the Lower Linear Limit case.
+			// handle the Upper Linear Limit case.
 			else
 			{
 				m_Impulse += correctiveImpulse;
-			}		
+			}
 		}
 	}
 	// There is no Limit on the Linear motion.
 	else 
 	{
-		Vector2f rhs(Cdot1, m_PhysicalBody2->m_AngularVelocity - m_PhysicalBody1->m_AngularVelocity + m_AngularError);
-		Vector2f impulse = m_EffectiveMassMatrix.solve22(-rhs);
-		correctiveImpulse = impulse;
-		correctiveImpulse.z = 0.0f;
-		m_Impulse += correctiveImpulse;
-		m_Impulse.z = 0.0f;
-		
-		//correctiveImpulse.x = -Cdot1/m_EffectiveMassMatrix.col1.x;
-//		correctiveImpulse.y = 0.0f;
-//		m_Impulse.x += correctiveImpulse.x;
-//		m_Impulse.y = 0.0f;
+		correctiveImpulse.x = -Cdot1/m_EffectiveMassMatrix.a11;
+		correctiveImpulse.y = 0.0f;
+		m_Impulse.x += correctiveImpulse.x;
+		m_Impulse.y = 0.0f;
 	}
 	
+	
 	Vector2f linearImpulse = m_WorldPerpendicularAxis * correctiveImpulse.x;
-	Vector2f limitImpulse  = m_WorldAxis * correctiveImpulse.z;
-	Vector2f impulse =  linearImpulse + limitImpulse;
-	//dfloat l1 = Vector2f::cross( linearImpulse , m_r1 + d ) + Vector2f::cross( limitImpulse , m_r1 + d );
-	//dfloat l2 = Vector2f::cross(m_r2, impulse) + Vector2f::cross( limitImpulse, m_r2 );
+	Vector2f limitImpulse  = m_WorldAxis * correctiveImpulse.y;
+	
+	Vector2f impulse = linearImpulse + limitImpulse;
+	
+	//dfloat l1 = Vector2f::cross( m_r1 + d, linearImpulse) + Vector2f::cross( m_r1 + d, limitImpulse);
+	//dfloat l2 = Vector2f::cross( m_r2, linearImpulse) + Vector2f::cross( m_r2, limitImpulse);
 	
 	body1->m_Velocity        -= impulse * m1Inv;
-	body1->m_AngularVelocity -= i1Inv * ( Vector2f::cross(impulse,m_r1+d) + correctiveImpulse.y  );
+	body1->m_AngularVelocity -= i1Inv * Vector2f::cross( m_r1 + d, impulse);
 	
 	body2->m_Velocity        += impulse * m2Inv;
-	body2->m_AngularVelocity += i2Inv * ( Vector2f::cross(impulse, m_r2) + correctiveImpulse.y );		
+	body2->m_AngularVelocity += i2Inv * Vector2f::cross( m_r2, impulse);		
 	
 }
+
 
 END_NAMESPACE_DIRAC2D

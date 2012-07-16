@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */; };
 		758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
+		758DCA2D13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */; };
 		75BD79A413C6E94700D8A086 /* LineConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD79A313C6E94700D8A086 /* LineConstraint.cpp */; };
 		75BD7B2613C7268600D8A086 /* PrismaticConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2513C7268600D8A086 /* PrismaticConstraint.cpp */; };
 		75BD7B2913C7269800D8A086 /* WheelConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */; };
@@ -62,8 +64,12 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		75580E9B13CED76500B6B03B /* PulleyConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulleyConstraint.h; sourceTree = "<group>"; };
+		75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PulleyConstraint.cpp; sourceTree = "<group>"; };
 		758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DTimer.cpp; path = Dirac2D/DTimer.cpp; sourceTree = SOURCE_ROOT; };
 		758921F213B0E3DF0005E1E2 /* DTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTimer.h; path = Dirac2D/DTimer.h; sourceTree = SOURCE_ROOT; };
+		758DCA2B13CF3DE200FDD6F1 /* CubicSplinePathConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubicSplinePathConstraint.h; sourceTree = "<group>"; };
+		758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubicSplinePathConstraint.cpp; sourceTree = "<group>"; };
 		75BD79A213C6E94700D8A086 /* LineConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineConstraint.h; sourceTree = "<group>"; };
 		75BD79A313C6E94700D8A086 /* LineConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LineConstraint.cpp; sourceTree = "<group>"; };
 		75BD7B2413C7268600D8A086 /* PrismaticConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrismaticConstraint.h; sourceTree = "<group>"; };
@@ -293,6 +299,10 @@
 				75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */,
 				75BD7C8413C76A3800D8A086 /* MotorConstraint.h */,
 				75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */,
+				75580E9B13CED76500B6B03B /* PulleyConstraint.h */,
+				75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */,
+				758DCA2B13CF3DE200FDD6F1 /* CubicSplinePathConstraint.h */,
+				758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -478,6 +488,8 @@
 				75BD7B2613C7268600D8A086 /* PrismaticConstraint.cpp in Sources */,
 				75BD7B2913C7269800D8A086 /* WheelConstraint.cpp in Sources */,
 				75BD7C8613C76A3800D8A086 /* MotorConstraint.cpp in Sources */,
+				75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */,
+				758DCA2D13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +540,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_AUTO_VECTORIZATION = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_MODEL_PPC64 = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_UNROLL_LOOPS = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

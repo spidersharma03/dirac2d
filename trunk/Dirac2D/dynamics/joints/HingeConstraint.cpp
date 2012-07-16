@@ -88,21 +88,21 @@ void HingeConstraint::buildJacobian()
 	if( fabs(m_UpperAngle - m_LowerAngle) < ANGULAR_ERROR )
 	{
 		m_AngularError = ( angle - m_UpperAngle ) * m_Erp;
-		m_AngleLimitState = EALS_LOWER_UPPER;
+		m_AngleLimitState = ECLS_LOWER_UPPER;
 	}
 	else if( angle >= m_UpperAngle )
 	{
 		m_AngularError = ( angle - m_UpperAngle ) * m_Erp;
-		m_AngleLimitState = EALS_UPPER;
+		m_AngleLimitState = ECLS_UPPER;
 	}
 	else if( angle <= m_LowerAngle )
 	{
 		m_AngularError = ( angle - m_LowerAngle ) * m_Erp;
-		m_AngleLimitState = EALS_LOWER;
+		m_AngleLimitState = ECLS_LOWER;
 	}
 	else {
 		m_Impulse.z = 0.0f;
-		m_AngleLimitState = EALS_NONE;
+		m_AngleLimitState = ECLS_NONE;
 	}
 
 	//printf(" Error = %f  %f\n", m_PositionError.x, m_PositionError.y);
@@ -163,19 +163,19 @@ void HingeConstraint::correctVelocities()
 	Vector3f correctiveImpulse;
 	
 	// This is Angular Limit case 
-	if( m_AngleLimitState != EALS_NONE )
+	if( m_AngleLimitState != ECLS_NONE )
 	{		
 		// First Solve for the Complete 3x3 Jacobian Matrix( ie all constraints simultaneously).		
 		Vector3f Cdot1 = Vector3f( Cdot,  body2->m_AngularVelocity - body1->m_AngularVelocity + m_AngularError + m_Cfm * m_Impulse.z );
 		correctiveImpulse = -( m_EffectiveMass.solve(Cdot1) );
 				
 		// Both Lower and Upper Limits are Same. we need to only solve the Complete 3x3 Jacobian Matrix.
-		if( m_AngleLimitState == EALS_LOWER_UPPER )
+		if( m_AngleLimitState == ECLS_LOWER_UPPER )
 		{
 			m_Impulse += correctiveImpulse;
 		}
 		// Lower Limit.
-		else if ( m_AngleLimitState == EALS_LOWER )
+		else if ( m_AngleLimitState == ECLS_LOWER )
 		{
 			dfloat newImpulseZ = m_Impulse.z + correctiveImpulse.z;
 			// we need to clamp the impulse to 0.0f as this impulse should not effect the Hinge Constraint. we should solve for 
@@ -197,7 +197,7 @@ void HingeConstraint::correctVelocities()
 				m_Impulse += correctiveImpulse;
 			}
 		}
-		else if ( m_AngleLimitState == EALS_UPPER )
+		else if ( m_AngleLimitState == ECLS_UPPER )
 		{
 			dfloat newImpulseZ = m_Impulse.z + correctiveImpulse.z;
 			// we need to clamp the impulse to 0.0f as this impulse should not effect the Hinge Constraint. we should solve for 

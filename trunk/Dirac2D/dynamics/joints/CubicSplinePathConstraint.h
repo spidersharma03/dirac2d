@@ -1,22 +1,28 @@
 /*
- *  LineConstraint.h
+ *  CubicSplinePathConstraint.h
  *  Dirac2D
  *
- *  Created by Prashant on 08/07/11.
+ *  Created by Prashant on 14/07/11.
  *
  */
 
-#ifndef _LINE_CONSTRAINT_H_
-#define _LINE_CONSTRAINT_H_
+#ifndef _CUBIC_SPLINE_PATH_CONSTRAINT_H_
+#define _CUBIC_SPLINE_PATH_CONSTRAINT_H_
 
 #include "Constraint.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
-class LineConstraint : public Constraint
+struct CubicSpline 
+{
+	// coeffs of cubic polynomial
+	dfloat a , b, c , d;
+};
+
+class CubicSplinePathConstraint : public Constraint
 {
 public:
-	LineConstraint();
+	CubicSplinePathConstraint(Vector2f* splineVertices, int numVertices);
 	
 	virtual void buildJacobian();
 	
@@ -36,6 +42,12 @@ public:
 	Vector2f m_WorldPerpendicularAxis;
 	Vector2f m_WorldAxis;
 	Vector2f d;
+	
+	dint32 m_NumSplineVertices;
+	Vector2f* m_SplineVertices;
+	
+	CubicSpline* m_SplinesX;
+	CubicSpline* m_SplinesY;
 	
 	dfloat m_UpperLimit;
 	dfloat m_LowerLimit;
