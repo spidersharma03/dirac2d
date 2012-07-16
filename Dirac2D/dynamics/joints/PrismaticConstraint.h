@@ -15,7 +15,6 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class PrismaticConstraint : public Constraint
 {
-	enum PRISMATIC_CONSTRAINT_LIMIT_STATE { EPCLS_LOWER, EPCLS_UPPER, EPCLS_LOWER_UPPER, EPCLS_NONE };
 public:
 	PrismaticConstraint();
 	
@@ -39,7 +38,7 @@ public:
 	Vector2f d;
 	dfloat m_ReferenceAngle;
 	dfloat m_LowerLimit, m_UpperLimit;
-	PRISMATIC_CONSTRAINT_LIMIT_STATE m_LimitState;
+	CONSTRAINT_LIMIT_STATE m_LimitState;
 };
 
 END_NAMESPACE_DIRAC2D

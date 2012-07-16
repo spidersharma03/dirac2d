@@ -29,6 +29,7 @@
 #include "../dynamics/joints/LineConstraint.h"
 #include "../dynamics/joints/PrismaticConstraint.h"
 #include "../dynamics/joints/WheelConstraint.h"
+#include "../dynamics/joints/PulleyConstraint.h"
 #include "../dynamics/joints/MotorConstraint.h"
 
 #include "../draw/Renderer.h"
@@ -40,8 +41,8 @@ Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
 PhysicalWorld::PhysicalWorld()
 {
 	m_CollisionManager = new CollisionManager(this);
-	//m_pBroadPhaseAlgorithm = new DynamicTreeBroadPhaseAlgorithm(m_CollisionManager);
-	m_pBroadPhaseAlgorithm = new NaiveBroadPhaseCollisionAlgorithm(m_CollisionManager);
+	m_pBroadPhaseAlgorithm = new DynamicTreeBroadPhaseAlgorithm(m_CollisionManager);
+	//m_pBroadPhaseAlgorithm = new NaiveBroadPhaseCollisionAlgorithm(m_CollisionManager);
 	m_ContactSolver    = new ContactSolver(this);
 	m_Renderer		   = 0;
 	
@@ -76,6 +77,7 @@ PhysicalWorld::PhysicalWorld()
 	m_WheelConstraintPool    = new MemoryAllocator<WheelConstraint>(MAX_BODIES/10);
 	m_MotorConstraintPool    = new MemoryAllocator<MotorConstraint>(MAX_BODIES/10);
 	m_PrismaticConstraintPool = new MemoryAllocator<PrismaticConstraint>(MAX_BODIES/10);
+	m_PulleyConstraintPool    = new MemoryAllocator<PulleyConstraint>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
@@ -124,6 +126,9 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 			break;
 		case ECT_PRISMATIC:
 			constraint = new( m_PrismaticConstraintPool->Allocate() )PrismaticConstraint();
+			break;
+		case ECT_PULLEY:
+			constraint = new( m_PulleyConstraintPool->Allocate() )PulleyConstraint();
 			break;
 		case ECT_MOTOR:
 			constraint = new( m_MotorConstraintPool->Allocate() )MotorConstraint();
@@ -435,6 +440,29 @@ void PhysicalWorld::draw()
 				m_Renderer->setColor(255, 0, 255);
 				m_Renderer->setPointSize(3.0f);
 				m_Renderer->drawPoint(anchorPoint);
+			}
+			if( pConstraint->m_Type == ECT_PULLEY )
+			{
+				PulleyConstraint* pc = (PulleyConstraint*)pConstraint;
+				m_Renderer->setColor(255, 0, 255);
+				m_Renderer->setPointSize(3.0f);
+				m_Renderer->drawPoint(pc->m_FixedPoint1);
+				m_Renderer->drawPoint(pc->m_FixedPoint2);
+				m_Renderer->setPointSize(1.0f);
+				
+				Vector2f c1 = pc->m_PhysicalBody1->m_Position;
+				Vector2f ap1 = pc->m_Anchor1;
+				pc->m_PhysicalBody1->getTransform().transformAsVector(ap1);
+				c1 += ap1;
+				
+				Vector2f c2 = pc->m_PhysicalBody2->m_Position;
+				Vector2f ap2 = pc->m_Anchor2;
+				pc->m_PhysicalBody2->getTransform().transformAsVector(ap2);
+				c2 += ap2;
+				
+				m_Renderer->setColor(255, 255, 255);
+				m_Renderer->drawLine(c1, pc->m_FixedPoint1);
+				m_Renderer->drawLine(c2, pc->m_FixedPoint2);
 			}
 			pConstraint = pConstraint->m_Next;
 		}

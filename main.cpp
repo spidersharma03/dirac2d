@@ -1604,6 +1604,72 @@ void demo25()
 }
 
 
+// Pulley Constraint
+void demo26()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	pBodyGround->m_BodyType = EBT_STATIC;
+	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	for( dint32 i=0; i< 1; i++ )
+	{
+		PhysicalBody* pBox1 = pWorld->createPhysicalBody();
+		PhysicalBody* circle1 = pWorld->createPhysicalBody();
+		//PhysicalBody* circle2 = pWorld->createPhysicalBody();
+		
+		//pBox1->setAngle(PI_4);
+		//pBox1->m_BodyType = EBT_STATIC;
+		
+		pBox1->setPosition(Vector2f(0.0f,0.0f));		
+		circle1->setPosition(Vector2f(0.4f,0.0f));		
+		//circle2->setPosition(Vector2f(0.2f,-0.2f));		
+		
+		PhysicalAppearance pApp;
+		dfloat boxWidth = 0.06f; dfloat boxHeight = 0.06f;
+		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pBox1->createPhysicalShape(pApp);
+		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		//pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
+
+		circle1->createPhysicalShape(pApp);
+		
+		//pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
+		
+		//circle2->createPhysicalShape(pApp);
+		
+		if(1)
+		{
+			PulleyConstraint* pc1 = (PulleyConstraint*)pWorld->createConstraint(ECT_PULLEY);
+			pc1->m_PhysicalBody1 = pBox1;
+			pc1->m_PhysicalBody2 = circle1;
+			pc1->m_PulleyRatio = 2.0f;
+			pc1->m_Anchor1 = Vector2f(0.0f,0.1f);
+			pc1->m_Anchor2 = Vector2f(0.0f,0.1f);
+			pc1->m_FixedPoint1 = Vector2f(0.0f, 0.5f);
+			pc1->m_FixedPoint2 = Vector2f(0.4f, 0.5f);
+			//pc1->m_Anchor1 = Vector2f(0.4f,0.20f);
+			pc1->initialize();
+		}
+		
+		//LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
+		//		lc2->m_PhysicalBody1 = pBox1;
+		//		lc2->m_PhysicalBody2 = circle2;
+		//		lc2->m_Anchor = Vector2f(0.2f,-0.2f);
+		//		lc2->m_LocalAxis = Vector2f(1.0f,0.0f);
+		//		lc2->initialize();
+		
+	}
+	// Create Circle Chain
+}
+
+
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
@@ -1635,7 +1701,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo25();
+	demo3();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;

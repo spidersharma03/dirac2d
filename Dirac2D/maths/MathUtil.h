@@ -129,6 +129,71 @@ static inline void findBaryCentricCoordinate(Vector2<T>& p0, Vector2<T>& p1, Vec
 	}
 }
 
+template<class T>
+static void tridia_sl(T *lower, T *main, T *upper, T *rhs, T *sol, dint32 n) 
+{
+	solver(lower, upper, main, rhs, sol, n);
+}
+
+template<class T>
+static void tridia_sl(T *rhs, T* sol, dint32 n) 
+{
+	T lower[n];
+	T upper[n];
+	T main[n];
+	
+	for ( dint32 i = 0 ; i < n ; i ++)
+	{
+		lower[i] = 1.0f;
+		upper[i] = 1.0f;
+	}
+	for ( dint32 i = 0 ; i < n ; i ++)
+	{
+		main[i] = 4.0f;
+	}
+	
+	solver(lower, upper, main, rhs, sol, n);
+}
+
+template<class T>
+static void solver(T* l, T* u, T* d, T* r, T* y, dint32 n) 
+{
+	//gauss_elimination:do i=1,n-1
+	for (dint32 i = 0; i < n - 2; i++) {
+		u[i] = u[i] / d[i];
+		r[i] = r[i] / d[i];
+		d[i] = d[i] / d[i];
+		r[i + 1] = r[i] * l[i] - r[i + 1];
+		d[i + 1] = l[i] * u[i] - d[i + 1];
+		u[i + 1] = -u[i + 1];
+		l[i] = l[i] * d[i] - l[i];
+	}
+	y[n - 1] = r[n - 1] / d[n - 1];
+	//back_substitution:do i=n-1,1,-1
+	for (dint32 i = n - 2; i >= 0; i--) {
+		y[i] = (r[i] - u[i] * y[i + 1]) / d[i];
+	}
+	
+}
+
+//template<class T>
+//static void findSplineCoeff( CubicSpline* splines , T* D , T* y, dint32 n)
+//{
+//	for ( dint32 i = 0 ; i < n ; i ++)
+//	{
+//		splines[i].a = y[i];
+//		splines[i].b = D[i];
+//		splines[i].c = 3 * ( y[i+1] - y[i] ) - 2 * D[i] - D[i+1];
+//		splines[i].d = 2 * ( y[i] - y[i+1] ) + D[i] + D[i+1] ;
+//	}
+//}
+//
+//public static float interpolate(CubicSpline spline , float t ){
+//	if ( t > 1 || t < 0)return 0;
+//	float y;
+//	y = (int) (spline.a + spline.b * t + spline.c * t * t + spline.d * t * t * t);
+//	return y;
+//}
 
 END_NAMESPACE_DIRAC2D
 

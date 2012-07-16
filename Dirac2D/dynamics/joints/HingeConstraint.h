@@ -15,7 +15,6 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class HingeConstraint : public Constraint
 {
-	enum ANGLE_LIMIT_STATE { EALS_LOWER, EALS_UPPER, EALS_LOWER_UPPER, EALS_NONE };
 public:
 	HingeConstraint();
 	
@@ -35,7 +34,7 @@ public:
 	dfloat m_AngularError;
 	dfloat m_LowerAngle, m_UpperAngle;
 	dfloat m_ReferenceAngle;
-	ANGLE_LIMIT_STATE m_AngleLimitState;
+	CONSTRAINT_LIMIT_STATE m_AngleLimitState;
 };
 
 END_NAMESPACE_DIRAC2D
