@@ -15,8 +15,8 @@ BEGIN_NAMESPACE_DIRAC2D
 PrismaticConstraint::PrismaticConstraint()
 {
 	m_Type = ECT_PRISMATIC;
-	m_Erp = 0.0f;
-	m_Cfm = 0.0f;
+	m_Erp = 1000.0f;
+	m_Cfm = 10.0f;
 	m_LowerLimit = -0.4f;
 	m_UpperLimit = 0.4f;
 }
@@ -69,13 +69,13 @@ void PrismaticConstraint::buildJacobian()
 	m_WorldPerpendicularAxis = m_LocalPerpendicularAxis;
 	body1->m_Transform.transformAsVector(m_WorldPerpendicularAxis);
 	Vector2f s = m_r1 + d;
-	dfloat aperp_cross_s  = m_WorldPerpendicularAxis.cross(s);
-	dfloat aperp_cross_r2 = m_WorldPerpendicularAxis.cross(m_r2);
+	dfloat aperp_cross_s  = -m_WorldPerpendicularAxis.cross(s);
+	dfloat aperp_cross_r2 = -m_WorldPerpendicularAxis.cross(m_r2);
 	
 	m_WorldAxis = m_LocalAxis;
 	body1->m_Transform.transformAsVector(m_WorldAxis);
-	dfloat a_cross_s  = m_WorldAxis.cross(s);
-	dfloat a_cross_r2 = m_WorldAxis.cross(m_r2);
+	dfloat a_cross_s  = -m_WorldAxis.cross(s);
+	dfloat a_cross_r2 = -m_WorldAxis.cross(m_r2);
 	
 	// Positional Error for Position Stabilization( Baumgarte )
 	m_PositionError	= d.dot(m_WorldPerpendicularAxis) * m_Erp;
@@ -116,16 +116,14 @@ void PrismaticConstraint::buildJacobian()
 
 	m_EffectiveMassMatrix.col1.z = m_EffectiveMassMatrix.col3.x;
 	m_EffectiveMassMatrix.col2.z = m_EffectiveMassMatrix.col3.y;
-	m_EffectiveMassMatrix.col3.z = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2;
+	m_EffectiveMassMatrix.col3.z = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2 + m_Cfm;
 	
 	// Apply Corrective impulse on the bodies
-	if( 0 )
+	if( 1 )
 	{
-		Vector2f linearImpulse = m_WorldPerpendicularAxis * m_Impulse.x;
-		Vector2f limitImpulse  = m_WorldAxis * m_Impulse.z;
-		Vector2f impulse =  linearImpulse + limitImpulse;
-		dfloat l1 = Vector2f::cross( linearImpulse , m_r1 + d ) + Vector2f::cross( limitImpulse , m_r1 + d );
-		dfloat l2 = Vector2f::cross( linearImpulse, m_r2 ) + Vector2f::cross( limitImpulse, m_r2 );
+		Vector2f impulse =  m_WorldPerpendicularAxis * m_Impulse.x + m_WorldAxis * m_Impulse.z;
+		dfloat l1 = Vector2f::cross( impulse , m_r1 + d );
+		dfloat l2 = Vector2f::cross( impulse, m_r2 );
 		
 		body1->m_Velocity        -= impulse * m1Inv;
 		body1->m_AngularVelocity -= i1Inv * ( l1 + m_Impulse.y );
@@ -176,7 +174,7 @@ void PrismaticConstraint::correctVelocities()
 	dfloat Cdot2 = d.dot(Vector2f::cross(body1->m_AngularVelocity, m_WorldAxis))
 	+ relVel.dot(m_WorldAxis);
 	
-	Cdot2 += m_PositionErrorParallel;
+	Cdot2 += m_PositionErrorParallel + m_Cfm * m_Impulse.z;
 	
 	Vector3f correctiveImpulse;
 	
@@ -249,24 +247,15 @@ void PrismaticConstraint::correctVelocities()
 		correctiveImpulse.z = 0.0f;
 		m_Impulse += correctiveImpulse;
 		m_Impulse.z = 0.0f;
-		
-		//correctiveImpulse.x = -Cdot1/m_EffectiveMassMatrix.col1.x;
-//		correctiveImpulse.y = 0.0f;
-//		m_Impulse.x += correctiveImpulse.x;
-//		m_Impulse.y = 0.0f;
 	}
 	
-	Vector2f linearImpulse = m_WorldPerpendicularAxis * correctiveImpulse.x;
-	Vector2f limitImpulse  = m_WorldAxis * correctiveImpulse.z;
-	Vector2f impulse =  linearImpulse + limitImpulse;
-	//dfloat l1 = Vector2f::cross( linearImpulse , m_r1 + d ) + Vector2f::cross( limitImpulse , m_r1 + d );
-	//dfloat l2 = Vector2f::cross(m_r2, impulse) + Vector2f::cross( limitImpulse, m_r2 );
+	Vector2f impulse =  m_WorldPerpendicularAxis * correctiveImpulse.x + m_WorldAxis * correctiveImpulse.z;
 	
 	body1->m_Velocity        -= impulse * m1Inv;
-	body1->m_AngularVelocity -= i1Inv * ( Vector2f::cross(impulse,m_r1+d) + correctiveImpulse.y  );
+	body1->m_AngularVelocity -= i1Inv * ( Vector2f::cross(m_r1+d, impulse) + correctiveImpulse.y  );
 	
 	body2->m_Velocity        += impulse * m2Inv;
-	body2->m_AngularVelocity += i2Inv * ( Vector2f::cross(impulse, m_r2) + correctiveImpulse.y );		
+	body2->m_AngularVelocity += i2Inv * ( Vector2f::cross(m_r2, impulse) + correctiveImpulse.y );		
 	
 }
 

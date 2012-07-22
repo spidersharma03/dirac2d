@@ -1575,8 +1575,8 @@ void demo25()
 		pc1->m_PhysicalBody2 = circle1;
 		pc1->m_Anchor = Vector2f(0.4f,0.20f);
 		pc1->m_LocalAxis = Vector2f(1.0f,1.0f);
-		pc1->m_LowerLimit = -110.1f;
-		pc1->m_UpperLimit = 110.5f;		
+		pc1->m_LowerLimit = -0.1f;
+		pc1->m_UpperLimit = 0.5f;		
 		pc1->initialize();
 		}
 		else {
@@ -1701,7 +1701,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo3();
+	demo25();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
