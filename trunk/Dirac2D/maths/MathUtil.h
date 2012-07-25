@@ -138,7 +138,7 @@ static void tridia_sl(T *lower, T *main, T *upper, T *rhs, T *sol, dint32 n)
 template<class T>
 static void tridia_sl(T *rhs, T* sol, dint32 n) 
 {
-	T lower[n];
+	/*T lower[n];
 	T upper[n];
 	T main[n];
 	
@@ -152,7 +152,7 @@ static void tridia_sl(T *rhs, T* sol, dint32 n)
 		main[i] = 4.0f;
 	}
 	
-	solver(lower, upper, main, rhs, sol, n);
+	solver(lower, upper, main, rhs, sol, n);*/
 }
 
 template<class T>
