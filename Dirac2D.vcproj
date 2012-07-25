@@ -212,6 +212,18 @@
 					Name="joints"
 					>
 					<File
+						RelativePath=".\Dirac2D\dynamics\joints\CatenaryConstraint.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\CatenaryConstraintFixedRotation.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\CubicSplinePathConstraint.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\joints\DistanceConstraint.cpp"
 						>
 					</File>
@@ -220,7 +232,27 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Dirac2D\dynamics\joints\LineConstraint.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\MotorConstraint.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\PrismaticConstraint.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\PulleyConstraint.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\joints\WeldConstraint.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\WheelConstraint.cpp"
 						>
 					</File>
 				</Filter>
@@ -298,6 +330,10 @@
 				</File>
 				<File
 					RelativePath=".\Dirac2D\geometry\Circle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\CircleSweep.cpp"
 					>
 				</File>
 				<File
@@ -442,7 +478,19 @@
 					Name="joints"
 					>
 					<File
+						RelativePath=".\Dirac2D\dynamics\joints\CatenaryConstraint.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\CatenaryConstraintFixedRotation.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\joints\Constraint.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\CubicSplinePathConstraint.h"
 						>
 					</File>
 					<File
@@ -454,7 +502,27 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Dirac2D\dynamics\joints\LineConstraint.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\MotorConstraint.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\PrismaticConstraint.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\PulleyConstraint.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\joints\WeldConstraint.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\WheelConstraint.h"
 						>
 					</File>
 				</Filter>
@@ -484,6 +552,10 @@
 				</File>
 				<File
 					RelativePath=".\Dirac2D\geometry\Circle.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\geometry\CircleSweep.h"
 					>
 				</File>
 				<File

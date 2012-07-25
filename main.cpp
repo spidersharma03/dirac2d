@@ -1490,7 +1490,7 @@ void demo24()
 		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
 		pBox1->createPhysicalShape(pApp);
-		pApp.m_CollisionAttributes.m_Shape = new Circle(0.03f);
+		pApp.m_CollisionAttributes.m_Shape = new Circle(0.06f);
 		
 		circle1->createPhysicalShape(pApp);
 		
@@ -1701,7 +1701,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo25();
+	demo24();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;

@@ -42,10 +42,10 @@ void CubicSplinePathConstraint::initialize()
 	m_LocalAxis.normalize();
 	m_LocalPerpendicularAxis.set(-m_LocalAxis.y, m_LocalAxis.x);
 	
-	dfloat D[m_NumSplineVertices];
-	dfloat y[m_NumSplineVertices];
-	dfloat x[m_NumSplineVertices];
-	dfloat rhs[m_NumSplineVertices];
+	dfloat D[10];
+	dfloat y[10];
+	dfloat x[10];
+	dfloat rhs[10];
 	
 	for ( dint32 i = 0 ; i < m_NumSplineVertices ; i ++)
 	{
