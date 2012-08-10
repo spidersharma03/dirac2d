@@ -16,7 +16,6 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-
 template< class T >
 class Ray2
 {
@@ -55,8 +54,50 @@ public:
 	Vector2<T> m_Direction;
 };
 
+
+template< class T >
+class RaySegment
+{
+public:
+	RaySegment()
+	{
+	}
+	
+	RaySegment(const RaySegment<T>& other)
+	{
+		m_Start = other.m_Start;
+		m_End = other.m_End;
+	}
+	
+	RaySegment(Vector2<T>& start, Vector2<T>& end)
+	{
+		m_Start = start;
+		m_End = end;
+	}
+	
+	inline void set(Ray2<T>& other)
+	{
+		m_Start = other.m_Start;
+		m_End = other.m_End;
+	}
+	
+	inline void set(Vector2<T>& start, Vector2<T>& end)
+	{
+		m_Start = start;
+		m_End = end;
+	}
+	
+	
+public:
+	Vector2<T> m_Start;
+	Vector2<T> m_End;
+};
+
 typedef Ray2<dfloat> Ray2f;
 typedef Ray2<ddouble> Ray2d;
+
+typedef RaySegment<dfloat> RaySegment2f;
+typedef RaySegment<ddouble> RaySegment2d;
 
 END_NAMESPACE_DIRAC2D
 

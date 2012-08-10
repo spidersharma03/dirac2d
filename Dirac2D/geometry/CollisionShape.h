@@ -17,6 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 enum SHAPE_TYPE { EST_CIRCLE = 0, EST_BOX, EST_REGULARPOLY, EST_CAPSULE, EST_EDGE, EST_EDGE_CHAIN, EST_CIRCLE_SWEEP };
 
+
 class CollisionShape
 {
 public:
@@ -68,6 +69,11 @@ public:
 	virtual dbool isPointInside(Vector2f& p) = 0;
 	
 	virtual void updateAABB(Matrix3f& xForm) = 0;
+	
+	virtual dbool intersectRay(const Ray2f& ray)
+	{
+		return false;
+	}
 	
 	virtual CollisionShape* clone() = 0;
 	

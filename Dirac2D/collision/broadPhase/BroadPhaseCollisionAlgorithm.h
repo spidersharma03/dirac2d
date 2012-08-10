@@ -68,7 +68,7 @@ public:
 	
 	virtual void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack ) = 0;
 	
-	virtual void intersectRay( RayIntersectionCallBackClass* callBack) = 0;
+	virtual void intersectRay( const Ray2f& ray, RayIntersectionCallBackClass* callBack) = 0;
 	
 	ALGORITHM_TYPE getAlgorithmType()
 	{

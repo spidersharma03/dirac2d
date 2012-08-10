@@ -31,6 +31,7 @@
 #include "../dynamics/joints/WheelConstraint.h"
 #include "../dynamics/joints/PulleyConstraint.h"
 #include "../dynamics/joints/MotorConstraint.h"
+#include "../dynamics/joints/MinMaxConstraint.h"
 
 #include "../draw/Renderer.h"
 
@@ -78,6 +79,7 @@ PhysicalWorld::PhysicalWorld()
 	m_MotorConstraintPool    = new MemoryAllocator<MotorConstraint>(MAX_BODIES/10);
 	m_PrismaticConstraintPool = new MemoryAllocator<PrismaticConstraint>(MAX_BODIES/10);
 	m_PulleyConstraintPool    = new MemoryAllocator<PulleyConstraint>(MAX_BODIES/10);
+	m_MinMaxConstraintPool    = new MemoryAllocator<MinMaxConstraint>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
@@ -129,6 +131,9 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 			break;
 		case ECT_PULLEY:
 			constraint = new( m_PulleyConstraintPool->Allocate() )PulleyConstraint();
+			break;
+		case ECT_MIN_MAX:
+			constraint = new( m_MinMaxConstraintPool->Allocate() )MinMaxConstraint();
 			break;
 		case ECT_MOTOR:
 			constraint = new( m_MotorConstraintPool->Allocate() )MotorConstraint();
@@ -313,6 +318,22 @@ void PhysicalWorld::draw()
 				{
 					p1 += dc->m_PhysicalBody2->m_Centre;
 					dc->m_PhysicalBody2->getTransform().transformAsPoint(p1);
+				}
+				m_Renderer->drawLine(p0, p1);
+			}
+			if( pConstraint->m_Type == ECT_MIN_MAX )
+			{
+				MinMaxConstraint* mc = (MinMaxConstraint*)pConstraint;
+				Vector2f p0 = mc->m_Anchor1, p1 = mc->m_Anchor2;
+				if( mc->m_PhysicalBody1 )
+				{
+					p0 += mc->m_PhysicalBody1->m_Centre;
+					mc->m_PhysicalBody1->getTransform().transformAsPoint(p0);
+				}
+				if( mc->m_PhysicalBody2 )
+				{
+					p1 += mc->m_PhysicalBody2->m_Centre;
+					mc->m_PhysicalBody2->getTransform().transformAsPoint(p1);
 				}
 				m_Renderer->drawLine(p0, p1);
 			}
