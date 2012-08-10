@@ -122,8 +122,8 @@ void PrismaticConstraint::buildJacobian()
 	if( 1 )
 	{
 		Vector2f impulse =  m_WorldPerpendicularAxis * m_Impulse.x + m_WorldAxis * m_Impulse.z;
-		dfloat l1 = Vector2f::cross( impulse , m_r1 + d );
-		dfloat l2 = Vector2f::cross( impulse, m_r2 );
+		dfloat l1 = Vector2f::cross( m_r1 + d, impulse);
+		dfloat l2 = Vector2f::cross( m_r2, impulse );
 		
 		body1->m_Velocity        -= impulse * m1Inv;
 		body1->m_AngularVelocity -= i1Inv * ( l1 + m_Impulse.y );
@@ -150,18 +150,16 @@ void PrismaticConstraint::correctVelocities()
 	
 	Vector2f v1,v2;
 	dfloat w1 = 0.0f, w2 = 0.0f;
-	{
-		m1Inv = body1->m_InvMass;
-		i1Inv = body1->m_InvI;
-		v1 = body1->m_Velocity;
-		w1 = body1->m_AngularVelocity;
-	}
-	{
-		m2Inv = body2->m_InvMass;
-		i2Inv = body2->m_InvI;
-		v2 = body2->m_Velocity;
-		w2 = body2->m_AngularVelocity;
-	}
+	
+	m1Inv = body1->m_InvMass;
+	i1Inv = body1->m_InvI;
+	v1 = body1->m_Velocity;
+	w1 = body1->m_AngularVelocity;
+	
+	m2Inv = body2->m_InvMass;
+	i2Inv = body2->m_InvI;
+	v2 = body2->m_Velocity;
+	w2 = body2->m_AngularVelocity;	
 	
 	// Relative Velocity = V2 - V1 = v2 + w2xr2 - v1 - w1xr1			
 	Vector2f relVel = v2 + Vector2f::cross(w2, m_r2) - v1 - Vector2f::cross(w1, m_r1);

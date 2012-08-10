@@ -134,8 +134,16 @@ void NaiveBroadPhaseCollisionAlgorithm::overlapAABB( AABB2f& queryAABB, OverlapC
 	} 
 }
 
-void NaiveBroadPhaseCollisionAlgorithm::intersectRay( RayIntersectionCallBackClass* callBack)
+void NaiveBroadPhaseCollisionAlgorithm::intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack)
 {
+	BroadPhaseNode* pNode = m_BroadPhaseNodeList;
+	while( pNode )
+	{									
+		if( pNode->m_CollisionShape->intersectRay(ray) )
+			callBack->rayIntersectionCallBack(pNode->m_ID);
+		
+		pNode = pNode->m_Next;
+	} 
 }
 
 END_NAMESPACE_DIRAC2D

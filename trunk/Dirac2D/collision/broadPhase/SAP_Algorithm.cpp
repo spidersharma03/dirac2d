@@ -32,7 +32,7 @@ void SAPAlgorithm::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBac
 {
 }
 
-void SAPAlgorithm::intersectRay( RayIntersectionCallBackClass* callBack)
+void SAPAlgorithm::intersectRay( const Ray2f& ray,RayIntersectionCallBackClass* callBack)
 {
 }
 

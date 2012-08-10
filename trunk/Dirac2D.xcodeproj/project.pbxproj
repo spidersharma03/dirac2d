@@ -46,6 +46,7 @@
 		C2DD149D1558102700432320 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
 		C2DD15001558E6A300432320 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 		C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
+		C2EDB84A15D4EA48008EAD97 /* MinMaxConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EDB84915D4EA48008EAD97 /* MinMaxConstraint.cpp */; };
 		C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,8 @@
 		C2DD14FF1558E6A300432320 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C2EB2C2E1573C48600E92679 /* EdgeChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EdgeChain.h; sourceTree = "<group>"; };
 		C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EdgeChain.cpp; sourceTree = "<group>"; };
+		C2EDB84815D4EA48008EAD97 /* MinMaxConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinMaxConstraint.h; sourceTree = "<group>"; };
+		C2EDB84915D4EA48008EAD97 /* MinMaxConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MinMaxConstraint.cpp; sourceTree = "<group>"; };
 		C2F30F631578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BroadPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/BroadPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
 		C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NaiveBoradPhaseCollisionAlgorithm.cpp; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
 		C2F30F651578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NaiveBoradPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
@@ -303,6 +306,8 @@
 				75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */,
 				758DCA2B13CF3DE200FDD6F1 /* CubicSplinePathConstraint.h */,
 				758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */,
+				C2EDB84815D4EA48008EAD97 /* MinMaxConstraint.h */,
+				C2EDB84915D4EA48008EAD97 /* MinMaxConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -490,6 +495,7 @@
 				75BD7C8613C76A3800D8A086 /* MotorConstraint.cpp in Sources */,
 				75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */,
 				758DCA2D13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp in Sources */,
+				C2EDB84A15D4EA48008EAD97 /* MinMaxConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

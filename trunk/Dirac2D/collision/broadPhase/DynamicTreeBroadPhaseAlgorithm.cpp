@@ -137,8 +137,9 @@ void DynamicTreeBroadPhaseAlgorithm::overlapAABB( AABB2f& queryAABB, OverlapCall
 	} 
 }
 
-void DynamicTreeBroadPhaseAlgorithm::intersectRay( RayIntersectionCallBackClass* callBack)
+void DynamicTreeBroadPhaseAlgorithm::intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack)
 {
+	
 }
 
 END_NAMESPACE_DIRAC2D

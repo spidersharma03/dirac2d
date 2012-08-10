@@ -74,11 +74,6 @@ void PulleyConstraint::buildJacobian()
 	if( len2 > 0.0f )
 		m_ImpulseDirection2 /= len2;
 		
-	//if( m_ImpulseDirection.lengthSquared() < EPSILON )
-	//		dAssert(0);
-	//	else
-	//m_ImpulseDirection.normalize();
-	
 	dfloat r_cross_l1 = m_r1.cross(m_ImpulseDirection1);
 	dfloat r_cross_l2 = m_r2.cross(m_ImpulseDirection2);
 	
@@ -87,8 +82,6 @@ void PulleyConstraint::buildJacobian()
 	
 	// Effective mass for the Constraint.
 	m_EffectiveMass = 1.0f/JInvMJT;
-	
-	//printf("m_EffectiveMass = %f\n", ( m_TotalLength - m_Length ));
 	
 	// Positional Error for Position Stabilization( Baumgarte )
 	m_TotalLength = len1 + len2 * m_PulleyRatio;

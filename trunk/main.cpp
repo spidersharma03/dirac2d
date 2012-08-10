@@ -1425,13 +1425,14 @@ void demo23()
 		//pBox1->m_BodyType = EBT_STATIC;
 		
 		pBox1->setPosition(Vector2f(0.0f,0.0f));		
-		circle1->setPosition(Vector2f(0.2f,0.2f));		
-		circle2->setPosition(Vector2f(0.2f,-0.2f));		
+		circle1->setPosition(Vector2f(0.3f,-0.2f));		
+		circle2->setPosition(Vector2f(-0.3f,-0.2f));		
 		
 		PhysicalAppearance pApp;
-		dfloat boxWidth = 0.06f; dfloat boxHeight = 0.3f;
-		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
-		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		dfloat boxWidth = 0.3f; dfloat boxHeight = 0.04f;
+		//Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+		//pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.1f, 0.3f);
 		pBox1->createPhysicalShape(pApp);
 		pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
 		
@@ -1444,16 +1445,20 @@ void demo23()
 		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
 		lc1->m_PhysicalBody1 = pBox1;
 		lc1->m_PhysicalBody2 = circle1;
-		lc1->m_Anchor = Vector2f(0.2f,0.2f);
-		lc1->m_LocalAxis = Vector2f(1.0f,0.0f);
+		lc1->m_Anchor = Vector2f(0.3f,-0.2f);
+		lc1->m_LocalAxis = Vector2f(1.0f,-1.0f);
 		lc1->initialize();
+		lc1->m_Erp = 50.0f;
+		lc1->m_Cfm = 10.0f;
 		
 		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
 		lc2->m_PhysicalBody1 = pBox1;
 		lc2->m_PhysicalBody2 = circle2;
-		lc2->m_Anchor = Vector2f(0.2f,-0.2f);
-		lc2->m_LocalAxis = Vector2f(1.0f,0.0f);
+		lc2->m_Anchor = Vector2f(-0.3f,-0.2f);
+		lc2->m_LocalAxis = Vector2f(-1.0f,-1.0f);
 		lc2->initialize();
+		lc2->m_Erp = 50.0f;
+		lc2->m_Cfm = 10.0f;
 		
 	}
 	// Create Circle Chain
@@ -1476,36 +1481,51 @@ void demo24()
 	{
 		PhysicalBody* pBox1 = pWorld->createPhysicalBody();
 		PhysicalBody* circle1 = pWorld->createPhysicalBody();
-		//PhysicalBody* circle2 = pWorld->createPhysicalBody();
+		PhysicalBody* circle2 = pWorld->createPhysicalBody();
 		
 		//pBox1->setAngle(PI_4);
 		//pBox1->m_BodyType = EBT_STATIC;
 		
 		pBox1->setPosition(Vector2f(0.0f,0.0f));		
 		circle1->setPosition(Vector2f(0.2f,0.0f));		
-		//circle2->setPosition(Vector2f(0.2f,-0.2f));		
+		circle2->setPosition(Vector2f(-0.2f,0.0f));		
 		
 		PhysicalAppearance pApp;
 		dfloat boxWidth = 0.06f; dfloat boxHeight = 0.06f;
 		Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
 		pBox1->createPhysicalShape(pApp);
-		pApp.m_CollisionAttributes.m_Shape = new Circle(0.06f);
+		pApp.m_CollisionAttributes.m_Shape = new Circle(0.05f);
 		
 		circle1->createPhysicalShape(pApp);
 		
+		pApp.m_CollisionAttributes.m_Shape = new Circle(0.05f);
+
 		//pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
 		
-		//circle2->createPhysicalShape(pApp);
+		circle2->createPhysicalShape(pApp);
 		
 		LineConstraint* lc1 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
 		lc1->m_PhysicalBody1 = pBox1;
 		lc1->m_PhysicalBody2 = circle1;
 		lc1->m_Anchor = Vector2f(0.2f,0.0f);
 		lc1->m_LocalAxis = Vector2f(1.0f,0.0f);
-		lc1->m_LowerLimit = -0.5f;
-		lc1->m_UpperLimit = 0.5f;		
+		lc1->m_LowerLimit = 0.1f;
+		lc1->m_UpperLimit = 0.5f;
+		lc1->m_Cfm = 100.0f;
+		lc1->m_Erp = 100.0f;
 		lc1->initialize();
+		
+		LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
+		lc2->m_PhysicalBody1 = pBox1;
+		lc2->m_PhysicalBody2 = circle2;
+		lc2->m_Anchor = Vector2f(-0.2f,0.0f);
+		lc2->m_LocalAxis = Vector2f(-1.0f,0.0f);
+		lc2->m_LowerLimit = 0.1f;
+		lc2->m_UpperLimit = 0.5f;
+		lc2->m_Cfm = 100.0f;
+		lc2->m_Erp = 100.0f;
+		lc2->initialize();
 		
 		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 		dc->m_PhysicalBody1 = pBox1;
@@ -1515,7 +1535,7 @@ void demo24()
 		MotorConstraint* mc = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
 		mc->m_PhysicalBody1 = pBox1;
 		mc->m_MaxTorque = 10.0f;
-		mc->m_Speed = 3.0f;
+		mc->m_Speed = 0.50f;
 		mc->initialize();
 		//LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
 //		lc2->m_PhysicalBody1 = pBox1;
@@ -1670,6 +1690,56 @@ void demo26()
 }
 
 
+// MinMax Constraint
+void demo27()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-1.0f));
+	//pBodyGround->setAngle(PI_4/112);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Circle Chain
+	dfloat y = 0.1f;
+	dint32 n = 1;
+	
+	dfloat radius = 0.07f;
+	PhysicalBody* pBodyCircle1 = pWorld->createPhysicalBody();
+	pBodyCircle1->setPosition(Vector2f(0.0,y));
+	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
+	pBodyCircle1->createPhysicalShape(pApp);
+	
+	PhysicalBody* pBodyCircle2 = pWorld->createPhysicalBody();
+	pBodyCircle2->setPosition(Vector2f(0.0,y-0.5f));
+	pApp.m_CollisionAttributes.m_Shape = new Circle(radius);
+	pBodyCircle2->createPhysicalShape(pApp);
+	
+	dfloat erp = 10.0f; dfloat cfm = 1.0f;
+	
+	MinMaxConstraint* mc = (MinMaxConstraint*)pWorld->createConstraint(ECT_MIN_MAX);
+
+	mc->m_Erp = erp;
+	mc->m_Cfm = cfm;
+	mc->m_PhysicalBody1 = pBodyCircle1;
+	mc->m_PhysicalBody2 = pBodyCircle2;
+	mc->m_Anchor1 = Vector2f(0.0f,0.0f);
+	mc->m_Anchor2 = Vector2f(0.0f,0.0f);
+	mc->m_LowerLimit = 0.3f;
+	mc->m_UpperLimit = 0.6f;
+	mc->initialize();
+	
+	//PhysicalBody* pPrevCircle = pBodyCircle;
+//	dfloat dy = radius*3;
+//	dfloat boxHeight = 2*radius; dfloat boxWidth = 2*radius;
+//	Vector2f verticesBox[4] = {Vector2f(boxWidth/2, boxHeight/2), Vector2f(-boxWidth/2, boxHeight/2), Vector2f(-boxWidth/2, -boxHeight/2), Vector2f(boxWidth/2, -boxHeight/2) };
+//	
+}
+
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
@@ -1701,7 +1771,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo24();
+	demo27();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;

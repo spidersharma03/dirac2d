@@ -75,7 +75,9 @@
 #include "dynamics/joints/PrismaticConstraint.h"
 #include "dynamics/joints/WheelConstraint.h"
 #include "dynamics/joints/PulleyConstraint.h"
+#include "dynamics/joints/CubicSplinePathConstraint.h"
 #include "dynamics/joints/MotorConstraint.h"
+#include "dynamics/joints/MinMaxConstraint.h"
 
 #include "geometry/CollisionShape.h"
 #include "geometry/Circle.h"

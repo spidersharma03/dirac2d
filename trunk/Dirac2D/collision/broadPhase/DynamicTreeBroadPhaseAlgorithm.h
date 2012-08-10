@@ -33,7 +33,7 @@ public:
 		
 	virtual void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack );
 	
-	virtual void intersectRay( RayIntersectionCallBackClass* callBack);
+	virtual void intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack);
 	
 	virtual void overlapCallBack(dint32 overlapNodeID);
 	

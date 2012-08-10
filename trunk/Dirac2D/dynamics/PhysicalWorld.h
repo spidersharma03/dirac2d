@@ -42,6 +42,7 @@ class PrismaticConstraint;
 class WheelConstraint;
 class PulleyConstraint;
 class MotorConstraint;
+class MinMaxConstraint;
 
 enum BROAD_PHASE_ALGORITHM { EBPA_NAIVE, EBPA_SAP, EBPA_DYNAMIC_TREE };
 
@@ -126,6 +127,7 @@ private:
 	MemoryAllocator<BroadPhaseNode> *m_BroadPhaseNodePool;
 	// Constraint Pools
 	MemoryAllocator<DistanceConstraint> *m_DistanceConstraintPool;
+	MemoryAllocator<MinMaxConstraint> *m_MinMaxConstraintPool;
 	MemoryAllocator<HingeConstraint> *m_HingeConstraintPool;
 	MemoryAllocator<WeldConstraint> *m_WeldConstraintPool;
 	MemoryAllocator<CatenaryConstraint> *m_CatenaryConstraintPool;
