@@ -222,11 +222,11 @@ static dbool findSeperationAxis(ConvexPolygon* poly1, Matrix3f& polyxForm1, Conv
 
 
 // Find Whether two Regular/ConvexPolygons intersect.
-dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& xform1, ConvexPolygon* poly2, Matrix3f& xform2);
+dbool intersectPolygons( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2);
 
 
 // Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& xform1, ConvexPolygon* poly2, Matrix3f& xform2, ContactManifold* contactManifold);
+dbool intersectPolygons( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2, ContactManifold* contactManifold);
 
 END_NAMESPACE_DIRAC2D
 

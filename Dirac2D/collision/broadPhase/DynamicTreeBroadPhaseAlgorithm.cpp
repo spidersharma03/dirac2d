@@ -25,7 +25,7 @@ BEGIN_NAMESPACE_DIRAC2D
 DynamicTreeBroadPhaseAlgorithm::DynamicTreeBroadPhaseAlgorithm(CollisionManager* collisionManager):
 BroadPhaseCollisionAlgorithm(collisionManager)
 {
-	m_DynamicTree = new DynamicTree();
+	m_DynamicTree = new DynamicTree(64);
 	m_AlgorithmType = EAT_DYNAMIC_TREE;
 }
 	
