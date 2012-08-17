@@ -16,6 +16,19 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 
+CollisionRegisterFn registeredFunctions[][2] = 
+{ 
+	{0 , 0 }, 
+	{0 , 0 }, 
+	{0 , 0 }, 
+	{0 , 0 } 
+};
+
+CollisionRegisterFn getRegisteredFunction(dint32 i, dint32 j)
+{
+	return registeredFunctions[i][j];
+}
+
 // Find Whether two Shapes intersect.
 dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2)
 {
@@ -24,9 +37,9 @@ dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape*
 
 // Find Whether two Shapes intersect. Also find the Contact Points if the Shapes intersect.
 dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2, ContactManifold* contactManifold)
-{
+{	
 	if( shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_REGULARPOLY )
-		return intersectPolygons((ConvexPolygon*)shape1, xform1, (ConvexPolygon*)shape2, xform2, contactManifold);
+		return intersectPolygons(shape1, xform1, shape2, xform2, contactManifold);
 	
 	if( (shape1->getShapeType() == EST_REGULARPOLY && shape2->getShapeType() == EST_CIRCLE) ) 
 	{

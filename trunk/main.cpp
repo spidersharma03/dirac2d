@@ -1193,7 +1193,7 @@ void demo18()
 {	
 	dint32 numBoxes = 15;
 	
-	dynamicTree = new DynamicTree();
+	dynamicTree = new DynamicTree(64);
 	// Create Boxes
 	for( dint32 i=0; i< numBoxes; i++ )
 	{
@@ -1730,7 +1730,7 @@ void demo27()
 	mc->m_Anchor1 = Vector2f(0.0f,0.0f);
 	mc->m_Anchor2 = Vector2f(0.0f,0.0f);
 	mc->m_LowerLimit = 0.3f;
-	mc->m_UpperLimit = 0.6f;
+	mc->m_UpperLimit = 0.5f;
 	mc->initialize();
 	
 	//PhysicalBody* pPrevCircle = pBodyCircle;
@@ -1867,6 +1867,29 @@ void renderScene(void)
 		if( pAlgo->getDynamicTree() )
 			renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
 	}
+	
+	//float size = 0.3f;
+//	
+//	float data[16];
+//	Matrix3f R;
+//	R.rotate(M_PI_4);
+//	
+//	glPushMatrix();
+//
+//	//glScaled(2, 1, 1);
+//	//glScaled(1, 0.9, 1);
+//	glRotated(45, 0, 0, 1);
+//	//R.getPointer(data);
+//	//glLoadMatrixf(data);
+//	glBegin(GL_QUADS);
+//	glVertex3d(size, size, 0.0);
+//	glVertex3d(-size, size, 0.0);
+//	glVertex3d(-size, -size, 0.0);
+//	glVertex3d(size, -size, 0.0);
+//	glEnd();
+//
+//	
+//	glPopMatrix();
 	
     glutSwapBuffers();
 	

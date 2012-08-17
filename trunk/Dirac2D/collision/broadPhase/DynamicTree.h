@@ -56,7 +56,7 @@ struct DynamicTreeNode
 class DynamicTree
 {
 public:
-	DynamicTree();
+	DynamicTree(dint32 capacity = 64);
 	
 	~DynamicTree();
 	
@@ -118,7 +118,7 @@ protected:
 	
 	dint32 m_FreeNode;
 	
-	dint32 m_RootNode;
+	dint32 m_RootNode;	
 };
 
 

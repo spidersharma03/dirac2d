@@ -18,7 +18,7 @@ BEGIN_NAMESPACE_DIRAC2D
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Find Whether two Regular/ConvexPolygons intersect.
-dbool intersectPolygons( ConvexPolygon& poly1, Matrix3f& xform1, ConvexPolygon& poly2, Matrix3f& xform2)
+dbool intersectPolygons( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2 )
 {
 	return 0;
 }
@@ -26,8 +26,11 @@ dbool intersectPolygons( ConvexPolygon& poly1, Matrix3f& xform1, ConvexPolygon& 
 #ifndef NEW
 
 // Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& polygonXform1, ConvexPolygon* poly2, Matrix3f& polygonXform2, ContactManifold* contactManifold)
+dbool intersectPolygons( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2, ContactManifold* contactManifold)
 {
+	ConvexPolygon* poly1 = (ConvexPolygon*)shape1;
+	ConvexPolygon* poly2 = (ConvexPolygon*)shape2;
+	
 	Vector2f* vertices1 = poly1->getVertices();
 	Vector2f* vertices2 = poly2->getVertices();
 	dint32 numVertices1 = poly1->getNumVertices();
@@ -180,8 +183,11 @@ dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& polygonXform1, ConvexPo
 #else
 
 // Find Whether two Regular/ConvexPolygons intersect. Also find the Contact Points if the Polygons intersect.
-dbool intersectPolygons( ConvexPolygon* poly1, Matrix3f& polygonXform1, ConvexPolygon* poly2, Matrix3f& polygonXform2, ContactManifold* contactManifold)
+dbool intersectPolygons( CollisionShape* shape1, Matrix3f& polygonXform1, CollisionShape* shape2, Matrix3f& polygonXform2, ContactManifold* contactManifold)
 {	
+	ConvexPolygon* poly1 = (ConvexPolygon*)shape1;
+	ConvexPolygon* poly2 = (ConvexPolygon*)shape2;
+	
 	dfloat minSeperation1 = 10000.0f; //Initialize the length of the collision vector to a relatively large value
 	dfloat minSeperation2 = 10000.0f; //Initialize the length of the collision vector to a relatively large value
 

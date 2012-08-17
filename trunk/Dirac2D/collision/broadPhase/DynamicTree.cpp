@@ -13,9 +13,9 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-DynamicTree::DynamicTree()
+DynamicTree::DynamicTree(dint32 capacity)
 {
-	m_NodeCapacity = 100;
+	m_NodeCapacity = capacity;
 	m_CurrentNodeCount = 0;
 	m_Nodes = (DynamicTreeNode*)malloc(m_NodeCapacity * sizeof(DynamicTreeNode));
 	
