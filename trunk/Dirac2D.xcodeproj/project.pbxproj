@@ -33,6 +33,7 @@
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
 		C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
 		C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B5361581CA820040896A /* DistanceConstraint.cpp */; };
+		C29B9C1C15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29B9C1B15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp */; };
 		C2AD46CD1599EC2C009C4951 /* WeldConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD46CC1599EC2C009C4951 /* WeldConstraint.cpp */; };
 		C2B6C7DC156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */; };
 		C2B6D19C156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */; };
@@ -126,6 +127,9 @@
 		C299B45E1580D26D0040896A /* GJKAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GJKAlgorithm.h; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.h; sourceTree = SOURCE_ROOT; };
 		C299B4601580D26D0040896A /* Simplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Simplex.h; path = Dirac2D/collision/GJK_EPA/Simplex.h; sourceTree = SOURCE_ROOT; };
 		C299B5361581CA820040896A /* DistanceConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DistanceConstraint.cpp; sourceTree = "<group>"; };
+		C29B9C1115F0DB04002CF007 /* ConvexHullGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvexHullGenerator.h; sourceTree = "<group>"; };
+		C29B9C1815F0DCB1002CF007 /* GrahamScanConvexHullGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrahamScanConvexHullGenerator.h; sourceTree = "<group>"; };
+		C29B9C1B15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GrahamScanConvexHullGenerator.cpp; sourceTree = "<group>"; };
 		C2AD46CB1599EC2C009C4951 /* WeldConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeldConstraint.h; sourceTree = "<group>"; };
 		C2AD46CC1599EC2C009C4951 /* WeldConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeldConstraint.cpp; sourceTree = "<group>"; };
 		C2B6C7DA156B736000E31E38 /* CollisionDetectionCirclePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetectionCirclePolygon.h; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 		C257F14F154E71AE00270D77 /* geometry */ = {
 			isa = PBXGroup;
 			children = (
+				C29B9C1015F0DAE7002CF007 /* ConvexHull */,
 				C2D19CD21587853F0042A724 /* ConvexPolygon.h */,
 				C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */,
 				C257F153154E71AE00270D77 /* CollisionShape.h */,
@@ -381,6 +386,17 @@
 			);
 			name = GJK_EPA;
 			path = Dirac2D/collision/GJK_EPA;
+			sourceTree = SOURCE_ROOT;
+		};
+		C29B9C1015F0DAE7002CF007 /* ConvexHull */ = {
+			isa = PBXGroup;
+			children = (
+				C29B9C1115F0DB04002CF007 /* ConvexHullGenerator.h */,
+				C29B9C1815F0DCB1002CF007 /* GrahamScanConvexHullGenerator.h */,
+				C29B9C1B15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp */,
+			);
+			name = ConvexHull;
+			path = Dirac2D/geometry/ConvexHull;
 			sourceTree = SOURCE_ROOT;
 		};
 		C2F30F611578FE6D00D4F2F4 /* broadPhase */ = {
@@ -496,6 +512,7 @@
 				75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */,
 				758DCA2D13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp in Sources */,
 				C2EDB84A15D4EA48008EAD97 /* MinMaxConstraint.cpp in Sources */,
+				C29B9C1C15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

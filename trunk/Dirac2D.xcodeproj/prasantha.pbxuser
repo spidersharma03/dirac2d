@@ -700,9 +700,9 @@
 	};
 	C257F144154E71AE00270D77 /* Dirac2D.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1395}}";
-			sepNavSelRange = "{2797, 0}";
-			sepNavVisRange = "{1818, 1415}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1453}}";
+			sepNavSelRange = "{3500, 0}";
+			sepNavVisRange = "{2010, 1519}";
 		};
 	};
 	C257F147154E71AE00270D77 /* Contact.h */ = {
@@ -848,15 +848,15 @@
 	};
 	C257F7C815528EE500270D77 /* PhysicalWorld.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 8536}}";
-			sepNavSelRange = "{1869, 0}";
-			sepNavVisRange = "{1164, 1380}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 8401}}";
+			sepNavSelRange = "{1870, 0}";
+			sepNavVisRange = "{3039, 1497}";
 		};
 	};
 	C257F8021552996600270D77 /* PhysicalBody.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 5198}}";
-			sepNavSelRange = "{7908, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 5096}}";
+			sepNavSelRange = "{7465, 0}";
 			sepNavVisRange = "{7027, 1013}";
 		};
 	};
@@ -1463,6 +1463,20 @@
 		vrLen = 1380;
 		vrLoc = 1164;
 	};
+	C29B9C1115F0DB04002CF007 /* ConvexHullGenerator.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 653}}";
+			sepNavSelRange = "{89, 298}";
+			sepNavVisRange = "{0, 389}";
+		};
+	};
+	C29B9C1815F0DCB1002CF007 /* GrahamScanConvexHullGenerator.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 653}}";
+			sepNavSelRange = "{258, 29}";
+			sepNavVisRange = "{0, 442}";
+		};
+	};
 	C2AD46CB1599EC2C009C4951 /* WeldConstraint.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 685}}";
@@ -2067,9 +2081,9 @@
 	};
 	C2DD149C1558102700432320 /* PhysicalShape.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1096}}";
-			sepNavSelRange = "{794, 0}";
-			sepNavVisRange = "{25, 1045}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1111}}";
+			sepNavSelRange = "{900, 0}";
+			sepNavVisRange = "{25, 987}";
 		};
 	};
 	C2DD164F155CE01200432320 /* PBXTextBookmark */ = {
