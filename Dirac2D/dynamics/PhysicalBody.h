@@ -146,6 +146,7 @@ protected:
 	
 	PhysicalBody* m_Next;
 	PhysicalBody* m_Prev;
+	
 	// Calculates MassAttributes( mass, moment of inertia, centre of mass) of this Body from the Physical Shapes associated with this Body.
 	void calculateMassAttributes();
 	

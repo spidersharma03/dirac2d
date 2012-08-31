@@ -286,44 +286,18 @@ void PhysicalBody::updateAABB()
 		pShape = pShape->m_Next;
 	}
 	
-	dfloat min_x = 100000.0f;
-	dfloat min_y = 100000.0f;
-	
-	dfloat max_x = -100000.0f;
-	dfloat max_y = -100000.0f;
-	
 	pShape = m_PhysicalShapeList;
-	
-	dint32 i = 0;
-	
-	Vector2f vertices[50];
-	
+		
+	AABB2f combinedAABB = pShape->m_CollisionShape->m_AABB;;
+	pShape = pShape->m_Next;
+
 	while( pShape )
 	{
-		vertices[i++] = pShape->m_CollisionShape->m_AABB.m_LowerBounds;
-		vertices[i++] = pShape->m_CollisionShape->m_AABB.m_UpperBounds;
+		combinedAABB.combine(pShape->m_CollisionShape->m_AABB);
 		pShape = pShape->m_Next;
 	}
 	
-	pShape = m_PhysicalShapeList;
-
-	for( dint32 j=0; j<i; j++ )
-	{
-		Vector2f p = vertices[j];
-		
-		if( min_x > p.x )
-			min_x = p.x;
-		if( min_y > p.y )
-			min_y = p.y;
-		
-		if( max_x < p.x )
-			max_x = p.x;
-		if( max_y < p.y )
-			max_y = p.y;
-	}
-	
-	m_AABB.m_LowerBounds.set(min_x, min_y);
-	m_AABB.m_UpperBounds.set(max_x, max_y);	
+	m_AABB = combinedAABB;
 }
 
 void PhysicalBody::calculateMassAttributes()
@@ -370,8 +344,6 @@ void PhysicalBody::calculateMassAttributes()
 		m_InvI    = 0.0f;
 	}
 
-	//updateAABB();
-	//m_Transform.transformAsPoint(m_Centre);
 }
 
 END_NAMESPACE_DIRAC2D
