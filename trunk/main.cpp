@@ -1771,7 +1771,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo27();
+	demo8();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
