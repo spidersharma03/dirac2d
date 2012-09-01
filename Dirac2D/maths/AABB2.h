@@ -50,7 +50,7 @@ public:
 	
 	inline T getPerimeter()
 	{
-		return 2.0 * ( ( m_UpperBounds.x - m_LowerBounds.x ) + ( m_UpperBounds.y - m_LowerBounds.y ) );
+		return T(2.0) * ( ( m_UpperBounds.x - m_LowerBounds.x ) + ( m_UpperBounds.y - m_LowerBounds.y ) );
 	}
 	
 	inline dbool contains(AABB2<T>& other)
