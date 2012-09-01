@@ -128,7 +128,7 @@ void EdgeChain::findCentroid()
 		m_Centroid += c;
 	}
 	dAssert(m_Area > 0.0f );
-	m_Centroid /= m_NumEdges;
+	m_Centroid /= (dfloat)m_NumEdges;
 }
 
 void EdgeChain::findMomentOfInertia()

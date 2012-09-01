@@ -14,6 +14,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 ConvexPolygon* GrahamScanConvexHullGenerator::createConvexHull( Vector2f* pointSet, dint32 numPoints)
 {
+	
 	return 0;
 }
 

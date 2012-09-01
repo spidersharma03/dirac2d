@@ -21,7 +21,7 @@ DynamicTree::DynamicTree(dint32 capacity)
 	
 	memset(m_Nodes, 0, m_NodeCapacity * sizeof(DynamicTreeNode) );
 	
-	for( dint32 i=0; i<m_NodeCapacity-1; i++ )
+	for( duint32 i=0; i<m_NodeCapacity-1; i++ )
 	{
 		DynamicTreeNode* pNode = m_Nodes + i;
 		pNode->m_Next = i+1;
@@ -97,7 +97,7 @@ dint32 DynamicTree::allocateNode()
 		free(m_Nodes);
 		m_Nodes = newNodes;
 		
-		for( dint32 i=m_CurrentNodeCount; i<m_NodeCapacity-1; i++ )
+		for( duint32 i=m_CurrentNodeCount; i<m_NodeCapacity-1; i++ )
 		{
 			DynamicTreeNode* pNode = m_Nodes + i;
 			pNode->m_Next = i+1;

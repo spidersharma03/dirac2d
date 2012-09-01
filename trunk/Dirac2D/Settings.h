@@ -40,7 +40,7 @@ BEGIN_NAMESPACE_DIRAC2D
 #define ENERGY_THRESHOLD 1e-5f
 
 // Extend the AABB of the Physical Bodies by this factor in Dynamic Tree. this exploits temporal coherence.
-#define AABB_EXTENSION_FACTOR 0.01
+#define AABB_EXTENSION_FACTOR 0.01f
 
 END_NAMESPACE_DIRAC2D
 

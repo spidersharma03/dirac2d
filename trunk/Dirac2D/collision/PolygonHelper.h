@@ -37,7 +37,7 @@ static void findCandidateEdge( ConvexPolygon* poly, Vector2f& normal, dint32& ed
 		}
 	}
 	duint16 index1;
-	duint16 newindex;
+	duint16 newindex = 0;
 	duint16 index2 = newindex;
 	
 	edgeVertex1 = normalIndex;

@@ -20,7 +20,7 @@ class CollisionShape;
 class PhysicalShape;
 class PhysicalAppearance;
 class Contact;
-class ContactEdge;
+struct ContactEdge;
 
 enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
 

@@ -236,6 +236,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Dirac2D\dynamics\joints\MinMaxConstraint.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\joints\MotorConstraint.cpp"
 						>
 					</File>
@@ -348,6 +352,14 @@
 					RelativePath=".\Dirac2D\geometry\EdgeChain.cpp"
 					>
 				</File>
+				<Filter
+					Name="ConveHull"
+					>
+					<File
+						RelativePath=".\Dirac2D\geometry\ConvexHull\GrahamScanConvexHullGenerator.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="draw"
@@ -506,6 +518,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Dirac2D\dynamics\joints\MinMaxConstraint.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\joints\MotorConstraint.h"
 						>
 					</File>
@@ -574,6 +590,18 @@
 					RelativePath=".\Dirac2D\geometry\EdgeChain.h"
 					>
 				</File>
+				<Filter
+					Name="ConvexHull"
+					>
+					<File
+						RelativePath=".\Dirac2D\geometry\ConvexHull\ConvexHullGenerator.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\geometry\ConvexHull\GrahamScanConvexHullGenerator.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="maths"

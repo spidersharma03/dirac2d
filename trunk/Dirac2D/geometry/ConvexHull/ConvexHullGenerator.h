@@ -9,7 +9,7 @@
 #ifndef _CONVEX_HULL_GENERATOR_H_
 #define _CONVEX_HULL_GENERATOR_H_
 
-#include "definitions.h" 
+#include "../../definitions.h" 
 #include "../../maths/Vector2.h"
 
 BEGIN_NAMESPACE_DIRAC2D
