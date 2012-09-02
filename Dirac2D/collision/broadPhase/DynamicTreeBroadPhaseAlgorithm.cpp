@@ -142,4 +142,9 @@ void DynamicTreeBroadPhaseAlgorithm::intersectRay(const Ray2f& ray, RayIntersect
 	
 }
 
+void DynamicTreeBroadPhaseAlgorithm::intersectRaySegment(const RaySegment2f& raySegment, RayIntersectionCallBackClass* callBack)
+{
+	m_DynamicTree->intersectRaySegment(raySegment, callBack);
+}
+
 END_NAMESPACE_DIRAC2D

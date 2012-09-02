@@ -35,6 +35,8 @@ public:
 	
 	virtual void intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack);
 	
+	void intersectRaySegment(const RaySegment2f& raySegment, RayIntersectionCallBackClass* callBack);
+
 	virtual void overlapCallBack(dint32 overlapNodeID);
 	
 	DynamicTree* getDynamicTree()

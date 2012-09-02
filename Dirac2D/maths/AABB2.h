@@ -28,7 +28,7 @@ public:
 		m_UpperBounds = other.m_UpperBounds;
 	}
 	
-	AABB2(Vector2<T>& lower, Vector2<T>& upper)
+	AABB2(const Vector2<T>& lower, const Vector2<T>& upper)
 	{
 		m_LowerBounds = lower;
 		m_UpperBounds = upper;
@@ -43,16 +43,26 @@ public:
 		m_UpperBounds.y = upperY;
 	}
 	
-	inline T getArea()
+	inline T getArea() const
 	{
 		return ( m_UpperBounds.x - m_LowerBounds.x ) * ( m_UpperBounds.y - m_LowerBounds.y );
 	}
 	
-	inline T getPerimeter()
+	inline T getPerimeter() const
 	{
 		return T(2.0) * ( ( m_UpperBounds.x - m_LowerBounds.x ) + ( m_UpperBounds.y - m_LowerBounds.y ) );
 	}
 	
+	inline Vector2<T> getExtents() const
+	{
+		return Vector2<T>( (m_UpperBounds - m_LowerBounds) * (T)0.5);
+	}
+
+	inline Vector2<T> getCentre() const
+	{
+		return Vector2<T>( (m_UpperBounds + m_LowerBounds) * (T)0.5);
+	}
+
 	inline dbool contains(AABB2<T>& other)
 	{
 		dbool bRes = true;
@@ -127,7 +137,7 @@ public:
 		m_UpperBounds.set(max_x, max_y);
 	}
 	
-	inline dbool intersectAABB( AABB2<T>& other )
+	inline dbool intersectAABB( const AABB2<T>& other ) const
 	{
 		Vector2f d1, d2;
 		d1 = other.m_LowerBounds - m_UpperBounds;

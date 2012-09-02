@@ -48,6 +48,8 @@ public:
 	virtual void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack );
 	
 	virtual void intersectRay( const Ray2f& ray, RayIntersectionCallBackClass* callBack);
+
+	virtual void intersectRaySegment(const RaySegment2f& raySegment, RayIntersectionCallBackClass* callBack);
 };
 
 END_NAMESPACE_DIRAC2D

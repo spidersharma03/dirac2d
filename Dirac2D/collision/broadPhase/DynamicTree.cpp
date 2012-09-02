@@ -567,6 +567,45 @@ dbool DynamicTree::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBac
 	return bResult;
 }
 
+dbool DynamicTree::intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack)
+{
+	return false;
+}
+
+dbool DynamicTree::intersectRaySegment(const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack)
+{
+	dbool bResult = false;
+
+	dint32 nodeCount = 0;
+	nodeVector[nodeCount++] = m_RootNode;
+	
+	while ( nodeCount != 0 ) 
+	{
+		dint32 nodeID;
+		
+		nodeCount--;
+		nodeID = nodeVector[nodeCount];
+		
+		AABB2f& nodeAABB = m_Nodes[nodeID].m_AABB;
+
+		if( raySeg.intersectAABB( m_Nodes[nodeID].m_AABB ) )
+		{
+			if( m_Nodes[nodeID].isLeaf() )
+			{
+				bResult = true;
+				if( callBack )
+					callBack->rayIntersectionCallBack(nodeID);
+			}
+			else 
+			{
+				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
+				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
+			}
+		}
+	}
+
+	return bResult;
+}
 
 void DynamicTree::validateTree(dint32 index)
 {

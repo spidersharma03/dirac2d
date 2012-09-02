@@ -12,6 +12,7 @@
 #include "PhysicalAppearance.h"
 #include "../memory/memoryAllocator.h"
 #include "joints/Constraint.h"
+#include "../CallBacks.h"
 
 
 #include <vector>
@@ -48,6 +49,22 @@ enum BROAD_PHASE_ALGORITHM { EBPA_NAIVE, EBPA_SAP, EBPA_DYNAMIC_TREE };
 
 class PhysicalWorld
 {
+private:
+	class WorldOverlapAABBCallBackClass : public OverlapCallBackClass
+	{
+	  public:
+		virtual void overlapCallBack(dint32 overlapNodeID);
+	};
+
+	class CRayIntersectionCallBackClass : public RayIntersectionCallBackClass
+	{
+	  public:
+		virtual void rayIntersectionCallBack(dint32 overlapNodeID);
+		WorldRayIntersectionCallBackClass *m_WorldRayIntersectionCallBackClass;
+	};
+
+	WorldOverlapAABBCallBackClass m_OverlapCallBackClass;
+	CRayIntersectionCallBackClass m_RayIntersectionCallBackClass;
 public:
 	PhysicalWorld();
 	
@@ -86,6 +103,11 @@ public:
 	{
 		return m_pBroadPhaseAlgorithm;
 	}
+
+	void overlapAABB( AABB2f& queryAABB );
+
+	void intersectRaySegment( const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack );
+
 public:
 	
 	friend class CollisionManager;

@@ -92,13 +92,10 @@ public:
 	
 	// check whether given queryAABB overlaps with any AABB leaf of the tree. a vector of overlapped aabb is filled here.
 	dbool overlapAABB( AABB2f& queryAABB, vector<dint32>& vecOverlappedIDs );
+
+	dbool intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack);
 	//
-	dbool intersectRay(RayIntersectionCallBackClass* callBack)
-	{
-		if( callBack )
-			callBack->rayIntersectionCallBack(0);
-		return false;
-	}
+	dbool intersectRaySegment(const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack);
 	
 protected:
 	dint32 nodeVector[256];
