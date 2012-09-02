@@ -70,6 +70,8 @@ public:
 	
 	virtual void intersectRay( const Ray2f& ray, RayIntersectionCallBackClass* callBack) = 0;
 	
+	virtual void intersectRaySegment(const RaySegment2f& raySegment, RayIntersectionCallBackClass* callBack) = 0;
+
 	ALGORITHM_TYPE getAlgorithmType()
 	{
 		return m_AlgorithmType;

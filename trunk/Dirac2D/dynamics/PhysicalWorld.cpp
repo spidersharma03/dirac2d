@@ -565,6 +565,31 @@ PhysicalBody* PhysicalWorld::pickBodyFromPoint(Vector2f p)
 		pBody = pBody->m_Next;
 	}
 	return 0;
+
+}
+
+void PhysicalWorld::WorldOverlapAABBCallBackClass::overlapCallBack(dint32 overlapNodeID)
+{
+}
+
+void PhysicalWorld::CRayIntersectionCallBackClass::rayIntersectionCallBack(dint32 overlapNodeID)
+{
+	if( m_WorldRayIntersectionCallBackClass )
+	{
+		//CollisionShape* pShape = 
+		m_WorldRayIntersectionCallBackClass->rayIntersectionCallBack(0);
+	}
+}
+
+void PhysicalWorld::overlapAABB( AABB2f& queryAABB )
+{
+	m_pBroadPhaseAlgorithm->overlapAABB(queryAABB, &m_OverlapCallBackClass);
+	//m_OverlapCallBackClass.overlapCallBack(
+}
+
+void PhysicalWorld::intersectRaySegment( const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack )
+{
+	m_pBroadPhaseAlgorithm->intersectRaySegment(raySeg, callBack);
 }
 
 END_NAMESPACE_DIRAC2D

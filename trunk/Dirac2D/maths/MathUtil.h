@@ -23,6 +23,12 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 template< typename T >
+inline T ABS( T a )
+{
+	return a < 0.0 ? -a : a;
+}
+
+template< typename T >
 inline T MIN( T a, T b )
 {
 	return a < b ? a : b;

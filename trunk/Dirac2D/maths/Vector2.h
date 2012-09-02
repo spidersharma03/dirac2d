@@ -149,17 +149,17 @@ public:
 		return Vector2<T>(-x, -y);
 	}
 	
-	inline Vector2<T> operator+( const Vector2<T>& other )
+	inline Vector2<T> operator+( const Vector2<T>& other ) const
 	{
 		return Vector2<T>(x+other.x, y+other.y);
 	}
 	
-	inline Vector2<T> operator-( const Vector2<T>& other )
+	inline Vector2<T> operator-( const Vector2<T>& other ) const
 	{
 		return Vector2<T>(x-other.x, y-other.y);
 	}
 	
-	inline Vector2<T> operator*( const Vector2<T>& other )
+	inline Vector2<T> operator*( const Vector2<T>& other ) const
 	{
 		return Vector2<T>(x*other.x, y*other.y);
 	}
@@ -251,6 +251,11 @@ public:
 	inline bool operator==( const Vector2<T>& other )
 	{
 		return (x==other.x) && (y==other.y);
+	}
+
+	inline bool operator<( const Vector2<T>& other )
+	{
+		return (x<other.x) && (y<other.y);
 	}
 public:
 	T x, y;

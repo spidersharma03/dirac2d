@@ -36,5 +36,8 @@ void SAPAlgorithm::intersectRay( const Ray2f& ray,RayIntersectionCallBackClass* 
 {
 }
 
+void SAPAlgorithm::intersectRaySegment(const RaySegment2f& raySegment, RayIntersectionCallBackClass* callBack)
+{
+}
 
 END_NAMESPACE_DIRAC2D

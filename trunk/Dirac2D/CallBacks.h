@@ -16,6 +16,8 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+class CollisionShape;
+
 /* This Callback is for reporting any AABB overlaps happening in DynamicTree class. Any class which wishes to get the overlapCallback should subclass from this. this calls the 
    overlapCallBack function with the ID of the overlapping node. 	
    For example DynamicTreeBroadPhaseAlgorithm inherits from this class and gets the callback for each potential overlap from the Dynamic Tree.
@@ -26,13 +28,21 @@ public:
 	virtual void overlapCallBack(dint32 overlapNodeID) = 0;
 };
 
-/* This Callback is for reporting any intersection of a ray with any of the Shape.
+/* This Callback is for reporting any intersection of a ray with Dynamic Tree AABB.
  */
 
 class RayIntersectionCallBackClass
 {
 public:
 	virtual void rayIntersectionCallBack(dint32 overlapNodeID) = 0;
+};
+
+/* This Callback is for reporting any intersection of a ray with any of the Collision Shape.
+ */
+class WorldRayIntersectionCallBackClass
+{
+  public:
+	virtual void rayIntersectionCallBack(CollisionShape* pShape) = 0;
 };
 
 END_NAMESPACE_DIRAC2D

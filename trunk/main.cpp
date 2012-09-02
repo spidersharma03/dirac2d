@@ -126,6 +126,19 @@ void demo3()
 	}
 }
 
+class MyCallBack : public RayIntersectionCallBackClass
+{
+public:
+	void rayIntersectionCallBack(dint32 overlapNodeID)
+	{
+		numCalls++;
+	}
+
+	int numCalls;
+};
+
+MyCallBack callBack;
+
 void demo3_()
 {
 	// Create Ground Body
@@ -144,14 +157,14 @@ void demo3_()
 	// Create Boxes
 	dfloat y = -0.8f;
 	dfloat x = -1.0f;
-	dint32 n = 40;
+	dint32 n = 20;
 	dfloat dx = 0.0f;
 												
-	for(int j=0; j<40;j++ )
+	for(int j=0; j<20;j++ )
 	{
 		y += 0.1f;
-		x = -2.0 + dx;
-		dx += 0.05f;
+		x = -1.0 + dx;
+		dx += 0.1f;
 		for( int i=0; i<n; i++ )
 		{
 			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
@@ -159,7 +172,7 @@ void demo3_()
 			x += 0.1f;
 			pBodyBox->setPosition(Vector2f(x,y));
 			//pBodyBox->setAngle(PI_4*0.9);
-			dfloat boxWidth = 0.035f; dfloat boxHeight = 0.035f;
+			dfloat boxWidth = 0.037f; dfloat boxHeight = 0.037f;
 			Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 			
 			pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox,4);
@@ -1771,7 +1784,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo8();
+	demo3_();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
@@ -1890,8 +1903,23 @@ void renderScene(void)
 //
 //	
 //	glPopMatrix();
+	RaySegment2f raySeg;//(Vector2f(), Vector2f());
+	raySeg.m_End = Vector2f(0.0f,-1.0f);
+	raySeg.m_Start = Vector2f(0.4f,-0.6f);
+
+	callBack.numCalls = 0;
+	pWorld->intersectRaySegment(raySeg, &callBack);
 	
-    glutSwapBuffers();
+	printf("Num Ray Intersections = %d\n", callBack.numCalls);
+
+	glPushMatrix();
+	glBegin(GL_LINES);
+	  glVertex2f(raySeg.m_Start.x, raySeg.m_Start.y); 
+	  glVertex2f(raySeg.m_End.x, raySeg.m_End.y); 
+	glEnd();
+	glPopMatrix();
+
+	glutSwapBuffers();
 	
 #ifndef WIN32
 	frameCnt ++;
