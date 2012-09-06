@@ -25,7 +25,7 @@ class CollisionShape;
 class OverlapCallBackClass
 {
 public:
-	virtual void overlapCallBack(dint32 overlapNodeID) = 0;
+	virtual void overlapCallBack(dint32 overlapNodeID, void* userData = 0) = 0;
 };
 
 /* This Callback is for reporting any intersection of a ray with Dynamic Tree AABB.
@@ -34,7 +34,7 @@ public:
 class RayIntersectionCallBackClass
 {
 public:
-	virtual void rayIntersectionCallBack(dint32 overlapNodeID) = 0;
+	virtual void rayIntersectionCallBack(dint32 overlapNodeID, void* userData = 0) = 0;
 };
 
 /* This Callback is for reporting any intersection of a ray with any of the Collision Shape.
@@ -42,7 +42,7 @@ public:
 class WorldRayIntersectionCallBackClass
 {
   public:
-	virtual void rayIntersectionCallBack(CollisionShape* pShape) = 0;
+	virtual void rayIntersectionCallBack(CollisionShape* pShape, RayIntersectionInfo& info) = 0;
 };
 
 END_NAMESPACE_DIRAC2D

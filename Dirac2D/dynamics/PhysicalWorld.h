@@ -53,16 +53,23 @@ private:
 	class WorldOverlapAABBCallBackClass : public OverlapCallBackClass
 	{
 	  public:
-		virtual void overlapCallBack(dint32 overlapNodeID);
+		virtual void overlapCallBack(dint32 overlapNodeID, void* userData);
 	};
 
+	class CWorldRayIntersectionCallBackClass : public WorldRayIntersectionCallBackClass
+	{
+	  public:
+		virtual void rayIntersectionCallBack(CollisionShape* pShape, RayIntersectionInfo& info);
+	};
+	
 	class CRayIntersectionCallBackClass : public RayIntersectionCallBackClass
 	{
 	  public:
-		virtual void rayIntersectionCallBack(dint32 overlapNodeID);
-		WorldRayIntersectionCallBackClass *m_WorldRayIntersectionCallBackClass;
+		virtual void rayIntersectionCallBack(dint32 overlapNodeID, void* userData);
+		CWorldRayIntersectionCallBackClass m_WorldRayIntersectionCallBackClass;
 	};
 
+	
 	WorldOverlapAABBCallBackClass m_OverlapCallBackClass;
 	CRayIntersectionCallBackClass m_RayIntersectionCallBackClass;
 public:
@@ -78,11 +85,16 @@ public:
 
 	void Step(dfloat dt);
 	
-	PhysicalBody* pickBodyFromPoint(Vector2f p);
+	PhysicalBody* pickBodyFromScreenCoordinates(Vector2f p);
 	
 	void draw();
 	
 	void setRenderer(Renderer*);
+	
+	Renderer* getRenderer()
+	{
+		return m_Renderer;
+	}
 	
 	inline void setGravityOn(dbool btrue)
 	{
@@ -107,6 +119,8 @@ public:
 	void overlapAABB( AABB2f& queryAABB );
 
 	void intersectRaySegment( const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack );
+
+	void intersectRaySegment( const RaySegment2f& raySeg );
 
 public:
 	

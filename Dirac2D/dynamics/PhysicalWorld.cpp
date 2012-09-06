@@ -545,7 +545,7 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 	}
 }
 
-PhysicalBody* PhysicalWorld::pickBodyFromPoint(Vector2f p)
+PhysicalBody* PhysicalWorld::pickBodyFromScreenCoordinates(Vector2f p)
 {
 	PhysicalBody* pBody = m_PhysicalBodyList;
 	while (pBody) 
@@ -568,23 +568,34 @@ PhysicalBody* PhysicalWorld::pickBodyFromPoint(Vector2f p)
 
 }
 
-void PhysicalWorld::WorldOverlapAABBCallBackClass::overlapCallBack(dint32 overlapNodeID)
+void PhysicalWorld::WorldOverlapAABBCallBackClass::overlapCallBack(dint32 overlapNodeID, void* userData)
 {
 }
 
-void PhysicalWorld::CRayIntersectionCallBackClass::rayIntersectionCallBack(dint32 overlapNodeID)
+void PhysicalWorld::CRayIntersectionCallBackClass::rayIntersectionCallBack(dint32 overlapNodeID, void* userData)
 {
-	if( m_WorldRayIntersectionCallBackClass )
+	//if( m_WorldRayIntersectionCallBackClass )
 	{
-		//CollisionShape* pShape = 
-		m_WorldRayIntersectionCallBackClass->rayIntersectionCallBack(0);
+		RayIntersectionInfo info;
+		BroadPhaseNode* pNode = (BroadPhaseNode*)userData;
+		CollisionShape* pShape = pNode->m_CollisionShape;
+		m_WorldRayIntersectionCallBackClass.rayIntersectionCallBack(pShape, info);
 	}
+}
+
+void PhysicalWorld::CWorldRayIntersectionCallBackClass::rayIntersectionCallBack(CollisionShape* pShape, RayIntersectionInfo& info)
+{
 }
 
 void PhysicalWorld::overlapAABB( AABB2f& queryAABB )
 {
 	m_pBroadPhaseAlgorithm->overlapAABB(queryAABB, &m_OverlapCallBackClass);
 	//m_OverlapCallBackClass.overlapCallBack(
+}
+
+void PhysicalWorld::intersectRaySegment( const RaySegment2f& raySeg )
+{
+	m_pBroadPhaseAlgorithm->intersectRaySegment(raySeg, &m_RayIntersectionCallBackClass);
 }
 
 void PhysicalWorld::intersectRaySegment( const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack )

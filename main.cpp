@@ -129,12 +129,15 @@ void demo3()
 class MyCallBack : public RayIntersectionCallBackClass
 {
 public:
-	void rayIntersectionCallBack(dint32 overlapNodeID)
+	void rayIntersectionCallBack(dint32 overlapNodeID, void* userData)
 	{
+		BroadPhaseNode* pNode = (BroadPhaseNode*)userData;
+		m_pBody = pNode->m_PhysicalShape->m_ParentBody;
 		numCalls++;
 	}
 
 	int numCalls;
+	PhysicalBody* m_pBody;
 };
 
 MyCallBack callBack;
@@ -148,7 +151,7 @@ void demo3_()
 	pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 2.0f; dfloat groundHeight = 0.02f;
+	dfloat groundWidth = 3.0f; dfloat groundHeight = 0.02f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	
 	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
@@ -1812,7 +1815,6 @@ void changeSize(int w, int h)
     glViewport(0, 0, w, h);
 	
     // Set the correct perspective.
-	
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 	glOrtho(-1.5*ratio, 1.5*ratio, -1.5, 1.5, -0.01, 100);
@@ -1881,36 +1883,24 @@ void renderScene(void)
 			renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
 	}
 	
-	//float size = 0.3f;
-//	
-//	float data[16];
-//	Matrix3f R;
-//	R.rotate(M_PI_4);
-//	
-//	glPushMatrix();
-//
-//	//glScaled(2, 1, 1);
-//	//glScaled(1, 0.9, 1);
-//	glRotated(45, 0, 0, 1);
-//	//R.getPointer(data);
-//	//glLoadMatrixf(data);
-//	glBegin(GL_QUADS);
-//	glVertex3d(size, size, 0.0);
-//	glVertex3d(-size, size, 0.0);
-//	glVertex3d(-size, -size, 0.0);
-//	glVertex3d(size, -size, 0.0);
-//	glEnd();
-//
-//	
-//	glPopMatrix();
+
 	RaySegment2f raySeg;//(Vector2f(), Vector2f());
 	raySeg.m_End = Vector2f(0.0f,-1.0f);
-	raySeg.m_Start = Vector2f(0.4f,-0.6f);
+	raySeg.m_Start = Vector2f(0.4f,1.6f);
 
 	callBack.numCalls = 0;
-	pWorld->intersectRaySegment(raySeg, &callBack);
+	pWorld->intersectRaySegment(raySeg,&callBack);
 	
-	printf("Num Ray Intersections = %d\n", callBack.numCalls);
+	glPushMatrix();
+	Matrix3f xForm =  callBack.m_pBody->m_Transform;
+	Matrix3f Identity;
+	pWorld->getRenderer()->setTransform(Identity);
+	pWorld->getRenderer()->setTransform(xForm);
+	pWorld->getRenderer()->setColor(0, 255, 255);
+	pWorld->getRenderer()->drawShape(callBack.m_pBody->getPhysicalShapeList()->m_CollisionShape);
+	glPopMatrix();
+
+	//printf("Num Ray Intersections = %d\n", callBack.numCalls);
 
 	glPushMatrix();
 	glBegin(GL_LINES);
@@ -1981,7 +1971,7 @@ void MouseButton(int button, int state, int x, int y)
 	Vector2f p(px,py);
 	if (state == GLUT_DOWN && button == GLUT_LEFT_BUTTON)
     {
-		PhysicalBody* pBody = pWorld->pickBodyFromPoint(p);
+		PhysicalBody* pBody = pWorld->pickBodyFromScreenCoordinates(p);
 		if( pBody )
 		{
 			bPicked = true;
