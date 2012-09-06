@@ -94,9 +94,11 @@ public:
 	dbool overlapAABB( AABB2f& queryAABB, vector<dint32>& vecOverlappedIDs );
 
 	dbool intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack);
-	//
+	
 	dbool intersectRaySegment(const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack);
 	
+	dbool intersectRaySegmentClosest(const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack);
+
 protected:
 	dint32 nodeVector[256];
 

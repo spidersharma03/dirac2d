@@ -105,6 +105,11 @@ public:
 		m_bSleeping = bSleep;
 	}
 	
+	PhysicalShape* getPhysicalShapeList()
+	{
+		return m_PhysicalShapeList;
+	}
+	
 	void updateSleepingStatus(dfloat dt);
 	
 	void updateAABB();

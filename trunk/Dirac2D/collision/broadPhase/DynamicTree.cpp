@@ -243,7 +243,7 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 	dint32 index = m_Nodes[nodeID].m_Parent;
 	while ( index != Null_Node ) 
 	{
-		index = balance(index);
+		//index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
 		
@@ -303,7 +303,7 @@ void DynamicTree::removeNode(dint32 nodeID)
 	dint32 index = grandParentNodeIndex;
 	while ( index != Null_Node ) 
 	{
-		index = balance(index);
+		//index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
@@ -572,12 +572,15 @@ dbool DynamicTree::intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* 
 	return false;
 }
 
+
 dbool DynamicTree::intersectRaySegment(const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack)
 {
 	dbool bResult = false;
-
+	
 	dint32 nodeCount = 0;
 	nodeVector[nodeCount++] = m_RootNode;
+	
+	Vector2f rayDir = raySeg.m_End - raySeg.m_Start;
 	
 	while ( nodeCount != 0 ) 
 	{
@@ -585,25 +588,81 @@ dbool DynamicTree::intersectRaySegment(const RaySegment2f& raySeg, RayIntersecti
 		
 		nodeCount--;
 		nodeID = nodeVector[nodeCount];
+		Vector2f c = m_Nodes[nodeID].m_AABB.getCentre();
 		
-		AABB2f& nodeAABB = m_Nodes[nodeID].m_AABB;
-
 		if( raySeg.intersectAABB( m_Nodes[nodeID].m_AABB ) )
 		{
 			if( m_Nodes[nodeID].isLeaf() )
 			{
 				bResult = true;
 				if( callBack )
-					callBack->rayIntersectionCallBack(nodeID);
+					callBack->rayIntersectionCallBack(nodeID, m_Nodes[nodeID].m_UserData);
+				return true;
 			}
 			else 
 			{
+				// Project the AABB centres on the Ray Segment.
+				Vector2f c1 = m_Nodes[m_Nodes[nodeID].m_Child1].m_AABB.getCentre();
+				Vector2f c2 = m_Nodes[m_Nodes[nodeID].m_Child2].m_AABB.getCentre();
+				
 				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
 				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
 			}
 		}
 	}
+	return bResult;
+}
 
+dbool DynamicTree::intersectRaySegmentClosest(const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack)
+{
+	dbool bResult = false;
+	
+	dint32 nodeCount = 0;
+	nodeVector[nodeCount++] = m_RootNode;
+	
+	Vector2f rayDir = raySeg.m_End - raySeg.m_Start;
+	
+	while ( nodeCount != 0 ) 
+	{
+		dint32 nodeID;
+		
+		nodeCount--;
+		nodeID = nodeVector[nodeCount];
+		Vector2f c = m_Nodes[nodeID].m_AABB.getCentre();
+		
+		dfloat tmin1, tmax1, tmin2, tmax2;
+		dchar bRayInside1, bRayInside2;
+		
+		
+		if( m_Nodes[nodeID].isLeaf() )
+		{
+			bResult = true;
+			if( callBack )
+				callBack->rayIntersectionCallBack(nodeID, m_Nodes[nodeID].m_UserData);
+			return true;
+		}
+		else 
+		{
+			dbool bFlag1 = raySeg.intersectAABB( m_Nodes[m_Nodes[nodeID].m_Child1].m_AABB, tmin1, tmax1, bRayInside1 );
+			dbool bFlag2 = raySeg.intersectAABB( m_Nodes[m_Nodes[nodeID].m_Child2].m_AABB, tmin2, tmax2, bRayInside2 );
+			
+			if( tmin1 > tmin2 )
+			{
+				if( bFlag1 )
+					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
+				if( bFlag2 )
+					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
+			}
+			else
+			{
+				if( bFlag2 )
+					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
+				if( bFlag1 )
+					nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
+			}
+		}
+	}
+	
 	return bResult;
 }
 

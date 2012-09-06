@@ -45,7 +45,7 @@ struct BroadPhasePair
 	BroadPhaseNode* m_Node2;
 };
 
-enum ALGORITHM_TYPE { EAT_NAIVE, EAT_DYNAMIC_TREE, EAT_SAP };
+enum ALGORITHM_TYPE { EAT_NAIVE, EAT_DYNAMIC_TREE, EAT_SAP, EAT_SPATIAL_HASH };
 
 class BroadPhaseCollisionAlgorithm 
 {
