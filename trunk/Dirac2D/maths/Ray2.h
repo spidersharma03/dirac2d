@@ -58,7 +58,7 @@ public:
 		m_InvDirection = Vector2<T>(1.0/m_Direction.x, 1.0/m_Direction.y);
 	}
 	
-#define RAYAABB_EPSILON 1e-06
+#define RAYAABB_EPSILON 1e-03
 	// Clip Plane Based Implementation
 	inline dbool intersectAABB(AABB2<T>& aabb, float* tmin, float* tmax, int* bRayInside)
 	{
@@ -236,7 +236,7 @@ public:
 		Vector2f satAxis(m_Start.y - m_End.y, m_End.x - m_Start.x);
 		Vector2f absSatAxis =  Vector2f( fabs(satAxis.x), fabs(satAxis.y ) );
 
-		dfloat a = ABS( satAxis.dot( raySegAABB.m_LowerBounds - aabb.getCentre() ) );
+		dfloat a = fabs( satAxis.dot( raySegAABB.m_LowerBounds - aabb.getCentre() ) );
 		dfloat b = absSatAxis.dot(aabb.getExtents());
 
 		return (a < b);

@@ -601,11 +601,7 @@ dbool DynamicTree::intersectRaySegment(const RaySegment2f& raySeg, RayIntersecti
 			}
 			else 
 			{
-				// Project the AABB centres on the Ray Segment.
-				Vector2f c1 = m_Nodes[m_Nodes[nodeID].m_Child1].m_AABB.getCentre();
-				Vector2f c2 = m_Nodes[m_Nodes[nodeID].m_Child2].m_AABB.getCentre();
-				
-				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
+                nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child1;
 				nodeVector[nodeCount++] = m_Nodes[nodeID].m_Child2;
 			}
 		}

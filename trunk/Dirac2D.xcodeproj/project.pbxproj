@@ -263,8 +263,8 @@
 				C257F14B154E71AE00270D77 /* PhysicalAppearance.h */,
 				C257F14C154E71AE00270D77 /* PhysicalBody.h */,
 				C257F14D154E71AE00270D77 /* PhysicalShape.h */,
-				C257F14E154E71AE00270D77 /* PhysicalWorld.h */,
 				C257F7C815528EE500270D77 /* PhysicalWorld.cpp */,
+				C257F14E154E71AE00270D77 /* PhysicalWorld.h */,
 				C257F8021552996600270D77 /* PhysicalBody.cpp */,
 				C2DD149C1558102700432320 /* PhysicalShape.cpp */,
 			);
