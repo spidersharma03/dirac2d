@@ -14,7 +14,7 @@
 #ifdef WIN32
   #include <GL/glut.h>
 #else
-  #include <OpenGL/OpenGL.h>
+  #include <OpenGL/gl.h>
 #endif
 
 BEGIN_NAMESPACE_DIRAC2D

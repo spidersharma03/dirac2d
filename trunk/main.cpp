@@ -160,10 +160,10 @@ void demo3_()
 	// Create Boxes
 	dfloat y = -0.8f;
 	dfloat x = -1.0f;
-	dint32 n = 20;
+	dint32 n = 3;
 	dfloat dx = 0.0f;
 												
-	for(int j=0; j<20;j++ )
+	for(int j=0; j<3;j++ )
 	{
 		y += 0.1f;
 		x = -1.0 + dx;
@@ -1760,7 +1760,7 @@ DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
 {
-	return;
+	//return;
 	if( pNode->isLeaf() )
 	{
 		glRenderer->setColor(255, 255, 0);
@@ -2068,7 +2068,6 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(renderScene);
     glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
-
 	
 #ifndef WIN32
 	//glutTimerFunc(0, timerCallback, 0);

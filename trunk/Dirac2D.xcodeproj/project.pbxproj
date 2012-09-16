@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */; };
 		75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */; };
 		758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
 		758DCA2D13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */; };
@@ -66,6 +67,8 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3568969816062C3F001D9A15 /* CirclePathConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePathConstraint.h; sourceTree = "<group>"; };
+		3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CirclePathConstraint.cpp; sourceTree = "<group>"; };
 		75580E9B13CED76500B6B03B /* PulleyConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulleyConstraint.h; sourceTree = "<group>"; };
 		75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PulleyConstraint.cpp; sourceTree = "<group>"; };
 		758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DTimer.cpp; path = Dirac2D/DTimer.cpp; sourceTree = SOURCE_ROOT; };
@@ -312,6 +315,8 @@
 				758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */,
 				C2EDB84815D4EA48008EAD97 /* MinMaxConstraint.h */,
 				C2EDB84915D4EA48008EAD97 /* MinMaxConstraint.cpp */,
+				3568969816062C3F001D9A15 /* CirclePathConstraint.h */,
+				3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -513,6 +518,7 @@
 				758DCA2D13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp in Sources */,
 				C2EDB84A15D4EA48008EAD97 /* MinMaxConstraint.cpp in Sources */,
 				C29B9C1C15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp in Sources */,
+				3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
