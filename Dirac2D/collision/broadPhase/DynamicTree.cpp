@@ -639,7 +639,7 @@ dbool DynamicTree::intersectRaySegmentClosest(const RaySegment2f& raySeg, RayInt
 		}
 		else 
 		{
-			dbool bFlag1 = raySeg.intersectAABB( m_Nodes[m_Nodes[nodeID].m_Child1].m_AABB, tmin1, tmax1, bRayInside1 );
+            dbool bFlag1 = raySeg.intersectAABB( m_Nodes[m_Nodes[nodeID].m_Child1].m_AABB, tmin1, tmax1, bRayInside1 );
 			dbool bFlag2 = raySeg.intersectAABB( m_Nodes[m_Nodes[nodeID].m_Child2].m_AABB, tmin2, tmax2, bRayInside2 );
 			
 			if( tmin1 > tmin2 )
