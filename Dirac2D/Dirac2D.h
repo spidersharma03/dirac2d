@@ -55,6 +55,7 @@
 #include "memory/memoryAllocator.h"
 
 #include "maths/MathUtil.h"
+#include "maths/Curves/Curves.h"
 
 
 #include "dynamics/PhysicalBody.h"
@@ -99,5 +100,6 @@
 
 #include "draw/Renderer.h"
 #include "draw/GLRenderer.h"
+
 
 #endif

@@ -58,7 +58,7 @@ public:
 		m_InvDirection = Vector2<T>(1.0/m_Direction.x, 1.0/m_Direction.y);
 	}
 	
-#define RAYAABB_EPSILON 1e-03
+#define RAYAABB_EPSILON 1e-06
 	// Clip Plane Based Implementation
 	inline dbool intersectAABB(AABB2<T>& aabb, float* tmin, float* tmax, int* bRayInside)
 	{
@@ -67,6 +67,7 @@ public:
 		Vector2<T>& MaxB = aabb.m_UpperBounds;
 		dfloat MaxTx, MaxTy;
 		dfloat MinTx, MinTy;
+		
 		
 		MaxTx = MaxTy = -10000000.0f;
 		MinTx = MinTy =  10000000.0f;

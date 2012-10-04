@@ -626,7 +626,7 @@ dbool DynamicTree::intersectRaySegmentClosest(const RaySegment2f& raySeg, RayInt
 		nodeID = nodeVector[nodeCount];
 		Vector2f c = m_Nodes[nodeID].m_AABB.getCentre();
 		
-		dfloat tmin1, tmax1, tmin2, tmax2;
+		dfloat tmin1 = 100000.0f, tmax1, tmin2 = 100000.0f, tmax2;
 		dchar bRayInside1, bRayInside2;
 		
 		
