@@ -18,6 +18,7 @@
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
 		C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
+		C244CF87161D805300C141F8 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C244CF86161D805300C141F8 /* BSpline.cpp */; };
 		C250BD4A15A41D4E009C9A37 /* CircleSweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */; };
 		C250C1B615A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250C1B515A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp */; };
 		C257F15B154E71AE00270D77 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
@@ -86,6 +87,9 @@
 		8DD76F6C0486A84900D96B5E /* Dirac2D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dirac2D; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatenaryConstraint.h; sourceTree = "<group>"; };
 		C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatenaryConstraint.cpp; sourceTree = "<group>"; };
+		C244CF85161D805300C141F8 /* BSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSpline.h; sourceTree = "<group>"; };
+		C244CF86161D805300C141F8 /* BSpline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BSpline.cpp; sourceTree = "<group>"; };
+		C244CFAE161D901600C141F8 /* Curves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Curves.h; sourceTree = "<group>"; };
 		C250BD4815A41D4E009C9A37 /* CircleSweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSweep.h; sourceTree = "<group>"; };
 		C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleSweep.cpp; sourceTree = "<group>"; };
 		C250C1B415A6D622009C9A37 /* CatenaryConstraintFixedRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatenaryConstraintFixedRotation.h; sourceTree = "<group>"; };
@@ -214,6 +218,17 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		C244CF82161D7F1000C141F8 /* Curves */ = {
+			isa = PBXGroup;
+			children = (
+				C244CF85161D805300C141F8 /* BSpline.h */,
+				C244CF86161D805300C141F8 /* BSpline.cpp */,
+				C244CFAE161D901600C141F8 /* Curves.h */,
+			);
+			name = Curves;
+			path = Dirac2D/maths/Curves;
+			sourceTree = SOURCE_ROOT;
 		};
 		C257F13D154E71AE00270D77 /* Dirac2D */ = {
 			isa = PBXGroup;
@@ -349,6 +364,7 @@
 		C257F156154E71AE00270D77 /* maths */ = {
 			isa = PBXGroup;
 			children = (
+				C244CF82161D7F1000C141F8 /* Curves */,
 				C257F157154E71AE00270D77 /* MathUtil.h */,
 				C2DD136A1553EAE100432320 /* Vector2.h */,
 				C2DD136D1553EC7C00432320 /* Vector3.h */,
@@ -519,6 +535,7 @@
 				C2EDB84A15D4EA48008EAD97 /* MinMaxConstraint.cpp in Sources */,
 				C29B9C1C15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp in Sources */,
 				3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */,
+				C244CF87161D805300C141F8 /* BSpline.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +594,7 @@
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
 				GCC_MODEL_PPC64 = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = MACOSX;
 				GCC_UNROLL_LOOPS = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
