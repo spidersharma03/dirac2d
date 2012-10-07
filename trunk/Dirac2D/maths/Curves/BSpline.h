@@ -30,4 +30,7 @@ void findOpenKnots(int nControlPoints, int nOrder, float* knotVector);
 void splineBasis(int nControlPoints, int nOrder, float t, float* basisVector);
 
 
+void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, int nOrder);
+
+
 #endif
