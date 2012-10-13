@@ -39,19 +39,40 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 		else
 			N_i1[i] = 0.0f;
 	}
-	
+	//if(t == (float)knotVector[nControlPoints + nOrder])
+//	{
+//		N_i1[nControlPoints] = 1.0f;
+//	}
 	int N = nControlPoints + nOrder - 1;
 	// Calculate higher order basis functions
 	for( int o=1; o<nOrder; o++ )
 	{
 		for( int i=0; i<N-1; i++ )
 		{
-			float sum = ( t - knotVector[i] )/( knotVector[i+nOrder-1] ) * N_i1[i] + ( knotVector[i+nOrder] - t)/(knotVector[i+nOrder] - knotVector[i+1] ) *  N_i1[i+1];
-			basisVector[i] += sum;
-			N_i1[i] = sum;
+			float a, b;
+			if( N_i1[i] != 0.0f )
+			{
+				a = ( t - knotVector[i] )/( knotVector[i+nOrder-1] - knotVector[i] ) * N_i1[i];
+			}
+			else {
+				a = 0.0f;
+			}
+			if( N_i1[i+1] != 0.0f )
+			{
+				b = ( knotVector[i+nOrder] - t)/(knotVector[i+nOrder] - knotVector[i+1] ) *  N_i1[i+1];
+			}
+			else {
+				b = 0.0f;
+			}
+
+			N_i1[i] = a + b;
 		}
 		N = N - 1;
 	}	
+	for (int i=0; i<nControlPoints; i++ )
+	{
+		basisVector[i] = N_i1[i];
+	}
 }
 
 void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, int nOrder)

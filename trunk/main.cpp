@@ -1756,11 +1756,35 @@ void demo27()
 //	
 }
 
+void demo28()
+{
+	//float controlPoints[4];
+	//float curvePoints[30];
+	float x[30], basis[30];
+	int nOrder = 3;
+	int nPoints = 4;
+	findOpenKnots(nPoints, nOrder, x);
+	float t = 0.0f;
+	glPushMatrix();
+	glTranslated(-1.0, 0, 0);
+	for( int i=0; i<200; i++ )
+	{
+		splineBasis( nPoints, nOrder, t, x, basis);
+		glBegin(GL_POINTS);
+		for( int j=0; j<nPoints; j++ )
+			glVertex2f(t, basis[j]);
+		glEnd();
+		t += 0.01f;
+	}
+	glPopMatrix();
+	//BSpline(controlPoints, 4, curvePoints, 30, 3);
+}
+
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
 {
-	//return;
+	return;
 	if( pNode->isLeaf() )
 	{
 		glRenderer->setColor(255, 255, 0);
@@ -1787,7 +1811,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo3_();
+	//demo26();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
@@ -1883,31 +1907,31 @@ void renderScene(void)
 			renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
 	}
 	
-
-	RaySegment2f raySeg;//(Vector2f(), Vector2f());
-	raySeg.m_End = Vector2f(0.0f,-1.0f);
-	raySeg.m_Start = Vector2f(0.4f,1.6f);
-
-	callBack.numCalls = 0;
-	pWorld->intersectRaySegment(raySeg,&callBack);
-	
-	glPushMatrix();
-	Matrix3f xForm =  callBack.m_pBody->m_Transform;
-	Matrix3f Identity;
-	pWorld->getRenderer()->setTransform(Identity);
-	pWorld->getRenderer()->setTransform(xForm);
-	pWorld->getRenderer()->setColor(0, 255, 255);
-	pWorld->getRenderer()->drawShape(callBack.m_pBody->getPhysicalShapeList()->m_CollisionShape);
-	glPopMatrix();
-
-	//printf("Num Ray Intersections = %d\n", callBack.numCalls);
-
-	glPushMatrix();
-	glBegin(GL_LINES);
-	  glVertex2f(raySeg.m_Start.x, raySeg.m_Start.y); 
-	  glVertex2f(raySeg.m_End.x, raySeg.m_End.y); 
-	glEnd();
-	glPopMatrix();
+    demo28();
+	//RaySegment2f raySeg;//(Vector2f(), Vector2f());
+//	raySeg.m_End = Vector2f(0.0f,-1.0f);
+//	raySeg.m_Start = Vector2f(0.4f,1.6f);
+//
+//	callBack.numCalls = 0;
+//	pWorld->intersectRaySegment(raySeg,&callBack);
+//	
+//	glPushMatrix();
+//	Matrix3f xForm =  callBack.m_pBody->m_Transform;
+//	Matrix3f Identity;
+//	pWorld->getRenderer()->setTransform(Identity);
+//	pWorld->getRenderer()->setTransform(xForm);
+//	pWorld->getRenderer()->setColor(0, 255, 255);
+//	pWorld->getRenderer()->drawShape(callBack.m_pBody->getPhysicalShapeList()->m_CollisionShape);
+//	glPopMatrix();
+//
+//	//printf("Num Ray Intersections = %d\n", callBack.numCalls);
+//
+//	glPushMatrix();
+//	glBegin(GL_LINES);
+//	  glVertex2f(raySeg.m_Start.x, raySeg.m_Start.y); 
+//	  glVertex2f(raySeg.m_End.x, raySeg.m_End.y); 
+//	glEnd();
+//	glPopMatrix();
 
 	glutSwapBuffers();
 	
