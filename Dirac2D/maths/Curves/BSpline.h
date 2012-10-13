@@ -27,7 +27,7 @@ void findOpenKnots(int nControlPoints, int nOrder, float* knotVector);
  in  -- nControlPoints, nOrder, parameter value t at which basis functions are needed
  out -- basisVector containing basis functions values at given t for all nControlPoints.
  */
-void splineBasis(int nControlPoints, int nOrder, float t, float* basisVector);
+void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, float* basisVector);
 
 
 void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, int nOrder);
