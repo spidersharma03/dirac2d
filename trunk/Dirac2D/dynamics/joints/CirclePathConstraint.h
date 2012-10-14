@@ -24,6 +24,9 @@ public:
 	
 	virtual void initialize();
     
+public:
+    Vector2f m_Centre;
+    dfloat m_Radius;
 };
 
 END_NAMESPACE_DIRAC2D

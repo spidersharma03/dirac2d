@@ -20,9 +20,22 @@ void findOpenKnots(int nControlPoints, int nOrder, float* knotVector)
 		knotVector[i] = 0.0f;
 	for( int i=nOrder+nControlPoints-1; i>nOrder+nControlPoints-4; i-- )
 		knotVector[i] = nControlPoints - nOrder + 1;
-	int n = 1;
+	float n = 1.0f;
 	for( int i=nOrder; i<nOrder+nControlPoints-3; i++ )
-		knotVector[i] = n++;	
+    {
+		knotVector[i] = n;	
+        n += 1.0f;
+    }
+}
+
+void findPeriodicKnots(int nControlPoints, int nOrder, float* knotVector)
+{
+    float n = 0.0f;
+	for( int i=0; i<nControlPoints + nOrder; i++ )
+    {
+		knotVector[i] = n;	
+        n += 1.0f;
+    }
 }
 
 
@@ -30,7 +43,11 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 {
 	float N_i1[40];  // First Order basis functions
 	
-	
+    if( t > 0.999 )
+    {
+        int test = 0;
+        test++;
+    }
 	// initialize the first order basis functions
 	for (int i=0; i<nControlPoints + nOrder - 1; i++) 
 	{
@@ -39,10 +56,7 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 		else
 			N_i1[i] = 0.0f;
 	}
-	//if(t == (float)knotVector[nControlPoints + nOrder])
-//	{
-//		N_i1[nControlPoints] = 1.0f;
-//	}
+	
 	int N = nControlPoints + nOrder - 1;
 	// Calculate higher order basis functions
 	for( int o=1; o<nOrder; o++ )
@@ -52,14 +66,14 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 			float a, b;
 			if( N_i1[i] != 0.0f )
 			{
-				a = ( t - knotVector[i] )/( knotVector[i+nOrder-1] - knotVector[i] ) * N_i1[i];
+				a = ( t - knotVector[i] ) * N_i1[i]/( knotVector[i+o] - knotVector[i] );
 			}
 			else {
 				a = 0.0f;
 			}
 			if( N_i1[i+1] != 0.0f )
 			{
-				b = ( knotVector[i+nOrder] - t)/(knotVector[i+nOrder] - knotVector[i+1] ) *  N_i1[i+1];
+				b = ( knotVector[i+o+1] - t) * N_i1[i+1]/(knotVector[i+o+1] - knotVector[i+1] );
 			}
 			else {
 				b = 0.0f;
@@ -69,6 +83,7 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 		}
 		N = N - 1;
 	}	
+
 	for (int i=0; i<nControlPoints; i++ )
 	{
 		basisVector[i] = N_i1[i];

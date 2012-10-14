@@ -1760,16 +1760,17 @@ void demo28()
 {
 	//float controlPoints[4];
 	//float curvePoints[30];
-	float x[30], basis[30];
+	float knots[30], basis[30];
 	int nOrder = 3;
 	int nPoints = 4;
-	findOpenKnots(nPoints, nOrder, x);
+	findPeriodicKnots(nPoints, nOrder, knots);
 	float t = 0.0f;
 	glPushMatrix();
 	glTranslated(-1.0, 0, 0);
-	for( int i=0; i<200; i++ )
+    glScaled(0.5, 1.0, 1);
+	for( int i=0; i<1000; i++ )
 	{
-		splineBasis( nPoints, nOrder, t, x, basis);
+		splineBasis( nPoints, nOrder, t, knots, basis);
 		glBegin(GL_POINTS);
 		for( int j=0; j<nPoints; j++ )
 			glVertex2f(t, basis[j]);
