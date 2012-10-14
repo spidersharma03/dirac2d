@@ -23,6 +23,9 @@
 void findOpenKnots(int nControlPoints, int nOrder, float* knotVector);
 
 
+void findPeriodicKnots(int nControlPoints, int nOrder, float* knotVector);
+
+
 /*
  in  -- nControlPoints, nOrder, parameter value t at which basis functions are needed
  out -- basisVector containing basis functions values at given t for all nControlPoints.
