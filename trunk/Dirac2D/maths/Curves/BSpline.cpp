@@ -42,12 +42,7 @@ void findPeriodicKnots(int nControlPoints, int nOrder, float* knotVector)
 void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, float* basisVector)
 {
 	float N_i1[40];  // First Order basis functions
-	
-    if( t > 0.999 )
-    {
-        int test = 0;
-        test++;
-    }
+
 	// initialize the first order basis functions
 	for (int i=0; i<nControlPoints + nOrder - 1; i++) 
 	{
