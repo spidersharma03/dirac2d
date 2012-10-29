@@ -7,7 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		354F4703163586AB000DFC09 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; };
 		3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */; };
+		35C0770D163C21BD00B32CB4 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
+		35C0770E163C21BD00B32CB4 /* ContactSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */; };
+		35C0770F163C21BD00B32CB4 /* CollisionDetectionPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */; };
+		35C07710163C21BD00B32CB4 /* CollisionDetection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F1FC154E7D7E00270D77 /* CollisionDetection.cpp */; };
+		35C07711163C21BD00B32CB4 /* PhysicalWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F7C815528EE500270D77 /* PhysicalWorld.cpp */; };
+		35C07712163C21BD00B32CB4 /* PhysicalBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F8021552996600270D77 /* PhysicalBody.cpp */; };
+		35C07713163C21BD00B32CB4 /* GLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F80E15529CBC00270D77 /* GLRenderer.cpp */; };
+		35C07714163C21BD00B32CB4 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F85B1552BEF400270D77 /* Box.cpp */; };
+		35C07715163C21BD00B32CB4 /* Capsule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9321552CCDA00270D77 /* Capsule.cpp */; };
+		35C07716163C21BD00B32CB4 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
+		35C07717163C21BD00B32CB4 /* PhysicalShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DD149C1558102700432320 /* PhysicalShape.cpp */; };
+		35C07718163C21BD00B32CB4 /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
+		35C07719163C21BD00B32CB4 /* CollisionDetectionCirclePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C7DB156B736000E31E38 /* CollisionDetectionCirclePolygon.cpp */; };
+		35C0771A163C21BD00B32CB4 /* CollisionDetectionCapsulePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D19B156CEF6800E31E38 /* CollisionDetectionCapsulePolygon.cpp */; };
+		35C0771B163C21BD00B32CB4 /* CollisionDetectionEdgePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D880157358D600E31E38 /* CollisionDetectionEdgePolygon.cpp */; };
+		35C0771C163C21BD00B32CB4 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D8B3157398D600E31E38 /* Edge.cpp */; };
+		35C0771D163C21BD00B32CB4 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
+		35C0771E163C21BD00B32CB4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */; };
+		35C0771F163C21BD00B32CB4 /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
+		35C07720163C21BD00B32CB4 /* DistanceConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B5361581CA820040896A /* DistanceConstraint.cpp */; };
+		35C07721163C21BD00B32CB4 /* SAP_Algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19C151585DF840042A724 /* SAP_Algorithm.cpp */; };
+		35C07722163C21BD00B32CB4 /* HingeConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19CC2158782D40042A724 /* HingeConstraint.cpp */; };
+		35C07723163C21BD00B32CB4 /* ConvexPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */; };
+		35C07724163C21BD00B32CB4 /* DynamicTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19DE11588D9CD0042A724 /* DynamicTree.cpp */; };
+		35C07725163C21BD00B32CB4 /* DynamicTreeBroadPhaseAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2D19F38158B4A5D0042A724 /* DynamicTreeBroadPhaseAlgorithm.cpp */; };
+		35C07726163C21BD00B32CB4 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
+		35C07727163C21BD00B32CB4 /* WeldConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD46CC1599EC2C009C4951 /* WeldConstraint.cpp */; };
+		35C07728163C21BD00B32CB4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
+		35C07729163C21BD00B32CB4 /* CircleSweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */; };
+		35C0772A163C21BD00B32CB4 /* CatenaryConstraintFixedRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250C1B515A6D622009C9A37 /* CatenaryConstraintFixedRotation.cpp */; };
+		35C0772B163C21BD00B32CB4 /* LineConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD79A313C6E94700D8A086 /* LineConstraint.cpp */; };
+		35C0772C163C21BD00B32CB4 /* PrismaticConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2513C7268600D8A086 /* PrismaticConstraint.cpp */; };
+		35C0772D163C21BD00B32CB4 /* WheelConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */; };
+		35C0772E163C21BD00B32CB4 /* MotorConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */; };
+		35C0772F163C21BD00B32CB4 /* PulleyConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */; };
+		35C07730163C21BD00B32CB4 /* CubicSplinePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */; };
+		35C07731163C21BD00B32CB4 /* MinMaxConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EDB84915D4EA48008EAD97 /* MinMaxConstraint.cpp */; };
+		35C07732163C21BD00B32CB4 /* GrahamScanConvexHullGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29B9C1B15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp */; };
+		35C07733163C21BD00B32CB4 /* CirclePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */; };
+		35C07734163C21BD00B32CB4 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C244CF86161D805300C141F8 /* BSpline.cpp */; };
+		35C07736163C21BD00B32CB4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C257F8351552A23500270D77 /* OpenGL.framework */; };
+		35C07737163C21BD00B32CB4 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
+		35C07739163C21BD00B32CB4 /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
+		35C0773F163C21D800B32CB4 /* SimpleVehicle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35530055163C14430037A4E5 /* SimpleVehicle.cpp */; };
+		35C07740163C21DC00B32CB4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3553008E163C15A80037A4E5 /* main.cpp */; };
+		35D61659163C266900AE9631 /* FirstGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35D61658163C266900AE9631 /* FirstGame.cpp */; };
+		35E3A200163D2C0E0023D968 /* TerrainGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */; };
+		35E3A202163D37150023D968 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A201163D37140023D968 /* Camera.cpp */; };
 		75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */; };
 		758921F313B0E3DF0005E1E2 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
 		758DCA2D13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758DCA2C13CF3DE200FDD6F1 /* CubicSplinePathConstraint.cpp */; };
@@ -15,7 +64,6 @@
 		75BD7B2613C7268600D8A086 /* PrismaticConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2513C7268600D8A086 /* PrismaticConstraint.cpp */; };
 		75BD7B2913C7269800D8A086 /* WheelConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */; };
 		75BD7C8613C76A3800D8A086 /* MotorConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */; };
-		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
 		C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
 		C244CF87161D805300C141F8 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C244CF86161D805300C141F8 /* BSpline.cpp */; };
@@ -54,6 +102,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		35C07738163C21BD00B32CB4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				35C07739163C21BD00B32CB4 /* Dirac2D.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		8DD76F690486A84900D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
@@ -68,8 +126,22 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		35530055163C14430037A4E5 /* SimpleVehicle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleVehicle.cpp; sourceTree = "<group>"; };
+		35530056163C145D0037A4E5 /* Vehicle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vehicle.h; sourceTree = "<group>"; };
+		35530057163C14B50037A4E5 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		3553008E163C15A80037A4E5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3568969816062C3F001D9A15 /* CirclePathConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePathConstraint.h; sourceTree = "<group>"; };
 		3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CirclePathConstraint.cpp; sourceTree = "<group>"; };
+		35C0773D163C21BD00B32CB4 /* Dirac2D copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Dirac2D copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		35C07741163C227100B32CB4 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		35D61656163C260F00AE9631 /* FirstGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstGame.h; sourceTree = "<group>"; };
+		35D61658163C266900AE9631 /* FirstGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FirstGame.cpp; sourceTree = "<group>"; };
+		35D6165A163C31CE00AE9631 /* IUpdatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUpdatable.h; sourceTree = "<group>"; };
+		35D6165B163C412300AE9631 /* SimpleVehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleVehicle.h; sourceTree = "<group>"; };
+		35D6165C163C42A800AE9631 /* IRenderable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderable.h; sourceTree = "<group>"; };
+		35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainGenerator.h; sourceTree = "<group>"; };
+		35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainGenerator.cpp; sourceTree = "<group>"; };
+		35E3A201163D37140023D968 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		75580E9B13CED76500B6B03B /* PulleyConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulleyConstraint.h; sourceTree = "<group>"; };
 		75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PulleyConstraint.cpp; sourceTree = "<group>"; };
 		758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DTimer.cpp; path = Dirac2D/DTimer.cpp; sourceTree = SOURCE_ROOT; };
@@ -178,6 +250,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		35C07735163C21BD00B32CB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35C07736163C21BD00B32CB4 /* OpenGL.framework in Frameworks */,
+				35C07737163C21BD00B32CB4 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F660486A84900D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -205,6 +286,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				35530053163C141E0037A4E5 /* GameDemo */,
 				C257F13D154E71AE00270D77 /* Dirac2D */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 			);
@@ -215,8 +297,29 @@
 			isa = PBXGroup;
 			children = (
 				8DD76F6C0486A84900D96B5E /* Dirac2D */,
+				35C0773D163C21BD00B32CB4 /* Dirac2D copy */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		35530053163C141E0037A4E5 /* GameDemo */ = {
+			isa = PBXGroup;
+			children = (
+				35D6165A163C31CE00AE9631 /* IUpdatable.h */,
+				35D6165C163C42A800AE9631 /* IRenderable.h */,
+				35530056163C145D0037A4E5 /* Vehicle.h */,
+				35D6165B163C412300AE9631 /* SimpleVehicle.h */,
+				35530055163C14430037A4E5 /* SimpleVehicle.cpp */,
+				35530057163C14B50037A4E5 /* Camera.h */,
+				35E3A201163D37140023D968 /* Camera.cpp */,
+				35C07741163C227100B32CB4 /* Game.h */,
+				35D61656163C260F00AE9631 /* FirstGame.h */,
+				35D61658163C266900AE9631 /* FirstGame.cpp */,
+				3553008E163C15A80037A4E5 /* main.cpp */,
+				35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */,
+				35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */,
+			);
+			path = GameDemo;
 			sourceTree = "<group>";
 		};
 		C244CF82161D7F1000C141F8 /* Curves */ = {
@@ -448,6 +551,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		35C0770A163C21BD00B32CB4 /* GameDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35C0773A163C21BD00B32CB4 /* Build configuration list for PBXNativeTarget "GameDemo" */;
+			buildPhases = (
+				35C0770B163C21BD00B32CB4 /* Sources */,
+				35C07735163C21BD00B32CB4 /* Frameworks */,
+				35C07738163C21BD00B32CB4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameDemo;
+			productInstallPath = "$(HOME)/bin";
+			productName = Dirac2D;
+			productReference = 35C0773D163C21BD00B32CB4 /* Dirac2D copy */;
+			productType = "com.apple.product-type.tool";
+		};
 		8DD76F620486A84900D96B5E /* Dirac2D */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "Dirac2D" */;
@@ -486,16 +607,69 @@
 			projectRoot = "";
 			targets = (
 				8DD76F620486A84900D96B5E /* Dirac2D */,
+				35C0770A163C21BD00B32CB4 /* GameDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		35C0770B163C21BD00B32CB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35C0770D163C21BD00B32CB4 /* CollisionManager.cpp in Sources */,
+				35C0770E163C21BD00B32CB4 /* ContactSolver.cpp in Sources */,
+				35C0770F163C21BD00B32CB4 /* CollisionDetectionPolygon.cpp in Sources */,
+				35C07710163C21BD00B32CB4 /* CollisionDetection.cpp in Sources */,
+				35C07711163C21BD00B32CB4 /* PhysicalWorld.cpp in Sources */,
+				35C07712163C21BD00B32CB4 /* PhysicalBody.cpp in Sources */,
+				35C07713163C21BD00B32CB4 /* GLRenderer.cpp in Sources */,
+				35C07714163C21BD00B32CB4 /* Box.cpp in Sources */,
+				35C07715163C21BD00B32CB4 /* Capsule.cpp in Sources */,
+				35C07716163C21BD00B32CB4 /* Circle.cpp in Sources */,
+				35C07717163C21BD00B32CB4 /* PhysicalShape.cpp in Sources */,
+				35C07718163C21BD00B32CB4 /* Contact.cpp in Sources */,
+				35C07719163C21BD00B32CB4 /* CollisionDetectionCirclePolygon.cpp in Sources */,
+				35C0771A163C21BD00B32CB4 /* CollisionDetectionCapsulePolygon.cpp in Sources */,
+				35C0771B163C21BD00B32CB4 /* CollisionDetectionEdgePolygon.cpp in Sources */,
+				35C0771C163C21BD00B32CB4 /* Edge.cpp in Sources */,
+				35C0771D163C21BD00B32CB4 /* EdgeChain.cpp in Sources */,
+				35C0771E163C21BD00B32CB4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */,
+				35C0771F163C21BD00B32CB4 /* GJKAlgorithm.cpp in Sources */,
+				35C07720163C21BD00B32CB4 /* DistanceConstraint.cpp in Sources */,
+				35C07721163C21BD00B32CB4 /* SAP_Algorithm.cpp in Sources */,
+				35C07722163C21BD00B32CB4 /* HingeConstraint.cpp in Sources */,
+				35C07723163C21BD00B32CB4 /* ConvexPolygon.cpp in Sources */,
+				35C07724163C21BD00B32CB4 /* DynamicTree.cpp in Sources */,
+				35C07725163C21BD00B32CB4 /* DynamicTreeBroadPhaseAlgorithm.cpp in Sources */,
+				35C07726163C21BD00B32CB4 /* DTimer.cpp in Sources */,
+				35C07727163C21BD00B32CB4 /* WeldConstraint.cpp in Sources */,
+				35C07728163C21BD00B32CB4 /* CatenaryConstraint.cpp in Sources */,
+				35C07729163C21BD00B32CB4 /* CircleSweep.cpp in Sources */,
+				35C0772A163C21BD00B32CB4 /* CatenaryConstraintFixedRotation.cpp in Sources */,
+				35C0772B163C21BD00B32CB4 /* LineConstraint.cpp in Sources */,
+				35C0772C163C21BD00B32CB4 /* PrismaticConstraint.cpp in Sources */,
+				35C0772D163C21BD00B32CB4 /* WheelConstraint.cpp in Sources */,
+				35C0772E163C21BD00B32CB4 /* MotorConstraint.cpp in Sources */,
+				35C0772F163C21BD00B32CB4 /* PulleyConstraint.cpp in Sources */,
+				35C07730163C21BD00B32CB4 /* CubicSplinePathConstraint.cpp in Sources */,
+				35C07731163C21BD00B32CB4 /* MinMaxConstraint.cpp in Sources */,
+				35C07732163C21BD00B32CB4 /* GrahamScanConvexHullGenerator.cpp in Sources */,
+				35C07733163C21BD00B32CB4 /* CirclePathConstraint.cpp in Sources */,
+				35C07734163C21BD00B32CB4 /* BSpline.cpp in Sources */,
+				35C0773F163C21D800B32CB4 /* SimpleVehicle.cpp in Sources */,
+				35C07740163C21DC00B32CB4 /* main.cpp in Sources */,
+				35D61659163C266900AE9631 /* FirstGame.cpp in Sources */,
+				35E3A200163D2C0E0023D968 /* TerrainGenerator.cpp in Sources */,
+				35E3A202163D37150023D968 /* Camera.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F640486A84900D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				354F4703163586AB000DFC09 /* main.cpp in Sources */,
 				C257F15B154E71AE00270D77 /* CollisionManager.cpp in Sources */,
 				C257F15C154E71AE00270D77 /* ContactSolver.cpp in Sources */,
 				C257F198154E75F400270D77 /* CollisionDetectionPolygon.cpp in Sources */,
@@ -604,6 +778,31 @@
 			};
 			name = Release;
 		};
+		35C0773B163C21BD00B32CB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "Dirac2D copy";
+			};
+			name = Debug;
+		};
+		35C0773C163C21BD00B32CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "Dirac2D copy";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -621,6 +820,15 @@
 			buildConfigurations = (
 				1DEB923608733DC60010E9CD /* Debug */,
 				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		35C0773A163C21BD00B32CB4 /* Build configuration list for PBXNativeTarget "GameDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35C0773B163C21BD00B32CB4 /* Debug */,
+				35C0773C163C21BD00B32CB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
