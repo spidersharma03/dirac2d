@@ -85,17 +85,15 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 	}
 }
 
-void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, int nOrder)
+void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, float* knotVector, int nOrder)
 {
-	float x[30];     // Knot Vector
-	float basis[30];     // Knot Vector
+	float basis[30]; 
 
-	findOpenKnots(nControlPoints, nOrder, x);
 	float t = 0.0f;
 	float tStep = (float)(nControlPoints - nOrder + 1)/(nCurvePoints-1);
 	for( int i=0; i<2*nCurvePoints; i+=2 )
 	{
-		splineBasis( nControlPoints, nOrder, t, x, basis);
+		splineBasis( nControlPoints, nOrder, t, knotVector, basis);
 		
 		float s1 = 0.0f;
 		float s2 = 0.0f;

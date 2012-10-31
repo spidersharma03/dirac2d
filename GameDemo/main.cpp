@@ -20,9 +20,9 @@ void renderScene(void);
 PhysicalWorld* pWorld;
 GLRenderer* glRenderer;
 DTimer timer;
-FirstGame* pGame = new FirstGame();
+FirstGame* pGame;
 
-dfloat dt = 1.0f/2000.0f;
+dfloat dt = 1.0f/600.0f;
 
 dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
@@ -36,15 +36,34 @@ void demo23()
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
     pBodyGround->setAngle(PI_4/10);
-	pBodyGround->setPosition(Vector2f(0.0f,-0.7f));
+	pBodyGround->setPosition(Vector2f(1.0f,-0.7f));
 	pBodyGround->m_BodyType = EBT_STATIC;
 	dfloat groundWidth = 1.2f;  dfloat groundHeight = 0.02f;
-	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	//Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
 	PhysicalAppearance pApp;
     pApp.m_PhysicalAttributes.m_Friction = 1.0f;
-	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
-	pBodyGround->createPhysicalShape(pApp);
 	
+	dint32 edgeCount = 30;
+	Vector2f vertices[30];
+	dfloat chainLength = 3.0f;
+	dfloat ex = chainLength/2;
+	dfloat ey = 0.0f;
+	dfloat dx = 2*chainLength/(edgeCount-1);
+	
+	vertices[0] = Vector2f(-ex,0.0f);
+	vertices[1] = Vector2f(0.0f,0.8f);
+	vertices[2] = Vector2f(ex,0.0f);
+	
+	for( dint32 e=0; e<edgeCount; e++ )
+	{
+		vertices[e] = Vector2f(ex,ey);
+		ex -= dx;
+		ey = -0.03*sin(e*1.39);
+	}
+	
+	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, edgeCount);
+	pBodyGround->createPhysicalShape(pApp);
+
 	for( dint32 i=0; i< 1; i++ )
 	{
 		PhysicalBody* pBox1 = pWorld->createPhysicalBody();
@@ -62,7 +81,7 @@ void demo23()
 		dfloat boxWidth = 0.3f; dfloat boxHeight = 0.04f;
 		//Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		//pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
-		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.1f, 0.3f);
+		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.03f, 0.6f);
 		pBox1->createPhysicalShape(pApp);
 		pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
 		
@@ -79,7 +98,7 @@ void demo23()
 		lc1->m_LocalAxis = Vector2f(1.0f,-1.0f);
 		lc1->initialize();
 		lc1->m_Erp = 50.0f;
-		lc1->m_Cfm = 10.0f;
+		lc1->m_Cfm = 4.0f;
 		
 		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
 		lc2->m_PhysicalBody1 = pBox1;
@@ -88,7 +107,7 @@ void demo23()
 		lc2->m_LocalAxis = Vector2f(-1.0f,-1.0f);
 		lc2->initialize();
 		lc2->m_Erp = 50.0f;
-		lc2->m_Cfm = 10.0f;
+		lc2->m_Cfm = 4.0f;
 		
         MotorConstraint* mc = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
         mc->m_PhysicalBody1 = circle2;
@@ -111,7 +130,7 @@ void initScene()
 	mouseJoint->m_Erp = 2.0f;
 	mouseJoint->m_Cfm = 1.0f;
     
-    
+    pGame = new FirstGame();
 }
 
 void changeSize(int w, int h) 
@@ -146,25 +165,6 @@ void changeSize(int w, int h)
 }
 
 
-//static dfloat time = 0.0f;
-//time += dt;
-//// Find Anchor Point Position
-//Vector2f ap(0.025f,-0.45f);
-//limb2->m_Transform.transformAsPoint(ap);
-//dfloat angle = stick->m_Angle;
-//Vector2f c = stick->m_Position;
-//dfloat r = c.distance(ap);
-//dfloat R = r * sin(angle);
-//dfloat random = RANDOM_NUMBER(60.0f, 100.0f);
-//dfloat tau = dt*random;
-//Vector2f A (-R/(tau*tau), 0.0f );
-//{
-//	if( fabs(R) < 0.1f ) 
-//		limb2->m_Velocity.x += A.x * dt;
-//		else
-//			limb2->m_Velocity.x = 0.0f;
-//			}
-
 void renderScene(void) 
 {	
 #ifndef WIN32
@@ -194,33 +194,10 @@ void renderScene(void)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	pWorld->draw();
 	
+	pGame->gameLoop();
 	
-    //demo28();
-	//RaySegment2f raySeg;//(Vector2f(), Vector2f());
-    //	raySeg.m_End = Vector2f(0.0f,-1.0f);
-    //	raySeg.m_Start = Vector2f(0.4f,1.6f);
-    //
-    //	callBack.numCalls = 0;
-    //	pWorld->intersectRaySegment(raySeg,&callBack);
-    //	
-    //	glPushMatrix();
-    //	Matrix3f xForm =  callBack.m_pBody->m_Transform;
-    //	Matrix3f Identity;
-    //	pWorld->getRenderer()->setTransform(Identity);
-    //	pWorld->getRenderer()->setTransform(xForm);
-    //	pWorld->getRenderer()->setColor(0, 255, 255);
-    //	pWorld->getRenderer()->drawShape(callBack.m_pBody->getPhysicalShapeList()->m_CollisionShape);
-    //	glPopMatrix();
-    //
-    //	//printf("Num Ray Intersections = %d\n", callBack.numCalls);
-    //
-    //	glPushMatrix();
-    //	glBegin(GL_LINES);
-    //	  glVertex2f(raySeg.m_Start.x, raySeg.m_Start.y); 
-    //	  glVertex2f(raySeg.m_End.x, raySeg.m_End.y); 
-    //	glEnd();
-    //	glPopMatrix();
-    
+	pGame->render();
+	
 	glutSwapBuffers();
 	
 #ifndef WIN32

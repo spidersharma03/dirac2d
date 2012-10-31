@@ -9,6 +9,7 @@
 
 #include "Dirac2D/Dirac2D.h"
 
+
 USE_NAMESPACE_DIRAC2D
 
 void initScene();
@@ -1764,12 +1765,14 @@ void demo27()
 
 void demo28()
 {
-	//float controlPoints[4];
-	//float curvePoints[30];
-	float knots[30], basis[30];
-	int nOrder = 3;
-	int nPoints = 4;
-	findPeriodicKnots(nPoints, nOrder, knots);
+	int nPoints = 8;
+	int nCurvePoints = 260;
+	float controlPoints[8*2] = {0.0f,0.0f,  0.0f,0.4f,  0.5f,0.5f, 0.8f,0.2f, 0.5f,-0.8f, 0.2f,-0.9f, 0.4f,-0.3f,  -0.3f,-0.2f};
+	float curvePoints[nCurvePoints*2];
+	float knots[130], basis[30];
+	int nOrder = 4;
+	findOpenKnots(nPoints, nOrder, knots);
+	
 
     knots[0] = 0.0f;    
     knots[1] = 0.0f;
@@ -1793,7 +1796,27 @@ void demo28()
 		t += 0.01f;
 	}
 	glPopMatrix();
-	//BSpline(controlPoints, 4, curvePoints, 30, 3);
+	BSpline(controlPoints, nPoints, curvePoints, nCurvePoints, knots, nOrder);
+	
+	glPushMatrix();
+	glTranslated(0, -0.5, 0);
+	glPointSize(3.0f);
+	for( int i=0; i<2*nPoints; i+=2 )
+	{
+		glBegin(GL_POINTS);
+		glVertex2f(controlPoints[i], controlPoints[i+1]);
+		glEnd();
+	}
+	glPointSize(1.0f);
+
+	for( int i=0; i<2*nCurvePoints; i+=2 )
+	{
+		glBegin(GL_POINTS);
+			glVertex2f(curvePoints[i], curvePoints[i+1]);
+		glEnd();
+	}
+	glPopMatrix();
+	
 }
 
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;

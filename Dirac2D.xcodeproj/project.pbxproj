@@ -65,6 +65,7 @@
 		75BD7B2913C7269800D8A086 /* WheelConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7B2813C7269800D8A086 /* WheelConstraint.cpp */; };
 		75BD7C8613C76A3800D8A086 /* MotorConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */; };
 		8DD76F6A0486A84900D96B5E /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
+		C20055A0163FC7A9002D1565 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C200559F163FC7A9002D1565 /* GameObject.cpp */; };
 		C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
 		C244CF87161D805300C141F8 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C244CF86161D805300C141F8 /* BSpline.cpp */; };
 		C250BD4A15A41D4E009C9A37 /* CircleSweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */; };
@@ -157,6 +158,8 @@
 		75BD7C8413C76A3800D8A086 /* MotorConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotorConstraint.h; sourceTree = "<group>"; };
 		75BD7C8513C76A3800D8A086 /* MotorConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotorConstraint.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* Dirac2D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dirac2D; sourceTree = BUILT_PRODUCTS_DIR; };
+		C200559E163FC7A9002D1565 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		C200559F163FC7A9002D1565 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		C21844FF15A2C94E00164BD4 /* CatenaryConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatenaryConstraint.h; sourceTree = "<group>"; };
 		C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatenaryConstraint.cpp; sourceTree = "<group>"; };
 		C244CF85161D805300C141F8 /* BSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSpline.h; sourceTree = "<group>"; };
@@ -315,9 +318,11 @@
 				35C07741163C227100B32CB4 /* Game.h */,
 				35D61656163C260F00AE9631 /* FirstGame.h */,
 				35D61658163C266900AE9631 /* FirstGame.cpp */,
-				3553008E163C15A80037A4E5 /* main.cpp */,
 				35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */,
 				35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */,
+				C200559E163FC7A9002D1565 /* GameObject.h */,
+				C200559F163FC7A9002D1565 /* GameObject.cpp */,
+				3553008E163C15A80037A4E5 /* main.cpp */,
 			);
 			path = GameDemo;
 			sourceTree = "<group>";
@@ -662,6 +667,7 @@
 				35D61659163C266900AE9631 /* FirstGame.cpp in Sources */,
 				35E3A200163D2C0E0023D968 /* TerrainGenerator.cpp in Sources */,
 				35E3A202163D37150023D968 /* Camera.cpp in Sources */,
+				C20055A0163FC7A9002D1565 /* GameObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

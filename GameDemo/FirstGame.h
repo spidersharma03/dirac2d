@@ -6,15 +6,29 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+
+#include <vector>
 #include "Game.h"
+
+using namespace std;
 
 #ifndef _FIRST_GAME_H_
 #define _FIRST_GAME_H_
 
 class SimpleVehicle;
+class Camera;
+
+BEGIN_NAMESPACE_DIRAC2D
+class PhysicalWorld;
+END_NAMESPACE_DIRAC2D
+
+USE_NAMESPACE_DIRAC2D
+
+class GameObject;
 
 class FirstGame : public Game
 {
+	
 public:
     FirstGame();
     
@@ -26,13 +40,22 @@ public:
     
     virtual void render();
     
-    virtual void update(float dt);
-
 public:
     virtual void keyProcessor(unsigned char key, int x, int y);
     
+public:
+	PhysicalWorld* getPhysicalWorld()
+	{
+		return m_pWorld;
+	}
 private:
     SimpleVehicle* m_pVehicle;
+	PhysicalWorld* m_pWorld;
+	Camera* m_pCamera;
+	
+	float m_StepSize;
+	
+	vector<GameObject*> m_vecGameObjects;
 };
 
 #endif

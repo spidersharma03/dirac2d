@@ -33,7 +33,7 @@ void findPeriodicKnots(int nControlPoints, int nOrder, float* knotVector);
 void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, float* basisVector);
 
 
-void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, int nOrder);
+void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, float* knotVector, int nOrder);
 
 
 #endif
