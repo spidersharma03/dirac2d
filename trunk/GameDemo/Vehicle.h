@@ -11,7 +11,7 @@
 
 #include "../Dirac2D/Dirac2D.h"
 #include "IRenderable.h"
-#include "IUpdatable.h"
+#include "GameObject.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 class MotorConstraint;
@@ -19,7 +19,7 @@ END_NAMESPACE_DIRAC2D
 
 USE_NAMESPACE_DIRAC2D
 
-class Vehicle : public IRenderable, IUpdatable
+class Vehicle : public IRenderable, public GameObject
 {
 public:
     Vehicle()
@@ -64,7 +64,6 @@ public:
 protected:
     MotorConstraint* m_pMotor;
 protected:
-    Vector2f m_Velocity;
     Vector2f m_Position; // Centre of Mass of the Vehicle
     
     float m_MaxTorque; // Max Motor Torque

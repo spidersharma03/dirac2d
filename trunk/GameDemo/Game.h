@@ -11,7 +11,7 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
-class Game : public IUpdatable
+class Game
 {
 public:
     Game()
@@ -26,9 +26,7 @@ public:
     virtual void gameLoop() = 0;
     
     virtual void render() = 0;
-    
-    virtual void update(float dt){};
-    
+        
 public:
     
     virtual void keyProcessor(unsigned char key, int x, int y){};
