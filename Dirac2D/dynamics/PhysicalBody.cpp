@@ -210,6 +210,10 @@ void PhysicalBody::updateSleepingStatus(dfloat dt)
 PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 {
 	PhysicalShape* pShape = new PhysicalShape();
+    /*
+     pShape = new(m_PhysicalWorld->m_PhysicaShapePool->Allocate())PhysicalShape();
+     */
+    
 	pShape->m_ParentBody = this;
 	pShape->m_Restitution = pApp.m_PhysicalAttributes.m_Restitution;
 	pShape->m_Friction = pApp.m_PhysicalAttributes.m_Friction;
@@ -269,12 +273,12 @@ void PhysicalBody::updateTransform()
 
 PhysicalBody::~PhysicalBody()
 {
-	dAssert(0);
-	PhysicalShape* pShape = m_PhysicalShapeList;
-	while( pShape ) 
-	{
-		delete pShape;
-	}
+    m_PhysicalShapeList = 0;
+    
+    m_Next = m_Prev = 0;
+    
+    
+    m_ContactEdgeList = 0;
 }
 
 void PhysicalBody::updateAABB()

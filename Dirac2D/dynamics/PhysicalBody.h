@@ -26,9 +26,7 @@ enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
 
 class PhysicalBody
 {
-public:	
-	PhysicalBody(const PhysicalBody& other);
-	
+public:		
 	void operator=(const PhysicalBody& other);
 	
 	PhysicalBody* clone();
@@ -36,7 +34,7 @@ public:
 	// adds this Body to the physical World. only useful for adding Clones to the Physical World. if this body is already part of the world it wont get added.
 	void addToPhysicalWorld(PhysicalWorld* pWorld);
 
-	// Removes this Body from the physical World.
+	// Removes this Body from the physical World. removes it from the doubly linked list.
 	void removeFromPhysicalWorld(PhysicalWorld* pWorld);
 
 	void applyForce( Vector2f& force );	
@@ -155,11 +153,14 @@ protected:
 	// Calculates MassAttributes( mass, moment of inertia, centre of mass) of this Body from the Physical Shapes associated with this Body.
 	void calculateMassAttributes();
 	
+    PhysicalBody(const PhysicalBody& other);
+
 	PhysicalBody(PhysicalWorld* world);
 
 	PhysicalShape* m_PhysicalShapeList;
 		
 	PhysicalWorld* m_PhysicalWorld;
+    
 };
 
 END_NAMESPACE_DIRAC2D

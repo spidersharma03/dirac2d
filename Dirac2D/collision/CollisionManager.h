@@ -28,6 +28,7 @@ public:
 
 	void addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pNode2);
 	
+    friend class PhysicalWorld;
 protected:
 		
 	void updateContacts();

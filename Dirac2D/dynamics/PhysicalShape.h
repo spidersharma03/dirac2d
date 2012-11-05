@@ -18,6 +18,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class PhysicalBody;
 class CollisionShape;
+class BroadPhaseNode;
 
 class PhysicalShape
 {
@@ -28,6 +29,7 @@ protected:
 		m_Restitution = 0.0f;
 		m_Next = m_Prev = 0;
 		m_CollisionShape = 0;
+        m_pBroadPhaseNode = 0;
 	}
 	
 	PhysicalShape(const PhysicalShape& other);
@@ -44,8 +46,9 @@ protected:
 	
 	void calculateMassAttributes();
 	
-	virtual ~PhysicalShape();
 public:
+    virtual ~PhysicalShape();
+
 	PhysicalBody* m_ParentBody;
 
 	dfloat m_Friction;
@@ -56,6 +59,9 @@ public:
 	CollisionShape* m_CollisionShape;
 	CollisionFilter m_CollisionFilter;
 
+    // pointer to the BroadPhase Node
+    BroadPhaseNode* m_pBroadPhaseNode;
+    
 	// pointer to the next shape from the parent body.
 	PhysicalShape* m_Next;
 	PhysicalShape* m_Prev;

@@ -35,6 +35,13 @@
 
 #include "../draw/Renderer.h"
 
+#ifndef WIN32 
+#include <sys/time.h>
+#include<GLUT/glut.h>
+#else
+#include<GL/glut.h>
+#endif
+
 BEGIN_NAMESPACE_DIRAC2D
 
 Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
@@ -68,7 +75,8 @@ PhysicalWorld::PhysicalWorld()
 	m_ContactList	   = 0;
 	
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
-	
+	m_PhysicaShapePool = new MemoryAllocator<PhysicalShape>(MAX_PHYSICAL_SHAPES);
+    
 	m_DistanceConstraintPool = new MemoryAllocator<DistanceConstraint>(MAX_BODIES/10);
 	m_HingeConstraintPool	 = new MemoryAllocator<HingeConstraint>(MAX_BODIES/10);
 	m_WeldConstraintPool     = new MemoryAllocator<WeldConstraint>(MAX_BODIES/10);
@@ -93,6 +101,24 @@ PhysicalBody* PhysicalWorld::createPhysicalBody()
 
 void PhysicalWorld::deletePhysicalBody(PhysicalBody* pBody)
 {
+    // Remove All the Contacts attached to this body.
+    ContactEdge* cEdge = pBody->m_ContactEdgeList;
+    while (cEdge) 
+    {
+        ContactEdge* ce = cEdge;
+        cEdge = ce->m_Next;
+        m_CollisionManager->deleteContact(ce->contact);
+    }
+    // Remove All the Physical Shapes attached to this body.
+    PhysicalShape* pShape = pBody->m_PhysicalShapeList;
+    while (pShape) 
+    {
+        PhysicalShape* pShape_ = pShape;
+        pShape = pShape_->m_Next;
+        delete pShape_;
+        pShape_ = 0;
+    }
+    
 	pBody->removeFromPhysicalWorld(this);	
 	// Release Memory. do not call delete on this as we didnt allocate it through new operator.
 	pBody->~PhysicalBody();
@@ -241,7 +267,8 @@ void PhysicalWorld::draw()
 		{
 			if( m_bDrawShapes )
 			{
-				Matrix3f xForm =  pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+				Matrix3f xForm =  pBody->m_Transform;
+                glPushMatrix();
 				m_Renderer->setTransform(xForm);
 				if( pBody->m_BodyType == EBT_DYNAMIC )
 					m_Renderer->setColor(255, 255, 255);
@@ -253,6 +280,7 @@ void PhysicalWorld::draw()
 					m_Renderer->setColor(0, 255, 255);
 				
 				m_Renderer->drawShape(pShape->m_CollisionShape);
+                glPopMatrix();
 			}
 			if( m_bDrawBoundingBoxes )
 			{
@@ -284,13 +312,15 @@ void PhysicalWorld::draw()
 		if( m_bDrawCentreOfMass )
 		{
 			Matrix3f xForm = pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
-			m_Renderer->setTransform(xForm);
+			glPushMatrix();
+            m_Renderer->setTransform(xForm);
 			m_Renderer->setColor(0, 255, 0);
 			p0 = pBody->m_Centre - Vector2f(0.01f, 0.0f); p1 = pBody->m_Centre + Vector2f(0.01f, 0.0f);
 			m_Renderer->drawLine(p0, p1);
 			p0 = pBody->m_Centre - Vector2f(0.0f, 0.01f); p1 = pBody->m_Centre + Vector2f(0.0f, 0.01f);
 			m_Renderer->setColor(255, 0, 0);
 			m_Renderer->drawLine(p0, p1);
+            glPopMatrix();
 		}
 		
 		pBody = pBody->m_Next;
@@ -543,6 +573,11 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 		pNode->m_AABB = pShape->m_CollisionShape->getAABB();
 		m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 	}
+}
+
+void PhysicalWorld::removeFromBroadPhase( PhysicalShape* pShape)
+{
+    //m_pBroadPhaseAlgorithm-
 }
 
 PhysicalBody* PhysicalWorld::pickBodyFromScreenCoordinates(Vector2f p)

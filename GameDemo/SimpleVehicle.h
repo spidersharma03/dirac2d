@@ -11,10 +11,12 @@
 #ifndef _SIMPLE_VEHICLE_H_
 #define _SIMPLE_VEHICLE_H_
 
+class FirstGame;
+
 class SimpleVehicle : public Vehicle
 {
 public:
-    SimpleVehicle();
+    SimpleVehicle(FirstGame* pGame);
     
     virtual void init();
     
@@ -25,6 +27,9 @@ public:
     virtual void render();
     
 private:
+    FirstGame* m_pGame;
+    
+    PhysicalBody* m_pVehicleBody;
     
     
 };

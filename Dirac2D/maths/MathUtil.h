@@ -13,6 +13,7 @@
 #include "Vector3.h"
 #include "Matrix2.h"
 #include "Matrix3.h"
+#include "Matrix4.h"
 #include "AABB2.h"
 #include "Ray2.h"
 #include <stdlib.h>

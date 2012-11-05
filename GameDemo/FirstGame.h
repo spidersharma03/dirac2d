@@ -25,6 +25,7 @@ END_NAMESPACE_DIRAC2D
 USE_NAMESPACE_DIRAC2D
 
 class GameObject;
+class TerrainGenerator;
 
 class FirstGame : public Game
 {
@@ -48,7 +49,18 @@ public:
 	{
 		return m_pWorld;
 	}
+    
+    Camera* getCamera()
+    {
+        return m_pCamera;
+    }
+    
+    TerrainGenerator* getTerrainGenerator()
+    {
+        return m_pTerrainGenerator;
+    }
 private:
+    TerrainGenerator* m_pTerrainGenerator;
     SimpleVehicle* m_pVehicle;
 	PhysicalWorld* m_pWorld;
 	Camera* m_pCamera;

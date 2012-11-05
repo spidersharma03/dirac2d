@@ -131,7 +131,9 @@ public:
 protected:
 	
 	void addToBroadPhase( PhysicalShape* pShape);
-	
+
+    void removeFromBroadPhase( PhysicalShape* pShape);
+
 private:
 	CollisionManager* m_CollisionManager;
 	BroadPhaseCollisionAlgorithm* m_pBroadPhaseAlgorithm;
@@ -159,6 +161,7 @@ private:
 	
 	dbool m_bWarmStart;
 	
+    MemoryAllocator<PhysicalShape> *m_PhysicaShapePool;
 	MemoryAllocator<PhysicalBody> *m_PhysicalBodyPool;
 	MemoryAllocator<BroadPhaseNode> *m_BroadPhaseNodePool;
 	// Constraint Pools

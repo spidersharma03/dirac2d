@@ -24,11 +24,11 @@ public:
 	{
 	}
 	
-	Vector3( Vector2<T>& vec2, T z):x(vec2.x),y(vec2.y),z(z)
+	Vector3(const Vector2<T>& vec2, T z):x(vec2.x),y(vec2.y),z(z)
 	{
 	}
 	
-	Vector3( T x, Vector2<T>& vec2):x(x),y(vec2.x),z(vec2.y)
+	Vector3( T x, const Vector2<T>& vec2):x(x),y(vec2.x),z(vec2.y)
 	{
 	}
 	
@@ -90,17 +90,17 @@ public:
 		z -= other.z;
 	}
 	
-	Vector3 operator-()
+	inline Vector3<T> operator-()
 	{
 		return Vector3<T>(-x, -y, -z);
 	}
 	
-	Vector3 operator+( const Vector3& other )
+	inline Vector3<T> operator+( const Vector3<T>& other ) const
 	{
 		return Vector3<T>(x+other.x, y+other.y, z+other.z);
 	}
 	
-	Vector3 operator-( const Vector3& other )
+	inline Vector3<T> operator-( const Vector3<T>& other ) const
 	{
 		return Vector3<T>(x-other.x, y-other.y, z-other.z);
 	}
@@ -112,14 +112,14 @@ public:
 		z /= d;
 	}
 	
-	void operator/=( const Vector3& other )
+	void operator/=( const Vector3<T>& other )
 	{
 		x /= other.x;
 		y /= other.y;
 		z /= other.z;
 	}
 	
-	void operator*=( const Vector3& other )
+	void operator*=( const Vector3<T>& other )
 	{
 		x *= other.x;
 		y *= other.y;

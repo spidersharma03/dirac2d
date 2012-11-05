@@ -1850,7 +1850,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo28();
+	demo3();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
@@ -1932,6 +1932,10 @@ void renderScene(void)
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	
 	glOrtho(-1.5*ratio, 1.5*ratio, -1.5, 1.5, -0.01, 100);
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    
 	pWorld->Step(dt);
 	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -2005,7 +2009,9 @@ void keyProcessor(unsigned char key, int x, int y)
 		case 27:
 			exit(0);
 			break;
-			
+		case 127:
+            
+            break;
 		case 'w':
 		case 'W':
 			bWarmStart = !bWarmStart;

@@ -154,8 +154,8 @@ void GLRenderer::setTransform( Matrix3f& xform)
 {
 	xform.getPointer(data);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glLoadMatrixf(data);
+	//glLoadIdentity();
+	glMultMatrixf(data);
 }
 
 void GLRenderer::setColor( dchar r, dchar g, dchar b, dchar a )

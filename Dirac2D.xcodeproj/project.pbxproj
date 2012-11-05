@@ -133,6 +133,7 @@
 		3553008E163C15A80037A4E5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3568969816062C3F001D9A15 /* CirclePathConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePathConstraint.h; sourceTree = "<group>"; };
 		3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CirclePathConstraint.cpp; sourceTree = "<group>"; };
+		35A42F701643A369009ECA9D /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
 		35C0773D163C21BD00B32CB4 /* Dirac2D copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Dirac2D copy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35C07741163C227100B32CB4 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		35D61656163C260F00AE9631 /* FirstGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstGame.h; sourceTree = "<group>"; };
@@ -478,6 +479,7 @@
 				C2DD136D1553EC7C00432320 /* Vector3.h */,
 				C2DD136B1553EAEF00432320 /* Matrix2.h */,
 				C2DD136C1553EAFD00432320 /* Matrix3.h */,
+				35A42F701643A369009ECA9D /* Matrix4.h */,
 				C27A86A81561442D007AD13C /* AABB2.h */,
 				C2B6D90E1573A6DB00E31E38 /* Point2.h */,
 				C2C9E236158F649C0083F1EC /* Ray2.h */,
