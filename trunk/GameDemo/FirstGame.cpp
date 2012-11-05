@@ -11,23 +11,26 @@
 #include "FirstGame.h"
 #include "SimpleVehicle.h"
 #include "Camera.h"
+#include "TerrainGenerator.h"
 
 
 FirstGame::FirstGame()
 {
     m_pWorld = new PhysicalWorld();
-	
-	m_pVehicle = new SimpleVehicle();
+	GLRenderer* glRenderer = new GLRenderer(m_pWorld);
+	m_pWorld->setRenderer(glRenderer);
+    
+    m_pTerrainGenerator = new TerrainGenerator(this);
+	m_pVehicle = new SimpleVehicle(this);
 	
 	m_pCamera = new Camera();
 	m_pCamera->setFocusTarget(m_pVehicle);
 	
-	m_StepSize = 1.0f/600.0f;
+	m_StepSize = 1.0f/1400.0f;
 }
 
 void FirstGame::initGame()
 {
-    m_pVehicle = new SimpleVehicle();
 }
 
 void FirstGame::initGameFromFile(const char* fileName)
@@ -39,12 +42,18 @@ void FirstGame::gameLoop()
 {
     m_pWorld->Step(m_StepSize);
 	
+    m_pTerrainGenerator->update(m_StepSize);
+    
+    m_pVehicle->update(m_StepSize);
+    
 	m_pCamera->update(m_StepSize);
 }
 
 void FirstGame::render()
 {
+    m_pTerrainGenerator->render();
     
+    m_pWorld->draw();
 }
 
 void FirstGame::keyProcessor(unsigned char key, int x, int y)

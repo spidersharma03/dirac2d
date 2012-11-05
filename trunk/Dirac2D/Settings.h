@@ -23,6 +23,8 @@ BEGIN_NAMESPACE_DIRAC2D
 #define MAX_CONTACT_POINTS 2000
 // Maximum number of bodies in the Physical world.
 #define MAX_BODIES 1000
+// Maximum number of bodies in the Physical world.
+#define MAX_PHYSICAL_SHAPES 1000
 // Maximum number of Proxies in Boroad Phase
 #define MAX_PROXIES 1000
 

@@ -7,12 +7,9 @@
  */
 
 #include "BSpline.h"
-#include "GLRenderer.h"
 #include "Vector2.h"
 
 USE_NAMESPACE_DIRAC2D
-
-GLRenderer* pglRenderer = new GLRenderer(0);
 
 void findOpenKnots(int nControlPoints, int nOrder, float* knotVector)
 {
@@ -87,7 +84,7 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 
 void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, float* knotVector, int nOrder)
 {
-	float basis[30]; 
+	float basis[100]; 
 
 	float t = 0.0f;
 	float tStep = (float)(nControlPoints - nOrder + 1)/(nCurvePoints-1);
@@ -106,16 +103,5 @@ void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int n
 		curvePoints[i]   = s1;
 		curvePoints[i+1] = s2;
 		t += tStep;
-	}
-}
-
-void drawBSpline(float* curvePoints, int nCurvePoints)
-{
-	pglRenderer->setColor(0, 255, 0);
-	for( int i=0; i<2*nCurvePoints-2; i+=2 )
-	{
-		Vector2f p0(curvePoints[i], curvePoints[i+1]);
-		Vector2f p1(curvePoints[i+2], curvePoints[i+3]);
-		pglRenderer->drawLine(p0, p1);
 	}
 }

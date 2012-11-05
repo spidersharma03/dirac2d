@@ -64,7 +64,7 @@ public:
 protected:
     MotorConstraint* m_pMotor;
 protected:
-    Vector2f m_Position; // Centre of Mass of the Vehicle
+    Vector2f m_Com; // Centre of Mass of the Vehicle
     
     float m_MaxTorque; // Max Motor Torque
     
