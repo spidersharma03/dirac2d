@@ -45,6 +45,10 @@ public:
 				&& (m_EdgeList->m_Vertex2 == (m_EdgeList+m_NumEdges)->m_Vertex2) );
 	}
 	
+    virtual ~EdgeChain()
+    {
+        delete [] m_EdgeList;
+    }
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);

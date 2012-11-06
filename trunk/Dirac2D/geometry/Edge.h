@@ -31,6 +31,10 @@ public:
 	virtual void updateAABB(Matrix3f& xForm);
 	
 	virtual CollisionShape* clone();
+    
+    virtual ~Edge()
+    {
+    }
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);
