@@ -115,6 +115,7 @@ void PhysicalWorld::deletePhysicalBody(PhysicalBody* pBody)
     {
         PhysicalShape* pShape_ = pShape;
         pShape = pShape_->m_Next;
+		removeFromBroadPhase(pShape_);
         delete pShape_;
         pShape_ = 0;
     }
@@ -561,6 +562,7 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 			pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
 			pNode->m_PhysicalShape = pShape;
 			pNode->m_CollisionShape = (CollisionShape*)edgeChain->getEdge(e);
+			pNode->m_CollisionShape->m_pBroadPhaseNode = pNode;
 			pNode->m_AABB = pNode->m_CollisionShape->getAABB();
 			m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 		}
@@ -570,6 +572,7 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 		pNode = new(m_BroadPhaseNodePool->Allocate()) BroadPhaseNode();
 		pNode->m_PhysicalShape = pShape;
 		pNode->m_CollisionShape = pShape->m_CollisionShape;
+		pNode->m_CollisionShape->m_pBroadPhaseNode = pNode;
 		pNode->m_AABB = pShape->m_CollisionShape->getAABB();
 		m_pBroadPhaseAlgorithm->addBroadPhaseNode(pNode);
 	}
@@ -577,7 +580,22 @@ void PhysicalWorld::addToBroadPhase( PhysicalShape* pShape)
 
 void PhysicalWorld::removeFromBroadPhase( PhysicalShape* pShape)
 {
-    //m_pBroadPhaseAlgorithm-
+	if( pShape->m_CollisionShape->getShapeType() == EST_EDGE_CHAIN )
+	{
+		EdgeChain* edgeChain = (EdgeChain*)pShape->m_CollisionShape;
+		dint32 numEdges = edgeChain->getNumEdges();
+		for (dint32 e=0; e<numEdges; e++) 
+		{
+			CollisionShape* cShape = (CollisionShape*)edgeChain->getEdge(e);
+			m_pBroadPhaseAlgorithm->removeBroadPhaseNode(cShape->m_pBroadPhaseNode);
+			m_BroadPhaseNodePool->Free(cShape->m_pBroadPhaseNode);
+		}
+	}
+	else 
+	{
+		m_pBroadPhaseAlgorithm->removeBroadPhaseNode(pShape->m_CollisionShape->m_pBroadPhaseNode);
+		m_BroadPhaseNodePool->Free(pShape->m_CollisionShape->m_pBroadPhaseNode);
+	}
 }
 
 PhysicalBody* PhysicalWorld::pickBodyFromScreenCoordinates(Vector2f p)

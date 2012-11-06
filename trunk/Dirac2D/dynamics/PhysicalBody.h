@@ -37,15 +37,15 @@ public:
 	// Removes this Body from the physical World. removes it from the doubly linked list.
 	void removeFromPhysicalWorld(PhysicalWorld* pWorld);
 
-	void applyForce( Vector2f& force );	
+	void applyForce( const Vector2f& force );	
 	
-	void applyForce( Vector2f& force, Vector2f& point );	
+	void applyForce( const Vector2f& force, const Vector2f& point );	
 
-	void applyImpulse( Vector2f& impulse );	
+	void applyImpulse(const Vector2f& impulse );	
 	
-	void applyImpulse( Vector2f& impulse, Vector2f& point );
+	void applyImpulse(const Vector2f& impulse, const Vector2f& point );
 
-	void applyTorque( Vector2f& torque );	
+	void applyTorque( const Vector2f& torque );	
 
 	PhysicalShape* createPhysicalShape(PhysicalAppearance& pApp);
 	
@@ -106,6 +106,16 @@ public:
 	PhysicalShape* getPhysicalShapeList()
 	{
 		return m_PhysicalShapeList;
+	}
+
+	PhysicalBody* getNext()
+	{
+		return m_Next;
+	}
+	
+	PhysicalBody* getPrevious()
+	{
+		return m_Prev;
 	}
 	
 	void updateSleepingStatus(dfloat dt);

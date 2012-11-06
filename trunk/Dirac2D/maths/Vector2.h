@@ -258,12 +258,27 @@ public:
 	{
 		return (x<other.x) && (y<other.y);
 	}
+	
+	
+	
 public:
 	T x, y;
 };
 
+
 typedef Vector2<dfloat> Vector2f;
 typedef Vector2<ddouble> Vector2d;
+
+
+inline Vector2f operator* ( dfloat a, const Vector2f& v )
+{
+	return Vector2f(a*v.x, a*v.y);
+}
+
+inline Vector2d operator* ( dfloat a, const Vector2d& v )
+{
+	return Vector2d(a*v.x, a*v.y);
+}
 
 END_NAMESPACE_DIRAC2D
 

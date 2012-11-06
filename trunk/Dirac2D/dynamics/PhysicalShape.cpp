@@ -41,7 +41,6 @@ PhysicalShape::~PhysicalShape()
     m_CollisionShape = 0;
     m_ParentBody = 0;
     m_Next = m_Prev = 0;
-    m_pBroadPhaseNode = 0;
 }
 
 PhysicalShape* PhysicalShape::clone()

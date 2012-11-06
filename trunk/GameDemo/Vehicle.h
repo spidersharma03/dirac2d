@@ -31,6 +31,14 @@ public:
     
     virtual void initFromFile(const char* fileName) = 0;
     
+	virtual void applyForce( const Vector2f& force )
+	{
+	}
+	
+	virtual void applyImpulse( const Vector2f& impulse)
+	{
+	}
+	
     virtual void accelerate()
     {
         

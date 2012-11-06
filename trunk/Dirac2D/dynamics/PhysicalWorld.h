@@ -122,6 +122,11 @@ public:
 
 	void intersectRaySegment( const RaySegment2f& raySeg );
 
+	
+	PhysicalBody* getPhysicalBodyList()
+	{
+		return m_PhysicalBodyList;
+	}
 public:
 	
 	friend class CollisionManager;

@@ -67,6 +67,7 @@ public:
 		return (T*)((dchar*)pLinkNode + sizeof(MemoryLinkNode));
 	}
 	
+	
 	void Free(T* ptr)
 	{
 		// Free the Node

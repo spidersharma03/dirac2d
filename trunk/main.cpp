@@ -1850,7 +1850,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo3();
+	demo16();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
@@ -2010,7 +2010,10 @@ void keyProcessor(unsigned char key, int x, int y)
 			exit(0);
 			break;
 		case 127:
-            
+		{
+            //PhysicalBody* pBody =  pWorld->getPhysicalBodyList();
+			//pWorld->deletePhysicalBody(pBody);	
+		}
             break;
 		case 'w':
 		case 'W':
