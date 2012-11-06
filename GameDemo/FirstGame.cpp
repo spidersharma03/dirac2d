@@ -20,13 +20,14 @@ FirstGame::FirstGame()
 	GLRenderer* glRenderer = new GLRenderer(m_pWorld);
 	m_pWorld->setRenderer(glRenderer);
     
-    m_pTerrainGenerator = new TerrainGenerator(this);
 	m_pVehicle = new SimpleVehicle(this);
 	
 	m_pCamera = new Camera();
 	m_pCamera->setFocusTarget(m_pVehicle);
 	
-	m_StepSize = 1.0f/1400.0f;
+	m_pTerrainGenerator = new TerrainGenerator(this);
+
+	m_StepSize = 1.0f/600.0f;
 }
 
 void FirstGame::initGame()

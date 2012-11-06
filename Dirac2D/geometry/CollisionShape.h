@@ -17,6 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 enum SHAPE_TYPE { EST_CIRCLE = 0, EST_BOX, EST_REGULARPOLY, EST_CAPSULE, EST_EDGE, EST_EDGE_CHAIN, EST_CIRCLE_SWEEP };
 
+class BroadPhaseNode;
 
 class CollisionShape
 {
@@ -25,6 +26,7 @@ public:
 	{
 		m_Area = 0.0f;
 		m_I = 0.0f;
+		m_pBroadPhaseNode = 0;
 	}
 
 	CollisionShape( const CollisionShape& other )
@@ -77,9 +79,16 @@ public:
 	
 	virtual CollisionShape* clone() = 0;
 	
-	virtual ~CollisionShape(){};
+	virtual ~CollisionShape()
+	{
+		m_pBroadPhaseNode = 0;
+	};
+	
 	
 	Vector2f m_Centroid;
+
+	// pointer to the BroadPhase Node
+	BroadPhaseNode* m_pBroadPhaseNode;
 
 	// friend classes
 	friend class PhysicalShape;
@@ -94,7 +103,7 @@ protected:
 	virtual void findMomentOfInertia() = 0;
 	
 	protected:
-
+	
 	dfloat m_Area;
 	dfloat m_I;
 	SHAPE_TYPE m_ShapeType;

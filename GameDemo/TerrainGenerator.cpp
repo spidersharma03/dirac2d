@@ -17,52 +17,78 @@
 Vector2f sawToothSample(float t )
 {
     float x = t;
-    float y = 0.5f * fmod(x, 6.0f) - 2.0f;
+    float y = 1.0f * fmod(x, 6.0f) - 2.0f;
     return Vector2f(x,y);
 }
 
 Vector2f squareWaveSample( float t )
 {
     float x = t;
-    float y = fmod(x, 12.0f);
+	float A = 82.0f;
+    float y = fmod(x, A);
 
-    if( y  < 6.0f )
-        y = 1.0f;
+    if( 2.0f*y  < A )
+        y = 2.25f;
     else
     {
-        y = -1.0f;
+        y = -4.25f;
     }
     return Vector2f(x,y);
 }
 
 Vector2f linearSample( float t )
 {
-    float slope = M_PI_4/4;
+    float slope = -M_PI/8;
     float x = cos(slope);
     float y = sin(slope);
     return Vector2f( x*t, y*t);
 }
+
+Vector2f sinWaveSample( float t )
+{
+	float x = t;
+	float y = 3.25f*sin(x);
+	return Vector2f( x, y);
+}
+
+float knots[130], basis[30];
+float controlPoints[200];
+int nCurvePoints = 120;
 
 TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 {
     m_pGame = pGame;
     m_vecTerrainPoints.reserve(3*MAX_TERRAIN_POINTS_ON_SCREEN);
     m_TerrainSlope = 0.0f;
-    m_MaxTerrainHeight = 0.5f;
-    m_SmoothNess = 2;
+    m_MaxTerrainHeight = 1.75f;
+    m_SmoothNess = 3;
     
-    m_vecTerrainPoints.push_back(Vector2f(0.0f,0.0f));
+	m_SampleFunction = sinWaveSample;
+
+    m_vecTerrainPoints.push_back(Vector2f(-0.9f,0.0f));
     
-    m_pTerrainBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
+	generateSamplePoints();
+	generateBSplineCurvePoints();
+	
+	m_pTerrainBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
     
-    m_pTerrainBody->setAngle(PI_4/10);
-	m_pTerrainBody->setPosition(Vector2f(1.0f,-0.7f));
+    //m_pTerrainBody->setAngle(PI_4/10);
+	m_pTerrainBody->setPosition(Vector2f(0.0f,-0.7f));
 	m_pTerrainBody->m_BodyType = EBT_STATIC;
-    
+	
+	
     PhysicalAppearance pApp;
-    pApp.m_PhysicalAttributes.m_Friction = 1.0f;
+    pApp.m_PhysicalAttributes.m_Friction = 5.0f;
     
-    m_SampleFunction = squareWaveSample;
+	Vector2f vertices[300];
+	
+	for( int i=0; i<2*nCurvePoints-4; i+=2)
+	{
+		vertices[i/2] = Vector2f(curvePoints[i], curvePoints[i+1]);
+	}
+		
+	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, (2*nCurvePoints-4)/2);
+	m_pTerrainBody->createPhysicalShape(pApp);
 }
 
 void TerrainGenerator::update(float dt)
@@ -73,22 +99,48 @@ void TerrainGenerator::update(float dt)
     
     generateBSplineCurvePoints();
 
-    if( 0 )
-    {
-    // Create new Physical Body for the terrain
-        
-    // 1. delete old terrain body.    
-    //m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pTerrainBody);
-    // 2. create new terrain body using the new points.     
-    }
+    //
+	initializeTerrainBody();
 }
-float knots[130], basis[30];
-float controlPoints[200];
-int nCurvePoints = 120;
 
+
+void TerrainGenerator::initializeTerrainBody()
+{
+	//return;
+	// Create new Physical Body for the terrain
+	
+    // 1. delete old terrain body.    
+	m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pTerrainBody);
+    // 2. create new terrain body using the new points.   
+	PhysicalAppearance pApp;
+    pApp.m_PhysicalAttributes.m_Friction = 5.0f;
+    
+	Vector2f vertices[300];
+	
+	for( int i=0; i<2*nCurvePoints-4; i+=2)
+	{
+		vertices[i/2] = Vector2f(curvePoints[i], curvePoints[i+1]);
+		vertices[i/2+1] = Vector2f(curvePoints[i+2], curvePoints[i+3]);
+		Vector2f v1 = vertices[i/2];
+		Vector2f v2 = vertices[i/2+1];
+		float el = v1.distance(v2);
+		dAssert(el<100.0f);
+	}
+	
+	m_pTerrainBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
+	m_pTerrainBody->setPosition(Vector2f(0.0f,-0.7f));
+
+    //m_pTerrainBody->setAngle(PI_4/10);
+	//m_pTerrainBody->setPosition(Vector2f(1.0f,-0.7f));
+	m_pTerrainBody->m_BodyType = EBT_STATIC;
+	
+	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, (2*nCurvePoints-6)/2);
+	m_pTerrainBody->createPhysicalShape(pApp);
+}
 
 void TerrainGenerator::render()
 {
+	return;
 	glPushMatrix();   
 	for( int i=0; i<2*nCurvePoints-4; i+=2 )
 	{
@@ -98,19 +150,6 @@ void TerrainGenerator::render()
 		glEnd();
 	}
 	glPopMatrix();
-    
-//    glPushMatrix();
-//    glBegin(GL_LINES);
-//    for (int i=0; i<m_vecTerrainPoints.size()-1; i++) 
-//    {
-//        Vector2f& p1 = m_vecTerrainPoints[i];
-//        Vector2f& p2 = m_vecTerrainPoints[i+1];
-//        glVertex2f(p1.x, p1.y);
-//        glVertex2f(p2.x, p2.y);
-//        //glColor3b(255, 255, 0);
-//    }
-//    glEnd();
-//    glPopMatrix();
 }
 
 
@@ -122,12 +161,14 @@ bool SortPredicate(const Vector2f& p1, const Vector2f& p2)
 void TerrainGenerator::generateBSplineCurvePoints()
 {
     int c = 0;
-    for( int i=0; i<m_vecTerrainPoints.size(); i++ )
+	int size = m_vecTerrainPoints.size();
+    for( int i=0; i<size; i++ )
     {
         Vector2f& p = m_vecTerrainPoints[i];
+	
         controlPoints[c] =  p.x;
         controlPoints[c+1] =  p.y;
-        c += 2;    
+        c += 2;
     }
     
 	findOpenKnots(m_vecTerrainPoints.size(), m_SmoothNess, knots);
@@ -145,7 +186,7 @@ void TerrainGenerator::generateSamplePoints()
     for( int i=0; i<m_vecTerrainPoints.size(); i++ )
     {
         Vector2f& p = m_vecTerrainPoints[i];
-        bool bRes =  fabs(pCamera->getPosition().x - p.x) > R;
+        bool bRes =  (pCamera->getPosition().x - p.x) > R;
         if( bRes )
         {
             m_vecTerrainPoints.erase(m_vecTerrainPoints.begin() + i);
@@ -154,13 +195,12 @@ void TerrainGenerator::generateSamplePoints()
     
    
     float delta = swh * 2.0f * 3.0f/(3*MAX_TERRAIN_POINTS_ON_SCREEN);
-    // Sample new points on the line, passing through the last point and having given slope.
+
     float low  = -m_MaxTerrainHeight * 0.5f;
     float high = m_MaxTerrainHeight * 0.5f;
 
     static float t = 0.0f;
     t += delta;
-
     while (true)
     {
         Vector2f p =   m_SampleFunction(t);

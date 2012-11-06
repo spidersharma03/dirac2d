@@ -167,23 +167,26 @@ void PhysicalBody::removeFromPhysicalWorld(PhysicalWorld* pWorld)
 	m_bIsAlive = false;
 }
 
-void PhysicalBody::applyForce( Vector2f& force )
+void PhysicalBody::applyForce( const Vector2f& force )
 {
 }
 
-void PhysicalBody::applyForce( Vector2f& force, Vector2f& point )
+void PhysicalBody::applyForce( const Vector2f& force, const Vector2f& point )
 {
 }
 
-void PhysicalBody::applyImpulse( Vector2f& impulse )
+void PhysicalBody::applyImpulse( const Vector2f& impulse )
 {
+	m_Velocity += m_InvMass * impulse;
 }
 
-void PhysicalBody::applyImpulse( Vector2f& impulse, Vector2f& point )
+void PhysicalBody::applyImpulse( const Vector2f& impulse, const Vector2f& point )
 {
+	m_Velocity += m_InvMass * impulse;
+	m_AngularVelocity += m_InvI * Vector2f::cross(point, impulse);
 }
 
-void PhysicalBody::applyTorque( Vector2f& torque )
+void PhysicalBody::applyTorque( const Vector2f& torque )
 {
 }
 

@@ -18,6 +18,10 @@ class SimpleVehicle : public Vehicle
 public:
     SimpleVehicle(FirstGame* pGame);
     
+	virtual void applyForce( const Vector2f& force );
+	
+	virtual void applyImpulse( const Vector2f& impulse);
+		
     virtual void init();
     
     virtual void initFromFile(const char* fileName);

@@ -15,16 +15,19 @@
 #include "Camera.h"
 #include "GameObject.h"
 
+#include <stdio.h>
+
 Camera::Camera()
 {
 	m_pFocusTarget = 0;
     m_EyePosition = Vector3f(0.0f,0.0f,1.0f);
     m_Target = Vector3f(0.0f,0.0f,-1.0f);
     m_ViewMatrix.lookAt(m_EyePosition, m_Target, Vector3f(0.0f,1.0f,0.0f));
-    m_ScreenWidth = m_ScreenHeight = 4.0f;
+    m_ScreenWidth = m_ScreenHeight = 16.0f;
     m_ProjectionMatrix.ortho(-m_ScreenWidth/2, m_ScreenWidth/2, -m_ScreenWidth/2, m_ScreenWidth/2, 0.001, 100.0f);
     m_Elasticity = 100.0f;
     m_AspectRatio = 4.0f/3.0f;
+	m_EyePosition.z = 8.0f;
 }
 
 void Camera::update(float dt)
@@ -32,10 +35,13 @@ void Camera::update(float dt)
 	if( m_pFocusTarget )
 		followTarget(dt);
 
+	autoZoom();
+	
     float data[16];
 
     
-    m_ProjectionMatrix.ortho(-m_ScreenWidth/2*m_AspectRatio, m_ScreenWidth/2*m_AspectRatio, -m_ScreenWidth/2, m_ScreenWidth/2, 0.001, 100.0f);
+	m_ProjectionMatrix.perspective(M_PI_2, m_AspectRatio, 0.001f, 100.0f);
+    //m_ProjectionMatrix.ortho(-m_ScreenWidth/2*m_AspectRatio, m_ScreenWidth/2*m_AspectRatio, -m_ScreenWidth/2, m_ScreenWidth/2, 0.001, 100.0f);
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -48,6 +54,20 @@ void Camera::update(float dt)
     glLoadIdentity();
     m_ViewMatrix.getPointer(data);
     glLoadMatrixf(data);
+}
+
+void Camera::autoZoom()
+{
+	if( m_pFocusTarget )
+	{
+		float y = m_pFocusTarget->getPosition().y;
+		
+		if( y > 0.0f )
+		{
+			m_EyePosition.z = 8.0f + y;
+			m_ScreenWidth = 2*m_EyePosition.z;
+		}
+	}
 }
 
 void Camera::followTarget(float dt)

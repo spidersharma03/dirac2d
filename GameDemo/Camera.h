@@ -111,6 +111,9 @@ public:
     {
         return m_EyePosition;
     }
+	
+	void autoZoom();
+	
 protected:
 	
 	void followTarget(float dt);

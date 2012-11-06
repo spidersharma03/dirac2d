@@ -59,6 +59,11 @@ public:
     {
         return m_pTerrainGenerator;
     }
+	
+	SimpleVehicle* getVehicle()
+	{
+		return m_pVehicle;
+	}
 private:
     TerrainGenerator* m_pTerrainGenerator;
     SimpleVehicle* m_pVehicle;

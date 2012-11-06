@@ -124,6 +124,7 @@ void EdgeChain::findCentroid()
 		Vector2f& v2 = edge->m_Vertex2;
 		Vector2f c = ( v1 + v2 ) * 0.5f;
 		dfloat edgeLength = v1.distance(v2);
+		dAssert(edgeLength > 0.0f);
 		m_Area += edgeLength;
 		m_Centroid += c;
 	}
