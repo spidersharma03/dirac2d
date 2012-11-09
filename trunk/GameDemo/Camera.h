@@ -132,6 +132,7 @@ protected:
     float m_AspectRatio;
     float m_Fov;
     float m_zNear, m_zFar;
+	float m_InitEyeZ;
     
     float m_ScreenWidth, m_ScreenHeight;
     

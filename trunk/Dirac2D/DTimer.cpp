@@ -3,16 +3,16 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 	
-	//float DTimer::currentTime = 0.0f;
-	//float DTimer::startTime = 0.0f;
-	//float DTimer::diffTime = 0.0f;
-	//float DTimer::increasingDuration = 0.0f;
-	//float DTimer::decreasingDuration = 0.0f;
+	//dfloat DTimer::currentTime = 0.0f;
+	//dfloat DTimer::startTime = 0.0f;
+	//dfloat DTimer::diffTime = 0.0f;
+	//dfloat DTimer::increasingDuration = 0.0f;
+	//dfloat DTimer::decreasingDuration = 0.0f;
 #ifdef WIN32
 	static LARGE_INTEGER HighPerformanceFreq;
 	static BOOL HighPerformanceTimerSupport = FALSE;
 #endif
-#if defined(MACOSX) || defined(iOS)
+#ifdef MACOSX
 #endif
 	
 	DTimer::DTimer()
@@ -20,7 +20,7 @@ BEGIN_NAMESPACE_DIRAC2D
 		initTimer();
 	}
 	
-	DTimer::DTimer(unsigned loopCount , float increasingDuration)
+	DTimer::DTimer(unsigned loopCount , dfloat increasingDuration)
 	{
 		initTimer();
 		DTimer::increasingDuration = increasingDuration;
@@ -38,7 +38,7 @@ BEGIN_NAMESPACE_DIRAC2D
 		HighPerformanceTimerSupport = QueryPerformanceFrequency(&HighPerformanceFreq);
 #endif
 		
-#if defined(MACOSX) || defined(iOS)
+#ifdef MACOSX
 		timeval t;
 		gettimeofday(&t, 0);
 		m_start_sec = t.tv_sec;
@@ -66,7 +66,7 @@ BEGIN_NAMESPACE_DIRAC2D
 		}
 #endif
 		
-#if defined(MACOSX) || defined(iOS)
+#ifdef MACOSX
 		timeval t;
 		gettimeofday(&t, 0);
 		currentTime = (double)t.tv_sec * 1000 + (double)t.tv_usec * 0.001f;;	
@@ -76,14 +76,19 @@ BEGIN_NAMESPACE_DIRAC2D
 		if ( diffTime > increasingDuration )
 		{
 			fps = count*1000.0/diffTime;
+#ifdef WIN32
+			printf("\nFPS = %f" , fps);
+#endif
+#ifdef MACOSX
 			printf("\nFPS = %d" , fps);
+#endif
 			count = 0;
 			startTime = currentTime;
 		}
 		diffTime = ( currentTime - startTime );
 	}
 	
-	void DTimer::setCurrentTime(float time)
+	void DTimer::setCurrentTime(dfloat time)
 	{
 		startTime = time;
 	}
@@ -106,11 +111,12 @@ BEGIN_NAMESPACE_DIRAC2D
 		}
 #endif
 		
-#if defined(MACOSX) || defined(iOS)
+#ifdef MACOSX
 		timeval t;
 		gettimeofday(&t, 0);
 		time =  (double)t.tv_sec  * 1000 + (double)t.tv_usec * 0.001f;
 #endif
+		//printf("Time = %f\n", time);
 		return time;
 	}
 	
@@ -119,29 +125,30 @@ BEGIN_NAMESPACE_DIRAC2D
 		
 	}
 	
-	float DTimer::value()
+	dfloat DTimer::value()
 	{
 		return diffTime / increasingDuration;
 	}
 	
-	void DTimer::setIncreasingDuration(float increasingDuration)
+	void DTimer::setIncreasingDuration(dfloat increasingDuration)
 	{
 		DTimer::increasingDuration = increasingDuration;
 	}
 	
-	float DTimer::getIncreasingDuration()
+	dfloat DTimer::getIncreasingDuration()
 	{
 		return increasingDuration;
 	}
 	
-	void DTimer::setDecreasingDuration(float decreasingDuration)
+	void DTimer::setDecreasingDuration(dfloat decreasingDuration)
 	{
 		DTimer::decreasingDuration = decreasingDuration;
 	}
 	
-	float DTimer::getDecreasingDuration()
+	dfloat DTimer::getDecreasingDuration()
 	{
 		return decreasingDuration;
 	}
-	
+
 END_NAMESPACE_DIRAC2D
+	

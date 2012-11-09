@@ -188,6 +188,12 @@ void PhysicalBody::applyImpulse( const Vector2f& impulse, const Vector2f& point 
 
 void PhysicalBody::applyTorque( const Vector2f& torque )
 {
+	
+}
+
+void PhysicalBody::applyImpulsiveTorque( const float torqueImpulse )
+{
+	m_AngularVelocity += m_InvI * torqueImpulse;
 }
 
 void PhysicalBody::updateSleepingStatus(dfloat dt)
