@@ -28,6 +28,11 @@ BEGIN_NAMESPACE_DIRAC2D
 // Maximum number of Proxies in Boroad Phase
 #define MAX_PROXIES 1000
 
+// Maximum Angular Speed of a Physical Body.
+#define MAX_ANGULAR_SPEED 10.0f
+// Maximum Linear Speed of a Physical Body.
+#define MAX_LINEAR_SPEED 10.0f
+
 // Below this velocity the collision are considered inelastic
 #define VELOCITY_BIAS_THRESHOLD 0.5f
 

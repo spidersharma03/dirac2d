@@ -1,16 +1,15 @@
-#ifndef _DTimer_H
-
-#define _DTimer_H
-
-
-#include "definitions.h"
+#ifndef _DTIMER_H
+#define _DTIMER_H
 
 #ifdef WIN32
 #include <windows.h>
-#else if defined(MACOSX) || defined(iOS)
+#endif
+
+#ifdef MACOSX
 #include <sys/time.h>
 #endif
 
+#include  "definitions.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 	
@@ -24,43 +23,52 @@ BEGIN_NAMESPACE_DIRAC2D
 		
 		void tick();
 		
-		float value();
+		dfloat value();
 		
-		void setCurrentTime(float time);
+		void setCurrentTime(dfloat time);
 		
 		double getCurrentTime();
 		
-		float getIncreasingDuration();
+		dfloat getIncreasingDuration();
 		
-		float getDecreasingDuration();
+		dfloat getDecreasingDuration();
 		
-		void setIncreasingDuration(float);
+		void setIncreasingDuration(dfloat);
 		
-		void setDecreasingDuration(float);
+		void setDecreasingDuration(dfloat);
 		
 		DTimer();
 		
-		DTimer(unsigned , float);
+		DTimer(unsigned , dfloat);
 		
 		
 	private:
 		
+#ifdef WIN32
+		dfloat fps;
+		dfloat currentTime , startTime;
+		dfloat diffTime;
+#endif
+		
+#ifdef MACOSX
 		unsigned int fps;
 		double currentTime , startTime;
 		double diffTime;
+#endif
 		
 		unsigned loopCount;
-		float increasingDuration;
-		float decreasingDuration;
+		dfloat increasingDuration;
+		dfloat decreasingDuration;
 		
 		void initTimer();
 		
+#ifdef MACOSX
 		double m_start_sec;
 		double m_start_msec;
+#endif
 		
 	};
 
 END_NAMESPACE_DIRAC2D
-
 
 #endif

@@ -21,7 +21,9 @@ public:
 	virtual void applyForce( const Vector2f& force );
 	
 	virtual void applyImpulse( const Vector2f& impulse);
-		
+
+	virtual void applyTorqueImpulse( const float torqueImpulse);
+
     virtual void init();
     
     virtual void initFromFile(const char* fileName);

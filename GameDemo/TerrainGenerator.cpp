@@ -17,28 +17,28 @@
 Vector2f sawToothSample(float t )
 {
     float x = t;
-    float y = 1.0f * fmod(x, 6.0f) - 2.0f;
+    float y = 0.5f * fmod(x, 12.0f) - 4.0f;
     return Vector2f(x,y);
 }
 
 Vector2f squareWaveSample( float t )
 {
     float x = t;
-	float A = 82.0f;
+	float A = 122.0f;
     float y = fmod(x, A);
 
     if( 2.0f*y  < A )
-        y = 2.25f;
+        y = 0.0f;
     else
     {
-        y = -4.25f;
+        y = -3.25f;
     }
     return Vector2f(x,y);
 }
 
 Vector2f linearSample( float t )
 {
-    float slope = -M_PI/8;
+    float slope = -0.0/118;
     float x = cos(slope);
     float y = sin(slope);
     return Vector2f( x*t, y*t);
@@ -47,7 +47,7 @@ Vector2f linearSample( float t )
 Vector2f sinWaveSample( float t )
 {
 	float x = t;
-	float y = 3.25f*sin(x);
+	float y = 1.0f*sin(0.4f*x);
 	return Vector2f( x, y);
 }
 
@@ -55,15 +55,18 @@ float knots[130], basis[30];
 float controlPoints[200];
 int nCurvePoints = 120;
 
+int numSampleFunctions = 4;
+SampleFunction funcArray[] = {linearSample, squareWaveSample, sinWaveSample, sawToothSample};
+
 TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 {
     m_pGame = pGame;
     m_vecTerrainPoints.reserve(3*MAX_TERRAIN_POINTS_ON_SCREEN);
     m_TerrainSlope = 0.0f;
-    m_MaxTerrainHeight = 1.75f;
-    m_SmoothNess = 3;
+    m_MaxTerrainHeight = 0.2f;
+    m_SmoothNess = 4;
     
-	m_SampleFunction = sinWaveSample;
+	m_SampleFunction = linearSample;
 
     m_vecTerrainPoints.push_back(Vector2f(-0.9f,0.0f));
     
@@ -89,10 +92,16 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 		
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, (2*nCurvePoints-4)/2);
 	m_pTerrainBody->createPhysicalShape(pApp);
+	
+	m_StartTime = m_Timer.getCurrentTime();
+	
+	m_TerrainSwitchTime = 5000.0;
 }
 
 void TerrainGenerator::update(float dt)
 {
+	changeTerrainShape();
+	
     // Sample and generate control points of the Terrain 
     generateSamplePoints();
     
@@ -106,9 +115,7 @@ void TerrainGenerator::update(float dt)
 
 void TerrainGenerator::initializeTerrainBody()
 {
-	//return;
-	// Create new Physical Body for the terrain
-	
+	//return;	
     // 1. delete old terrain body.    
 	m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pTerrainBody);
     // 2. create new terrain body using the new points.   
@@ -120,11 +127,6 @@ void TerrainGenerator::initializeTerrainBody()
 	for( int i=0; i<2*nCurvePoints-4; i+=2)
 	{
 		vertices[i/2] = Vector2f(curvePoints[i], curvePoints[i+1]);
-		vertices[i/2+1] = Vector2f(curvePoints[i+2], curvePoints[i+3]);
-		Vector2f v1 = vertices[i/2];
-		Vector2f v2 = vertices[i/2+1];
-		float el = v1.distance(v2);
-		dAssert(el<100.0f);
 	}
 	
 	m_pTerrainBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
@@ -203,7 +205,7 @@ void TerrainGenerator::generateSamplePoints()
     t += delta;
     while (true)
     {
-        Vector2f p =   m_SampleFunction(t);
+        Vector2f p =   m_LastPoint + m_SampleFunction(t);
 
         if( fabs(pCamera->getPosition().x - p.x) < R )
         {
@@ -220,6 +222,22 @@ void TerrainGenerator::generateSamplePoints()
     //printf("Num TerrainPoints = %d\n", m_vecTerrainPoints.size());
     }
     std::sort(m_vecTerrainPoints.begin(), m_vecTerrainPoints.end(), SortPredicate);
+}
+
+int f = 0;
+
+void TerrainGenerator::changeTerrainShape()
+{
+	double currentTime = m_Timer.getCurrentTime();
+	if( currentTime - m_StartTime > m_TerrainSwitchTime )
+	{
+		printf("Terrain Shape Change\n");
+		m_StartTime = currentTime;
+		f++;
+		f = f > 3 ? 0 : f;
+		m_SampleFunction = funcArray[f];
+		//m_LastPoint = m_vecTerrainPoints[m_vecTerrainPoints.size()-1];
+	}
 }
 
 void TerrainGenerator::initializeTerrainPoints(const Vector2f& p)

@@ -12,6 +12,7 @@
 #define _TERRAIN_GENERATOR_H_
 
 #include "../Dirac2D/maths/MathUtil.h"
+#include "../Dirac2D/DTimer.h"
 #include <vector>
 
 using namespace std;
@@ -23,7 +24,7 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
 END_NAMESPACE_DIRAC2D
 
-#define MAX_TERRAIN_POINTS_ON_SCREEN 8
+#define MAX_TERRAIN_POINTS_ON_SCREEN 6
 // B Spline Based Terrain Generator.
 
 typedef Vector2f (*SampleFunction)(float);
@@ -62,6 +63,10 @@ protected:
     /* Generate Points from the  control points for the Terrain */
     void generateBSplineCurvePoints();
     
+	
+	/* Change Shape of the Terrain */
+	void changeTerrainShape();
+	
 protected:
     
     FirstGame* m_pGame;
@@ -80,6 +85,12 @@ protected:
     PhysicalBody* m_pTerrainBody;
     
     SampleFunction m_SampleFunction;
+	
+	DTimer m_Timer;
+	double m_StartTime;
+	
+	double m_TerrainSwitchTime;
+	Vector2f m_LastPoint; // 
 };
 
 #endif

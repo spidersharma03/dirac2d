@@ -47,6 +47,8 @@ public:
 
 	void applyTorque( const Vector2f& torque );	
 
+	void applyImpulsiveTorque( const float torqueImpulse );
+
 	PhysicalShape* createPhysicalShape(PhysicalAppearance& pApp);
 	
 	// Gets the worldPosition in Local Coordinate Frame of the Body.

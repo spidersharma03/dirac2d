@@ -44,6 +44,10 @@ public:
         
     }
     
+	virtual void applyTorqueImpulse( const float torqueImpulse)
+	{
+	}
+	
     virtual void applyBrake()
     {
         

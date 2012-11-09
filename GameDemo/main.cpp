@@ -61,18 +61,6 @@ void changeSize(int w, int h)
 
 void renderScene(void) 
 {	
-#ifndef WIN32
-	timeval t1, t2;
-    static double elapsedTime;
-    double FPS = 0;
-    
-    static int frameCnt = 0;
-    
-    // start timer
-    gettimeofday(&t1, NULL);
-#endif
-	
-    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	if(windowHeight == 0)
@@ -89,26 +77,7 @@ void renderScene(void)
 
 	glutSwapBuffers();
 	
-#ifndef WIN32
-	frameCnt ++;
-    
-    // stop timer
-    gettimeofday(&t2, NULL);
-    
-    // compute and print the elapsed time in millisec
-    elapsedTime += (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
-    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
-    
-    if( frameCnt >=1000 )
-    {
-        frameCnt=0;
-        FPS = 1000 /(elapsedTime * 0.001);
-        printf("\n FPS = %f", FPS);
-        elapsedTime = 0;
-    }
-#else
-	timer.tick();
-#endif
+	//timer.tick();
 }
 
 //static bool bWarmStart = true;
@@ -118,8 +87,19 @@ void keyProcessor(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
+		case 'd':
+		case 'D':
+			pGame->getVehicle()->applyTorqueImpulse(-1.5f);
+
+			break;
+			
+		case 'a':
+		case 'A':
+			pGame->getVehicle()->applyTorqueImpulse(1.5f);
+
+			break;
 		case 32:
-			pGame->getVehicle()->applyImpulse(Vector2f(0.0f,-300.0f));
+			//pGame->getVehicle()->applyImpulse(Vector2f(0.0f,-300.0f));
 			break;
 		case 27:
 			exit(0);
@@ -260,7 +240,7 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(renderScene);
     glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
-    //glutFullScreen();
+    glutFullScreen();
 	
 #ifndef WIN32
 	//glutTimerFunc(0, timerCallback, 0);

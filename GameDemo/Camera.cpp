@@ -27,7 +27,8 @@ Camera::Camera()
     m_ProjectionMatrix.ortho(-m_ScreenWidth/2, m_ScreenWidth/2, -m_ScreenWidth/2, m_ScreenWidth/2, 0.001, 100.0f);
     m_Elasticity = 100.0f;
     m_AspectRatio = 4.0f/3.0f;
-	m_EyePosition.z = 8.0f;
+	m_InitEyeZ = 5.0f;
+	m_EyePosition.z = m_InitEyeZ;
 }
 
 void Camera::update(float dt)
@@ -64,7 +65,7 @@ void Camera::autoZoom()
 		
 		if( y > 0.0f )
 		{
-			m_EyePosition.z = 8.0f + y;
+			m_EyePosition.z = m_InitEyeZ + y;
 			m_ScreenWidth = 2*m_EyePosition.z;
 		}
 	}
