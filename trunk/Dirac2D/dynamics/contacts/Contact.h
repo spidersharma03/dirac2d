@@ -9,6 +9,7 @@
 #include "../../definitions.h"
 #include "../../Settings.h"
 #include "../../maths/MathUtil.h"
+#include "../../CallBacks.h"
 
 
 #ifndef _CONTACT_H_
@@ -97,6 +98,7 @@ struct ContactManifold
 	ContactPoint m_ContactPoints[MAX_CONTACTS];
 	Vector2f m_ContactNormal;
 	dchar m_NumContacts;
+    
 	dchar m_bFlipShapes;
 };
 
@@ -144,6 +146,8 @@ public:
 		m_ContactEdge2.m_Next = 0;
 		m_ContactEdge2.m_Prev = 0;
 		m_ContactEdge2.pBody = 0;
+        
+        m_bWasTouching = m_bIsTouching = false;
 	}
 	
 	Contact(const Contact& other)
@@ -165,7 +169,7 @@ public:
 		m_ERP = other.m_ERP;
 	}
 	
-	void update();
+	void update(ICollisionLisetner* pCollisionListener);
 	
 public:
 	ContactManifold m_Manifold;
@@ -199,6 +203,9 @@ public:
 	
 	ContactEdge m_ContactEdge1;
 	ContactEdge m_ContactEdge2;
+    
+    dbool m_bWasTouching;
+    dbool m_bIsTouching;
 };
 
 

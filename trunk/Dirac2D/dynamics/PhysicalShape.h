@@ -29,6 +29,7 @@ protected:
 		m_Restitution = 0.0f;
 		m_Next = m_Prev = 0;
 		m_CollisionShape = 0;
+        m_bIsSensor = false;
 	}
 	
 	PhysicalShape(const PhysicalShape& other);
@@ -45,6 +46,7 @@ protected:
 	
 	void calculateMassAttributes();
 	
+    dbool m_bIsSensor;
 public:
     virtual ~PhysicalShape();
 
@@ -62,6 +64,10 @@ public:
 	PhysicalShape* m_Next;
 	PhysicalShape* m_Prev;
 
+    inline dbool isSensor()
+    {
+        return m_bIsSensor;
+    }
 public:
 	friend class PhysicalBody;
 };

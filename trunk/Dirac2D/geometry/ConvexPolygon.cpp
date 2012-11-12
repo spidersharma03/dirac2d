@@ -167,7 +167,7 @@ void ConvexPolygon::findCentroid()
 		// Center of the Triangle
 		Vector2f c = ( v1 + v2 ) * ONE_BY_THREE;
 
-		// Wighted Sum ( Center = SUM ( Ai * Ci )/ SUM( Ai )
+		// Weighted Sum ( Center = SUM ( Ai * Ci )/ SUM( Ai )
 		Area += A;
 		m_Centroid += c * A;
 	}

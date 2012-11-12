@@ -226,7 +226,7 @@ void PhysicalWorld::Step(dfloat dt)
 		}
 	}
 	
-	// Correct the velocities.
+	// Correct the velocities of the Physical Bodies due to Contacts.
 	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
 		m_ContactSolver->correctVelocities();
 	

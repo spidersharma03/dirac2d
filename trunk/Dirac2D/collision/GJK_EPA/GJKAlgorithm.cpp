@@ -88,17 +88,15 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, Col
 	Simplexf s;
 	
 	Vector2f point;
-	Vector2f point1;// =  *polygon1.m_vecVertices[0];
-	Vector2f point2;// =  *polygon2.m_vecVertices[0];
+    Vector2f dir(1.0f,0.0f);
+	Vector2f point1 = polygon1.getSupportPoint(dir);
+	Vector2f point2 = polygon2.getSupportPoint(dir);
 	
 	// Transform the support point 2 into Polygon1's local space
-	//Matrix3f m1 = polygon1.m_Transform;
-	//Matrix3f m2 = polygon2.m_Transform;
-	
 	Matrix3f m1Inv;
 	Matrix3f m2Inv;
-	//m1.getInverse(m1Inv);
-	//m2.getInverse(m2Inv);
+	m1.getInverse(m1Inv);
+	m2.getInverse(m2Inv);
 	
 	m1.multiply(m2Inv, m1);
 	m2.multiply(m1Inv, m2);

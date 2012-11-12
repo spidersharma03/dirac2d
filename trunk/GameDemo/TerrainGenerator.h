@@ -24,7 +24,7 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
 END_NAMESPACE_DIRAC2D
 
-#define MAX_TERRAIN_POINTS_ON_SCREEN 6
+#define MAX_TERRAIN_POINTS_ON_SCREEN 5
 // B Spline Based Terrain Generator.
 
 typedef Vector2f (*SampleFunction)(float);

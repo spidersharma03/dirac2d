@@ -14,6 +14,8 @@ class PhysicalShape;
 class ContactSolver;
 class Contact;
 class BroadPhaseNode;
+class ICollisionLisetner;
+
 struct ContactPair;
 
 
@@ -41,6 +43,7 @@ protected:
 private:
 	PhysicalWorld *m_PhysicalWorld;
 	MemoryAllocator<Contact> *m_ContactPool;
+    ICollisionLisetner* m_pCollisionListener;
 };
 
 END_NAMESPACE_DIRAC2D

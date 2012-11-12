@@ -68,6 +68,15 @@ public:
         m_MaxTorque = torque; 
     }
     
+    inline void setMotorSpeed( float motorSpeed )
+    {
+        m_pMotor->m_Speed = motorSpeed;
+    }
+    
+    inline float getMotorSpeed()
+    {
+        return m_pMotor->m_Speed;
+    }
 public:
     virtual void update(float dt){};
     

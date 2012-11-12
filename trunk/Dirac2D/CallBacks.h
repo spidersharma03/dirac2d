@@ -17,6 +17,8 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 class CollisionShape;
+class PhysicalShape;
+struct ContactManifold;
 
 /* This Callback is for reporting any AABB overlaps happening in DynamicTree class. Any class which wishes to get the overlapCallback should subclass from this. this calls the 
    overlapCallBack function with the ID of the overlapping node. 	
@@ -43,6 +45,32 @@ class WorldRayIntersectionCallBackClass
 {
   public:
 	virtual void rayIntersectionCallBack(CollisionShape* pShape, RayIntersectionInfo& info) = 0;
+};
+
+
+/* This is an interface which is responsible for recieving collision call backs */
+class ICollisionLisetner
+{
+  public:
+    // Called when two Physical Shapes begin to touch
+    virtual void onCollisionEnter(PhysicalShape*, PhysicalShape*, ContactManifold&) = 0;    
+
+    // Called when two Physical Shapes are in contact
+    virtual void onCollision(PhysicalShape*, PhysicalShape*, ContactManifold&) = 0;    
+
+    // Called when two Physical Shapes begin to seperate
+    virtual void onCollisionExit(PhysicalShape*, PhysicalShape*, ContactManifold&) = 0;    
+
+};
+
+
+/*  */
+class IContactListener
+{
+   public:
+    virtual void preSolve();
+    
+    virtual void postSolve();
 };
 
 END_NAMESPACE_DIRAC2D

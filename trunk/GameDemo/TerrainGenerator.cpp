@@ -10,6 +10,7 @@
 #include "FirstGame.h"
 #include "Camera.h"
 #include "../Dirac2D/Dirac2D.h"
+#include "SimpleVehicle.h"
 
 #include <algorithm>
 
@@ -17,7 +18,7 @@
 Vector2f sawToothSample(float t )
 {
     float x = t;
-    float y = 0.5f * fmod(x, 12.0f) - 4.0f;
+    float y = 0.5f * fmod(x, 32.0f) - 1.0f;
     return Vector2f(x,y);
 }
 
@@ -31,7 +32,7 @@ Vector2f squareWaveSample( float t )
         y = 0.0f;
     else
     {
-        y = -3.25f;
+        y = -2.25f;
     }
     return Vector2f(x,y);
 }
@@ -47,7 +48,7 @@ Vector2f linearSample( float t )
 Vector2f sinWaveSample( float t )
 {
 	float x = t;
-	float y = 1.0f*sin(0.4f*x);
+	float y = 1.8f*sin(0.3f*x);
 	return Vector2f( x, y);
 }
 
@@ -56,15 +57,15 @@ float controlPoints[200];
 int nCurvePoints = 120;
 
 int numSampleFunctions = 4;
-SampleFunction funcArray[] = {linearSample, squareWaveSample, sinWaveSample, sawToothSample};
+SampleFunction funcArray[] = {linearSample, squareWaveSample, sinWaveSample, sinWaveSample};
 
 TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 {
     m_pGame = pGame;
     m_vecTerrainPoints.reserve(3*MAX_TERRAIN_POINTS_ON_SCREEN);
     m_TerrainSlope = 0.0f;
-    m_MaxTerrainHeight = 0.2f;
-    m_SmoothNess = 4;
+    m_MaxTerrainHeight = 0.5f;
+    m_SmoothNess = 3;
     
 	m_SampleFunction = linearSample;
 
@@ -231,9 +232,13 @@ void TerrainGenerator::changeTerrainShape()
 	double currentTime = m_Timer.getCurrentTime();
 	if( currentTime - m_StartTime > m_TerrainSwitchTime )
 	{
-		printf("Terrain Shape Change\n");
+		printf("Terrain Shape Changed\n");
 		m_StartTime = currentTime;
 		f++;
+        if( f == 3 )
+        {
+            //m_pGame->getVehicle()->setMotorSpeed(m_pGame->getVehicle()->getMotorSpeed() + 100);
+        }
 		f = f > 3 ? 0 : f;
 		m_SampleFunction = funcArray[f];
 		//m_LastPoint = m_vecTerrainPoints[m_vecTerrainPoints.size()-1];
