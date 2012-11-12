@@ -34,7 +34,7 @@ public:
 		m_Centroid  = other.m_Centroid;
 		m_Area	    = other.m_Area;
 		m_ShapeType = other.m_ShapeType;
-		m_AABB      = other.m_AABB;		
+		m_AABB      = other.m_AABB;	
 	}
 	
 	void operator= ( CollisionShape& other)
@@ -64,6 +64,8 @@ public:
 	{
 		return m_AABB;
 	}
+    
+    
 	// For GJK/EPA 
 	// returns Local Support Point on the Shape.
 	virtual Vector2f getSupportPoint(Vector2f& d) = 0;

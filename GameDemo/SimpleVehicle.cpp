@@ -112,7 +112,7 @@ void SimpleVehicle::init()
         m_pMotor = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
         m_pMotor->m_PhysicalBody1 = circle2;
 		m_pMotor->m_MaxTorque = 100.0f;
-		m_pMotor->m_Speed = 240.0f;
+		m_pMotor->m_Speed = 180.0f;
 		m_pMotor->initialize();
 	}
 

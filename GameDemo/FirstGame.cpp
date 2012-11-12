@@ -27,7 +27,7 @@ FirstGame::FirstGame()
 	
 	m_pTerrainGenerator = new TerrainGenerator(this);
 
-	m_StepSize = 1.0f/900.0f;
+	m_StepSize = 1.0f/1600.0f;
 }
 
 void FirstGame::initGame()

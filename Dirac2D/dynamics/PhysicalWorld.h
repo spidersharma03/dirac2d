@@ -69,7 +69,29 @@ private:
 		CWorldRayIntersectionCallBackClass m_WorldRayIntersectionCallBackClass;
 	};
 
-	
+	class CCollisionListener : public ICollisionLisetner
+    {
+      public:
+        // Called when two Physical Shapes begin to touch
+        virtual void onCollisionEnter(PhysicalShape* pShape1, PhysicalShape* pShape2,
+        ContactManifold& manifold)
+        {
+        }
+        
+        // Called when two Physical Shapes are in contact
+        virtual void onCollision(PhysicalShape* pShape1, PhysicalShape* pShape2, 
+        ContactManifold& manifold)
+        {
+            
+        }
+        
+        // Called when two Physical Shapes begin to seperate
+        virtual void onCollisionExit(PhysicalShape* pShape1, PhysicalShape* pShape2, 
+        ContactManifold& manifold)
+        {
+        }
+    };
+    
 	WorldOverlapAABBCallBackClass m_OverlapCallBackClass;
 	CRayIntersectionCallBackClass m_RayIntersectionCallBackClass;
 public:
@@ -140,6 +162,8 @@ protected:
     void removeFromBroadPhase( PhysicalShape* pShape);
 
 private:
+    // Default Collision Listener
+    CCollisionListener m_CollisionListener;
 	CollisionManager* m_CollisionManager;
 	BroadPhaseCollisionAlgorithm* m_pBroadPhaseAlgorithm;
 	ContactSolver*	  m_ContactSolver;

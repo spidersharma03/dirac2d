@@ -16,14 +16,14 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-CollisionManager::CollisionManager(PhysicalWorld* world) : m_PhysicalWorld(world)
+CollisionManager::CollisionManager(PhysicalWorld* pWorld) : m_PhysicalWorld(pWorld)
 {
 	m_ContactPool = new MemoryAllocator<Contact>(MAX_CONTACT_POINTS);
+    m_pCollisionListener = &pWorld->m_CollisionListener;
 }
 	
 void CollisionManager::update()
 {	
-	//printf("NumContacts = %d\n",  m_ContactPairSet.size() );
 	updateContacts();	
 }
 
@@ -35,7 +35,6 @@ void CollisionManager::updateContacts()
 	if( !contact )
 		return;
 	
-	dint32 contactCount = 0;
 	while(contact)
 	{
 		PhysicalBody* body1 = contact->m_PhysicalShape1->m_ParentBody;
@@ -47,13 +46,11 @@ void CollisionManager::updateContacts()
 		AABB2f& aabb1 = pShape1->getAABB();
 		AABB2f& aabb2 = pShape2->getAABB();
 		
+        //ToDo:: Check for Collision Filters here before updating contacts.
+        
 		// Destroy the Contact if it dosen't persist
 		if( !aabb1.intersectAABB(aabb2) )
 		{
-			// Erase Contact pair.
-			//m_ContactPairSet.erase(ContactPair(pShape1, pShape2));
-		
-			
 			deleteContact(contact);
 			// Awake the Bodies
 			body1->setSleeping(false);
@@ -61,8 +58,14 @@ void CollisionManager::updateContacts()
 		}
 		else 
 		{
-			contactCount++;
-			contact->update();
+			contact->update(m_pCollisionListener);
+            
+            // if the contactManifold contains some contact point, call world callback.
+            if( contact->m_Manifold.m_NumContacts > 0 )
+            {
+                //m_PhysicalWorld->beginContact(contact->m_PhysicalShape1, 
+                //contact->m_PhysicalShape2, contact->m_Manifold);
+            }
 		}
 
 		contact = contact->m_Next;

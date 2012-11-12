@@ -89,13 +89,13 @@ void keyProcessor(unsigned char key, int x, int y)
 	{
 		case 'd':
 		case 'D':
-			pGame->getVehicle()->applyTorqueImpulse(-1.5f);
+			pGame->getVehicle()->applyTorqueImpulse(-3.5f);
 
 			break;
 			
 		case 'a':
 		case 'A':
-			pGame->getVehicle()->applyTorqueImpulse(1.5f);
+			pGame->getVehicle()->applyTorqueImpulse(3.5f);
 
 			break;
 		case 32:
@@ -240,7 +240,7 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(renderScene);
     glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
-    glutFullScreen();
+    //glutFullScreen();
 	
 #ifndef WIN32
 	//glutTimerFunc(0, timerCallback, 0);

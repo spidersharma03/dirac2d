@@ -8,27 +8,38 @@
 
 #include "Contact.h"
 #include "../PhysicalShape.h"
+#include "../../geometry/CollisionShape.h"
 #include "../PhysicalBody.h"
 #include "../../collision/CollisionDetection.h"
+#include "../../CallBacks.h"
 
 
 BEGIN_NAMESPACE_DIRAC2D
 
-void Contact::update()
+void Contact::update(ICollisionLisetner* pCollisionListener)
 {
 	m_Manifold.m_bFlipShapes = false;
 	ContactManifold oldManifold = m_Manifold;
 	ContactConstraint oldConstraint[MAX_CONTACTS];
 	oldConstraint[0].m_NormalImpulse = m_ContactConstraint[0].m_NormalImpulse;
 	oldConstraint[0].m_TangentImpulse = m_ContactConstraint[0].m_TangentImpulse;
-
+    m_bIsTouching = false;
 	oldConstraint[1].m_NormalImpulse = m_ContactConstraint[1].m_NormalImpulse;
 	oldConstraint[1].m_TangentImpulse = m_ContactConstraint[1].m_TangentImpulse;
 	
-	dbool bRes = intersectShapes(m_CollisionShape1, m_PhysicalShape1->m_ParentBody->m_Transform, m_CollisionShape2, m_PhysicalShape2->m_ParentBody->m_Transform, &m_Manifold);
-	
+    dbool bRes = false;
+    
+    if( m_PhysicalShape1->isSensor() || m_PhysicalShape2->isSensor() )
+    {
+        bRes = intersectShapes(m_CollisionShape1, m_PhysicalShape1->m_ParentBody->m_Transform, m_CollisionShape2, m_PhysicalShape2->m_ParentBody->m_Transform);
+	}
+    else
+    {
+        bRes = intersectShapes(m_CollisionShape1, m_PhysicalShape1->m_ParentBody->m_Transform, m_CollisionShape2, m_PhysicalShape2->m_ParentBody->m_Transform, &m_Manifold);
+    }
 	if( bRes )
 	{
+        m_bIsTouching = m_Manifold.m_NumContacts > 0;
 		// Friction mixing
 		m_Friction = sqrt(m_PhysicalShape1->m_Friction * m_PhysicalShape2->m_Friction);
 		m_ContactNormal = m_Manifold.m_ContactNormal;
@@ -66,6 +77,20 @@ void Contact::update()
 	{
 		m_NumContactConstraints = 0;
 	}
+    
+    // Begin Contact
+    if( !m_bWasTouching && m_bIsTouching && pCollisionListener)
+    {
+        pCollisionListener->onCollisionEnter(m_PhysicalShape1, m_PhysicalShape1, m_Manifold);
+        pCollisionListener->onCollision(m_PhysicalShape1, m_PhysicalShape1, m_Manifold);
+    }
+    // End Contact
+    if( m_bWasTouching && !m_bIsTouching && pCollisionListener)
+    {
+        pCollisionListener->onCollision(m_PhysicalShape1, m_PhysicalShape1, m_Manifold);
+        pCollisionListener->onCollisionExit(m_PhysicalShape1, m_PhysicalShape1, m_Manifold);
+    }
+    m_bWasTouching = m_bIsTouching;
 
 }
 
