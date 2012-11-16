@@ -48,9 +48,15 @@ CollisionShape* Edge::clone()
 	return new Edge(*this);
 }
 
-Vector2f Edge::getSupportPoint(Vector2f& d) 
+Vector2f Edge::getSupportPoint(const Vector2f& d) 
 {
-	return Vector2f();
+	dfloat proj1 = m_Vertex1.dot(d);
+	dfloat proj2 = m_Vertex2.dot(d);
+
+	if( proj1 > proj2 )
+		return m_Vertex1;
+	else
+		return m_Vertex2;
 }
 
 dbool Edge::isPointInside(Vector2f& p)

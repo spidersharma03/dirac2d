@@ -66,7 +66,7 @@ void CircleSweep::operator= ( CircleSweep& other)
 {
 }
 
-Vector2f CircleSweep::getSupportPoint(Vector2f& d)
+Vector2f CircleSweep::getSupportPoint(const Vector2f& d)
 {
 	return Vector2f();
 }

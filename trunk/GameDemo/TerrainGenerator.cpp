@@ -9,6 +9,7 @@
 #include "TerrainGenerator.h"
 #include "FirstGame.h"
 #include "Camera.h"
+#include "ObjectGenerator.h"
 #include "../Dirac2D/Dirac2D.h"
 #include "SimpleVehicle.h"
 
@@ -109,10 +110,23 @@ void TerrainGenerator::update(float dt)
     
     generateBSplineCurvePoints();
 
+	// Generate Coins
+	generateCoins();
     //
 	initializeTerrainBody();
 }
 
+void TerrainGenerator::generateCoins()
+{
+	int numCoins = 10;
+	Vector2f coinPos[20];
+	int n = nCurvePoints;
+	for (int i=0; i<numCoins; i+=2) {
+		coinPos[i/2] = Vector2f(curvePoints[n], curvePoints[n+1]);
+		n += 4;
+	}
+	m_pGame->getObjectGenerator()->generateCoins(coinPos, numCoins);
+}
 
 void TerrainGenerator::initializeTerrainBody()
 {

@@ -12,6 +12,7 @@
 #include "CollisionDetectionCirclePolygon.h"
 #include "CollisionDetectionCapsulePolygon.h"
 #include "CollisionDetectionEdgePolygon.h"
+#include "GJK_EPA/GJKAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -32,7 +33,7 @@ CollisionRegisterFn getRegisteredFunction(dint32 i, dint32 j)
 // Find Whether two Shapes intersect.
 dbool intersectShapes( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2)
 {
-	return false;
+	return GJKAlgorithm::getInstance()->intersectShapes(shape1, xform1, shape2, xform2);
 }
 
 // Find Whether two Shapes intersect. Also find the Contact Points if the Shapes intersect.

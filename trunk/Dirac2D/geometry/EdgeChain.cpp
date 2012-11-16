@@ -78,9 +78,21 @@ CollisionShape* EdgeChain::clone()
 	return new EdgeChain(*this);
 }
 
-Vector2f EdgeChain::getSupportPoint(Vector2f& d)
+Vector2f EdgeChain::getSupportPoint(const Vector2f& d)
 {
-	return Vector2f();
+	dfloat max = -10000.0f;
+	dint32 index = -1;
+	for( dint32 e=0; e<m_NumEdges; e++ )
+	{
+		Vector2f sp = m_EdgeList[e].getSupportPoint(d);
+		dfloat proj = sp.dot(d);
+		if( proj > max )
+		{
+			max = proj;
+			index = e;
+		}
+	}
+	return m_EdgeList[index].getSupportPoint(d);
 }
 
 dbool EdgeChain::isPointInside(Vector2f& p)

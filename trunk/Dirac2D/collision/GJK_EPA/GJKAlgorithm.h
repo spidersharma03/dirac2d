@@ -29,7 +29,7 @@ public:
 	
 	dbool pointInsideShape( CollisionShape& polygon, Vector2f& p );
 	
-	dbool intersectShapes( CollisionShape& polygon1, Matrix3f& m1, CollisionShape& polygon2, Matrix3f& m2 );
+	dbool intersectShapes( CollisionShape* polygon1, Matrix3f m1, CollisionShape* polygon2, Matrix3f m2 );
 	
 	dbool intersectShapes( CollisionShape& polygon1, Matrix3f& m1, CollisionShape& polygon2, Matrix3f& m2, Simplexf& simplex );
 

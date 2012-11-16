@@ -91,9 +91,21 @@ CollisionShape* ConvexPolygon::clone()
 	return new ConvexPolygon(*this);
 }
 
-Vector2f ConvexPolygon::getSupportPoint(Vector2f& d)
+Vector2f ConvexPolygon::getSupportPoint(const Vector2f& d)
 {
-	return Vector2f();
+	dfloat max = -10000.0f;
+	dint32 pointIndex = 0;
+	for( dint32 i=0; i<m_NumVertices; i++ )
+	{
+		Vector2f& p = m_Vertices[i];
+		dfloat proj = p.dot(d);
+		if( proj > max )
+		{
+			max = proj;
+			pointIndex = i;
+		}
+	}
+	return m_Vertices[pointIndex];
 }
 
 dbool ConvexPolygon::isPointInside(Vector2f& p)

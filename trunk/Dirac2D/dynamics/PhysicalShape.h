@@ -30,6 +30,7 @@ protected:
 		m_Next = m_Prev = 0;
 		m_CollisionShape = 0;
         m_bIsSensor = false;
+		m_pUserData = 0;
 	}
 	
 	PhysicalShape(const PhysicalShape& other);
@@ -47,6 +48,8 @@ protected:
 	void calculateMassAttributes();
 	
     dbool m_bIsSensor;
+	
+	void* m_pUserData;
 public:
     virtual ~PhysicalShape();
 
@@ -64,10 +67,25 @@ public:
 	PhysicalShape* m_Next;
 	PhysicalShape* m_Prev;
 
-    inline dbool isSensor()
+    inline dbool isSensor() const
     {
         return m_bIsSensor;
     }
+	
+	void setSensor( dbool bSensor )
+	{
+		m_bIsSensor = bSensor;
+	}
+	
+	void setUserData(void* pUserData)
+	{
+		m_pUserData = pUserData;
+	}
+	
+	void* getUserData()
+	{
+		return m_pUserData;
+	}
 public:
 	friend class PhysicalBody;
 };

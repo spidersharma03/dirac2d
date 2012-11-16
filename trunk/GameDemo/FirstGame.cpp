@@ -12,7 +12,7 @@
 #include "SimpleVehicle.h"
 #include "Camera.h"
 #include "TerrainGenerator.h"
-
+#include "ObjectGenerator.h"
 
 FirstGame::FirstGame()
 {
@@ -26,6 +26,8 @@ FirstGame::FirstGame()
 	m_pCamera->setFocusTarget(m_pVehicle);
 	
 	m_pTerrainGenerator = new TerrainGenerator(this);
+	
+	m_pObjectGenerator = new ObjectGenerator(this);
 
 	m_StepSize = 1.0f/1600.0f;
 }
