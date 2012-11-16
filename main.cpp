@@ -1819,6 +1819,45 @@ void demo28()
 	
 }
 
+void demo29()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	Vector2f vertex1(-1.5f, -0.2f);
+	Vector2f vertex2(1.5f, -0.2f);
+	pApp.m_CollisionAttributes.m_Shape = new Edge(vertex1, vertex2);
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Box1
+	PhysicalBody* pBodyBox1 = pWorld->createPhysicalBody();
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBox1->setPosition(Vector2f(0.0f,0.1f));
+	pBodyBox1->setAngle(-PI_2);
+	dfloat boxWidth = 0.051f; dfloat boxHeight = 0.051f;
+	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	//pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox, 4);
+	pApp.m_CollisionAttributes.m_Shape = new Circle(0.1);
+	pBodyBox1->createPhysicalShape(pApp);
+	
+	// Create Box2
+	PhysicalBody* pBodyBox2 = pWorld->createPhysicalBody();
+	pBodyBox2->m_LinearDamping = 2.0f;
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBox2->setPosition(Vector2f(0.0f,0.35f));
+	pBodyBox2->setAngle(-PI_2);
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox, 4);
+	PhysicalShape* pShape = pBodyBox2->createPhysicalShape(pApp);
+	pShape->setSensor(true);
+}
+
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
 
 void renderDynamicTree(DynamicTreeNode* pNode)
@@ -1850,7 +1889,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo16();
+	demo29();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;

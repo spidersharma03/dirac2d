@@ -42,9 +42,11 @@ CollisionShape* Circle::clone()
 	return new Circle(*this);
 }
 
-Vector2f Circle::getSupportPoint(Vector2f& d)
+Vector2f Circle::getSupportPoint(const Vector2f& d)
 {
-	return m_Centroid + d * m_Radius;
+	Vector2f dir = d;
+	dir.normalize();
+	return m_Centroid + m_Radius * dir;
 }
 
 dbool Circle::isPointInside(Vector2f& p)

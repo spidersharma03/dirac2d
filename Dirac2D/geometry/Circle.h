@@ -28,7 +28,7 @@ public:
 		
 	void operator= ( Circle& other);
 
-	virtual Vector2f getSupportPoint(Vector2f& d);
+	virtual Vector2f getSupportPoint(const Vector2f& d);
 
 	virtual dbool isPointInside(Vector2f& p);
 	

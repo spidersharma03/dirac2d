@@ -7,6 +7,7 @@
  */
 #include "CollisionDetectionPolygon.h"
 #include "PolygonHelper.h"
+#include "GJK_EPA/GJKAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -20,7 +21,7 @@ BEGIN_NAMESPACE_DIRAC2D
 // Find Whether two Regular/ConvexPolygons intersect.
 dbool intersectPolygons( CollisionShape* shape1, Matrix3f& xform1, CollisionShape* shape2, Matrix3f& xform2 )
 {
-	return 0;
+	return GJKAlgorithm::getInstance()->intersectShapes(shape1, xform1, shape2, xform2);
 }
 
 #ifndef NEW

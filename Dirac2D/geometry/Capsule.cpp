@@ -31,8 +31,10 @@ CollisionShape* Capsule::clone()
 	return new Capsule(*this);
 }
 
-Vector2f Capsule::getSupportPoint(Vector2f& d)
+Vector2f Capsule::getSupportPoint(const Vector2f& d)
 {
+	Vector2f dir = d;
+	dir.normalize();
 	return Vector2f();
 }
 

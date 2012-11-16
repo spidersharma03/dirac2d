@@ -67,6 +67,8 @@ protected:
 	/* Change Shape of the Terrain */
 	void changeTerrainShape();
 	
+	void generateCoins();
+	
 protected:
     
     FirstGame* m_pGame;

@@ -68,7 +68,7 @@ public:
     
 	// For GJK/EPA 
 	// returns Local Support Point on the Shape.
-	virtual Vector2f getSupportPoint(Vector2f& d) = 0;
+	virtual Vector2f getSupportPoint(const Vector2f& d) = 0;
 	
 	virtual dbool isPointInside(Vector2f& p) = 0;
 	

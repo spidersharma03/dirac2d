@@ -139,7 +139,7 @@ public:
 		*this = outMatrix;
 	}
 	
-	void multiply( Matrix3<T>& m1, Matrix3<T>& m2 )
+	void multiply( Matrix3<T> m1, Matrix3<T> m2 )
 	{
 		col1.x = m1.col1.x * m2.col1.x + m1.col2.x * m2.col1.y + m1.col3.x * m2.col1.z;
 		col2.x = m1.col1.x * m2.col2.x + m1.col2.x * m2.col2.y + m1.col3.x * m2.col2.z;

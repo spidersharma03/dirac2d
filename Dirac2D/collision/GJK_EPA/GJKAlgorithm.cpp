@@ -82,15 +82,15 @@ dbool GJKAlgorithm::pointInsideShapeStepWise( CollisionShape& polygon, Vector2f&
 	return false;
 }
 
-dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, CollisionShape& polygon2, Matrix3f& m2 )
+dbool GJKAlgorithm::intersectShapes( CollisionShape* polygon1, Matrix3f m1, CollisionShape* polygon2, Matrix3f m2 )
 {
 	// 1. Create Simplex 0 using any point in the Minkowski difference of polygon 1 and 2.
 	Simplexf s;
 	
 	Vector2f point;
     Vector2f dir(1.0f,0.0f);
-	Vector2f point1 = polygon1.getSupportPoint(dir);
-	Vector2f point2 = polygon2.getSupportPoint(dir);
+	Vector2f point1 = polygon1->getSupportPoint(dir);
+	Vector2f point2 = polygon2->getSupportPoint(dir);
 	
 	// Transform the support point 2 into Polygon1's local space
 	Matrix3f m1Inv;
@@ -98,8 +98,9 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, Col
 	m1.getInverse(m1Inv);
 	m2.getInverse(m2Inv);
 	
-	m1.multiply(m2Inv, m1);
-	m2.multiply(m1Inv, m2);
+	m1 = m2Inv * m1;
+	m2 = m1Inv * m2;
+	
 	m2.transformAsPoint(point2);
 	
 	point = point1 - point2;
@@ -115,11 +116,11 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, Col
 		Vector2f supportPoint, supportPoint1, supportPoint2;
 		
 		// Get a new Support Point in the Minkowski difference.
-		supportPoint1 = polygon1.getSupportPoint(d);
+		supportPoint1 = polygon1->getSupportPoint(d);
 		Vector2f negd = -d;
 		// Transform the search direction into Polygon2's local space
 		m1.transformAsVector(negd);
-		supportPoint2 = polygon2.getSupportPoint(negd);
+		supportPoint2 = polygon2->getSupportPoint(negd);
 		
 		// Transform the support point 2 into Polygon1's space
 		m2.transformAsPoint(supportPoint2);
