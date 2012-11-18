@@ -24,12 +24,15 @@ void ObjectGenerator::update(float dt)
 	
     float R = ( swh + swh * 2.0f ); 
 	
+    // Remove/Cull Coins
     for( int i=0; i<m_vecPhysicalBodies.size(); i++ )
     {
         PhysicalBody* pBody = m_vecPhysicalBodies[i];
         bool bRes =  (pCamera->getPosition().x - pBody->m_Position.x) > R;
         if( bRes )
         {
+            PhysicalBody* pBody = m_vecPhysicalBodies[i];
+            m_pGame->getPhysicalWorld()->deletePhysicalBody(pBody);
             m_vecPhysicalBodies.erase(m_vecPhysicalBodies.begin() + i);
         }
     }
@@ -46,8 +49,8 @@ void ObjectGenerator::generateCoins( Vector2f* positions, int numCoins )
 	{
 		PhysicalBody* pBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
 		pBody->setPosition(positions[i]);
-		pBody->m_BodyType = EBT_STATIC;
-		pApp.m_CollisionAttributes.m_Shape = new Circle(0.02f);
+		pBody->m_BodyType = EBT_KINEMATIC;
+		pApp.m_CollisionAttributes.m_Shape = new Circle(0.05f);
 		PhysicalShape* pShape = pBody->createPhysicalShape(pApp);
 		pShape->setSensor(true);
 		m_vecPhysicalBodies.push_back(pBody);
