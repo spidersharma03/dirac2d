@@ -14,11 +14,14 @@ USE_NAMESPACE_DIRAC2D
 #ifndef _GAME_OBJECT_H_
 #define _GAME_OBJECT_H_
 
+enum GAME_OBJECT_TYPE { EOT_COIN , EOT_NONE };
+
 class GameObject : public IUpdatable
 {
 public:
 	GameObject()
 	{
+        m_ObjectType = EOT_NONE;
 	}
 	
 	Matrix3f getTransform() const
@@ -43,6 +46,7 @@ protected:
 	Vector2f m_Position;
 	Vector2f m_Velocity;
 	float m_Angle;
+    GAME_OBJECT_TYPE m_ObjectType;
 };
 
 #endif

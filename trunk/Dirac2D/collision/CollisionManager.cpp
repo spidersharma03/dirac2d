@@ -19,7 +19,7 @@ BEGIN_NAMESPACE_DIRAC2D
 CollisionManager::CollisionManager(PhysicalWorld* pWorld) : m_PhysicalWorld(pWorld)
 {
 	m_ContactPool = new MemoryAllocator<Contact>(MAX_CONTACT_POINTS);
-    m_pCollisionListener = &pWorld->m_CollisionListener;
+    m_pCollisionListener = pWorld->m_pCollisionListener;
 }
 	
 void CollisionManager::update()
@@ -59,13 +59,6 @@ void CollisionManager::updateContacts()
 		else 
 		{
 			contact->update(m_pCollisionListener);
-            
-            // if the contactManifold contains some contact point, call world callback.
-            if( contact->m_Manifold.m_NumContacts > 0 )
-            {
-                //m_PhysicalWorld->beginContact(contact->m_PhysicalShape1, 
-                //contact->m_PhysicalShape2, contact->m_Manifold);
-            }
 		}
 
 		contact = contact->m_Next;

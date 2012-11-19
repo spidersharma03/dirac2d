@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		354F4703163586AB000DFC09 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; };
+		355FCBDE1658A42D004D4C5E /* ObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */; };
+		355FCBE916592EF2004D4C5E /* memoryBlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */; };
 		3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */; };
 		35C0770D163C21BD00B32CB4 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
 		35C0770E163C21BD00B32CB4 /* ContactSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */; };
@@ -55,6 +57,7 @@
 		35C0773F163C21D800B32CB4 /* SimpleVehicle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35530055163C14430037A4E5 /* SimpleVehicle.cpp */; };
 		35C07740163C21DC00B32CB4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3553008E163C15A80037A4E5 /* main.cpp */; };
 		35D61659163C266900AE9631 /* FirstGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35D61658163C266900AE9631 /* FirstGame.cpp */; };
+		35DC47161657CA2500B0BD69 /* Coin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35DC47151657CA2400B0BD69 /* Coin.cpp */; };
 		35E3A200163D2C0E0023D968 /* TerrainGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */; };
 		35E3A202163D37150023D968 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A201163D37140023D968 /* Camera.cpp */; };
 		75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */; };
@@ -82,7 +85,6 @@
 		C257F9331552CCDA00270D77 /* Capsule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F9321552CCDA00270D77 /* Capsule.cpp */; };
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
-		C293024016565BA000B517F6 /* ObjectGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C293023F16565BA000B517F6 /* ObjectGenerator.cpp */; };
 		C293029C1656635A00B517F6 /* GameCollisions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C293029B1656635A00B517F6 /* GameCollisions.cpp */; };
 		C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
 		C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B5361581CA820040896A /* DistanceConstraint.cpp */; };
@@ -133,6 +135,10 @@
 		35530056163C145D0037A4E5 /* Vehicle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vehicle.h; sourceTree = "<group>"; };
 		35530057163C14B50037A4E5 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		3553008E163C15A80037A4E5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectFactory.cpp; sourceTree = "<group>"; };
+		355FCBDD1658A42D004D4C5E /* ObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFactory.h; sourceTree = "<group>"; };
+		355FCBE5165903AB004D4C5E /* memoryBlockAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memoryBlockAllocator.h; sourceTree = "<group>"; };
+		355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memoryBlockAllocator.cpp; sourceTree = "<group>"; };
 		3568969816062C3F001D9A15 /* CirclePathConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePathConstraint.h; sourceTree = "<group>"; };
 		3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CirclePathConstraint.cpp; sourceTree = "<group>"; };
 		35A42F701643A369009ECA9D /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
@@ -143,6 +149,8 @@
 		35D6165A163C31CE00AE9631 /* IUpdatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUpdatable.h; sourceTree = "<group>"; };
 		35D6165B163C412300AE9631 /* SimpleVehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleVehicle.h; sourceTree = "<group>"; };
 		35D6165C163C42A800AE9631 /* IRenderable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderable.h; sourceTree = "<group>"; };
+		35DC47151657CA2400B0BD69 /* Coin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Coin.cpp; sourceTree = "<group>"; };
+		35DC47181657CA4200B0BD69 /* Coin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coin.h; sourceTree = "<group>"; };
 		35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainGenerator.h; sourceTree = "<group>"; };
 		35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainGenerator.cpp; sourceTree = "<group>"; };
 		35E3A201163D37140023D968 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
@@ -208,8 +216,6 @@
 		C257F93A1552CD7A00270D77 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		C27A86A81561442D007AD13C /* AABB2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB2.h; sourceTree = "<group>"; };
 		C27A8ADD15661EDD007AD13C /* Contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contact.cpp; sourceTree = "<group>"; };
-		C293023E16565BA000B517F6 /* ObjectGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectGenerator.h; sourceTree = "<group>"; };
-		C293023F16565BA000B517F6 /* ObjectGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectGenerator.cpp; sourceTree = "<group>"; };
 		C29302981656629100B517F6 /* GameCollisions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCollisions.h; sourceTree = "<group>"; };
 		C293029B1656635A00B517F6 /* GameCollisions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameCollisions.cpp; sourceTree = "<group>"; };
 		C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GJKAlgorithm.cpp; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
@@ -315,6 +321,8 @@
 		35530053163C141E0037A4E5 /* GameDemo */ = {
 			isa = PBXGroup;
 			children = (
+				355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */,
+				355FCBDD1658A42D004D4C5E /* ObjectFactory.h */,
 				35D6165A163C31CE00AE9631 /* IUpdatable.h */,
 				35D6165C163C42A800AE9631 /* IRenderable.h */,
 				35530056163C145D0037A4E5 /* Vehicle.h */,
@@ -330,10 +338,10 @@
 				C200559E163FC7A9002D1565 /* GameObject.h */,
 				C200559F163FC7A9002D1565 /* GameObject.cpp */,
 				3553008E163C15A80037A4E5 /* main.cpp */,
-				C293023E16565BA000B517F6 /* ObjectGenerator.h */,
-				C293023F16565BA000B517F6 /* ObjectGenerator.cpp */,
 				C29302981656629100B517F6 /* GameCollisions.h */,
 				C293029B1656635A00B517F6 /* GameCollisions.cpp */,
+				35DC47151657CA2400B0BD69 /* Coin.cpp */,
+				35DC47181657CA4200B0BD69 /* Coin.h */,
 			);
 			path = GameDemo;
 			sourceTree = "<group>";
@@ -502,6 +510,8 @@
 			isa = PBXGroup;
 			children = (
 				C257F159154E71AE00270D77 /* memoryAllocator.h */,
+				355FCBE5165903AB004D4C5E /* memoryBlockAllocator.h */,
+				355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */,
 			);
 			name = memory;
 			path = Dirac2D/memory;
@@ -680,8 +690,9 @@
 				35E3A200163D2C0E0023D968 /* TerrainGenerator.cpp in Sources */,
 				35E3A202163D37150023D968 /* Camera.cpp in Sources */,
 				C20055A0163FC7A9002D1565 /* GameObject.cpp in Sources */,
-				C293024016565BA000B517F6 /* ObjectGenerator.cpp in Sources */,
 				C293029C1656635A00B517F6 /* GameCollisions.cpp in Sources */,
+				35DC47161657CA2500B0BD69 /* Coin.cpp in Sources */,
+				355FCBDE1658A42D004D4C5E /* ObjectFactory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +741,7 @@
 				C29B9C1C15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp in Sources */,
 				3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */,
 				C244CF87161D805300C141F8 /* BSpline.cpp in Sources */,
+				355FCBE916592EF2004D4C5E /* memoryBlockAllocator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,14 +12,14 @@
 #include "../PhysicalBody.h"
 #include "../../collision/CollisionDetection.h"
 #include "../../CallBacks.h"
-
+#include "../../collision/GJK_EPA/GJKAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
 void Contact::update(ICollisionLisetner* pCollisionListener)
 {
 	m_Manifold.m_bFlipShapes = false;
-	m_Manifold.m_NumContacts = 0;
+	//m_Manifold.m_NumContacts = 0;
 	ContactManifold oldManifold = m_Manifold;
 	ContactConstraint oldConstraint[MAX_CONTACTS];
 	oldConstraint[0].m_NormalImpulse = m_ContactConstraint[0].m_NormalImpulse;
@@ -32,7 +32,7 @@ void Contact::update(ICollisionLisetner* pCollisionListener)
     
     if( m_PhysicalShape1->isSensor() || m_PhysicalShape2->isSensor() )
     {
-        m_bIsTouching = intersectShapes(m_CollisionShape1, m_PhysicalShape1->m_ParentBody->m_Transform, m_CollisionShape2, m_PhysicalShape2->m_ParentBody->m_Transform);
+        m_bIsTouching = GJKAlgorithm::getInstance()->intersectShapes(m_CollisionShape1, m_PhysicalShape1->m_ParentBody->m_Transform, m_CollisionShape2, m_PhysicalShape2->m_ParentBody->m_Transform);
 	}
     else
     {
@@ -69,9 +69,7 @@ void Contact::update(ICollisionLisetner* pCollisionListener)
 					m_ContactConstraint[n].m_TangentImpulse = oldConstraint[n].m_TangentImpulse;
 					break;
 				}
-
 			}
-
 		}
 	}
 	else 
@@ -88,7 +86,6 @@ void Contact::update(ICollisionLisetner* pCollisionListener)
     // End Contact
     if( m_bWasTouching && !m_bIsTouching && pCollisionListener)
     {
-        pCollisionListener->onCollision(m_PhysicalShape1, m_PhysicalShape2, m_Manifold);
         pCollisionListener->onCollisionExit(m_PhysicalShape1, m_PhysicalShape2, m_Manifold);
     }
     m_bWasTouching = m_bIsTouching;

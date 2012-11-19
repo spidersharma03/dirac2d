@@ -15,7 +15,7 @@ CirclePathConstraint::CirclePathConstraint()
 
 void CirclePathConstraint::buildJacobian()
 {
-    PhysicalBody* pBody = m_PhysicalBody1;
+   // PhysicalBody* pBody = m_PhysicalBody1;
 	
 }
 

@@ -77,7 +77,7 @@ void renderScene(void)
 
 	glutSwapBuffers();
 	
-	//timer.tick();
+	timer.tick();
 }
 
 //static bool bWarmStart = true;
