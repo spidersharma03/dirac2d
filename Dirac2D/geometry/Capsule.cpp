@@ -35,7 +35,9 @@ Vector2f Capsule::getSupportPoint(const Vector2f& d)
 {
 	Vector2f dir = d;
 	dir.normalize();
-	return Vector2f();
+    dfloat signx = dir.x > 0.0f ? 1.0f : -1.0f;
+    
+	return Vector2f(signx * m_Height * 0.5f + dir.x * m_Radius, m_Radius * dir.y);
 }
 
 dbool Capsule::isPointInside(Vector2f& p)

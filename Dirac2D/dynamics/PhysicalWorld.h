@@ -149,6 +149,9 @@ public:
 	{
 		return m_PhysicalBodyList;
 	}
+    
+    void setCollisionListener( ICollisionLisetner* pCollisionListener );
+
 public:
 	
 	friend class CollisionManager;
@@ -163,7 +166,8 @@ protected:
 
 private:
     // Default Collision Listener
-    CCollisionListener m_CollisionListener;
+    ICollisionLisetner *m_pCollisionListener;
+    
 	CollisionManager* m_CollisionManager;
 	BroadPhaseCollisionAlgorithm* m_pBroadPhaseAlgorithm;
 	ContactSolver*	  m_ContactSolver;

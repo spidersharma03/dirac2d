@@ -67,14 +67,14 @@ void SimpleVehicle::init()
 		
 		float xPos = 15.0f;
 		float yPos = 0.0f;
-		m_pVehicleBody->setPosition(Vector2f(1.0f+xPos,1.0f+yPos));		
+		m_pVehicleBody->setPosition(Vector2f(1.0f+xPos,1.05f+yPos));		
 		
 		PhysicalAppearance pApp;
 		pApp.m_MassAttributes.m_Density = 10.0f;
 		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.07f,0.6);
 		//pApp.m_CollisionAttributes.m_Shape = new Circle(0.3f);
 		m_pVehicleBody->createPhysicalShape(pApp);
-		m_pVehicleBody->m_AngularDamping = 2.0f;
+		m_pVehicleBody->m_AngularDamping = 50.0f;
 		//m_pVehicleBody->m_LinearDamping = 2.0f;
 		
 		PhysicalBody* circle1 = pWorld->createPhysicalBody();
@@ -98,7 +98,7 @@ void SimpleVehicle::init()
 		lc1->m_LocalAxis = Vector2f(1.0f,-1.0f);
 		lc1->initialize();
 		lc1->m_Erp = 10.0f;
-		lc1->m_Cfm = 4.0f;
+		lc1->m_Cfm = 8.0f;
 		
 		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
 		lc2->m_PhysicalBody1 = m_pVehicleBody;
@@ -107,7 +107,7 @@ void SimpleVehicle::init()
 		lc2->m_LocalAxis = Vector2f(-1.0f,-1.0f);
 		lc2->initialize();
 		lc2->m_Erp = 10.0f;
-		lc2->m_Cfm = 4.0f;
+		lc2->m_Cfm = 8.0f;
 		
         m_pMotor = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
         m_pMotor->m_PhysicalBody1 = circle2;

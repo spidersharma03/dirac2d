@@ -48,7 +48,8 @@ class WorldRayIntersectionCallBackClass
 };
 
 
-/* This is an interface which is responsible for recieving collision call backs */
+/* This is an interface which is responsible for recieving collision call backs.
+   if one of the colliding shape is a sensor then ContactManifold dosen't contain any info. */
 class ICollisionLisetner
 {
   public:

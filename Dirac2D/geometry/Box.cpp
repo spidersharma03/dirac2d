@@ -28,7 +28,10 @@ CollisionShape* Box::clone()
 
 Vector2f Box::getSupportPoint(const Vector2f& d)
 {
-	return Vector2f();
+    dfloat signx = d.x > 0.0f ? 1.0f : -1.0f;
+    dfloat signy = d.y > 0.0f ? 1.0f : -1.0f;
+
+	return Vector2f(signx * m_Width * 0.5f, signy * m_Height * 0.5f);
 }
 
 dbool Box::isPointInside(Vector2f& p)

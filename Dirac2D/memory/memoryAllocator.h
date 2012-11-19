@@ -60,6 +60,7 @@ public:
 	T* Allocate()
 	{
 		dAssert( m_MaxObjects > ++m_NumObjects );
+        
 		MemoryLinkNode* pLinkNode = m_pFreeMemoryBlock;
 		if( m_pFreeMemoryBlock->pNext )
 			m_pFreeMemoryBlock = m_pFreeMemoryBlock->pNext;	

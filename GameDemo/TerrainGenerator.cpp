@@ -9,7 +9,7 @@
 #include "TerrainGenerator.h"
 #include "FirstGame.h"
 #include "Camera.h"
-#include "ObjectGenerator.h"
+#include "ObjectFactory.h"
 #include "../Dirac2D/Dirac2D.h"
 #include "SimpleVehicle.h"
 
@@ -49,11 +49,11 @@ Vector2f linearSample( float t )
 Vector2f sinWaveSample( float t )
 {
 	float x = t;
-	float y = 1.8f*sin(0.3f*x);
+	float y = 1.0f*sin(0.6f*x);
 	return Vector2f( x, y);
 }
 
-float knots[130], basis[30];
+float knots[130];
 float controlPoints[200];
 int nCurvePoints = 120;
 
@@ -97,7 +97,7 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 	
 	m_StartTime = m_Timer.getCurrentTime();
 	
-	m_TerrainSwitchTime = 5000.0;
+	m_TerrainSwitchTime = 10000.0;
 }
 
 void TerrainGenerator::update(float dt)
@@ -110,22 +110,29 @@ void TerrainGenerator::update(float dt)
     
     generateBSplineCurvePoints();
 
-	// Generate Coins
-	generateCoins();
+	// Place Coins
+	placeCoins();
     //
 	initializeTerrainBody();
 }
 
-void TerrainGenerator::generateCoins()
+void TerrainGenerator::placeCoins()
 {
-	int numCoins = 10;
-	Vector2f coinPos[20];
-	int n = nCurvePoints;
-	for (int i=0; i<numCoins; i+=2) {
-		coinPos[i/2] = Vector2f(curvePoints[n], curvePoints[n+1]);
-		n += 4;
-	}
-	m_pGame->getObjectGenerator()->generateCoins(coinPos, numCoins);
+    static double initTime = m_Timer.getCurrentTime();
+    double time = m_Timer.getCurrentTime();
+    if( time - initTime > 2000 )
+    {
+        initTime = time;
+        int numCoins = 15;
+        Vector2f coinPos[20];
+        int n = 2*nCurvePoints-40;
+        for (int i=0; i<2*numCoins; i+=2) {
+            coinPos[i/2] = Vector2f(curvePoints[n], curvePoints[n+1] - 0.4);
+            n += 2;
+        }
+        m_pGame->getObjectGenerator()->generateCoins(coinPos, numCoins);
+    }
+	
 }
 
 void TerrainGenerator::initializeTerrainBody()
@@ -135,7 +142,7 @@ void TerrainGenerator::initializeTerrainBody()
 	m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pTerrainBody);
     // 2. create new terrain body using the new points.   
 	PhysicalAppearance pApp;
-    pApp.m_PhysicalAttributes.m_Friction = 5.0f;
+    pApp.m_PhysicalAttributes.m_Friction = 1.0f;
     
 	Vector2f vertices[300];
 	

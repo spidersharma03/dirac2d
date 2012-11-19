@@ -7,17 +7,20 @@
  *
  */
 
-#include "ObjectGenerator.h"
+#include "ObjectFactory.h"
 #include "../Dirac2D/Dirac2D.h"
 #include "FirstGame.h"
 #include "Camera.h"
+#include "Coin.h"
 
-ObjectGenerator::ObjectGenerator(FirstGame* pGame) : m_pGame( pGame )
+ObjectFactory::ObjectFactory(FirstGame* pGame) : m_pGame( pGame )
 {
 	m_vecPhysicalBodies.reserve(MAX_COINS_ON_SCREEN);
+    
+    m_pCoinPool = new MemoryAllocator<Coin>(MAX_COINS_ON_SCREEN);
 }
 
-void ObjectGenerator::update(float dt)
+void ObjectFactory::update(float dt)
 {
 	Camera* pCamera = m_pGame->getCamera();
     float swh = pCamera->getScreenWidth() * 0.5f;
@@ -39,7 +42,7 @@ void ObjectGenerator::update(float dt)
 	
 }
 
-void ObjectGenerator::generateCoins( Vector2f* positions, int numCoins )
+void ObjectFactory::generateCoins( Vector2f* positions, int numCoins )
 {
 	if( m_vecPhysicalBodies.size() > MAX_COINS_ON_SCREEN )
 		return;

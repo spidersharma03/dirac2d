@@ -14,16 +14,17 @@
 #include "../Dirac2D/Dirac2D.h"
 
 class FirstGame;
+class Coin;
 
 USE_NAMESPACE_DIRAC2D
 
 #define MAX_COINS_ON_SCREEN 30
 
-class ObjectGenerator : public IUpdatable
+class ObjectFactory : public IUpdatable
 {
 public:
 	
-	ObjectGenerator(FirstGame* pGame);
+	ObjectFactory(FirstGame* pGame);
 	
 	void generateCoins( Vector2f* positions, int numCoins );
 	
@@ -34,6 +35,8 @@ private:
 	FirstGame* m_pGame;
 	
 	vector<PhysicalBody*> m_vecPhysicalBodies;
+    
+    MemoryAllocator<Coin>* m_pCoinPool;
 };
 
 #endif

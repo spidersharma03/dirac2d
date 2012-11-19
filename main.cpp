@@ -20,7 +20,7 @@ PhysicalWorld* pWorld;
 GLRenderer* glRenderer;
 DTimer timer;
 
-dfloat dt = 1.0f/2000.0f;
+dfloat dt = 1.0f/600.0f;
 
 dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
@@ -107,14 +107,14 @@ void demo3()
 	dfloat dx = 0.0f;
 	for(int j=0; j<40;j++ )
 	{
-		y += 0.1f;
+		y += 0.08f;
 		x = -2.0 + dx;
 		dx += 0.05f;
 		for( int i=0; i<n; i++ )
 		{
 			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
 			//pBodyBox->m_BodyType = EBT_STATIC;
-			x += 0.1f;
+			x += 0.08f;
 			pBodyBox->setPosition(Vector2f(x,y));
 			//pBodyBox->setAngle(PI_4*0.9);
 			dfloat boxWidth = 0.035f; dfloat boxHeight = 0.035f;
@@ -1853,9 +1853,16 @@ void demo29()
 	//pBodyBox->m_BodyType = EBT_STATIC;
 	pBodyBox2->setPosition(Vector2f(0.0f,0.35f));
 	pBodyBox2->setAngle(-PI_2);
-	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox, 4);
+	pApp.m_CollisionAttributes.m_Shape = new Capsule(0.05, 0.07);//(verticesBox, 4);
 	PhysicalShape* pShape = pBodyBox2->createPhysicalShape(pApp);
 	pShape->setSensor(true);
+    
+    MemoryBlockAllocator* pBlockAllocator = new MemoryBlockAllocator();
+    Vector2f *v = new((pBlockAllocator->Allocate(sizeof(Vector2f)))) Vector2f();
+    pBlockAllocator->Free(v, sizeof(Vector2f));
+    
+    Vector2f *v1 = new((pBlockAllocator->Allocate(sizeof(Vector2f)))) Vector2f();
+    pBlockAllocator->Free(v1, sizeof(Vector2f));
 }
 
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
@@ -1959,7 +1966,6 @@ void renderScene(void)
     // start timer
     gettimeofday(&t1, NULL);
 #endif
-	
 		
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	

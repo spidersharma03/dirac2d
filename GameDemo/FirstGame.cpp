@@ -12,7 +12,8 @@
 #include "SimpleVehicle.h"
 #include "Camera.h"
 #include "TerrainGenerator.h"
-#include "ObjectGenerator.h"
+#include "ObjectFactory.h"
+#include "GameCollisions.h"
 
 FirstGame::FirstGame()
 {
@@ -27,8 +28,10 @@ FirstGame::FirstGame()
 	
 	m_pTerrainGenerator = new TerrainGenerator(this);
 	
-	m_pObjectGenerator = new ObjectGenerator(this);
+	m_pObjectFactory = new ObjectFactory(this);
 
+    m_pGameCollisionListener = new GameCollisionListener(this);
+    
 	m_StepSize = 1.0f/1600.0f;
 }
 
@@ -45,6 +48,8 @@ void FirstGame::gameLoop()
 {
     m_pWorld->Step(m_StepSize);
 	
+    m_pObjectFactory->update(m_StepSize);
+    
     m_pTerrainGenerator->update(m_StepSize);
     
     m_pVehicle->update(m_StepSize);

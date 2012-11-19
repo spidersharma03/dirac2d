@@ -48,12 +48,14 @@ Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
 
 PhysicalWorld::PhysicalWorld()
 {
+    m_pCollisionListener = new CCollisionListener(); // Default Collision Listener
+
 	m_CollisionManager = new CollisionManager(this);
 	m_pBroadPhaseAlgorithm = new DynamicTreeBroadPhaseAlgorithm(m_CollisionManager);
 	//m_pBroadPhaseAlgorithm = new NaiveBroadPhaseCollisionAlgorithm(m_CollisionManager);
 	m_ContactSolver    = new ContactSolver(this);
 	m_Renderer		   = 0;
-	
+    
 	m_bGravityOn = true;
 	m_GravityScale = 1.0f;
 	
@@ -91,7 +93,13 @@ PhysicalWorld::PhysicalWorld()
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
 }
-	
+
+void PhysicalWorld::setCollisionListener( ICollisionLisetner* pCollisionListener )
+{
+    m_pCollisionListener = pCollisionListener; 
+    m_CollisionManager->m_pCollisionListener = pCollisionListener;
+}
+
 PhysicalBody* PhysicalWorld::createPhysicalBody()
 {
 	PhysicalBody* pBody = new(m_PhysicalBodyPool->Allocate()) PhysicalBody(this);
