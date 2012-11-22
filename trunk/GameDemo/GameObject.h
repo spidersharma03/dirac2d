@@ -16,12 +16,23 @@ USE_NAMESPACE_DIRAC2D
 
 enum GAME_OBJECT_TYPE { EOT_COIN , EOT_NONE };
 
+struct GameObjectInfo
+{
+	GAME_OBJECT_TYPE m_ObjectType;
+};
+
+
 class GameObject : public IUpdatable
 {
 public:
 	GameObject()
 	{
-        m_ObjectType = EOT_NONE;
+        m_ObjectInfo.m_ObjectType = EOT_NONE;
+	}
+	
+	GameObject(GameObjectInfo gInfo)
+	{
+        m_ObjectInfo = gInfo;
 	}
 	
 	Matrix3f getTransform() const
@@ -46,7 +57,7 @@ protected:
 	Vector2f m_Position;
 	Vector2f m_Velocity;
 	float m_Angle;
-    GAME_OBJECT_TYPE m_ObjectType;
+	GameObjectInfo m_ObjectInfo;
 };
 
 #endif

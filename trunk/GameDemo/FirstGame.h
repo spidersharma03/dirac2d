@@ -71,6 +71,8 @@ public:
 	{
 		return m_pObjectFactory;
 	}
+	
+	
 private:
     TerrainGenerator* m_pTerrainGenerator;
     SimpleVehicle* m_pVehicle;

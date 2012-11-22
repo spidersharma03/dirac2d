@@ -20,6 +20,10 @@ ObjectFactory::ObjectFactory(FirstGame* pGame) : m_pGame( pGame )
     m_pCoinPool = new MemoryAllocator<Coin>(MAX_COINS_ON_SCREEN);
 }
 
+void ObjectFactory::createObjects(GameObjectInfo gInfo ,int numObjects)
+{
+}
+
 void ObjectFactory::update(float dt)
 {
 	Camera* pCamera = m_pGame->getCamera();

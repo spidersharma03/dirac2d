@@ -7,9 +7,9 @@
 
 #include "Coin.h"
 
-Coin::Coin()
+Coin::Coin(CoinInfo cInfo) : GameObject(cInfo)
 {
-    m_ObjectType = EOT_COIN;
+    m_ObjectInfo.m_ObjectType = EOT_COIN;
 }
 
 void Coin::update(float dt)
