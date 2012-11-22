@@ -15,10 +15,16 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
 END_NAMESPACE_DIRAC2D
 
+struct CoinInfo : public GameObjectInfo
+{
+	int m_Value;
+	float m_Radius;
+};
+
 class Coin : public GameObject
 {
 public:
-    Coin();
+    Coin(CoinInfo cInfo);
     
     virtual void update(float dt);
     
@@ -27,6 +33,7 @@ public:
         return m_pBody;
     }
 private:
+	int m_Value;
     PhysicalBody* m_pBody;
 };
 

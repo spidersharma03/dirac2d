@@ -12,6 +12,7 @@
 #define _OBJECT_GENERATOR_H_
 
 #include "../Dirac2D/Dirac2D.h"
+#include "GameObject.h"
 
 class FirstGame;
 class Coin;
@@ -26,6 +27,8 @@ public:
 	
 	ObjectFactory(FirstGame* pGame);
 	
+	void createObjects(GameObjectInfo gInfo ,int numObjects);
+					  
 	void generateCoins( Vector2f* positions, int numCoins );
 	
 	virtual void update(float dt);
