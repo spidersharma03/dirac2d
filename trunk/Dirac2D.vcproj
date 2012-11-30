@@ -369,6 +369,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="memory"
+				>
+				<File
+					RelativePath=".\Dirac2D\memory\memoryBlockAllocator.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="maths"
+				>
+				<Filter
+					Name="Curves"
+					>
+					<File
+						RelativePath=".\Dirac2D\maths\Curves\BSpline.cpp"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -638,12 +658,28 @@
 					RelativePath=".\Dirac2D\maths\Vector3.h"
 					>
 				</File>
+				<Filter
+					Name="Curves"
+					>
+					<File
+						RelativePath=".\Dirac2D\maths\Curves\BSpline.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\maths\Curves\Curves.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="memory"
 				>
 				<File
 					RelativePath=".\Dirac2D\memory\memoryAllocator.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Dirac2D\memory\memoryBlockAllocator.h"
 					>
 				</File>
 			</Filter>

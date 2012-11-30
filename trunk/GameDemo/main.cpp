@@ -1,5 +1,11 @@
 #include <iostream>
 
+#include "../Dirac2D/Dirac2D.h"
+#include "FirstGame.h"
+#include "TerrainGenerator.h"
+#include "Camera.h"
+#include "SimpleVehicle.h"
+
 #ifndef WIN32 
 #include <sys/time.h>
 #include<GLUT/glut.h>
@@ -7,14 +13,9 @@
 #include<GL/glut.h>
 #endif
 
-#include "../Dirac2D/Dirac2D.h"
 
 USE_NAMESPACE_DIRAC2D
 
-#include "FirstGame.h"
-#include "TerrainGenerator.h"
-#include "Camera.h"
-#include "SimpleVehicle.h"
 
 
 void initScene();

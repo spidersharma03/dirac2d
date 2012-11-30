@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dirac2D", "Dirac2D.vcproj", "{BBF927B4-53BD-48C6-A7C8-0609DF0ED24A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameDemo", "GameDemo\GameDemo.vcproj", "{8CF9A0C9-27A2-41D4-B29E-F75AC213FBF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{BBF927B4-53BD-48C6-A7C8-0609DF0ED24A}.Debug|Win32.Build.0 = Debug|Win32
 		{BBF927B4-53BD-48C6-A7C8-0609DF0ED24A}.Release|Win32.ActiveCfg = Release|Win32
 		{BBF927B4-53BD-48C6-A7C8-0609DF0ED24A}.Release|Win32.Build.0 = Release|Win32
+		{8CF9A0C9-27A2-41D4-B29E-F75AC213FBF2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8CF9A0C9-27A2-41D4-B29E-F75AC213FBF2}.Debug|Win32.Build.0 = Debug|Win32
+		{8CF9A0C9-27A2-41D4-B29E-F75AC213FBF2}.Release|Win32.ActiveCfg = Release|Win32
+		{8CF9A0C9-27A2-41D4-B29E-F75AC213FBF2}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
