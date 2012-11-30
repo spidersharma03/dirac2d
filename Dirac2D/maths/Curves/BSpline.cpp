@@ -7,7 +7,7 @@
  */
 
 #include "BSpline.h"
-#include "Vector2.h"
+#include "../Vector2.h"
 
 USE_NAMESPACE_DIRAC2D
 
@@ -16,7 +16,7 @@ void findOpenKnots(int nControlPoints, int nOrder, float* knotVector)
 	for( int i=0; i<nOrder; i++ )
 		knotVector[i] = 0.0f;
 	for( int i=nOrder+nControlPoints-1; i>nOrder+nControlPoints-4; i-- )
-		knotVector[i] = nControlPoints - nOrder + 1;
+		knotVector[i] = (float)(nControlPoints - nOrder + 1);
 	float n = 1.0f;
 	for( int i=nOrder; i<nOrder+nControlPoints-3; i++ )
     {

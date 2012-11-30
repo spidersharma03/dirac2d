@@ -1768,7 +1768,7 @@ void demo28()
 	int nPoints = 8;
 	int nCurvePoints = 260;
 	float controlPoints[8*2] = {0.0f,0.0f,  0.0f,0.4f,  0.5f,0.5f, 0.8f,0.2f, 0.5f,-0.8f, 0.2f,-0.9f, 0.4f,-0.3f,  -0.3f,-0.2f};
-	float curvePoints[nCurvePoints*2];
+	float curvePoints[260*2];
 	float knots[130], basis[30];
 	int nOrder = 4;
 	findOpenKnots(nPoints, nOrder, knots);

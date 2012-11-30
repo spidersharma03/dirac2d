@@ -5,17 +5,9 @@
 //  Created by Prashant Sharma on 28/10/12.
 //
 
-#ifndef WIN32 
-#include <sys/time.h>
-#include<GLUT/glut.h>
-#else
-#include<GL/glut.h>
-#endif
-
 #include "Camera.h"
 #include "GameObject.h"
 
-#include <stdio.h>
 
 Camera::Camera()
 {
@@ -41,7 +33,7 @@ void Camera::update(float dt)
     float data[16];
 
     
-	m_ProjectionMatrix.perspective(M_PI_2, m_AspectRatio, 0.001f, 100.0f);
+	m_ProjectionMatrix.perspective(3.14159/2, m_AspectRatio, 0.001f, 100.0f);
     //m_ProjectionMatrix.ortho(-m_ScreenWidth/2*m_AspectRatio, m_ScreenWidth/2*m_AspectRatio, -m_ScreenWidth/2, m_ScreenWidth/2, 0.001, 100.0f);
     
     glMatrixMode(GL_PROJECTION);

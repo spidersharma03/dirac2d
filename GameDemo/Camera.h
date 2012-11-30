@@ -8,6 +8,14 @@
 #include "IUpdatable.h"
 #include "../Dirac2D/maths/MathUtil.h"
 
+#ifndef WIN32 
+#include <sys/time.h>
+#include<GLUT/glut.h>
+#else
+#include<GL/glut.h>
+#endif
+
+
 
 USE_NAMESPACE_DIRAC2D
 
