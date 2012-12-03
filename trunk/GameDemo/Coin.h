@@ -26,6 +26,8 @@ class Coin : public GameObject
 public:
     Coin(CoinInfo cInfo);
     
+	Coin();
+	
     virtual void update(float dt);
     
     PhysicalBody* getPhysicalBody()
@@ -34,6 +36,7 @@ public:
     }
 private:
 	int m_Value;
+	float m_Radius;
     PhysicalBody* m_pBody;
 };
 

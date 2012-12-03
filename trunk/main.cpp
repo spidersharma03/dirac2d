@@ -1857,12 +1857,12 @@ void demo29()
 	PhysicalShape* pShape = pBodyBox2->createPhysicalShape(pApp);
 	pShape->setSensor(true);
     
-    MemoryBlockAllocator* pBlockAllocator = new MemoryBlockAllocator();
-    Vector2f *v = new((pBlockAllocator->Allocate(sizeof(Vector2f)))) Vector2f();
-    pBlockAllocator->Free(v, sizeof(Vector2f));
-    
-    Vector2f *v1 = new((pBlockAllocator->Allocate(sizeof(Vector2f)))) Vector2f();
-    pBlockAllocator->Free(v1, sizeof(Vector2f));
+    //MemoryBlockAllocator* pBlockAllocator = new MemoryBlockAllocator();
+//    Vector2f *v = new((pBlockAllocator->Allocate(sizeof(Vector2f)))) Vector2f();
+//    pBlockAllocator->Free(v, sizeof(Vector2f));
+//    
+//    Vector2f *v1 = new((pBlockAllocator->Allocate(sizeof(Vector2f)))) Vector2f();
+//    pBlockAllocator->Free(v1, sizeof(Vector2f));
 }
 
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;

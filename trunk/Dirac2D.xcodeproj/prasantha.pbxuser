@@ -992,6 +992,19 @@
 			C29303B2165E1E8000B517F6 /* PBXTextBookmark */ = C29303B2165E1E8000B517F6 /* PBXTextBookmark */;
 			C29303B3165E1E8000B517F6 /* PBXTextBookmark */ = C29303B3165E1E8000B517F6 /* PBXTextBookmark */;
 			C29303B4165E1E8000B517F6 /* PBXTextBookmark */ = C29303B4165E1E8000B517F6 /* PBXTextBookmark */;
+			C293049C166CBB9C00B517F6 /* PBXTextBookmark */ = C293049C166CBB9C00B517F6 /* PBXTextBookmark */;
+			C293049D166CBB9C00B517F6 /* PBXTextBookmark */ = C293049D166CBB9C00B517F6 /* PBXTextBookmark */;
+			C293049E166CBB9C00B517F6 /* PBXTextBookmark */ = C293049E166CBB9C00B517F6 /* PBXTextBookmark */;
+			C293049F166CBB9C00B517F6 /* PBXTextBookmark */ = C293049F166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A0166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A0166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A1166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A1166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A2166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A2166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A3166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A3166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A4166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A4166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A5166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A5166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A6166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A6166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A7166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A7166CBB9C00B517F6 /* PBXTextBookmark */;
+			C29304A8166CBB9C00B517F6 /* PBXTextBookmark */ = C29304A8166CBB9C00B517F6 /* PBXTextBookmark */;
 			C293F7E41649275700B517F6 = C293F7E41649275700B517F6 /* PBXTextBookmark */;
 			C293F7F31649279100B517F6 = C293F7F31649279100B517F6 /* PBXTextBookmark */;
 			C293F7F7164927D300B517F6 = C293F7F7164927D300B517F6 /* PBXTextBookmark */;
@@ -1779,17 +1792,17 @@
 	};
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 33196}}";
-			sepNavSelRange = "{66312, 0}";
-			sepNavVisRange = "{65421, 1925}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 33286}}";
+			sepNavSelRange = "{66761, 0}";
+			sepNavVisRange = "{65669, 1993}";
 			sepNavWindowFrame = "{{6, 60}, {1914, 997}}";
 		};
 	};
 	35530055163C14430037A4E5 /* SimpleVehicle.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 1948}}";
-			sepNavSelRange = "{3333, 0}";
-			sepNavVisRange = "{1993, 1441}";
+			sepNavSelRange = "{3044, 0}";
+			sepNavVisRange = "{1993, 1443}";
 		};
 	};
 	35530056163C145D0037A4E5 /* Vehicle.h */ = {
@@ -1810,35 +1823,36 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 3719}}";
 			sepNavSelRange = "{4485, 0}";
-			sepNavVisRange = "{3805, 1166}";
+			sepNavVisRange = "{3805, 1148}";
 		};
 	};
 	355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 959}}";
-			sepNavSelRange = "{531, 0}";
-			sepNavVisRange = "{391, 1319}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1454}}";
+			sepNavSelRange = "{795, 0}";
+			sepNavVisRange = "{145, 983}";
 		};
 	};
 	355FCBDD1658A42D004D4C5E /* ObjectFactory.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 689}}";
-			sepNavSelRange = "{413, 0}";
-			sepNavVisRange = "{0, 693}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 758}}";
+			sepNavSelRange = "{439, 0}";
+			sepNavVisRange = "{40, 843}";
 		};
 	};
 	355FCBE5165903AB004D4C5E /* memoryBlockAllocator.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1150}}";
-			sepNavSelRange = "{1270, 0}";
-			sepNavVisRange = "{214, 1439}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1223}}";
+			sepNavSelRange = "{1662, 0}";
+			sepNavVisRange = "{1271, 819}";
 		};
 	};
 	355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 2698}}";
 			sepNavSelRange = "{1007, 0}";
-			sepNavVisRange = "{443, 1157}";
+			sepNavVisRange = "{344, 801}";
+			sepNavWindowFrame = "{{6, 60}, {1914, 997}}";
 		};
 	};
 	35C0770A163C21BD00B32CB4 /* GameDemo */ = {
@@ -1858,14 +1872,14 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1519, 1328}}";
 			sepNavSelRange = "{1136, 0}";
-			sepNavVisRange = "{628, 790}";
+			sepNavVisRange = "{657, 761}";
 		};
 	};
 	35D61658163C266900AE9631 /* FirstGame.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 931}}";
-			sepNavSelRange = "{675, 0}";
-			sepNavVisRange = "{203, 751}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1081}}";
+			sepNavSelRange = "{754, 12}";
+			sepNavVisRange = "{80, 921}";
 		};
 	};
 	35D6165A163C31CE00AE9631 /* IUpdatable.h */ = {
@@ -1891,16 +1905,16 @@
 	};
 	35DC47151657CA2400B0BD69 /* Coin.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 689}}";
-			sepNavSelRange = "{143, 0}";
-			sepNavVisRange = "{0, 228}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 674}}";
+			sepNavSelRange = "{104, 0}";
+			sepNavVisRange = "{0, 342}";
 		};
 	};
 	35DC47181657CA4200B0BD69 /* Coin.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 689}}";
-			sepNavSelRange = "{514, 0}";
-			sepNavVisRange = "{0, 562}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 674}}";
+			sepNavSelRange = "{390, 4}";
+			sepNavVisRange = "{0, 590}";
 		};
 	};
 	35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */ = {
@@ -2677,9 +2691,9 @@
 	};
 	C200559E163FC7A9002D1565 /* GameObject.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 955}}";
-			sepNavSelRange = "{271, 14}";
-			sepNavVisRange = "{3, 656}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1075}}";
+			sepNavSelRange = "{939, 0}";
+			sepNavVisRange = "{144, 629}";
 		};
 	};
 	C200559F163FC7A9002D1565 /* GameObject.cpp */ = {
@@ -2844,7 +2858,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 18";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 634;
 		vrLoc = 0;
@@ -2854,7 +2868,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 16";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 616;
 		vrLoc = 0;
@@ -3045,7 +3059,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 14";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 914;
 		vrLoc = 0;
@@ -3055,7 +3069,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 14";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 914;
 		vrLoc = 0;
@@ -3195,7 +3209,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 14";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 882;
 		vrLoc = 0;
@@ -3205,7 +3219,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 14";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 879;
 		vrLoc = 3;
@@ -3215,7 +3229,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 14";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 911;
 		vrLoc = 3;
@@ -3235,7 +3249,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1853";
 		rLen = 0;
-		rLoc = 67848;
+		rLoc = 67860;
 		rType = 0;
 		vrLen = 927;
 		vrLoc = 65420;
@@ -3275,7 +3289,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2018";
 		rLen = 0;
-		rLoc = 71752;
+		rLoc = 71764;
 		rType = 0;
 		vrLen = 882;
 		vrLoc = 69289;
@@ -3285,7 +3299,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2018";
 		rLen = 0;
-		rLoc = 71752;
+		rLoc = 71764;
 		rType = 0;
 		vrLen = 866;
 		vrLoc = 69305;
@@ -3295,7 +3309,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2018";
 		rLen = 0;
-		rLoc = 71752;
+		rLoc = 71764;
 		rType = 0;
 		vrLen = 866;
 		vrLoc = 69305;
@@ -3369,7 +3383,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71677;
+		rLoc = 71689;
 		rType = 0;
 		vrLen = 910;
 		vrLoc = 69342;
@@ -3433,7 +3447,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71677;
+		rLoc = 71689;
 		rType = 0;
 		vrLen = 907;
 		vrLoc = 69342;
@@ -3483,7 +3497,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2010";
 		rLen = 0;
-		rLoc = 71582;
+		rLoc = 71594;
 		rType = 0;
 		vrLen = 886;
 		vrLoc = 69627;
@@ -3493,7 +3507,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71714;
+		rLoc = 71726;
 		rType = 0;
 		vrLen = 854;
 		vrLoc = 69670;
@@ -3503,7 +3517,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71714;
+		rLoc = 71726;
 		rType = 0;
 		vrLen = 828;
 		vrLoc = 69731;
@@ -3513,7 +3527,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71682;
+		rLoc = 71694;
 		rType = 0;
 		vrLen = 821;
 		vrLoc = 69731;
@@ -3523,7 +3537,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2025";
 		rLen = 0;
-		rLoc = 71846;
+		rLoc = 71858;
 		rType = 0;
 		vrLen = 821;
 		vrLoc = 69731;
@@ -3583,7 +3597,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71682;
+		rLoc = 71694;
 		rType = 0;
 		vrLen = 868;
 		vrLoc = 69737;
@@ -3593,7 +3607,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2019";
 		rLen = 0;
-		rLoc = 71764;
+		rLoc = 71776;
 		rType = 0;
 		vrLen = 860;
 		vrLoc = 69743;
@@ -3603,7 +3617,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71682;
+		rLoc = 71694;
 		rType = 0;
 		vrLen = 870;
 		vrLoc = 69743;
@@ -3777,7 +3791,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 14";
 		rLen = 0;
-		rLoc = 276;
+		rLoc = 294;
 		rType = 0;
 		vrLen = 879;
 		vrLoc = 3;
@@ -3787,7 +3801,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 29";
 		rLen = 0;
-		rLoc = 676;
+		rLoc = 694;
 		rType = 0;
 		vrLen = 854;
 		vrLoc = 21;
@@ -3797,7 +3811,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 29";
 		rLen = 0;
-		rLoc = 676;
+		rLoc = 694;
 		rType = 0;
 		vrLen = 854;
 		vrLoc = 21;
@@ -3807,7 +3821,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 29";
 		rLen = 0;
-		rLoc = 676;
+		rLoc = 694;
 		rType = 0;
 		vrLen = 607;
 		vrLoc = 21;
@@ -3834,7 +3848,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 29";
 		rLen = 0;
-		rLoc = 676;
+		rLoc = 694;
 		rType = 0;
 		vrLen = 891;
 		vrLoc = 21;
@@ -3863,7 +3877,7 @@
 		isa = PBXTextBookmark;
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		rLen = 0;
-		rLoc = 29;
+		rLoc = 30;
 		rType = 1;
 	};
 	C2488B141648E82D00873182 /* PBXTextBookmark */ = {
@@ -3871,7 +3885,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 28";
 		rLen = 0;
-		rLoc = 574;
+		rLoc = 592;
 		rType = 0;
 		vrLen = 854;
 		vrLoc = 21;
@@ -3891,7 +3905,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 28";
 		rLen = 0;
-		rLoc = 574;
+		rLoc = 592;
 		rType = 0;
 		vrLen = 607;
 		vrLoc = 21;
@@ -3901,7 +3915,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 26";
 		rLen = 0;
-		rLoc = 567;
+		rLoc = 585;
 		rType = 0;
 		vrLen = 859;
 		vrLoc = 21;
@@ -3911,7 +3925,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 26";
 		rLen = 0;
-		rLoc = 567;
+		rLoc = 585;
 		rType = 0;
 		vrLen = 847;
 		vrLoc = 33;
@@ -3921,7 +3935,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 26";
 		rLen = 0;
-		rLoc = 567;
+		rLoc = 585;
 		rType = 0;
 		vrLen = 847;
 		vrLoc = 33;
@@ -3961,7 +3975,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 28";
 		rLen = 0;
-		rLoc = 574;
+		rLoc = 592;
 		rType = 0;
 		vrLen = 559;
 		vrLoc = 21;
@@ -4001,7 +4015,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 26";
 		rLen = 0;
-		rLoc = 567;
+		rLoc = 585;
 		rType = 0;
 		vrLen = 891;
 		vrLoc = 21;
@@ -4031,7 +4045,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 23";
 		rLen = 0;
-		rLoc = 464;
+		rLoc = 482;
 		rType = 0;
 		vrLen = 854;
 		vrLoc = 21;
@@ -4642,7 +4656,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 23";
 		rLen = 0;
-		rLoc = 464;
+		rLoc = 482;
 		rType = 0;
 		vrLen = 877;
 		vrLoc = 3;
@@ -4652,7 +4666,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 697;
+		rLoc = 715;
 		rType = 0;
 		vrLen = 848;
 		vrLoc = 33;
@@ -4662,7 +4676,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 697;
+		rLoc = 715;
 		rType = 0;
 		vrLen = 835;
 		vrLoc = 80;
@@ -4672,7 +4686,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 697;
+		rLoc = 715;
 		rType = 0;
 		vrLen = 774;
 		vrLoc = 143;
@@ -4682,7 +4696,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 697;
+		rLoc = 715;
 		rType = 0;
 		vrLen = 799;
 		vrLoc = 143;
@@ -4692,7 +4706,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 32";
 		rLen = 0;
-		rLoc = 705;
+		rLoc = 783;
 		rType = 0;
 		vrLen = 799;
 		vrLoc = 143;
@@ -5502,7 +5516,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2014";
 		rLen = 0;
-		rLoc = 71623;
+		rLoc = 71635;
 		rType = 0;
 		vrLen = 889;
 		vrLoc = 69305;
@@ -5512,7 +5526,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71714;
+		rLoc = 71726;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 69324;
@@ -5522,7 +5536,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71682;
+		rLoc = 71694;
 		rType = 0;
 		vrLen = 932;
 		vrLoc = 69324;
@@ -6317,7 +6331,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 2015";
 		rLen = 0;
-		rLoc = 71682;
+		rLoc = 71694;
 		rType = 0;
 		vrLen = 932;
 		vrLoc = 69324;
@@ -6327,7 +6341,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1853";
 		rLen = 0;
-		rLoc = 67848;
+		rLoc = 67860;
 		rType = 0;
 		vrLen = 966;
 		vrLoc = 65535;
@@ -6337,7 +6351,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1834";
 		rLen = 0;
-		rLoc = 67353;
+		rLoc = 67149;
 		rType = 0;
 		vrLen = 1020;
 		vrLoc = 65535;
@@ -6757,7 +6771,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1834";
 		rLen = 0;
-		rLoc = 67353;
+		rLoc = 67149;
 		rType = 0;
 		vrLen = 1018;
 		vrLoc = 65535;
@@ -7277,7 +7291,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 32";
 		rLen = 0;
-		rLoc = 705;
+		rLoc = 783;
 		rType = 0;
 		vrLen = 797;
 		vrLoc = 143;
@@ -7287,7 +7301,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 696;
+		rLoc = 714;
 		rType = 0;
 		vrLen = 793;
 		vrLoc = 146;
@@ -7297,7 +7311,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 696;
+		rLoc = 714;
 		rType = 0;
 		vrLen = 795;
 		vrLoc = 146;
@@ -8264,9 +8278,9 @@
 	};
 	C257F144154E71AE00270D77 /* Dirac2D.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1440}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1498}}";
 			sepNavSelRange = "{2070, 0}";
-			sepNavVisRange = "{1511, 1219}";
+			sepNavVisRange = "{1884, 1374}";
 		};
 	};
 	C257F147154E71AE00270D77 /* Contact.h */ = {
@@ -8355,9 +8369,9 @@
 	};
 	C257F159154E71AE00270D77 /* memoryAllocator.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1519, 1737}}";
-			sepNavSelRange = "{1544, 4}";
-			sepNavVisRange = "{1335, 1197}";
+			sepNavIntBoundsRect = "{{0, 0}, {1519, 1722}}";
+			sepNavSelRange = "{2020, 0}";
+			sepNavVisRange = "{1335, 1117}";
 			sepNavWindowFrame = "{{6, 60}, {1914, 997}}";
 		};
 	};
@@ -8730,7 +8744,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1866";
 		rLen = 0;
-		rLoc = 68146;
+		rLoc = 68158;
 		rType = 0;
 		vrLen = 818;
 		vrLoc = 64987;
@@ -8740,7 +8754,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1878";
 		rLen = 0;
-		rLoc = 67848;
+		rLoc = 67860;
 		rType = 0;
 		vrLen = 964;
 		vrLoc = 66512;
@@ -8750,7 +8764,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1878";
 		rLen = 0;
-		rLoc = 67848;
+		rLoc = 67860;
 		rType = 0;
 		vrLen = 1000;
 		vrLoc = 66552;
@@ -10742,7 +10756,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 675;
+		rLoc = 693;
 		rType = 0;
 		vrLen = 751;
 		vrLoc = 203;
@@ -11264,7 +11278,7 @@
 		fRef = 35DC47151657CA2400B0BD69 /* Coin.cpp */;
 		name = "Coin.cpp: 10";
 		rLen = 0;
-		rLoc = 143;
+		rLoc = 229;
 		rType = 0;
 		vrLen = 228;
 		vrLoc = 0;
@@ -11284,7 +11298,7 @@
 		fRef = 35DC47181657CA4200B0BD69 /* Coin.h */;
 		name = "Coin.h: 36";
 		rLen = 0;
-		rLoc = 514;
+		rLoc = 525;
 		rType = 0;
 		vrLen = 562;
 		vrLoc = 0;
@@ -11304,7 +11318,7 @@
 		fRef = 355FCBDD1658A42D004D4C5E /* ObjectFactory.h */;
 		name = "ObjectFactory.h: 30";
 		rLen = 0;
-		rLoc = 413;
+		rLoc = 425;
 		rType = 0;
 		vrLen = 693;
 		vrLoc = 0;
@@ -11314,7 +11328,7 @@
 		fRef = 355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */;
 		name = "ObjectFactory.cpp: 23";
 		rLen = 0;
-		rLoc = 531;
+		rLoc = 898;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 391;
@@ -11338,6 +11352,136 @@
 		rType = 0;
 		vrLen = 1441;
 		vrLoc = 1993;
+	};
+	C293049C166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 35530055163C14430037A4E5 /* SimpleVehicle.cpp */;
+		name = "SimpleVehicle.cpp: 106";
+		rLen = 0;
+		rLoc = 3044;
+		rType = 0;
+		vrLen = 1443;
+		vrLoc = 1993;
+	};
+	C293049D166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F159154E71AE00270D77 /* memoryAllocator.h */;
+		name = "memoryAllocator.h: 88";
+		rLen = 0;
+		rLoc = 2020;
+		rType = 0;
+		vrLen = 1117;
+		vrLoc = 1335;
+	};
+	C293049E166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 355FCBE5165903AB004D4C5E /* memoryBlockAllocator.h */;
+		name = "memoryBlockAllocator.h: 63";
+		rLen = 0;
+		rLoc = 1662;
+		rType = 0;
+		vrLen = 819;
+		vrLoc = 1271;
+	};
+	C293049F166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C257F144154E71AE00270D77 /* Dirac2D.h */;
+		name = "Dirac2D.h: 58";
+		rLen = 0;
+		rLoc = 2070;
+		rType = 0;
+		vrLen = 1374;
+		vrLoc = 1884;
+	};
+	C29304A0166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3553008E163C15A80037A4E5 /* main.cpp */;
+		name = "main.cpp: 232";
+		rLen = 0;
+		rLoc = 4485;
+		rType = 0;
+		vrLen = 1148;
+		vrLoc = 3805;
+	};
+	C29304A1166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */;
+		name = "memoryBlockAllocator.cpp: 69";
+		rLen = 0;
+		rLoc = 1007;
+		rType = 0;
+		vrLen = 801;
+		vrLoc = 344;
+	};
+	C29304A2166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 1850";
+		rLen = 0;
+		rLoc = 66761;
+		rType = 0;
+		vrLen = 1993;
+		vrLoc = 65669;
+	};
+	C29304A3166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */;
+		name = "ObjectFactory.cpp: 29";
+		rLen = 0;
+		rLoc = 813;
+		rType = 0;
+		vrLen = 1052;
+		vrLoc = 42;
+	};
+	C29304A4166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C200559E163FC7A9002D1565 /* GameObject.h */;
+		name = "GameObject.h: 68";
+		rLen = 0;
+		rLoc = 939;
+		rType = 0;
+		vrLen = 629;
+		vrLoc = 144;
+	};
+	C29304A5166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 355FCBDD1658A42D004D4C5E /* ObjectFactory.h */;
+		name = "ObjectFactory.h: 30";
+		rLen = 0;
+		rLoc = 439;
+		rType = 0;
+		vrLen = 844;
+		vrLoc = 40;
+	};
+	C29304A6166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 35DC47151657CA2400B0BD69 /* Coin.cpp */;
+		name = "Coin.cpp: 8";
+		rLen = 0;
+		rLoc = 91;
+		rType = 0;
+		vrLen = 256;
+		vrLoc = 0;
+	};
+	C29304A7166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 35DC47181657CA4200B0BD69 /* Coin.h */;
+		name = "Coin.h: 37";
+		rLen = 7;
+		rLoc = 570;
+		rType = 0;
+		vrLen = 562;
+		vrLoc = 0;
+	};
+	C29304A8166CBB9C00B517F6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 35DC47181657CA4200B0BD69 /* Coin.h */;
+		name = "Coin.h: 37";
+		rLen = 0;
+		rLoc = 551;
+		rType = 0;
+		vrLen = 579;
+		vrLoc = 0;
 	};
 	C293F7E41649275700B517F6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -13491,7 +13635,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1834";
 		rLen = 0;
-		rLoc = 67353;
+		rLoc = 67149;
 		rType = 0;
 		vrLen = 1147;
 		vrLoc = 65794;
@@ -14995,7 +15139,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 696;
+		rLoc = 714;
 		rType = 0;
 		vrLen = 794;
 		vrLoc = 146;
@@ -15005,7 +15149,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 35";
 		rLen = 0;
-		rLoc = 737;
+		rLoc = 815;
 		rType = 0;
 		vrLen = 829;
 		vrLoc = 147;
@@ -15015,7 +15159,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 35";
 		rLen = 0;
-		rLoc = 737;
+		rLoc = 815;
 		rType = 0;
 		vrLen = 796;
 		vrLoc = 180;
@@ -15035,7 +15179,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 35";
 		rLen = 0;
-		rLoc = 737;
+		rLoc = 815;
 		rType = 0;
 		vrLen = 311;
 		vrLoc = 477;
@@ -15045,7 +15189,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 34";
 		rLen = 0;
-		rLoc = 735;
+		rLoc = 813;
 		rType = 0;
 		vrLen = 823;
 		vrLoc = 180;
@@ -15152,7 +15296,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 1866";
 		rLen = 0;
-		rLoc = 68146;
+		rLoc = 68158;
 		rType = 0;
 		vrLen = 815;
 		vrLoc = 64990;
@@ -15202,7 +15346,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 35";
 		rLen = 0;
-		rLoc = 737;
+		rLoc = 815;
 		rType = 0;
 		vrLen = 311;
 		vrLoc = 477;
@@ -15959,7 +16103,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 34";
 		rLen = 0;
-		rLoc = 735;
+		rLoc = 813;
 		rType = 0;
 		vrLen = 801;
 		vrLoc = 180;
@@ -15969,7 +16113,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 697;
+		rLoc = 715;
 		rType = 0;
 		vrLen = 778;
 		vrLoc = 203;
@@ -15979,7 +16123,7 @@
 		fRef = 35D61658163C266900AE9631 /* FirstGame.cpp */;
 		name = "FirstGame.cpp: 30";
 		rLen = 0;
-		rLoc = 697;
+		rLoc = 715;
 		rType = 0;
 		vrLen = 802;
 		vrLoc = 203;

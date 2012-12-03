@@ -276,7 +276,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
+									<integer>23</integer>
 									<integer>2</integer>
 									<integer>1</integer>
 									<integer>0</integer>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>C21DD0BD1526FAC30008ADD0</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SimpleVehicle.cpp</string>
+								<string>Coin.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>C21DD0BE1526FAC30008ADD0</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SimpleVehicle.cpp</string>
+										<string>Coin.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>C29303B4165E1E8000B517F6</string>
+										<string>C29304A8166CBB9C00B517F6</string>
 										<key>history</key>
 										<array>
 											<string>C257F9541552CF8000270D77</string>
@@ -460,25 +460,25 @@
 											<string>C29302851656610500B517F6</string>
 											<string>C29302861656610500B517F6</string>
 											<string>C29302891656610500B517F6</string>
-											<string>C29302B31656652900B517F6</string>
 											<string>C29302B41656652900B517F6</string>
 											<string>C29302B71656652900B517F6</string>
 											<string>C29302CE1656660D00B517F6</string>
 											<string>C2930379165E107B00B517F6</string>
-											<string>C293037D165E107B00B517F6</string>
-											<string>C293037E165E107B00B517F6</string>
-											<string>C293037F165E107B00B517F6</string>
 											<string>C2930380165E107B00B517F6</string>
-											<string>C29303AA165E1E8000B517F6</string>
-											<string>C29303AB165E1E8000B517F6</string>
 											<string>C29303AC165E1E8000B517F6</string>
-											<string>C29303AD165E1E8000B517F6</string>
 											<string>C29303AE165E1E8000B517F6</string>
-											<string>C29303AF165E1E8000B517F6</string>
-											<string>C29303B0165E1E8000B517F6</string>
-											<string>C29303B1165E1E8000B517F6</string>
-											<string>C29303B2165E1E8000B517F6</string>
-											<string>C29303B3165E1E8000B517F6</string>
+											<string>C293049C166CBB9C00B517F6</string>
+											<string>C293049D166CBB9C00B517F6</string>
+											<string>C293049E166CBB9C00B517F6</string>
+											<string>C293049F166CBB9C00B517F6</string>
+											<string>C29304A0166CBB9C00B517F6</string>
+											<string>C29304A1166CBB9C00B517F6</string>
+											<string>C29304A2166CBB9C00B517F6</string>
+											<string>C29304A3166CBB9C00B517F6</string>
+											<string>C29304A4166CBB9C00B517F6</string>
+											<string>C29304A5166CBB9C00B517F6</string>
+											<string>C29304A6166CBB9C00B517F6</string>
+											<string>C29304A7166CBB9C00B517F6</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -492,18 +492,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1580, 721}}</string>
+								<string>{{0, 0}, {1580, 731}}</string>
 								<key>RubberWindowFrame</key>
 								<string>3 115 1920 943 0 0 1920 1058 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>721pt</string>
+							<string>731pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>176pt</string>
+							<string>166pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -571,7 +571,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1580, 149}}</string>
+										<string>{{10, 27}, {1580, 139}}</string>
 										<key>RubberWindowFrame</key>
 										<string>3 115 1920 943 0 0 1920 1058 </string>
 									</dict>
@@ -796,7 +796,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>C29303B5165E1E8000B517F6</string>
 		<string>C293038F165E107D00B517F6</string>
 		<string>C2930390165E107D00B517F6</string>
 		<string>/Users/prasantha/SVN/Dirac2d/Dirac2D.xcodeproj</string>

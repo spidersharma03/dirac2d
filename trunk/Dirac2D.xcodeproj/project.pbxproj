@@ -86,6 +86,7 @@
 		C257F93B1552CD7A00270D77 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F93A1552CD7A00270D77 /* Circle.cpp */; };
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
 		C293029C1656635A00B517F6 /* GameCollisions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C293029B1656635A00B517F6 /* GameCollisions.cpp */; };
+		C2930491166CB56700B517F6 /* memoryBlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */; };
 		C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
 		C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B5361581CA820040896A /* DistanceConstraint.cpp */; };
 		C29B9C1C15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29B9C1B15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp */; };
@@ -693,6 +694,7 @@
 				C293029C1656635A00B517F6 /* GameCollisions.cpp in Sources */,
 				35DC47161657CA2500B0BD69 /* Coin.cpp in Sources */,
 				355FCBDE1658A42D004D4C5E /* ObjectFactory.cpp in Sources */,
+				C2930491166CB56700B517F6 /* memoryBlockAllocator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

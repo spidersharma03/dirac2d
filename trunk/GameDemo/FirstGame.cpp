@@ -8,6 +8,7 @@
 
 #include "../Dirac2D/Dirac2D.h"
 
+#include "Coin.h"
 #include "FirstGame.h"
 #include "SimpleVehicle.h"
 #include "Camera.h"
@@ -29,7 +30,10 @@ FirstGame::FirstGame()
 	m_pTerrainGenerator = new TerrainGenerator(this);
 	
 	m_pObjectFactory = new ObjectFactory(this);
-
+	
+	CoinInfo cInfo;
+	m_pObjectFactory->createObject(cInfo);
+	
     m_pGameCollisionListener = new GameCollisionListener(this);
     
 	m_StepSize = 1.0f/1600.0f;

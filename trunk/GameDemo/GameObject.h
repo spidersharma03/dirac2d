@@ -60,5 +60,13 @@ protected:
 	GameObjectInfo m_ObjectInfo;
 };
 
+class GameObjectList
+{
+public:
+	GameObjectList* m_pNext;
+	GameObjectList* m_pPrev;
+	GameObject* m_pObject;
+};
+
 #endif
 
