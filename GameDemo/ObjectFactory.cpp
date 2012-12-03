@@ -8,7 +8,6 @@
  */
 
 #include "ObjectFactory.h"
-#include "../Dirac2D/Dirac2D.h"
 #include "FirstGame.h"
 #include "Camera.h"
 #include "Coin.h"
@@ -18,9 +17,35 @@ ObjectFactory::ObjectFactory(FirstGame* pGame) : m_pGame( pGame )
 	m_vecPhysicalBodies.reserve(MAX_COINS_ON_SCREEN);
     
     m_pCoinPool = new MemoryAllocator<Coin>(MAX_COINS_ON_SCREEN);
+	m_pBlockAllocator = new MemoryBlockAllocator();
 }
 
-void ObjectFactory::createObjects(GameObjectInfo gInfo ,int numObjects)
+GameObject* ObjectFactory::createObject(GameObjectInfo gInfo)
+{
+	GameObject* pObject = 0;
+	int size_ = 0;
+	if( gInfo.m_ObjectType == EOT_COIN )
+		size_ = sizeof(Coin);
+	switch (gInfo.m_ObjectType) {
+		case EOT_COIN:
+			pObject = new(m_pBlockAllocator->Allocate(sizeof(size_))) Coin();
+			break;
+		default:
+			break;
+	}
+	return pObject;
+}
+
+GameObjectList* ObjectFactory::createObjects(GameObjectInfo gInfo ,int numObjects)
+{
+	return 0;
+}
+
+void ObjectFactory::destroyObject( GameObject* pObject )
+{
+}
+
+void ObjectFactory::destroyObjects( GameObjectList* pObjectList )
 {
 }
 

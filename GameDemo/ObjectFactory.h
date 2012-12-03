@@ -26,9 +26,15 @@ class ObjectFactory : public IUpdatable
 public:
 	
 	ObjectFactory(FirstGame* pGame);
+		
+	GameObjectList* createObjects(GameObjectInfo gInfo ,int numObjects);
+
+	GameObject* createObject(GameObjectInfo gInfo);
+
+	void destroyObjects( GameObjectList* pObjectList );
+
+	void destroyObject( GameObject* pObject );
 	
-	void createObjects(GameObjectInfo gInfo ,int numObjects);
-					  
 	void generateCoins( Vector2f* positions, int numCoins );
 	
 	virtual void update(float dt);
@@ -40,6 +46,7 @@ private:
 	vector<PhysicalBody*> m_vecPhysicalBodies;
     
     MemoryAllocator<Coin>* m_pCoinPool;
+	MemoryBlockAllocator *m_pBlockAllocator;
 };
 
 #endif
