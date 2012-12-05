@@ -15,6 +15,8 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
 END_NAMESPACE_DIRAC2D
 
+class FirstGame;
+
 struct CoinInfo : public GameObjectInfo
 {
 	int m_Value;
@@ -24,20 +26,25 @@ struct CoinInfo : public GameObjectInfo
 class Coin : public GameObject
 {
 public:
-    Coin(CoinInfo cInfo);
-    
-	Coin();
-	
-    virtual void update(float dt);
+	virtual void update(float dt);
     
     PhysicalBody* getPhysicalBody()
     {
         return m_pBody;
     }
 private:
+    Coin(CoinInfo cInfo, FirstGame* pGame);
+    
+	Coin(FirstGame* pGame);
+	
+	~Coin();
+	
+	friend class ObjectFactory;
+private:
 	int m_Value;
 	float m_Radius;
     PhysicalBody* m_pBody;
+	static FirstGame* m_pGame;
 };
 
 #endif
