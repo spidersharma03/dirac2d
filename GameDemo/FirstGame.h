@@ -6,14 +6,13 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#ifndef _FIRST_GAME_H_
+#define _FIRST_GAME_H_
 
 #include <vector>
 #include "Game.h"
 
 using namespace std;
-
-#ifndef _FIRST_GAME_H_
-#define _FIRST_GAME_H_
 
 class SimpleVehicle;
 class Camera;
@@ -27,6 +26,7 @@ USE_NAMESPACE_DIRAC2D
 class GameObject;
 class TerrainGenerator;
 class ObjectFactory;
+class ObjectGenerator;
 class GameCollisionListener;
 
 class FirstGame : public Game
@@ -79,6 +79,7 @@ private:
 	PhysicalWorld* m_pWorld;
 	Camera* m_pCamera;
 	ObjectFactory* m_pObjectFactory;
+	ObjectGenerator* m_pObjectGenerator;
 	GameCollisionListener* m_pGameCollisionListener;
     
 	float m_StepSize;

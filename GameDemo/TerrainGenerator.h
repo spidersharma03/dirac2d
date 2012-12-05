@@ -49,7 +49,12 @@ public:
         if( smoothness > m_vecTerrainPoints.size()/3-1 ) smoothness = m_vecTerrainPoints.size()/3-1;
         m_SmoothNess = smoothness;
     }
-
+	
+	int getCurvePointsArray(const float* pCurvePoints)
+	{
+		pCurvePoints = curvePoints;
+		return nCurvePoints;
+	}
 protected:
     
 	
@@ -93,6 +98,8 @@ protected:
 	
 	double m_TerrainSwitchTime;
 	Vector2f m_LastPoint; // 
+	
+	int nCurvePoints;
 };
 
 #endif

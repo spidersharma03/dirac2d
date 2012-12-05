@@ -3,7 +3,6 @@
 //  Dirac2D
 //
 //  Created by Prashant Sharma on 27/10/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #include "../Dirac2D/Dirac2D.h"
@@ -14,6 +13,7 @@
 #include "Camera.h"
 #include "TerrainGenerator.h"
 #include "ObjectFactory.h"
+#include "ObjectGenerator.h"
 #include "GameCollisions.h"
 
 FirstGame::FirstGame()
@@ -30,6 +30,8 @@ FirstGame::FirstGame()
 	m_pTerrainGenerator = new TerrainGenerator(this);
 	
 	m_pObjectFactory = new ObjectFactory(this);
+	
+	m_pObjectGenerator = new ObjectGenerator(this);
 	
 	CoinInfo cInfo;
 	m_pObjectFactory->createObject(cInfo);
@@ -50,6 +52,8 @@ void FirstGame::initGameFromFile(const char* fileName)
 
 void FirstGame::gameLoop()
 {
+	m_pObjectGenerator->manageObjects();
+	
     m_pWorld->Step(m_StepSize);
 	
     m_pObjectFactory->update(m_StepSize);

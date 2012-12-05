@@ -55,7 +55,6 @@ Vector2f sinWaveSample( float t )
 
 float knots[130];
 float controlPoints[200];
-int nCurvePoints = 120;
 
 int numSampleFunctions = 4;
 SampleFunction funcArray[] = {linearSample, squareWaveSample, sinWaveSample, sinWaveSample};
@@ -98,6 +97,8 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 	m_StartTime = m_Timer.getCurrentTime();
 	
 	m_TerrainSwitchTime = 10000.0;
+	
+	nCurvePoints = 120;
 }
 
 void TerrainGenerator::update(float dt)

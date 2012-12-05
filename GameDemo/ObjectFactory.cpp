@@ -23,12 +23,10 @@ ObjectFactory::ObjectFactory(FirstGame* pGame) : m_pGame( pGame )
 GameObject* ObjectFactory::createObject(GameObjectInfo gInfo)
 {
 	GameObject* pObject = 0;
-	int size_ = 0;
-	if( gInfo.m_ObjectType == EOT_COIN )
-		size_ = sizeof(Coin);
+	
 	switch (gInfo.m_ObjectType) {
 		case EOT_COIN:
-			pObject = new(m_pBlockAllocator->Allocate(sizeof(size_))) Coin();
+			pObject = new(m_pBlockAllocator->Allocate(sizeof(Coin))) Coin((CoinInfo&)gInfo, m_pGame);
 			break;
 		default:
 			break;
@@ -43,6 +41,13 @@ GameObjectList* ObjectFactory::createObjects(GameObjectInfo gInfo ,int numObject
 
 void ObjectFactory::destroyObject( GameObject* pObject )
 {
+	switch (pObject->getGameObjectInfo().m_ObjectType) {
+		case EOT_COIN:
+			m_pBlockAllocator->Free(pObject, sizeof(Coin));
+			break;
+		default:
+			break;
+	}
 }
 
 void ObjectFactory::destroyObjects( GameObjectList* pObjectList )
