@@ -50,11 +50,15 @@ public:
         m_SmoothNess = smoothness;
     }
 	
-	int getCurvePointsArray(const float* pCurvePoints)
+	float* getCurvePointsArray()
 	{
-		pCurvePoints = curvePoints;
-		return nCurvePoints;
+		return curvePoints;
 	}
+    
+    int getNumTerrainPoints()
+    {
+        return nCurvePoints;
+    }
 protected:
     
 	

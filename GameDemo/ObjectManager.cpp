@@ -7,14 +7,14 @@
  */
 
 #include "../Dirac2D/Dirac2D.h"
-#include "ObjectGenerator.h"
+#include "ObjectManager.h"
 #include "FirstGame.h"
 #include "Camera.h"
 #include "ObjectFactory.h"
 #include "Coin.h"
 #include "ObjectPlacementSrategy.h"
 
-ObjectGenerator::ObjectGenerator(FirstGame* pGame)
+ObjectManager::ObjectManager(FirstGame* pGame)
 {
 	m_pGame = pGame;
     m_pObjects = 0;
@@ -22,7 +22,7 @@ ObjectGenerator::ObjectGenerator(FirstGame* pGame)
     m_pObjectPool = new MemoryAllocator<GameObjectList>(MAX_GAME_OBJECTS);
 }
 
-void ObjectGenerator::manageObjects()
+void ObjectManager::manageObjects()
 {    
 	static double initTime = m_Timer.getCurrentTime();
     double time = m_Timer.getCurrentTime();
@@ -31,12 +31,10 @@ void ObjectGenerator::manageObjects()
         initTime = time;
         //
         generateCoins();
-	}
-    
-    cullObjects();
+	}    
 }
 
-void ObjectGenerator::cullObjects()
+void ObjectManager::cullObjects()
 {
     GameObjectList* pList = m_pObjects;
     
@@ -47,8 +45,10 @@ void ObjectGenerator::cullObjects()
 	
     float R = ( swh + swh * 2.0f );
     
-    while (pList->m_pNext) 
+    int n = 0;
+    while (pList) 
     {
+        n++;
         GameObject* pObject = pList->m_pObject;
         bool bRes =  (pCamera->getPosition().x - pObject->getPosition().x) > R;
         if( bRes )
@@ -56,17 +56,18 @@ void ObjectGenerator::cullObjects()
             removeFromPool(pList);
             pObjFactory->destroyObject(pObject);
         }
-    }
+        pList = pList->m_pNext;
+    }  
 }
 
-void ObjectGenerator::generateCoins() 
+void ObjectManager::generateCoins() 
 {
     ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
     
     // Coin info. 
     CoinInfo cInfo;
     cInfo.m_Radius = 0.05f;
-    
+
     // Create a list of Coins
     GameObjectList pList[NUM_COINS];
     GameObjectList* pCurrent = 0;
@@ -77,6 +78,8 @@ void ObjectGenerator::generateCoins()
        GameObject* pObject = pObjFactory->createObject(cInfo);
        pList[i].m_pObject = pObject;
        pList[i].m_pPrev = pCurrent;
+       if( pCurrent )
+            pCurrent->m_pNext = &pList[i];
        pList[i].m_pNext = 0;
        pCurrent = &pList[i];
     }
@@ -93,16 +96,29 @@ void ObjectGenerator::generateCoins()
     }
 }
 
-ObjectGenerator::~ObjectGenerator()
+void ObjectManager::update(float dt)
 {
-    while (m_pObjects->m_pNext) {
+    manageObjects();
+    GameObjectList* pList = m_pObjects;
+    while (pList) {
+        pList->m_pObject->update(dt);
+        pList = pList->m_pNext;
+    }
+    cullObjects();
+}
+
+ObjectManager::~ObjectManager()
+{
+    GameObjectList* pList = m_pObjects;
+    while (pList) {
         m_pGame->getObjectFactory()->destroyObject(m_pObjects->m_pObject);
+        pList = pList->m_pNext;
     }
     delete m_pObjectPool;
     m_pObjects = 0;
 }
 
-void ObjectGenerator::addToPool(GameObjectList* pObjectList)
+void ObjectManager::addToPool(GameObjectList* pObjectList)
 {
     pObjectList->m_pPrev = 0;
     pObjectList->m_pNext = m_pObjects;
@@ -114,7 +130,7 @@ void ObjectGenerator::addToPool(GameObjectList* pObjectList)
     m_pObjects = pObjectList;
 }
 
-void ObjectGenerator::removeFromPool(GameObjectList* pObjectList)
+void ObjectManager::removeFromPool(GameObjectList* pObjectList)
 {
     if( pObjectList->m_pPrev )
 	{
@@ -128,5 +144,5 @@ void ObjectGenerator::removeFromPool(GameObjectList* pObjectList)
 	{
 		pObjectList->m_pNext->m_pPrev = pObjectList->m_pPrev;
 	}
-  
+    m_pObjectPool->Free(pObjectList);
 }

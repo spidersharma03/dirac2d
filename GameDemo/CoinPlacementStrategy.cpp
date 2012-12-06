@@ -19,9 +19,12 @@ CoinPlacementStraregy::CoinPlacementStraregy( FirstGame* pGame ) : ObjectPlaceme
 
 void CoinPlacementStraregy::placeObjects(GameObjectList* pList, int numObjects)
 {
+    dAssert( (pList->m_pObject->getGameObjectInfo().m_ObjectType == EOT_COIN ));
+    
 	TerrainGenerator* pTerrainGenerator = m_pGame->getTerrainGenerator();
 	float* pCurvePoints;
-	int nCurvePoints = pTerrainGenerator->getCurvePointsArray(pCurvePoints);
+    int nCurvePoints = pTerrainGenerator->getNumTerrainPoints();
+	pCurvePoints = pTerrainGenerator->getCurvePointsArray();
 	Vector2f coinPos[20];
 	int n = 2*nCurvePoints-40;
 	for (int i=0; i<2*numObjects; i+=2) {
@@ -29,10 +32,11 @@ void CoinPlacementStraregy::placeObjects(GameObjectList* pList, int numObjects)
 		n += 2;
 	}
 	int i = 0;
-	while (pList->m_pNext) 
+	while (pList) 
 	{
 		Coin* pCoin = (Coin*)pList->m_pObject;
 		pCoin->getPhysicalBody()->setPosition(coinPos[i]);
 		i++;
-	}
+        pList = pList->m_pNext;
+    }
 }

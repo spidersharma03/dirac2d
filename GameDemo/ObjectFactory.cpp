@@ -20,7 +20,7 @@ ObjectFactory::ObjectFactory(FirstGame* pGame) : m_pGame( pGame )
 	m_pBlockAllocator = new MemoryBlockAllocator();
 }
 
-GameObject* ObjectFactory::createObject(GameObjectInfo gInfo)
+GameObject* ObjectFactory::createObject(GameObjectInfo& gInfo)
 {
 	GameObject* pObject = 0;
 	
@@ -43,6 +43,7 @@ void ObjectFactory::destroyObject( GameObject* pObject )
 {
 	switch (pObject->getGameObjectInfo().m_ObjectType) {
 		case EOT_COIN:
+            ((Coin*)pObject)->~Coin();
 			m_pBlockAllocator->Free(pObject, sizeof(Coin));
 			break;
 		default:
@@ -52,6 +53,11 @@ void ObjectFactory::destroyObject( GameObject* pObject )
 
 void ObjectFactory::destroyObjects( GameObjectList* pObjectList )
 {
+}
+
+void ObjectFactory::createObjects(GAME_OBJECT_TYPE objType, int numObjects)
+{
+    
 }
 
 void ObjectFactory::update(float dt)

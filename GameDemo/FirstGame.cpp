@@ -13,8 +13,9 @@
 #include "Camera.h"
 #include "TerrainGenerator.h"
 #include "ObjectFactory.h"
-#include "ObjectGenerator.h"
+#include "ObjectManager.h"
 #include "GameCollisions.h"
+#include "CoinPlacementStrategy.h"
 
 FirstGame::FirstGame()
 {
@@ -31,12 +32,11 @@ FirstGame::FirstGame()
 	
 	m_pObjectFactory = new ObjectFactory(this);
 	
-	m_pObjectGenerator = new ObjectGenerator(this);
-	
-	CoinInfo cInfo;
-	m_pObjectFactory->createObject(cInfo);
+	m_pObjectManager = new ObjectManager(this);
 	
     m_pGameCollisionListener = new GameCollisionListener(this);
+    
+    m_pObjectPlacementStrategy[0] = new CoinPlacementStraregy(this);
     
 	m_StepSize = 1.0f/1600.0f;
 }
@@ -51,12 +51,10 @@ void FirstGame::initGameFromFile(const char* fileName)
 }
 
 void FirstGame::gameLoop()
-{
-	m_pObjectGenerator->manageObjects();
-	
+{	
     m_pWorld->Step(m_StepSize);
 	
-    m_pObjectFactory->update(m_StepSize);
+    m_pObjectManager->update(m_StepSize);
     
     m_pTerrainGenerator->update(m_StepSize);
     
@@ -75,4 +73,9 @@ void FirstGame::render()
 void FirstGame::keyProcessor(unsigned char key, int x, int y)
 {
     
+}
+
+void FirstGame::placeObjects(GameObjectList* pList, int numObjects)
+{
+    m_pObjectPlacementStrategy[pList->m_pObject->getGameObjectInfo().m_ObjectType]->placeObjects(pList, numObjects);
 }

@@ -32,13 +32,16 @@ Coin::Coin(CoinInfo cInfo, FirstGame* pGame) : GameObject(cInfo)
 	m_pBody->m_BodyType = EBT_KINEMATIC;
 	pApp.m_CollisionAttributes.m_Shape = new Circle(m_Radius);
 	PhysicalShape* pShape = m_pBody->createPhysicalShape(pApp);
+    pShape->setUserData(this);
 	pShape->setSensor(true);	
 }
 
 void Coin::update(float dt)
 {
+    m_Position = m_pBody->m_Position;
 }
 
 Coin::~Coin()
 {
+    m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pBody);
 }

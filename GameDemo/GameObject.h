@@ -21,7 +21,6 @@ struct GameObjectInfo
 	GAME_OBJECT_TYPE m_ObjectType;
 };
 
-
 class GameObject : public IUpdatable
 {
 public:
@@ -29,11 +28,11 @@ public:
 	{
         m_ObjectInfo.m_ObjectType = EOT_NONE;
 	}
-	
-	GameObject(GameObjectInfo gInfo)
-	{
+	    
+    GameObject(GameObjectInfo gInfo)
+    {
         m_ObjectInfo = gInfo;
-	}
+    }
 	
 	inline Matrix3f getTransform() const
 	{
@@ -54,9 +53,13 @@ public:
 	{
 		return m_ObjectInfo;
 	}
-	
+    
 	virtual void update(float dt){};
 
+    virtual ~GameObject()
+    {
+        
+    }
 protected:
 	Matrix3f m_Transform;
 	Vector2f m_Position;

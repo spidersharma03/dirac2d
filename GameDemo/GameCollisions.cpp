@@ -7,7 +7,11 @@
  */
 #include "GameCollisions.h"
 #include "FirstGame.h"
+#include "ObjectFactory.h"
+#include "ObjectManager.h"
+#include "GameObject.h"
 #include "../Dirac2D/Dirac2D.h"
+
 
 GameCollisionListener::GameCollisionListener(FirstGame* pGame) : m_pGame( pGame )
 {
@@ -17,19 +21,24 @@ GameCollisionListener::GameCollisionListener(FirstGame* pGame) : m_pGame( pGame 
 // Called when two Physical Shapes begin to touch
 void GameCollisionListener::onCollisionEnter(PhysicalShape* pShape1, PhysicalShape* pShape2, ContactManifold& manifold)
 {
-    void* userData1 = pShape1->getUserData();
-    void* userData2 = pShape2->getUserData();
+    GameObject* pObject1 = (GameObject*)pShape1->getUserData();
+    GameObject* pObject2 = (GameObject*)pShape2->getUserData();
     
-    if( userData1 )
+    if( pObject1 )
     {
-        
+        if( pObject1->getGameObjectInfo().m_ObjectType == EOT_COIN  &&
+           pObject2 == 0 )
+        {
+            //m_pGame->getObjectManager()->removeFromPool(pObject1);
+            //m_pGame->getObjectFactory()->destroyObject(pObject1);
+        }
     }
-    if( userData2 )
+    if( pObject2 )
     {
-        
-    }
-    if( ( !pShape1->isSensor() && pShape2->isSensor() ) ||  ( pShape1->isSensor() && !pShape2->isSensor() ) )
-    {
+        if( pObject2->getGameObjectInfo().m_ObjectType == EOT_COIN )
+        {
+            //m_pGame->getObjectFactory()->destroyObject(pObject2);
+        } 
     }
 }
 

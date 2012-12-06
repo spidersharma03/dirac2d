@@ -71,6 +71,8 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 
     m_vecTerrainPoints.push_back(Vector2f(-0.9f,0.0f));
     
+    nCurvePoints = 120;
+
 	generateSamplePoints();
 	generateBSplineCurvePoints();
 	
@@ -80,7 +82,7 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 	m_pTerrainBody->setPosition(Vector2f(0.0f,-0.7f));
 	m_pTerrainBody->m_BodyType = EBT_STATIC;
 	
-	
+
     PhysicalAppearance pApp;
     pApp.m_PhysicalAttributes.m_Friction = 5.0f;
     
@@ -98,7 +100,6 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 	
 	m_TerrainSwitchTime = 10000.0;
 	
-	nCurvePoints = 120;
 }
 
 void TerrainGenerator::update(float dt)
@@ -111,8 +112,6 @@ void TerrainGenerator::update(float dt)
     
     generateBSplineCurvePoints();
 
-	// Place Coins
-	placeCoins();
     //
 	initializeTerrainBody();
 }
@@ -131,7 +130,7 @@ void TerrainGenerator::placeCoins()
             coinPos[i/2] = Vector2f(curvePoints[n], curvePoints[n+1] - 0.4);
             n += 2;
         }
-        m_pGame->getObjectGenerator()->generateCoins(coinPos, numCoins);
+        m_pGame->getObjectFactory()->generateCoins(coinPos, numCoins);
     }
 	
 }
