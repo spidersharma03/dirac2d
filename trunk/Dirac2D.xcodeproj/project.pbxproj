@@ -58,6 +58,8 @@
 		35C07740163C21DC00B32CB4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3553008E163C15A80037A4E5 /* main.cpp */; };
 		35D61659163C266900AE9631 /* FirstGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35D61658163C266900AE9631 /* FirstGame.cpp */; };
 		35DC47161657CA2500B0BD69 /* Coin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35DC47151657CA2400B0BD69 /* Coin.cpp */; };
+		35E02F04166F40B200C3889A /* CoinPlacementStrategy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E02EFC166F400400C3889A /* CoinPlacementStrategy.cpp */; };
+		35E02F0E166FAA3500C3889A /* ObjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E02F0C166FAA3500C3889A /* ObjectManager.cpp */; };
 		35E3A200163D2C0E0023D968 /* TerrainGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */; };
 		35E3A202163D37150023D968 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A201163D37140023D968 /* Camera.cpp */; };
 		75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */; };
@@ -152,6 +154,11 @@
 		35D6165C163C42A800AE9631 /* IRenderable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderable.h; sourceTree = "<group>"; };
 		35DC47151657CA2400B0BD69 /* Coin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Coin.cpp; sourceTree = "<group>"; };
 		35DC47181657CA4200B0BD69 /* Coin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coin.h; sourceTree = "<group>"; };
+		35E02EFC166F400400C3889A /* CoinPlacementStrategy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoinPlacementStrategy.cpp; sourceTree = "<group>"; };
+		35E02EFD166F400400C3889A /* CoinPlacementStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinPlacementStrategy.h; sourceTree = "<group>"; };
+		35E02F00166F400400C3889A /* ObjectPlacementSrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectPlacementSrategy.h; sourceTree = "<group>"; };
+		35E02F0C166FAA3500C3889A /* ObjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectManager.cpp; sourceTree = "<group>"; };
+		35E02F0D166FAA3500C3889A /* ObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectManager.h; sourceTree = "<group>"; };
 		35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainGenerator.h; sourceTree = "<group>"; };
 		35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainGenerator.cpp; sourceTree = "<group>"; };
 		35E3A201163D37140023D968 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
@@ -322,6 +329,11 @@
 		35530053163C141E0037A4E5 /* GameDemo */ = {
 			isa = PBXGroup;
 			children = (
+				35E02F0C166FAA3500C3889A /* ObjectManager.cpp */,
+				35E02F0D166FAA3500C3889A /* ObjectManager.h */,
+				35E02EFC166F400400C3889A /* CoinPlacementStrategy.cpp */,
+				35E02EFD166F400400C3889A /* CoinPlacementStrategy.h */,
+				35E02F00166F400400C3889A /* ObjectPlacementSrategy.h */,
 				355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */,
 				355FCBDD1658A42D004D4C5E /* ObjectFactory.h */,
 				35D6165A163C31CE00AE9631 /* IUpdatable.h */,
@@ -695,6 +707,8 @@
 				35DC47161657CA2500B0BD69 /* Coin.cpp in Sources */,
 				355FCBDE1658A42D004D4C5E /* ObjectFactory.cpp in Sources */,
 				C2930491166CB56700B517F6 /* memoryBlockAllocator.cpp in Sources */,
+				35E02F04166F40B200C3889A /* CoinPlacementStrategy.cpp in Sources */,
+				35E02F0E166FAA3500C3889A /* ObjectManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
