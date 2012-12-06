@@ -102,8 +102,8 @@ dbool EdgeChain::isPointInside(Vector2f& p)
 	
 	for( dint32 e=0; e<m_NumEdges; e++ )
 	{
-		Edge* edge = m_EdgeList + e;
-		edge->m_Vertex1;
+		//Edge* edge = m_EdgeList + e;
+		//edge->m_Vertex1;
 	}
 	return false;
 }

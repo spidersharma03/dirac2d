@@ -112,7 +112,7 @@ static inline void findClosestPoint(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& 
 	
 	T u = 0.0f;
 	
-	if( fabs(Denom) > EPSILON )
+	if( Denom*Denom > EPSILON*EPSILON )
 	{
 		u = (dx * point.x + dy * point.y - dx * p0.x - dy * p0.y)/Denom;
 	}
@@ -130,7 +130,7 @@ static inline void findBaryCentricCoordinate(Vector2<T>& p0, Vector2<T>& p1, Vec
 	T dy = p1.y - p0.y;
 	T Denom = dx*dx + dy*dy;
 		
-	if( fabs(Denom) > EPSILON )
+	if( Denom*Denom > EPSILON*EPSILON )
 	{
 		u = (dx * point.x + dy * point.y - dx * p0.x - dy * p0.y)/Denom;
 	}
