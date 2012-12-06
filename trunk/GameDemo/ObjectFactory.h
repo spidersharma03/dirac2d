@@ -29,12 +29,16 @@ public:
 		
 	GameObjectList* createObjects(GameObjectInfo gInfo ,int numObjects);
 
-	GameObject* createObject(GameObjectInfo gInfo);
+	GameObject* createObject(GameObjectInfo& gInfo);
 
 	void destroyObjects( GameObjectList* pObjectList );
 
 	void destroyObject( GameObject* pObject );
 	
+    void createObjects(GAME_OBJECT_TYPE objType, int numObjects);
+    
+    //void recycleObjects(GAME_OBJECT_TYPE objType, int numObjects);
+    
 	void generateCoins( Vector2f* positions, int numCoins );
 	
 	virtual void update(float dt);

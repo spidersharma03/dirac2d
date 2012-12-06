@@ -24,10 +24,12 @@ END_NAMESPACE_DIRAC2D
 USE_NAMESPACE_DIRAC2D
 
 class GameObject;
+class GameObjectList;
 class TerrainGenerator;
 class ObjectFactory;
-class ObjectGenerator;
+class ObjectManager;
 class GameCollisionListener;
+class ObjectPlacementStraregy;
 
 class FirstGame : public Game
 {
@@ -67,20 +69,27 @@ public:
 		return m_pVehicle;
 	}
 	
-	ObjectFactory* getObjectGenerator()
+	ObjectFactory* getObjectFactory()
 	{
 		return m_pObjectFactory;
 	}
 	
+    ObjectManager* getObjectManager()
+	{
+		return m_pObjectManager;
+	}
 	
+    void placeObjects(GameObjectList* pList, int numObjects);
+    
 private:
     TerrainGenerator* m_pTerrainGenerator;
     SimpleVehicle* m_pVehicle;
 	PhysicalWorld* m_pWorld;
 	Camera* m_pCamera;
 	ObjectFactory* m_pObjectFactory;
-	ObjectGenerator* m_pObjectGenerator;
+	ObjectManager* m_pObjectManager;
 	GameCollisionListener* m_pGameCollisionListener;
+    ObjectPlacementStraregy* m_pObjectPlacementStrategy[10];
     
 	float m_StepSize;
 	

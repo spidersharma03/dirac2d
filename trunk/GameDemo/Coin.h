@@ -19,6 +19,10 @@ class FirstGame;
 
 struct CoinInfo : public GameObjectInfo
 {
+    CoinInfo()
+    {
+        m_ObjectType = EOT_COIN;
+    }
 	int m_Value;
 	float m_Radius;
 };
@@ -37,7 +41,7 @@ private:
     
 	Coin(FirstGame* pGame);
 	
-	~Coin();
+	virtual ~Coin();
 	
 	friend class ObjectFactory;
 private:

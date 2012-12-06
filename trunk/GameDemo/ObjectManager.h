@@ -6,10 +6,11 @@
  *
  */
 
-#ifndef _OBJECT_GENERATOR_H_
-#define _OBJECT_GENERATOR_H_
+#ifndef _OBJECT_MANAGER_H_
+#define _OBJECT_MANAGER_H_
 
 #include "../Dirac2D/Dirac2D.h"
+#include "IUpdatable.h"
 
 USE_NAMESPACE_DIRAC2D
 
@@ -19,10 +20,10 @@ USE_NAMESPACE_DIRAC2D
 class FirstGame;
 class GameObjectList;
 
-class ObjectGenerator
+class ObjectManager : public IUpdatable
 {
 public:
-	ObjectGenerator(FirstGame* pGame);
+	ObjectManager(FirstGame* pGame);
 	
 	// Generate/Destroy Objects
 	void manageObjects();
@@ -31,22 +32,27 @@ public:
     // since the Camera is always moving in front direction, only objects which are left behind are Culled/Destroyed.
     void cullObjects();
     
-private:
-    void generateCoins();   
-    
+    virtual void update(float dt);
+
     // Add Game Objects to the Global List
     void addToPool(GameObjectList* pObjectList);
     
     // Removes Game Objects from the Global List    
     void removeFromPool(GameObjectList* pObjectList);
     
-    ~ObjectGenerator();
+private:
+    void generateCoins();   
+    
+    
+    ~ObjectManager();
     
 private:
 	FirstGame* m_pGame;
 	DTimer m_Timer;
     GameObjectList* m_pObjects;
     MemoryAllocator<GameObjectList> *m_pObjectPool;
+    
+    int m_NumCoins;
 };
 
 #endif
