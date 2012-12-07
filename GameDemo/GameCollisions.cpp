@@ -29,15 +29,15 @@ void GameCollisionListener::onCollisionEnter(PhysicalShape* pShape1, PhysicalSha
         if( pObject1->getGameObjectInfo().m_ObjectType == EOT_COIN  &&
            pObject2 == 0 )
         {
-            //m_pGame->getObjectManager()->removeFromPool(pObject1);
-            //m_pGame->getObjectFactory()->destroyObject(pObject1);
+            m_pGame->getObjectManager()->markObjectsForCleanup(pObject1);
         }
     }
     if( pObject2 )
     {
-        if( pObject2->getGameObjectInfo().m_ObjectType == EOT_COIN )
+        if( pObject2->getGameObjectInfo().m_ObjectType == EOT_COIN 
+		   && pObject1 == 0)
         {
-            //m_pGame->getObjectFactory()->destroyObject(pObject2);
+            m_pGame->getObjectManager()->markObjectsForCleanup(pObject2);
         } 
     }
 }
@@ -50,8 +50,5 @@ void GameCollisionListener::onCollision(PhysicalShape* pShape1, PhysicalShape* p
 // Called when two Physical Shapes begin to seperate
 void GameCollisionListener::onCollisionExit(PhysicalShape* pShape1, PhysicalShape* pShape2, ContactManifold& manifold)
 {
-    if( ( !pShape1->isSensor() && pShape2->isSensor() ) ||  ( pShape1->isSensor() && !pShape2->isSensor() ) )
-    {
-        
-    }
+    
 }

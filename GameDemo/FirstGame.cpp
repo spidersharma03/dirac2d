@@ -75,7 +75,7 @@ void FirstGame::keyProcessor(unsigned char key, int x, int y)
     
 }
 
-void FirstGame::placeObjects(GameObjectList* pList, int numObjects)
+void FirstGame::placeObjects(GameObject* pList, int numObjects)
 {
-    m_pObjectPlacementStrategy[pList->m_pObject->getGameObjectInfo().m_ObjectType]->placeObjects(pList, numObjects);
+    m_pObjectPlacementStrategy[pList->getGameObjectInfo().m_ObjectType]->placeObjects(pList, numObjects);
 }

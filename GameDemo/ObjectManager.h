@@ -11,14 +11,21 @@
 
 #include "../Dirac2D/Dirac2D.h"
 #include "IUpdatable.h"
+#include <set>
 
+using namespace std;
 USE_NAMESPACE_DIRAC2D
+
+
+#define MAX_CRATES_ON_SCREEN 10
+#define MAX_COINS_ON_SCREEN 30
 
 #define MAX_GAME_OBJECTS 200
 #define NUM_COINS 10
 
 class FirstGame;
 class GameObjectList;
+class GameObject;
 
 class ObjectManager : public IUpdatable
 {
@@ -35,23 +42,30 @@ public:
     virtual void update(float dt);
 
     // Add Game Objects to the Global List
-    void addToPool(GameObjectList* pObjectList);
+    void add(GameObject* pObjectList);
     
     // Removes Game Objects from the Global List    
-    void removeFromPool(GameObjectList* pObjectList);
+    void remove(GameObject* pObjectList);
     
+	// Mark these Objects for deletion after the WorldStep.
+	void markObjectsForCleanup(GameObject* pObject);
+	
+	// Removes marked GameObjects from the Game.
+	void cleanup();
 private:
     void generateCoins();   
     
+	void generateCrates();
     
     ~ObjectManager();
     
 private:
 	FirstGame* m_pGame;
 	DTimer m_Timer;
-    GameObjectList* m_pObjects;
-    MemoryAllocator<GameObjectList> *m_pObjectPool;
+    GameObject* m_pObjectList;
     
+	// TODO -- use some different structure
+	set<GameObject*> m_SetMarkedObjects;
     int m_NumCoins;
 };
 

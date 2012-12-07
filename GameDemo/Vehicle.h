@@ -31,6 +31,10 @@ public:
     
     virtual void initFromFile(const char* fileName) = 0;
     
+	virtual void shoot()
+	{
+	}
+	
 	virtual void applyForce( const Vector2f& force )
 	{
 	}

@@ -9,3 +9,4 @@
 
 #include "GameObject.h"
 
+int GameObject::m_ObjectCount = 0;

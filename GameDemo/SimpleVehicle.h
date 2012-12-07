@@ -32,12 +32,16 @@ public:
     
     virtual void render();
     
+	virtual void shoot();
+	
 private:
     FirstGame* m_pGame;
     
     PhysicalBody* m_pVehicleBody;
     
-    
+	// Move this Code to Gun class
+	float m_ShootingInterval;
+    DTimer m_Timer;
 };
 
 #endif

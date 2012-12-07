@@ -16,7 +16,7 @@ class CoinPlacementStraregy : public ObjectPlacementStraregy
 public:
 	CoinPlacementStraregy( FirstGame* pGame );
 	
-	virtual void placeObjects(GameObjectList* pList, int numObjects);
+	virtual void placeObjects(GameObject* pList, int numObjects);
 	
 };
 
