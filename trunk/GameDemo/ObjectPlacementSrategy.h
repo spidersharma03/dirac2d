@@ -10,7 +10,12 @@
 #define _OBJECT_PLACEMENT_STRATEGY_H_
 
 class FirstGame;
-class GameObjectList;
+class GameObject;
+
+
+void placeCoins(FirstGame* pGame ,GameObject* pList, int numObjects);
+
+void placeCrates(FirstGame* pGame ,GameObject* pList, int numObjects, float w, float h);
 
 class ObjectPlacementStraregy 
 {
@@ -20,7 +25,7 @@ public:
 		m_pGame = pGame;
 	}
 	
-	virtual void placeObjects(GameObjectList* pList, int numObjects) = 0;
+	virtual void placeObjects(GameObject* pList, int numObjects) = 0;
 	
 protected:
 	FirstGame* m_pGame;

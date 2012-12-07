@@ -12,6 +12,8 @@ SimpleVehicle::SimpleVehicle(FirstGame* pGame)
 {
     m_pGame = pGame;
     
+	m_ShootingInterval = 500;
+	
     init();
 }
 
@@ -33,34 +35,7 @@ void SimpleVehicle::applyTorqueImpulse( const float torqueImpulse)
 void SimpleVehicle::init()
 {
     PhysicalWorld* pWorld = m_pGame->getPhysicalWorld();
-    // Create Ground Body
-	//PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
-//	pBodyGround->setPosition(Vector2f(1.0f,-0.7f));
-//	pBodyGround->m_BodyType = EBT_STATIC;
-//	PhysicalAppearance pApp;
-//    pApp.m_PhysicalAttributes.m_Friction = 1.0f;
-//	
-//	dint32 edgeCount = 30;
-//	Vector2f vertices[30];
-//	dfloat chainLength = 3.0f;
-//	dfloat ex = 15*chainLength/2;
-//	dfloat ey = 0.0f;
-//	dfloat dx = 10*chainLength/(edgeCount-1);
-//	
-//	vertices[0] = Vector2f(-ex,0.0f);
-//	vertices[1] = Vector2f(0.0f,0.8f);
-//	vertices[2] = Vector2f(ex,0.0f);
-//	
-//	for( dint32 e=0; e<edgeCount; e++ )
-//	{
-//		vertices[e] = Vector2f(ex,ey);
-//		ex -= dx;
-//		ey = -0.0*sin(e*1.39);
-//	}
-//	
-//	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, edgeCount);
-//	pBodyGround->createPhysicalShape(pApp);
-    
+        
 	for( dint32 i=0; i< 1; i++ )
 	{
 		m_pVehicleBody = pWorld->createPhysicalBody();
@@ -126,9 +101,19 @@ void SimpleVehicle::initFromFile(const char* fileName)
 void SimpleVehicle::update(float dt)
 {
     m_Position = m_pVehicleBody->m_Position;
-	//m_pVehicleBody->applyImpulse(Vector2f(0.5f,0.0f), Vector2f(-0.0f,0.0f));
 }
 
 void SimpleVehicle::render()
 {
+}
+
+void SimpleVehicle::shoot()
+{
+	static double initTime = m_Timer.getCurrentTime();
+    double time = m_Timer.getCurrentTime();
+    if( time - initTime > m_ShootingInterval )
+    {
+        initTime = time;
+        //
+	} 
 }

@@ -116,25 +116,6 @@ void TerrainGenerator::update(float dt)
 	initializeTerrainBody();
 }
 
-void TerrainGenerator::placeCoins()
-{
-    static double initTime = m_Timer.getCurrentTime();
-    double time = m_Timer.getCurrentTime();
-    if( time - initTime > 2000 )
-    {
-        initTime = time;
-        int numCoins = 15;
-        Vector2f coinPos[20];
-        int n = 2*nCurvePoints-40;
-        for (int i=0; i<2*numCoins; i+=2) {
-            coinPos[i/2] = Vector2f(curvePoints[n], curvePoints[n+1] - 0.4);
-            n += 2;
-        }
-        m_pGame->getObjectFactory()->generateCoins(coinPos, numCoins);
-    }
-	
-}
-
 void TerrainGenerator::initializeTerrainBody()
 {
 	//return;	
@@ -254,6 +235,7 @@ void TerrainGenerator::changeTerrainShape()
 	if( currentTime - m_StartTime > m_TerrainSwitchTime )
 	{
 		printf("Terrain Shape Changed\n");
+		m_SampleFunctionType = (SAMPLE_FUNCTION_TYPE)f;
 		m_StartTime = currentTime;
 		f++;
         if( f == 3 )

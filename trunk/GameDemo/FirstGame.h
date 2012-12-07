@@ -30,6 +30,8 @@ class ObjectFactory;
 class ObjectManager;
 class GameCollisionListener;
 class ObjectPlacementStraregy;
+class FirstGame;
+
 
 class FirstGame : public Game
 {
@@ -79,8 +81,8 @@ public:
 		return m_pObjectManager;
 	}
 	
-    void placeObjects(GameObjectList* pList, int numObjects);
-    
+    void placeObjects(GameObject* pList, int numObjects);
+    	
 private:
     TerrainGenerator* m_pTerrainGenerator;
     SimpleVehicle* m_pVehicle;

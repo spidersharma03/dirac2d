@@ -49,6 +49,9 @@ private:
 	float m_Radius;
     PhysicalBody* m_pBody;
 	static FirstGame* m_pGame;
+	
+public:
+	static int m_CoinCount;
 };
 
 #endif

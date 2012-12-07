@@ -100,6 +100,7 @@ void keyProcessor(unsigned char key, int x, int y)
 
 			break;
 		case 32:
+			pGame->getVehicle()->shoot();
 			//pGame->getVehicle()->applyImpulse(Vector2f(0.0f,-300.0f));
 			break;
 		case 27:

@@ -10,16 +10,17 @@
 #include "ObjectManager.h"
 #include "FirstGame.h"
 #include "Camera.h"
+#include "TerrainGenerator.h"
 #include "ObjectFactory.h"
 #include "Coin.h"
+#include "Crate.h"
 #include "ObjectPlacementSrategy.h"
 
 ObjectManager::ObjectManager(FirstGame* pGame)
 {
 	m_pGame = pGame;
-    m_pObjects = 0;
-    
-    m_pObjectPool = new MemoryAllocator<GameObjectList>(MAX_GAME_OBJECTS);
+    m_pObjectList = 0;
+    //m_SetMarkedObjects.reserve(100);
 }
 
 void ObjectManager::manageObjects()
@@ -31,12 +32,23 @@ void ObjectManager::manageObjects()
         initTime = time;
         //
         generateCoins();
-	}    
+	} 
+	// Place Stack of Crates only for Linear regions
+	if( m_pGame->getTerrainGenerator()->getSampleFunctionType() == ESFT_LINEAR )
+	{
+		static double initTime = m_Timer.getCurrentTime();
+		double time = m_Timer.getCurrentTime();
+		if( time - initTime > 4000 )
+		{
+			initTime = time;
+			generateCrates();
+		}
+	}
 }
 
 void ObjectManager::cullObjects()
 {
-    GameObjectList* pList = m_pObjects;
+    GameObject* pList = m_pObjectList;
     
     ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
     Camera* pCamera = m_pGame->getCamera();
@@ -49,12 +61,11 @@ void ObjectManager::cullObjects()
     while (pList) 
     {
         n++;
-        GameObject* pObject = pList->m_pObject;
-        bool bRes =  (pCamera->getPosition().x - pObject->getPosition().x) > R;
+        bool bRes =  (pCamera->getPosition().x - pList->getPosition().x) > R;
         if( bRes )
         {
-            removeFromPool(pList);
-            pObjFactory->destroyObject(pObject);
+            remove(pList);
+            pObjFactory->destroyObject(pList);
         }
         pList = pList->m_pNext;
     }  
@@ -62,6 +73,9 @@ void ObjectManager::cullObjects()
 
 void ObjectManager::generateCoins() 
 {
+	if( Coin::m_CoinCount > MAX_COINS_ON_SCREEN )
+		return;
+
     ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
     
     // Coin info. 
@@ -69,80 +83,134 @@ void ObjectManager::generateCoins()
     cInfo.m_Radius = 0.05f;
 
     // Create a list of Coins
-    GameObjectList pList[NUM_COINS];
-    GameObjectList* pCurrent = 0;
+    GameObject *pList[NUM_COINS];
+    GameObject* pCurrent = 0;
 
     // Request for Coins from the Object Factory
     for( int i=0; i<NUM_COINS; i++ )
     {
        GameObject* pObject = pObjFactory->createObject(cInfo);
-       pList[i].m_pObject = pObject;
-       pList[i].m_pPrev = pCurrent;
+       pList[i] = pObject;
+       pList[i]->m_pPrev = pCurrent;
        if( pCurrent )
-            pCurrent->m_pNext = &pList[i];
-       pList[i].m_pNext = 0;
-       pCurrent = &pList[i];
+            pCurrent->m_pNext = pList[i];
+       pList[i]->m_pNext = 0;
+       pCurrent = pList[i];
     }
     
     // Place Coins in the Game
-    m_pGame->placeObjects(pList, NUM_COINS);
+    placeCoins(m_pGame,pList[0], NUM_COINS);
+	
+	for( int i=0; i<NUM_COINS; i++ )
+	{
+		GameObject* pObject = pList[i];
+		add(pObject);
+	}
+}
+
+void ObjectManager::generateCrates() 
+{
+	if( Crate::m_CrateCount > MAX_CRATES_ON_SCREEN )
+		return;
+	
+    ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
     
-    // Add to the Object Pool List
-    for( int i=0; i<NUM_COINS; i++ )
+    // Crate info. 
+    CrateInfo cInfo;
+	cInfo.m_Width  = 0.4f;
+	cInfo.m_Height = 0.3f;
+	
+    // Create a list of Crates
+	int nColumns = 6;
+	int nObjects = nColumns*(nColumns+1)/2;
+    GameObject *pList[nObjects];
+    GameObject* pCurrent = 0;
+	
+    // Request for Crates from the Object Factory
+    for( int i=0; i<nObjects; i++ )
     {
-        GameObjectList *pObjectList = new(m_pObjectPool->Allocate()) GameObjectList();
-        pObjectList->m_pObject = pList[i].m_pObject;
-        addToPool(pObjectList);
+		GameObject* pObject = pObjFactory->createObject(cInfo);
+		pList[i] = pObject;
+		pList[i]->m_pPrev = pCurrent;
+		if( pCurrent )
+            pCurrent->m_pNext = pList[i];
+		pList[i]->m_pNext = 0;
+		pCurrent = pList[i];
     }
+    
+    // Place Crates in the Game
+    placeCrates(m_pGame,pList[0], nColumns, cInfo.m_Width, cInfo.m_Height);
+	
+	for( int i=0; i<nObjects; i++ )
+	{
+		GameObject* pObject = pList[i];
+		add(pObject);
+	}
 }
 
 void ObjectManager::update(float dt)
 {
+	cleanup();
+
     manageObjects();
-    GameObjectList* pList = m_pObjects;
+    GameObject* pList = m_pObjectList;
     while (pList) {
-        pList->m_pObject->update(dt);
+        pList->update(dt);
         pList = pList->m_pNext;
-    }
-    cullObjects();
+    }	
+	cullObjects();
 }
 
 ObjectManager::~ObjectManager()
 {
-    GameObjectList* pList = m_pObjects;
+    GameObject* pList = m_pObjectList;
     while (pList) {
-        m_pGame->getObjectFactory()->destroyObject(m_pObjects->m_pObject);
+        m_pGame->getObjectFactory()->destroyObject(pList);
         pList = pList->m_pNext;
     }
-    delete m_pObjectPool;
-    m_pObjects = 0;
+    m_pObjectList = 0;
 }
 
-void ObjectManager::addToPool(GameObjectList* pObjectList)
+void ObjectManager::markObjectsForCleanup(GameObject* pObject)
 {
-    pObjectList->m_pPrev = 0;
-    pObjectList->m_pNext = m_pObjects;
-    
-    if( m_pObjects )
-    {
-        m_pObjects->m_pPrev = pObjectList;
-    }
-    m_pObjects = pObjectList;
+	m_SetMarkedObjects.insert(pObject);
 }
 
-void ObjectManager::removeFromPool(GameObjectList* pObjectList)
+void ObjectManager::cleanup()
 {
-    if( pObjectList->m_pPrev )
+	while(m_SetMarkedObjects.size() > 0) 
 	{
-		pObjectList->m_pPrev->m_pNext = pObjectList->m_pNext;
+		GameObject* pObject = *(m_SetMarkedObjects.begin());
+		m_SetMarkedObjects.erase(m_SetMarkedObjects.begin());
+		remove(pObject);
+		m_pGame->getObjectFactory()->destroyObject(pObject);
+	}
+}
+
+void ObjectManager::add(GameObject* pObject)
+{
+    pObject->m_pPrev = 0;
+    pObject->m_pNext = m_pObjectList;
+    
+    if( m_pObjectList )
+    {
+        m_pObjectList->m_pPrev = pObject;
+    }
+    m_pObjectList = pObject;
+}
+
+void ObjectManager::remove(GameObject* pObject)
+{
+    if( pObject->m_pPrev )
+	{
+		pObject->m_pPrev->m_pNext = pObject->m_pNext;
 	}
 	else 
 	{
-		m_pObjects = pObjectList->m_pNext;
+		m_pObjectList = pObject->m_pNext;
 	}
-	if( pObjectList->m_pNext )
+	if( pObject->m_pNext )
 	{
-		pObjectList->m_pNext->m_pPrev = pObjectList->m_pPrev;
+		pObject->m_pNext->m_pPrev = pObject->m_pPrev;
 	}
-    m_pObjectPool->Free(pObjectList);
 }

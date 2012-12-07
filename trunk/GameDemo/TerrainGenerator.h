@@ -28,6 +28,7 @@ END_NAMESPACE_DIRAC2D
 // B Spline Based Terrain Generator.
 
 typedef Vector2f (*SampleFunction)(float);
+enum SAMPLE_FUNCTION_TYPE { ESFT_LINEAR };
 
 class TerrainGenerator : public IUpdatable, IRenderable
 {
@@ -59,6 +60,12 @@ public:
     {
         return nCurvePoints;
     }
+	
+	SAMPLE_FUNCTION_TYPE getSampleFunctionType()
+	{
+		return m_SampleFunctionType;
+	}
+	
 protected:
     
 	
@@ -75,9 +82,7 @@ protected:
 	
 	/* Change Shape of the Terrain */
 	void changeTerrainShape();
-	
-	void placeCoins();
-	
+		
 protected:
     
     FirstGame* m_pGame;
@@ -104,6 +109,7 @@ protected:
 	Vector2f m_LastPoint; // 
 	
 	int nCurvePoints;
+	SAMPLE_FUNCTION_TYPE m_SampleFunctionType;
 };
 
 #endif
