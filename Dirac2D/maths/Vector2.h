@@ -39,17 +39,17 @@ public:
 		y = other.y;
 	}
 
-	inline T dot( const Vector2<T>& other)
+	inline T dot( const Vector2<T>& other) const
 	{
 		return x*other.x + y*other.y;
 	}
 
-	inline T cross( const Vector2<T>& other )
+	inline T cross( const Vector2<T>& other ) const
 	{
 		return x*other.y - y*other.x;
 	}
 	
-	inline Vector2<T> cross( const T d )
+	inline Vector2<T> cross( const T d ) const
 	{
 		return Vector2<T>(d*y, -d*x);
 	}
@@ -69,14 +69,14 @@ public:
 		return  v1.x * v2.y - v1.y * v2.x;
 	}
 	
-	inline T distanceSquared( const Vector2<T>& other)
+	inline T distanceSquared( const Vector2<T>& other) const
 	{
 		T dx = x-other.x;
 		T dy = y-other.y;
 		return  dx*dx + dy*dy;
 	}
 	
-	inline T distance( const Vector2<T>& other)
+	inline T distance( const Vector2<T>& other) const
 	{
 		T dx = x-other.x;
 		T dy = y-other.y;
@@ -97,12 +97,12 @@ public:
 		return  sqrt(dx*dx + dy*dy);
 	}
 	
-	inline T length()
+	inline T length() const
 	{
 		return sqrt(x*x + y*y);
 	}
 	
-	inline T lengthSquared()
+	inline T lengthSquared() const
 	{
 		return (x*x + y*y);
 	}
@@ -145,7 +145,7 @@ public:
 		y -= other.y;
 	}
 	
-	inline Vector2<T> operator-()
+	inline Vector2<T> operator-() const
 	{
 		return Vector2<T>(-x, -y);
 	}
@@ -166,13 +166,13 @@ public:
 	}
 	
 	// Right Multiply By a 2x2 Matrix( this is same as out = AT * v )
-	inline Vector2<T> operator*( const Matrix2<T>& matrix )
+	inline Vector2<T> operator*( const Matrix2<T>& matrix ) const
 	{
 		return Vector2<T>(matrix.a11*x + matrix.a21*y, matrix.a12*x + matrix.a22*y);
 	}
 	
 	// Right Multiply By a 3x3 Matrix( this is same as out = AInv * v )
-	inline Vector2<T> operator*( const Matrix3<T>& matrix )
+	inline Vector2<T> operator*( const Matrix3<T>& matrix ) const
 	{
 		dfloat tx  = -matrix.col1.x * matrix.col3.x - matrix.col1.y * matrix.col3.y;
 		dfloat ty  = -matrix.col2.x * matrix.col3.x - matrix.col2.y * matrix.col3.y;
@@ -198,12 +198,12 @@ public:
 		x = temp;
 	}
 	
-	inline Vector2<T> operator*( const T d )
+	inline Vector2<T> operator*( const T d ) const
 	{
 		return Vector2<T>(x*d, y*d);
 	}
 	
-	inline Vector2<T> operator/( const T d )
+	inline Vector2<T> operator/( const T d ) const
 	{
 		return Vector2<T>(x/d, y/d);
 	}
@@ -214,7 +214,7 @@ public:
 		y /= d;
 	}
 	
-	inline Vector2<T> operator/( const Vector2<T>& other )
+	inline Vector2<T> operator/( const Vector2<T>& other ) const
 	{
 		return Vector2<T>(x/other.x, y/other.y);
 	}
@@ -249,12 +249,12 @@ public:
 		y -= other.y;
 	}
 	
-	inline bool operator==( const Vector2<T>& other )
+	inline bool operator==( const Vector2<T>& other ) const
 	{
 		return (x==other.x) && (y==other.y);
 	}
 
-	inline bool operator<( const Vector2<T>& other )
+	inline bool operator<( const Vector2<T>& other ) const
 	{
 		return (x<other.x) && (y<other.y);
 	}

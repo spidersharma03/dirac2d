@@ -50,19 +50,19 @@ public:
 		col3.y = ty;
 	}
 	
-	inline Vector2<T> operator*( const Vector2<T>& v )
+	inline Vector2<T> operator*( const Vector2<T>& v ) const
 	{
 		return Vector2<T>( col1.x*v.x + col2.x*v.y + col3.x,  col1.y*v.x + col2.y*v.y + col3.y);
 	}
 	
-	inline Vector3<T> operator*( const Vector3<T>& v )
+	inline Vector3<T> operator*( const Vector3<T>& v ) const
 	{
 		return Vector3<T>( col1.x*v.x + col2.x*v.y + col3.x*v.z,
 						   col1.y*v.x + col2.y*v.y + col3.y*v.z, 
 						   col1.z*v.x + col2.z*v.y + col3.z*v.z);
 	}
 	
-	inline void transformAsPoint(Vector2<T>& v)
+	inline void transformAsPoint(Vector2<T>& v) const
 	{
 		dfloat x = col1.x*v.x + col2.x*v.y + col3.x;
 		dfloat y = col1.y*v.x + col2.y*v.y + col3.y;
@@ -70,7 +70,7 @@ public:
 		v.y = y;
 	}
 	
-	inline void transformAsVector(Vector2<T>& v)
+	inline void transformAsVector(Vector2<T>& v) const
 	{
 		dfloat x = col1.x*v.x + col2.x*v.y;
 		dfloat y = col1.y*v.x + col2.y*v.y;
@@ -78,12 +78,12 @@ public:
 		v.y = y;
 	}
 	
-	inline Matrix2<T> getRotationMatrix()
+	inline Matrix2<T> getRotationMatrix() const
 	{
 		return Matrix2<T>(col1.x, col1.y, col2.x, col2.y);
 	}
 	
-	inline Matrix2<T> getRotationMatrixTransposed()
+	inline Matrix2<T> getRotationMatrixTransposed() const
 	{
 		return Matrix2<T>(col1.x, col2.x, col1.y, col2.y);
 	}
@@ -95,7 +95,7 @@ public:
 		col1.z = 0.0f; col2.z = 0.0f; col3.z = 1.0f;
 	}
 	
-	void getPointer( T* data )
+	void getPointer( T* data ) const
 	{
 		data[0] = col1.x; data[1] = col1.y; data[2] = 0.0;    data[3] = 0.0;
 		data[4] = col2.x; data[5] = col2.y; data[6] = 0.0;    data[7] = 0.0;
@@ -103,7 +103,7 @@ public:
 		data[12] = col3.x; data[13] = col3.y; data[14] = 0.0;    data[15] = 1.0;
 	}
 	
-	Matrix3<T> operator*( Matrix3<T>& other )
+	Matrix3<T> operator*( Matrix3<T>& other ) const
 	{
 		Matrix3<T> outMatrix;
 		outMatrix.col1.x = col1.x * other.col1.x + col2.x * other.col1.y + col3.x * other.col1.z;
@@ -183,7 +183,7 @@ public:
 	}
 	
 	
-	inline void getInverse(Matrix3<T>& other)
+	inline void getInverse(Matrix3<T>& other) const
 	{
 		dfloat det = ( col1.x * ( col2.y * col3.z  - col2.z * col3.y ) 
 					  - col2.x * ( col1.y * col3.z - col1.z * col3.y ) 
@@ -207,7 +207,7 @@ public:
 		other.col3.z = ( col1.x * col2.y  - col1.y * col2.x ) * det;
 	}
 		
-	inline Matrix3<T> getInverse()
+	inline Matrix3<T> getInverse() const
 	{
 		Matrix3<T> outMatrix;
 		
@@ -235,14 +235,14 @@ public:
 		return outMatrix;
 	}
 	
-	inline T determinant()
+	inline T determinant() const
 	{
 		// Volume of a Parallelepid with col1, col2 and col3 as axis.
 		return col1.dot( col2.cross(col3) );
 	}
 	
 	// Solve a System like A * x = rhs. returns result in x.
-	void solve( Vector3<T>& rhs, Vector3<T>& x )
+	void solve( const Vector3<T>& rhs, Vector3<T>& x ) const
 	{		
 		T det = col1.dot( col2.cross(col3) );
 		if (det != 0.0f)
@@ -255,7 +255,7 @@ public:
 		x.z = det * col1.dot(col2.cross(rhs));
 	}
 	
-	Vector3<T> solve( Vector3<T>& rhs )
+	Vector3<T> solve( const Vector3<T>& rhs ) const
 	{
 		Vector3<T> solution;
 		
@@ -272,7 +272,7 @@ public:
 	}
 	
 	// Solve a System like A * x = rhs. returns result in x.
-	void solve22( const Vector2<T>& rhs, Vector2<T>& x )
+	void solve22( const Vector2<T>& rhs, Vector2<T>& x ) const
 	{		
 		T det = col1.x * col2.y - col1.y * col2.x;
 		if( det != 0.0 )
@@ -284,7 +284,7 @@ public:
 		}
 	}
 	
-	Vector2<T> solve22( const Vector2<T>& rhs )
+	Vector2<T> solve22( const Vector2<T>& rhs ) const
 	{
 		Vector2<T> solution;
 		

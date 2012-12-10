@@ -78,7 +78,9 @@ public:
 		
 		if( prevNode )
 			prevNode->pNext = nextNode;
-		
+		//else
+		//	m_pFreeMemoryBlock->pNext = nextNode;
+			
 		if( nextNode )
 			nextNode->pPrev = prevNode;
 		

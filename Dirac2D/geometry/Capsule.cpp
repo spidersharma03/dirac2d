@@ -48,6 +48,11 @@ dbool Capsule::isPointInside(Vector2f& p)
 	return p.distanceSquared(outPoint) < m_Radius * m_Radius;
 }
 
+dbool Capsule::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
+{
+	return false;
+}
+
 void Capsule::updateAABB(Matrix3f& xForm)
 {
 	Vector2f p0(-m_Height*0.5f + m_Centroid.x - m_Radius, m_Radius + m_Centroid.y), p1(m_Height*0.5f + m_Radius + m_Centroid.x, m_Radius+ m_Centroid.y); 

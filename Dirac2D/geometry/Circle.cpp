@@ -37,6 +37,10 @@ void Circle::operator= ( Circle& other)
 	m_Radius = other.m_Radius;
 }
 
+Circle::~Circle()
+{
+}
+
 CollisionShape* Circle::clone()
 {
 	return new Circle(*this);
@@ -52,6 +56,29 @@ Vector2f Circle::getSupportPoint(const Vector2f& d)
 dbool Circle::isPointInside(Vector2f& p)
 {
 	return p.distanceSquared(m_Centroid) < m_Radius * m_Radius;
+}
+
+dbool Circle::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
+{
+	// Transform Ray Segment into Circle's space.(since the Circle is symmetrical object, no need for the rotation matrix.)
+	Vector2f rayOrigin = raySeg.m_Start - Vector2f(xForm.col3.x, xForm.col3.y);
+	
+	const Vector2f d = raySeg.m_End - raySeg.m_Start;
+	dfloat A = d.lengthSquared();
+	dfloat B = rayOrigin.dot(d);
+	dfloat C = rayOrigin.lengthSquared() - m_Radius * m_Radius;
+	
+	//Discriminant
+	dfloat D = B * B - A * C;
+	
+	// No Intersection
+	if( D < EPSILON )
+		return false;
+	
+	// Get the lowest root
+	intersectInfo.m_HitT = -(B + D);
+	
+	return true;
 }
 
 void Circle::updateAABB(Matrix3f& xForm)

@@ -50,19 +50,19 @@ public:
 		col3.y = ty;
 	}
 	
-	inline Vector2<T> operator*( const Vector2<T>& v )
+	inline Vector2<T> operator*( const Vector2<T>& v ) const
 	{
 		return Vector2<T>( col1.x*v.x + col2.x*v.y + col3.x,  col1.y*v.x + col2.y*v.y + col3.y);
 	}
 	
-	inline Vector3<T> operator*( const Vector3<T>& v )
+	inline Vector3<T> operator*( const Vector3<T>& v ) const
 	{
 		return Vector3<T>( col1.x*v.x + col2.x*v.y + col3.x*v.z,
                           col1.y*v.x + col2.y*v.y + col3.y*v.z, 
                           col1.z*v.x + col2.z*v.y + col3.z*v.z);
 	}
 	
-	inline void transformAsPoint(Vector2<T>& v)
+	inline void transformAsPoint(Vector2<T>& v) const
 	{
 		dfloat x = col1.x*v.x + col2.x*v.y + col3.x;
 		dfloat y = col1.y*v.x + col2.y*v.y + col3.y;
@@ -70,7 +70,7 @@ public:
 		v.y = y;
 	}
 	
-	inline void transformAsVector(Vector2<T>& v)
+	inline void transformAsVector(Vector2<T>& v) const
 	{
 		dfloat x = col1.x*v.x + col2.x*v.y;
 		dfloat y = col1.y*v.x + col2.y*v.y;
@@ -78,7 +78,7 @@ public:
 		v.y = y;
 	}
 	
-	inline Matrix2<T> getRotationMatrix()
+	inline Matrix2<T> getRotationMatrix() const
 	{
 		return Matrix2<T>(col1.x, col1.y, col2.x, col2.y);
 	}

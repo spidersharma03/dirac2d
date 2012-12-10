@@ -120,6 +120,62 @@ dbool ConvexPolygon::isPointInside(Vector2f& p)
 	return true;
 }
 
+/*
+  Any Point on the Ray Segment is given by P = P0 + D*t, where D = P1 - P0
+  if the Edge of the Polygon is given by vertices V1, V2, and Normal N
+  and if the point P on the ray segment lies on the Edge then
+   ( P - V1 ) DOT N = 0
+   
+   solving the above we get
+   t = ( V1 - P0 ) DOT N / ( D DOT N )
+ 
+   Also we need to make sure 
+ */
+dbool ConvexPolygon::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
+{
+	// Transform the Ray into Poly's space. this can be done by taking inverse of xForm and then transforming the ray. below implementation is more efficient.
+	Matrix3f M = xForm;
+	M.col3.x = M.col3.y = 0.0f;
+	Vector2f T(xForm.col3.x, xForm.col3.y);
+	Vector2f rayStart = ( raySeg.m_Start - T ) * M;
+	Vector2f rayEnd   = ( raySeg.m_End - T ) * M;
+	Vector2f D = rayEnd - rayStart;
+	dfloat tmin = 10000000.0f;
+	dfloat tmax = -10000000.0f;
+	
+	dbool bResult = false;
+	dint32 index = -1;
+	
+	for (int i=0; i<m_NumVertices; i++) 
+	{
+		dfloat Denom = ( m_Normals[i].dot(D) );
+		dfloat Numerator = ( m_Vertices[i] - rayStart ).dot(m_Normals[i]);
+		if( Denom * Denom > EPSILON * EPSILON )
+		{
+			dfloat t = Numerator/Denom;
+			// Ray Entering this Half plane defined by the Polygon's Edge.
+			if( Denom < 0.0f && t < tmin )
+			{
+				tmin = t;
+				index = i;
+			}
+			// Ray Exiting this Half plane defined by the Polygon's Edge.
+			else if ( Denom > 0.0f && t < tmax )
+			{
+				tmax = t;
+				index = i;
+			}
+		}
+		// Ray can't intersect the Poly.
+		if( tmax < tmin )
+			return false;
+	}
+	// if tmin is negative, the Ray starts within the Poly.
+	intersectInfo.m_HitT = tmin;
+	intersectInfo.m_HitNormal = xForm * m_Normals[index];
+	return bResult;
+}
+
 void ConvexPolygon::updateAABB(Matrix3f& xForm)
 {
 	dfloat min_x = 100000.0f;

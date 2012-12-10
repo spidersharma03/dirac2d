@@ -28,7 +28,7 @@ BEGIN_NAMESPACE_DIRAC2D
 		void setCurrentTime(dfloat time);
 		
 		double getCurrentTime();
-		
+				
 		dfloat getIncreasingDuration();
 		
 		dfloat getDecreasingDuration();

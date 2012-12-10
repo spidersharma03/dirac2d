@@ -76,6 +76,11 @@ dbool CircleSweep::isPointInside(Vector2f& p)
 	return 0;
 }
 
+dbool CircleSweep::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
+{
+	return false;
+}
+
 void CircleSweep::updateAABB(Matrix3f& xForm)
 {
 }

@@ -36,12 +36,12 @@ public:
 		a21 = c1.y; a22 = c2.y;
 	}
 	
-	inline Vector2<T> operator* ( Vector2<T>& v )
+	inline Vector2<T> operator* ( const Vector2<T>& v ) const
 	{
 		return Vector2<T>(a11*v.x + a12*v.y, a21*v.x + a22*v.y);
 	}
 	
-	inline Matrix2<T> operator* ( Matrix2<T>& other )
+	inline Matrix2<T> operator* ( Matrix2<T>& other ) const
 	{
 		return Matrix2<T>( a11 * other*a11 + a12 * other.a21,
 						   a21 * other.a11 + a22 * other.a21,
@@ -76,7 +76,7 @@ public:
 		}
 	}
 	
-	inline Matrix2<T> getInverse()
+	inline Matrix2<T> getInverse() const
 	{
 		Matrix2<T> outMatrix;
 		T det = a11 * a22 - a21 * a12;
@@ -90,18 +90,18 @@ public:
 		return outMatrix;
 	}
 	
-	inline T determinant()
+	inline T determinant() const
 	{
 		return a11 * a22 - a21 * a12;
 	}
 	
-	inline T& operator[] ( dint32 index )
+	inline T& operator[] ( dint32 index ) const
 	{
 		return (&a11)[index];
 	}
 	
 	// Solve a System like A * x = rhs. returns result in x.
-	void solve( const Vector2<T>& rhs, Vector2<T>& x )
+	void solve( const Vector2<T>& rhs, Vector2<T>& x ) const
 	{
 		T det = a11 * a22 - a21 * a12;
 		if( fabs(det) > EPSILON )
@@ -113,7 +113,7 @@ public:
 		}
 	}
 	
-	Vector2<T> solve( const Vector2<T>& rhs )
+	Vector2<T> solve( const Vector2<T>& rhs ) const
 	{
 		Vector2<T> solution;
 		T det = a11 * a22 - a21 * a12;
