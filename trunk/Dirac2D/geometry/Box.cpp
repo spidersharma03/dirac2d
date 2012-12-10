@@ -39,6 +39,11 @@ dbool Box::isPointInside(Vector2f& p)
 	return 0;
 }
 
+dbool Box::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
+{
+	return false;
+}
+
 void Box::updateAABB(Matrix3f& xForm)
 {
 }

@@ -74,6 +74,8 @@ public:
 	
 	virtual void updateAABB(Matrix3f& xForm) = 0;
 	
+	virtual dbool intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo) = 0;
+	
 	virtual dbool intersectRay(const Ray2f& ray)
 	{
 		return false;

@@ -89,6 +89,8 @@
 		C27A8ADE15661EDD007AD13C /* Contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27A8ADD15661EDD007AD13C /* Contact.cpp */; };
 		C293029C1656635A00B517F6 /* GameCollisions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C293029B1656635A00B517F6 /* GameCollisions.cpp */; };
 		C2930491166CB56700B517F6 /* memoryBlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */; };
+		C29309C51671BCA400B517F6 /* Crate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29309C41671BCA400B517F6 /* Crate.cpp */; };
+		C29309F91671CA8800B517F6 /* ObjectPlacementSrategy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29309F81671CA8800B517F6 /* ObjectPlacementSrategy.cpp */; };
 		C299B4611580D26D0040896A /* GJKAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */; };
 		C299B5371581CA820040896A /* DistanceConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C299B5361581CA820040896A /* DistanceConstraint.cpp */; };
 		C29B9C1C15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29B9C1B15F0DE26002CF007 /* GrahamScanConvexHullGenerator.cpp */; };
@@ -226,6 +228,9 @@
 		C27A8ADD15661EDD007AD13C /* Contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contact.cpp; sourceTree = "<group>"; };
 		C29302981656629100B517F6 /* GameCollisions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCollisions.h; sourceTree = "<group>"; };
 		C293029B1656635A00B517F6 /* GameCollisions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameCollisions.cpp; sourceTree = "<group>"; };
+		C29309C31671BCA400B517F6 /* Crate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crate.h; sourceTree = "<group>"; };
+		C29309C41671BCA400B517F6 /* Crate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Crate.cpp; sourceTree = "<group>"; };
+		C29309F81671CA8800B517F6 /* ObjectPlacementSrategy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectPlacementSrategy.cpp; sourceTree = "<group>"; };
 		C299B45D1580D26D0040896A /* GJKAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GJKAlgorithm.cpp; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
 		C299B45E1580D26D0040896A /* GJKAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GJKAlgorithm.h; path = Dirac2D/collision/GJK_EPA/GJKAlgorithm.h; sourceTree = SOURCE_ROOT; };
 		C299B4601580D26D0040896A /* Simplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Simplex.h; path = Dirac2D/collision/GJK_EPA/Simplex.h; sourceTree = SOURCE_ROOT; };
@@ -334,6 +339,7 @@
 				35E02EFC166F400400C3889A /* CoinPlacementStrategy.cpp */,
 				35E02EFD166F400400C3889A /* CoinPlacementStrategy.h */,
 				35E02F00166F400400C3889A /* ObjectPlacementSrategy.h */,
+				C29309F81671CA8800B517F6 /* ObjectPlacementSrategy.cpp */,
 				355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */,
 				355FCBDD1658A42D004D4C5E /* ObjectFactory.h */,
 				35D6165A163C31CE00AE9631 /* IUpdatable.h */,
@@ -348,13 +354,15 @@
 				35D61658163C266900AE9631 /* FirstGame.cpp */,
 				35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */,
 				35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */,
-				C200559E163FC7A9002D1565 /* GameObject.h */,
-				C200559F163FC7A9002D1565 /* GameObject.cpp */,
 				3553008E163C15A80037A4E5 /* main.cpp */,
 				C29302981656629100B517F6 /* GameCollisions.h */,
 				C293029B1656635A00B517F6 /* GameCollisions.cpp */,
+				C200559E163FC7A9002D1565 /* GameObject.h */,
+				C200559F163FC7A9002D1565 /* GameObject.cpp */,
 				35DC47151657CA2400B0BD69 /* Coin.cpp */,
 				35DC47181657CA4200B0BD69 /* Coin.h */,
+				C29309C31671BCA400B517F6 /* Crate.h */,
+				C29309C41671BCA400B517F6 /* Crate.cpp */,
 			);
 			path = GameDemo;
 			sourceTree = "<group>";
@@ -709,6 +717,8 @@
 				C2930491166CB56700B517F6 /* memoryBlockAllocator.cpp in Sources */,
 				35E02F04166F40B200C3889A /* CoinPlacementStrategy.cpp in Sources */,
 				35E02F0E166FAA3500C3889A /* ObjectManager.cpp in Sources */,
+				C29309C51671BCA400B517F6 /* Crate.cpp in Sources */,
+				C29309F91671CA8800B517F6 /* ObjectPlacementSrategy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

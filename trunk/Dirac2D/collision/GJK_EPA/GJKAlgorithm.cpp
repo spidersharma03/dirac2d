@@ -95,6 +95,7 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape* polygon1, Matrix3f m1, Coll
 	// Transform the support point 2 into Polygon1's local space
 	Matrix3f m1Inv;
 	Matrix3f m2Inv;
+	// TODO :: Find the inverse simply by noting that the 2x2 part of the inverse is transpose of the original matrix.
 	m1.getInverse(m1Inv);
 	m2.getInverse(m2Inv);
 	

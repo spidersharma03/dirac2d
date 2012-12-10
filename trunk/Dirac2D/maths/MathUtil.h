@@ -104,7 +104,7 @@ static void findClosestPoints(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& p2, Ve
 
 // Finds the Closest point on the Line Segment p0-p1 from an Input Point.
 template<class T>
-static inline void findClosestPoint(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& point, Vector2<T>& outPoint)
+static inline void findClosestPoint(const Vector2<T>& p0, const Vector2<T>& p1, const Vector2<T>& point, Vector2<T>& outPoint)
 {
 	T dx = p1.x - p0.x;
 	T dy = p1.y - p0.y;
@@ -124,7 +124,7 @@ static inline void findClosestPoint(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& 
 
 // Finds the Barycentric Coordinate of the Closest Point on the Line Segment p0-p1 from an Input Point.
 template<class T>
-static inline void findBaryCentricCoordinate(Vector2<T>& p0, Vector2<T>& p1, Vector2<T>& point, T& u)
+static inline void findBaryCentricCoordinate(const Vector2<T>& p0, const Vector2<T>& p1, const Vector2<T>& point, T& u)
 {
 	T dx = p1.x - p0.x;
 	T dy = p1.y - p0.y;

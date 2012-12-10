@@ -29,17 +29,17 @@ public:
 	{
 	}
 	
-	Point2<T> operator-()
+	Point2<T> operator-() const
 	{
 		return Point2<T>(-x, -y);
 	}
 	
-	Point2<T> operator+( const Point2<T>& other )
+	Point2<T> operator+( const Point2<T>& other ) const
 	{
 		return Point2<T>(x+other.x, y+other.y);
 	}
 	
-	Point2<T> operator-( const Point2<T>& other )
+	Point2<T> operator-( const Point2<T>& other ) const
 	{
 		return Point2<T>(x-other.x, y-other.y);
 	}
@@ -90,17 +90,17 @@ public:
 		return (x==other.x) && (y==other.y);
 	}
 	
-	inline T EuclidiandDistance( Point2<T>& other )
+	inline T EuclidiandDistance( Point2<T>& other ) const
 	{
 		return sqrt( (x-other.x)*(x-other.x) + (y-other.y)*(y-other.y) );
 	}
 	
-	inline T EuclidiandDistanceSquared( Point2<T>& other )
+	inline T EuclidiandDistanceSquared( Point2<T>& other ) const
 	{
 		return (x-other.x)*(x-other.x) + (y-other.y)*(y-other.y);
 	}
 	
-	inline T ManhattendDistance( Point2<T>& other )
+	inline T ManhattendDistance( Point2<T>& other ) const
 	{
 		return fabs(x-other.x) + fabs(y-other.y);
 	}

@@ -50,18 +50,44 @@ CollisionShape* Edge::clone()
 
 Vector2f Edge::getSupportPoint(const Vector2f& d) 
 {
-	dfloat proj1 = m_Vertex1.dot(d);
-	dfloat proj2 = m_Vertex2.dot(d);
-
-	if( proj1 > proj2 )
-		return m_Vertex1;
-	else
-		return m_Vertex2;
+	return m_Vertex1.dot(d) >= m_Vertex2.dot(d) ? m_Vertex1 : m_Vertex2;
 }
 
 dbool Edge::isPointInside(Vector2f& p)
 {
 	return false;
+}
+
+dbool Edge::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
+{
+	// Transform the Ray into Edge's space. this can be done by taking inverse of xForm and then transforming the ray. below implementation is more efficient.
+	Matrix3f M = xForm;
+	M.col3.x = M.col3.y = 0.0f;
+	Vector2f T(xForm.col3.x, xForm.col3.y);
+	Vector2f rayStart = M * ( raySeg.m_Start - T );
+	Vector2f rayEnd   = M * ( raySeg.m_End - T );
+	
+	// Solve for the Segments( RaySegment and the Edge )
+	dfloat dx1 = rayEnd.x - rayStart.x;
+	dfloat dy1 = rayEnd.y - rayStart.y;
+	dfloat dx2 = m_Vertex2.x - m_Vertex1.x;
+	dfloat dy2 = m_Vertex2.y - m_Vertex1.y;
+	
+	dfloat Denom = dx1 * dy2 - dx2 * dy1;
+	
+	// Parallel Segments
+	if ( Denom * Denom < EPSILON * EPSILON )
+		return false;
+	dfloat t1 = -( ( rayStart.x * dy2 - rayStart.y * dx2 ) + ( m_Vertex1.y * dx2 - m_Vertex1.x * dy2 ) )/Denom;
+	dfloat t2 = -( ( rayStart.x * dy1 - rayStart.y * dx1 ) + ( m_Vertex1.y * dx1 - m_Vertex1.x * dy1 ) )/Denom;
+
+	// Intersection point lies outside the segments.
+	if( t1 < 0.0f || t1 > 1.0f || t2 < 0.0f || t2 > 1.0f)
+		return false;
+	
+	intersectInfo.m_HitT = t1;
+	
+	return true;
 }
 
 void Edge::updateAABB(Matrix3f& xForm)

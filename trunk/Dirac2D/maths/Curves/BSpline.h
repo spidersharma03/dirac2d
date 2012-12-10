@@ -35,5 +35,4 @@ void splineBasis(int nControlPoints, int nOrder, float t, float* knotVector, flo
 
 void BSpline(float* controlPoints, int nControlPoints, float* curvePoints, int nCurvePoints, float* knotVector, int nOrder);
 
-
 #endif

@@ -108,6 +108,12 @@ dbool EdgeChain::isPointInside(Vector2f& p)
 	return false;
 }
 
+dbool EdgeChain::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
+{
+	dAssert(1);
+	return false;
+}
+
 void EdgeChain::updateAABB(Matrix3f& xForm)
 {
 	for( dint32 e=0; e<m_NumEdges; e++ )

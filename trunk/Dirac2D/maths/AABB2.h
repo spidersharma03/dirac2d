@@ -63,7 +63,7 @@ public:
 		return Vector2<T>( (m_UpperBounds + m_LowerBounds) * (T)0.5);
 	}
 
-	inline dbool contains(AABB2<T>& other)
+	inline dbool contains(const AABB2<T>& other) const
 	{
 		dbool bRes = true;
 		bRes = bRes && m_LowerBounds.x <= other.m_LowerBounds.x;

@@ -20,6 +20,8 @@ BEGIN_NAMESPACE_DIRAC2D
 
 struct RayIntersectionInfo
 {
+	dfloat m_HitT;
+	Vector2f m_HitNormal;
 };
 
 template< class T >
@@ -60,7 +62,7 @@ public:
 	
 #define RAYAABB_EPSILON 1e-06
 	// Clip Plane Based Implementation
-	inline dbool intersectAABB(AABB2<T>& aabb, float* tmin, float* tmax, int* bRayInside)
+	inline dbool intersectAABB(const AABB2<T>& aabb, float* tmin, float* tmax, int* bRayInside) const
 	{
 		dbool bInside = true;
 		Vector2<T>& MinB = aabb.m_LowerBounds;

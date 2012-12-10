@@ -33,6 +33,8 @@ public:
 
 	virtual dbool isPointInside(Vector2f& p);
 	
+	virtual dbool intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo);
+
 	virtual void updateAABB(Matrix3f& xForm);
 	
 	virtual void updateShape(Matrix3f& xForm);

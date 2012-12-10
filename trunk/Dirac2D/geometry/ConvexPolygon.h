@@ -51,6 +51,8 @@ public:
 		return m_Normals;
 	}
 	
+	virtual dbool intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo);
+	
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);
