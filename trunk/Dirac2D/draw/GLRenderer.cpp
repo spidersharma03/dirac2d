@@ -17,7 +17,7 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 
-void GLRenderer::drawShape(CollisionShape* shape)
+void GLRenderer::drawShape(const CollisionShape* shape)
 {
 	switch ( shape->getShapeType() )
 	{
@@ -122,7 +122,7 @@ void GLRenderer::drawBox( dfloat width, dfloat height)
 	glEnd();
 }
 
-void GLRenderer::drawPolygon( Vector2f* vertices, dint32 numVertices )
+void GLRenderer::drawPolygon( const Vector2f* vertices, dint32 numVertices )
 {
 	glBegin(GL_POLYGON);
 	for( dint32 i=0; i<numVertices; i++ )
@@ -130,7 +130,7 @@ void GLRenderer::drawPolygon( Vector2f* vertices, dint32 numVertices )
 	glEnd();
 }
 
-void GLRenderer::drawLine( Vector2f& begin, Vector2f& end)
+void GLRenderer::drawLine( const Vector2f& begin, const Vector2f& end)
 {
 	glBegin(GL_LINES);
 	glVertex2f(begin.x, begin.y);
@@ -138,19 +138,19 @@ void GLRenderer::drawLine( Vector2f& begin, Vector2f& end)
 	glEnd();
 }
 
-void GLRenderer::drawPoint( Vector2f& point )
+void GLRenderer::drawPoint( const Vector2f& point )
 {
 	glBegin(GL_POINTS);
 	glVertex2f(point.x, point.y);
 	glEnd();
 }
 
-void GLRenderer::drawAABB( AABB2f& aabb )
+void GLRenderer::drawAABB( const AABB2f& aabb )
 {
 	glRectf(aabb.m_LowerBounds.x, aabb.m_LowerBounds.y, aabb.m_UpperBounds.x, aabb.m_UpperBounds.y);
 }
 
-void GLRenderer::setTransform( Matrix3f& xform)
+void GLRenderer::setTransform( const Matrix3f& xform)
 {
 	xform.getPointer(data);
 	glMatrixMode(GL_MODELVIEW);

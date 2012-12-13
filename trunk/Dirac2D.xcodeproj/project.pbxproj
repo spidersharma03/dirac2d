@@ -109,6 +109,9 @@
 		C2EB2C301573C48600E92679 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
 		C2EDB84A15D4EA48008EAD97 /* MinMaxConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EDB84915D4EA48008EAD97 /* MinMaxConstraint.cpp */; };
 		C2F30F671578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */; };
+		C2FB6C0516788FE7002549D8 /* SimpleGun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB6C0416788FE7002549D8 /* SimpleGun.cpp */; };
+		C2FB6C0A16789098002549D8 /* GunRayCastCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB6C0916789098002549D8 /* GunRayCastCallback.cpp */; };
+		C2FB6FEE1679F4D6002549D8 /* WorldOverlapCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -206,7 +209,7 @@
 		C257F150154E71AE00270D77 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Box.h; path = Dirac2D/geometry/Box.h; sourceTree = SOURCE_ROOT; };
 		C257F151154E71AE00270D77 /* Capsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Capsule.h; path = Dirac2D/geometry/Capsule.h; sourceTree = SOURCE_ROOT; };
 		C257F152154E71AE00270D77 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = Dirac2D/geometry/Circle.h; sourceTree = SOURCE_ROOT; };
-		C257F153154E71AE00270D77 /* CollisionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionShape.h; path = Dirac2D/geometry/CollisionShape.h; sourceTree = SOURCE_ROOT; };
+		C257F153154E71AE00270D77 /* CollisionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionShape.h; sourceTree = "<group>"; };
 		C257F157154E71AE00270D77 /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathUtil.h; path = Dirac2D/maths/MathUtil.h; sourceTree = SOURCE_ROOT; };
 		C257F159154E71AE00270D77 /* memoryAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memoryAllocator.h; path = Dirac2D/memory/memoryAllocator.h; sourceTree = SOURCE_ROOT; };
 		C257F15A154E71AE00270D77 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Dirac2D/Settings.h; sourceTree = SOURCE_ROOT; };
@@ -275,6 +278,13 @@
 		C2F30F631578FE6D00D4F2F4 /* BroadPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BroadPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/BroadPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
 		C2F30F641578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NaiveBoradPhaseCollisionAlgorithm.cpp; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.cpp; sourceTree = SOURCE_ROOT; };
 		C2F30F651578FE6D00D4F2F4 /* NaiveBoradPhaseCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NaiveBoradPhaseCollisionAlgorithm.h; path = Dirac2D/collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h; sourceTree = SOURCE_ROOT; };
+		C2FB6BFC16788D54002549D8 /* Gun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gun.h; sourceTree = "<group>"; };
+		C2FB6C0316788FE7002549D8 /* SimpleGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleGun.h; sourceTree = "<group>"; };
+		C2FB6C0416788FE7002549D8 /* SimpleGun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleGun.cpp; sourceTree = "<group>"; };
+		C2FB6C0816789098002549D8 /* GunRayCastCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GunRayCastCallback.h; sourceTree = "<group>"; };
+		C2FB6C0916789098002549D8 /* GunRayCastCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GunRayCastCallback.cpp; sourceTree = "<group>"; };
+		C2FB6FEC1679F4D6002549D8 /* WorldOverlapCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldOverlapCallback.h; sourceTree = "<group>"; };
+		C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorldOverlapCallback.cpp; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -354,15 +364,22 @@
 				35D61658163C266900AE9631 /* FirstGame.cpp */,
 				35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */,
 				35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */,
-				3553008E163C15A80037A4E5 /* main.cpp */,
-				C29302981656629100B517F6 /* GameCollisions.h */,
-				C293029B1656635A00B517F6 /* GameCollisions.cpp */,
 				C200559E163FC7A9002D1565 /* GameObject.h */,
 				C200559F163FC7A9002D1565 /* GameObject.cpp */,
 				35DC47151657CA2400B0BD69 /* Coin.cpp */,
 				35DC47181657CA4200B0BD69 /* Coin.h */,
 				C29309C31671BCA400B517F6 /* Crate.h */,
 				C29309C41671BCA400B517F6 /* Crate.cpp */,
+				C2FB6BFC16788D54002549D8 /* Gun.h */,
+				C2FB6C0316788FE7002549D8 /* SimpleGun.h */,
+				C2FB6C0416788FE7002549D8 /* SimpleGun.cpp */,
+				C29302981656629100B517F6 /* GameCollisions.h */,
+				C293029B1656635A00B517F6 /* GameCollisions.cpp */,
+				C2FB6C0816789098002549D8 /* GunRayCastCallback.h */,
+				C2FB6C0916789098002549D8 /* GunRayCastCallback.cpp */,
+				C2FB6FEC1679F4D6002549D8 /* WorldOverlapCallback.h */,
+				C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */,
+				3553008E163C15A80037A4E5 /* main.cpp */,
 			);
 			path = GameDemo;
 			sourceTree = "<group>";
@@ -489,9 +506,9 @@
 			isa = PBXGroup;
 			children = (
 				C29B9C1015F0DAE7002CF007 /* ConvexHull */,
+				C257F153154E71AE00270D77 /* CollisionShape.h */,
 				C2D19CD21587853F0042A724 /* ConvexPolygon.h */,
 				C2D19CD31587853F0042A724 /* ConvexPolygon.cpp */,
-				C257F153154E71AE00270D77 /* CollisionShape.h */,
 				C257F150154E71AE00270D77 /* Box.h */,
 				C257F151154E71AE00270D77 /* Capsule.h */,
 				C257F152154E71AE00270D77 /* Circle.h */,
@@ -719,6 +736,9 @@
 				35E02F0E166FAA3500C3889A /* ObjectManager.cpp in Sources */,
 				C29309C51671BCA400B517F6 /* Crate.cpp in Sources */,
 				C29309F91671CA8800B517F6 /* ObjectPlacementSrategy.cpp in Sources */,
+				C2FB6C0516788FE7002549D8 /* SimpleGun.cpp in Sources */,
+				C2FB6C0A16789098002549D8 /* GunRayCastCallback.cpp in Sources */,
+				C2FB6FEE1679F4D6002549D8 /* WorldOverlapCallback.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

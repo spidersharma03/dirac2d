@@ -31,20 +31,20 @@ public:
 		col3 = other.col3;
 	}
 	
-	inline void rotate(T angle)
+	inline void rotate(const T angle)
 	{
 		T cs = cos(angle); T sn = sin(angle);
 		col1.x = cs; col2.x = -sn;
 		col1.y = sn; col2.y = cs;
 	}
 	
-	inline void translate( Vector2<T>& translation )
+	inline void translate( const Vector2<T>& translation )
 	{
 		col3.x = translation.x;
 		col3.y = translation.y;
 	}
 	
-	inline void translate( T tx, T ty )
+	inline void translate( const T tx, const T ty )
 	{
 		col3.x = tx;
 		col3.y = ty;

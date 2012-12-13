@@ -59,14 +59,13 @@ private:
 	class CWorldRayIntersectionCallBackClass : public WorldRayIntersectionCallBackClass
 	{
 	  public:
-		virtual void rayIntersectionCallBack(CollisionShape* pShape, RayIntersectionInfo& info);
+		virtual dfloat rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info);
 	};
 	
 	class CRayIntersectionCallBackClass : public RayIntersectionCallBackClass
 	{
 	  public:
-		virtual void rayIntersectionCallBack(dint32 overlapNodeID, void* userData);
-		CWorldRayIntersectionCallBackClass m_WorldRayIntersectionCallBackClass;
+		virtual dfloat rayIntersectionCallBack(const RaySegment2f& raySeg, dint32 overlapNodeID, void* userData);
 	};
 
 	class CCollisionListener : public ICollisionLisetner
@@ -92,7 +91,6 @@ private:
         }
     };
     
-	WorldOverlapAABBCallBackClass m_OverlapCallBackClass;
 	CRayIntersectionCallBackClass m_RayIntersectionCallBackClass;
 public:
 	PhysicalWorld();
@@ -138,7 +136,7 @@ public:
 		return m_pBroadPhaseAlgorithm;
 	}
 
-	void overlapAABB( AABB2f& queryAABB );
+	void overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* pOverlapCallBackClass = 0 );
 
 	void intersectRaySegment( const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack );
 
@@ -152,6 +150,8 @@ public:
     
     void setCollisionListener( ICollisionLisetner* pCollisionListener );
 
+	void setRayIntersectionListener(WorldRayIntersectionCallBackClass* pRayIntersectionCallback);
+	
 public:
 	
 	friend class CollisionManager;
@@ -167,7 +167,8 @@ protected:
 private:
     // Default Collision Listener
     ICollisionLisetner *m_pCollisionListener;
-    
+    WorldRayIntersectionCallBackClass* m_pRayIntersectionCallback;
+	
 	CollisionManager* m_CollisionManager;
 	BroadPhaseCollisionAlgorithm* m_pBroadPhaseAlgorithm;
 	ContactSolver*	  m_ContactSolver;

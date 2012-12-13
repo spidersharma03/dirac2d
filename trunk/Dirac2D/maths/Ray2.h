@@ -11,17 +11,18 @@
 #include "Matrix2.h"
 #include "Matrix3.h"
 #include "AABB2.h" 
+//#include <stdio.h>
 
 #ifndef _RAY2_H_
 #define _RAY2_H_
 
 BEGIN_NAMESPACE_DIRAC2D
 
-
 struct RayIntersectionInfo
 {
 	dfloat m_HitT;
 	Vector2f m_HitNormal;
+	Vector2f m_HitPoint;
 };
 
 template< class T >
@@ -239,10 +240,19 @@ public:
 		Vector2f satAxis(m_Start.y - m_End.y, m_End.x - m_Start.x);
 		Vector2f absSatAxis =  Vector2f( fabs(satAxis.x), fabs(satAxis.y ) );
 
-		dfloat a = fabs( satAxis.dot( raySegAABB.m_LowerBounds - aabb.getCentre() ) );
+		//dfloat a = fabs( satAxis.dot( raySegAABB.m_LowerBounds - aabb.getCentre() ) );
 		dfloat b = absSatAxis.dot(aabb.getExtents());
-
-		return (a < b);
+		Vector2f centre = aabb.getCentre();
+		
+		// Projection interval of the aabb.
+		dfloat dot = satAxis.dot(centre);
+		dfloat aabbMin = dot - b;
+		dfloat aabbMax = dot + b;
+		
+		dfloat a3 = satAxis.dot(m_Start);
+		
+		//printf("Interval = %f  %f  %f\n", aabbMin, aabbMax, a3);
+		return (a3 < aabbMax && a3 > aabbMin);
 	}
 	
 	/*

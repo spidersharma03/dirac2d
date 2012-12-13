@@ -555,7 +555,7 @@ dbool DynamicTree::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBac
 				bResult = true;
 				
 				if( callBack )
-					callBack->overlapCallBack(nodeID);
+					callBack->overlapCallBack(nodeID,m_Nodes[nodeID].m_UserData);
 			}
 			else 
 			{
@@ -579,8 +579,8 @@ dbool DynamicTree::intersectRaySegment(const RaySegment2f& raySeg, RayIntersecti
 	
 	dint32 nodeCount = 0;
 	nodeVector[nodeCount++] = m_RootNode;
-	
-	Vector2f rayDir = raySeg.m_End - raySeg.m_Start;
+		
+	RaySegment2f newRaySeg( raySeg );
 	
 	while ( nodeCount != 0 ) 
 	{
@@ -588,16 +588,24 @@ dbool DynamicTree::intersectRaySegment(const RaySegment2f& raySeg, RayIntersecti
 		
 		nodeCount--;
 		nodeID = nodeVector[nodeCount];
-		Vector2f c = m_Nodes[nodeID].m_AABB.getCentre();
 		
-		if( raySeg.intersectAABB( m_Nodes[nodeID].m_AABB ) )
+		if( newRaySeg.intersectAABB( m_Nodes[nodeID].m_AABB ) )
 		{
 			if( m_Nodes[nodeID].isLeaf() )
 			{
 				bResult = true;
+				float fractionHitT = -1.0f;
 				if( callBack )
-					callBack->rayIntersectionCallBack(nodeID, m_Nodes[nodeID].m_UserData);
-				return true;
+					fractionHitT = callBack->rayIntersectionCallBack(newRaySeg, nodeID, m_Nodes[nodeID].m_UserData);
+				
+				if( fractionHitT == 0.0f ) // Terminate ray cast
+					return false;
+				
+				// Modify the RayExtents
+				if( fractionHitT > 0.0f )
+				{
+					newRaySeg.m_End = newRaySeg.m_Start + fractionHitT * ( newRaySeg.m_End - newRaySeg.m_Start ); 
+				}
 			}
 			else 
 			{
@@ -634,7 +642,7 @@ dbool DynamicTree::intersectRaySegmentClosest(const RaySegment2f& raySeg, RayInt
 		{
 			bResult = true;
 			if( callBack )
-				callBack->rayIntersectionCallBack(nodeID, m_Nodes[nodeID].m_UserData);
+				callBack->rayIntersectionCallBack(raySeg ,nodeID, m_Nodes[nodeID].m_UserData);
 			return true;
 		}
 		else 

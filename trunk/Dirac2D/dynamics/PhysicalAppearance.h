@@ -41,6 +41,18 @@ struct PhysicalAttributes
 
 struct CollisionFilter
 {
+	CollisionFilter()
+	{
+		m_CollisionBit = 0xFFFFFFFF;
+		m_CollisionMask = 0x0;
+	}
+	
+	CollisionFilter( const CollisionFilter& other)
+	{
+		m_CollisionBit  = other.m_CollisionBit;
+		m_CollisionMask = other.m_CollisionMask;
+	}
+	
 	duint32 m_CollisionBit;
 	duint32 m_CollisionMask;
 };

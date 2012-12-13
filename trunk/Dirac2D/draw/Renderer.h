@@ -49,23 +49,23 @@ public:
 
 	virtual void setColor( dchar r, dchar g, dchar b ) = 0;
 
-	virtual void drawShape(CollisionShape*) = 0;
+	virtual void drawShape(const CollisionShape*) = 0;
 	
 	virtual void drawCircle( dfloat cx, dfloat cy, dfloat radius ) = 0;
 	
 	virtual void drawBox( dfloat width, dfloat height) = 0;
 	
-	virtual void drawPolygon( Vector2f* vertices, dint32 numVertices ) = 0;
+	virtual void drawPolygon( const Vector2f* vertices, dint32 numVertices ) = 0;
 	
-	virtual void drawLine( Vector2f& begin, Vector2f& end) = 0;
+	virtual void drawLine( const Vector2f& begin, const Vector2f& end) = 0;
 	
-	virtual void drawPoint( Vector2f& point ) = 0;
+	virtual void drawPoint( const Vector2f& point ) = 0;
 	
-	virtual void drawAABB( AABB2f& aabb ) = 0;
+	virtual void drawAABB( const AABB2f& aabb ) = 0;
 	
 	virtual void drawCapsule( dfloat cx, dfloat cy, dfloat width, dfloat height) = 0;
 
-	virtual void setTransform( Matrix3f& xform) = 0;
+	virtual void setTransform( const Matrix3f& xform) = 0;
 	
 protected:
 	

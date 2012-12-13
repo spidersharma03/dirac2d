@@ -30,25 +30,43 @@ public:
 	virtual void overlapCallBack(dint32 overlapNodeID, void* userData = 0) = 0;
 };
 
-/* This Callback is for reporting any intersection of a ray with Dynamic Tree AABB.
+
+/* This Callback is for reporting any intersection of a ray with any of the Collision Shape.
+   This is called when a ray intersects with any Collision Shape from the PhysicalWorld. it also provides with the Intersection info like hit time and hit Normal.
+   
+   return 0.0f to terminate the ray cast
+   return 1.0 to continue
+   return fraction to get the closest hit
+ */
+class WorldRayIntersectionCallBackClass
+{
+  public:
+	virtual dfloat rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info) = 0;
+};
+
+
+/* This Callback is for reporting any intersection of a ray with Collision Shape's AABB.
+ This is called when a ray intersects with any AABB from the PhysicalWorld. 
  */
 
 class RayIntersectionCallBackClass
 {
 public:
-	virtual void rayIntersectionCallBack(dint32 overlapNodeID, void* userData = 0) = 0;
+	RayIntersectionCallBackClass()
+	{
+		m_pWorldRayIntersectionCallBackClass = 0;
+	}
+	
+	virtual dfloat rayIntersectionCallBack(const RaySegment2f& raySeg, dint32 overlapNodeID, void* userData = 0) = 0;
+	
+	friend class PhysicalWorld;
+	
+protected:
+	WorldRayIntersectionCallBackClass *m_pWorldRayIntersectionCallBackClass;
 };
-
-/* This Callback is for reporting any intersection of a ray with any of the Collision Shape.
- */
-class WorldRayIntersectionCallBackClass
-{
-  public:
-	virtual void rayIntersectionCallBack(CollisionShape* pShape, RayIntersectionInfo& info) = 0;
-};
-
 
 /* This is an interface which is responsible for recieving collision call backs.
+   make sure not to remove any Physical Bodies/Contacts/Constraints in these call backs or else the program will crash.
    if one of the colliding shape is a sensor then ContactManifold dosen't contain any info. */
 class ICollisionLisetner
 {

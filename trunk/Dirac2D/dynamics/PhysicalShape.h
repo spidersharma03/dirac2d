@@ -82,7 +82,7 @@ public:
 		m_pUserData = pUserData;
 	}
 	
-	void* getUserData()
+	void* getUserData() const
 	{
 		return m_pUserData;
 	}

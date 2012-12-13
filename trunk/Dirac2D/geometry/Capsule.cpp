@@ -51,6 +51,67 @@ dbool Capsule::isPointInside(Vector2f& p)
 dbool Capsule::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
 {
 	return false;
+	// Centre of Circles
+	Vector2f p0(-m_Height*0.5f + m_Centroid.x,  m_Centroid.y); // Circle 1
+	Vector2f p1(m_Height*0.5f + m_Centroid.x, m_Centroid.y);   // Circle 2 
+
+	xForm.transformAsPoint(p0);
+	xForm.transformAsPoint(p1);
+	
+	// Transform Ray Segment into Circle1's space.
+	Vector2f rayOrigin = raySeg.m_Start - p0;
+	
+	Vector2f d = raySeg.m_End - raySeg.m_Start;
+	dfloat A = d.lengthSquared();
+	dfloat B = rayOrigin.dot(d);
+	dfloat C = rayOrigin.lengthSquared() - m_Radius * m_Radius;
+	
+	//Discriminant
+	dfloat D = B * B - A * C;
+	dfloat tmin = -1.0f;
+	
+	// find the hitT
+	if(  D < 0.0f )
+	 tmin = -(B + sqrt(D));
+	
+	// Transform Ray Segment into Circle2's space.
+	rayOrigin = raySeg.m_Start - p1;
+	B = rayOrigin.dot(d);
+	C = rayOrigin.lengthSquared() - m_Radius * m_Radius;
+	
+	//Discriminant
+	D = B * B - A * C;
+	dfloat tmin2 = -1.0f;
+	if(  D < 0.0f )
+		tmin2 = -(B + sqrt(D));
+	
+	tmin = tmin < tmin2 ? tmin : tmin2;
+	
+	// Transform the Ray into Capsule's space.
+	Vector2f rayStart = raySeg.m_Start * xForm;
+	Vector2f rayEnd   = raySeg.m_End  * xForm;
+	// Perform Ray-AABB intersection
+	AABB2f aabb;
+	dfloat Tmin = 0.0f, Tmax = 0.0f;
+	dchar bRayInside;
+	RaySegment2f newRay(rayStart,rayEnd);
+	
+	dbool bHit = newRay.intersectAABB(aabb, Tmin, Tmax, bRayInside);
+	
+	if( bHit )
+	{
+		tmin = tmin < Tmin ? tmin : Tmin;
+	}
+	else
+	{
+		if( tmin == -1.0f )
+			return false;
+		
+		return true;
+	}
+	intersectInfo.m_HitT = tmin;
+	
+	return true;
 }
 
 void Capsule::updateAABB(Matrix3f& xForm)

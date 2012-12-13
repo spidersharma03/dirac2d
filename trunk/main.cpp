@@ -127,21 +127,7 @@ void demo3()
 	}
 }
 
-class MyCallBack : public RayIntersectionCallBackClass
-{
-public:
-	void rayIntersectionCallBack(dint32 overlapNodeID, void* userData)
-	{
-		BroadPhaseNode* pNode = (BroadPhaseNode*)userData;
-		m_pBody = pNode->m_PhysicalShape->m_ParentBody;
-		numCalls++;
-	}
 
-	int numCalls;
-	PhysicalBody* m_pBody;
-};
-
-MyCallBack callBack;
 
 void demo3_()
 {
@@ -1452,7 +1438,7 @@ void demo23()
 		circle2->setPosition(Vector2f(-0.3f,-0.2f));		
 		
 		PhysicalAppearance pApp;
-		dfloat boxWidth = 0.3f; dfloat boxHeight = 0.04f;
+		//dfloat boxWidth = 0.3f; dfloat boxHeight = 0.04f;
 		//Vector2f vertices[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 		//pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
 		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.1f, 0.3f);
@@ -1729,7 +1715,7 @@ void demo27()
 	
 	// Create Circle Chain
 	dfloat y = 0.1f;
-	dint32 n = 1;
+	//dint32 n = 1;
 	
 	dfloat radius = 0.07f;
 	PhysicalBody* pBodyCircle1 = pWorld->createPhysicalBody();
@@ -1841,8 +1827,8 @@ void demo29()
 	//pBodyBox->m_BodyType = EBT_STATIC;
 	pBodyBox1->setPosition(Vector2f(0.0f,0.1f));
 	pBodyBox1->setAngle(-PI_2);
-	dfloat boxWidth = 0.051f; dfloat boxHeight = 0.051f;
-	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	//dfloat boxWidth = 0.051f; dfloat boxHeight = 0.051f;
+	//Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
 	//pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(verticesBox, 4);
 	pApp.m_CollisionAttributes.m_Shape = new Circle(0.1);
 	pBodyBox1->createPhysicalShape(pApp);
@@ -1863,6 +1849,152 @@ void demo29()
 //    
 //    Vector2f *v1 = new((pBlockAllocator->Allocate(sizeof(Vector2f)))) Vector2f();
 //    pBlockAllocator->Free(v1, sizeof(Vector2f));
+}
+
+
+class RayIntersectionClass : public WorldRayIntersectionCallBackClass
+{
+public:
+	RayIntersectionClass()
+	{
+		theta = 0.0f;
+		start = Vector2f(0.0f,-0.0f);
+		end = Vector2f(1.0f,1.0f);
+		m_bIntersect = false;
+	}
+	dfloat rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info)
+	{
+		m_bIntersect = true;
+		m_PoI = raySeg.m_Start + info.m_HitT * (raySeg.m_End - raySeg.m_Start);
+		m_HitNormal = info.m_HitNormal;	
+		return info.m_HitT;
+	}
+	
+	void renderRay()
+	{
+		theta += 0.00006f;
+
+		glPushMatrix();
+		
+		Matrix3f xForm, xFormRot, xFormTinv, xFormT;
+		xFormRot.rotate(theta);
+		xFormTinv.translate(-start);
+		xFormT.translate(start);
+		xForm = xFormT * xFormRot * xFormTinv;
+		float data[16];
+		xForm.getPointer(data);
+		raySeg.m_Start = xForm * start;
+		raySeg.m_End = xForm * end;
+		
+		if( m_bIntersect )
+		{
+			glBegin(GL_LINES);
+			glVertex3f(raySeg.m_Start.x, raySeg.m_Start.y, 0.0f);
+			glVertex3f(m_PoI.x, m_PoI.y, 0.0f);
+			glEnd();
+			glPopMatrix();
+		}
+		else 
+		{
+			glBegin(GL_LINES);
+			glVertex3f(raySeg.m_Start.x, raySeg.m_Start.y, 0.0f);
+			glVertex3f(raySeg.m_End.x, raySeg.m_End.y, 0.0f);
+			glEnd();
+			glPopMatrix();
+		}
+
+		if( m_bIntersect )
+		{
+			glPointSize(5.0f);
+			glBegin(GL_POINTS);
+			glVertex3f(m_PoI.x, m_PoI.y, 0.0f);
+			glEnd();
+			glPointSize(1.0f);
+			
+			float eps = 0.07f;
+			glBegin(GL_LINES);
+			glVertex3f(m_PoI.x, m_PoI.y, 0.0f);
+			glVertex3f(m_PoI.x + m_HitNormal.x * eps, m_PoI.y + m_HitNormal.y * eps, 0.0f);
+			glEnd();
+		}
+		
+		m_bIntersect = false;
+	}
+	
+	int numCalls;
+	PhysicalBody* m_pBody;
+	RaySegment2f raySeg;
+	Vector2f start, end;
+	Vector2f m_PoI;
+	Vector2f m_HitNormal;
+	bool m_bIntersect;
+	float theta;
+};
+
+RayIntersectionClass callBack;
+
+
+//Ray Cast
+void demo30()
+{
+	// Create Different Shapes
+	// 1 Circle
+	PhysicalBody* pBodyCircle = pWorld->createPhysicalBody();
+	pBodyCircle->setPosition(Vector2f(-0.5f,0.2f));
+	pBodyCircle->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	pApp.m_CollisionAttributes.m_Shape = new Circle(0.2f);
+	pBodyCircle->m_BodyType = EBT_STATIC;
+	pBodyCircle->createPhysicalShape(pApp);
+
+	// 2 Edge
+	PhysicalBody* pBodyEdge = pWorld->createPhysicalBody();
+	pBodyEdge->setPosition(Vector2f(0.0f,0.9f));
+	pBodyEdge->m_BodyType = EBT_STATIC;
+	
+	Vector2f vertex1(-0.2f, -0.5f);
+	Vector2f vertex2(0.3f, -0.2f);
+	pApp.m_CollisionAttributes.m_Shape = new Edge(vertex1, vertex2);
+	pBodyEdge->createPhysicalShape(pApp);
+	
+	
+	 // 3. Convex Polygon
+	PhysicalBody* pBodyPoly1 = pWorld->createPhysicalBody();
+	pBodyPoly1->setPosition(Vector2f(-0.8f,-0.5f));
+	pBodyPoly1->m_BodyType = EBT_STATIC;
+	pBodyPoly1->setAngle(-PI_4/2);
+	dfloat width = 0.4f; dfloat height = 0.08f;
+	Vector2f vertices[4] = { Vector2f(width, height), Vector2f(-width, height), Vector2f(-width, -height), Vector2f(width, -height) };
+	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+	pBodyPoly1->createPhysicalShape(pApp);
+
+	PhysicalBody* pBodyPoly2 = pWorld->createPhysicalBody();
+	pBodyPoly2->setPosition(Vector2f(0.3f,0.1f));
+	pBodyPoly2->m_BodyType = EBT_STATIC;
+	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(3, 0.1f);
+	pBodyPoly2->createPhysicalShape(pApp);
+	
+	PhysicalBody* pBodyPoly3 = pWorld->createPhysicalBody();
+	pBodyPoly3->setPosition(Vector2f(0.4f,0.4f));
+	pBodyPoly3->m_BodyType = EBT_STATIC;
+	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(5, 0.1f);
+	pBodyPoly3->createPhysicalShape(pApp);
+	
+	PhysicalBody* pBodyPoly4 = pWorld->createPhysicalBody();
+	pBodyPoly4->setPosition(Vector2f(0.5f,0.5f));
+	pBodyPoly4->m_BodyType = EBT_STATIC;
+	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(3, 0.1f);
+	pBodyPoly4->createPhysicalShape(pApp);
+	
+	PhysicalBody* pBodyPoly5 = pWorld->createPhysicalBody();
+	pBodyPoly5->setPosition(Vector2f(0.6f,0.6f));
+	pBodyPoly5->m_BodyType = EBT_STATIC;
+	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(6, 0.1f);
+	pBodyPoly5->createPhysicalShape(pApp);
+	
+	pWorld->setRayIntersectionListener(&callBack);
+	
 }
 
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
@@ -1896,7 +2028,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo29();
+	demo30();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
@@ -1994,6 +2126,9 @@ void renderScene(void)
 		if( pAlgo->getDynamicTree() )
 			renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
 	}
+	
+	callBack.renderRay();
+	pWorld->intersectRaySegment(callBack.raySeg);
 	
     //demo28();
 	//RaySegment2f raySeg;//(Vector2f(), Vector2f());
