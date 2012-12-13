@@ -49,7 +49,8 @@ Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
 PhysicalWorld::PhysicalWorld()
 {
     m_pCollisionListener = new CCollisionListener(); // Default Collision Listener
-
+	m_pRayIntersectionCallback = 0;
+	
 	m_CollisionManager = new CollisionManager(this);
 	m_pBroadPhaseAlgorithm = new DynamicTreeBroadPhaseAlgorithm(m_CollisionManager);
 	//m_pBroadPhaseAlgorithm = new NaiveBroadPhaseCollisionAlgorithm(m_CollisionManager);
@@ -92,12 +93,6 @@ PhysicalWorld::PhysicalWorld()
 	m_MinMaxConstraintPool    = new MemoryAllocator<MinMaxConstraint>(MAX_BODIES/10);
 	
 	m_BroadPhaseNodePool = new MemoryAllocator<BroadPhaseNode>(MAX_PROXIES);
-}
-
-void PhysicalWorld::setCollisionListener( ICollisionLisetner* pCollisionListener )
-{
-    m_pCollisionListener = pCollisionListener; 
-    m_CollisionManager->m_pCollisionListener = pCollisionListener;
 }
 
 PhysicalBody* PhysicalWorld::createPhysicalBody()
@@ -636,24 +631,33 @@ void PhysicalWorld::WorldOverlapAABBCallBackClass::overlapCallBack(dint32 overla
 {
 }
 
-void PhysicalWorld::CRayIntersectionCallBackClass::rayIntersectionCallBack(dint32 overlapNodeID, void* userData)
+dfloat PhysicalWorld::CRayIntersectionCallBackClass::rayIntersectionCallBack(const RaySegment2f& raySeg, dint32 nodeID, void* userData)
 {
-	//if( m_WorldRayIntersectionCallBackClass )
+	if( m_pWorldRayIntersectionCallBackClass )
 	{
 		RayIntersectionInfo info;
 		BroadPhaseNode* pNode = (BroadPhaseNode*)userData;
-		CollisionShape* pShape = pNode->m_CollisionShape;
-		m_WorldRayIntersectionCallBackClass.rayIntersectionCallBack(pShape, info);
+		CollisionShape* cShape = pNode->m_CollisionShape;
+		if( cShape->intersectRaySegment(pNode->m_PhysicalShape->m_ParentBody->m_Transform, raySeg, info) )
+			return m_pWorldRayIntersectionCallBackClass->rayIntersectionCallBack(raySeg ,pNode->m_PhysicalShape, info);
 	}
+	else 
+	{
+		return 0.0f;
+	}
+
+	return -1.0f;
 }
 
-void PhysicalWorld::CWorldRayIntersectionCallBackClass::rayIntersectionCallBack(CollisionShape* pShape, RayIntersectionInfo& info)
+dfloat PhysicalWorld::CWorldRayIntersectionCallBackClass::rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info)
 {
+	return 0.0f;
 }
 
-void PhysicalWorld::overlapAABB( AABB2f& queryAABB )
+void PhysicalWorld::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* pOverlapCallBackClass )
 {
-	m_pBroadPhaseAlgorithm->overlapAABB(queryAABB, &m_OverlapCallBackClass);
+	if( pOverlapCallBackClass )
+		m_pBroadPhaseAlgorithm->overlapAABB(queryAABB, pOverlapCallBackClass);
 	//m_OverlapCallBackClass.overlapCallBack(
 }
 
@@ -665,6 +669,17 @@ void PhysicalWorld::intersectRaySegment( const RaySegment2f& raySeg )
 void PhysicalWorld::intersectRaySegment( const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack )
 {
 	m_pBroadPhaseAlgorithm->intersectRaySegment(raySeg, callBack);
+}
+
+void PhysicalWorld::setCollisionListener( ICollisionLisetner* pCollisionListener )
+{
+    m_pCollisionListener = pCollisionListener; 
+    m_CollisionManager->m_pCollisionListener = pCollisionListener;
+}
+
+void PhysicalWorld::setRayIntersectionListener(WorldRayIntersectionCallBackClass* pRayIntersectionCallback)
+{
+	m_RayIntersectionCallBackClass.m_pWorldRayIntersectionCallBackClass = pRayIntersectionCallback;
 }
 
 END_NAMESPACE_DIRAC2D

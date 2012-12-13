@@ -86,7 +86,10 @@ dbool Edge::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySe
 		return false;
 	
 	intersectInfo.m_HitT = t1;
-	
+	intersectInfo.m_HitNormal = Vector2f( dy2, -dx2 );
+	intersectInfo.m_HitNormal.normalize();
+	intersectInfo.m_HitPoint = raySeg.m_Start + (raySeg.m_End - raySeg.m_Start) * intersectInfo.m_HitT;
+
 	return true;
 }
 

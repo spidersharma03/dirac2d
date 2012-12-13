@@ -129,12 +129,7 @@ void DynamicTreeBroadPhaseAlgorithm::overlapCallBack(dint32 overlapNodeID, void*
 
 void DynamicTreeBroadPhaseAlgorithm::overlapAABB( AABB2f& queryAABB, OverlapCallBackClass* callBack )
 {
-	BroadPhaseNode* pNode = m_BroadPhaseNodeList;
-	while( pNode )
-	{									
-		m_DynamicTree->overlapAABB(queryAABB, callBack );
-		pNode = pNode->m_Next;
-	} 
+	m_DynamicTree->overlapAABB(queryAABB, callBack );
 }
 
 void DynamicTreeBroadPhaseAlgorithm::intersectRay(const Ray2f& ray, RayIntersectionCallBackClass* callBack)
@@ -144,8 +139,7 @@ void DynamicTreeBroadPhaseAlgorithm::intersectRay(const Ray2f& ray, RayIntersect
 
 void DynamicTreeBroadPhaseAlgorithm::intersectRaySegment(const RaySegment2f& raySegment, RayIntersectionCallBackClass* callBack)
 {
-	//m_DynamicTree->intersectRaySegment(raySegment, callBack);
-	m_DynamicTree->intersectRaySegmentClosest(raySegment, callBack);
+	m_DynamicTree->intersectRaySegment(raySegment, callBack);
 }
 
 END_NAMESPACE_DIRAC2D

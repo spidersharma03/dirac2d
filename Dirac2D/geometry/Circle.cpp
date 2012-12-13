@@ -72,11 +72,15 @@ dbool Circle::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& ray
 	dfloat D = B * B - A * C;
 	
 	// No Intersection
-	if( D < EPSILON )
+	if( D < 0.0f )
 		return false;
 	
 	// Get the lowest root
-	intersectInfo.m_HitT = -(B + D);
+	dfloat hitT = -(B + sqrt(D))/A;
+	intersectInfo.m_HitT = hitT;
+	intersectInfo.m_HitPoint = raySeg.m_Start + d * hitT;
+	intersectInfo.m_HitNormal = raySeg.m_Start + d * hitT - xForm * m_Centroid;
+	intersectInfo.m_HitNormal.normalize();
 	
 	return true;
 }

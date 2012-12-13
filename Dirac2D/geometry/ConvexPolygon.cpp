@@ -129,7 +129,8 @@ dbool ConvexPolygon::isPointInside(Vector2f& p)
    solving the above we get
    t = ( V1 - P0 ) DOT N / ( D DOT N )
  
-   Also we need to make sure 
+   Also we need to make sure that we don't pick intersections which are outside the Poly's Edges.
+   inspired by Erin Catto's awesome Box2D engine.
  */
 dbool ConvexPolygon::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
 {
@@ -140,10 +141,9 @@ dbool ConvexPolygon::intersectRaySegment(const Matrix3f& xForm, const RaySegment
 	Vector2f rayStart = ( raySeg.m_Start - T ) * M;
 	Vector2f rayEnd   = ( raySeg.m_End - T ) * M;
 	Vector2f D = rayEnd - rayStart;
-	dfloat tmin = 10000000.0f;
-	dfloat tmax = -10000000.0f;
+	dfloat tmin = 0.0f;
+	dfloat tmax = 1.0f;
 	
-	dbool bResult = false;
 	dint32 index = -1;
 	
 	for (int i=0; i<m_NumVertices; i++) 
@@ -154,26 +154,28 @@ dbool ConvexPolygon::intersectRaySegment(const Matrix3f& xForm, const RaySegment
 		{
 			dfloat t = Numerator/Denom;
 			// Ray Entering this Half plane defined by the Polygon's Edge.
-			if( Denom < 0.0f && t < tmin )
+			if( Denom < 0.0f && Numerator < tmin * Denom )
 			{
 				tmin = t;
 				index = i;
 			}
 			// Ray Exiting this Half plane defined by the Polygon's Edge.
-			else if ( Denom > 0.0f && t < tmax )
+			else if ( Denom > 0.0f && Numerator < tmax * Denom )
 			{
 				tmax = t;
-				index = i;
 			}
 		}
 		// Ray can't intersect the Poly.
 		if( tmax < tmin )
 			return false;
 	}
-	// if tmin is negative, the Ray starts within the Poly.
+	// if tmin is zero, the Ray starts within the Poly.
 	intersectInfo.m_HitT = tmin;
-	intersectInfo.m_HitNormal = xForm * m_Normals[index];
-	return bResult;
+	Vector2f normal = m_Normals[index];
+	xForm.transformAsVector(normal);
+	intersectInfo.m_HitNormal = normal;
+	intersectInfo.m_HitPoint = raySeg.m_Start + (raySeg.m_End - raySeg.m_Start) * intersectInfo.m_HitT;
+	return true;
 }
 
 void ConvexPolygon::updateAABB(Matrix3f& xForm)

@@ -128,7 +128,7 @@ void NaiveBroadPhaseCollisionAlgorithm::overlapAABB( AABB2f& queryAABB, OverlapC
 	while( pNode )
 	{									
 		if( queryAABB.intersectAABB(pNode->m_CollisionShape->getAABB()) )
-			callBack->overlapCallBack(pNode->m_ID, 0);
+			callBack->overlapCallBack(pNode->m_ID, pNode);
 
 		pNode = pNode->m_Next;
 	} 
@@ -139,8 +139,8 @@ void NaiveBroadPhaseCollisionAlgorithm::intersectRay(const Ray2f& ray, RayInters
 	BroadPhaseNode* pNode = m_BroadPhaseNodeList;
 	while( pNode )
 	{									
-		if( pNode->m_CollisionShape->intersectRay(ray) )
-			callBack->rayIntersectionCallBack(pNode->m_ID);
+		//if( pNode->m_CollisionShape->intersectRay(ray) )
+		//	callBack->rayIntersectionCallBack(pNode->m_ID);
 		
 		pNode = pNode->m_Next;
 	} 
@@ -152,7 +152,7 @@ void NaiveBroadPhaseCollisionAlgorithm::intersectRaySegment(const RaySegment2f& 
 	while( pNode )
 	{									
 		//if( pNode->m_CollisionShape->intersectRay(raySegment) )
-			callBack->rayIntersectionCallBack(pNode->m_ID);
+			callBack->rayIntersectionCallBack(raySegment, pNode->m_ID);
 		
 		pNode = pNode->m_Next;
 	} 

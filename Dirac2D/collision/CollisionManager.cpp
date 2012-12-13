@@ -46,8 +46,20 @@ void CollisionManager::updateContacts()
 		AABB2f& aabb1 = pShape1->getAABB();
 		AABB2f& aabb2 = pShape2->getAABB();
 		
-        //ToDo:: Check for Collision Filters here before updating contacts.
-        
+        //Check for Collision Filters here before updating contacts.
+        CollisionFilter& filter1 = contact->m_PhysicalShape1->m_CollisionFilter;
+        CollisionFilter& filter2 = contact->m_PhysicalShape2->m_CollisionFilter;
+		
+		bool bCollide = !((filter1.m_CollisionMask & filter2.m_CollisionBit) != 0  &&
+						(filter2.m_CollisionMask & filter1.m_CollisionBit) != 0);
+			
+		if( !bCollide )	
+		{
+			deleteContact(contact);
+			contact = contact->m_Next;
+			continue;
+		}
+		
 		// Destroy the Contact if it dosen't persist
 		if( !aabb1.intersectAABB(aabb2) )
 		{
