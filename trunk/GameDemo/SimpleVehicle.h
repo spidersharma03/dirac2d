@@ -39,9 +39,6 @@ private:
     
     PhysicalBody* m_pVehicleBody;
     
-	// Move this Code to Gun class
-	float m_ShootingInterval;
-    DTimer m_Timer;
 };
 
 #endif

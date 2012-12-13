@@ -19,6 +19,8 @@ END_NAMESPACE_DIRAC2D
 
 USE_NAMESPACE_DIRAC2D
 
+class Gun;
+
 class Vehicle : public IRenderable, public GameObject
 {
 public:
@@ -93,6 +95,7 @@ protected:
     
     float m_MaxTorque; // Max Motor Torque
     
+	Gun* m_pGun;
 };
 
 #endif
