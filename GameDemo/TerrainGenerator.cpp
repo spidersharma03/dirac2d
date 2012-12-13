@@ -140,7 +140,10 @@ void TerrainGenerator::initializeTerrainBody()
 	m_pTerrainBody->m_BodyType = EBT_STATIC;
 	
 	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, (2*nCurvePoints-6)/2);
-	m_pTerrainBody->createPhysicalShape(pApp);
+	
+	PhysicalShape* pShape = m_pTerrainBody->createPhysicalShape(pApp);
+	pShape->m_CollisionFilter.m_CollisionBit = EOCB_TERRAIN;
+	pShape->m_CollisionFilter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
 }
 
 void TerrainGenerator::render()

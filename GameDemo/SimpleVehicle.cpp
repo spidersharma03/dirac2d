@@ -6,13 +6,14 @@
 //
 
 #include "SimpleVehicle.h"
+#include "SimpleGun.h"
 #include "FirstGame.h"
 
 SimpleVehicle::SimpleVehicle(FirstGame* pGame)
 {
     m_pGame = pGame;
-    
-	m_ShootingInterval = 500;
+    	
+	m_pGun = new SimpleGun(m_pGame);
 	
     init();
 }
@@ -87,7 +88,7 @@ void SimpleVehicle::init()
         m_pMotor = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
         m_pMotor->m_PhysicalBody1 = circle2;
 		m_pMotor->m_MaxTorque = 100.0f;
-		m_pMotor->m_Speed = 250.0f;
+		m_pMotor->m_Speed = 150.0f;
 		m_pMotor->initialize();
 	}
 
@@ -100,20 +101,18 @@ void SimpleVehicle::initFromFile(const char* fileName)
 
 void SimpleVehicle::update(float dt)
 {
-    m_Position = m_pVehicleBody->m_Position;
+	m_Position = m_pVehicleBody->m_Position;
+	m_Transform = m_pVehicleBody->getTransform();
+	
+	m_pGun->update(dt);
 }
 
 void SimpleVehicle::render()
 {
+	m_pGun->render();
 }
 
 void SimpleVehicle::shoot()
 {
-	static double initTime = m_Timer.getCurrentTime();
-    double time = m_Timer.getCurrentTime();
-    if( time - initTime > m_ShootingInterval )
-    {
-        initTime = time;
-        //
-	} 
+	m_pGun->shoot();
 }

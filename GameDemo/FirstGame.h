@@ -11,15 +11,13 @@
 
 #include <vector>
 #include "Game.h"
+#include "../Dirac2D/Dirac2D.h"
 
 using namespace std;
 
 class SimpleVehicle;
 class Camera;
 
-BEGIN_NAMESPACE_DIRAC2D
-class PhysicalWorld;
-END_NAMESPACE_DIRAC2D
 
 USE_NAMESPACE_DIRAC2D
 
@@ -30,10 +28,8 @@ class ObjectFactory;
 class ObjectManager;
 class GameCollisionListener;
 class ObjectPlacementStraregy;
-class FirstGame;
 
-
-class FirstGame : public Game
+class FirstGame : public Game, public OverlapCallBackClass
 {
 	
 public:
@@ -81,8 +77,24 @@ public:
 		return m_pObjectManager;
 	}
 	
+	GLRenderer* getRenderer()
+	{
+		return m_pRenderer;
+	}
+	
     void placeObjects(GameObject* pList, int numObjects);
     	
+public:
+// CALL BACKS
+	// Overlap Call Back
+	void overlapCallBack(dint32 overlapNodeID, void* userData);
+	
+	void applyImpulse(const Vector2f& impulseCentre, const float impulseMagnitude);
+	
+private:
+	
+	void cleanUp();
+	
 private:
     TerrainGenerator* m_pTerrainGenerator;
     SimpleVehicle* m_pVehicle;
@@ -91,11 +103,13 @@ private:
 	ObjectFactory* m_pObjectFactory;
 	ObjectManager* m_pObjectManager;
 	GameCollisionListener* m_pGameCollisionListener;
+	
     ObjectPlacementStraregy* m_pObjectPlacementStrategy[10];
-    
+    GLRenderer *m_pRenderer;
+	
 	float m_StepSize;
 	
-	vector<GameObject*> m_vecGameObjects;
+	vector<GameObject*> m_vecOverlapQueryGameObjects;
 };
 
 #endif

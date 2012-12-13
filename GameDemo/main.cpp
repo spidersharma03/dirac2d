@@ -78,7 +78,7 @@ void renderScene(void)
 
 	glutSwapBuffers();
 	
-	timer.tick();
+	//timer.tick();
 }
 
 //static bool bWarmStart = true;
@@ -91,7 +91,7 @@ void keyProcessor(unsigned char key, int x, int y)
 		case 'd':
 		case 'D':
 			pGame->getVehicle()->applyTorqueImpulse(-3.5f);
-
+			pGame->getVehicle()->setMotorSpeed(0.0f);
 			break;
 			
 		case 'a':
@@ -100,7 +100,6 @@ void keyProcessor(unsigned char key, int x, int y)
 
 			break;
 		case 32:
-			pGame->getVehicle()->shoot();
 			//pGame->getVehicle()->applyImpulse(Vector2f(0.0f,-300.0f));
 			break;
 		case 27:
@@ -130,6 +129,9 @@ dbool bPicked = false;
 
 void MouseButton(int button, int state, int x, int y)
 {	
+	if( state == GLUT_DOWN && button == GLUT_LEFT_BUTTON )
+		pGame->getVehicle()->shoot();
+
 	_button = button;
 	
 	if(windowHeight == 0)

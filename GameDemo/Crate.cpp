@@ -39,6 +39,7 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
 
 	
 	PhysicalShape* pShape = m_pBody->createPhysicalShape(pApp);
+	pShape->m_CollisionFilter.m_CollisionBit = EOCB_PHYSICAL_BODY;
     pShape->setUserData(this);
 	m_CrateCount++;
 }
