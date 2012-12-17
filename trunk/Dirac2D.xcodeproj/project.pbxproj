@@ -60,6 +60,8 @@
 		35DC47161657CA2500B0BD69 /* Coin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35DC47151657CA2400B0BD69 /* Coin.cpp */; };
 		35E02F04166F40B200C3889A /* CoinPlacementStrategy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E02EFC166F400400C3889A /* CoinPlacementStrategy.cpp */; };
 		35E02F0E166FAA3500C3889A /* ObjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E02F0C166FAA3500C3889A /* ObjectManager.cpp */; };
+		35E02F26167B585800C3889A /* DebrisBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E02F25167B585600C3889A /* DebrisBody.cpp */; };
+		35E02F2A167CA5F500C3889A /* DebrisBodyCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E02F29167CA5F300C3889A /* DebrisBodyCreator.cpp */; };
 		35E3A200163D2C0E0023D968 /* TerrainGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */; };
 		35E3A202163D37150023D968 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35E3A201163D37140023D968 /* Camera.cpp */; };
 		75580E9D13CED76500B6B03B /* PulleyConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */; };
@@ -164,6 +166,11 @@
 		35E02F00166F400400C3889A /* ObjectPlacementSrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectPlacementSrategy.h; sourceTree = "<group>"; };
 		35E02F0C166FAA3500C3889A /* ObjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectManager.cpp; sourceTree = "<group>"; };
 		35E02F0D166FAA3500C3889A /* ObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectManager.h; sourceTree = "<group>"; };
+		35E02F23167B53E700C3889A /* IGameCollisionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGameCollisionListener.h; sourceTree = "<group>"; };
+		35E02F25167B585600C3889A /* DebrisBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebrisBody.cpp; sourceTree = "<group>"; };
+		35E02F27167B587600C3889A /* DebrisBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebrisBody.h; sourceTree = "<group>"; };
+		35E02F28167CA52400C3889A /* DebrisBodyCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebrisBodyCreator.h; sourceTree = "<group>"; };
+		35E02F29167CA5F300C3889A /* DebrisBodyCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebrisBodyCreator.cpp; sourceTree = "<group>"; };
 		35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainGenerator.h; sourceTree = "<group>"; };
 		35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainGenerator.cpp; sourceTree = "<group>"; };
 		35E3A201163D37140023D968 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
@@ -380,6 +387,11 @@
 				C2FB6FEC1679F4D6002549D8 /* WorldOverlapCallback.h */,
 				C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */,
 				3553008E163C15A80037A4E5 /* main.cpp */,
+				35E02F23167B53E700C3889A /* IGameCollisionListener.h */,
+				35E02F25167B585600C3889A /* DebrisBody.cpp */,
+				35E02F27167B587600C3889A /* DebrisBody.h */,
+				35E02F28167CA52400C3889A /* DebrisBodyCreator.h */,
+				35E02F29167CA5F300C3889A /* DebrisBodyCreator.cpp */,
 			);
 			path = GameDemo;
 			sourceTree = "<group>";
@@ -739,6 +751,8 @@
 				C2FB6C0516788FE7002549D8 /* SimpleGun.cpp in Sources */,
 				C2FB6C0A16789098002549D8 /* GunRayCastCallback.cpp in Sources */,
 				C2FB6FEE1679F4D6002549D8 /* WorldOverlapCallback.cpp in Sources */,
+				35E02F26167B585800C3889A /* DebrisBody.cpp in Sources */,
+				35E02F2A167CA5F500C3889A /* DebrisBodyCreator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

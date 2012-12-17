@@ -219,7 +219,7 @@ public:
 /*
   This uses the SAT for the intersection check between Ray Segment and AABB.
   the implementation is done as described in gino's book "Collision Detecton in
-   Interactive 3D Environments". page 80
+   Interactive 3D Environments". page 79-80
 */
 	inline dbool intersectAABB(const AABB2<T>& aabb) const
 	{

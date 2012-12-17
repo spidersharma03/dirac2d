@@ -243,7 +243,7 @@ void DynamicTree::insertNode(const AABB2f& nodeAABB, dint32 nodeID)
 	dint32 index = m_Nodes[nodeID].m_Parent;
 	while ( index != Null_Node ) 
 	{
-		//index = balance(index);
+		index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
 		
@@ -303,7 +303,7 @@ void DynamicTree::removeNode(dint32 nodeID)
 	dint32 index = grandParentNodeIndex;
 	while ( index != Null_Node ) 
 	{
-		//index = balance(index);
+		index = balance(index);
 		dint32 child1Index = m_Nodes[index].m_Child1;
 		dint32 child2Index = m_Nodes[index].m_Child2;
 		m_Nodes[index].m_AABB.combine( m_Nodes[child1Index].m_AABB, m_Nodes[child2Index].m_AABB );
@@ -386,7 +386,7 @@ dint32 DynamicTree::balance(dint32 rootID)
 			m_Nodes[m_Nodes[pivotNode].m_Child2].m_Parent = rootID;
 
 			m_Nodes[rootID].m_Height = 1 + MAX( m_Nodes[m_Nodes[pivotNode].m_Child2].m_Height, m_Nodes[rootchild2Index].m_Height);
-			m_Nodes[rootID].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child2].m_AABB, m_Nodes[child1Index].m_AABB);
+			m_Nodes[rootID].m_AABB.combine( m_Nodes[m_Nodes[pivotNode].m_Child2].m_AABB, m_Nodes[rootchild2Index].m_AABB);
 			
 			m_Nodes[pivotNode].m_Child2 = rootID;
 			m_Nodes[rootID].m_Parent = pivotNode;
