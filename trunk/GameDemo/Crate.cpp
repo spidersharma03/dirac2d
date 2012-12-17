@@ -22,7 +22,7 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
 	m_pGame = pGame;
 	
 	PhysicalAppearance pApp;
-	pApp.m_MassAttributes.m_Density = 5*AVG_OBJECT_DENSITY;
+	pApp.m_MassAttributes.m_Density = 50*AVG_OBJECT_DENSITY;
 	m_pBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
 
 	if( cInfo.m_ShapeType == ECS_CIRCLE )
@@ -40,6 +40,7 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
 	
 	PhysicalShape* pShape = m_pBody->createPhysicalShape(pApp);
 	pShape->m_CollisionFilter.m_CollisionBit = EOCB_PHYSICAL_BODY;
+    pShape->m_CollisionFilter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
     pShape->setUserData(this);
 	m_CrateCount++;
 }

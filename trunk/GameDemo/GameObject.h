@@ -8,6 +8,8 @@
 
 #include "../Dirac2D/maths/MathUtil.h"
 #include "IUpdatable.h"
+#include "IGameCollisionListener.h"
+
 
 USE_NAMESPACE_DIRAC2D
 
@@ -16,16 +18,19 @@ USE_NAMESPACE_DIRAC2D
 
 #define AVG_OBJECT_DENSITY 1.0
 
-enum GAME_OBJECT_TYPE { EOT_COIN, EOT_CRATE , EOT_NONE };
+enum GAME_OBJECT_TYPE { EOT_COIN = 1, EOT_CRATE, EOT_DEBRIS , EOT_NONE };
 
-enum OBJECT_COLLISION_BIT { EOCB_COIN = 0x1, EOCB_PHYSICAL_BODY = 0x2, EOCB_TERRAIN = 0x4, EOCB_PARTICLE_DEBRIS = 0x8 };
+enum OBJECT_COLLISION_BIT { EOCB_COIN = 0x1, EOCB_PHYSICAL_BODY = 0x2, EOCB_TERRAIN = 0x4, EOCB_PARTICLE_DEBRIS = 0x8};
 	
 struct GameObjectInfo
 {
+    Vector2f m_Position;
+    Vector2f m_Velocity;
+    float m_AngularVelocity;
 	GAME_OBJECT_TYPE m_ObjectType;
 };
 
-class GameObject : public IUpdatable
+class GameObject : public IUpdatable, public IGameCollisionListener
 {
 public:
 	GameObject()
@@ -71,6 +76,12 @@ public:
         m_ObjectCount--;
     }
 	
+    // COLLISION CALL BACKS
+    
+    virtual void onCollisionEnter( GameObject* pObject, ContactManifold& manifold ){};
+    
+    virtual void onCollisionExit( GameObject* pObject, ContactManifold& manifold ){};
+    
 	GameObject* m_pNext;
 	GameObject* m_pPrev;
 	

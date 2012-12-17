@@ -18,7 +18,7 @@ USE_NAMESPACE_DIRAC2D
 
 
 #define MAX_CRATES_ON_SCREEN 10
-#define MAX_COINS_ON_SCREEN 30
+#define MAX_COINS_ON_SCREEN 20
 
 #define MAX_GAME_OBJECTS 200
 #define NUM_COINS 10
@@ -44,9 +44,6 @@ public:
     // Add Game Objects to the Global List
     void add(GameObject* pObjectList);
     
-    // Removes Game Objects from the Global List    
-    void remove(GameObject* pObjectList);
-    
 	// Mark these Objects for deletion after the WorldStep.
 	void markObjectsForCleanup(GameObject* pObject);
 	
@@ -56,6 +53,9 @@ private:
     void generateCoins();   
     
 	void generateCrates();
+    
+    // Removes Game Objects from the Global List    
+    void remove(GameObject* pObjectList);
     
     ~ObjectManager();
     

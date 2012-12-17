@@ -132,6 +132,7 @@ protected:
     Vector3f m_Target;
     
     Vector2f m_Velocity;
+    Vector2f m_cameraOffset;
     float m_Elasticity;
     
     Matrix4f m_ViewMatrix;

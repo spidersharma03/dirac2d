@@ -124,7 +124,8 @@ void TerrainGenerator::initializeTerrainBody()
     // 2. create new terrain body using the new points.   
 	PhysicalAppearance pApp;
     pApp.m_PhysicalAttributes.m_Friction = 1.0f;
-    
+    pApp.m_PhysicalAttributes.m_Restitution = 0.5f;
+
 	Vector2f vertices[300];
 	
 	for( int i=0; i<2*nCurvePoints-4; i+=2)
@@ -143,7 +144,6 @@ void TerrainGenerator::initializeTerrainBody()
 	
 	PhysicalShape* pShape = m_pTerrainBody->createPhysicalShape(pApp);
 	pShape->m_CollisionFilter.m_CollisionBit = EOCB_TERRAIN;
-	pShape->m_CollisionFilter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
 }
 
 void TerrainGenerator::render()

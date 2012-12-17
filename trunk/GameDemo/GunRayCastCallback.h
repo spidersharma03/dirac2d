@@ -24,7 +24,8 @@ public:
 	
 	virtual float rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info);
 	
-public:
+    friend class SimpleGun;
+private:
 	GameObject* m_pObject; // Closest Object Picked
 	RayIntersectionInfo m_IntersectionInfo; // Closest Intersection Info
 protected:
