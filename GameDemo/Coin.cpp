@@ -52,3 +52,13 @@ Coin::~Coin()
 	m_Value = -1;
 	m_CoinCount--;
 }
+
+void Coin::onCollisionEnter( GameObject* pObject, ContactManifold& manifold )
+{
+    
+}
+
+void Coin::onCollisionExit( GameObject* pObject, ContactManifold& manifold )
+{
+    
+}

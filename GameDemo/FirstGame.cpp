@@ -15,6 +15,8 @@
 #include "GameCollisions.h"
 #include "CoinPlacementStrategy.h"
 #include "Crate.h"
+#include "DebrisBody.h"
+#include "DebrisBodyCreator.h"
 
 FirstGame::FirstGame()
 {
@@ -36,7 +38,8 @@ FirstGame::FirstGame()
 	m_pObjectManager = new ObjectManager(this);
 	
     m_pGameCollisionListener = new GameCollisionListener(this);
-	    	
+	m_pDebrisBodyCreator = new DebrisBodyCreator(this);
+    
     m_pObjectPlacementStrategy[0] = new CoinPlacementStraregy(this);
     
 	m_StepSize = 1.0f/1600.0f;
@@ -116,8 +119,20 @@ void FirstGame::applyImpulse(const Vector2f& impulseCentre, const float impulseM
 		float d = impulseCentre.distanceSquared(pBody->m_Position);
 		Vector2f impulse = pBody->m_Position - impulseCentre;
 		impulse.normalize();
-		if( d*d > EPSILON * EPSILON )
-			impulse *=  ( 1.0f/d * impulseMagnitude );
+        impulse *=  ( 1.0f/(1.0f+d) * impulseMagnitude );
 		pCrate->getPhysicalBody()->applyImpulse(impulse);
 	}
+}
+
+void FirstGame::explodeDebris( const GameObjectInfo& objectInfo, const Vector2f& position )
+{
+    switch (objectInfo.m_ObjectType) {
+        case EOT_CRATE:
+            {
+                m_pDebrisBodyCreator->createDebrisBodies(objectInfo, position, 5);
+            }
+            break;
+        default:
+            break;
+    }
 }

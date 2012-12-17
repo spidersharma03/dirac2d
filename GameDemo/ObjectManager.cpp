@@ -117,8 +117,8 @@ void ObjectManager::generateCrates()
     
     // Crate info. 
     CrateInfo cInfo;
-	cInfo.m_Width  = 0.4f;
-	cInfo.m_Height = 0.3f;
+	cInfo.m_Width  = 0.6f;
+	cInfo.m_Height = 0.4f;
 	
     // Create a list of Crates
 	int nColumns = 6;

@@ -25,14 +25,23 @@ GunRayCastClosestCallBack::GunRayCastClosestCallBack(FirstGame* pGame)
 float GunRayCastClosestCallBack::rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info)
 {	
 	GameObject* pObject = (GameObject*)pShape->getUserData();
-    
+    //printf("%f  %d", info.m_HitT, pObject);
+    //if( pObject )
+    //    printf("  %d\n", pObject->getGameObjectInfo().m_ObjectType);
+
     if( pObject )
     {
 		if( pObject->getGameObjectInfo().m_ObjectType != EOT_CRATE )
+        {
 			return -1.0f;
-		
+		}
+        
 		m_pObject = pObject;
 		m_IntersectionInfo = info;
+    }
+    else
+    {
+        return -1.0f;
     }
 	return info.m_HitT;
 }

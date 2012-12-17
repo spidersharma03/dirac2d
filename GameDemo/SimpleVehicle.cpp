@@ -46,10 +46,16 @@ void SimpleVehicle::init()
 		m_pVehicleBody->setPosition(Vector2f(1.0f+xPos,1.05f+yPos));		
 		
 		PhysicalAppearance pApp;
+        pApp.m_CollisionAttributes.m_Filter.m_CollisionBit = EOCB_PHYSICAL_BODY;
+        pApp.m_CollisionAttributes.m_Filter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
+
 		pApp.m_MassAttributes.m_Density = 10.0f;
 		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.07f,0.6);
 		//pApp.m_CollisionAttributes.m_Shape = new Circle(0.3f);
-		m_pVehicleBody->createPhysicalShape(pApp);
+		PhysicalShape* pShape = m_pVehicleBody->createPhysicalShape(pApp);
+        //pShape->m_CollisionFilter.m_CollisionBit = EOCB_PHYSICAL_BODY;
+        //pShape->m_CollisionFilter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
+        
 		m_pVehicleBody->m_AngularDamping = 50.0f;
 		//m_pVehicleBody->m_LinearDamping = 2.0f;
 		
@@ -61,12 +67,17 @@ void SimpleVehicle::init()
 		pApp.m_MassAttributes.m_Density = 200.0f;
 		pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
 		
-		circle1->createPhysicalShape(pApp);
-		
+		pShape = circle1->createPhysicalShape(pApp);
+		//pShape->m_CollisionFilter.m_CollisionBit = EOCB_PHYSICAL_BODY;
+        //pShape->m_CollisionFilter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
+        
 		pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
         pApp.m_PhysicalAttributes.m_Friction = 1.0f;
-		circle2->createPhysicalShape(pApp);
 		
+        pShape = circle2->createPhysicalShape(pApp);
+		//pShape->m_CollisionFilter.m_CollisionBit = EOCB_PHYSICAL_BODY;
+        //pShape->m_CollisionFilter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
+        
 		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
 		lc1->m_PhysicalBody1 = m_pVehicleBody;
 		lc1->m_PhysicalBody2 = circle1;
@@ -88,7 +99,7 @@ void SimpleVehicle::init()
         m_pMotor = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
         m_pMotor->m_PhysicalBody1 = circle2;
 		m_pMotor->m_MaxTorque = 100.0f;
-		m_pMotor->m_Speed = 150.0f;
+		m_pMotor->m_Speed = 50.0f;
 		m_pMotor->initialize();
 	}
 

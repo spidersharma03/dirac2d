@@ -1,15 +1,14 @@
 //
-//  Coin.h
+//  DebrisBody.h
 //  Dirac2D
 //
-//  Created by Prashant Sharma on 17/11/12.
+//  Created by Prashant Sharma on 14/12/12.
 //
 
-#include "GameObject.h"
-#include "../Dirac2D/definitions.h"
+#ifndef _DEBRIS_BODY_H_
+#define _DEBRIS_BODY_H_
 
-#ifndef _COIN_H_
-#define _COIN_H_
+#include "../Dirac2D/definitions.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
@@ -17,17 +16,21 @@ END_NAMESPACE_DIRAC2D
 
 class FirstGame;
 
-struct CoinInfo : public GameObjectInfo
+#include "GameObject.h"
+
+enum { MAX_DEBRIS_VERTICS = 8 };
+
+struct DebrisInfo : public GameObjectInfo
 {
-    CoinInfo()
+    DebrisInfo()
     {
-        m_ObjectType = EOT_COIN;
+        m_ObjectType = EOT_DEBRIS;
     }
-	int m_Value;
-	float m_Radius;
+    Vector2f vertices[MAX_DEBRIS_VERTICS]; 
+    int numVertices;
 };
 
-class Coin : public GameObject
+class DebrisBody : public GameObject
 {
 public:
 	virtual void update(float dt);
@@ -37,25 +40,23 @@ public:
         return m_pBody;
     }
 private:
-    Coin(CoinInfo cInfo, FirstGame* pGame);
-    
-	Coin(FirstGame* pGame);
-	
+    DebrisBody(DebrisInfo dInfo, FirstGame* pGame);
+    	
     virtual void onCollisionEnter( GameObject* pObject, ContactManifold& manifold );
     
     virtual void onCollisionExit( GameObject* pObject, ContactManifold& manifold );
     
-	virtual ~Coin();
+	virtual ~DebrisBody();
 	
 	friend class ObjectFactory;
+    
 private:
-	int m_Value;
-	float m_Radius;
+    int m_BounceCount;
+private:
     PhysicalBody* m_pBody;
 	static FirstGame* m_pGame;
-	
 public:
-	static int m_CoinCount;
+	static int m_DebrisCount;
 };
 
 #endif

@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "Coin.h"
 #include "Crate.h"
+#include "DebrisBody.h"
 
 ObjectFactory::ObjectFactory(FirstGame* pGame) : m_pGame( pGame )
 {
@@ -31,6 +32,9 @@ GameObject* ObjectFactory::createObject(GameObjectInfo& gInfo)
 			break;
 		case EOT_CRATE:
 			pObject = new(m_pBlockAllocator->Allocate(sizeof(Crate))) Crate((CrateInfo&)gInfo, m_pGame);
+			break;
+        case EOT_DEBRIS:
+			pObject = new(m_pBlockAllocator->Allocate(sizeof(DebrisBody))) DebrisBody((DebrisInfo&)gInfo, m_pGame);
 			break;
 		default:
 			break;
@@ -52,6 +56,12 @@ void ObjectFactory::destroyObject( GameObject* pObject )
 		{
             ((Crate*)pObject)->~Crate();
 			m_pBlockAllocator->Free(pObject, sizeof(Crate));
+			break;
+		}
+        case EOT_DEBRIS:
+		{
+            ((DebrisBody*)pObject)->~DebrisBody();
+			m_pBlockAllocator->Free(pObject, sizeof(DebrisBody));
 			break;
 		}
 		default:

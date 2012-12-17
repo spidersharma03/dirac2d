@@ -19,7 +19,7 @@ class Coin;
 
 USE_NAMESPACE_DIRAC2D
 
-#define MAX_COINS_ON_SCREEN1 30
+#define MAX_COINS_ON_SCREEN1 20
 
 class ObjectFactory
 {

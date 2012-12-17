@@ -17,7 +17,7 @@ using namespace std;
 
 class SimpleVehicle;
 class Camera;
-
+class DebrisBodyCreator;
 
 USE_NAMESPACE_DIRAC2D
 
@@ -28,6 +28,7 @@ class ObjectFactory;
 class ObjectManager;
 class GameCollisionListener;
 class ObjectPlacementStraregy;
+struct GameObjectInfo;
 
 class FirstGame : public Game, public OverlapCallBackClass
 {
@@ -89,8 +90,12 @@ public:
 	// Overlap Call Back
 	void overlapCallBack(dint32 overlapNodeID, void* userData);
 	
+    // Aplies impulses to Objects queried from AABB overlap
 	void applyImpulse(const Vector2f& impulseCentre, const float impulseMagnitude);
 	
+    // Creates Debris Bodies for different explosions
+    void explodeDebris( const GameObjectInfo& objectInfo, const Vector2f& position );
+    
 private:
 	
 	void cleanUp();
@@ -104,6 +109,7 @@ private:
 	ObjectManager* m_pObjectManager;
 	GameCollisionListener* m_pGameCollisionListener;
 	
+    DebrisBodyCreator* m_pDebrisBodyCreator;
     ObjectPlacementStraregy* m_pObjectPlacementStrategy[10];
     GLRenderer *m_pRenderer;
 	

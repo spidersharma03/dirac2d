@@ -21,6 +21,7 @@ Camera::Camera()
     m_AspectRatio = 4.0f/3.0f;
 	m_InitEyeZ = 5.0f;
 	m_EyePosition.z = m_InitEyeZ;
+    m_cameraOffset = Vector2f(4.0,0.0f);
 }
 
 void Camera::update(float dt)
@@ -66,7 +67,7 @@ void Camera::autoZoom()
 void Camera::followTarget(float dt)
 {
     Vector2f targetPos = m_pFocusTarget->getPosition();
-    Vector2f vel = (targetPos - Vector2f(m_EyePosition.x, m_EyePosition.y)) * m_Elasticity;
+    Vector2f vel = (targetPos - Vector2f(m_EyePosition.x, m_EyePosition.y) + m_cameraOffset) * m_Elasticity;
     m_Target.x = m_EyePosition.x += vel.x * dt;
     m_Target.y = m_EyePosition.y += vel.y * dt;
 }
