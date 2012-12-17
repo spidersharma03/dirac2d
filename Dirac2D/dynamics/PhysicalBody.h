@@ -69,12 +69,22 @@ public:
 		return m_Velocity + Vector2f::cross(m_AngularVelocity, localPosition);
 	}
 	
-	void setPosition(Vector2f position)
+	inline void setPosition(const Vector2f& position)
 	{
 		m_Position = position;
 		m_Transform.translate(position);
 	}
 	
+    inline void setVelocity(const Vector2f& velocity)
+	{
+		m_Velocity = velocity;
+	}
+    
+    inline void setAngularVelocity( const dfloat angularVelocity )
+    {
+        m_AngularVelocity = angularVelocity;
+    }
+    
 	void setAngle(dfloat angle)
 	{
 		m_Angle = angle;

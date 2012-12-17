@@ -52,7 +52,7 @@ void CollisionManager::updateContacts()
 		
 		bool bCollide = !((filter1.m_CollisionMask & filter2.m_CollisionBit) != 0  &&
 						(filter2.m_CollisionMask & filter1.m_CollisionBit) != 0);
-			
+		
 		if( !bCollide )	
 		{
 			deleteContact(contact);

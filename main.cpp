@@ -1859,7 +1859,7 @@ public:
 	{
 		theta = 0.0f;
 		start = Vector2f(0.0f,-0.0f);
-		end = Vector2f(1.0f,1.0f);
+		end = Vector2f(2.0f,0.0f);
 		m_bIntersect = false;
 	}
 	dfloat rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info)
@@ -1872,7 +1872,7 @@ public:
 	
 	void renderRay()
 	{
-		theta += 0.00006f;
+		theta += 0.0002f;
 
 		glPushMatrix();
 		
@@ -1953,46 +1953,79 @@ void demo30()
 	pBodyEdge->setPosition(Vector2f(0.0f,0.9f));
 	pBodyEdge->m_BodyType = EBT_STATIC;
 	
-	Vector2f vertex1(-0.2f, -0.5f);
-	Vector2f vertex2(0.3f, -0.2f);
+	Vector2f vertex1(-1.2f, -1.1f);
+	Vector2f vertex2(2.3f, -1.1f);
 	pApp.m_CollisionAttributes.m_Shape = new Edge(vertex1, vertex2);
 	pBodyEdge->createPhysicalShape(pApp);
 	
 	
 	 // 3. Convex Polygon
-	PhysicalBody* pBodyPoly1 = pWorld->createPhysicalBody();
-	pBodyPoly1->setPosition(Vector2f(-0.8f,-0.5f));
-	pBodyPoly1->m_BodyType = EBT_STATIC;
-	pBodyPoly1->setAngle(-PI_4/2);
-	dfloat width = 0.4f; dfloat height = 0.08f;
-	Vector2f vertices[4] = { Vector2f(width, height), Vector2f(-width, height), Vector2f(-width, -height), Vector2f(width, -height) };
-	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
-	pBodyPoly1->createPhysicalShape(pApp);
-
-	PhysicalBody* pBodyPoly2 = pWorld->createPhysicalBody();
-	pBodyPoly2->setPosition(Vector2f(0.3f,0.1f));
-	pBodyPoly2->m_BodyType = EBT_STATIC;
-	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(3, 0.1f);
-	pBodyPoly2->createPhysicalShape(pApp);
+//	PhysicalBody* pBodyPoly1 = pWorld->createPhysicalBody();
+//	pBodyPoly1->setPosition(Vector2f(-0.8f,-0.5f));
+//	pBodyPoly1->m_BodyType = EBT_STATIC;
+//	pBodyPoly1->setAngle(-PI_4/2);
+//	dfloat width = 0.4f; dfloat height = 0.08f;
+//	Vector2f vertices[4] = { Vector2f(width, height), Vector2f(-width, height), Vector2f(-width, -height), Vector2f(width, -height) };
+//	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+//	pBodyPoly1->createPhysicalShape(pApp);
+//
+//	PhysicalBody* pBodyPoly2 = pWorld->createPhysicalBody();
+//	pBodyPoly2->setPosition(Vector2f(0.2f,0.0f));
+//    pBodyPoly2->setAngle(-PI_4);
+//	pBodyPoly2->m_BodyType = EBT_STATIC;
+//	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(4, 0.1f);
+//	pBodyPoly2->createPhysicalShape(pApp);
+//	
+//	PhysicalBody* pBodyPoly3 = pWorld->createPhysicalBody();
+//	pBodyPoly3->setPosition(Vector2f(0.4f,0.0f));
+//    pBodyPoly3->setAngle(-PI_4);
+//	pBodyPoly3->m_BodyType = EBT_STATIC;
+//	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(4, 0.1f);
+//	pBodyPoly3->createPhysicalShape(pApp);
+//	
+//	PhysicalBody* pBodyPoly4 = pWorld->createPhysicalBody();
+//	pBodyPoly4->setPosition(Vector2f(0.2f,0.3f));
+//    pBodyPoly4->setAngle(-PI_4/2);
+//	pBodyPoly4->m_BodyType = EBT_STATIC;
+//	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(4, 0.1f);
+//	pBodyPoly4->createPhysicalShape(pApp);
+//	
+//	PhysicalBody* pBodyPoly5 = pWorld->createPhysicalBody();
+//	pBodyPoly5->setPosition(Vector2f(0.6f,0.6f));
+//    pBodyPoly5->setAngle(-PI_4/2);
+//	pBodyPoly5->m_BodyType = EBT_STATIC;
+//	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(6, 0.1f);
+//	pBodyPoly5->createPhysicalShape(pApp);
 	
-	PhysicalBody* pBodyPoly3 = pWorld->createPhysicalBody();
-	pBodyPoly3->setPosition(Vector2f(0.4f,0.4f));
-	pBodyPoly3->m_BodyType = EBT_STATIC;
-	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(5, 0.1f);
-	pBodyPoly3->createPhysicalShape(pApp);
+    float w = 0.25;
+    float h = 0.25/1.5;
+    Vector2f start(0.5,-0.2);
+    int nColumns = 6;
+	int m = nColumns;
+	float x = start.x;
+	float y = start.y + 0.1f;
+	float eps = w/10;
 	
-	PhysicalBody* pBodyPoly4 = pWorld->createPhysicalBody();
-	pBodyPoly4->setPosition(Vector2f(0.5f,0.5f));
-	pBodyPoly4->m_BodyType = EBT_STATIC;
-	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(3, 0.1f);
-	pBodyPoly4->createPhysicalShape(pApp);
-	
-	PhysicalBody* pBodyPoly5 = pWorld->createPhysicalBody();
-	pBodyPoly5->setPosition(Vector2f(0.6f,0.6f));
-	pBodyPoly5->m_BodyType = EBT_STATIC;
-	pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(6, 0.1f);
-	pBodyPoly5->createPhysicalShape(pApp);
-	
+	// Crate Placement
+	for( int i=0; i<nColumns; i++ )
+	{
+		x = start.x + i * w/2;
+		
+		for( int j=0; j<m; j++ )
+		{
+            PhysicalBody* pBodyPoly = pWorld->createPhysicalBody();
+            //pBodyPoly->m_BodyType = EBT_STATIC;
+            float w_ = 0.5*w; float h_ = 0.5*h;
+            Vector2f vertices[4] = { Vector2f(w_,h_), Vector2f(-w_,h_), Vector2f(-w_,-h_), Vector2f(w_,-h_)};
+            pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+            pBodyPoly->createPhysicalShape(pApp);
+            pBodyPoly->setPosition(Vector2f(x,y));
+			x += w + eps;
+		}
+		m--;
+		y += h + eps;
+	}
+    
 	pWorld->setRayIntersectionListener(&callBack);
 	
 }
