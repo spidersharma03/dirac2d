@@ -5,6 +5,13 @@
 //  Created by Prashant Sharma on 27/10/12.
 //
 
+#ifndef WIN32 
+#include <sys/time.h>
+#include<GLUT/glut.h>
+#else
+#include<GL/glut.h>
+#endif
+
 #include "Coin.h"
 #include "FirstGame.h"
 #include "SimpleVehicle.h"
@@ -28,7 +35,7 @@ FirstGame::FirstGame()
 	
 	m_pVehicle = new SimpleVehicle(this);
 	
-	m_pCamera = new Camera();
+	m_pCamera = new Camera(this);
 	m_pCamera->setFocusTarget(m_pVehicle);
 	
 	m_pTerrainGenerator = new TerrainGenerator(this);
@@ -135,4 +142,59 @@ void FirstGame::explodeDebris( const GameObjectInfo& objectInfo, const Vector2f&
         default:
             break;
     }
+}
+
+
+
+void FirstGame::MouseButton(int button, int state, int x, int y)
+{
+	m_MousePositionScreenSpace = Vector2f(x,y);
+	
+	int windowWidth = m_pCamera->getWindowWidth();
+	int windowHeight = m_pCamera->getWindowHeight();
+	
+	y = windowHeight - y;
+	float x_ = 2.0f * (float)x/windowWidth - 1.0f;
+	float y_ = 2.0f * (float)y/windowHeight - 1.0f;
+	float sw = m_pCamera->getScreenWidth();
+	float sh = m_pCamera->getScreenHeight();
+	
+	Vector2f mousePos(x_ * sw/2, y_ * sh/2);
+	
+	Vector3f cameraPos = m_pCamera->getPosition();
+	Vector2f eyePos(cameraPos.x,cameraPos.y);
+	
+	Vector2f cameraOffset = m_pCamera->getCameraOffset();
+	cameraOffset.normalize();
+	Vector2f worldPos = eyePos + mousePos - cameraOffset;
+	m_MousePositionWorldSpace = worldPos;
+	
+	if( state == GLUT_DOWN && button == GLUT_LEFT_BUTTON )
+	{
+		Vector2f direction = worldPos - m_pVehicle->getPosition();
+		direction.normalize();
+		m_pVehicle->shoot(direction);
+	}
+}
+
+void FirstGame::MouseMotion(int x, int y)
+{
+	m_MousePositionScreenSpace = Vector2f(x,y);
+	
+	int windowWidth = m_pCamera->getWindowWidth();
+	int windowHeight = m_pCamera->getWindowHeight();
+
+	y = windowHeight - y;
+	float x_ = 2.0f * (float)x/windowWidth - 1.0f;
+	float y_ = 2.0f * (float)y/windowHeight - 1.0f;
+	float sw = m_pCamera->getScreenWidth();
+	float sh = m_pCamera->getScreenHeight();
+	
+	Vector2f mousePos(x_ * sw/2, y_ * sh/2);
+
+	Vector3f cameraPos = m_pCamera->getPosition();
+	Vector2f eyePos(cameraPos.x,cameraPos.y);
+	
+	Vector2f worldPos = eyePos + mousePos;
+	m_MousePositionWorldSpace = worldPos;	
 }

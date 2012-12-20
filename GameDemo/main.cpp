@@ -52,6 +52,7 @@ void changeSize(int w, int h)
     ratio = 1.0* w / h;
 	
     pGame->getCamera()->setAspectRatio(ratio);
+	pGame->getCamera()->changeWindowSize(w,h);
     // Reset the coordinate system before modifying
 	
     // Set the viewport to be the entire window
@@ -111,14 +112,14 @@ void keyProcessor(unsigned char key, int x, int y)
             smoothNess--;
             smoothNess = smoothNess < 2 ? 2 : smoothNess;
 			//bWarmStart = !bWarmStart;
-            pGame->getTerrainGenerator()->setSmoothNess(smoothNess);
+            //pGame->getTerrainGenerator()->setSmoothNess(smoothNess);
 			//pWorld->setWarmStart(bWarmStart);
 			break;
         case 's':
 		case 'S':
             smoothNess++;
 			//bWarmStart = !bWarmStart;
-            pGame->getTerrainGenerator()->setSmoothNess(smoothNess);
+            //pGame->getTerrainGenerator()->setSmoothNess(smoothNess);
 			//pWorld->setWarmStart(bWarmStart);
 			break;
 	}
@@ -129,9 +130,17 @@ dbool bPicked = false;
 
 void MouseButton(int button, int state, int x, int y)
 {	
+	pGame->MouseButton(button, state, x, y);
+	
 	if( state == GLUT_DOWN && button == GLUT_LEFT_BUTTON )
-		pGame->getVehicle()->shoot();
-
+	{
+		pGame->getVehicle()->setBoostEnable(true);
+	}
+	if( state == GLUT_UP && button == GLUT_LEFT_BUTTON )
+	{
+		pGame->getVehicle()->setBoostEnable(false);
+	}
+	
 	_button = button;
 	
 	if(windowHeight == 0)
@@ -175,6 +184,8 @@ void MouseButton(int button, int state, int x, int y)
 
 void MouseMotion(int x, int y)
 {
+	pGame->MouseMotion(x,y);
+	
 	if( !bPicked )
 		return;
 	
@@ -241,6 +252,7 @@ int main(int argc, char **argv) {
 	glutKeyboardFunc(keyProcessor);
 	glutMouseFunc (MouseButton);
 	glutMotionFunc (MouseMotion);
+	//glutPassiveMotionFunc(MouseMotion);
 	glutDisplayFunc(renderScene);
     glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);

@@ -11,10 +11,6 @@
 
 #include "Gun.h"
 
-BEGIN_NAMESPACE_DIRAC2D
-
-END_NAMESPACE_DIRAC2D
-
 class GunRayCastClosestCallBack;
 
 class SimpleGun : public Gun
@@ -22,7 +18,7 @@ class SimpleGun : public Gun
 public:
 	SimpleGun(FirstGame* pGame);
 	
-	virtual void shoot();
+	virtual void shoot(const Vector2f& direction);
 	
 	virtual void update(float dt);
 	
@@ -30,11 +26,6 @@ public:
 	
 protected:
 	GunRayCastClosestCallBack* m_pGunRayCastClosestCallBack;
-
-	Vector2f m_ShootingOrigin, m_ShootingTarget;
-	float m_ShootingRadius;
-	float m_ShootingImpactRadius;
-	float m_ShootingImpact;
 };
 
 #endif

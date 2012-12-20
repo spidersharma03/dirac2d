@@ -19,7 +19,7 @@
 Vector2f sawToothSample(float t )
 {
     float x = t;
-    float y = 0.5f * fmod(x, 32.0f) - 1.0f;
+    float y = 0.4f * fmod(x, 10.0f) - 1.5f;
     return Vector2f(x,y);
 }
 
@@ -40,7 +40,7 @@ Vector2f squareWaveSample( float t )
 
 Vector2f linearSample( float t )
 {
-    float slope = -0.0/118;
+    float slope = PI_4/1112;
     float x = cos(slope);
     float y = sin(slope);
     return Vector2f( x*t, y*t);
@@ -57,7 +57,8 @@ float knots[130];
 float controlPoints[200];
 
 int numSampleFunctions = 4;
-SampleFunction funcArray[] = {linearSample, squareWaveSample, sinWaveSample, sinWaveSample};
+SampleFunction funcArray[] = {linearSample, squareWaveSample, sinWaveSample, sawToothSample};
+//SampleFunction funcArray[] = {squareWaveSample, linearSample, sinWaveSample, sinWaveSample};
 
 TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 {
@@ -184,6 +185,8 @@ void TerrainGenerator::generateBSplineCurvePoints()
     BSpline(controlPoints, m_vecTerrainPoints.size(), curvePoints, nCurvePoints, knots, m_SmoothNess);
 }
 
+static float t = 0.0f;
+
 void TerrainGenerator::generateSamplePoints()
 {
     Camera* pCamera = m_pGame->getCamera();
@@ -191,6 +194,7 @@ void TerrainGenerator::generateSamplePoints()
 
     float R = ( swh + swh * 2.0f ); 
 
+	// Remove points which are left behind by more than 2 screens.
     for( int i=0; i<m_vecTerrainPoints.size(); i++ )
     {
         Vector2f& p = m_vecTerrainPoints[i];
@@ -207,12 +211,12 @@ void TerrainGenerator::generateSamplePoints()
     float low  = -m_MaxTerrainHeight * 0.5f;
     float high = m_MaxTerrainHeight * 0.5f;
 
-    static float t = 0.0f;
+	// Add points at a time.
     t += delta;
     while (true)
     {
-        Vector2f p =   m_LastPoint + m_SampleFunction(t);
-
+        Vector2f p =  m_LastPoint + m_SampleFunction(t);
+		
         if( fabs(pCamera->getPosition().x - p.x) < R )
         {
             t += delta;
@@ -224,9 +228,9 @@ void TerrainGenerator::generateSamplePoints()
             t -= delta;
             break;
         }
-        // Sort the Points    
     //printf("Num TerrainPoints = %d\n", m_vecTerrainPoints.size());
     }
+	// Sort the Points    
     std::sort(m_vecTerrainPoints.begin(), m_vecTerrainPoints.end(), SortPredicate);
 }
 
@@ -247,7 +251,9 @@ void TerrainGenerator::changeTerrainShape()
         }
 		f = f > 3 ? 0 : f;
 		m_SampleFunction = funcArray[f];
-		//m_LastPoint = m_vecTerrainPoints[m_vecTerrainPoints.size()-1];
+		m_LastPoint = m_vecTerrainPoints[m_vecTerrainPoints.size()-1];
+		// Reset the time, so that the new terrain points will start from the last point.
+		t = 0.0f;
 	}
 }
 

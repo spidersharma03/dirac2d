@@ -7,6 +7,7 @@
 
 #include "Coin.h"
 #include "FirstGame.h"
+#include "ObjectManager.h"
 #include "../Dirac2D/Dirac2D.h"
 
 USE_NAMESPACE_DIRAC2D
@@ -55,7 +56,11 @@ Coin::~Coin()
 
 void Coin::onCollisionEnter( GameObject* pObject, ContactManifold& manifold )
 {
-    
+    if( pObject && pObject->getGameObjectInfo().m_ObjectType == EOT_VEHICLE ) 
+    {
+		m_pGame->getObjectManager()->markObjectsForCleanup(this);
+    }
+	
 }
 
 void Coin::onCollisionExit( GameObject* pObject, ContactManifold& manifold )

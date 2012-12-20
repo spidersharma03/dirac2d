@@ -16,13 +16,12 @@ SimpleGun::SimpleGun(FirstGame* pGame) : Gun(pGame)
 {
 	m_ShootingInterval = 10.0f;
 	m_pGunRayCastClosestCallBack = new GunRayCastClosestCallBack(m_pGame);
-	m_pGame->getPhysicalWorld()->setRayIntersectionListener(m_pGunRayCastClosestCallBack);
 	m_ShootingRadius = 5.0f;
 	m_ShootingImpactRadius = 1.0f;
 	m_ShootingImpact = 4.0f;
 }
 
-void SimpleGun::shoot()
+void SimpleGun::shoot(const Vector2f& direction)
 {	
     //if( time - initTime > m_ShootingInterval )
     {
@@ -31,7 +30,7 @@ void SimpleGun::shoot()
 		raySegment.m_Start = m_ShootingOrigin;
 		raySegment.m_End   = m_ShootingOrigin + m_ShootingTarget;
 		
-		m_pGame->getPhysicalWorld()->intersectRaySegment(raySegment);
+		m_pGame->getPhysicalWorld()->intersectRaySegment(raySegment, m_pGunRayCastClosestCallBack);
 		
         //printf("%d\n", m_pGunRayCastClosestCallBack->m_pObject);
         

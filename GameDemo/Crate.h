@@ -19,7 +19,7 @@ USE_NAMESPACE_DIRAC2D
 
 class FirstGame;
 
-enum CRATE_SHAPE { ECS_BOX, ECS_CIRCLE, ECS_POLY };
+enum CRATE_SHAPE { ECS_BOX, ECS_CIRCLE, ECS_REGULAR_POLY, ECS_POLY };
 
 struct CrateInfo : public GameObjectInfo
 {
@@ -31,9 +31,10 @@ struct CrateInfo : public GameObjectInfo
 		m_Height = 0.2f;
 		m_Radius = 0.1f;
     }
+	
+	CRATE_SHAPE m_ShapeType;
 	Vector2f m_Vertices[8];
 	int m_NumVertices;
-	CRATE_SHAPE m_ShapeType;
 	float m_Radius, m_Width, m_Height;
 };
 

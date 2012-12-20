@@ -25,7 +25,7 @@ public:
 		m_pGame = pGame;
 	}
 	
-	virtual void shoot() = 0;
+	virtual void shoot(const Vector2f& direction) = 0;
 	
 	virtual void update(float dt){};
 	
@@ -35,6 +35,11 @@ protected:
 	FirstGame *m_pGame;
 
 	float m_ShootingInterval;
+	float m_ShootingImpact;
+	Vector2f m_ShootingOrigin, m_ShootingTarget;
+	float m_ShootingRadius;
+	float m_ShootingImpactRadius;
+	
     DTimer m_Timer;
 };
 

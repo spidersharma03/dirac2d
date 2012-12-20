@@ -28,7 +28,7 @@ END_NAMESPACE_DIRAC2D
 // B Spline Based Terrain Generator.
 
 typedef Vector2f (*SampleFunction)(float);
-enum SAMPLE_FUNCTION_TYPE { ESFT_LINEAR };
+enum SAMPLE_FUNCTION_TYPE { ESFT_LINEAR, ESFT_SIN_WAVE, ESFT_SQUARE_WAVE, ESFT_SAW_TOOTH };
 
 class TerrainGenerator : public IUpdatable, IRenderable
 {

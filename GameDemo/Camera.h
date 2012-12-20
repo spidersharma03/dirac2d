@@ -23,11 +23,12 @@ USE_NAMESPACE_DIRAC2D
 #define _CAMERA_H_
 
 class GameObject;
+class FirstGame;
 
 class Camera : public IUpdatable
 {
 public:
-    Camera();
+    Camera(FirstGame* pGame);
     
     virtual void update(float dt);
 
@@ -115,10 +116,31 @@ public:
         return m_ScreenHeight;
     }
     
+	inline float getWindowWidth()
+    {
+        return m_WindowWidth;
+    }
+    
+    inline float getWindowHeight()
+    {
+        return m_WindowHeight;
+    }
+	
     inline Vector3f getPosition()
     {
         return m_EyePosition;
     }
+	
+	inline Vector2f getCameraOffset()
+	{
+		return m_cameraOffset;
+	}
+	
+	void changeWindowSize(int w, int h)
+	{
+		m_WindowWidth = w;
+		m_WindowHeight = h;
+	}
 	
 	void autoZoom();
 	
@@ -127,6 +149,8 @@ protected:
 	void followTarget(float dt);
 	
 protected:
+	FirstGame* m_pGame;
+	
     GameObject* m_pFocusTarget;
     Vector3f m_EyePosition;
     Vector3f m_Target;
@@ -142,9 +166,10 @@ protected:
     float m_Fov;
     float m_zNear, m_zFar;
 	float m_InitEyeZ;
-    
+	    
     float m_ScreenWidth, m_ScreenHeight;
-    
+    float m_WindowWidth, m_WindowHeight;
+	
     AABB2f m_BoundingRect;
 };
 

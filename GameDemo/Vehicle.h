@@ -21,19 +21,21 @@ USE_NAMESPACE_DIRAC2D
 
 class Gun;
 
-class Vehicle : public IRenderable, public GameObject
+class Vehicle :  public GameObject, public IRenderable
 {
 public:
     Vehicle()
     {
-        
+		m_ObjectInfo.m_ObjectType = EOT_VEHICLE;
+        m_bBoostEnable = false;
+		m_BoostIncreament = 1.0f;
     }
     
     virtual void init() = 0;
     
     virtual void initFromFile(const char* fileName) = 0;
     
-	virtual void shoot()
+	virtual void shoot(const Vector2f& direction)
 	{
 	}
 	
@@ -45,6 +47,11 @@ public:
 	{
 	}
 	
+	void setBoostEnable(bool bEnable)
+	{
+		m_bBoostEnable = bEnable;
+	}
+
     virtual void accelerate()
     {
         
@@ -88,8 +95,13 @@ public:
     
     virtual void render(){};
 
+	
 protected:
     MotorConstraint* m_pMotor;
+	
+	bool m_bBoostEnable;
+	float m_BoostIncreament; // Every frame this much speed will be increased
+
 protected:
     Vector2f m_Com; // Centre of Mass of the Vehicle
     
