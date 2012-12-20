@@ -677,9 +677,15 @@ void PhysicalWorld::setCollisionListener( ICollisionLisetner* pCollisionListener
     m_CollisionManager->m_pCollisionListener = pCollisionListener;
 }
 
-void PhysicalWorld::setRayIntersectionListener(WorldRayIntersectionCallBackClass* pRayIntersectionCallback)
+//void PhysicalWorld::setRayIntersectionListener(WorldRayIntersectionCallBackClass* pRayIntersectionCallback)
+//{
+//	m_RayIntersectionCallBackClass.m_pWorldRayIntersectionCallBackClass = pRayIntersectionCallback;
+//}
+
+void PhysicalWorld::intersectRaySegment( const RaySegment2f& raySeg, WorldRayIntersectionCallBackClass* callBack )
 {
-	m_RayIntersectionCallBackClass.m_pWorldRayIntersectionCallBackClass = pRayIntersectionCallback;
+	m_RayIntersectionCallBackClass.m_pWorldRayIntersectionCallBackClass = callBack;
+	m_pBroadPhaseAlgorithm->intersectRaySegment(raySeg, &m_RayIntersectionCallBackClass);
 }
 
 END_NAMESPACE_DIRAC2D

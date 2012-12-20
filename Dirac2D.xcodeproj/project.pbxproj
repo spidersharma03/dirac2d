@@ -114,6 +114,8 @@
 		C2FB6C0516788FE7002549D8 /* SimpleGun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB6C0416788FE7002549D8 /* SimpleGun.cpp */; };
 		C2FB6C0A16789098002549D8 /* GunRayCastCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB6C0916789098002549D8 /* GunRayCastCallback.cpp */; };
 		C2FB6FEE1679F4D6002549D8 /* WorldOverlapCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */; };
+		C2FB7136167EF14E002549D8 /* LaserGun2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB7135167EF14E002549D8 /* LaserGun2.cpp */; };
+		C2FB79E51683389C002549D8 /* Tumbler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB79E41683389C002549D8 /* Tumbler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -292,6 +294,10 @@
 		C2FB6C0916789098002549D8 /* GunRayCastCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GunRayCastCallback.cpp; sourceTree = "<group>"; };
 		C2FB6FEC1679F4D6002549D8 /* WorldOverlapCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldOverlapCallback.h; sourceTree = "<group>"; };
 		C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorldOverlapCallback.cpp; sourceTree = "<group>"; };
+		C2FB7134167EF14E002549D8 /* LaserGun2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserGun2.h; sourceTree = "<group>"; };
+		C2FB7135167EF14E002549D8 /* LaserGun2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LaserGun2.cpp; sourceTree = "<group>"; };
+		C2FB79E31683389C002549D8 /* Tumbler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tumbler.h; sourceTree = "<group>"; };
+		C2FB79E41683389C002549D8 /* Tumbler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tumbler.cpp; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -377,21 +383,25 @@
 				35DC47181657CA4200B0BD69 /* Coin.h */,
 				C29309C31671BCA400B517F6 /* Crate.h */,
 				C29309C41671BCA400B517F6 /* Crate.cpp */,
-				C2FB6BFC16788D54002549D8 /* Gun.h */,
-				C2FB6C0316788FE7002549D8 /* SimpleGun.h */,
-				C2FB6C0416788FE7002549D8 /* SimpleGun.cpp */,
 				C29302981656629100B517F6 /* GameCollisions.h */,
 				C293029B1656635A00B517F6 /* GameCollisions.cpp */,
 				C2FB6C0816789098002549D8 /* GunRayCastCallback.h */,
 				C2FB6C0916789098002549D8 /* GunRayCastCallback.cpp */,
 				C2FB6FEC1679F4D6002549D8 /* WorldOverlapCallback.h */,
 				C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */,
-				3553008E163C15A80037A4E5 /* main.cpp */,
 				35E02F23167B53E700C3889A /* IGameCollisionListener.h */,
 				35E02F25167B585600C3889A /* DebrisBody.cpp */,
 				35E02F27167B587600C3889A /* DebrisBody.h */,
 				35E02F28167CA52400C3889A /* DebrisBodyCreator.h */,
 				35E02F29167CA5F300C3889A /* DebrisBodyCreator.cpp */,
+				C2FB6BFC16788D54002549D8 /* Gun.h */,
+				C2FB6C0316788FE7002549D8 /* SimpleGun.h */,
+				C2FB6C0416788FE7002549D8 /* SimpleGun.cpp */,
+				C2FB7134167EF14E002549D8 /* LaserGun2.h */,
+				C2FB7135167EF14E002549D8 /* LaserGun2.cpp */,
+				3553008E163C15A80037A4E5 /* main.cpp */,
+				C2FB79E31683389C002549D8 /* Tumbler.h */,
+				C2FB79E41683389C002549D8 /* Tumbler.cpp */,
 			);
 			path = GameDemo;
 			sourceTree = "<group>";
@@ -753,6 +763,8 @@
 				C2FB6FEE1679F4D6002549D8 /* WorldOverlapCallback.cpp in Sources */,
 				35E02F26167B585800C3889A /* DebrisBody.cpp in Sources */,
 				35E02F2A167CA5F500C3889A /* DebrisBodyCreator.cpp in Sources */,
+				C2FB7136167EF14E002549D8 /* LaserGun2.cpp in Sources */,
+				C2FB79E51683389C002549D8 /* Tumbler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
