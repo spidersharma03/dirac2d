@@ -17,6 +17,8 @@ void placeCoins(FirstGame* pGame ,GameObject* pList, int numObjects);
 
 void placeCrates(FirstGame* pGame ,GameObject* pList, int numObjects, float w, float h);
 
+void placeFallingCrates(FirstGame* pGame ,GameObject* pList, int numObjects, float w, float h);
+
 class ObjectPlacementStraregy 
 {
 public:

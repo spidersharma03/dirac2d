@@ -13,6 +13,7 @@
 #include "Crate.h"
 #include "../Dirac2D/Dirac2D.h"
 #include "FirstGame.h"
+#include "Camera.h"
 
 USE_NAMESPACE_DIRAC2D
 
@@ -62,7 +63,7 @@ void placeCrates(FirstGame* pGame ,GameObject* pList, int nColumns, float w, flo
 	int l = 0;
 	int m = nColumns;
 	float x = start.x;
-	float y = start.y + 0.1f;
+	float y = start.y + 0.3f;
 	float eps = w/10;
 	
 	// Crate Placement
@@ -88,4 +89,41 @@ void placeCrates(FirstGame* pGame ,GameObject* pList, int nColumns, float w, flo
 		i++;
         pList = pList->m_pNext;
     }
+}
+
+void placeFallingCrates(FirstGame* pGame ,GameObject* pList, int numObjects, float w, float h)
+{
+	dAssert( (pList->getGameObjectInfo().m_ObjectType == EOT_CRATE ));
+    	
+	dAssert( numObjects < 50 );
+	
+	Vector2f meanPos;
+	
+	Vector2f cratePos[50];
+	int i = 0;
+	
+	float sh = pGame->getCamera()->getScreenHeight() + pGame->getCamera()->getCameraOffset().y;
+	float sw = pGame->getCamera()->getScreenWidth() + pGame->getCamera()->getCameraOffset().x;
+	
+	meanPos.x = pGame->getCamera()->getPosition().x + sw;
+	meanPos.y = pGame->getCamera()->getPosition().y;
+	
+	// Crate Placement
+	for( int i=0; i<numObjects; i++ )
+	{
+		//float low = i; float high = i+1;
+		float x = meanPos.x - (i+1) * numObjects * 0.5f * w;//RANDOM_NUMBER(low, high);
+		float y = meanPos.y + sh + RANDOM_NUMBER(0.0f, 2.0f);
+		
+		cratePos[i] = Vector2f(x,y);
+	}
+	
+	while (pList) 
+	{
+		Crate* pCrate = (Crate*)pList;
+		pCrate->getPhysicalBody()->setPosition(cratePos[i]);
+		i++;
+        pList = pList->m_pNext;
+    }
+	
 }

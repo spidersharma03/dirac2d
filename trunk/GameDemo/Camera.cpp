@@ -7,9 +7,10 @@
 
 #include "Camera.h"
 #include "GameObject.h"
+#include "FirstGame.h"
+#include "SimpleVehicle.h"
 
-
-Camera::Camera()
+Camera::Camera(FirstGame* pGame) : m_pGame(pGame)
 {
 	m_pFocusTarget = 0;
     m_EyePosition = Vector3f(0.0f,0.0f,1.0f);
@@ -21,7 +22,9 @@ Camera::Camera()
     m_AspectRatio = 4.0f/3.0f;
 	m_InitEyeZ = 5.0f;
 	m_EyePosition.z = m_InitEyeZ;
-    m_cameraOffset = Vector2f(4.0,0.0f);
+    m_cameraOffset = Vector2f(4.0,1.0f);
+	m_WindowWidth = 800;
+	m_WindowHeight = 600;
 }
 
 void Camera::update(float dt)
@@ -34,7 +37,7 @@ void Camera::update(float dt)
     float data[16];
 
     
-	m_ProjectionMatrix.perspective(3.14159/2, m_AspectRatio, 0.001f, 100.0f);
+	m_ProjectionMatrix.perspective(PI/2, m_AspectRatio, 0.001f, 100.0f);
     //m_ProjectionMatrix.ortho(-m_ScreenWidth/2*m_AspectRatio, m_ScreenWidth/2*m_AspectRatio, -m_ScreenWidth/2, m_ScreenWidth/2, 0.001, 100.0f);
     
     glMatrixMode(GL_PROJECTION);
@@ -54,12 +57,13 @@ void Camera::autoZoom()
 {
 	if( m_pFocusTarget )
 	{
-		float y = m_pFocusTarget->getPosition().y;
-		
+		float y = m_pFocusTarget->getPosition().y + 0.1f;
+		//float y = m_pGame->getVehicle()->getDistanceFromTerrain();
 		if( y > 0.0f )
 		{
 			m_EyePosition.z = m_InitEyeZ + y;
 			m_ScreenWidth = 2*m_EyePosition.z;
+			m_ScreenHeight = m_ScreenWidth/m_AspectRatio;
 		}
 	}
 }

@@ -14,6 +14,7 @@
 #include "ObjectFactory.h"
 #include "Coin.h"
 #include "Crate.h"
+#include "Tumbler.h"
 #include "ObjectPlacementSrategy.h"
 
 ObjectManager::ObjectManager(FirstGame* pGame)
@@ -30,9 +31,20 @@ void ObjectManager::manageObjects()
     if( time - initTime > 2000 )
     {
         initTime = time;
-        //
         generateCoins();
 	} 
+	
+	// Place Falling Crates only for Non Linear regions
+	if( m_pGame->getTerrainGenerator()->getSampleFunctionType() != ESFT_LINEAR )
+	{
+		static double initTime = m_Timer.getCurrentTime();
+		double time = m_Timer.getCurrentTime();
+		if( time - initTime > 3000 )
+		{
+			initTime = time;
+			//generateFallingCrates();
+		}
+	}
 	// Place Stack of Crates only for Linear regions
 	if( m_pGame->getTerrainGenerator()->getSampleFunctionType() == ESFT_LINEAR )
 	{
@@ -41,7 +53,8 @@ void ObjectManager::manageObjects()
 		if( time - initTime > 4000 )
 		{
 			initTime = time;
-			generateCrates();
+			//generateCrates();
+			generateTumblers();
 		}
 	}
 }
@@ -146,6 +159,66 @@ void ObjectManager::generateCrates()
 		GameObject* pObject = pList[i];
 		add(pObject);
 	}
+}
+
+void ObjectManager::generateFallingCrates()
+{
+    ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
+    
+    // Create a list of Crates
+	int nObjects = 10;
+    GameObject *pList[nObjects];
+    GameObject* pCurrent = 0;
+	
+    // Request for Crates from the Object Factory
+    for( int i=0; i<nObjects; i++ )
+    {
+		// Crate info. 
+		CrateInfo cInfo;
+		cInfo.m_ShapeType = ECS_REGULAR_POLY;
+		cInfo.m_NumVertices = RANDOM_NUMBER(3.0f, 6.0f);
+		cInfo.m_Radius  = RANDOM_NUMBER(0.4f, 1.0f);
+		cInfo.m_AngularVelocity = RANDOM_NUMBER(-12.0f, 12.0f);
+		
+		GameObject* pObject = pObjFactory->createObject(cInfo);
+		pList[i] = pObject;
+		pList[i]->m_pPrev = pCurrent;
+		if( pCurrent )
+            pCurrent->m_pNext = pList[i];
+		pList[i]->m_pNext = 0;
+		pCurrent = pList[i];
+    }
+    
+    // Place Crates in the Game
+    placeFallingCrates(m_pGame,pList[0], nObjects, 0.6f, 0.6f);
+	
+	for( int i=0; i<nObjects; i++ )
+	{
+		GameObject* pObject = pList[i];
+		add(pObject);
+	}
+}
+
+void ObjectManager::generateTumblers()
+{
+	if( Tumbler::m_TumblerCount > 0 )
+		return;
+	
+	ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
+	
+	TumblerInfo tInfo;
+	tInfo.m_Width = 1.0f;
+	tInfo.m_Height = 1.5f;
+	
+	Vector3f cameraPos = m_pGame->getCamera()->getPosition();
+	float sw = m_pGame->getCamera()->getScreenWidth();
+	float sh = m_pGame->getCamera()->getScreenHeight() * 0.5f;
+	
+	tInfo.m_Position = Vector2f( cameraPos.x + sw, cameraPos.y + sh);
+		
+	GameObject* pObject = pObjFactory->createObject(tInfo);
+	
+	add(pObject);
 }
 
 void ObjectManager::update(float dt)

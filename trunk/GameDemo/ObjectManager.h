@@ -54,6 +54,10 @@ private:
     
 	void generateCrates();
     
+	void generateFallingCrates();
+	
+	void generateTumblers();
+	
     // Removes Game Objects from the Global List    
     void remove(GameObject* pObjectList);
     

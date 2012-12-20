@@ -12,11 +12,17 @@
 #define _SIMPLE_VEHICLE_H_
 
 class FirstGame;
+class RayCastTerrainCallBack;
+
 
 class SimpleVehicle : public Vehicle
 {
 public:
     SimpleVehicle(FirstGame* pGame);
+    
+	virtual void accelerate();
+	
+	virtual void applyBrake();
     
 	virtual void applyForce( const Vector2f& force );
 	
@@ -32,13 +38,27 @@ public:
     
     virtual void render();
     
-	virtual void shoot();
+	virtual void shoot(const Vector2f& direction);
+	
+	float getDistanceFromTerrain()
+	{
+		return m_DistanceFromTerrain;
+	}
+	// COLLISION CALL BACKS
+    
+    virtual void onCollisionEnter( GameObject* pObject, ContactManifold& manifold );
+    
+    virtual void onCollisionExit( GameObject* pObject, ContactManifold& manifold );
 	
 private:
     FirstGame* m_pGame;
-    
+    RayCastTerrainCallBack* m_pRayCastTerrainCallBack;
+	
     PhysicalBody* m_pVehicleBody;
-    
+    float m_MinSpeed;
+	float m_MaxSpeed;
+	
+	float m_DistanceFromTerrain;
 };
 
 #endif

@@ -47,6 +47,10 @@ public:
 public:
     virtual void keyProcessor(unsigned char key, int x, int y);
     
+	void MouseButton(int button, int state, int x, int y);
+	
+	void MouseMotion(int x, int y);
+	
 public:
 	PhysicalWorld* getPhysicalWorld()
 	{
@@ -83,6 +87,16 @@ public:
 		return m_pRenderer;
 	}
 	
+	Vector2f getMousePositionScreenSpace() const
+	{
+		return m_MousePositionScreenSpace;
+	}
+	
+	Vector2f getMousePositionWorldSpace() const
+	{
+		return m_MousePositionWorldSpace;
+	}
+	
     void placeObjects(GameObject* pList, int numObjects);
     	
 public:
@@ -115,6 +129,9 @@ private:
 	
 	float m_StepSize;
 	
+	Vector2f m_MousePositionScreenSpace;
+	Vector2f m_MousePositionWorldSpace;
+		
 	vector<GameObject*> m_vecOverlapQueryGameObjects;
 };
 

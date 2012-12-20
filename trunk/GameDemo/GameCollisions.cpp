@@ -10,6 +10,7 @@
 #include "ObjectFactory.h"
 #include "ObjectManager.h"
 #include "GameObject.h"
+#include "SimpleVehicle.h"
 #include "../Dirac2D/Dirac2D.h"
 
 
@@ -22,25 +23,17 @@ GameCollisionListener::GameCollisionListener(FirstGame* pGame) : m_pGame( pGame 
 void GameCollisionListener::onCollisionEnter(PhysicalShape* pShape1, PhysicalShape* pShape2, ContactManifold& manifold)
 {
     GameObject* pObject1 = (GameObject*)pShape1->getUserData();
-    GameObject* pObject2 = (GameObject*)pShape2->getUserData();
+    GameObject* pObject2 = (GameObject*)(pShape2->getUserData());
+	
+	//GameObject* pObject2 = dynamic_cast<GameObject*> ((SimpleVehicle*)pShape2->getUserData());
     
     if( pObject1 )
     {
         pObject1->onCollisionEnter(pObject2, manifold);
-        if( pObject1->getGameObjectInfo().m_ObjectType == EOT_COIN  &&
-           pObject2 == 0 )
-        {
-            m_pGame->getObjectManager()->markObjectsForCleanup(pObject1);
-        }
-    }
+	}
     if( pObject2 )
     {
         pObject2->onCollisionEnter(pObject1, manifold);
-        if( pObject2->getGameObjectInfo().m_ObjectType == EOT_COIN 
-		   && pObject1 == 0)
-        {
-            m_pGame->getObjectManager()->markObjectsForCleanup(pObject2);
-        } 
     }
 }
 

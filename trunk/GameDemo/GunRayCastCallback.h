@@ -32,4 +32,22 @@ protected:
 	FirstGame* m_pGame;
 };
 
+class GunRayCastManyCallBack : public WorldRayIntersectionCallBackClass
+{
+public:
+	GunRayCastManyCallBack(FirstGame* pGame );
+	
+	virtual float rayIntersectionCallBack(const RaySegment2f& raySeg, PhysicalShape* pShape, RayIntersectionInfo& info);
+	
+	friend class LaserGun2;
+private:
+	GameObject* m_pObject[10]; // Objects Picked
+	RayIntersectionInfo m_IntersectionInfo[10]; // Closest Intersection Info
+	int m_ObjectCounter;
+	
+	int m_MaxObjectPickCount;
+protected:
+	FirstGame* m_pGame;
+};
+
 #endif

@@ -22,14 +22,21 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
 	m_pGame = pGame;
 	
 	PhysicalAppearance pApp;
-	pApp.m_MassAttributes.m_Density = 50*AVG_OBJECT_DENSITY;
+	pApp.m_MassAttributes.m_Density = 10*AVG_OBJECT_DENSITY;
 	m_pBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
-
+	m_pBody->setPosition(cInfo.m_Position);
+    m_pBody->setVelocity(cInfo.m_Velocity);
+    m_pBody->setAngularVelocity(cInfo.m_AngularVelocity);
+	
 	if( cInfo.m_ShapeType == ECS_CIRCLE )
 		pApp.m_CollisionAttributes.m_Shape = new Circle(cInfo.m_Radius);
 	else if( cInfo.m_ShapeType == ECS_POLY )
 	{
 		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(cInfo.m_Vertices, cInfo.m_NumVertices);
+	}
+	else if( cInfo.m_ShapeType == ECS_REGULAR_POLY )
+	{
+		pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(cInfo.m_NumVertices, cInfo.m_Radius);
 	}
 	else {
 		float w = 0.5*cInfo.m_Width; float h = 0.5*cInfo.m_Height;
