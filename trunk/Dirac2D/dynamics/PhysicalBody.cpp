@@ -218,7 +218,7 @@ void PhysicalBody::updateSleepingStatus(dfloat dt)
 
 PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 {
-	PhysicalShape* pShape = new PhysicalShape();
+	PhysicalShape* pShape = new PhysicalShape(); // TODO :: allocate memory for this from memoryBlockAllocator
     /*
      pShape = new(m_PhysicalWorld->m_PhysicaShapePool->Allocate())PhysicalShape();
      */
@@ -241,6 +241,7 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 
 	pShape->m_CollisionShape->updateShape(xForm);
 	
+	// Add to the linked list of physical shapes.
 	pShape->m_Prev = 0;
 	pShape->m_Next = m_PhysicalShapeList;
 	
@@ -286,13 +287,15 @@ PhysicalBody::~PhysicalBody()
     
     m_Next = m_Prev = 0;
     
-    
     m_ContactEdgeList = 0;
 }
 
 void PhysicalBody::updateAABB()
 {
 	PhysicalShape* pShape = m_PhysicalShapeList;
+	if( !pShape )
+		return;
+	
 	while( pShape )
 	{
 		pShape->m_CollisionShape->updateAABB(m_Transform);

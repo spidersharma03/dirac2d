@@ -57,6 +57,18 @@ struct CollisionFilter
 	duint32 m_CollisionMask;
 };
 
+struct CollisionShapeInfo
+{
+};
+
+struct CircleShapeInfo : public CollisionShapeInfo
+{
+	CircleShapeInfo(dfloat radius) : m_Radius ( radius )
+	{
+	}
+	dfloat m_Radius;
+};
+
 struct CollisionAttributes
 {
 	CollisionShape* m_Shape;

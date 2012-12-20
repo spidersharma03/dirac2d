@@ -140,6 +140,8 @@ public:
 
 	void intersectRaySegment( const RaySegment2f& raySeg, RayIntersectionCallBackClass* callBack );
 
+	void intersectRaySegment( const RaySegment2f& raySeg, WorldRayIntersectionCallBackClass* callBack );
+
 	void intersectRaySegment( const RaySegment2f& raySeg );
 
 	

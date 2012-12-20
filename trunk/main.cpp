@@ -2025,9 +2025,7 @@ void demo30()
 		m--;
 		y += h + eps;
 	}
-    
-	pWorld->setRayIntersectionListener(&callBack);
-	
+    	
 }
 
 DynamicTreeBroadPhaseAlgorithm* pAlgo = 0;
@@ -2061,7 +2059,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo30();
+	demo19();
 
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
 	mouseJoint->m_Erp = 2.0f;
@@ -2161,7 +2159,7 @@ void renderScene(void)
 	}
 	
 	callBack.renderRay();
-	pWorld->intersectRaySegment(callBack.raySeg);
+	pWorld->intersectRaySegment(callBack.raySeg, &callBack);
 	
     //demo28();
 	//RaySegment2f raySeg;//(Vector2f(), Vector2f());
