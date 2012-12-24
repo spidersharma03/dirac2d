@@ -25,7 +25,8 @@ DebrisBody::DebrisBody(DebrisInfo dInfo, FirstGame* pGame)
     m_pBody->setPosition(dInfo.m_Position);
     m_pBody->setVelocity(dInfo.m_Velocity);
     m_pBody->setAngularVelocity(dInfo.m_AngularVelocity);
-	pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(dInfo.vertices, dInfo.numVertices);
+    PolygonInfo pInfo(dInfo.vertices, dInfo.numVertices);
+    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
 
 	PhysicalShape* pShape = m_pBody->createPhysicalShape(pApp);
     pShape->setUserData(this);

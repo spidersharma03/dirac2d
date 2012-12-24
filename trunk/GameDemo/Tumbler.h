@@ -13,6 +13,7 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
+class HingeConstraint;
 END_NAMESPACE_DIRAC2D
 
 USE_NAMESPACE_DIRAC2D
@@ -27,15 +28,19 @@ struct TumblerInfo : public GameObjectInfo
         m_ObjectType = EOT_TUMBLER;
 		m_Width = 0.2f;
 		m_Height = 0.2f;
+        m_NumObjects = 0;
     }
 	
 	float m_Width, m_Height;
+    int m_NumObjects;
 };
 
 class Tumbler : public GameObject
 {
 public:
 	virtual void update(float dt);
+    
+    void openLid();
     
     PhysicalBody* getPhysicalBody()
     {
@@ -52,6 +57,10 @@ private:
     PhysicalBody* m_pTumblerBody;
 	PhysicalBody* m_pTumblerLidBody;
 	
+    HingeConstraint* m_pLidConstraint;
+    
+    int m_NumObjects;
+    
 	static FirstGame* m_pGame; 
 	
 public:
