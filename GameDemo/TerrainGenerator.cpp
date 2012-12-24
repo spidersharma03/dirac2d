@@ -93,8 +93,9 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
 	{
 		vertices[i/2] = Vector2f(curvePoints[i], curvePoints[i+1]);
 	}
-		
-	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, (2*nCurvePoints-4)/2);
+	
+	EdgeChainInfo eInfo(vertices, (2*nCurvePoints-4)/2);
+    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &eInfo;
 	m_pTerrainBody->createPhysicalShape(pApp);
 	
 	m_StartTime = m_Timer.getCurrentTime();
@@ -141,8 +142,8 @@ void TerrainGenerator::initializeTerrainBody()
 	//m_pTerrainBody->setPosition(Vector2f(1.0f,-0.7f));
 	m_pTerrainBody->m_BodyType = EBT_STATIC;
 	
-	pApp.m_CollisionAttributes.m_Shape = new EdgeChain(vertices, (2*nCurvePoints-6)/2);
-	
+    EdgeChainInfo eInfo(vertices, (2*nCurvePoints-6)/2);
+    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &eInfo;	
 	PhysicalShape* pShape = m_pTerrainBody->createPhysicalShape(pApp);
 	pShape->m_CollisionFilter.m_CollisionBit = EOCB_TERRAIN;
 }

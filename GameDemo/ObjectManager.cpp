@@ -46,7 +46,7 @@ void ObjectManager::manageObjects()
 		}
 	}
 	// Place Stack of Crates only for Linear regions
-	if( m_pGame->getTerrainGenerator()->getSampleFunctionType() == ESFT_LINEAR )
+	//if( m_pGame->getTerrainGenerator()->getSampleFunctionType() == ESFT_LINEAR )
 	{
 		static double initTime = m_Timer.getCurrentTime();
 		double time = m_Timer.getCurrentTime();
@@ -201,14 +201,15 @@ void ObjectManager::generateFallingCrates()
 
 void ObjectManager::generateTumblers()
 {
-	if( Tumbler::m_TumblerCount > 0 )
+	if( Tumbler::m_TumblerCount > 1 )
 		return;
 	
 	ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
 	
 	TumblerInfo tInfo;
-	tInfo.m_Width = 1.0f;
-	tInfo.m_Height = 1.5f;
+	tInfo.m_Width = 2.5f;
+	tInfo.m_Height = 2.0f;
+    tInfo.m_NumObjects = 5;
 	
 	Vector3f cameraPos = m_pGame->getCamera()->getPosition();
 	float sw = m_pGame->getCamera()->getScreenWidth();

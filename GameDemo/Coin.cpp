@@ -34,7 +34,8 @@ Coin::Coin(CoinInfo cInfo, FirstGame* pGame) : GameObject(cInfo)
 	pApp.m_MassAttributes.m_Density = 1;
 	m_pBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
 	m_pBody->m_BodyType = EBT_KINEMATIC;
-	pApp.m_CollisionAttributes.m_Shape = new Circle(m_Radius);
+    CircleInfo circleInfo(m_Radius);
+    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &circleInfo;
 	PhysicalShape* pShape = m_pBody->createPhysicalShape(pApp);
     pShape->setUserData(this);
 	pShape->setSensor(true);	

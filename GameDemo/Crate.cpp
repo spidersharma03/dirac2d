@@ -29,19 +29,38 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
     m_pBody->setAngularVelocity(cInfo.m_AngularVelocity);
 	
 	if( cInfo.m_ShapeType == ECS_CIRCLE )
-		pApp.m_CollisionAttributes.m_Shape = new Circle(cInfo.m_Radius);
+    {
+        CircleInfo circleInfo(cInfo.m_Radius);
+		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &circleInfo;
+    }
 	else if( cInfo.m_ShapeType == ECS_POLY )
 	{
-		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(cInfo.m_Vertices, cInfo.m_NumVertices);
+        PolygonInfo pInfo(cInfo.m_Vertices, cInfo.m_NumVertices);
+		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
 	}
 	else if( cInfo.m_ShapeType == ECS_REGULAR_POLY )
 	{
-		pApp.m_CollisionAttributes.m_Shape = ConvexPolygon::createRegularPolygon(cInfo.m_NumVertices, cInfo.m_Radius);
+        Vector2f vertices[10];
+        dfloat angle = 0.0f;
+        dfloat dAngle = 2*PI/(cInfo.m_NumVertices);
+        dfloat x, y;
+        
+        for( dint32 v=0; v<cInfo.m_NumVertices; v++ )
+        {
+            x = cInfo.m_Radius * cos(angle);
+            y = cInfo.m_Radius * sin(angle);
+            vertices[v].x = x;
+            vertices[v].y = y;
+            angle += dAngle;
+        }
+        PolygonInfo pInfo(vertices, cInfo.m_NumVertices);
+		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
 	}
 	else {
 		float w = 0.5*cInfo.m_Width; float h = 0.5*cInfo.m_Height;
 		Vector2f vertices[4] = { Vector2f(w,h), Vector2f(-w,h), Vector2f(-w,-h), Vector2f(w,-h)};
-		pApp.m_CollisionAttributes.m_Shape = new ConvexPolygon(vertices, 4);
+        PolygonInfo pInfo(vertices, 4);
+		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
 	}
 
 	

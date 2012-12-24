@@ -88,7 +88,8 @@ void SimpleVehicle::init()
         pApp.m_CollisionAttributes.m_Filter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
 
 		pApp.m_MassAttributes.m_Density = 10.0f;
-		pApp.m_CollisionAttributes.m_Shape = new Capsule(0.07f,0.6);
+        CapsuleInfo capsuleInfo(0.07f, 0.6f);
+        pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capsuleInfo;
 		PhysicalShape* pShape = m_pVehicleBody->createPhysicalShape(pApp);
 		pShape->setUserData(this);
         
@@ -100,39 +101,43 @@ void SimpleVehicle::init()
 		circle2->setPosition(Vector2f(1.0f-0.3f+xPos,0.8f+yPos));		
 		
 		pApp.m_MassAttributes.m_Density = 200.0f;
-		pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
+        CircleInfo cInfo(0.1f);
+		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &cInfo;
 		
 		pShape = circle1->createPhysicalShape(pApp);
 		pShape->setUserData(this);
-		
-		pApp.m_CollisionAttributes.m_Shape = new Circle(0.1f);
+		        
         pApp.m_PhysicalAttributes.m_Friction = 2.0f;
-		
+    
         pShape = circle2->createPhysicalShape(pApp);
 		pShape->setUserData(this);
 		
-		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
-		lc1->m_PhysicalBody1 = m_pVehicleBody;
-		lc1->m_PhysicalBody2 = circle1;
-		lc1->m_Anchor = Vector2f(1.3f+xPos,0.8f);
-		lc1->m_LocalAxis = Vector2f(1.0f,-1.0f);
-		lc1->initialize();
-		lc1->m_Erp = 10.0f;
-		lc1->m_Cfm = 8.0f;
-		
-		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
-		lc2->m_PhysicalBody1 = m_pVehicleBody;
-		lc2->m_PhysicalBody2 = circle2;
-		lc2->m_Anchor = Vector2f(1.0f-0.3f+xPos,0.8f);
-		lc2->m_LocalAxis = Vector2f(-1.0f,-1.0f);
-		lc2->initialize();
-		lc2->m_Erp = 10.0f;
-		lc2->m_Cfm = 8.0f;
-		
-        m_pMotor = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
-        m_pMotor->m_PhysicalBody1 = circle2;
-		m_pMotor->m_MaxTorque = 100.0f;
-		m_pMotor->m_Speed = m_MinSpeed;
+        WheelConstraintInfo wInfo;
+        wInfo.m_PhysicalBody1 = m_pVehicleBody;
+		wInfo.m_PhysicalBody2 = circle1;
+		wInfo.m_Anchor = Vector2f(1.3f+xPos,0.8f);
+		wInfo.m_LocalAxis = Vector2f(1.0f,-1.0f);
+		wInfo.m_Erp = 10.0f;
+		wInfo.m_Cfm = 8.0f;
+        
+		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(wInfo);
+        lc1->initialize();
+                
+        wInfo.m_PhysicalBody1 = m_pVehicleBody;
+		wInfo.m_PhysicalBody2 = circle2;
+		wInfo.m_Anchor = Vector2f(1.0f-0.3f+xPos,0.8f);
+		wInfo.m_LocalAxis = Vector2f(-1.0f,-1.0f);
+        
+		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(wInfo);
+        lc2->initialize();
+
+        
+		MotorConstraintInfo mInfo;
+        mInfo.m_PhysicalBody1 = circle2;
+		mInfo.m_MaxTorque = 100.0f;
+		mInfo.m_Speed = m_MinSpeed;
+        
+        m_pMotor = (MotorConstraint*)pWorld->createConstraint(mInfo);
 		m_pMotor->initialize();
 	}
 
