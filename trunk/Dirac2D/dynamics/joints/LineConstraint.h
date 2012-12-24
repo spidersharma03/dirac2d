@@ -13,10 +13,25 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct LineConstraintInfo : public ConstraintInfo
+{
+    LineConstraintInfo()
+    {
+        m_Type = ECT_LINE;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+        m_LowerLimit = -100.0f;
+        m_UpperLimit = 100.0f;
+    }
+    Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
+	Vector2f m_LocalAxis; // Local Axis for the Line Constraint wrt Body1.
+    
+    dfloat m_UpperLimit;
+	dfloat m_LowerLimit;
+};
+
 class LineConstraint : public Constraint
 {
 public:
-	LineConstraint();
 	
 	virtual void buildJacobian();
 	
@@ -24,6 +39,12 @@ public:
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:
+    
+    LineConstraint( const LineConstraintInfo& cInfo);
+
 public:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
 	Vector2f m_LocalAxis; // Local Axis for the Line Constraint wrt Body1.

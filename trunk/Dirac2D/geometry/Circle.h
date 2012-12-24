@@ -22,12 +22,6 @@ class Edge;
 class Circle : public CollisionShape
 {
 public:
-	Circle(dfloat radius);
-	
-	Circle(const Circle& other);
-		
-	void operator= ( Circle& other);
-
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 
 	virtual dbool isPointInside(Vector2f& p);
@@ -36,8 +30,6 @@ public:
 
 	virtual void updateAABB(Matrix3f& xForm);
 	
-	virtual CollisionShape* clone();
-
 	inline dfloat getRadius() const
 	{
 		return m_Radius;
@@ -45,6 +37,17 @@ public:
 	
 	virtual ~Circle();
 	
+    friend class PhysicalBody;
+private:
+    
+    Circle(dfloat radius);
+	
+	Circle(const Circle& other);
+    
+	void operator= ( Circle& other);
+    
+    virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator);
+
 protected:
 	
 	virtual void updateShape(Matrix3f& xForm);

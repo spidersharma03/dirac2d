@@ -13,6 +13,7 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+class MemoryBlockAllocator;
 struct ContactManifold;
 class Circle;
 class Capsule;
@@ -20,21 +21,13 @@ class Capsule;
 class ConvexPolygon : public CollisionShape
 {
 public:
-	ConvexPolygon(Vector2f* vertices, dint32 numVertices);
-	
-	ConvexPolygon(const ConvexPolygon& other);
-	
-	void operator=( ConvexPolygon& other);
-
-	static ConvexPolygon* createRegularPolygon( dint32 numSides, dfloat radius); 
-						 
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 
 	virtual dbool isPointInside(Vector2f& p);
 	
 	virtual void updateAABB(Matrix3f& xForm);
 	
-	virtual CollisionShape* clone();
+	virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator);
 
 	inline dint32 getNumVertices()
 	{
@@ -53,8 +46,16 @@ public:
 	
 	virtual dbool intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo);
 	
+    friend class PhysicalBody;
+
 protected:
 	
+    ConvexPolygon(Vector2f* vertices, dint32 numVertices);
+	
+	ConvexPolygon(const ConvexPolygon& other);
+	
+	void operator=( ConvexPolygon& other);
+    
 	virtual void updateShape(Matrix3f& xForm);
 
 	virtual void findCentroid();

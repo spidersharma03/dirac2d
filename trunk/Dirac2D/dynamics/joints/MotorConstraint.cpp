@@ -13,9 +13,12 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-MotorConstraint::MotorConstraint()
+
+MotorConstraint::MotorConstraint(const MotorConstraintInfo& cInfo): Constraint(cInfo)
 {
-	m_Type = ECT_MOTOR;
+    m_Type = ECT_MOTOR;
+    m_MaxTorque = cInfo.m_MaxTorque;
+    m_Speed = cInfo.m_Speed;
 }
 
 void MotorConstraint::initialize()

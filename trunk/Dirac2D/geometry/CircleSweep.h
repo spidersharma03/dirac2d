@@ -18,11 +18,6 @@ class Edge;
 class CircleSweep : public CollisionShape
 {
 public:
-	CircleSweep(dfloat radius, Vector2f* vertices, dint32 numVertices);
-		
-	CircleSweep(const CircleSweep& other);
-	
-	void operator= ( CircleSweep& other);
 	
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 	
@@ -32,9 +27,18 @@ public:
 
 	virtual void updateAABB(Matrix3f& xForm);
 	
-	virtual CollisionShape* clone();
+    friend class PhysicalBody;
+
 protected:
 	
+    CircleSweep(dfloat radius, Vector2f* vertices, dint32 numVertices);
+    
+	CircleSweep(const CircleSweep& other);
+	
+	void operator= ( CircleSweep& other);
+    
+    virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator);
+
 	virtual void updateShape(Matrix3f& xForm);
 	
 	virtual void findCentroid();

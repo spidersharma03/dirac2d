@@ -64,31 +64,9 @@ void ConvexPolygon::operator=( ConvexPolygon& other)
 	m_Radius   = other.m_Radius;
 }
 
-ConvexPolygon* ConvexPolygon::createRegularPolygon( dint32 numSides, dfloat radius)
+CollisionShape* ConvexPolygon::clone(MemoryBlockAllocator* pAllocator)
 {
-	dAssert(numSides > 2);
-	dAssert(numSides < MAX_POLY_VERTICES);
-	Vector2f *vertices = new Vector2f[numSides];
-	dfloat angle = 0.0f;
-	dfloat dAngle = 2*PI/(numSides);
-	dfloat x, y;
-	
-	for( dint32 v=0; v<numSides; v++ )
-	{
-		x = radius * cos(angle);
-		y = radius * sin(angle);
-		vertices[v].x = x;
-		vertices[v].y = y;
-		angle += dAngle;
-	}
-	ConvexPolygon* convexPoly = new ConvexPolygon(vertices, numSides);
-	delete[] vertices;
-	return convexPoly;
-}
-
-CollisionShape* ConvexPolygon::clone()
-{
-	return new ConvexPolygon(*this);
+	return new(pAllocator->Allocate(sizeof(ConvexPolygon))) ConvexPolygon(*this);
 }
 
 Vector2f ConvexPolygon::getSupportPoint(const Vector2f& d)

@@ -19,6 +19,7 @@ BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;
 class CollisionShape;
 class BroadPhaseNode;
+class MemoryBlockAllocator;
 
 class PhysicalShape
 {
@@ -37,7 +38,7 @@ protected:
 
 	void operator=(PhysicalShape& other);
 
-	PhysicalShape* clone();
+	PhysicalShape* clone(MemoryBlockAllocator* pAllocator);
 
 	void setAsBox(dfloat width, dfloat height);
 	

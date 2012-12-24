@@ -43,9 +43,9 @@ void Edge::operator= ( Edge& other)
 	m_bHasNext = other.m_bHasNext;
 }
 
-CollisionShape* Edge::clone()
+CollisionShape* Edge::clone(MemoryBlockAllocator* pAllocator)
 {
-	return new Edge(*this);
+	return new(pAllocator->Allocate(sizeof(Edge))) Edge(*this);
 }
 
 Vector2f Edge::getSupportPoint(const Vector2f& d) 
@@ -64,8 +64,8 @@ dbool Edge::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySe
 	Matrix3f M = xForm;
 	M.col3.x = M.col3.y = 0.0f;
 	Vector2f T(xForm.col3.x, xForm.col3.y);
-	Vector2f rayStart = M * ( raySeg.m_Start - T );
-	Vector2f rayEnd   = M * ( raySeg.m_End - T );
+	Vector2f rayStart = ( raySeg.m_Start - T ) * M;
+	Vector2f rayEnd   = ( raySeg.m_End - T ) * M;
 	
 	// Solve for the Segments( RaySegment and the Edge )
 	dfloat dx1 = rayEnd.x - rayStart.x;

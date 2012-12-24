@@ -12,12 +12,18 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-PulleyConstraint::PulleyConstraint()
+
+PulleyConstraint::PulleyConstraint( const PulleyConstraintInfo& cInfo): Constraint(cInfo)
 {
-	m_Type = ECT_PULLEY;
+    m_Type = ECT_PULLEY;
+    m_Anchor1 = cInfo.m_Anchor1;
+    m_Anchor2 = cInfo.m_Anchor2;
+    m_FixedPoint1 = cInfo.m_FixedPoint1;
+    m_FixedPoint2 = cInfo.m_FixedPoint2;
+    m_PulleyRatio = cInfo.m_PulleyRatio;
+    
 	m_Erp = 100.0f;
 	m_Cfm = 0.0f;
-	m_PulleyRatio = 1.0f;
 }
 
 void PulleyConstraint::initialize()

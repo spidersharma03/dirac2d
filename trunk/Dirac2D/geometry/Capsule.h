@@ -21,14 +21,7 @@ class Edge;
 class Capsule : public CollisionShape
 {
 public:
-	Capsule(dfloat radius, dfloat height);
-	
-	Capsule(const Capsule& other);
-	
-	void operator=( Capsule& other);
-	
-	virtual CollisionShape* clone();
-	
+
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 
 	virtual dbool isPointInside(Vector2f& p);
@@ -49,7 +42,17 @@ public:
 		return m_Height;
 	}
 	
+    friend class PhysicalBody;
+
 protected:
+	
+    Capsule(dfloat radius, dfloat height);
+	
+	Capsule(const Capsule& other);
+	
+	void operator=( Capsule& other);
+	
+	virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator);
 	
 	virtual void findCentroid();
 	

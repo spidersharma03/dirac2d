@@ -12,13 +12,14 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-PrismaticConstraint::PrismaticConstraint()
+
+PrismaticConstraint::PrismaticConstraint( const PrismaticConstraintInfo& cInfo): Constraint(cInfo)
 {
-	m_Type = ECT_PRISMATIC;
-	m_Erp = 1000.0f;
-	m_Cfm = 10.0f;
-	m_LowerLimit = -0.4f;
-	m_UpperLimit = 0.4f;
+    m_Type = ECT_PRISMATIC;
+    m_Anchor = cInfo.m_Anchor;
+    m_LocalAxis = cInfo.m_LocalAxis;
+	m_LowerLimit = cInfo.m_LowerLimit;
+    m_UpperLimit = cInfo.m_UpperLimit;
 }
 
 void PrismaticConstraint::initialize()

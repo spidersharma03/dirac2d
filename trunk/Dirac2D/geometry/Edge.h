@@ -16,14 +16,6 @@ BEGIN_NAMESPACE_DIRAC2D
 class Edge : public CollisionShape
 {
 public:
-	Edge();
-	
-	Edge(Vector2f& vertex1, Vector2f& vertex2);
-	
-	Edge(const Edge& other);
-	
-	void operator= ( Edge& other);
-
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 	
 	virtual dbool isPointInside(Vector2f& p);
@@ -31,14 +23,26 @@ public:
 	virtual dbool intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo);
 
 	virtual void updateAABB(Matrix3f& xForm);
-	
-	virtual CollisionShape* clone();
-    
+	    
     virtual ~Edge()
     {
     }
+    
+    friend class PhysicalBody;
+    friend class CircleSweep;
+    
 protected:
 	
+    Edge();
+	
+	Edge(Vector2f& vertex1, Vector2f& vertex2);
+	
+	Edge(const Edge& other);
+	
+	void operator= ( Edge& other);
+
+    virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator);
+
 	virtual void updateShape(Matrix3f& xForm);
 	
 	virtual void findCentroid();

@@ -16,7 +16,7 @@ class CirclePathConstraint : public Constraint
 {
 public:
     
-    CirclePathConstraint();
+    //CirclePathConstraint();
 	
 	virtual void buildJacobian();
 	

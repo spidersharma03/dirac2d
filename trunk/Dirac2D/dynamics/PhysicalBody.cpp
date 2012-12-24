@@ -11,6 +11,12 @@
 #include "PhysicalShape.h"
 #include "contacts/Contact.h"
 #include "../geometry/CollisionShape.h"
+#include "../geometry/Circle.h"
+#include "../geometry/Capsule.h"
+#include "../geometry/ConvexPolygon.h"
+#include "../geometry/Edge.h"
+#include "../geometry/EdgeChain.h"
+
 #include "../collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
@@ -63,7 +69,9 @@ PhysicalBody::PhysicalBody(const PhysicalBody& other)
 	// Clone All the Physical Shapes attached to this PhysicalBody
 	while (pShape) 
 	{
-		PhysicalShape* cloneShape = pShape->clone();
+		PhysicalShape* cloneShape = pShape->clone(m_PhysicalWorld->m_pBlockAllocator);
+        cloneShape->m_CollisionShape = pShape->m_CollisionShape->clone(m_PhysicalWorld->m_pBlockAllocator);
+        
 		cloneShape->m_Next = m_PhysicalShapeList;
 		
 		if( m_PhysicalShapeList )
@@ -218,18 +226,60 @@ void PhysicalBody::updateSleepingStatus(dfloat dt)
 
 PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 {
-	PhysicalShape* pShape = new PhysicalShape(); // TODO :: allocate memory for this from memoryBlockAllocator
-    /*
-     pShape = new(m_PhysicalWorld->m_PhysicaShapePool->Allocate())PhysicalShape();
-     */
+	PhysicalShape* pShape;// = new PhysicalShape(); // TODO :: allocate memory for this from memoryBlockAllocator
+    pShape = new(m_PhysicalWorld->m_pBlockAllocator->Allocate(sizeof(PhysicalShape)))PhysicalShape();
     
 	pShape->m_ParentBody = this;
 	pShape->m_Restitution = pApp.m_PhysicalAttributes.m_Restitution;
 	pShape->m_Friction = pApp.m_PhysicalAttributes.m_Friction;
 	
 	pShape->m_MassAttributes = pApp.m_MassAttributes;
-	
-	pShape->m_CollisionShape = pApp.m_CollisionAttributes.m_Shape;
+	    
+    CollisionShapeInfo* cShapeInfo = pApp.m_CollisionAttributes.m_CollisionShapeInfo;
+    
+    // Create Collision Shape
+    if( cShapeInfo )
+    {
+        switch (cShapeInfo->m_ColShapeType) {
+            case EST_CIRCLE:
+            {
+                CircleInfo* cInfo = (CircleInfo*)cShapeInfo;
+                pShape->m_CollisionShape = new(m_PhysicalWorld->m_pBlockAllocator->Allocate(sizeof(Circle))) Circle(cInfo->m_Radius);
+                break;
+            } 
+            case EST_CAPSULE:
+            {
+                CapsuleInfo* cInfo = (CapsuleInfo*)cShapeInfo;
+                pShape->m_CollisionShape = new(m_PhysicalWorld->m_pBlockAllocator->Allocate(sizeof(Capsule))) 
+                Capsule(cInfo->m_Radius, cInfo->m_Height);
+                break;
+            }  
+            case EST_REGULARPOLY:
+            {
+                PolygonInfo* pInfo = (PolygonInfo*)cShapeInfo;
+                pShape->m_CollisionShape = new(m_PhysicalWorld->m_pBlockAllocator->Allocate(sizeof(ConvexPolygon)))
+                ConvexPolygon(pInfo->m_Vertices, pInfo->m_NumVertices);
+                break;
+            }  
+            case EST_EDGE:
+            {
+                EdgeInfo* eInfo = (EdgeInfo*)cShapeInfo;
+                pShape->m_CollisionShape = new(m_PhysicalWorld->m_pBlockAllocator->Allocate(sizeof(Edge))) 
+                Edge(eInfo->m_Vertex1, eInfo->m_Vertex2);
+                break;
+            }  
+            case EST_EDGE_CHAIN:
+            {
+                EdgeChainInfo* eInfo = (EdgeChainInfo*)cShapeInfo;
+                pShape->m_CollisionShape = new(m_PhysicalWorld->m_pBlockAllocator->Allocate(sizeof(EdgeChain))) 
+                EdgeChain(eInfo->m_Vertices, eInfo->m_NumVertices);
+                break;
+            }      
+            default:
+                break;
+        }
+    }
+    
 	pShape->m_CollisionFilter = pApp.m_CollisionAttributes.m_Filter;
 	
 	if( pShape->m_CollisionShape->m_ShapeType == EST_EDGE  )
@@ -259,6 +309,49 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 	return pShape;
 }
 
+
+void PhysicalBody::deletePhysicalShape(PhysicalShape* pShape)
+{
+    if( pShape )
+    {
+        m_PhysicalWorld->removeFromBroadPhase(pShape);
+
+        CollisionShape* pCollisionShape = pShape->m_CollisionShape;
+        switch (pCollisionShape->getShapeType()) {
+            case EST_CIRCLE:
+            {
+                m_PhysicalWorld->m_pBlockAllocator->Free(pCollisionShape, sizeof(Circle));
+                break;
+            } 
+            case EST_CAPSULE:
+            {
+                m_PhysicalWorld->m_pBlockAllocator->Free(pCollisionShape, sizeof(Capsule));
+                break;
+            }  
+            case EST_REGULARPOLY:
+            {
+                m_PhysicalWorld->m_pBlockAllocator->Free(pCollisionShape, sizeof(ConvexPolygon));
+                break;
+            }  
+            case EST_EDGE:
+            {
+                m_PhysicalWorld->m_pBlockAllocator->Free(pCollisionShape, sizeof(Edge));
+                break;
+            }  
+            case EST_EDGE_CHAIN:
+            {
+                ((EdgeChain*)pCollisionShape)->~EdgeChain();
+                m_PhysicalWorld->m_pBlockAllocator->Free(pCollisionShape, sizeof(EdgeChain));
+                break;
+            }      
+            default:
+                break;
+        }
+    }
+    
+    pShape->~PhysicalShape();
+    m_PhysicalWorld->m_pBlockAllocator->Free(pShape,sizeof(PhysicalShape));
+}
 // Update the Body Transform.
 /*
   we need to be careful as there might be offsets in the vertices defined for a Shape.
@@ -284,6 +377,14 @@ void PhysicalBody::updateTransform()
 PhysicalBody::~PhysicalBody()
 {
     m_PhysicalShapeList = 0;
+    PhysicalShape* pShape = m_PhysicalShapeList;
+    while (pShape) 
+    {
+        PhysicalShape* pShape_ = pShape;
+        pShape = pShape_->m_Next;
+        pShape_->~PhysicalShape();
+        m_PhysicalWorld->m_PhysicaShapePool->Free(pShape_); // Free memory of Physical Shape        
+    }
     
     m_Next = m_Prev = 0;
     

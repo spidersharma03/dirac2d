@@ -77,6 +77,7 @@ PhysicalWorld::PhysicalWorld()
 	m_ConstraintList   = 0;
 	m_ContactList	   = 0;
 	
+    m_pBlockAllocator  = new MemoryBlockAllocator();
 	m_PhysicalBodyPool = new MemoryAllocator<PhysicalBody>(MAX_BODIES);
 	m_PhysicaShapePool = new MemoryAllocator<PhysicalShape>(MAX_PHYSICAL_SHAPES);
     
@@ -112,15 +113,22 @@ void PhysicalWorld::deletePhysicalBody(PhysicalBody* pBody)
         cEdge = ce->m_Next;
         m_CollisionManager->deleteContact(ce->contact);
     }
+    // Remove All the Constraints attached to this body.
+    ConstraintEdge* constraintEdge = pBody->m_ConstraintEdgeList;
+    while (constraintEdge) 
+    {
+        ConstraintEdge* ce = constraintEdge;
+        constraintEdge = ce->m_Next;
+        deleteConstraint(ce->m_pConstraint);
+    }
+    
     // Remove All the Physical Shapes attached to this body.
     PhysicalShape* pShape = pBody->m_PhysicalShapeList;
     while (pShape) 
     {
         PhysicalShape* pShape_ = pShape;
         pShape = pShape_->m_Next;
-		removeFromBroadPhase(pShape_);
-        delete pShape_;
-        pShape_ = 0;
+        pBody->deletePhysicalShape(pShape_);
     }
     
 	pBody->removeFromPhysicalWorld(this);	
@@ -129,44 +137,45 @@ void PhysicalWorld::deletePhysicalBody(PhysicalBody* pBody)
 	m_PhysicalBodyPool->Free(pBody);
 }
 
-Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
+Constraint* PhysicalWorld::createConstraint(const ConstraintInfo& constraintInfo)
 {
 	Constraint* constraint;
 	// Create Constraint from the Pool.
-	switch (constraintType) 
+	switch (constraintInfo.m_Type) 
 	{
 		case ECT_DISTANCE:
-			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint();
+			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint((DistanceConstraint&)constraintInfo);
 			break;
 		case ECT_HINGE:
-			constraint = new( m_HingeConstraintPool->Allocate() )HingeConstraint();
+			constraint = new( m_HingeConstraintPool->Allocate() )HingeConstraint((HingeConstraintInfo&)constraintInfo);
 			break;
 		case ECT_WELD:
-			constraint = new( m_WeldConstraintPool->Allocate() )WeldConstraint();
+			constraint = new( m_WeldConstraintPool->Allocate() )WeldConstraint((WeldConstraintInfo&)constraintInfo);
 			break;
 		case ECT_CATENARY:
-			constraint = new( m_CatenaryConstraintPool->Allocate() )CatenaryConstraint();
+			constraint = new( m_CatenaryConstraintPool->Allocate() )CatenaryConstraint((CatenaryConstraintInfo&)constraintInfo);
 			break;
 		case ECT_CATENARY_FIXED_ROTATION:
-			constraint = new( m_CatenaryConstraintFixedRotationPool->Allocate() )CatenaryConstraintFixedRotation();
+			constraint = new( m_CatenaryConstraintFixedRotationPool->Allocate() )
+            CatenaryConstraintFixedRotation((CatenaryConstraintFixedRotationInfo&)constraintInfo);
 			break;
 		case ECT_LINE:
-			constraint = new( m_LineConstraintPool->Allocate() )LineConstraint();
+			constraint = new( m_LineConstraintPool->Allocate() )LineConstraint((LineConstraintInfo&)constraintInfo);
 			break;
 		case ECT_WHEEL:
-			constraint = new( m_WheelConstraintPool->Allocate() )WheelConstraint();
+			constraint = new( m_WheelConstraintPool->Allocate() )WheelConstraint((WheelConstraintInfo&)constraintInfo);
 			break;
 		case ECT_PRISMATIC:
-			constraint = new( m_PrismaticConstraintPool->Allocate() )PrismaticConstraint();
+			constraint = new( m_PrismaticConstraintPool->Allocate() )PrismaticConstraint((PrismaticConstraintInfo&)constraintInfo);
 			break;
 		case ECT_PULLEY:
-			constraint = new( m_PulleyConstraintPool->Allocate() )PulleyConstraint();
+			constraint = new( m_PulleyConstraintPool->Allocate() )PulleyConstraint((PulleyConstraintInfo&)constraintInfo);
 			break;
 		case ECT_MIN_MAX:
-			constraint = new( m_MinMaxConstraintPool->Allocate() )MinMaxConstraint();
+			constraint = new( m_MinMaxConstraintPool->Allocate() )MinMaxConstraint((MinMaxConstraintInfo&)constraintInfo);
 			break;
 		case ECT_MOTOR:
-			constraint = new( m_MotorConstraintPool->Allocate() )MotorConstraint();
+			constraint = new( m_MotorConstraintPool->Allocate() )MotorConstraint((MotorConstraintInfo&)constraintInfo);
 			break;
 		default:
 			break;
@@ -181,11 +190,141 @@ Constraint* PhysicalWorld::createConstraint(CONSTRAINT_TYPE constraintType)
 	}
 	m_ConstraintList = constraint;
 	
+    
+    PhysicalBody* pBody1 = constraint->m_PhysicalBody1;
+    PhysicalBody* pBody2 = constraint->m_PhysicalBody2;
+    
+    // Add this constraint to Physical Bodies constraint list
+    // Add to body 1
+	constraint->m_ConstraintEdge1.m_pConstraint = constraint;
+	constraint->m_ConstraintEdge1.pBody = constraint->m_PhysicalBody2;
+	
+	constraint->m_ConstraintEdge1.m_Prev = 0;
+    if( pBody1 )
+        constraint->m_ConstraintEdge1.m_Next = pBody1->m_ConstraintEdgeList;
+	
+    if( pBody1 )
+    {
+        if( pBody1->m_ConstraintEdgeList )
+        {
+            pBody1->m_ConstraintEdgeList->m_Prev = &constraint->m_ConstraintEdge1;
+        }
+        pBody1->m_ConstraintEdgeList = &constraint->m_ConstraintEdge1;
+	}
+    // Add to body 2
+	constraint->m_ConstraintEdge2.m_pConstraint = constraint;
+	constraint->m_ConstraintEdge2.pBody = pBody1;
+    
+	constraint->m_ConstraintEdge2.m_Prev = 0;
+    if( pBody2 )
+        constraint->m_ConstraintEdge2.m_Next = pBody2->m_ConstraintEdgeList;
+	
+    if( pBody2 )
+    {
+	if( pBody2->m_ConstraintEdgeList )
+	{
+		pBody2->m_ConstraintEdgeList->m_Prev = &constraint->m_ConstraintEdge2;
+	}
+        pBody2->m_ConstraintEdgeList = &constraint->m_ConstraintEdge2;
+    }
+    
 	return constraint;
 }
 
 void PhysicalWorld::deleteConstraint(Constraint* pConstraint)
 {
+    switch(pConstraint->m_Type)
+    {
+    case ECT_DISTANCE:
+        m_DistanceConstraintPool->Free((DistanceConstraint*)pConstraint);    
+        break;
+    case ECT_HINGE:
+        m_HingeConstraintPool->Free((HingeConstraint*)pConstraint);
+        break;
+    case ECT_WELD:
+        m_WeldConstraintPool->Free((WeldConstraint*)pConstraint);
+        break;
+    case ECT_CATENARY:
+        m_CatenaryConstraintPool->Free((CatenaryConstraint*)pConstraint);
+        break;
+    case ECT_CATENARY_FIXED_ROTATION:
+        m_CatenaryConstraintFixedRotationPool->Free((CatenaryConstraintFixedRotation*)pConstraint);
+        break;
+    case ECT_LINE:
+        m_LineConstraintPool->Free((LineConstraint*)pConstraint);
+        break;
+    case ECT_WHEEL:
+        m_WheelConstraintPool->Free((WheelConstraint*)pConstraint);
+        break;
+    case ECT_PRISMATIC:
+        m_PrismaticConstraintPool->Free((PrismaticConstraint*)pConstraint);
+        break;
+    case ECT_PULLEY:
+        m_PulleyConstraintPool->Free((PulleyConstraint*)pConstraint);
+        break;
+    case ECT_MIN_MAX:
+        m_MinMaxConstraintPool->Free((MinMaxConstraint*)pConstraint);
+        break;
+    case ECT_MOTOR:
+        m_MotorConstraintPool->Free((MotorConstraint*)pConstraint);
+        break;
+    default:
+        break;
+	}
+    // Remove constraint from Physical World
+    Constraint* prevConstraint = pConstraint->m_Prev;
+	Constraint* nextConstraint = pConstraint->m_Next;
+	
+	if( prevConstraint )
+	{
+		prevConstraint->m_Next = nextConstraint;
+	}
+	else 
+	{
+		m_ConstraintList = nextConstraint;
+	}
+    
+    
+	if( nextConstraint )
+	{
+		nextConstraint->m_Prev = prevConstraint;
+	}
+    
+    // Remove Constraint from body1's list
+	PhysicalBody* pBody1 = pConstraint->m_PhysicalBody1;
+    if( !pBody1 )
+        return;
+    
+	if( pConstraint->m_ConstraintEdge1.m_Prev )
+	{
+		pConstraint->m_ConstraintEdge1.m_Prev->m_Next = pConstraint->m_ConstraintEdge1.m_Next;
+	}
+	else 
+	{
+        pBody1->m_ConstraintEdgeList = pConstraint->m_ConstraintEdge1.m_Next;
+	}
+	if( pConstraint->m_ConstraintEdge1.m_Next )
+	{
+		pConstraint->m_ConstraintEdge1.m_Next->m_Prev = pConstraint->m_ConstraintEdge1.m_Prev;
+	}
+	
+	// Remove Constraint from body2's list
+	PhysicalBody* pBody2 = pConstraint->m_PhysicalBody1;
+    if( !pBody2 )
+        return;
+    
+	if( pConstraint->m_ConstraintEdge2.m_Prev )
+	{
+		pConstraint->m_ConstraintEdge2.m_Prev->m_Next = pConstraint->m_ConstraintEdge2.m_Next;
+	}
+	else 
+	{
+		pBody2->m_ConstraintEdgeList = pConstraint->m_ConstraintEdge2.m_Next;
+	}
+	if( pConstraint->m_ConstraintEdge2.m_Next )
+	{
+		pConstraint->m_ConstraintEdge2.m_Next->m_Prev = pConstraint->m_ConstraintEdge2.m_Prev;
+	}
 }
 
 void PhysicalWorld::Step(dfloat dt)

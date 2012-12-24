@@ -11,6 +11,7 @@
 #include "../maths/MathUtil.h"
 #include "PhysicalAppearance.h"
 #include "../memory/memoryAllocator.h"
+#include "../memory/memoryBlockAllocator.h"
 #include "joints/Constraint.h"
 #include "../CallBacks.h"
 
@@ -32,6 +33,7 @@ class Renderer;
 class BroadPhaseCollisionAlgorithm;
 class BroadPhaseNode;
 class PhysicalShape;
+class MemoryBlockAllocator;
 
 class DistanceConstraint;
 class HingeConstraint;
@@ -95,7 +97,7 @@ private:
 public:
 	PhysicalWorld();
 	
-	Constraint* createConstraint(CONSTRAINT_TYPE constraintType);
+	Constraint* createConstraint(const ConstraintInfo& constraintInfo);
 
 	void deleteConstraint(Constraint* pConstraint);
 
@@ -197,6 +199,7 @@ private:
 	
 	dbool m_bWarmStart;
 	
+    MemoryBlockAllocator* m_pBlockAllocator;
     MemoryAllocator<PhysicalShape> *m_PhysicaShapePool;
 	MemoryAllocator<PhysicalBody> *m_PhysicalBodyPool;
 	MemoryAllocator<BroadPhaseNode> *m_BroadPhaseNodePool;

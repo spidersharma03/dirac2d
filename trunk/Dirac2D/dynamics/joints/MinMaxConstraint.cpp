@@ -31,11 +31,13 @@ void MinMaxConstraint::initialize()
 	m_Distance = a1.distance(a2);	
 }
 
-MinMaxConstraint::MinMaxConstraint()
+MinMaxConstraint::MinMaxConstraint( const MinMaxConstraintInfo& cInfo): Constraint(cInfo)
 {
-	m_Type = ECT_MIN_MAX;
-	m_UpperLimit = 100000.0f;
-	m_LowerLimit = -100000.0f;
+    m_Type = ECT_MIN_MAX;
+    m_Anchor1 = cInfo.m_Anchor1;
+    m_Anchor2 = cInfo.m_Anchor2;
+    m_UpperLimit = cInfo.m_UpperLimit;
+    m_LowerLimit = cInfo.m_LowerLimit;
 }
 
 void MinMaxConstraint::buildJacobian()

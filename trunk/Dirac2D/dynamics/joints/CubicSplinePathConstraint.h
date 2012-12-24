@@ -22,7 +22,7 @@ struct CubicSpline
 class CubicSplinePathConstraint : public Constraint
 {
 public:
-	CubicSplinePathConstraint(Vector2f* splineVertices, int numVertices);
+	//CubicSplinePathConstraint(Vector2f* splineVertices, int numVertices);
 	
 	virtual void buildJacobian();
 	

@@ -17,10 +17,6 @@ BEGIN_NAMESPACE_DIRAC2D
 class Box : public CollisionShape
 {
 public:
-	Box(dfloat width, dfloat height);
-	
-	Box(const Box& other);
-		
 	// For GJK/EPA 
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 	
@@ -30,10 +26,16 @@ public:
 
 	virtual void updateAABB(Matrix3f& xForm);
 	
-	virtual CollisionShape* clone();
+    friend class PhysicalBody;
 
 protected:
 	
+    Box(dfloat width, dfloat height);
+	
+	Box(const Box& other);
+	
+    virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator);
+
 	virtual void findCentroid();
 	
 	virtual void findMomentOfInertia();

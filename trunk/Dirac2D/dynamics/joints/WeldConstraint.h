@@ -13,17 +13,33 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct WeldConstraintInfo : public ConstraintInfo
+{
+    WeldConstraintInfo()
+    {
+        m_Type = ECT_WELD;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+    }
+    // Anchor Point.
+    Vector2f m_Anchor;
+};
+
 class WeldConstraint : public Constraint
 {
 public:
-	WeldConstraint();
 	
-	virtual void buildJacobian();
+    virtual void buildJacobian();
 	
 	virtual void correctVelocities();
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:
+    	
+    WeldConstraint(const WeldConstraintInfo& cInfo);
+    
 public:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
 	Vector3f m_Impulse;

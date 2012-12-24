@@ -124,7 +124,9 @@ void CollisionManager::addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pN
 
 	contact->m_CollisionShape1 = pNode1->m_CollisionShape;
 	contact->m_CollisionShape2 = pNode2->m_CollisionShape;
-
+    
+    // Add this contact to Physical Bodies contact list
+    // Add to body 1
 	contact->m_ContactEdge1.contact = contact;
 	contact->m_ContactEdge1.pBody = pBody2;
 	
@@ -137,6 +139,7 @@ void CollisionManager::addContactPair(BroadPhaseNode* pNode1, BroadPhaseNode* pN
 	}
 	pBody1->m_ContactEdgeList = &contact->m_ContactEdge1;
 	
+    // Add to body 2
 	contact->m_ContactEdge2.contact = contact;
 	contact->m_ContactEdge2.pBody = pBody1;
 
@@ -172,6 +175,7 @@ Contact* CollisionManager::createContact()
 // Remove a Contact from the world contact linked list and the Contact Pool.
 void CollisionManager::deleteContact(Contact* contact)
 {	
+    // Remove Contact from PhysicalWorld
 	Contact* prevContact = contact->m_Prev;
 	Contact* nextContact = contact->m_Next;
 	

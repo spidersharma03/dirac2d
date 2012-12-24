@@ -21,7 +21,7 @@ Box::Box(const Box& other)
 	m_Height = other.m_Height;
 }
 
-CollisionShape* Box::clone()
+CollisionShape* Box::clone(MemoryBlockAllocator* pAllocator)
 {
 	return 0;
 }

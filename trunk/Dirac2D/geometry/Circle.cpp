@@ -41,9 +41,9 @@ Circle::~Circle()
 {
 }
 
-CollisionShape* Circle::clone()
+CollisionShape* Circle::clone(MemoryBlockAllocator* pAllocator)
 {
-	return new Circle(*this);
+	return new(pAllocator->Allocate(sizeof(Circle))) Circle(*this);
 }
 
 Vector2f Circle::getSupportPoint(const Vector2f& d)
@@ -60,8 +60,8 @@ dbool Circle::isPointInside(Vector2f& p)
 
 dbool Circle::intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo)
 {
-	// Transform Ray Segment into Circle's space.(since the Circle is symmetrical object, no need for the rotation matrix.)
-	Vector2f rayOrigin = raySeg.m_Start - Vector2f(xForm.col3.x, xForm.col3.y);
+	// Transform Ray Segment into Circle's space.
+	Vector2f rayOrigin = raySeg.m_Start - xForm * m_Centroid;
 	
 	const Vector2f d = raySeg.m_End - raySeg.m_Start;
 	dfloat A = d.lengthSquared();

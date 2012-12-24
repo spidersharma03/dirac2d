@@ -12,23 +12,23 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-CubicSplinePathConstraint::CubicSplinePathConstraint(Vector2f* splineVertices, int numVertices)
-{
-	m_NumSplineVertices = numVertices;
-	dAssert(m_NumSplineVertices>3);
-	m_SplineVertices = new Vector2f[numVertices];
-	for( dint32 v=0; v<numVertices; v++ )
-	{
-		m_SplineVertices[v] = splineVertices[v];
-	}
-	
-	
-	m_Type = ECT_CUBIC_SPLINE;
-	m_Erp = 0.0f;
-	m_Cfm = 0.0f;
-	m_LowerLimit = -0.4f;
-	m_UpperLimit = 0.4f;
-}
+//CubicSplinePathConstraint::CubicSplinePathConstraint(Vector2f* splineVertices, int numVertices)
+//{
+//	m_NumSplineVertices = numVertices;
+//	dAssert(m_NumSplineVertices>3);
+//	m_SplineVertices = new Vector2f[numVertices];
+//	for( dint32 v=0; v<numVertices; v++ )
+//	{
+//		m_SplineVertices[v] = splineVertices[v];
+//	}
+//	
+//	
+//	m_Type = ECT_CUBIC_SPLINE;
+//	m_Erp = 0.0f;
+//	m_Cfm = 0.0f;
+//	m_LowerLimit = -0.4f;
+//	m_UpperLimit = 0.4f;
+//}
 
 void CubicSplinePathConstraint::initialize()
 {

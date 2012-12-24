@@ -9,6 +9,8 @@
 #include "../definitions.h"
 #include "../Settings.h"
 #include "../maths/MathUtil.h"
+#include "../memory/memoryBlockAllocator.h"
+#include <new>
 
 #ifndef _COLLISION_SHAPE_H_
 #define _COLLISION_SHAPE_H_
@@ -80,9 +82,7 @@ public:
 	{
 		return false;
 	}
-	
-	virtual CollisionShape* clone() = 0;
-	
+		
 	virtual ~CollisionShape()
 	{
 		m_pBroadPhaseNode = 0;
@@ -100,6 +100,8 @@ public:
 	
 protected:
 	
+    virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator) = 0;
+
 	virtual void updateShape(Matrix3f& xForm){};
 	
 	virtual void findCentroid() = 0;

@@ -85,9 +85,9 @@ void CircleSweep::updateAABB(Matrix3f& xForm)
 {
 }
 
-CollisionShape* CircleSweep::clone()
+CollisionShape* CircleSweep::clone(MemoryBlockAllocator* pAllocator)
 {
-	return new CircleSweep(*this);
+	return new(pAllocator->Allocate(sizeof(CircleSweep))) CircleSweep(*this);
 }
 
 void CircleSweep::updateShape(Matrix3f& xForm)

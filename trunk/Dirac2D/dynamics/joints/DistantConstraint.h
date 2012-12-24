@@ -13,17 +13,31 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct DistanceConstraintInfo : public ConstraintInfo
+{
+    DistanceConstraintInfo()
+    {
+        m_Type = ECT_DISTANCE;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+    }
+    // the Anchor points are always assumed in the local coordinate frames of the PhysicalBodies.
+    Vector2f m_Anchor1, m_Anchor2;
+};
+
 class DistanceConstraint : public Constraint
 {
 public:
-	DistanceConstraint();
-	
+    
 	virtual void buildJacobian();
 	
 	virtual void correctVelocities();
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:	
+    DistanceConstraint( const DistanceConstraintInfo& constraintInfo );
 public:
 	// the Anchor points are always assumed in the local coordinate frames of the PhysicalBodies.
 	Vector2f m_Anchor1, m_Anchor2;
