@@ -144,7 +144,7 @@ Constraint* PhysicalWorld::createConstraint(const ConstraintInfo& constraintInfo
 	switch (constraintInfo.m_Type) 
 	{
 		case ECT_DISTANCE:
-			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint((DistanceConstraint&)constraintInfo);
+			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint((DistanceConstraintInfo&)constraintInfo);
 			break;
 		case ECT_HINGE:
 			constraint = new( m_HingeConstraintPool->Allocate() )HingeConstraint((HingeConstraintInfo&)constraintInfo);
@@ -309,7 +309,7 @@ void PhysicalWorld::deleteConstraint(Constraint* pConstraint)
 	}
 	
 	// Remove Constraint from body2's list
-	PhysicalBody* pBody2 = pConstraint->m_PhysicalBody1;
+	PhysicalBody* pBody2 = pConstraint->m_PhysicalBody2;
     if( !pBody2 )
         return;
     
@@ -388,7 +388,8 @@ void PhysicalWorld::Step(dfloat dt)
 		if( ( pBody->m_BodyType == EBT_DYNAMIC || pBody->m_BodyType == EBT_KINEMATIC )  && !pBody->m_bSleeping)
 		{
 			pBody->m_Position += pBody->m_Velocity * dt;
-			pBody->m_Angle    += pBody->m_AngularVelocity * dt;
+			if( !pBody->m_bFixedRotation )
+				pBody->m_Angle    += pBody->m_AngularVelocity * dt;
 			pBody->updateTransform();
 		}
 		pBody = pBody->m_Next;

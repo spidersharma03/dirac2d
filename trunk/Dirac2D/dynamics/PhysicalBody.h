@@ -95,6 +95,11 @@ public:
 		m_Transform.rotate(m_Angle);
 	}
 	
+	void setFixedRotation( dbool bFixedRotation )
+	{
+		m_bFixedRotation = bFixedRotation;
+	}
+	
 	void updateTransform();
 	
 	Matrix3f getTransform()
@@ -163,6 +168,7 @@ public:
 	BODY_TYPE m_BodyType;
 	Vector2f m_Force;
 
+	dbool m_bFixedRotation;
 	
 	ContactEdge* m_ContactEdgeList;
     ConstraintEdge* m_ConstraintEdgeList;

@@ -692,32 +692,37 @@ void demo9()
 	pApp.m_PhysicalAttributes.m_Angle = PI/2;
 	pBodyBoxC->createPhysicalShape(pApp);
 	
-	DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc1->m_PhysicalBody1 = pBodyBoxD;
-	dc1->m_PhysicalBody2 = pBodyBoxI;
-	dc1->m_Anchor1 = Vector2f(0.0f,0.0f);
-	dc1->m_Anchor2 = Vector2f(0.0f,0.0f);
+	DistanceConstraintInfo dInfo;
+	dInfo.m_PhysicalBody1 = pBodyBoxD;
+	dInfo.m_PhysicalBody2 = pBodyBoxI;
+	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
+	
+	DistanceConstraint* dc1 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 	dc1->initialize();
 	
-	DistanceConstraint* dc2 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc2->m_PhysicalBody1 = pBodyBoxI;
-	dc2->m_PhysicalBody2 = pBodyBoxR;
-	dc2->m_Anchor1 = Vector2f(0.0f,0.0f);
-	dc2->m_Anchor2 = Vector2f(0.0f,0.0f);
+	dInfo.m_PhysicalBody1 = pBodyBoxI;
+	dInfo.m_PhysicalBody2 = pBodyBoxR;
+	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
+	
+	DistanceConstraint* dc2 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 	dc2->initialize();
 	
-	DistanceConstraint* dc3 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc3->m_PhysicalBody1 = pBodyBoxR;
-	dc3->m_PhysicalBody2 = pBodyBoxA;
-	dc3->m_Anchor1 = Vector2f(0.0f,0.0f);
-	dc3->m_Anchor2 = Vector2f(0.0f,0.0f);
+	dInfo.m_PhysicalBody1 = pBodyBoxR;
+	dInfo.m_PhysicalBody2 = pBodyBoxA;
+	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
+	
+	DistanceConstraint* dc3 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 	dc3->initialize();
 	
-	DistanceConstraint* dc4 = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc4->m_PhysicalBody1 = pBodyBoxA;
-	dc4->m_PhysicalBody2 = pBodyBoxC;
-	dc4->m_Anchor1 = Vector2f(0.0f,0.0f);
-	dc4->m_Anchor2 = Vector2f(0.0f,0.0f);
+	dInfo.m_PhysicalBody1 = pBodyBoxA;
+	dInfo.m_PhysicalBody2 = pBodyBoxC;
+	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
+	
+	DistanceConstraint* dc4 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 	dc4->initialize();
 	
 	//PhysicalBody* pBodyBoxD2 = pBodyBoxD->clone();
@@ -1097,10 +1102,12 @@ void demo15()
     pApp.m_CollisionAttributes.m_CollisionShapeInfo = &eInfoC;
 	pBodyC->createPhysicalShape(pApp);
 	
-	DistanceConstraint* dcC = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dcC->m_PhysicalBody1 = pBodyC;
-	dcC->m_Anchor1 = Vector2f(0.0f,0.5f);
-	dcC->m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	DistanceConstraintInfo dInfo;
+	dInfo.m_PhysicalBody1 = pBodyC;
+	dInfo.m_Anchor1 = Vector2f(0.0f,0.5f);
+	dInfo.m_Anchor2 = Vector2f(bodyX-0.1,y+0.5);
+	
+	DistanceConstraint* dcC = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 	dcC->initialize();
 	
 	// CREATE 2
@@ -1212,13 +1219,17 @@ void demo16()
 	pBodyCircle->createPhysicalShape(pApp);
 	
 	dfloat erp = 10.0f; dfloat cfm = 3.0f;
-	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	dc->m_Erp = erp;
-	dc->m_Cfm = cfm;
-	dc->m_PhysicalBody1 = pBodyCircle;
-	dc->m_Anchor1 = Vector2f(0.0f,0.0f);
-	dc->m_Anchor2 = Vector2f(0.0f,y+0.1f);
+	
+	DistanceConstraintInfo dInfo;
+	dInfo.m_PhysicalBody1 = pBodyCircle;
+	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+	dInfo.m_Anchor2 = Vector2f(0.1,y+0.1f);
+	dInfo.m_Erp = erp;
+	dInfo.m_Cfm = cfm;
+
+	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 	dc->initialize();
+	
 	PhysicalBody* pPrevCircle = pBodyCircle;
 	dfloat dy = radius*3;
 	dfloat boxHeight = 2*radius; dfloat boxWidth = 2*radius;
@@ -1234,14 +1245,15 @@ void demo16()
         pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
 		pBodyCircle->createPhysicalShape(pApp);
 		
+		DistanceConstraintInfo dInfo;
+		dInfo.m_PhysicalBody1 = pBodyCircle;
+		dInfo.m_PhysicalBody2 = pPrevCircle;
+		dInfo.m_Anchor1 = Vector2f(0.0f,radius/2);
+		dInfo.m_Anchor2 = Vector2f(0.0f,-radius/2);
+		dInfo.m_Erp = erp;
+		dInfo.m_Cfm = cfm;
 		
-		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-		dc->m_Erp = erp;
-		dc->m_Cfm = cfm;
-		dc->m_PhysicalBody1 = pBodyCircle;
-		dc->m_PhysicalBody2 = pPrevCircle;
-		dc->m_Anchor1 = Vector2f(0.0f,radius/2);
-		dc->m_Anchor2 = Vector2f(0.0f,-radius/2);
+		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 		dc->initialize();
 		
 		pPrevCircle = pBodyCircle;
@@ -1366,11 +1378,11 @@ void demo19()
 
 		pBox2->createPhysicalShape(pApp);
 		
-		HingeConstraint* hc = (HingeConstraint*)pWorld->createConstraint(ECT_HINGE);
+		HingeConstraintInfo hInfo;
+		hInfo.m_PhysicalBody1 = pBox1;
+		hInfo.m_PhysicalBody2 = pBox2;
+		HingeConstraint* hc = (HingeConstraint*)pWorld->createConstraint(hInfo);
 		//hc->m_Erp = 0.0f;
-		hc->m_PhysicalBody1 = pBox1;
-		hc->m_PhysicalBody2 = pBox2;
-		hc->m_Anchor = Vector2f(0.0f,0.0f);
 		hc->initialize();
 	}
 	// Create Circle Chain
@@ -1415,10 +1427,12 @@ void demo20()
         pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capInfo;
 		pBox2->createPhysicalShape(pApp);
 		
-		WeldConstraint* wc = (WeldConstraint*)pWorld->createConstraint(ECT_WELD);
-		wc->m_PhysicalBody1 = pBox1;
-		wc->m_PhysicalBody2 = pBox2;
-		wc->m_Anchor = Vector2f(0.1f,0.0f);
+		WeldConstraintInfo wInfo;
+		wInfo.m_PhysicalBody1 = pBox1;
+		wInfo.m_PhysicalBody2 = pBox2;
+		wInfo.m_Anchor = Vector2f(0.1f,0.0f);
+		
+		WeldConstraint* wc = (WeldConstraint*)pWorld->createConstraint(wInfo);
 		wc->initialize();
 	}
 	// Create Circle Chain
@@ -1512,12 +1526,14 @@ void demo22()
         pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capInfo;
 		pBox->createPhysicalShape(pApp);
 		
-		CatenaryConstraintFixedRotation* cc = (CatenaryConstraintFixedRotation*)pWorld->createConstraint(ECT_CATENARY_FIXED_ROTATION);
-		cc->m_PhysicalBody1 = pBox;
-		cc->m_FixedPoint1 = Vector2f(-0.9f,0.1f);
-		cc->m_FixedPoint2 = Vector2f(0.9f,0.0f);
-		cc->m_FixedLength = 1.9030005f;
-		cc->m_Anchor = Vector2f(0.0f,0.1f);
+		CatenaryConstraintFixedRotationInfo cInfo;
+		cInfo.m_PhysicalBody1 = pBox;
+		cInfo.m_Anchor = Vector2f(0.0f,0.1f);
+		cInfo.m_FixedPoint1 = Vector2f(-0.9f,0.1f);
+		cInfo.m_FixedPoint2 = Vector2f(0.9f,0.0f);
+		cInfo.m_FixedLength = 1.9030005f;
+		
+		CatenaryConstraintFixedRotation* cc = (CatenaryConstraintFixedRotation*)pWorld->createConstraint(cInfo);
 		cc->initialize();
 	}
 	// Create Circle Chain
@@ -1564,24 +1580,24 @@ void demo23()
 		circle1->createPhysicalShape(pApp);
 		circle2->createPhysicalShape(pApp);
 		
-		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
-		lc1->m_PhysicalBody1 = pBox1;
-		lc1->m_PhysicalBody2 = circle1;
-		lc1->m_Anchor = Vector2f(0.3f,-0.2f);
-		lc1->m_LocalAxis = Vector2f(1.0f,-1.0f);
+		WheelConstraintInfo wInfo;
+		wInfo.m_PhysicalBody1 = pBox1;
+		wInfo.m_PhysicalBody1 = circle1;
+		wInfo.m_Anchor = Vector2f(0.3f,-0.2f);
+		wInfo.m_LocalAxis = Vector2f(1.0f,-1.0f);
+		wInfo.m_Erp = 50.0f;
+		wInfo.m_Cfm = 10.0f;
+		
+		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(wInfo);
 		lc1->initialize();
-		lc1->m_Erp = 50.0f;
-		lc1->m_Cfm = 10.0f;
 		
-		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(ECT_WHEEL);
-		lc2->m_PhysicalBody1 = pBox1;
-		lc2->m_PhysicalBody2 = circle2;
-		lc2->m_Anchor = Vector2f(-0.3f,-0.2f);
-		lc2->m_LocalAxis = Vector2f(-1.0f,-1.0f);
+		wInfo.m_PhysicalBody1 = pBox1;
+		wInfo.m_PhysicalBody1 = circle2;
+		wInfo.m_Anchor = Vector2f(-0.3f,-0.2f);
+		wInfo.m_LocalAxis = Vector2f(-1.0f,-1.0f);
+		
+		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(wInfo);
 		lc2->initialize();
-		lc2->m_Erp = 50.0f;
-		lc2->m_Cfm = 10.0f;
-		
 	}
 	// Create Circle Chain
 }
@@ -1630,37 +1646,41 @@ void demo24()
 		
 		circle2->createPhysicalShape(pApp);
 		
-		LineConstraint* lc1 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
-		lc1->m_PhysicalBody1 = pBox1;
-		lc1->m_PhysicalBody2 = circle1;
-		lc1->m_Anchor = Vector2f(0.2f,0.0f);
-		lc1->m_LocalAxis = Vector2f(1.0f,0.0f);
-		lc1->m_LowerLimit = 0.1f;
-		lc1->m_UpperLimit = 0.5f;
-		lc1->m_Cfm = 100.0f;
-		lc1->m_Erp = 100.0f;
+		LineConstraintInfo lInfo;
+		lInfo.m_PhysicalBody1 = pBox1;
+		lInfo.m_PhysicalBody1 = circle1;
+		lInfo.m_Anchor = Vector2f(0.2f,0.0f);
+		lInfo.m_LocalAxis = Vector2f(1.0f,0.0f);
+		lInfo.m_Erp = 100.0f;
+		lInfo.m_Cfm = 100.0f;
+		lInfo.m_LowerLimit = 0.1f;
+		lInfo.m_UpperLimit = 0.5f;
+		
+		LineConstraint* lc1 = (LineConstraint*)pWorld->createConstraint(lInfo);
 		lc1->initialize();
 		
-		LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
-		lc2->m_PhysicalBody1 = pBox1;
-		lc2->m_PhysicalBody2 = circle2;
-		lc2->m_Anchor = Vector2f(-0.2f,0.0f);
-		lc2->m_LocalAxis = Vector2f(-1.0f,0.0f);
-		lc2->m_LowerLimit = 0.1f;
-		lc2->m_UpperLimit = 0.5f;
-		lc2->m_Cfm = 100.0f;
-		lc2->m_Erp = 100.0f;
+		lInfo.m_PhysicalBody1 = pBox1;
+		lInfo.m_PhysicalBody1 = circle2;
+		lInfo.m_Anchor = Vector2f(-0.2f,0.0f);
+		lInfo.m_LocalAxis = Vector2f(-1.0f,0.0f);
+		
+		
+		LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(lInfo);
 		lc2->initialize();
 		
-		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-		dc->m_PhysicalBody1 = pBox1;
-		dc->m_Erp = 100.0f;
+		DistanceConstraintInfo dInfo;
+		dInfo.m_PhysicalBody1 = pBox1;
+		dInfo.m_Erp = 100.0f;
+		
+		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 		dc->initialize();
 		
-		MotorConstraint* mc = (MotorConstraint*)pWorld->createConstraint(ECT_MOTOR);
-		mc->m_PhysicalBody1 = pBox1;
-		mc->m_MaxTorque = 10.0f;
-		mc->m_Speed = 0.50f;
+		MotorConstraintInfo mInfo;
+		mInfo.m_PhysicalBody1 = pBox1;
+		mInfo.m_MaxTorque = 10.0f;
+		mInfo.m_Speed = 0.50f;
+		
+		MotorConstraint* mc = (MotorConstraint*)pWorld->createConstraint(mInfo);
 		mc->initialize();
 		//LineConstraint* lc2 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
 //		lc2->m_PhysicalBody1 = pBox1;
@@ -1715,23 +1735,28 @@ void demo25()
 		
 		if(1)
 		{
-		PrismaticConstraint* pc1 = (PrismaticConstraint*)pWorld->createConstraint(ECT_PRISMATIC);
-		pc1->m_PhysicalBody1 = pBox1;
-		pc1->m_PhysicalBody2 = circle1;
-		pc1->m_Anchor = Vector2f(0.4f,0.20f);
-		pc1->m_LocalAxis = Vector2f(1.0f,1.0f);
-		pc1->m_LowerLimit = -0.1f;
-		pc1->m_UpperLimit = 0.5f;		
-		pc1->initialize();
+			PrismaticConstraintInfo pInfo;
+			pInfo.m_PhysicalBody1 = pBox1;
+			pInfo.m_PhysicalBody1 = circle1;
+			pInfo.m_Anchor = Vector2f(0.4f,0.2f);
+			pInfo.m_LocalAxis = Vector2f(1.0f,1.0f);
+			pInfo.m_LowerLimit = -0.1f;
+			pInfo.m_UpperLimit = 0.5f;
+			
+			PrismaticConstraint* pc1 = (PrismaticConstraint*)pWorld->createConstraint(pInfo);
+			pc1->initialize();
 		}
-		else {
-			LineConstraint* pc1 = (LineConstraint*)pWorld->createConstraint(ECT_LINE);
-			pc1->m_PhysicalBody1 = pBox1;
-			pc1->m_PhysicalBody2 = circle1;
-			pc1->m_Anchor = Vector2f(0.4f,0.40f);
-			pc1->m_LocalAxis = Vector2f(1.0f,1.0f);
-			pc1->m_LowerLimit = -0.1f;
-			pc1->m_UpperLimit = 0.5f;		
+		else 
+		{
+			LineConstraintInfo lInfo;
+			lInfo.m_PhysicalBody1 = pBox1;
+			lInfo.m_PhysicalBody1 = circle1;
+			lInfo.m_Anchor = Vector2f(0.4f,0.2f);
+			lInfo.m_LocalAxis = Vector2f(1.0f,1.0f);
+			lInfo.m_LowerLimit = -0.1f;
+			lInfo.m_UpperLimit = 0.5f;
+			
+			LineConstraint* pc1 = (LineConstraint*)pWorld->createConstraint(lInfo);
 			pc1->initialize();
 		}
 
@@ -1793,15 +1818,16 @@ void demo26()
 		
 		if(1)
 		{
-			PulleyConstraint* pc1 = (PulleyConstraint*)pWorld->createConstraint(ECT_PULLEY);
-			pc1->m_PhysicalBody1 = pBox1;
-			pc1->m_PhysicalBody2 = circle1;
-			pc1->m_PulleyRatio = 2.0f;
-			pc1->m_Anchor1 = Vector2f(0.0f,0.1f);
-			pc1->m_Anchor2 = Vector2f(0.0f,0.1f);
-			pc1->m_FixedPoint1 = Vector2f(0.0f, 0.5f);
-			pc1->m_FixedPoint2 = Vector2f(0.4f, 0.5f);
-			//pc1->m_Anchor1 = Vector2f(0.4f,0.20f);
+			PulleyConstraintInfo pInfo;
+			pInfo.m_PhysicalBody1 = pBox1;
+			pInfo.m_PhysicalBody1 = circle1;
+			pInfo.m_PulleyRatio = 2.0f;
+			pInfo.m_Anchor1 = Vector2f(0.0f,0.1f);
+			pInfo.m_Anchor2 = Vector2f(0.0f,0.1f);
+			pInfo.m_FixedPoint1 = Vector2f(0.0f, 0.5f);
+			pInfo.m_FixedPoint2 = Vector2f(0.4f, 0.5f);
+			
+			PulleyConstraint* pc1 = (PulleyConstraint*)pWorld->createConstraint(pInfo);
 			pc1->initialize();
 		}
 		
@@ -1850,16 +1876,17 @@ void demo27()
 	
 	dfloat erp = 10.0f; dfloat cfm = 1.0f;
 	
-	MinMaxConstraint* mc = (MinMaxConstraint*)pWorld->createConstraint(ECT_MIN_MAX);
+	MinMaxConstraintInfo mInfo;
+	mInfo.m_PhysicalBody1 = pBodyCircle1;
+	mInfo.m_PhysicalBody1 = pBodyCircle2;
+	mInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+	mInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
+	mInfo.m_LowerLimit = 0.3f;
+	mInfo.m_UpperLimit = 0.5f;
+	mInfo.m_Erp = erp;
+	mInfo.m_Cfm = cfm;
+	MinMaxConstraint* mc = (MinMaxConstraint*)pWorld->createConstraint(mInfo);
 
-	mc->m_Erp = erp;
-	mc->m_Cfm = cfm;
-	mc->m_PhysicalBody1 = pBodyCircle1;
-	mc->m_PhysicalBody2 = pBodyCircle2;
-	mc->m_Anchor1 = Vector2f(0.0f,0.0f);
-	mc->m_Anchor2 = Vector2f(0.0f,0.0f);
-	mc->m_LowerLimit = 0.3f;
-	mc->m_UpperLimit = 0.5f;
 	mc->initialize();
 	
 	//PhysicalBody* pPrevCircle = pBodyCircle;
@@ -2188,9 +2215,10 @@ void initScene()
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
 	demo19();
 
-	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(ECT_DISTANCE);
-	mouseJoint->m_Erp = 2.0f;
-	mouseJoint->m_Cfm = 1.0f;
+	DistanceConstraintInfo dInfo;
+	dInfo.m_Erp = 2.0f;
+	dInfo.m_Cfm = 1.0f;
+	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 }
 
 void changeSize(int w, int h) 
