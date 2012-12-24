@@ -42,19 +42,19 @@ void ObjectManager::manageObjects()
 		if( time - initTime > 3000 )
 		{
 			initTime = time;
-			//generateFallingCrates();
+			generateFallingCrates();
 		}
 	}
 	// Place Stack of Crates only for Linear regions
-	//if( m_pGame->getTerrainGenerator()->getSampleFunctionType() == ESFT_LINEAR )
+	if( m_pGame->getTerrainGenerator()->getSampleFunctionType() == ESFT_LINEAR )
 	{
 		static double initTime = m_Timer.getCurrentTime();
 		double time = m_Timer.getCurrentTime();
 		if( time - initTime > 4000 )
 		{
 			initTime = time;
-			//generateCrates();
-			generateTumblers();
+			generateCrates();
+			//generateTumblers();
 		}
 	}
 }
@@ -70,10 +70,8 @@ void ObjectManager::cullObjects()
 	
     float R = ( swh + swh * 2.0f );
     
-    int n = 0;
     while (pList) 
     {
-        n++;
         bool bRes =  (pCamera->getPosition().x - pList->getPosition().x) > R;
         if( bRes )
         {
@@ -132,6 +130,7 @@ void ObjectManager::generateCrates()
     CrateInfo cInfo;
 	cInfo.m_Width  = 0.6f;
 	cInfo.m_Height = 0.4f;
+	cInfo.m_Density = AVG_OBJECT_DENSITY * 10.0f;
 	
     // Create a list of Crates
 	int nColumns = 6;
@@ -175,6 +174,7 @@ void ObjectManager::generateFallingCrates()
     {
 		// Crate info. 
 		CrateInfo cInfo;
+		cInfo.m_Density = AVG_OBJECT_DENSITY * 10.0f;
 		cInfo.m_ShapeType = ECS_REGULAR_POLY;
 		cInfo.m_NumVertices = RANDOM_NUMBER(3.0f, 6.0f);
 		cInfo.m_Radius  = RANDOM_NUMBER(0.4f, 1.0f);
@@ -209,7 +209,7 @@ void ObjectManager::generateTumblers()
 	TumblerInfo tInfo;
 	tInfo.m_Width = 2.5f;
 	tInfo.m_Height = 2.0f;
-    tInfo.m_NumObjects = 5;
+    tInfo.m_NumObjects = 15;
 	
 	Vector3f cameraPos = m_pGame->getCamera()->getPosition();
 	float sw = m_pGame->getCamera()->getScreenWidth();

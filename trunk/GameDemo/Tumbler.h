@@ -60,6 +60,8 @@ private:
     HingeConstraint* m_pLidConstraint;
     
     int m_NumObjects;
+	bool m_bLidOpened;
+	float m_LidOpenDistance;
     
 	static FirstGame* m_pGame; 
 	
