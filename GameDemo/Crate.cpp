@@ -22,7 +22,7 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
 	m_pGame = pGame;
 	
 	PhysicalAppearance pApp;
-	pApp.m_MassAttributes.m_Density = 10*AVG_OBJECT_DENSITY;
+	pApp.m_MassAttributes.m_Density = cInfo.m_Density;
 	m_pBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
 	m_pBody->setPosition(cInfo.m_Position);
     m_pBody->setVelocity(cInfo.m_Velocity);

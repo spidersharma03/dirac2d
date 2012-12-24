@@ -24,7 +24,9 @@ Tumbler::Tumbler(TumblerInfo tInfo, FirstGame* pGame)
 	m_pGame = pGame;
 	
     m_NumObjects = tInfo.m_NumObjects;
-    
+    m_bLidOpened = false;
+	m_LidOpenDistance = 6.0f;
+	
 	PhysicalAppearance pApp;
 	m_pTumblerBody = m_pGame->getPhysicalWorld()->createPhysicalBody();
 	m_pTumblerBody->m_BodyType = EBT_STATIC;
@@ -61,22 +63,21 @@ Tumbler::Tumbler(TumblerInfo tInfo, FirstGame* pGame)
 	m_pTumblerLidBody->createPhysicalShape(pApp);
 	
 	m_pTumblerLidBody->setPosition(Vector2f(c.x+w, c.y-1.05*h));
-    //m_pTumblerLidBody->m_BodyType = EBT_STATIC;
     
     HingeConstraintInfo hInfo;
     hInfo.m_PhysicalBody1 = m_pTumblerBody;
 	hInfo.m_PhysicalBody2 = m_pTumblerLidBody;
 	hInfo.m_Anchor = c - Vector2f(0.0f,h);
-    hInfo.m_UpperAngle = PI_4/5;
+    hInfo.m_UpperAngle = PI_4/1115;
     
 	m_pLidConstraint = (HingeConstraint*)m_pGame->getPhysicalWorld()->createConstraint(hInfo);
-	//hc->m_Erp = 0.0f;
 	
 	m_pLidConstraint->initialize();
 	
     for( int i = 0; i< m_NumObjects; i++ )
     {
         CrateInfo cInfo;
+		cInfo.m_Density = 150 * AVG_OBJECT_DENSITY;
         cInfo.m_ShapeType = ECS_CIRCLE;
         cInfo.m_Radius = w/8;
         float x = RANDOM_NUMBER(-w, w);
@@ -91,15 +92,16 @@ Tumbler::Tumbler(TumblerInfo tInfo, FirstGame* pGame)
 
 void Tumbler::openLid()
 {
-   // m_pLidConstraint->m_UpperAngle = PI/3;
-	//m_pLidConstraint->initialize();
+    m_pLidConstraint->m_UpperAngle = PI_4;
+	m_pLidConstraint->initialize();
 }
 
 void Tumbler::update(float dt)
 {
 	m_Position = m_pTumblerBody->m_Position;
-    if( fabs(m_pGame->getCamera()->getPosition().x - m_Position.x) < 1.0 )
+    if( !m_bLidOpened && fabs(m_pGame->getCamera()->getPosition().x - m_Position.x) < m_LidOpenDistance )
     {
+		m_bLidOpened = true;
         openLid();
     }
 }
@@ -109,6 +111,5 @@ Tumbler::~Tumbler()
 	m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pTumblerBody);
 	m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pTumblerLidBody);
 	m_pTumblerBody = 0;
-	//m_pTumblerLidBody = 0;
 	m_TumblerCount--;
 }

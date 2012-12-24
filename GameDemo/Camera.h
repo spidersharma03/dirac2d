@@ -57,6 +57,11 @@ public:
 		m_pFocusTarget = pTarget;
 	}
     
+	void setElasticity( float elasticity )
+	{
+		m_Elasticity = elasticity;
+	}
+	
     void lookAt( const Vector3f& eyePos , const Vector3f& targetPos, const Vector3f& upVec)
     {
         m_ViewMatrix.lookAt( eyePos , targetPos , upVec );
