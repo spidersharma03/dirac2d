@@ -14,17 +14,36 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct CatenaryConstraintFixedRotationInfo : public ConstraintInfo
+{
+    CatenaryConstraintFixedRotationInfo()
+    {
+        m_Type = ECT_CATENARY_FIXED_ROTATION;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+        m_FixedLength = -1.0f;
+    }
+    // Anchor Point.
+    Vector2f m_Anchor;
+    Vector2f m_FixedPoint1, m_FixedPoint2;
+    dfloat m_FixedLength;
+};
+
 class CatenaryConstraintFixedRotation : public Constraint
 {
 public:
-	CatenaryConstraintFixedRotation();
 	
-	virtual void buildJacobian();
+    virtual void buildJacobian();
 	
 	virtual void correctVelocities();
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:
+    	
+    CatenaryConstraintFixedRotation( const CatenaryConstraintFixedRotationInfo& cInfo);
+    
 public:
 	// the Anchor point is always assumed in the local coordinate frames of the PhysicalBody.
 	Vector2f m_Anchor;

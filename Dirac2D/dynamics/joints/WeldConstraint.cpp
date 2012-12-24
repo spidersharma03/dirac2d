@@ -12,10 +12,12 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-WeldConstraint::WeldConstraint()
+
+WeldConstraint::WeldConstraint(const WeldConstraintInfo& cInfo):Constraint(cInfo)
 {
-	m_Type = ECT_WELD;
-	m_Cfm = 1000.4f;
+    m_Type = ECT_WELD;
+    m_Anchor = cInfo.m_Anchor;
+    m_Cfm = 1000.4f;
 	m_Erp = 300.0f;
 }
 

@@ -21,6 +21,7 @@ class PhysicalShape;
 class PhysicalAppearance;
 class Contact;
 struct ContactEdge;
+struct ConstraintEdge;
 
 enum BODY_TYPE { EBT_DYNAMIC, EBT_STATIC, EBT_KINEMATIC	};
 
@@ -50,7 +51,9 @@ public:
 	void applyImpulsiveTorque( const float torqueImpulse );
 
 	PhysicalShape* createPhysicalShape(PhysicalAppearance& pApp);
-	
+
+    void deletePhysicalShape(PhysicalShape* pShape);
+
 	// Gets the worldPosition in Local Coordinate Frame of the Body.
 	Vector2f getLocalPoint(Vector2f& worldPosition)
 	{
@@ -73,6 +76,7 @@ public:
 	{
 		m_Position = position;
 		m_Transform.translate(position);
+        updateAABB();
 	}
 	
     inline void setVelocity(const Vector2f& velocity)
@@ -161,7 +165,8 @@ public:
 
 	
 	ContactEdge* m_ContactEdgeList;
-
+    ConstraintEdge* m_ConstraintEdgeList;
+    
 	friend class CollisionManager;
 	friend class ContactSolver;
 	friend class PhysicalWorld;

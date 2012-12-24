@@ -13,13 +13,13 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-HingeConstraint::HingeConstraint()
+
+HingeConstraint::HingeConstraint(const HingeConstraintInfo& cInfo) : Constraint(cInfo)
 {
-	m_Type = ECT_HINGE;
-	m_Cfm = 0.0f;
-	m_Erp = 0.0f;
-	m_LowerAngle = PI/10.0f;
-	m_UpperAngle = PI_2;
+    m_Type = ECT_HINGE;
+    m_Anchor = cInfo.m_Anchor;
+    m_LowerAngle = cInfo.m_LowerAngle;
+    m_UpperAngle = cInfo.m_UpperAngle;
 }
 
 void HingeConstraint::initialize()

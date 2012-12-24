@@ -12,13 +12,13 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-LineConstraint::LineConstraint()
+LineConstraint::LineConstraint( const LineConstraintInfo& cInfo): Constraint(cInfo)
 {
-	m_Type = ECT_LINE;
-	m_Erp = 0.0f;
-	m_Cfm = 0.0f;
-	m_LowerLimit = -0.4f;
-	m_UpperLimit = 0.4f;
+    m_Type = ECT_LINE;
+    m_Anchor = cInfo.m_Anchor;
+    m_LocalAxis = cInfo.m_LocalAxis;
+	m_LowerLimit = cInfo.m_LowerLimit;
+    m_UpperLimit = cInfo.m_UpperLimit;
 }
 
 void LineConstraint::initialize()

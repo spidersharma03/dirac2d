@@ -12,9 +12,12 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-DistanceConstraint::DistanceConstraint():Constraint()
+
+DistanceConstraint::DistanceConstraint( const DistanceConstraintInfo& constraintInfo ) : Constraint(constraintInfo)
 {
 	m_Type = ECT_DISTANCE;
+    m_Anchor1 = constraintInfo.m_Anchor1;
+    m_Anchor2 = constraintInfo.m_Anchor2;
 }
 
 void DistanceConstraint::initialize()

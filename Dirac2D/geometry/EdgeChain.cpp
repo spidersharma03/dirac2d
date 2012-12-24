@@ -73,9 +73,9 @@ void EdgeChain::operator= ( EdgeChain& other)
 		m_EdgeList[e] = other.m_EdgeList[e];
 }
 
-CollisionShape* EdgeChain::clone()
+CollisionShape* EdgeChain::clone(MemoryBlockAllocator* pAllocator)
 {
-	return new EdgeChain(*this);
+	return new(pAllocator->Allocate(sizeof(EdgeChain))) EdgeChain(*this);
 }
 
 Vector2f EdgeChain::getSupportPoint(const Vector2f& d)

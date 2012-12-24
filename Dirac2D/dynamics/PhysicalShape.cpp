@@ -6,11 +6,14 @@
  *
  */
 
+#include "../memory/memoryBlockAllocator.h"
 #include "PhysicalShape.h"
 #include "../geometry/Box.h"
 #include "../geometry/Circle.h"
 #include "../geometry/Capsule.h"
 #include "../common.h"
+
+#include <new>
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -20,7 +23,7 @@ PhysicalShape::PhysicalShape(const PhysicalShape& other)
 	m_Restitution = other.m_Restitution;
 	m_MassAttributes = other.m_MassAttributes;
 	m_CollisionFilter = other.m_CollisionFilter;
-	m_CollisionShape = other.m_CollisionShape->clone();
+	//m_CollisionShape = other.m_CollisionShape->clone();
 	m_ParentBody     = other.m_ParentBody;
 }
 
@@ -37,30 +40,29 @@ void PhysicalShape::operator=(PhysicalShape& other)
 
 PhysicalShape::~PhysicalShape()
 {
-	delete m_CollisionShape;
     m_CollisionShape = 0;
     m_ParentBody = 0;
     m_Next = m_Prev = 0;
 }
 
-PhysicalShape* PhysicalShape::clone()
+PhysicalShape* PhysicalShape::clone(MemoryBlockAllocator* pAllocator)
 {
-	return new PhysicalShape(*this);
+	return new(pAllocator->Allocate(sizeof(PhysicalShape))) PhysicalShape(*this);
 }
 
 void PhysicalShape::setAsBox(dfloat width, dfloat height)
 {
-	m_CollisionShape = new Box(width, height);
+	//m_CollisionShape = new Box(width, height);
 }
 	
 void PhysicalShape::setAsCircle(dfloat radius)
 {
-	m_CollisionShape = new Circle(radius);
+	//m_CollisionShape = new Circle(radius);
 }
 	
 void PhysicalShape::setAsCapsule( dfloat radius, dfloat height)
 {
-	m_CollisionShape = new Capsule(radius, height);
+	//m_CollisionShape = new Capsule(radius, height);
 }
 
 void PhysicalShape::calculateMassAttributes()

@@ -18,13 +18,7 @@ class Edge;
 class EdgeChain : public CollisionShape
 {
 public:
-	EdgeChain(Vector2f* vertices, dint32 numVertices);
-	
-	EdgeChain(const EdgeChain& other);
-	
-	void operator= ( EdgeChain& other);
-
-	virtual Vector2f getSupportPoint(const Vector2f& d);
+    virtual Vector2f getSupportPoint(const Vector2f& d);
 	
 	virtual dbool isPointInside(Vector2f& p);
 	
@@ -33,8 +27,6 @@ public:
 	virtual void updateAABB(Matrix3f& xForm);
 	
 	Edge* getEdge(dint32 index) const;
-
-	virtual CollisionShape* clone();
 
 	inline dint32 getNumEdges() const
 	{
@@ -51,8 +43,19 @@ public:
     {
         delete [] m_EdgeList;
     }
+    
+    friend class PhysicalBody;
+
 protected:
+	    
+    EdgeChain(Vector2f* vertices, dint32 numVertices);
 	
+	EdgeChain(const EdgeChain& other);
+	
+	void operator= ( EdgeChain& other);
+    
+    virtual CollisionShape* clone(MemoryBlockAllocator* pAllocator);
+
 	virtual void updateShape(Matrix3f& xForm);
 	
 	virtual void findCentroid();

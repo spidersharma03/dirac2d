@@ -21,17 +21,45 @@ enum CONSTRAINT_TYPE { ECT_DISTANCE, ECT_HINGE, ECT_WELD, ECT_CATENARY, ECT_CATE
 
 enum CONSTRAINT_LIMIT_STATE { ECLS_LOWER, ECLS_UPPER, ECLS_LOWER_UPPER, ECLS_NONE };
 
+class Constraint;
+
+struct ConstraintEdge
+{
+	Constraint* m_pConstraint;
+	PhysicalBody* pBody;
+	ConstraintEdge* m_Next;
+	ConstraintEdge* m_Prev;
+};
+
+struct ConstraintInfo
+{
+    ConstraintInfo()
+    {
+        m_Erp = 0.0f;
+        m_Cfm = 0.0f;
+        m_PhysicalBody1 = 0;
+        m_PhysicalBody2 = 0;
+    }
+    
+    PhysicalBody* m_PhysicalBody1;
+	PhysicalBody* m_PhysicalBody2; 
+    CONSTRAINT_TYPE m_Type;
+    dfloat m_Erp;
+    dfloat m_Cfm;
+};
+
 class Constraint
 {
-public:
-	Constraint()
+protected:
+    Constraint(const ConstraintInfo& cInfo)
 	{
-		m_PhysicalBody1 = 0;
-		m_PhysicalBody2 = 0;
-		m_Erp = 0.5f;
-		m_Cfm = 0.1f;
+		m_PhysicalBody1 = cInfo.m_PhysicalBody1;
+		m_PhysicalBody2 = cInfo.m_PhysicalBody2;
+		m_Erp = cInfo.m_Erp;
+		m_Cfm = cInfo.m_Cfm;
 		m_Next = m_Prev = 0;
 	};
+public:
 	
 	virtual void buildJacobian() = 0;
 	
@@ -50,6 +78,10 @@ public:
 	// Constraint force mixing. this is used to soften the constraint and can be used as a softness parameter.
 	dfloat m_Cfm;
 	
+    //
+    ConstraintEdge m_ConstraintEdge1;
+    ConstraintEdge m_ConstraintEdge2;
+    
 	CONSTRAINT_TYPE m_Type;
 };
 

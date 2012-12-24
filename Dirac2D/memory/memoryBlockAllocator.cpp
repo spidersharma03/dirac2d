@@ -45,6 +45,7 @@ dint32 memoryBlockSize[] =
     1024
 };
 
+dint32 MemoryBlockAllocator::m_HeapLookUpTable[MAX_OBJECT_SIZE+1];
 
 MemoryBlockAllocator::MemoryBlockAllocator()
 {
@@ -54,6 +55,10 @@ MemoryBlockAllocator::MemoryBlockAllocator()
     
     memset(m_pFreeMemoryBlock, 0, NUM_HEAPS * sizeof(MemoryBlock));
     // initialize the heap lookup table.
+    static dbool bOnce = true;
+    if( bOnce )
+    {
+        bOnce = false;
     dint32 n = 0;
     for (dint32 i=0; i<=MAX_OBJECT_SIZE; i++) 
     {
@@ -66,6 +71,7 @@ MemoryBlockAllocator::MemoryBlockAllocator()
             n++;
             m_HeapLookUpTable[i] = n;
         }
+    }
     }
 }
 
@@ -95,6 +101,7 @@ void* MemoryBlockAllocator::Allocate(dint32 size)
         // All the Heaps are Full. need to create new ones.
         if( m_CurrentHeapCount == m_HeapCount )
         {
+            dAssert(1);
             m_HeapCount *= 2;
             Heap* newHeap = (Heap*)malloc(m_HeapCount * sizeof(Heap));
             memcpy(newHeap, m_pHeapArray, sizeof(Heap) * m_CurrentHeapCount);
@@ -124,6 +131,7 @@ void* MemoryBlockAllocator::Allocate(dint32 size)
         return pHeap->m_pMemoryChunk;
     }
     
+    dAssert(1);
     return 0;
 }
 

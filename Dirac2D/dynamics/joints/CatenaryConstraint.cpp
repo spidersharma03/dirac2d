@@ -13,12 +13,14 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-CatenaryConstraint::CatenaryConstraint():Constraint()
+
+CatenaryConstraint::CatenaryConstraint( const CatenaryConstraintInfo& cInfo): Constraint(cInfo)
 {
-	m_Type = ECT_CATENARY;
-	m_FixedLength = 0.0f;
-	m_Cfm = 100.0f;
-	m_Erp = 100.0f;
+    m_Type = ECT_CATENARY;
+    m_FixedLength = cInfo.m_FixedLength;
+    m_Anchor = cInfo.m_Anchor;
+    m_FixedPoint1 = cInfo.m_FixedPoint1;
+    m_FixedPoint2 = cInfo.m_FixedPoint2;
 }
 
 void CatenaryConstraint::initialize()

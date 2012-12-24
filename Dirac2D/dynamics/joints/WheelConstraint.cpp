@@ -11,9 +11,12 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-WheelConstraint::WheelConstraint()
+
+WheelConstraint::WheelConstraint( const WheelConstraintInfo& cInfo): Constraint(cInfo)
 {
-	m_Type = ECT_WHEEL;
+    m_Type = ECT_WHEEL;
+    m_Anchor = cInfo.m_Anchor;
+    m_LocalAxis = cInfo.m_LocalAxis;
 	m_Erp = 100.0f;
 	m_Cfm = 10.0f;
 }

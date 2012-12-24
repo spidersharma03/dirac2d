@@ -13,17 +13,36 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct HingeConstraintInfo : public ConstraintInfo
+{
+    HingeConstraintInfo()
+    {
+        m_Type = ECT_HINGE;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+        m_LowerAngle = 0.0f;
+        m_UpperAngle = PI;
+    }
+    // Anchor Point.
+    Vector2f m_Anchor;
+    // Angular Limits
+    dfloat m_LowerAngle, m_UpperAngle;
+};
+
 class HingeConstraint : public Constraint
 {
-public:
-	HingeConstraint();
-	
+public:	
 	virtual void buildJacobian();
 	
 	virtual void correctVelocities();
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:
+    
+    HingeConstraint(const HingeConstraintInfo& cInfo);
+
 public:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
 	Vector3f m_Impulse;

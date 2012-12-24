@@ -13,10 +13,23 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct PulleyConstraintInfo : public ConstraintInfo
+{
+    PulleyConstraintInfo()
+    {
+        m_Type = ECT_PULLEY;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+        m_PulleyRatio = 1.0f;
+    }
+    // the Anchor point is always assumed in the local coordinate frames of the PhysicalBody.
+	Vector2f m_Anchor1, m_Anchor2;
+	Vector2f m_FixedPoint1, m_FixedPoint2;
+    dfloat m_PulleyRatio;
+};
+
 class PulleyConstraint : public Constraint
 {
 public:
-	PulleyConstraint();
 	
 	virtual void buildJacobian();
 	
@@ -24,6 +37,12 @@ public:
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:
+    
+    PulleyConstraint( const PulleyConstraintInfo& cInfo);
+
 public:
 	// the Anchor point is always assumed in the local coordinate frames of the PhysicalBody.
 	Vector2f m_Anchor1, m_Anchor2;

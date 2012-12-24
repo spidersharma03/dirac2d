@@ -26,9 +26,9 @@ Capsule::Capsule(const Capsule& other) : CollisionShape(other)
 	m_Height = other.m_Height;
 }
 
-CollisionShape* Capsule::clone()
+CollisionShape* Capsule::clone(MemoryBlockAllocator* pAllocator)
 {
-	return new Capsule(*this);
+	return new(pAllocator->Allocate(sizeof(Capsule))) Capsule(*this);
 }
 
 Vector2f Capsule::getSupportPoint(const Vector2f& d)

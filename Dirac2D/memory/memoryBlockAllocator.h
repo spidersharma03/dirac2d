@@ -76,7 +76,7 @@ class MemoryBlockAllocator
     
     MemoryBlock* m_pFreeMemoryBlock[NUM_HEAPS];
     
-    dint32 m_HeapLookUpTable[MAX_OBJECT_SIZE+1];
+    static dint32 m_HeapLookUpTable[MAX_OBJECT_SIZE+1];
 };
 
 

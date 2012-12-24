@@ -13,10 +13,20 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct WheelConstraintInfo : public ConstraintInfo
+{
+    WheelConstraintInfo()
+    {
+        m_Type = ECT_WHEEL;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+    }
+    Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
+	Vector2f m_LocalAxis; // Local Axis for the Line Constraint wrt Body1.
+};
+
 class WheelConstraint : public Constraint
 {
 public:
-	WheelConstraint();
 	
 	virtual void buildJacobian();
 	
@@ -24,6 +34,14 @@ public:
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:
+    
+    WheelConstraint();
+    
+    WheelConstraint( const WheelConstraintInfo& cInfo);
+
 public:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
 	Vector2f m_LocalAxis; // Local Axis for the Line Constraint wrt Body1.

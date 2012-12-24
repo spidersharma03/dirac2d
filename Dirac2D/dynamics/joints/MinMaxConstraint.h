@@ -13,10 +13,24 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+struct MinMaxConstraintInfo : public ConstraintInfo
+{
+    MinMaxConstraintInfo()
+    {
+        m_Type = ECT_MIN_MAX;
+        m_PhysicalBody1 = m_PhysicalBody2 = 0;
+        m_UpperLimit = 100000.0f;
+        m_LowerLimit = -100000.0f;
+    }
+    // the Anchor point is always assumed in the local coordinate frames of the PhysicalBody.
+	Vector2f m_Anchor1, m_Anchor2;
+	dfloat m_UpperLimit;
+	dfloat m_LowerLimit;
+};
+
 class MinMaxConstraint : public Constraint
 {
 public:
-	MinMaxConstraint();
 	
 	virtual void buildJacobian();
 	
@@ -24,6 +38,12 @@ public:
 	
 	virtual void initialize();
 	
+    friend class PhysicalWorld;
+    
+protected:
+    
+    MinMaxConstraint( const MinMaxConstraintInfo& cInfo);
+
 public:
 	// the Anchor points are always assumed in the local coordinate frames of the PhysicalBodies.
 	Vector2f m_Anchor1, m_Anchor2;

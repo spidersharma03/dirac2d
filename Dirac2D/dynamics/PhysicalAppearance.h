@@ -8,6 +8,7 @@
 #include "../definitions.h"
 #include "../Settings.h"
 #include "../maths/Vector2.h"
+#include "../geometry/CollisionShape.h"
 
 #ifndef _PHYSICAL_APPEARANCE_H_
 #define _PHYSICAL_APPEARANCE_H_
@@ -57,26 +58,73 @@ struct CollisionFilter
 	duint32 m_CollisionMask;
 };
 
+//enum COLLISION_SHAPE_TYPE { ECOL_SHAPE_CIRCLE, ECOL_SHAPE_CAPSULE, ECOL_SHAPE_EDGE, ECOL_SHAPE_POLY, ECOL_SHAPE_EDGE_CHAIN }; 
+
 struct CollisionShapeInfo
 {
+    SHAPE_TYPE m_ColShapeType;
 };
 
-struct CircleShapeInfo : public CollisionShapeInfo
+struct CircleInfo : public CollisionShapeInfo
 {
-	CircleShapeInfo(dfloat radius) : m_Radius ( radius )
+	CircleInfo(dfloat radius) : m_Radius ( radius )
 	{
+        m_ColShapeType = EST_CIRCLE;
 	}
 	dfloat m_Radius;
 };
 
+struct CapsuleInfo : public CollisionShapeInfo
+{
+	CapsuleInfo(dfloat radius, dfloat height) : m_Radius ( radius ), m_Height( height )
+	{
+        m_ColShapeType = EST_CAPSULE;
+	}
+	dfloat m_Radius, m_Height;
+};
+
+struct PolygonInfo : public CollisionShapeInfo
+{
+	PolygonInfo(Vector2f* vertices, dint32 numVertices):m_NumVertices( numVertices )
+	{
+        m_ColShapeType = EST_REGULARPOLY;
+        for( dint32 i=0; i<m_NumVertices; i++ )
+        {
+            m_Vertices[i] = vertices[i];
+        }
+	}
+	Vector2f m_Vertices[MAX_POLY_VERTICES];
+    dint32 m_NumVertices;
+};
+
+struct EdgeInfo : public CollisionShapeInfo
+{
+	EdgeInfo(Vector2f v1, Vector2f v2) : m_Vertex1 ( v1 ), m_Vertex2( v2 )
+	{
+        m_ColShapeType = EST_EDGE;
+	}
+	Vector2f m_Vertex1, m_Vertex2;
+};
+
+struct EdgeChainInfo : public CollisionShapeInfo
+{
+	EdgeChainInfo(Vector2f* vertices, dint32 numVertices):m_NumVertices( numVertices )
+	{
+        m_ColShapeType = EST_EDGE_CHAIN;
+        m_Vertices = vertices;
+	}
+	Vector2f *m_Vertices;
+    dint32 m_NumVertices;
+};
+
 struct CollisionAttributes
 {
-	CollisionShape* m_Shape;
+    CollisionShapeInfo *m_CollisionShapeInfo;
 	CollisionFilter m_Filter;
 	
 	CollisionAttributes()
 	{
-		m_Shape = 0;
+        m_CollisionShapeInfo = 0;
 	}
 };
 

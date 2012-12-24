@@ -8,10 +8,10 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-CirclePathConstraint::CirclePathConstraint()
-{
- 	m_Type = ECT_CIRCULAR_PATH;   
-}
+//CirclePathConstraint::CirclePathConstraint() : 
+//{
+// 	m_Type = ECT_CIRCULAR_PATH;   
+//}
 
 void CirclePathConstraint::buildJacobian()
 {
