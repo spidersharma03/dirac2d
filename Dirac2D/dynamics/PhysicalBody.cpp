@@ -31,6 +31,7 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 	m_Mass = m_InvMass = 1.0f;
 	m_I = m_InvI = 1.0f;
 	m_bIsAlive = false;
+	m_bFixedRotation = false;
 	
 	m_SleepTime = 0.0f;
 	m_bSleeping    = false;
@@ -55,7 +56,8 @@ PhysicalBody::PhysicalBody(const PhysicalBody& other)
 	m_I = other.m_I;
 	m_InvI = other.m_InvI;
 	m_bIsAlive = other.m_bIsAlive;
-		
+	m_bFixedRotation = other.m_bFixedRotation;
+	
 	m_bSleepingPolicy = other.m_bSleepingPolicy;
 	m_bSleeping = other.m_bSleeping;
 	m_SleepTime = other.m_SleepTime;
@@ -104,7 +106,7 @@ void PhysicalBody::operator=(const PhysicalBody& other)
 	m_I = other.m_I;
 	m_InvI = other.m_InvI;
 	m_bIsAlive = other.m_bIsAlive;
-
+	m_bFixedRotation = other.m_bFixedRotation;
 	
 	m_bSleepingPolicy = other.m_bSleepingPolicy;
 	m_bSleeping = other.m_bSleeping;

@@ -39,11 +39,13 @@ struct ConstraintInfo
         m_Cfm = 0.0f;
         m_PhysicalBody1 = 0;
         m_PhysicalBody2 = 0;
+		m_bCollideConnected = true;
     }
     
     PhysicalBody* m_PhysicalBody1;
 	PhysicalBody* m_PhysicalBody2; 
     CONSTRAINT_TYPE m_Type;
+	dbool m_bCollideConnected;
     dfloat m_Erp;
     dfloat m_Cfm;
 };
@@ -59,6 +61,7 @@ protected:
 		m_Cfm = cInfo.m_Cfm;
 		m_Next = m_Prev = 0;
 	};
+	
 public:
 	
 	virtual void buildJacobian() = 0;
@@ -67,6 +70,8 @@ public:
 	
 	virtual void initialize() = 0;
 
+	friend class PhysicalWorld;
+	
 	// References of the Physical bodies attached to this Constraint
 	PhysicalBody* m_PhysicalBody1;
 	PhysicalBody* m_PhysicalBody2;
@@ -78,7 +83,10 @@ public:
 	// Constraint force mixing. this is used to soften the constraint and can be used as a softness parameter.
 	dfloat m_Cfm;
 	
-    //
+	// decides whether the bodies connected by this constraint should collide 
+	dbool m_bCollideConnected;
+    
+	//
     ConstraintEdge m_ConstraintEdge1;
     ConstraintEdge m_ConstraintEdge2;
     

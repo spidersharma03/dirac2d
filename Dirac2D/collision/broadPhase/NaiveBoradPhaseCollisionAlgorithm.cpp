@@ -84,7 +84,7 @@ void NaiveBroadPhaseCollisionAlgorithm::update()
 				continue;
 			}
 			
-			if( pBody1->m_BodyType == EBT_STATIC && pBody2->m_BodyType == EBT_STATIC )
+			if( pBody1->m_BodyType != EBT_DYNAMIC && pBody2->m_BodyType != EBT_DYNAMIC )
 			{
 				pNode2 = pNode2->m_Next;
 				continue;
