@@ -17,6 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 template< class T >
 class MemoryAllocator
 {
+private:
 	struct MemoryLinkNode
 	{
 		MemoryLinkNode* pNext;
