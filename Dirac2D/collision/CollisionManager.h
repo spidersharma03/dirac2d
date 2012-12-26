@@ -1,5 +1,6 @@
 #include "../definitions.h"
 #include "../memory/memoryAllocator.h"
+#include "../memory/memoryAllocatorNew.h"
 #include "../maths/MathUtil.h"
 
 
@@ -42,7 +43,7 @@ protected:
 	
 private:
 	PhysicalWorld *m_PhysicalWorld;
-	MemoryAllocator<Contact> *m_ContactPool;
+	MemoryAllocatorNew<Contact> *m_ContactPool;
     ICollisionLisetner* m_pCollisionListener;
 };
 

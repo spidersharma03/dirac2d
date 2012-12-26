@@ -314,6 +314,20 @@ PhysicalShape* PhysicalBody::createPhysicalShape(PhysicalAppearance& pApp)
 
 void PhysicalBody::deletePhysicalShape(PhysicalShape* pShape)
 {
+	// Remove from the List of shapes
+	if( pShape->m_Prev )
+	{
+		pShape->m_Prev->m_Next = pShape->m_Next;
+	}
+	else 
+	{
+		m_PhysicalShapeList = pShape->m_Next;
+	}
+	if( pShape->m_Next )
+	{
+		pShape->m_Next->m_Prev = pShape->m_Prev;
+	}
+	
     if( pShape )
     {
         m_PhysicalWorld->removeFromBroadPhase(pShape);

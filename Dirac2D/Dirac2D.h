@@ -53,6 +53,7 @@
 #include "DTimer.h"
 
 #include "memory/memoryAllocator.h"
+#include "memory/memoryAllocatorNew.h"
 #include "memory/memoryBlockAllocator.h"
 
 #include "maths/MathUtil.h"

@@ -18,7 +18,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 CollisionManager::CollisionManager(PhysicalWorld* pWorld) : m_PhysicalWorld(pWorld)
 {
-	m_ContactPool = new MemoryAllocator<Contact>(MAX_CONTACT_POINTS);
+	m_ContactPool = new MemoryAllocatorNew<Contact>(MAX_CONTACT_POINTS);
     m_pCollisionListener = pWorld->m_pCollisionListener;
 }
 	

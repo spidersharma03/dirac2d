@@ -156,7 +156,7 @@ MemoryBlockAllocator::~MemoryBlockAllocator()
 {
     for( dint32 i=0; i<m_HeapCount; i++ )
     {
-        Heap* pHeap = m_pHeapArray + m_CurrentHeapCount;
+        Heap* pHeap = m_pHeapArray + i;
         free(pHeap->m_pMemoryChunk);
     }
     free(m_pHeapArray);
