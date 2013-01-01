@@ -136,6 +136,14 @@ public:
         return m_EyePosition;
     }
 	
+    inline void setPosition( const Vector2f& position )
+    {
+        m_EyePosition.x = position.x;
+        m_EyePosition.y = position.y;
+        m_Target.x = position.x;
+        m_Target.y = position.y;
+    }
+    
 	inline Vector2f getCameraOffset()
 	{
 		return m_cameraOffset;

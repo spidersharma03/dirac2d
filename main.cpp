@@ -2213,7 +2213,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo19();
+	demo3();
 
 	DistanceConstraintInfo dInfo;
 	dInfo.m_Erp = 2.0f;

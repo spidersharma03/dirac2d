@@ -33,9 +33,10 @@ FirstGame::FirstGame()
     
 	m_pRenderer = new GLRenderer(m_pWorld);
 	
+    m_pCamera = new Camera(this);
+
 	m_pVehicle = new SimpleVehicle(this);
 	
-	m_pCamera = new Camera(this);
 	m_pCamera->setFocusTarget(m_pVehicle);
 	
 	m_pTerrainGenerator = new TerrainGenerator(this);
@@ -164,9 +165,7 @@ void FirstGame::MouseButton(int button, int state, int x, int y)
 	Vector3f cameraPos = m_pCamera->getPosition();
 	Vector2f eyePos(cameraPos.x,cameraPos.y);
 	
-	Vector2f cameraOffset = m_pCamera->getCameraOffset();
-	cameraOffset.normalize();
-	Vector2f worldPos = eyePos + mousePos - cameraOffset;
+	Vector2f worldPos = eyePos + mousePos;
 	m_MousePositionWorldSpace = worldPos;
 	
 	if( state == GLUT_DOWN && button == GLUT_LEFT_BUTTON )

@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "GameObject.h"
 #include "FirstGame.h"
+#include "TerrainGenerator.h"
 #include "SimpleVehicle.h"
 
 Camera::Camera(FirstGame* pGame) : m_pGame(pGame)
@@ -16,12 +17,15 @@ Camera::Camera(FirstGame* pGame) : m_pGame(pGame)
     m_EyePosition = Vector3f(0.0f,0.0f,1.0f);
     m_Target = Vector3f(0.0f,0.0f,-1.0f);
     m_ViewMatrix.lookAt(m_EyePosition, m_Target, Vector3f(0.0f,1.0f,0.0f));
-    m_ScreenWidth = m_ScreenHeight = 16.0f;
-    m_ProjectionMatrix.ortho(-m_ScreenWidth/2, m_ScreenWidth/2, -m_ScreenWidth/2, m_ScreenWidth/2, 0.001, 100.0f);
+
     m_Elasticity = 100.0f;
     m_AspectRatio = 4.0f/3.0f;
 	m_InitEyeZ = 5.0f;
 	m_EyePosition.z = m_InitEyeZ;
+    
+    m_ScreenHeight = 2*m_EyePosition.z;
+    m_ScreenWidth = m_ScreenHeight * m_AspectRatio;
+    
     m_cameraOffset = Vector2f(4.0,1.0f);
 	m_WindowWidth = 800;
 	m_WindowHeight = 600;
@@ -57,13 +61,16 @@ void Camera::autoZoom()
 {
 	if( m_pFocusTarget )
 	{
-		float y = m_pFocusTarget->getPosition().y + 0.1f;
+		float y = m_pFocusTarget->getPosition().y + 0.0f;
 		//float y = m_pGame->getVehicle()->getDistanceFromTerrain();
-		if( y > 0.0f )
+        float currentYlevel = m_pGame->getTerrainGenerator()->getAvgLevel(m_pFocusTarget->getPosition().x);
+        y -= currentYlevel;
+        //printf(" y = %f\n", y);
+		if( y > 0 )
 		{
 			m_EyePosition.z = m_InitEyeZ + y;
-			m_ScreenWidth = 2*m_EyePosition.z;
-			m_ScreenHeight = m_ScreenWidth/m_AspectRatio;
+            m_ScreenHeight = 2*m_EyePosition.z;
+			m_ScreenWidth = m_ScreenHeight * m_AspectRatio;
 		}
 	}
 }
