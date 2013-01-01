@@ -28,7 +28,7 @@ void placeCoins(FirstGame* pGame ,GameObject* pList, int numObjects)
 	Vector2f coinPos[20];
 	int n = 2*nCurvePoints-40;
 	for (int i=0; i<2*numObjects; i+=2) {
-		coinPos[i/2] = Vector2f(pCurvePoints[n], pCurvePoints[n+1] - 0.4);
+		coinPos[i/2] = Vector2f(pCurvePoints[n], pCurvePoints[n+1] + 0.4);
 		n += 2;
 	}
 	int i = 0;
@@ -56,7 +56,7 @@ void placeCrates(FirstGame* pGame ,GameObject* pList, int nColumns, float w, flo
 	pCurvePoints = pTerrainGenerator->getCurvePointsArray();
 	
 	int n = 2*nCurvePoints-20;
-	Vector2f start = Vector2f( pCurvePoints[n], pCurvePoints[n+1] );
+	Vector2f start = Vector2f( pCurvePoints[n], pCurvePoints[n+1] + 0.3f );
 	
 	Vector2f cratePos[50];
 		

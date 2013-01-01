@@ -176,6 +176,7 @@
 		35E3A1FD163D2B6E0023D968 /* TerrainGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainGenerator.h; sourceTree = "<group>"; };
 		35E3A1FF163D2C0E0023D968 /* TerrainGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainGenerator.cpp; sourceTree = "<group>"; };
 		35E3A201163D37140023D968 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		35E77BC5168B563D003D6594 /* memoryAllocatorNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memoryAllocatorNew.h; sourceTree = "<group>"; };
 		75580E9B13CED76500B6B03B /* PulleyConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulleyConstraint.h; sourceTree = "<group>"; };
 		75580E9C13CED76500B6B03B /* PulleyConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PulleyConstraint.cpp; sourceTree = "<group>"; };
 		758921F113B0E3DF0005E1E2 /* DTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DTimer.cpp; path = Dirac2D/DTimer.cpp; sourceTree = SOURCE_ROOT; };
@@ -569,6 +570,7 @@
 		C257F158154E71AE00270D77 /* memory */ = {
 			isa = PBXGroup;
 			children = (
+				35E77BC5168B563D003D6594 /* memoryAllocatorNew.h */,
 				C257F159154E71AE00270D77 /* memoryAllocator.h */,
 				355FCBE5165903AB004D4C5E /* memoryBlockAllocator.h */,
 				355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */,

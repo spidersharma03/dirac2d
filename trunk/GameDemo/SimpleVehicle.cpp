@@ -6,6 +6,7 @@
 //
 
 #include "SimpleVehicle.h"
+#include "Camera.h"
 #include "SimpleGun.h"
 #include "LaserGun2.h"
 #include "FirstGame.h"
@@ -79,8 +80,9 @@ void SimpleVehicle::init()
 	{
 		m_pVehicleBody = pWorld->createPhysicalBody();
 		
-		float xPos = 15.0f;
-		float yPos = 0.0f;
+		float xPos = 25.0f;
+		float yPos = 2.0f;
+        
 		m_pVehicleBody->setPosition(Vector2f(1.0f+xPos,1.05f+yPos));		
 		
 		PhysicalAppearance pApp;
@@ -115,7 +117,7 @@ void SimpleVehicle::init()
         WheelConstraintInfo wInfo;
         wInfo.m_PhysicalBody1 = m_pVehicleBody;
 		wInfo.m_PhysicalBody2 = circle1;
-		wInfo.m_Anchor = Vector2f(1.3f+xPos,0.8f);
+		wInfo.m_Anchor = Vector2f(1.3f+xPos,0.8f+yPos);
 		wInfo.m_LocalAxis = Vector2f(1.0f,-1.0f);
 		wInfo.m_Erp = 10.0f;
 		wInfo.m_Cfm = 8.0f;
@@ -125,7 +127,7 @@ void SimpleVehicle::init()
                 
         wInfo.m_PhysicalBody1 = m_pVehicleBody;
 		wInfo.m_PhysicalBody2 = circle2;
-		wInfo.m_Anchor = Vector2f(1.0f-0.3f+xPos,0.8f);
+		wInfo.m_Anchor = Vector2f(1.0f-0.3f+xPos,0.8f+yPos);
 		wInfo.m_LocalAxis = Vector2f(-1.0f,-1.0f);
         
 		WheelConstraint* lc2 = (WheelConstraint*)pWorld->createConstraint(wInfo);
