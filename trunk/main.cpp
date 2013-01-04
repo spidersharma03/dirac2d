@@ -1218,7 +1218,7 @@ void demo16()
     pApp.m_CollisionAttributes.m_CollisionShapeInfo = &cInfo;
 	pBodyCircle->createPhysicalShape(pApp);
 	
-	dfloat erp = 10.0f; dfloat cfm = 3.0f;
+	dfloat erp = 2; dfloat cfm = 0.4;
 	
 	DistanceConstraintInfo dInfo;
 	dInfo.m_PhysicalBody1 = pBodyCircle;
@@ -2213,11 +2213,11 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo3();
+	demo16();
 
 	DistanceConstraintInfo dInfo;
-	dInfo.m_Erp = 2.0f;
-	dInfo.m_Cfm = 1.0f;
+	dInfo.m_Erp = 5.0f;
+	dInfo.m_Cfm = 2.0f;
 	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 }
 

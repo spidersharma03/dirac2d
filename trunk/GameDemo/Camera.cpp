@@ -61,7 +61,7 @@ void Camera::autoZoom()
 {
 	if( m_pFocusTarget )
 	{
-		float y = m_pFocusTarget->getPosition().y + 0.0f;
+		float y = m_pFocusTarget->getPosition().y;
 		//float y = m_pGame->getVehicle()->getDistanceFromTerrain();
         float currentYlevel = m_pGame->getTerrainGenerator()->getAvgLevel(m_pFocusTarget->getPosition().x);
         y -= currentYlevel;

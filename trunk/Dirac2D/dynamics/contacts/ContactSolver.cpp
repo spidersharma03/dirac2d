@@ -171,6 +171,7 @@ void ContactSolver::correctVelocities()
 		}
 		contact = contact->m_Next;
 	}
+	// TODO :: All the Contacts are solved, call any Call back functions here for querying the contact impulses.
 }
 	
 END_NAMESPACE_DIRAC2D

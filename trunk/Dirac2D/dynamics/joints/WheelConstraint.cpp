@@ -34,7 +34,7 @@ void WheelConstraint::initialize()
 	m_LocalPerpendicularAxis.set(-m_LocalAxis.y, m_LocalAxis.x);
 }
 
-void WheelConstraint::buildJacobian()
+void WheelConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		

@@ -28,6 +28,15 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
     m_pBody->setVelocity(cInfo.m_Velocity);
     m_pBody->setAngularVelocity(cInfo.m_AngularVelocity);
 	
+	if( cInfo.m_BodyType == 1 )
+	{
+		m_pBody->m_BodyType = EBT_STATIC;
+	}
+	if( cInfo.m_BodyType == 2 )
+	{
+		m_pBody->m_BodyType = EBT_KINEMATIC;
+	}
+	
 	if( cInfo.m_ShapeType == ECS_CIRCLE )
     {
         CircleInfo circleInfo(cInfo.m_Radius);

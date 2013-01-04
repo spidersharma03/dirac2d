@@ -26,7 +26,7 @@ void MotorConstraint::initialize()
 	dAssert(m_PhysicalBody1 || m_PhysicalBody2);
 }
 
-void MotorConstraint::buildJacobian()
+void MotorConstraint::buildJacobian(dfloat dt)
 {
 	dfloat JInvmJT = 0.0f;
 	if( m_PhysicalBody1 )

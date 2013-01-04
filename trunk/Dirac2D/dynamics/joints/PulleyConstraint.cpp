@@ -46,7 +46,7 @@ void PulleyConstraint::initialize()
 	m_FixedLength = a1.distance(m_FixedPoint1) + a2.distance(m_FixedPoint2);
 }
 
-void PulleyConstraint::buildJacobian()
+void PulleyConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* pBody1 = m_PhysicalBody1;
 	PhysicalBody* pBody2 = m_PhysicalBody2;

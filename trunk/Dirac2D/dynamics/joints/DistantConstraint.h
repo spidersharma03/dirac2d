@@ -19,7 +19,7 @@ struct DistanceConstraintInfo : public ConstraintInfo
     {
         m_Type = ECT_DISTANCE;
         m_PhysicalBody1 = m_PhysicalBody2 = 0;
-    }
+	}
     // the Anchor points are always assumed in the local coordinate frames of the PhysicalBodies.
     Vector2f m_Anchor1, m_Anchor2;
 };
@@ -28,7 +28,7 @@ class DistanceConstraint : public Constraint
 {
 public:
     
-	virtual void buildJacobian();
+	virtual void buildJacobian(dfloat dt);
 	
 	virtual void correctVelocities();
 	

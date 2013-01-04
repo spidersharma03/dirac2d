@@ -33,7 +33,7 @@ class LineConstraint : public Constraint
 {
 public:
 	
-	virtual void buildJacobian();
+	virtual void buildJacobian(dfloat dt);
 	
 	virtual void correctVelocities();
 	

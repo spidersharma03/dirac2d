@@ -24,7 +24,7 @@ class CubicSplinePathConstraint : public Constraint
 public:
 	//CubicSplinePathConstraint(Vector2f* splineVertices, int numVertices);
 	
-	virtual void buildJacobian();
+	virtual void buildJacobian(dfloat dt);
 	
 	virtual void correctVelocities();
 	

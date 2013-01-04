@@ -42,7 +42,7 @@ void ObjectManager::manageObjects()
 		if( time - initTime > 3000 )
 		{
 			initTime = time;
-			generateFallingCrates();
+			//generateFallingCrates();
 		}
 	}
 	// Place Stack of Crates only for Linear regions
@@ -53,7 +53,7 @@ void ObjectManager::manageObjects()
 		if( time - initTime > 4000 )
 		{
 			initTime = time;
-			generateCrates();
+			//generateCrates();
 			//generateTumblers();
 		}
 	}
