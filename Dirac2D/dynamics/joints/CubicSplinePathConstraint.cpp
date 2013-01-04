@@ -78,7 +78,7 @@ void CubicSplinePathConstraint::initialize()
 	
 }
 
-void CubicSplinePathConstraint::buildJacobian()
+void CubicSplinePathConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		

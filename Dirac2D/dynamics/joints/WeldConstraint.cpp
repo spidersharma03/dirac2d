@@ -30,7 +30,7 @@ void WeldConstraint::initialize()
 	m_InitialAngle = m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle;
 }
 
-void WeldConstraint::buildJacobian()
+void WeldConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		

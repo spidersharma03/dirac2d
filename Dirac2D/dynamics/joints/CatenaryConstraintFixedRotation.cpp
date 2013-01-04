@@ -35,7 +35,7 @@ void CatenaryConstraintFixedRotation::initialize()
 	m_ReferenceAngle = m_PhysicalBody1->m_Angle;
 }
 
-void CatenaryConstraintFixedRotation::buildJacobian()
+void CatenaryConstraintFixedRotation::buildJacobian(dfloat dt)
 {
 	PhysicalBody* pBody = m_PhysicalBody1;
 	

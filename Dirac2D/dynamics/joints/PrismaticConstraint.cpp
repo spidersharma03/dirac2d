@@ -36,7 +36,7 @@ void PrismaticConstraint::initialize()
 	m_ReferenceAngle = m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle;
 }
 
-void PrismaticConstraint::buildJacobian()
+void PrismaticConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		

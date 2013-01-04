@@ -350,7 +350,7 @@ void PhysicalWorld::Step(dfloat dt)
 	Constraint* pConstraint = m_ConstraintList;
 	while (pConstraint) 
 	{
-		pConstraint->buildJacobian();
+		pConstraint->buildJacobian(dt);
 		pConstraint = pConstraint->m_Next;
 	}
 

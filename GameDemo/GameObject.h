@@ -31,6 +31,7 @@ struct GameObjectInfo
 		m_Density = AVG_OBJECT_DENSITY;
 		m_Restitution = 1.0f;
 		m_Friction = 1.0f;
+		m_BodyType = 0;
 	}
 	
     Vector2f m_Position;
@@ -40,6 +41,7 @@ struct GameObjectInfo
 	float m_Restitution;
 	float m_Friction;
 	GAME_OBJECT_TYPE m_ObjectType;
+	int m_BodyType;
 };
 
 class GameObject : public IUpdatable, public IGameCollisionListener

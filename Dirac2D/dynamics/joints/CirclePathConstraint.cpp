@@ -13,7 +13,7 @@ BEGIN_NAMESPACE_DIRAC2D
 // 	m_Type = ECT_CIRCULAR_PATH;   
 //}
 
-void CirclePathConstraint::buildJacobian()
+void CirclePathConstraint::buildJacobian(dfloat dt)
 {
    // PhysicalBody* pBody = m_PhysicalBody1;
 	

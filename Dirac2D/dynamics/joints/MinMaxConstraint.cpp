@@ -40,7 +40,7 @@ MinMaxConstraint::MinMaxConstraint( const MinMaxConstraintInfo& cInfo): Constrai
     m_LowerLimit = cInfo.m_LowerLimit;
 }
 
-void MinMaxConstraint::buildJacobian()
+void MinMaxConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		

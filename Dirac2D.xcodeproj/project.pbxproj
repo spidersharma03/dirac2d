@@ -299,6 +299,7 @@
 		C2FB7135167EF14E002549D8 /* LaserGun2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LaserGun2.cpp; sourceTree = "<group>"; };
 		C2FB79E31683389C002549D8 /* Tumbler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tumbler.h; sourceTree = "<group>"; };
 		C2FB79E41683389C002549D8 /* Tumbler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tumbler.cpp; sourceTree = "<group>"; };
+		C2FB7D0C168ADC92002549D8 /* memoryAllocatorNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memoryAllocatorNew.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -572,6 +573,7 @@
 			children = (
 				35E77BC5168B563D003D6594 /* memoryAllocatorNew.h */,
 				C257F159154E71AE00270D77 /* memoryAllocator.h */,
+				C2FB7D0C168ADC92002549D8 /* memoryAllocatorNew.h */,
 				355FCBE5165903AB004D4C5E /* memoryBlockAllocator.h */,
 				355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */,
 			);

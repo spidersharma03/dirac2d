@@ -76,6 +76,7 @@ void LaserGun2::shoot(const Vector2f& direction)
 
 void LaserGun2::render()
 {
+	glPushMatrix();
 	if( count > 0 )
 	{
 		count--;
@@ -83,13 +84,18 @@ void LaserGun2::render()
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		m_pGame->getRenderer()->setColor(255, 0, 0, count);
 		m_pGame->getRenderer()->drawLine(m_ShootingOrigin, m_ShootingOrigin + m_ShootingTarget);
+		//m_pGame->getRenderer()->setColor(255, 255, 0, count);
+		//m_pGame->getRenderer()->setPointSize(6.0f);
+		//m_pGame->getRenderer()->drawPoint(m_pGame->getMousePositionWorldSpace());
+		//m_pGame->getRenderer()->setPointSize(1.0f);
 		glDisable(GL_BLEND);
 	}
+	glPopMatrix();
 }
 
 void LaserGun2::update(float dt)
 {
-	m_ShootingOrigin = m_pGame->getVehicle()->getPosition() + Vector2f(0.02f,-0.03f);
+	m_ShootingOrigin = m_pGame->getVehicle()->getPosition();// + Vector2f(0.02f,-0.03f);
 	//Vector2f direction = m_pGame->getMousePositionWorldSpace() - m_pGame->getVehicle()->getPosition();
 	//direction.normalize();
 	

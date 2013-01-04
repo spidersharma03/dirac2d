@@ -31,7 +31,7 @@ void CatenaryConstraint::initialize()
 	dAssert( m_FixedLength > m_Distance );
 }
 
-void CatenaryConstraint::buildJacobian()
+void CatenaryConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* pBody = m_PhysicalBody1;
 		

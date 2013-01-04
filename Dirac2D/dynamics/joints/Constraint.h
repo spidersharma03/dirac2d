@@ -60,11 +60,13 @@ protected:
 		m_Erp = cInfo.m_Erp;
 		m_Cfm = cInfo.m_Cfm;
 		m_Next = m_Prev = 0;
+		m_Freqeuncy = 60.0f;
+		m_DampingRatio = 1.0f; // Critically damped.
 	};
 	
 public:
 	
-	virtual void buildJacobian() = 0;
+	virtual void buildJacobian(dfloat dt) = 0;
 	
 	virtual void correctVelocities() = 0;
 	
@@ -82,6 +84,15 @@ public:
 	dfloat m_Erp;
 	// Constraint force mixing. this is used to soften the constraint and can be used as a softness parameter.
 	dfloat m_Cfm;
+	
+	//The Natural Frequency of this Constraint( without damping ) . expressed in Hz.
+	dfloat m_Freqeuncy;
+	/* The Damping ratio for this Constraint. different damping behaviors are obtained based upon the value of Damping Ratio. it is dimentionless.
+	   m_DampingRatio = 1 ---> Critically Damped
+	   m_DampingRatio > 1 ---> Over Damped.
+	   m_DampingRatio < 1 && >= 0 ---> Under Damped. if m_DampingRatio == 0 the System will Oscillate without damping with natural frequency.
+	 */
+	dfloat m_DampingRatio;
 	
 	// decides whether the bodies connected by this constraint should collide 
 	dbool m_bCollideConnected;
