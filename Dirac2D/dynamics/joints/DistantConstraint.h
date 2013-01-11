@@ -38,7 +38,7 @@ public:
     
 protected:	
     DistanceConstraint( const DistanceConstraintInfo& constraintInfo );
-public:
+protected:
 	// the Anchor points are always assumed in the local coordinate frames of the PhysicalBodies.
 	Vector2f m_Anchor1, m_Anchor2;
 	Vector2f m_ImpulseDirection;

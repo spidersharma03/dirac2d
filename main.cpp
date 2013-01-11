@@ -20,12 +20,15 @@ PhysicalWorld* pWorld;
 GLRenderer* glRenderer;
 DTimer timer;
 
-dfloat dt = 1.0f/1600.0f;
+dfloat dt = 1.0f/60.0f;
 
 dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
+dint32 windowHandle;
 
-DistanceConstraint *mouseJoint;
+duint32 timerCallbackInterval = 16;
+
+MouseConstraint *mouseJoint;
 
 void demo1()
 {
@@ -108,13 +111,13 @@ void demo3()
 	// Create Boxes
 	dfloat y = -0.8f;
 	dfloat x = -1.0f;
-	dint32 n = 40;
+	dint32 n = 20;
 	dfloat dx = 0.0f;
-	for(int j=0; j<40;j++ )
+	for(int j=0; j<20;j++ )
 	{
 		y += 0.08f;
 		x = -2.0 + dx;
-		dx += 0.05f;
+		dx += 0.04f;
 		for( int i=0; i<n; i++ )
 		{
 			PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
@@ -1582,7 +1585,7 @@ void demo23()
 		
 		WheelConstraintInfo wInfo;
 		wInfo.m_PhysicalBody1 = pBox1;
-		wInfo.m_PhysicalBody1 = circle1;
+		wInfo.m_PhysicalBody2 = circle1;
 		wInfo.m_Anchor = Vector2f(0.3f,-0.2f);
 		wInfo.m_LocalAxis = Vector2f(1.0f,-1.0f);
 		wInfo.m_Erp = 50.0f;
@@ -1592,7 +1595,7 @@ void demo23()
 		lc1->initialize();
 		
 		wInfo.m_PhysicalBody1 = pBox1;
-		wInfo.m_PhysicalBody1 = circle2;
+		wInfo.m_PhysicalBody2 = circle2;
 		wInfo.m_Anchor = Vector2f(-0.3f,-0.2f);
 		wInfo.m_LocalAxis = Vector2f(-1.0f,-1.0f);
 		
@@ -1648,7 +1651,7 @@ void demo24()
 		
 		LineConstraintInfo lInfo;
 		lInfo.m_PhysicalBody1 = pBox1;
-		lInfo.m_PhysicalBody1 = circle1;
+		lInfo.m_PhysicalBody2 = circle1;
 		lInfo.m_Anchor = Vector2f(0.2f,0.0f);
 		lInfo.m_LocalAxis = Vector2f(1.0f,0.0f);
 		lInfo.m_Erp = 100.0f;
@@ -1660,7 +1663,7 @@ void demo24()
 		lc1->initialize();
 		
 		lInfo.m_PhysicalBody1 = pBox1;
-		lInfo.m_PhysicalBody1 = circle2;
+		lInfo.m_PhysicalBody2 = circle2;
 		lInfo.m_Anchor = Vector2f(-0.2f,0.0f);
 		lInfo.m_LocalAxis = Vector2f(-1.0f,0.0f);
 		
@@ -1737,7 +1740,7 @@ void demo25()
 		{
 			PrismaticConstraintInfo pInfo;
 			pInfo.m_PhysicalBody1 = pBox1;
-			pInfo.m_PhysicalBody1 = circle1;
+			pInfo.m_PhysicalBody2 = circle1;
 			pInfo.m_Anchor = Vector2f(0.4f,0.2f);
 			pInfo.m_LocalAxis = Vector2f(1.0f,1.0f);
 			pInfo.m_LowerLimit = -0.1f;
@@ -1750,7 +1753,7 @@ void demo25()
 		{
 			LineConstraintInfo lInfo;
 			lInfo.m_PhysicalBody1 = pBox1;
-			lInfo.m_PhysicalBody1 = circle1;
+			lInfo.m_PhysicalBody2 = circle1;
 			lInfo.m_Anchor = Vector2f(0.4f,0.2f);
 			lInfo.m_LocalAxis = Vector2f(1.0f,1.0f);
 			lInfo.m_LowerLimit = -0.1f;
@@ -1820,7 +1823,7 @@ void demo26()
 		{
 			PulleyConstraintInfo pInfo;
 			pInfo.m_PhysicalBody1 = pBox1;
-			pInfo.m_PhysicalBody1 = circle1;
+			pInfo.m_PhysicalBody2 = circle1;
 			pInfo.m_PulleyRatio = 2.0f;
 			pInfo.m_Anchor1 = Vector2f(0.0f,0.1f);
 			pInfo.m_Anchor2 = Vector2f(0.0f,0.1f);
@@ -1878,7 +1881,7 @@ void demo27()
 	
 	MinMaxConstraintInfo mInfo;
 	mInfo.m_PhysicalBody1 = pBodyCircle1;
-	mInfo.m_PhysicalBody1 = pBodyCircle2;
+	mInfo.m_PhysicalBody2 = pBodyCircle2;
 	mInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
 	mInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
 	mInfo.m_LowerLimit = 0.3f;
@@ -2213,12 +2216,10 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo16();
+	demo25();
 
-	DistanceConstraintInfo dInfo;
-	dInfo.m_Erp = 5.0f;
-	dInfo.m_Cfm = 2.0f;
-	mouseJoint = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+	MouseConstraintInfo mInfo;
+	mouseJoint = (MouseConstraint*)pWorld->createConstraint(mInfo);
 }
 
 void changeSize(int w, int h) 
@@ -2413,25 +2414,20 @@ void MouseButton(int button, int state, int x, int y)
 		if( pBody )
 		{
 			bPicked = true;
-			Vector2f posLocal = pBody->getLocalPoint(p);
-			mouseJoint->m_PhysicalBody1 = pBody;
-			mouseJoint->m_Anchor1 = posLocal;
-			mouseJoint->m_Anchor2 = p;
-			mouseJoint->initialize();
+			mouseJoint->setTargetBody(pBody, p);
+			mouseJoint->setMousePosition(p);
 		}
 		else 
 		{
 			bPicked = false;
-			mouseJoint->m_PhysicalBody1 = 0;
+			mouseJoint->setTargetBody(0);
 		}
 
     }
 	if( state == GLUT_UP && button == GLUT_LEFT_BUTTON )
 	{
 		bPicked = false;
-		mouseJoint->m_PhysicalBody1 = 0;
-		mouseJoint->m_Anchor1 = Vector2f();
-		mouseJoint->m_Anchor2 = Vector2f();
+		mouseJoint->setTargetBody(0);
 	}
 }
 
@@ -2453,43 +2449,44 @@ void MouseMotion(int x, int y)
 	Vector2f p(px,py);
 	if (_button == GLUT_LEFT_BUTTON)
     {
-		mouseJoint->m_Anchor2 = p;
+		mouseJoint->setMousePosition(p);
 	}
 }
 
 #ifndef WIN32
 static void timerCallback (int value)
 {
-    timeval t1, t2;
-    static double elapsedTime;
-    double FPS = 0;
-    
-    static int frameCnt = 0;
-    
-    // start timer
-    gettimeofday(&t1, NULL);
-    
-    // do something
-    renderScene();
-    frameCnt ++;
-    
-    // stop timer
-    gettimeofday(&t2, NULL);
-    
-    // compute and print the elapsed time in millisec
-    elapsedTime += (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
-    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
-    
-    if( frameCnt >=500 )
-    {
-        frameCnt=0;
-        FPS = 500 /(elapsedTime * 0.001);
-        printf("\n FPS = %f", FPS);
-        elapsedTime = 0;
-    }
-    
+    //timeval t1, t2;
+//    static double elapsedTime;
+//    double FPS = 0;
+//    
+//    static int frameCnt = 0;
+//    
+//    // start timer
+//    gettimeofday(&t1, NULL);
+//    
+//    // do something
+//    renderScene();
+//    frameCnt ++;
+//    
+//    // stop timer
+//    gettimeofday(&t2, NULL);
+//    
+//    // compute and print the elapsed time in millisec
+//    elapsedTime += (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
+//    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
+//    
+//    if( frameCnt >=500 )
+//    {
+//        frameCnt=0;
+//        FPS = 500 /(elapsedTime * 0.001);
+//        printf("\n FPS = %f", FPS);
+//        elapsedTime = 0;
+//    }
+    glutSetWindow(windowHandle);
+	glutPostRedisplay();
     /* Call back again after elapsedUSecs have passed */
-    glutTimerFunc (0, timerCallback, 0);
+    glutTimerFunc (timerCallbackInterval, timerCallback, 0);
 }
 
 #endif
@@ -2499,16 +2496,16 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(100,10);
     glutInitWindowSize(windowWidth,windowHeight);
-    glutCreateWindow("Physics Engine - DIRAC2D");
+	windowHandle = glutCreateWindow("Physics Engine - DIRAC2D");
 	glutKeyboardFunc(keyProcessor);
 	glutMouseFunc (MouseButton);
 	glutMotionFunc (MouseMotion);
 	glutDisplayFunc(renderScene);
-    glutIdleFunc(renderScene);
+    //glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
 	
 #ifndef WIN32
-	//glutTimerFunc(0, timerCallback, 0);
+	glutTimerFunc(timerCallbackInterval, timerCallback, 0);
 #endif
 	
 	initScene();

@@ -125,7 +125,7 @@ static void findCandidateEdge( ConvexPolygon* poly, Vector2f& normal, dint32& ed
 //}
 
 // Clip Against Edge Plane
-static void clip(Vector2f& refEdge, Vector2f& p, ContactManifold* contactManifold, dint32 refIndex)
+static void clip(const Vector2f& refEdge, const Vector2f& p, ContactManifold* contactManifold, const dint32 refIndex)
 {
 	Vector2f& cp0 = contactManifold->m_ContactPoints[0].m_Point;
 	Vector2f& cp1 = contactManifold->m_ContactPoints[1].m_Point;

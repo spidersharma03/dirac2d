@@ -22,7 +22,8 @@ CatenaryConstraintFixedRotation::CatenaryConstraintFixedRotation( const Catenary
     m_FixedPoint1 = cInfo.m_FixedPoint1;
     m_FixedPoint2 = cInfo.m_FixedPoint2;
     m_Cfm = 0.0f;
-	m_Erp = 100.0f;
+	m_Freqeuncy = 3.0f;
+	m_DampingRatio = 0.2f;
     m_ReferenceAngle = 0.0f;
 }
 
@@ -64,15 +65,29 @@ void CatenaryConstraintFixedRotation::buildJacobian(dfloat dt)
 	dfloat rcrossX = m_r.cross(m_ImpulseDirection);
 	
 	// Effective Mass Matrix for the Constraint.	
-	m_EffectiveMassMatrix.a11 = pBody->m_InvMass * m_ImpulseDirection.dot(m_ImpulseDirection) + pBody->m_InvI * rcrossX * rcrossX + m_Cfm;
+	dfloat effectiveMass = m_EffectiveMassMatrix.a11 = pBody->m_InvMass * m_ImpulseDirection.dot(m_ImpulseDirection) + pBody->m_InvI * rcrossX * rcrossX;
 	m_EffectiveMassMatrix.a21 = pBody->m_InvI * rcrossX;
 	m_EffectiveMassMatrix.a12 = m_EffectiveMassMatrix.a21;
-	m_EffectiveMassMatrix.a22 = pBody->m_InvI + m_Cfm;
-			
+	m_EffectiveMassMatrix.a22 = pBody->m_InvI;
+	
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = effectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
+	m_EffectiveMassMatrix.a11 += m_Cfm;
+	m_EffectiveMassMatrix.a22 += m_Cfm;
+	
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
+	
 	// Positional Error for Position Stabilization( Baumgarte )
 	m_TotalLength = len1 + len2;
-	m_PositionError = m_Erp * ( m_TotalLength - m_FixedLength );
-	m_AngularError  = m_Erp * ( pBody->m_Angle - m_ReferenceAngle );
+	m_PositionError = erp * ( m_TotalLength - m_FixedLength );
+	m_AngularError  = erp * ( pBody->m_Angle - m_ReferenceAngle );
 	
 	if( m_TotalLength - m_FixedLength <= 0.0f )
 	{

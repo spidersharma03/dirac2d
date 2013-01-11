@@ -22,7 +22,7 @@ PulleyConstraint::PulleyConstraint( const PulleyConstraintInfo& cInfo): Constrai
     m_FixedPoint2 = cInfo.m_FixedPoint2;
     m_PulleyRatio = cInfo.m_PulleyRatio;
     
-	m_Erp = 100.0f;
+	m_Freqeuncy = 60.0f;
 	m_Cfm = 0.0f;
 }
 
@@ -86,12 +86,24 @@ void PulleyConstraint::buildJacobian(dfloat dt)
 	dfloat JInvMJT = pBody1->m_InvMass + m_PulleyRatio * m_PulleyRatio * pBody2->m_InvMass 
 	                 + pBody1->m_InvI * r_cross_l1 * r_cross_l1 + m_PulleyRatio * m_PulleyRatio * pBody2->m_InvI * r_cross_l2 * r_cross_l2; 
 	
+	
 	// Effective mass for the Constraint.
-	m_EffectiveMass = 1.0f/JInvMJT;
+	m_EffectiveMass = JInvMJT != 0.0f ? 1.0f/JInvMJT : JInvMJT;
+	
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = m_EffectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * m_EffectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
 	
 	// Positional Error for Position Stabilization( Baumgarte )
 	m_TotalLength = len1 + len2 * m_PulleyRatio;
-	m_PositionError = m_Erp * ( m_TotalLength - m_FixedLength );
+	m_PositionError = erp * ( m_TotalLength - m_FixedLength );
 	
 	// Apply Corrective impulse on the bodies
 	if( 1 )

@@ -17,7 +17,7 @@ BEGIN_NAMESPACE_DIRAC2D
 
 class PhysicalBody;
 
-enum CONSTRAINT_TYPE { ECT_DISTANCE, ECT_HINGE, ECT_WELD, ECT_CATENARY, ECT_CATENARY_FIXED_ROTATION, ECT_LINE, ECT_PRISMATIC, ECT_WHEEL, ECT_MOTOR, ECT_PULLEY, ECT_GEAR, ECT_CUBIC_SPLINE, ECT_MIN_MAX, ECT_CIRCULAR_PATH };
+enum CONSTRAINT_TYPE { ECT_DISTANCE, ECT_MOUSE, ECT_HINGE, ECT_WELD, ECT_CATENARY, ECT_CATENARY_FIXED_ROTATION, ECT_LINE, ECT_PRISMATIC, ECT_WHEEL, ECT_MOTOR, ECT_PULLEY, ECT_GEAR, ECT_CUBIC_SPLINE, ECT_MIN_MAX, ECT_CIRCULAR_PATH };
 
 enum CONSTRAINT_LIMIT_STATE { ECLS_LOWER, ECLS_UPPER, ECLS_LOWER_UPPER, ECLS_NONE };
 
@@ -57,14 +57,14 @@ protected:
 	{
 		m_PhysicalBody1 = cInfo.m_PhysicalBody1;
 		m_PhysicalBody2 = cInfo.m_PhysicalBody2;
-		m_Erp = cInfo.m_Erp;
+		//m_Erp = cInfo.m_Erp;
 		m_Cfm = cInfo.m_Cfm;
 		m_Next = m_Prev = 0;
 		m_Freqeuncy = 60.0f;
 		m_DampingRatio = 1.0f; // Critically damped.
 	};
 	
-public:
+protected:
 	
 	virtual void buildJacobian(dfloat dt) = 0;
 	
@@ -80,9 +80,7 @@ public:
 	
 	Constraint* m_Next;
 	Constraint* m_Prev;
-	// Error reduction parameter. this is used to make sure that the constarint dosent drift over time. should be less than 1.0f/timeStep.
-	dfloat m_Erp;
-	// Constraint force mixing. this is used to soften the constraint and can be used as a softness parameter.
+	// Constraint force mixing. this is used to soften the constraint.
 	dfloat m_Cfm;
 	
 	//The Natural Frequency of this Constraint( without damping ) . expressed in Hz.

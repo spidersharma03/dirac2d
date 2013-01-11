@@ -17,8 +17,9 @@ WeldConstraint::WeldConstraint(const WeldConstraintInfo& cInfo):Constraint(cInfo
 {
     m_Type = ECT_WELD;
     m_Anchor = cInfo.m_Anchor;
-    m_Cfm = 1000.4f;
-	m_Erp = 300.0f;
+    m_Cfm = 0.4f;
+	m_Freqeuncy = 5.0f;
+	m_DampingRatio = 0.2f;
 }
 
 void WeldConstraint::initialize()
@@ -74,13 +75,30 @@ void WeldConstraint::buildJacobian(dfloat dt)
 
 	m_EffectiveMass.col3.x = m_EffectiveMass.col1.z;
 	m_EffectiveMass.col3.y = m_EffectiveMass.col2.z;
+	m_EffectiveMass.col3.z = i1Inv + i2Inv;
+	
+	
+	dfloat effectiveMass = i1Inv + i2Inv;
+	effectiveMass = effectiveMass != 0.0f ? 1.0f/effectiveMass : effectiveMass;
+	
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = effectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
 	m_EffectiveMass.col3.z = i1Inv + i2Inv + m_Cfm;
 
 	m_EffectiveMass.invert();
-		
+
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
+	
 	// Positional and Angular Error for Position Stabilization( Baumgarte )
-	m_PositionError = ( c2 + m_r2 - c1 - m_r1 ) * m_Erp;
-	m_AngleError    = (  ( m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle ) - m_InitialAngle ) * m_Erp;
+	m_PositionError = ( c2 + m_r2 - c1 - m_r1 ) * erp;
+	m_AngleError    = (  ( m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle ) - m_InitialAngle ) * erp;
 
 	// Apply Corrective impulse on the bodies
 	if( 1 )//body1->m_PhysicalWorld->m_bWarmStart )

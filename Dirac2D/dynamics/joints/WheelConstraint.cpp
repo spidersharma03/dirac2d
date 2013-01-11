@@ -17,8 +17,9 @@ WheelConstraint::WheelConstraint( const WheelConstraintInfo& cInfo): Constraint(
     m_Type = ECT_WHEEL;
     m_Anchor = cInfo.m_Anchor;
     m_LocalAxis = cInfo.m_LocalAxis;
-	m_Erp = 100.0f;
-	m_Cfm = 10.0f;
+	m_Cfm = 0.0f;
+	m_Freqeuncy = 5.0f;
+	m_DampingRatio = 0.0f;
 }
 
 void WheelConstraint::initialize()
@@ -76,16 +77,31 @@ void WheelConstraint::buildJacobian(dfloat dt)
 	dfloat a_cross_s  = m_WorldAxis.cross(s);
 	dfloat a_cross_r2 = m_WorldAxis.cross(m_r2);
 	
-	// Positional Error for Position Stabilization( Baumgarte )
-	m_PositionError			= d.dot(m_WorldPerpendicularAxis) * m_Erp;
-	m_PositionErrorParallel = d.dot(m_WorldAxis) * m_Erp;
-	
-	m_EffectiveMassMatrix.a11 = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2 + m_Cfm;
+	m_EffectiveMassMatrix.a11 = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
 	m_EffectiveMassMatrix.a21 = i1Inv * aperp_cross_s * a_cross_s + i2Inv * aperp_cross_r2 * a_cross_r2;
 	m_EffectiveMassMatrix.a12 = m_EffectiveMassMatrix.a21;
-	m_EffectiveMassMatrix.a22 = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2 + m_Cfm;
+	dfloat effectiveMass = m_EffectiveMassMatrix.a22 = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2;
+		
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = effectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
+	//m_EffectiveMassMatrix.a11 += m_Cfm;
+	m_EffectiveMassMatrix.a22 += m_Cfm;
 	
 	m_EffectiveMassMatrix.invert();
+
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
+	
+	// Positional Error for Position Stabilization( Baumgarte )
+	m_PositionError			= d.dot(m_WorldPerpendicularAxis) * erp;
+	m_PositionErrorParallel = d.dot(m_WorldAxis) * erp;
+	
 	
 	// Apply Corrective impulse on the bodies
 	if( 1 )

@@ -24,7 +24,7 @@ public:
 	
 	virtual void initialize();
     
-public:
+protected:
     Vector2f m_Centre;
     dfloat m_Radius;
 };

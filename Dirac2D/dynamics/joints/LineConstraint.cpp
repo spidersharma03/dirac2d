@@ -19,6 +19,8 @@ LineConstraint::LineConstraint( const LineConstraintInfo& cInfo): Constraint(cIn
     m_LocalAxis = cInfo.m_LocalAxis;
 	m_LowerLimit = cInfo.m_LowerLimit;
     m_UpperLimit = cInfo.m_UpperLimit;
+	m_Freqeuncy = 2.0f;
+	m_DampingRatio = 0.2f;
 }
 
 void LineConstraint::initialize()
@@ -75,25 +77,42 @@ void LineConstraint::buildJacobian(dfloat dt)
 	body1->m_Transform.transformAsVector(m_WorldAxis);
 	dfloat a_cross_s  = m_WorldAxis.cross(s);
 	dfloat a_cross_r2 = m_WorldAxis.cross(m_r2);
+		
+	m_EffectiveMassMatrix.a11 = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
+	m_EffectiveMassMatrix.a21 = i1Inv * aperp_cross_s * a_cross_s + i2Inv * aperp_cross_r2 * a_cross_r2;
+	m_EffectiveMassMatrix.a12 = m_EffectiveMassMatrix.a21;
+	dfloat effectiveMass = m_EffectiveMassMatrix.a22 = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2;
+
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = effectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
+	m_EffectiveMassMatrix.a22 += m_Cfm;
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
 	
 	// Positional Error for Position Stabilization( Baumgarte )
-	m_PositionError			= d.dot(m_WorldPerpendicularAxis) * m_Erp;
-
+	m_PositionError			= d.dot(m_WorldPerpendicularAxis) * erp;
+	
 	dfloat constraintDisplacement = d.dot(m_WorldAxis);
 	
 	if( fabs(m_UpperLimit - m_LowerLimit) < LINEAR_ERROR )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * erp;
 		m_LimitState = ECLS_LOWER_UPPER;
 	}
 	else if( constraintDisplacement >= m_UpperLimit )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_UpperLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_UpperLimit ) * erp;
 		m_LimitState = ECLS_UPPER;
 	}
 	else if( constraintDisplacement <= m_LowerLimit )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * erp;
 		m_LimitState = ECLS_LOWER;
 	}
 	else
@@ -101,12 +120,6 @@ void LineConstraint::buildJacobian(dfloat dt)
 		m_Impulse.y = 0.0f;
 		m_LimitState = ECLS_NONE;
 	}
-		
-	m_EffectiveMassMatrix.a11 = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
-	m_EffectiveMassMatrix.a21 = i1Inv * aperp_cross_s * a_cross_s + i2Inv * aperp_cross_r2 * a_cross_r2;
-	m_EffectiveMassMatrix.a12 = m_EffectiveMassMatrix.a21;
-	m_EffectiveMassMatrix.a22 = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2 + m_Cfm;
-
 	//m_EffectiveMassMatrix.invert();
 	
 	// Apply Corrective impulse on the bodies

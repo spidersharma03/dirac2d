@@ -121,23 +121,23 @@ void CubicSplinePathConstraint::buildJacobian(dfloat dt)
 	dfloat a_cross_r2 = m_WorldAxis.cross(m_r2);
 	
 	// Positional Error for Position Stabilization( Baumgarte )
-	m_PositionError			= d.dot(m_WorldPerpendicularAxis) * m_Erp;
+	m_PositionError			= d.dot(m_WorldPerpendicularAxis) * 1.0f;
 	
 	dfloat constraintDisplacement = d.dot(m_WorldAxis);
 	
 	if( fabs(m_UpperLimit - m_LowerLimit) < LINEAR_ERROR )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * 1.0f;
 		m_LimitState = ECLS_LOWER_UPPER;
 	}
 	else if( constraintDisplacement >= m_UpperLimit )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_UpperLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_UpperLimit ) * 1.0f;
 		m_LimitState = ECLS_UPPER;
 	}
 	else if( constraintDisplacement <= m_LowerLimit )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * 1.0f;
 		m_LimitState = ECLS_LOWER;
 	}
 	else

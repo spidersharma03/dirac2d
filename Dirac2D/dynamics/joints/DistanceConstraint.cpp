@@ -18,8 +18,8 @@ DistanceConstraint::DistanceConstraint( const DistanceConstraintInfo& constraint
 	m_Type = ECT_DISTANCE;
     m_Anchor1 = constraintInfo.m_Anchor1;
     m_Anchor2 = constraintInfo.m_Anchor2;
-	m_Freqeuncy = 60.0f;
-	m_DampingRatio = 0.0f;
+	m_Freqeuncy = 4.0f;
+	m_DampingRatio = 0.1f;
 }
 
 void DistanceConstraint::initialize()
@@ -44,7 +44,10 @@ void DistanceConstraint::buildJacobian(dfloat dt)
 {
 	PhysicalBody* body1 = m_PhysicalBody1;
 	PhysicalBody* body2 = m_PhysicalBody2;		
-		
+
+	if( !body1 && !body2 )
+		return;
+	
 	m_r1 = m_Anchor1; // World radius vector on body 1.
 	m_r2 = m_Anchor2; // World radius vector on body 2.
 	
@@ -93,23 +96,23 @@ void DistanceConstraint::buildJacobian(dfloat dt)
 	if( JInvMJT != 0.0f )
 		m_EffectiveMass = 1.0f/(JInvMJT);
 	
-	/*dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
 	dfloat k = m_EffectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * m_EffectiveMass * angularFrequency;
 	
 	dfloat cfm = (c + k * dt) * dt;
 	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
 	
 	// Error reduction parameter
-	dfloat erp = dt * k * cfm;*/
+	dfloat erp = dt * k * m_Cfm;
 	
 	// Constraint force mixing
 	m_EffectiveMass = (JInvMJT + m_Cfm );
 	m_EffectiveMass = m_EffectiveMass != 0.0f ? 1.0f/m_EffectiveMass : m_EffectiveMass;
 	
-	//printf("erp = %f   %f\n", m_Erp, erp);
 	// Positional Error for Position Stabilization( Baumgarte )
-	m_PositionError = m_Erp * cerror;
+	m_PositionError = erp * cerror;
 	
 	// Apply Corrective impulse on the bodies
 	if( 1 )//body1->m_PhysicalWorld->m_bWarmStart )

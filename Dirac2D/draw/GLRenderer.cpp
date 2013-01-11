@@ -37,6 +37,7 @@ void GLRenderer::drawShape(const CollisionShape* shape)
 				setColor(255, 255, 0);
 				drawPoint(edge->m_Vertex1);
 				drawPoint(edge->m_Vertex2);
+				setColor(255, 255, 255);
 			}
 			break;
 		}

@@ -51,7 +51,7 @@ protected:
     	
     MotorConstraint(const MotorConstraintInfo& cInfo);
 
-public:
+protected:
 	dfloat m_EffectiveMass;
 	dfloat m_Impulse;
 	dfloat m_MaxTorque;
