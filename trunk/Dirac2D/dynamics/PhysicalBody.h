@@ -54,16 +54,28 @@ public:
 
     void deletePhysicalShape(PhysicalShape* pShape);
 
+	// Gets the worldVector in Local Coordinate Frame of the Body.
+	Vector2f getLocalVector(const Vector2f& worldVector)
+	{
+		return m_Transform.getRotationMatrixTransposed() * worldVector;
+	}
+	
 	// Gets the worldPosition in Local Coordinate Frame of the Body.
-	Vector2f getLocalPoint(Vector2f& worldPosition)
+	Vector2f getLocalPoint(const Vector2f& worldPosition)
 	{
 		return  ( worldPosition * m_Transform - m_Centre);
 	}
 	
 	// Gets the localPosition in World Coordinate Frame. localPosition is assumed to be given from the centre of mass of the Body.  
-	Vector2f getWorldPoint(Vector2f& localPosition)
+	Vector2f getWorldPoint(const Vector2f& localPosition)
 	{
 		return m_Transform * ( localPosition + m_Centre );
+	}
+	
+	// Gets the localVector in World Coordinate Frame.  
+	Vector2f getWorldVector(const Vector2f& localVector)
+	{
+		return m_Transform.getRotationMatrix() * localVector;
 	}
 	
 	// Gets the velocity at the given local Coordinate of the body.
@@ -148,7 +160,9 @@ public:
 	Vector2f m_Velocity;
 	dfloat m_AngularVelocity;
 	dfloat m_InvMass, m_InvI;
-	Vector2f m_Centre;
+	
+	/* Centre of Mass of the body. this is always local to the body. This can be different from 0 for instance if the coordinates are defined not wrt 0 */
+	Vector2f m_Centre; 
 	
 	Matrix3f m_Transform;
 

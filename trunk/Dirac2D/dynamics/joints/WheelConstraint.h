@@ -42,7 +42,7 @@ protected:
     
     WheelConstraint( const WheelConstraintInfo& cInfo);
 
-public:
+protected:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
 	Vector2f m_LocalAxis; // Local Axis for the Line Constraint wrt Body1.
 	Vector2f m_LocalPerpendicularAxis; // Perpendicular axis to the local Axis

@@ -70,6 +70,7 @@
 
 #include "dynamics/joints/Constraint.h"
 #include "dynamics/joints/DistantConstraint.h"
+#include "dynamics/joints/MouseConstraint.h"
 #include "dynamics/joints/HingeConstraint.h"
 #include "dynamics/joints/WeldConstraint.h"
 #include "dynamics/joints/CatenaryConstraint.h"

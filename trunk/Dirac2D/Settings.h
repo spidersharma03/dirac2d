@@ -18,7 +18,7 @@ BEGIN_NAMESPACE_DIRAC2D
 // Maximum Number of vertices a Polygon can have
 #define MAX_POLY_VERTICES 10
 // Allowed penetration for collision
-#define ALLOWED_PENETRATION 0.001f
+#define ALLOWED_PENETRATION 0.01f
 // Maximum nuber of Contact Points in the Physical World
 #define MAX_CONTACT_POINTS 2000
 // Maximum number of bodies in the Physical world.
@@ -34,7 +34,7 @@ BEGIN_NAMESPACE_DIRAC2D
 #define MAX_LINEAR_SPEED 10.0f
 
 // Below this velocity the collision are considered inelastic
-#define VELOCITY_BIAS_THRESHOLD 0.5f
+#define VELOCITY_BIAS_THRESHOLD 1.0f
 
 #define ANGULAR_ERROR (1.0f*PI/180.0f)
 #define LINEAR_ERROR (0.01f) 

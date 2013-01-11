@@ -43,7 +43,7 @@ protected:
     
     PulleyConstraint( const PulleyConstraintInfo& cInfo);
 
-public:
+protected:
 	// the Anchor point is always assumed in the local coordinate frames of the PhysicalBody.
 	Vector2f m_Anchor1, m_Anchor2;
 	Vector2f m_FixedPoint1, m_FixedPoint2;

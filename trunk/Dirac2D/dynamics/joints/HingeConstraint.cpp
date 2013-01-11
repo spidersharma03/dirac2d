@@ -20,6 +20,8 @@ HingeConstraint::HingeConstraint(const HingeConstraintInfo& cInfo) : Constraint(
     m_Anchor = cInfo.m_Anchor;
     m_LowerAngle = cInfo.m_LowerAngle;
     m_UpperAngle = cInfo.m_UpperAngle;
+	m_Freqeuncy = 1.0f;
+	m_DampingRatio = 0.2f;
 }
 
 void HingeConstraint::initialize()
@@ -65,6 +67,7 @@ void HingeConstraint::buildJacobian(dfloat dt)
 		i2Inv = body2->m_InvI;
 	}
 	
+	
 	m_EffectiveMass.col1.x = m1Inv + m2Inv + i1Inv * m_r1.y * m_r1.y + i2Inv * m_r2.y * m_r2.y;
 	m_EffectiveMass.col1.y = - i1Inv * m_r1.y * m_r1.x - i2Inv * m_r2.y * m_r2.x;
 	m_EffectiveMass.col1.z = - i1Inv * m_r1.y - i2Inv * m_r2.y;
@@ -75,29 +78,40 @@ void HingeConstraint::buildJacobian(dfloat dt)
 	
 	m_EffectiveMass.col3.x = m_EffectiveMass.col1.z;
 	m_EffectiveMass.col3.y = m_EffectiveMass.col2.z;
-	m_EffectiveMass.col3.z = i1Inv + i2Inv + m_Cfm;
+	m_EffectiveMass.col3.z = i1Inv + i2Inv;
 	
-	//m_EffectiveMass.invert();
+	dfloat effectiveMass = i1Inv + i2Inv;
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = effectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
+	m_EffectiveMass.col3.z += m_Cfm;
+	
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
 	
 	// Positional Error for Position Stabilization( Baumgarte )
-	m_PositionError = ( c2 + m_r2 - c1 - m_r1 ) * m_Erp;
+	m_PositionError = ( c2 + m_r2 - c1 - m_r1 ) * erp;
 
 	dfloat angle = (body2->m_Angle - body1->m_Angle) - m_ReferenceAngle;
 
-	//printf("Angle = %f\n", angle*180.0f/PI);
 	if( fabs(m_UpperAngle - m_LowerAngle) < ANGULAR_ERROR )
 	{
-		m_AngularError = ( angle - m_UpperAngle ) * m_Erp;
+		m_AngularError = ( angle - m_UpperAngle ) * erp;
 		m_AngleLimitState = ECLS_LOWER_UPPER;
 	}
 	else if( angle >= m_UpperAngle )
 	{
-		m_AngularError = ( angle - m_UpperAngle ) * m_Erp;
+		m_AngularError = ( angle - m_UpperAngle ) * erp;
 		m_AngleLimitState = ECLS_UPPER;
 	}
 	else if( angle <= m_LowerAngle )
 	{
-		m_AngularError = ( angle - m_LowerAngle ) * m_Erp;
+		m_AngularError = ( angle - m_LowerAngle ) * erp;
 		m_AngleLimitState = ECLS_LOWER;
 	}
 	else {

@@ -24,11 +24,13 @@ public:
 	ContactSolver(PhysicalWorld* pPhysicalWorld);
 
 	// Initialize the effective mass matrix data.
-	void buildJacobian();
+	void buildJacobian(dfloat dt);
 
 	// Solve for the Normal and Tangent(Frictional) impulses and apply them on to the physical bodies.
 	void correctVelocities();
-	
+
+	dbool correctPositions();
+
 	friend class PhysicalWorld;
 	
 private:

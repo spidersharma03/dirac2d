@@ -43,7 +43,7 @@ protected:
     
     HingeConstraint(const HingeConstraintInfo& cInfo);
 
-public:
+protected:
 	Vector2f m_Anchor;    // Anchor Point. this is always defined locally wrt the first body.
 	Vector3f m_Impulse;
 	Vector2f m_Anchor1, m_Anchor2; // Local Anchor Points

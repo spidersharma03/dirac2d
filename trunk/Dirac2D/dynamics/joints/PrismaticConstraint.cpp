@@ -20,6 +20,8 @@ PrismaticConstraint::PrismaticConstraint( const PrismaticConstraintInfo& cInfo):
     m_LocalAxis = cInfo.m_LocalAxis;
 	m_LowerLimit = cInfo.m_LowerLimit;
     m_UpperLimit = cInfo.m_UpperLimit;
+	m_Freqeuncy = 3.0f;
+	m_DampingRatio = 0.2f;
 }
 
 void PrismaticConstraint::initialize()
@@ -78,9 +80,35 @@ void PrismaticConstraint::buildJacobian(dfloat dt)
 	dfloat a_cross_s  = -m_WorldAxis.cross(s);
 	dfloat a_cross_r2 = -m_WorldAxis.cross(m_r2);
 	
+	m_EffectiveMassMatrix.col1.x = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
+	m_EffectiveMassMatrix.col2.x = i1Inv * aperp_cross_s + i2Inv * aperp_cross_r2;
+	m_EffectiveMassMatrix.col3.x = i1Inv * aperp_cross_s * a_cross_s + i2Inv * aperp_cross_r2 * a_cross_r2;
+	
+	m_EffectiveMassMatrix.col1.y = m_EffectiveMassMatrix.col2.x;
+	m_EffectiveMassMatrix.col2.y = i1Inv + i2Inv;
+	m_EffectiveMassMatrix.col3.y = i1Inv * a_cross_s + i2Inv * a_cross_r2;
+	
+	m_EffectiveMassMatrix.col1.z = m_EffectiveMassMatrix.col3.x;
+	m_EffectiveMassMatrix.col2.z = m_EffectiveMassMatrix.col3.y;
+	m_EffectiveMassMatrix.col3.z = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2;
+	
+	dfloat effectiveMass = m_EffectiveMassMatrix.col3.z;
+	
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = effectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
+	m_EffectiveMassMatrix.col3.z += m_Cfm;
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
+	
 	// Positional Error for Position Stabilization( Baumgarte )
-	m_PositionError	= d.dot(m_WorldPerpendicularAxis) * m_Erp;
-	m_AngularError	= (m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle - m_ReferenceAngle) * m_Erp;
+	m_PositionError	= d.dot(m_WorldPerpendicularAxis) * erp;
+	m_AngularError	= (m_PhysicalBody2->m_Angle - m_PhysicalBody1->m_Angle - m_ReferenceAngle) * erp;
 	
 	//printf("Angular Velocity = %f    %f\n", m_PhysicalBody1->m_AngularVelocity, m_PhysicalBody2->m_AngularVelocity);
 	
@@ -88,17 +116,17 @@ void PrismaticConstraint::buildJacobian(dfloat dt)
 	
 	if( fabs(m_UpperLimit - m_LowerLimit) < LINEAR_ERROR )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * erp;
 		m_LimitState = ECLS_LOWER_UPPER;
 	}
 	else if( constraintDisplacement >= m_UpperLimit )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_UpperLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_UpperLimit ) * erp;
 		m_LimitState = ECLS_UPPER;
 	}
 	else if( constraintDisplacement <= m_LowerLimit )
 	{
-		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * m_Erp;
+		m_PositionErrorParallel = ( constraintDisplacement - m_LowerLimit ) * erp;
 		m_LimitState = ECLS_LOWER;
 	}
 	else
@@ -106,18 +134,6 @@ void PrismaticConstraint::buildJacobian(dfloat dt)
 		m_Impulse.z = 0.0f;
 		m_LimitState = ECLS_NONE;
 	}
-	
-	m_EffectiveMassMatrix.col1.x = m1Inv + i1Inv * aperp_cross_s * aperp_cross_s + m2Inv + i2Inv * aperp_cross_r2 * aperp_cross_r2;
-	m_EffectiveMassMatrix.col2.x = i1Inv * aperp_cross_s + i2Inv * aperp_cross_r2;
-	m_EffectiveMassMatrix.col3.x = i1Inv * aperp_cross_s * a_cross_s + i2Inv * aperp_cross_r2 * a_cross_r2;
-
-	m_EffectiveMassMatrix.col1.y = m_EffectiveMassMatrix.col2.x;
-	m_EffectiveMassMatrix.col2.y = i1Inv + i2Inv;
-	m_EffectiveMassMatrix.col3.y = i1Inv * a_cross_s + i2Inv * a_cross_r2;
-
-	m_EffectiveMassMatrix.col1.z = m_EffectiveMassMatrix.col3.x;
-	m_EffectiveMassMatrix.col2.z = m_EffectiveMassMatrix.col3.y;
-	m_EffectiveMassMatrix.col3.z = m1Inv + i1Inv * a_cross_s * a_cross_s + m2Inv + i2Inv * a_cross_r2 * a_cross_r2 + m_Cfm;
 	
 	// Apply Corrective impulse on the bodies
 	if( 1 )

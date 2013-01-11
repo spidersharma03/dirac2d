@@ -22,6 +22,7 @@
 #include "../dynamics/contacts/Contact.h"
 
 #include "../dynamics/joints/DistantConstraint.h"
+#include "../dynamics/joints/MouseConstraint.h"
 #include "../dynamics/joints/HingeConstraint.h"
 #include "../dynamics/joints/WeldConstraint.h"
 #include "../dynamics/joints/CatenaryConstraint.h"
@@ -32,6 +33,7 @@
 #include "../dynamics/joints/PulleyConstraint.h"
 #include "../dynamics/joints/MotorConstraint.h"
 #include "../dynamics/joints/MinMaxConstraint.h"
+
 
 #include "../draw/Renderer.h"
 
@@ -44,7 +46,7 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
-Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-10.0f);
+Vector2f PhysicalWorld::GRAVITY = Vector2f(0.0f,-1.0f);
 
 PhysicalWorld::PhysicalWorld()
 {
@@ -145,6 +147,9 @@ Constraint* PhysicalWorld::createConstraint(const ConstraintInfo& constraintInfo
 	{
 		case ECT_DISTANCE:
 			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint((DistanceConstraintInfo&)constraintInfo);
+			break;
+		case ECT_MOUSE:
+			constraint = new MouseConstraint((MouseConstraintInfo&)constraintInfo);
 			break;
 		case ECT_HINGE:
 			constraint = new( m_HingeConstraintPool->Allocate() )HingeConstraint((HingeConstraintInfo&)constraintInfo);
@@ -355,7 +360,7 @@ void PhysicalWorld::Step(dfloat dt)
 	}
 
 	// Initialize the Contact Solver.
-	m_ContactSolver->buildJacobian();
+	m_ContactSolver->buildJacobian(dt);
 	
 	// Correct the velocities of Physical Bodies due to Constraints.
 	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
@@ -497,6 +502,23 @@ void PhysicalWorld::draw()
 					dc->m_PhysicalBody2->getTransform().transformAsPoint(p1);
 				}
 				m_Renderer->drawLine(p0, p1);
+			}
+			if( pConstraint->m_Type == ECT_MOUSE )
+			{
+				MouseConstraint* mc = (MouseConstraint*)pConstraint;
+				Vector2f p0, p1;
+				if( mc->m_PhysicalBody1 )
+				{
+					p0 = mc->getMousePosition();
+					p1 = mc->getTargetPickPosition();
+					m_Renderer->drawLine(p0, p1);
+					
+					m_Renderer->setColor(255, 255, 0);
+					m_Renderer->setPointSize(4.0f);
+					m_Renderer->drawPoint(p1);
+					m_Renderer->setPointSize(1.0f);
+					m_Renderer->setColor(255, 255, 255);
+				}
 			}
 			if( pConstraint->m_Type == ECT_MIN_MAX )
 			{

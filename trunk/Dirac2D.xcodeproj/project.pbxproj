@@ -116,6 +116,7 @@
 		C2FB6FEE1679F4D6002549D8 /* WorldOverlapCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB6FED1679F4D6002549D8 /* WorldOverlapCallback.cpp */; };
 		C2FB7136167EF14E002549D8 /* LaserGun2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB7135167EF14E002549D8 /* LaserGun2.cpp */; };
 		C2FB79E51683389C002549D8 /* Tumbler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB79E41683389C002549D8 /* Tumbler.cpp */; };
+		C2FB8793169E9A1E002549D8 /* MouseConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB8792169E9A1E002549D8 /* MouseConstraint.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -300,6 +301,8 @@
 		C2FB79E31683389C002549D8 /* Tumbler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tumbler.h; sourceTree = "<group>"; };
 		C2FB79E41683389C002549D8 /* Tumbler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tumbler.cpp; sourceTree = "<group>"; };
 		C2FB7D0C168ADC92002549D8 /* memoryAllocatorNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memoryAllocatorNew.h; sourceTree = "<group>"; };
+		C2FB8791169E9A1E002549D8 /* MouseConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseConstraint.h; sourceTree = "<group>"; };
+		C2FB8792169E9A1E002549D8 /* MouseConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseConstraint.cpp; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* Dirac2D.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Dirac2D.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -521,6 +524,8 @@
 				C2EDB84915D4EA48008EAD97 /* MinMaxConstraint.cpp */,
 				3568969816062C3F001D9A15 /* CirclePathConstraint.h */,
 				3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */,
+				C2FB8791169E9A1E002549D8 /* MouseConstraint.h */,
+				C2FB8792169E9A1E002549D8 /* MouseConstraint.cpp */,
 			);
 			name = Constraints;
 			path = Dirac2D/dynamics/joints;
@@ -818,6 +823,7 @@
 				3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */,
 				C244CF87161D805300C141F8 /* BSpline.cpp in Sources */,
 				355FCBE916592EF2004D4C5E /* memoryBlockAllocator.cpp in Sources */,
+				C2FB8793169E9A1E002549D8 /* MouseConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

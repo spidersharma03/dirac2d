@@ -38,6 +38,8 @@ MinMaxConstraint::MinMaxConstraint( const MinMaxConstraintInfo& cInfo): Constrai
     m_Anchor2 = cInfo.m_Anchor2;
     m_UpperLimit = cInfo.m_UpperLimit;
     m_LowerLimit = cInfo.m_LowerLimit;
+	m_Freqeuncy = 6.0f;
+	m_DampingRatio = 0.2f;
 }
 
 void MinMaxConstraint::buildJacobian(dfloat dt)
@@ -82,26 +84,6 @@ void MinMaxConstraint::buildJacobian(dfloat dt)
 	if( distance > 0.0f )
 		m_ImpulseDirection /= distance;
 	
-	//dfloat cerror = (distance - m_Distance);
-	if( fabs(m_UpperLimit - m_LowerLimit) < LINEAR_ERROR )
-	{
-		m_PositionError = ( distance - m_LowerLimit ) * m_Erp;
-		m_LimitState = ECLS_LOWER_UPPER;
-	}
-	else if( distance >= m_UpperLimit )
-	{
-		m_PositionError = ( distance - m_UpperLimit ) * m_Erp;
-		m_LimitState = ECLS_UPPER;
-	}
-	else if( distance <= m_LowerLimit )
-	{
-		m_PositionError = ( distance - m_LowerLimit ) * m_Erp;
-		m_LimitState = ECLS_LOWER;
-	}
-	else
-	{
-		m_LimitState = ECLS_NONE;
-	}
 	
 	dfloat r1cross_d = m_r1.cross(m_ImpulseDirection);
 	dfloat r2cross_d = m_r2.cross(m_ImpulseDirection);
@@ -111,7 +93,44 @@ void MinMaxConstraint::buildJacobian(dfloat dt)
 	
 	// Effective mass for the Constraint.
 	if( JInvMJT != 0.0f )
-		m_EffectiveMass = 1.0f/(JInvMJT + m_Cfm);
+		m_EffectiveMass = 1.0f/(JInvMJT);
+	
+	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat k = m_EffectiveMass * angularFrequency * angularFrequency;
+	dfloat c = 2.0f * m_DampingRatio * m_EffectiveMass * angularFrequency;
+	
+	dfloat cfm = (c + k * dt) * dt;
+	cfm = cfm != 0.0f ? 1.0f/cfm : cfm;
+	m_Cfm = cfm;
+	
+	// Error reduction parameter
+	dfloat erp = dt * k * m_Cfm;
+	
+	m_EffectiveMass = JInvMJT + m_Cfm;
+	
+	m_EffectiveMass = m_EffectiveMass != 0.0f ? 1.0f/m_EffectiveMass : m_EffectiveMass;
+	
+	//dfloat cerror = (distance - m_Distance);
+	if( fabs(m_UpperLimit - m_LowerLimit) < LINEAR_ERROR )
+	{
+		m_PositionError = ( distance - m_LowerLimit ) * erp;
+		m_LimitState = ECLS_LOWER_UPPER;
+	}
+	else if( distance >= m_UpperLimit )
+	{
+		m_PositionError = ( distance - m_UpperLimit ) * erp;
+		m_LimitState = ECLS_UPPER;
+	}
+	else if( distance <= m_LowerLimit )
+	{
+		m_PositionError = ( distance - m_LowerLimit ) * erp;
+		m_LimitState = ECLS_LOWER;
+	}
+	else
+	{
+		m_LimitState = ECLS_NONE;
+	}
+	
 	
 	// Apply Corrective impulse on the bodies
 	if( 1 )//body1->m_PhysicalWorld->m_bWarmStart )
