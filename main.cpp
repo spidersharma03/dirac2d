@@ -2216,7 +2216,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo16();
+	demo21();
 
 	MouseConstraintInfo mInfo;
 	mouseJoint = (MouseConstraint*)pWorld->createConstraint(mInfo);

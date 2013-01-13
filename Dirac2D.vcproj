@@ -244,6 +244,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Dirac2D\dynamics\joints\MouseConstraint.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Dirac2D\dynamics\joints\PrismaticConstraint.cpp"
 						>
 					</File>
@@ -543,6 +547,10 @@
 					</File>
 					<File
 						RelativePath=".\Dirac2D\dynamics\joints\MotorConstraint.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Dirac2D\dynamics\joints\MouseConstraint.h"
 						>
 					</File>
 					<File
