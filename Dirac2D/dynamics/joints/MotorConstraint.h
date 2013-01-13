@@ -45,6 +45,16 @@ public:
 		return m_MaxTorque;
 	}
     
+    inline void setSpeed( dfloat speed )
+    {
+        m_Speed = speed;
+    }
+    
+    inline dfloat getSpeed()
+    {
+        return m_Speed;
+    }
+    
     friend class PhysicalWorld;
     
 protected:

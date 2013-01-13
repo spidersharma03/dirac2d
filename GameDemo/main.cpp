@@ -154,32 +154,6 @@ void MouseButton(int button, int state, int x, int y)
 	py *= 1.5f;
 	
 	Vector2f p(px,py);
-	if ( 0 )//state == GLUT_DOWN && button == GLUT_LEFT_BUTTON)
-    {
-		PhysicalBody* pBody = 0;//pWorld->pickBodyFromScreenCoordinates(p);
-		if( pBody )
-		{
-			bPicked = true;
-			Vector2f posLocal = pBody->getLocalPoint(p);
-			mouseJoint->m_PhysicalBody1 = pBody;
-			mouseJoint->m_Anchor1 = posLocal;
-			mouseJoint->m_Anchor2 = p;
-			mouseJoint->initialize();
-		}
-		else 
-		{
-			bPicked = false;
-			mouseJoint->m_PhysicalBody1 = 0;
-		}
-        
-    }
-	if( 0 )//state == GLUT_UP && button == GLUT_LEFT_BUTTON )
-	{
-		bPicked = false;
-		mouseJoint->m_PhysicalBody1 = 0;
-		mouseJoint->m_Anchor1 = Vector2f();
-		mouseJoint->m_Anchor2 = Vector2f();
-	}
 }
 
 void MouseMotion(int x, int y)
@@ -200,10 +174,6 @@ void MouseMotion(int x, int y)
 	py *= 1.5f;
 	
 	Vector2f p(px,py);
-	if (_button == GLUT_LEFT_BUTTON)
-    {
-		mouseJoint->m_Anchor2 = p;
-	}
 }
 
 #ifndef WIN32

@@ -2216,7 +2216,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo25();
+	demo16();
 
 	MouseConstraintInfo mInfo;
 	mouseJoint = (MouseConstraint*)pWorld->createConstraint(mInfo);
@@ -2453,7 +2453,7 @@ void MouseMotion(int x, int y)
 	}
 }
 
-#ifndef WIN32
+//#ifndef WIN32
 static void timerCallback (int value)
 {
     //timeval t1, t2;
@@ -2489,7 +2489,7 @@ static void timerCallback (int value)
     glutTimerFunc (timerCallbackInterval, timerCallback, 0);
 }
 
-#endif
+//#endif
 
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
@@ -2504,9 +2504,9 @@ int main(int argc, char **argv) {
     //glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
 	
-#ifndef WIN32
+//#ifndef WIN32
 	glutTimerFunc(timerCallbackInterval, timerCallback, 0);
-#endif
+//#endif
 	
 	initScene();
 	

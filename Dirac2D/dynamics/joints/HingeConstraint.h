@@ -37,6 +37,26 @@ public:
 	
 	virtual void initialize();
 	
+    inline void setUpperAngleLimit(const dfloat upperAngle)
+    {
+        m_UpperAngle = upperAngle; 
+    }
+    
+    inline void setLowerAngleLimit(const dfloat lowerAngle)
+    {
+        m_LowerAngle = lowerAngle; 
+    }
+    
+    inline dfloat getUpperAngleLimit() const
+    {
+        return m_UpperAngle;
+    }
+    
+    inline dfloat getLowerAngleLimit() const
+    {
+        return m_LowerAngle;
+    }
+    
     friend class PhysicalWorld;
     
 protected:

@@ -83,12 +83,12 @@ public:
     
     inline void setMotorSpeed( float motorSpeed )
     {
-        m_pMotor->m_Speed = motorSpeed;
+        m_pMotor->setSpeed( motorSpeed );
     }
     
     inline float getMotorSpeed()
     {
-        return m_pMotor->m_Speed;
+        return m_pMotor->getSpeed();
     }
 public:
     virtual void update(float dt){};

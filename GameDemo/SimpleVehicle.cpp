@@ -184,16 +184,18 @@ void SimpleVehicle::render()
 
 void SimpleVehicle::accelerate()
 {
-	m_pMotor->m_Speed += m_BoostIncreament;
-	if( m_pMotor->m_Speed >= m_MaxSpeed )
-		m_pMotor->m_Speed = m_MaxSpeed;
+    float speed = m_pMotor->getSpeed();
+	m_pMotor->setSpeed(speed + m_BoostIncreament);
+	if( m_pMotor->getSpeed() >= m_MaxSpeed )
+		m_pMotor->setSpeed(m_MaxSpeed);
 }
 
 void SimpleVehicle::applyBrake()
 {
-	m_pMotor->m_Speed -= m_BoostIncreament;
-	if( m_pMotor->m_Speed <= m_MinSpeed )
-		m_pMotor->m_Speed = m_MinSpeed;
+	float speed = m_pMotor->getSpeed();
+	m_pMotor->setSpeed(speed - m_BoostIncreament);
+	if( m_pMotor->getSpeed() < m_MinSpeed )
+		m_pMotor->setSpeed(m_MinSpeed);
 }
 
 void SimpleVehicle::shoot(const Vector2f& direction)
