@@ -11,6 +11,7 @@
 		355FCBDE1658A42D004D4C5E /* ObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBDC1658A42D004D4C5E /* ObjectFactory.cpp */; };
 		355FCBE916592EF2004D4C5E /* memoryBlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */; };
 		3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */; };
+		35BA453F16A1A94B00909AF4 /* MouseConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FB8792169E9A1E002549D8 /* MouseConstraint.cpp */; };
 		35C0770D163C21BD00B32CB4 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F140154E71AE00270D77 /* CollisionManager.cpp */; };
 		35C0770E163C21BD00B32CB4 /* ContactSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F148154E71AE00270D77 /* ContactSolver.cpp */; };
 		35C0770F163C21BD00B32CB4 /* CollisionDetectionPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C257F197154E75F400270D77 /* CollisionDetectionPolygon.cpp */; };
@@ -774,6 +775,7 @@
 				35E02F2A167CA5F500C3889A /* DebrisBodyCreator.cpp in Sources */,
 				C2FB7136167EF14E002549D8 /* LaserGun2.cpp in Sources */,
 				C2FB79E51683389C002549D8 /* Tumbler.cpp in Sources */,
+				35BA453F16A1A94B00909AF4 /* MouseConstraint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -92,7 +92,7 @@ Tumbler::Tumbler(TumblerInfo tInfo, FirstGame* pGame)
 
 void Tumbler::openLid()
 {
-    m_pLidConstraint->m_UpperAngle = PI_4;
+    m_pLidConstraint->setUpperAngleLimit(PI_4);
 	m_pLidConstraint->initialize();
 }
 
