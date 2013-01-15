@@ -33,7 +33,9 @@ dint32 windowWidth   = 800;
 dint32 windowHeight = 600;
 
 DistanceConstraint *mouseJoint;
+int windowHandle;
 
+unsigned int timerCallbackInterval = 16;
 
 void initScene()
 {
@@ -91,13 +93,13 @@ void keyProcessor(unsigned char key, int x, int y)
 	{
 		case 'd':
 		case 'D':
-			pGame->getVehicle()->applyTorqueImpulse(-3.5f);
+			pGame->getVehicle()->applyTorqueImpulse(-3.5f/5);
 			//pGame->getVehicle()->setMotorSpeed(0.0f);
 			break;
 			
 		case 'a':
 		case 'A':
-			pGame->getVehicle()->applyTorqueImpulse(3.5f);
+			pGame->getVehicle()->applyTorqueImpulse(3.5f/5);
 
 			break;
 		case 32:
@@ -176,42 +178,41 @@ void MouseMotion(int x, int y)
 	Vector2f p(px,py);
 }
 
-#ifndef WIN32
 static void timerCallback (int value)
 {
-    timeval t1, t2;
-    static double elapsedTime;
-    double FPS = 0;
-    
-    static int frameCnt = 0;
-    
-    // start timer
-    gettimeofday(&t1, NULL);
-    
-    // do something
-    renderScene();
-    frameCnt ++;
-    
-    // stop timer
-    gettimeofday(&t2, NULL);
-    
-    // compute and print the elapsed time in millisec
-    elapsedTime += (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
-    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
-    
-    if( frameCnt >=500 )
-    {
-        frameCnt=0;
-        FPS = 500 /(elapsedTime * 0.001);
-        printf("\n FPS = %f", FPS);
-        elapsedTime = 0;
-    }
-    
+//    timeval t1, t2;
+//    static double elapsedTime;
+//    double FPS = 0;
+//    
+//    static int frameCnt = 0;
+//    
+//    // start timer
+//    gettimeofday(&t1, NULL);
+//    
+//    // do something
+//    renderScene();
+//    frameCnt ++;
+//    
+//    // stop timer
+//    gettimeofday(&t2, NULL);
+//    
+//    // compute and print the elapsed time in millisec
+//    elapsedTime += (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
+//    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
+//    
+//    if( frameCnt >=500 )
+//    {
+//        frameCnt=0;
+//        FPS = 500 /(elapsedTime * 0.001);
+//        printf("\n FPS = %f", FPS);
+//        elapsedTime = 0;
+//    }
+    glutSetWindow(windowHandle);
+	glutPostRedisplay();
     /* Call back again after elapsedUSecs have passed */
-    glutTimerFunc (0, timerCallback, 0);
+    glutTimerFunc (timerCallbackInterval, timerCallback, 0);
 }
 
-#endif
 
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
@@ -224,10 +225,11 @@ int main(int argc, char **argv) {
 	glutMotionFunc (MouseMotion);
 	//glutPassiveMotionFunc(MouseMotion);
 	glutDisplayFunc(renderScene);
-    glutIdleFunc(renderScene);
+    //glutIdleFunc(renderScene);
     glutReshapeFunc(changeSize);
     //glutFullScreen();
 	
+    glutTimerFunc(timerCallbackInterval, timerCallback, 0);
 #ifndef WIN32
 	//glutTimerFunc(0, timerCallback, 0);
 #endif

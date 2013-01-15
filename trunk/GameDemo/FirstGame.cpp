@@ -50,7 +50,7 @@ FirstGame::FirstGame()
     
     m_pObjectPlacementStrategy[0] = new CoinPlacementStraregy(this);
     
-	m_StepSize = 1.0f/1600.0f;
+	m_StepSize = 1.0f/60.0f;
 }
 
 void FirstGame::initGame()

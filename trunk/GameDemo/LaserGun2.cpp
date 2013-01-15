@@ -79,7 +79,7 @@ void LaserGun2::render()
 	glPushMatrix();
 	if( count > 0 )
 	{
-		count--;
+		count-=10;
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		m_pGame->getRenderer()->setColor(255, 0, 0, count);
