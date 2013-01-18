@@ -22,7 +22,7 @@ PulleyConstraint::PulleyConstraint( const PulleyConstraintInfo& cInfo): Constrai
     m_FixedPoint2 = cInfo.m_FixedPoint2;
     m_PulleyRatio = cInfo.m_PulleyRatio;
     
-	m_Freqeuncy = 60.0f;
+	m_Frequency = 60.0f;
 	m_Cfm = 0.0f;
 }
 
@@ -90,7 +90,7 @@ void PulleyConstraint::buildJacobian(dfloat dt)
 	// Effective mass for the Constraint.
 	m_EffectiveMass = JInvMJT != 0.0f ? 1.0f/JInvMJT : JInvMJT;
 	
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = m_EffectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * m_EffectiveMass * angularFrequency;
 	

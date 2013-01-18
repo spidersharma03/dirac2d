@@ -18,6 +18,8 @@ class Edge : public CollisionShape
 public:
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 	
+	virtual Vector2f getSupportPointWithoutRadius(const Vector2f& d);
+
 	virtual dbool isPointInside(Vector2f& p);
 	
 	virtual dbool intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo);

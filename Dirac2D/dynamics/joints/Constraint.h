@@ -35,8 +35,8 @@ struct ConstraintInfo
 {
     ConstraintInfo()
     {
-        m_Erp = 0.0f;
-        m_Cfm = 0.0f;
+        m_Frequency = 60.0f;
+        m_DampingRatio = 0.0f;
         m_PhysicalBody1 = 0;
         m_PhysicalBody2 = 0;
 		m_bCollideConnected = true;
@@ -46,22 +46,27 @@ struct ConstraintInfo
 	PhysicalBody* m_PhysicalBody2; 
     CONSTRAINT_TYPE m_Type;
 	dbool m_bCollideConnected;
-    dfloat m_Erp;
-    dfloat m_Cfm;
+	dfloat m_Frequency;
+	dfloat m_DampingRatio;
 };
 
 class Constraint
 {
+public:
+	inline dbool shouldCollideConnected() const
+	{
+		return m_bCollideConnected;
+	}
 protected:
     Constraint(const ConstraintInfo& cInfo)
 	{
 		m_PhysicalBody1 = cInfo.m_PhysicalBody1;
 		m_PhysicalBody2 = cInfo.m_PhysicalBody2;
-		//m_Erp = cInfo.m_Erp;
-		m_Cfm = cInfo.m_Cfm;
+		m_DampingRatio = cInfo.m_DampingRatio;
 		m_Next = m_Prev = 0;
-		m_Freqeuncy = 60.0f;
-		m_DampingRatio = 1.0f; // Critically damped.
+		m_Frequency = cInfo.m_Frequency;
+		m_DampingRatio = cInfo.m_DampingRatio; // Critically damped.
+		m_Cfm = 0.0f;
 	};
 	
 protected:
@@ -84,7 +89,7 @@ protected:
 	dfloat m_Cfm;
 	
 	//The Natural Frequency of this Constraint( without damping ) . expressed in Hz.
-	dfloat m_Freqeuncy;
+	dfloat m_Frequency;
 	/* The Damping ratio for this Constraint. different damping behaviors are obtained based upon the value of Damping Ratio. it is dimentionless.
 	   m_DampingRatio = 1 ---> Critically Damped
 	   m_DampingRatio > 1 ---> Over Damped.

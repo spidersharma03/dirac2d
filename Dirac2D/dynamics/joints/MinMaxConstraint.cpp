@@ -38,7 +38,7 @@ MinMaxConstraint::MinMaxConstraint( const MinMaxConstraintInfo& cInfo): Constrai
     m_Anchor2 = cInfo.m_Anchor2;
     m_UpperLimit = cInfo.m_UpperLimit;
     m_LowerLimit = cInfo.m_LowerLimit;
-	m_Freqeuncy = 6.0f;
+	m_Frequency = 6.0f;
 	m_DampingRatio = 0.2f;
 }
 
@@ -95,7 +95,7 @@ void MinMaxConstraint::buildJacobian(dfloat dt)
 	if( JInvMJT != 0.0f )
 		m_EffectiveMass = 1.0f/(JInvMJT);
 	
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = m_EffectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * m_EffectiveMass * angularFrequency;
 	

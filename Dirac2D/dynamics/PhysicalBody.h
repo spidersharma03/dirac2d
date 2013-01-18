@@ -151,6 +151,8 @@ public:
 		return m_Prev;
 	}
 	
+	dbool getCollisionStatus( PhysicalBody* pOther);
+	
 	void updateSleepingStatus(dfloat dt);
 	
 	void updateAABB();

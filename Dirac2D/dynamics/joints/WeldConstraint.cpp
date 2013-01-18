@@ -18,7 +18,7 @@ WeldConstraint::WeldConstraint(const WeldConstraintInfo& cInfo):Constraint(cInfo
     m_Type = ECT_WELD;
     m_Anchor = cInfo.m_Anchor;
     m_Cfm = 0.4f;
-	m_Freqeuncy = 5.0f;
+	m_Frequency = 5.0f;
 	m_DampingRatio = 0.2f;
 }
 
@@ -81,7 +81,7 @@ void WeldConstraint::buildJacobian(dfloat dt)
 	dfloat effectiveMass = i1Inv + i2Inv;
 	effectiveMass = effectiveMass != 0.0f ? 1.0f/effectiveMass : effectiveMass;
 	
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = effectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
 	

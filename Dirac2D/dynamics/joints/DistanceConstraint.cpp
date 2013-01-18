@@ -18,7 +18,7 @@ DistanceConstraint::DistanceConstraint( const DistanceConstraintInfo& constraint
 	m_Type = ECT_DISTANCE;
     m_Anchor1 = constraintInfo.m_Anchor1;
     m_Anchor2 = constraintInfo.m_Anchor2;
-	m_Freqeuncy = 4.0f;
+	m_Frequency = 4.0f;
 	m_DampingRatio = 0.1f;
 }
 
@@ -96,7 +96,7 @@ void DistanceConstraint::buildJacobian(dfloat dt)
 	if( JInvMJT != 0.0f )
 		m_EffectiveMass = 1.0f/(JInvMJT);
 	
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = m_EffectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * m_EffectiveMass * angularFrequency;
 	

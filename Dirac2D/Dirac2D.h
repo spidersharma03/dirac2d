@@ -99,6 +99,8 @@
 #include "collision/broadPhase/DynamicTreeBroadPhaseAlgorithm.h"
 #include "collision/broadPhase/DynamicTree.h"
 
+#include "collision/GJK_EPA/GJKAlgorithm.h"
+
 #include "geometry/ConvexHull/ConvexHullGenerator.h"
 
 #include "draw/Renderer.h"

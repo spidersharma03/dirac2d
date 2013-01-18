@@ -29,6 +29,7 @@ public:
 		m_Area = 0.0f;
 		m_I = 0.0f;
 		m_pBroadPhaseNode = 0;
+		m_Radius = 0.0f;
 	}
 
 	CollisionShape( const CollisionShape& other )
@@ -37,6 +38,7 @@ public:
 		m_Area	    = other.m_Area;
 		m_ShapeType = other.m_ShapeType;
 		m_AABB      = other.m_AABB;	
+		m_Radius    = other.m_Radius;
 	}
 	
 	void operator= ( CollisionShape& other)
@@ -45,6 +47,7 @@ public:
 		m_Area	    = other.m_Area;
 		m_ShapeType = other.m_ShapeType;
 		m_AABB      = other.m_AABB;
+		m_Radius	= other.m_Radius;
 	}
 	
 	inline dfloat getArea() const
@@ -67,11 +70,18 @@ public:
 		return m_AABB;
 	}
     
+	inline dfloat getRadius()
+	{
+		return m_Radius;
+	}
     
 	// For GJK/EPA 
 	// returns Local Support Point on the Shape.
 	virtual Vector2f getSupportPoint(const Vector2f& d) = 0;
-	
+
+	// Returns local support Point on the Shape, without considering the radius.
+	virtual Vector2f getSupportPointWithoutRadius(const Vector2f& d) = 0;
+
 	virtual dbool isPointInside(Vector2f& p) = 0;
 	
 	virtual void updateAABB(Matrix3f& xForm) = 0;
@@ -114,6 +124,7 @@ protected:
 	dfloat m_I;
 	SHAPE_TYPE m_ShapeType;
 	AABB2f m_AABB;
+	dfloat m_Radius;
 };
 
 END_NAMESPACE_DIRAC2D

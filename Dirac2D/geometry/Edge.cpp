@@ -53,6 +53,11 @@ Vector2f Edge::getSupportPoint(const Vector2f& d)
 	return m_Vertex1.dot(d) >= m_Vertex2.dot(d) ? m_Vertex1 : m_Vertex2;
 }
 
+Vector2f Edge::getSupportPointWithoutRadius(const Vector2f& d)
+{
+	return m_Vertex1.dot(d) >= m_Vertex2.dot(d) ? m_Vertex1 : m_Vertex2;
+}
+
 dbool Edge::isPointInside(Vector2f& p)
 {
 	return false;

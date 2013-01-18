@@ -22,7 +22,7 @@ CatenaryConstraintFixedRotation::CatenaryConstraintFixedRotation( const Catenary
     m_FixedPoint1 = cInfo.m_FixedPoint1;
     m_FixedPoint2 = cInfo.m_FixedPoint2;
     m_Cfm = 0.0f;
-	m_Freqeuncy = 3.0f;
+	m_Frequency = 3.0f;
 	m_DampingRatio = 0.2f;
     m_ReferenceAngle = 0.0f;
 }
@@ -70,7 +70,7 @@ void CatenaryConstraintFixedRotation::buildJacobian(dfloat dt)
 	m_EffectiveMassMatrix.a12 = m_EffectiveMassMatrix.a21;
 	m_EffectiveMassMatrix.a22 = pBody->m_InvI;
 	
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = effectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
 	

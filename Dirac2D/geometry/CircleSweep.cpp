@@ -71,6 +71,11 @@ Vector2f CircleSweep::getSupportPoint(const Vector2f& d)
 	return Vector2f();
 }
 
+Vector2f CircleSweep::getSupportPointWithoutRadius(const Vector2f& d)
+{
+	return Vector2f();
+}
+
 dbool CircleSweep::isPointInside(Vector2f& p)
 {
 	return 0;

@@ -11,8 +11,10 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 
-Capsule::Capsule(dfloat radius, dfloat height):m_Radius(radius), m_Height(height)
+Capsule::Capsule(dfloat radius, dfloat height): m_Height(height)
 {
+	m_Radius = radius;
+	
 	m_Area = PI * m_Radius * m_Radius + 2.0f * m_Radius * m_Height;
 	
 	m_ShapeType = EST_CAPSULE;
@@ -38,6 +40,14 @@ Vector2f Capsule::getSupportPoint(const Vector2f& d)
     dfloat signx = dir.x > 0.0f ? 1.0f : -1.0f;
     
 	return Vector2f(signx * m_Height * 0.5f + dir.x * m_Radius, m_Radius * dir.y);
+}
+
+Vector2f Capsule::getSupportPointWithoutRadius(const Vector2f& d)
+{
+	Vector2f dir = d;
+    dfloat signx = dir.x > 0.0f ? 1.0f : -1.0f;
+    
+	return Vector2f(signx * m_Height * 0.5f , 0.0f);
 }
 
 dbool Capsule::isPointInside(Vector2f& p)

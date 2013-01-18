@@ -24,6 +24,8 @@ class Circle : public CollisionShape
 public:
 	virtual Vector2f getSupportPoint(const Vector2f& d);
 
+	virtual Vector2f getSupportPointWithoutRadius(const Vector2f& d);
+
 	virtual dbool isPointInside(Vector2f& p);
 	
 	virtual dbool intersectRaySegment(const Matrix3f& xForm, const RaySegment2f& raySeg, RayIntersectionInfo& intersectInfo);
@@ -57,7 +59,6 @@ protected:
 	virtual void findMomentOfInertia();
 
 protected:
-	dfloat m_Radius;
 	
 	friend dbool intersectCircles( Circle* circle1, Matrix3f& xform1, Circle* circle2, Matrix3f& xform2);
 	friend dbool intersectCircles( Circle* circle1, Matrix3f& xform1, Circle* circle2, Matrix3f& xform2, ContactManifold* contactManifold);

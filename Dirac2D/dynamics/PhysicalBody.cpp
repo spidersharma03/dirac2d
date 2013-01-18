@@ -479,4 +479,19 @@ void PhysicalBody::calculateMassAttributes()
 
 }
 
+dbool PhysicalBody::getCollisionStatus( PhysicalBody* pOther)
+{
+	dbool bRes = true;
+	ConstraintEdge* cEdge = pOther->m_ConstraintEdgeList;
+	while (cEdge) 
+	{
+		if( cEdge->pBody == this )
+		{
+			return cEdge->m_pConstraint->shouldCollideConnected();
+		}
+		cEdge = cEdge->m_Next;
+	}
+	return bRes;
+}
+
 END_NAMESPACE_DIRAC2D

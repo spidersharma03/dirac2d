@@ -90,7 +90,7 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape* polygon1, Matrix3f m1, Coll
 	Vector2f point;
     Vector2f dir(1.0f,0.0f);
 	Vector2f point1 = polygon1->getSupportPoint(dir);
-	Vector2f point2 = polygon2->getSupportPoint(dir);
+	Vector2f point2 = polygon2->getSupportPoint(-dir);
 	
 	// Transform the support point 2 into Polygon1's local space
 	Matrix3f m1Inv;
@@ -107,6 +107,8 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape* polygon1, Matrix3f m1, Coll
 	point = point1 - point2;
 	
 	s.addPoint( point );
+	s.addPoint1(point1);
+	s.addPoint2(point2);
 	
 	// Get support point in the direction towards the origin
 	Vector2f d;
@@ -139,8 +141,99 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape* polygon1, Matrix3f m1, Coll
 		// Process the Simplex
 		Vector2f origin;
 		if ( s.process(d, origin) )
+		{
 			return true;
+		}
+		if( d.lengthSquared() < EPSILON * EPSILON  )
+			return false;
 	}
+}
+
+
+dfloat GJKAlgorithm::closestDistance( CollisionShape* polygon1, Matrix3f m1, CollisionShape* polygon2, Matrix3f m2, ClosestPoints& closestPoints )
+{
+	// 1. Create Simplex 0 using any point in the Minkowski difference of polygon 1 and 2.
+	Simplexf s;
+	
+	Vector2f point;
+    Vector2f dir(1.0f,0.0f);
+	Vector2f point1 = polygon1->getSupportPointWithoutRadius(dir);
+	Vector2f point2 = polygon2->getSupportPointWithoutRadius(-dir);
+	
+	Matrix3f xForm1 = m1;
+
+	// Transform the support point 2 into Polygon1's local space
+	Matrix3f m1Inv;
+	Matrix3f m2Inv;
+	// TODO :: Find the inverse simply by noting that the 2x2 part of the inverse is transpose of the original matrix.
+	m1.getInverse(m1Inv);
+	m2.getInverse(m2Inv);
+	
+	m1 = m2Inv * m1;
+	m2 = m1Inv * m2;
+	
+	m2.transformAsPoint(point2);
+	
+	point = point1 - point2;
+	
+	s.addPoint( point );
+	s.addPoint1(point1);
+	s.addPoint2(point2);
+	
+	// Get support point in the direction towards the origin
+	Vector2f d;
+	d -= point;
+	
+	while (true)
+	{				
+		Vector2f supportPoint, supportPoint1, supportPoint2;
+		
+		// Get a new Support Point in the Minkowski difference.
+		supportPoint1 = polygon1->getSupportPointWithoutRadius(d);
+		Vector2f negd = -d;
+		// Transform the search direction into Polygon2's local space
+		m1.transformAsVector(negd);
+		supportPoint2 = polygon2->getSupportPointWithoutRadius(negd);
+		
+		// Transform the support point 2 into Polygon1's space
+		m2.transformAsPoint(supportPoint2);
+		
+		supportPoint = supportPoint1 -  supportPoint2;
+		
+		// Termination criterian. if the simplex already contains this support point.
+		if( s.contains(supportPoint) )
+		{
+			s.getClosestPoints(closestPoints);
+			xForm1.transformAsPoint(closestPoints.m_Point1);
+			xForm1.transformAsPoint(closestPoints.m_Point2);
+			
+			Vector2f n = closestPoints.m_Point2 - closestPoints.m_Point1;
+			n.normalize();
+			closestPoints.m_Point1 += polygon1->getRadius() * n;
+			closestPoints.m_Point2 -= polygon2->getRadius() * n;
+
+			return 1.0f;
+		}
+		
+		// Add the support point to evolve the Simplex
+		s.addPoint(supportPoint);
+		s.addPoint1(supportPoint1);
+		s.addPoint2(supportPoint2);
+		
+		// Process the Simplex
+		Vector2f origin;
+		
+		// if the Simplex contains the origin, there is an intersection. we return -1 to indicate the intersection.
+		if ( s.process(d, origin) )
+		{
+			return -1.0f;
+		}
+		// Origin lies on the edge of a line or triangle
+		if( d.lengthSquared() < EPSILON * EPSILON  )
+			return -1.0f;
+		numIterations++;
+	}
+	return 1000.0f;
 }
 
 dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, CollisionShape& polygon2, Matrix3f& m2, Simplexf& simplex )
@@ -149,17 +242,14 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, Col
 	Simplexf s;
 	
 	Vector2f point;
-	Vector2f point1;// =  *polygon1.m_vecVertices[0];
-	Vector2f point2;// =  *polygon2.m_vecVertices[0];
+	Vector2f point1;
+	Vector2f point2;
 	Vector2f dir(1.0f,0.0f);
 	point1 = polygon1.getSupportPoint(dir);
-	point2 = polygon2.getSupportPoint(dir);
+	point2 = polygon2.getSupportPoint(-dir);
 	
 	
 	// Transform the support point 2 into Polygon1's local space
-	//Matrix3f m1 = polygon1.m_Transform;
-	//Matrix3f m2 = polygon2.m_Transform;
-	
 	Matrix3f m1Inv;
 	Matrix3f m2Inv;
 	m1.getInverse(m1Inv);
@@ -205,7 +295,7 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, Col
 
 		if( a.dot(d) < 0.0f )	
 			return false;
-		
+
 		// Add the support point to evolve the Simplex
 		s.addPoint(supportPoint);
 		s.addPoint1( supportPoint1 );
@@ -215,7 +305,10 @@ dbool GJKAlgorithm::intersectShapes( CollisionShape& polygon1, Matrix3f& m1, Col
 		simplex = s;
 		// Process the Simplex
 		Vector2f origin;
+		
 		if ( s.process(d, origin) )
+			return true;
+		if( d.lengthSquared() < EPSILON * EPSILON )
 			return true;
 	}
 }
