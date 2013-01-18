@@ -20,7 +20,7 @@ PrismaticConstraint::PrismaticConstraint( const PrismaticConstraintInfo& cInfo):
     m_LocalAxis = cInfo.m_LocalAxis;
 	m_LowerLimit = cInfo.m_LowerLimit;
     m_UpperLimit = cInfo.m_UpperLimit;
-	m_Freqeuncy = 3.0f;
+	m_Frequency = 3.0f;
 	m_DampingRatio = 0.2f;
 }
 
@@ -94,7 +94,7 @@ void PrismaticConstraint::buildJacobian(dfloat dt)
 	
 	dfloat effectiveMass = m_EffectiveMassMatrix.col3.z;
 	
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = effectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
 	

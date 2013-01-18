@@ -21,7 +21,7 @@ CatenaryConstraint::CatenaryConstraint( const CatenaryConstraintInfo& cInfo): Co
     m_Anchor = cInfo.m_Anchor;
     m_FixedPoint1 = cInfo.m_FixedPoint1;
     m_FixedPoint2 = cInfo.m_FixedPoint2;
-	m_Freqeuncy = 2.0f;
+	m_Frequency = 2.0f;
 	m_DampingRatio = 0.2f;
 }
 
@@ -66,7 +66,7 @@ void CatenaryConstraint::buildJacobian(dfloat dt)
 	
 	m_EffectiveMass = JInvMJT != 0.0f ? 1.0f/JInvMJT : JInvMJT;
 	
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = m_EffectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * m_EffectiveMass * angularFrequency;
 	

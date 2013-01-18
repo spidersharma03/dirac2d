@@ -95,6 +95,23 @@ Vector2f EdgeChain::getSupportPoint(const Vector2f& d)
 	return m_EdgeList[index].getSupportPoint(d);
 }
 
+Vector2f EdgeChain::getSupportPointWithoutRadius(const Vector2f& d)
+{
+	dfloat max = -10000.0f;
+	dint32 index = -1;
+	for( dint32 e=0; e<m_NumEdges; e++ )
+	{
+		Vector2f sp = m_EdgeList[e].getSupportPoint(d);
+		dfloat proj = sp.dot(d);
+		if( proj > max )
+		{
+			max = proj;
+			index = e;
+		}
+	}
+	return m_EdgeList[index].getSupportPoint(d);
+}
+
 dbool EdgeChain::isPointInside(Vector2f& p)
 {
 	if( !isClosed() )

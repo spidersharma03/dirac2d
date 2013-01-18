@@ -9,10 +9,18 @@
 #include "../../definitions.h"
 #include "../../maths/MathUtil.h"
 
+#include <stdio.h>
+
 #ifndef _SIMPLEX_H_
 #define _SIMPLEX_H_
 
 BEGIN_NAMESPACE_DIRAC2D
+
+struct ClosestPoints
+{
+	Vector2f m_Point1;
+	Vector2f m_Point2;
+};
 
 template< class T >
 class Simplex
@@ -44,11 +52,63 @@ public:
 		m_SimplexType--;
 	}
 	
+	// check whether the simplex contains the point
+	inline dbool contains( const Vector2<T>& point )
+	{
+		for( int i = 0; i<m_SimplexType+1; i++ )
+		{
+			if( m_simplexPoints[i] == point )
+				return true;
+		}
+		return false;
+	}
+	
+	Vector2<T> getPointOfMinNorm(const Vector2<T>& point)
+	{
+		Vector2<T> outPoint;
+		if( m_SimplexType == 0 )
+		{
+			outPoint = m_simplexPoints[0];
+		}
+		if( m_SimplexType == 1 )
+		{
+			Vector2<T> d = m_simplexPoints[1] - m_simplexPoints[0];
+			dfloat u = (point - m_simplexPoints[0]).dot(d)/d.lengthSquared();
+			if( u < 0.0f )u = 0.0f;
+			if( u > 1.0f )u = 1.0f;
+			outPoint = m_simplexPoints[0] + u * d;
+		}
+		
+		return outPoint;
+	}
+	
+	void getClosestPoints(ClosestPoints& closestPoints)
+	{
+		if( m_SimplexType == 0 )
+		{
+			closestPoints.m_Point1 = m_SupportPoint1[0];
+			closestPoints.m_Point2 = m_SupportPoint2[0];
+		}
+		if( m_SimplexType == 1 )
+		{
+			Vector2<T> d = m_simplexPoints[1] - m_simplexPoints[0];
+			dfloat u = -m_simplexPoints[0].dot(d)/d.lengthSquared();
+			if( u < 0.0f )u = 0.0f;
+			if( u > 1.0f )u = 1.0f;
+			closestPoints.m_Point1 = m_SupportPoint1[0] + u * ( m_SupportPoint1[1] - m_SupportPoint1[0] );
+			closestPoints.m_Point2 = m_SupportPoint2[0] + u * ( m_SupportPoint2[1] - m_SupportPoint2[0] );
+		}
+		if( m_SimplexType == 2 )
+		{
+		}
+	}
+	
 	dbool process( Vector2<T>& d , Vector2<T>& p);
 	
 	void render();
 	
-public:
+	friend class GJKAlgorithm;
+protected:
 	// Support Points. In case when polygon intersection is required these points are Minkowski difference of support points.
 	Vector2<T> m_simplexPoints[3];
 	// In case when polygon intersection is required these points are support points of each polygon. can be used to get closest points on the polygons.
@@ -62,11 +122,13 @@ public:
 
 template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 {
+	if( m_SimplexType == 0 )
+		return false;
 	/*   Simplex type 1 (Line Segment)
 	 
 	 |    2             |
 	 | p1            p2 |
-	 1   |------------------|	4
+1	 |------------------| 4
 	 |                  |
 	 |    3             |
 	 
@@ -83,6 +145,10 @@ template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 		// p lies in region 4. so the Simplex will become of type 0. set the new search direction towards the test point.
 		if( sign < 0.0f )
 		{
+			m_simplexPoints[0] = m_simplexPoints[1];
+			m_SupportPoint1[0] = m_SupportPoint1[1];
+			m_SupportPoint2[0] = m_SupportPoint2[1];
+			
 			d = p - m_simplexPoints[1];
 			m_SimplexType = 0;
 			return false;
@@ -93,8 +159,8 @@ template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 			Vector2<T> normal( -p2p1.y, p2p1.x );
 			dfloat signNormal = p1p.dot(normal);
 			// On the Edge. return true
-			if( fabs(signNormal) < EPSILON )
-				return true;
+			//if( fabs(signNormal) < EPSILON )
+			//	return true;
 			
 			normal *= -signNormal;
 			d = normal;
@@ -111,7 +177,7 @@ template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 	 |\     4
 	 | \
 	 |  \
-	 1	 |   \
+1	 |   \
 	 |    \
 	 |  7  \
 	 |------\A
@@ -140,26 +206,33 @@ template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 		// Region 4 OR 5
 		dfloat signAB_Normal = AB_Normal.dot(AP);
 		
-		if( fabs(signAB_Normal) < EPSILON )
-			return true;
+		//if( fabs(signAB_Normal) < EPSILON )
+		//	return true;
 		
 		float signAC_Normal = AC_Normal.dot(AP);
 		
-		if( fabs(signAC_Normal) < EPSILON )
-			return true;
+		//if( fabs(signAC_Normal) < EPSILON )
+		//	return true;
 		
-		if( signAB_Normal > 0.0f )
+		if( signAB_Normal >= 0.0f )
 		{
 			// region 4. Set the new direction. Simplex is changed and contains A and B point.
 			dfloat signABAP = AB.dot(AP);
-			if( fabs(signABAP) < EPSILON )
-				return true;
+			//if( fabs(signABAP) < EPSILON )
+			//	return true;
 			
 			if(  signABAP < 0.0f )
 			{
 				d = AB_Normal;
 				m_simplexPoints[0] = m_simplexPoints[1];
 				m_simplexPoints[1] = m_simplexPoints[2];
+				
+				m_SupportPoint1[0] = m_SupportPoint1[1];
+				m_SupportPoint1[1] = m_SupportPoint1[2];
+
+				m_SupportPoint2[0] = m_SupportPoint2[1];
+				m_SupportPoint2[1] = m_SupportPoint2[2];
+
 				m_SimplexType = 1;
 				return false;
 			}
@@ -167,6 +240,10 @@ template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 			else 
 			{
 				m_simplexPoints[0] = m_simplexPoints[2]; 
+				
+				m_SupportPoint1[0] = m_SupportPoint1[2];
+				m_SupportPoint2[0] = m_SupportPoint2[2];
+
 				d = p - m_simplexPoints[0];
 				m_SimplexType = 0;
 				return false;
@@ -174,7 +251,7 @@ template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 			
 		}
 		// Region 6 OR 5
-		else if ( signAC_Normal > 0.0f )
+		else if ( signAC_Normal >= 0.0f )
 		{
 			// region 6. Set the new direction. Simplex is changed and contains A and C point.
 			if( AC.dot(AP) < 0.0f )
@@ -182,17 +259,26 @@ template< class T > dbool Simplex<T>::process( Vector2<T>& d , Vector2<T>& p)
 				d = AC_Normal;
 				m_SimplexType = 1;
 				m_simplexPoints[1] = m_simplexPoints[2];
+				
+				m_SupportPoint1[1] = m_SupportPoint1[2];
+				m_SupportPoint2[1] = m_SupportPoint2[2];
+
 				return false;
 			}
 			// region 5. Simplex becomes 0 simplex with point A. Set the new direction which is p - A.
 			else 
 			{
 				m_simplexPoints[0] = m_simplexPoints[2]; 
+				
+				m_SupportPoint1[0] = m_SupportPoint1[2];
+				m_SupportPoint2[0] = m_SupportPoint2[2];
+
 				d = p - m_simplexPoints[0];
 				m_SimplexType = 0;
 				return false;
 			}
 		}
+		// Inside Triangle
 		else
 		{
 			return true;

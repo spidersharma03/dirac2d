@@ -20,7 +20,7 @@ HingeConstraint::HingeConstraint(const HingeConstraintInfo& cInfo) : Constraint(
     m_Anchor = cInfo.m_Anchor;
     m_LowerAngle = cInfo.m_LowerAngle;
     m_UpperAngle = cInfo.m_UpperAngle;
-	m_Freqeuncy = 1.0f;
+	m_Frequency = 1.0f;
 	m_DampingRatio = 0.2f;
 }
 
@@ -81,7 +81,7 @@ void HingeConstraint::buildJacobian(dfloat dt)
 	m_EffectiveMass.col3.z = i1Inv + i2Inv;
 	
 	dfloat effectiveMass = i1Inv + i2Inv;
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = effectiveMass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * effectiveMass * angularFrequency;
 	

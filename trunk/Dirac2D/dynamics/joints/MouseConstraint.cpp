@@ -32,7 +32,7 @@ void MouseConstraint::buildJacobian(dfloat dt)
 	mInv = body1->m_InvMass;
 	iInv = body1->m_InvI;
 				
-	dfloat angularFrequency = 2.0f * PI * m_Freqeuncy;
+	dfloat angularFrequency = 2.0f * PI * m_Frequency;
 	dfloat k = body1->m_Mass * angularFrequency * angularFrequency;
 	dfloat c = 2.0f * m_DampingRatio * body1->m_Mass * angularFrequency;
 	
@@ -120,7 +120,7 @@ Vector2f MouseConstraint::getTargetPickPosition()
 
 MouseConstraint::MouseConstraint( const MouseConstraintInfo& constraintInfo ) : Constraint( constraintInfo )
 {
-	m_Freqeuncy = 5.0f;
+	m_Frequency = 5.0f;
 	m_DampingRatio = 1.0f;
 	m_Type = ECT_MOUSE;
 	m_MaxImpulse = 2.0f;

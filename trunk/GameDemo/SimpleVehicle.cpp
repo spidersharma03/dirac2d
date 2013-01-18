@@ -91,7 +91,15 @@ void SimpleVehicle::init()
 
 		pApp.m_MassAttributes.m_Density = 10.0f;
         CapsuleInfo capsuleInfo(0.07f, 0.6f);
-        pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capsuleInfo;
+		dfloat vehicleWidth = 0.4f; dfloat vehicleHeight = 0.08f;
+		Vector2f vertices[4] = { Vector2f(vehicleWidth, vehicleHeight), 
+								 Vector2f(-vehicleWidth, vehicleHeight), 
+								 Vector2f(-vehicleWidth, -vehicleHeight), 
+								 Vector2f(vehicleWidth, -vehicleHeight) };
+		PolygonInfo pInfo(vertices, 4);
+		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
+		
+        //pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capsuleInfo;
 		PhysicalShape* pShape = m_pVehicleBody->createPhysicalShape(pApp);
 		pShape->setUserData(this);
         
@@ -119,9 +127,10 @@ void SimpleVehicle::init()
 		wInfo.m_PhysicalBody2 = circle1;
 		wInfo.m_Anchor = Vector2f(1.3f+xPos,0.8f+yPos);
 		wInfo.m_LocalAxis = Vector2f(1.0f,-1.0f);
-		wInfo.m_Erp = 10.0f;
-		wInfo.m_Cfm = 8.0f;
-        
+		wInfo.m_Frequency = 2.0f;
+		wInfo.m_DampingRatio = 0.5f;
+		wInfo.m_bCollideConnected = false;
+		 
 		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(wInfo);
         lc1->initialize();
                 

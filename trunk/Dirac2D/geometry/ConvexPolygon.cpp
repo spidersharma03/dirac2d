@@ -86,6 +86,23 @@ Vector2f ConvexPolygon::getSupportPoint(const Vector2f& d)
 	return m_Vertices[pointIndex];
 }
 
+Vector2f ConvexPolygon::getSupportPointWithoutRadius(const Vector2f& d)
+{
+	dfloat max = -10000.0f;
+	dint32 pointIndex = 0;
+	for( dint32 i=0; i<m_NumVertices; i++ )
+	{
+		Vector2f& p = m_Vertices[i];
+		dfloat proj = p.dot(d);
+		if( proj > max )
+		{
+			max = proj;
+			pointIndex = i;
+		}
+	}
+	return m_Vertices[pointIndex];
+}
+
 dbool ConvexPolygon::isPointInside(Vector2f& p)
 {
 	for (dint32 v=0; v<m_NumVertices; v++)

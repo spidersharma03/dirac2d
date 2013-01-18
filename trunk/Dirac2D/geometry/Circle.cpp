@@ -12,8 +12,9 @@
 BEGIN_NAMESPACE_DIRAC2D
 
 
-Circle::Circle(dfloat radius):m_Radius(radius)
+Circle::Circle(dfloat radius)
 {
+	m_Radius = radius;
 	m_Area = PI * m_Radius * m_Radius;
 	
 	m_ShapeType = EST_CIRCLE;
@@ -51,6 +52,11 @@ Vector2f Circle::getSupportPoint(const Vector2f& d)
 	Vector2f dir = d;
 	dir.normalize();
 	return m_Centroid + m_Radius * dir;
+}
+
+Vector2f Circle::getSupportPointWithoutRadius(const Vector2f& d)
+{
+	return m_Centroid;
 }
 
 dbool Circle::isPointInside(Vector2f& p)

@@ -826,26 +826,33 @@ void demo12()
 {
 	// Create Ground Body
 	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
-	pBodyGround->setPosition(Vector2f(0.0f,-0.5f));
-	pBodyGround->setAngle(PI_4);
-	pBodyGround->m_BodyType = EBT_STATIC;
+	pBodyGround->setPosition(Vector2f(0.0f,1.95f));
+	pBodyGround->setAngle(PI_4/1000);
+	//pBodyGround->m_BodyType = EBT_STATIC;
 	
 	PhysicalAppearance pApp;
-	dfloat groundWidth = 0.4f; dfloat groundHeight = 0.4f;
+	dfloat groundWidth = 0.2f; dfloat groundHeight = 0.04f;
 	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
     PolygonInfo pInfo(vertices, 4);
     pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
 	pBodyGround->createPhysicalShape(pApp);
 	
 	// Create Capsule
-	dfloat y = 0.4f;
+	dfloat y = -0.4f;
 	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
-	//pBodyCompound->m_BodyType = EBT_STATIC;
+	pBodyCompound->m_BodyType = EBT_STATIC;
+	//pBodyCompound->setAngle(PI_2);
 	pBodyCompound->setPosition(Vector2f(0.01,y));
 	//pBodyCompound->setAngle(PI_4*0.9);
-	dfloat capsuleRadius = 0.15f;
-    CapsuleInfo capInfo(capsuleRadius,capsuleRadius);
-    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capInfo;
+	dfloat capsuleRadius = 0.05f;
+    CapsuleInfo capInfo(capsuleRadius,50*capsuleRadius);
+	
+	dfloat groundWidth1 = 10.2f; dfloat groundHeight1 = 0.04f;
+	Vector2f vertices1[4] = { Vector2f(groundWidth1, groundHeight1), Vector2f(-groundWidth1, groundHeight1), Vector2f(-groundWidth1, -groundHeight1), Vector2f(groundWidth1, -groundHeight1) };
+    PolygonInfo pInfo1(vertices1, 4);
+	
+    //pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo1;
+	pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capInfo;
 	//pApp.m_PhysicalAttributes.m_Position = Vector2f(0.40f, 0.0f);
 	//pApp.m_PhysicalAttributes.m_Angle = PI/2;
 	pBodyCompound->createPhysicalShape(pApp);
@@ -1221,15 +1228,12 @@ void demo16()
     pApp.m_CollisionAttributes.m_CollisionShapeInfo = &cInfo;
 	pBodyCircle->createPhysicalShape(pApp);
 	
-	dfloat erp = 2; dfloat cfm = 0.4;
 	
 	DistanceConstraintInfo dInfo;
 	dInfo.m_PhysicalBody1 = pBodyCircle;
 	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
 	dInfo.m_Anchor2 = Vector2f(0.1,y+0.1f);
-	dInfo.m_Erp = erp;
-	dInfo.m_Cfm = cfm;
-
+	
 	DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 	dc->initialize();
 	
@@ -1253,8 +1257,6 @@ void demo16()
 		dInfo.m_PhysicalBody2 = pPrevCircle;
 		dInfo.m_Anchor1 = Vector2f(0.0f,radius/2);
 		dInfo.m_Anchor2 = Vector2f(0.0f,-radius/2);
-		dInfo.m_Erp = erp;
-		dInfo.m_Cfm = cfm;
 		
 		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 		dc->initialize();
@@ -1588,8 +1590,6 @@ void demo23()
 		wInfo.m_PhysicalBody2 = circle1;
 		wInfo.m_Anchor = Vector2f(0.3f,-0.2f);
 		wInfo.m_LocalAxis = Vector2f(1.0f,-1.0f);
-		wInfo.m_Erp = 50.0f;
-		wInfo.m_Cfm = 10.0f;
 		
 		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(wInfo);
 		lc1->initialize();
@@ -1654,8 +1654,6 @@ void demo24()
 		lInfo.m_PhysicalBody2 = circle1;
 		lInfo.m_Anchor = Vector2f(0.2f,0.0f);
 		lInfo.m_LocalAxis = Vector2f(1.0f,0.0f);
-		lInfo.m_Erp = 100.0f;
-		lInfo.m_Cfm = 100.0f;
 		lInfo.m_LowerLimit = 0.1f;
 		lInfo.m_UpperLimit = 0.5f;
 		
@@ -1673,7 +1671,6 @@ void demo24()
 		
 		DistanceConstraintInfo dInfo;
 		dInfo.m_PhysicalBody1 = pBox1;
-		dInfo.m_Erp = 100.0f;
 		
 		DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
 		dc->initialize();
@@ -1877,7 +1874,6 @@ void demo27()
 	pBodyCircle2->setPosition(Vector2f(0.0,y-0.5f));
 	pBodyCircle2->createPhysicalShape(pApp);
 	
-	dfloat erp = 10.0f; dfloat cfm = 1.0f;
 	
 	MinMaxConstraintInfo mInfo;
 	mInfo.m_PhysicalBody1 = pBodyCircle1;
@@ -1886,8 +1882,6 @@ void demo27()
 	mInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
 	mInfo.m_LowerLimit = 0.3f;
 	mInfo.m_UpperLimit = 0.5f;
-	mInfo.m_Erp = erp;
-	mInfo.m_Cfm = cfm;
 	MinMaxConstraint* mc = (MinMaxConstraint*)pWorld->createConstraint(mInfo);
 
 	mc->initialize();
@@ -2210,13 +2204,56 @@ void renderDynamicTree(DynamicTreeNode* pNode)
 	renderDynamicTree( pAlgo->getDynamicTree()->getNode(pNode->m_Child2) );
 }
 
+// Closest Points
+ClosestPoints closestPoints;
+PhysicalBody* pBody1 = 0;
+PhysicalBody* pBody2 = 0;
+
+void demo31()
+{
+	// Create Body1
+	pBody1 = pWorld->createPhysicalBody();
+	pBody1->setPosition(Vector2f(1.0f,0.10f));
+	pBody1->setAngle( 0.0);
+	pBody1->m_BodyType = EBT_KINEMATIC;
+	
+	CircleInfo cInfo(0.1f);
+	CapsuleInfo capInfo(0.1f,0.31f);
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 0.1f; dfloat groundHeight = 0.1f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+    PolygonInfo pInfo(vertices, 4);
+    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capInfo;
+	pBody1->createPhysicalShape(pApp);
+	
+	// Create Box1
+	pBody2 = pWorld->createPhysicalBody();
+	pBody2->m_BodyType = EBT_KINEMATIC;
+	pBody2->setPosition(Vector2f(0.0f,0.0f));
+	pBody2->setAngle(0);
+	dfloat boxWidth = 0.1f; dfloat boxHeight = 0.1f;
+	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+	PolygonInfo pInfo1(verticesBox, 4);
+	
+    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capInfo;
+	pBody2->createPhysicalShape(pApp);
+	
+	GJKAlgorithm::getInstance()->closestDistance( pBody1->getPhysicalShapeList()->getCollisionShape(), pBody1->m_Transform,
+												 pBody2->getPhysicalShapeList()->getCollisionShape(), pBody2->m_Transform, closestPoints  );
+	
+	//float d = closestPoints.m_Point1.distance(closestPoints.m_Point2);
+	//GJKAlgorithm::getInstance()->numIterations;
+}
+
+
 void initScene()
 {
 	pWorld = new PhysicalWorld();
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo21();
+	demo12();
 
 	MouseConstraintInfo mInfo;
 	mouseJoint = (MouseConstraint*)pWorld->createConstraint(mInfo);
@@ -2305,6 +2342,7 @@ void renderScene(void)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	pWorld->draw();
 	
+	 
 	DynamicTreeBroadPhaseAlgorithm* pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
 	
 	if( pAlgo->getAlgorithmType() == EAT_DYNAMIC_TREE )
@@ -2314,9 +2352,35 @@ void renderScene(void)
 			renderDynamicTree(pAlgo->getDynamicTree()->getRootNode() );
 	}
 	
-	callBack.renderRay();
+	//callBack.renderRay();
 	pWorld->intersectRaySegment(callBack.raySeg, &callBack);
-	
+		
+	if( pBody1 )
+	{
+		GJKAlgorithm::getInstance()->numIterations = 0;
+		
+		GJKAlgorithm::getInstance()->closestDistance( pBody1->getPhysicalShapeList()->getCollisionShape(), pBody1->m_Transform,
+													 pBody2->getPhysicalShapeList()->getCollisionShape(), pBody2->m_Transform, closestPoints  );
+		
+		
+		//printf( "%d\n",GJKAlgorithm::getInstance()->numIterations );
+		
+		pBody1->m_Angle += 0.01;
+		pBody2->m_Angle -= 0.02;
+
+		glPointSize(5.0f);
+		glBegin(GL_POINTS);
+		glVertex2f(closestPoints.m_Point1.x, closestPoints.m_Point1.y);
+		glVertex2f(closestPoints.m_Point2.x, closestPoints.m_Point2.y);
+		glEnd();
+		glPointSize(1.0f);
+		
+		glBegin(GL_LINES);
+		glVertex2f(closestPoints.m_Point1.x, closestPoints.m_Point1.y);
+		glVertex2f(closestPoints.m_Point2.x, closestPoints.m_Point2.y);
+		glEnd();
+		
+	}
     //demo28();
 	//RaySegment2f raySeg;//(Vector2f(), Vector2f());
 //	raySeg.m_End = Vector2f(0.0f,-1.0f);

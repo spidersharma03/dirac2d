@@ -166,8 +166,20 @@ dbool intersectCapsulePolygon( ConvexPolygon* poly, Matrix3f& xform1, Capsule* c
 	Vector2f outPoint;
 	
 	dint32 edgeIndex = -1;
-	dfloat distance = 10000.0f;
 	
+	// Find the Candidate Edge of the Polygon.
+	/*
+	 TODO 
+	 
+	 Find Better candidate Edge( right now there is some error )
+	 
+	   OR
+	 
+	 Use GJK to Find the Candidate Edge.
+	 */
+	
+	dfloat distance = 10000000.0f;
+
 	for( dint32 v=0; v<numVertices; v++ )
 	{
 		dint32 i = v+1;

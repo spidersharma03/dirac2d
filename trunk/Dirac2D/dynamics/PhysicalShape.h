@@ -87,6 +87,12 @@ public:
 	{
 		return m_pUserData;
 	}
+	
+	CollisionShape* getCollisionShape() const
+	{
+		return m_CollisionShape;
+	}
+	
 public:
 	friend class PhysicalBody;
 };
