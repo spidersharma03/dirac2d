@@ -214,11 +214,11 @@ dfloat GJKAlgorithm::closestDistance( CollisionShape* polygon1, Matrix3f m1, Col
 
 			return 1.0f;
 		}
-		
+
 		// Add the support point to evolve the Simplex
 		s.addPoint(supportPoint);
-		s.addPoint1(supportPoint1);
-		s.addPoint2(supportPoint2);
+		s.addPoint1(supportPoint1,0);
+		s.addPoint2(supportPoint2,0);
 		
 		// Process the Simplex
 		Vector2f origin;

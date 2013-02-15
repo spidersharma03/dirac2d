@@ -481,6 +481,9 @@ void PhysicalBody::calculateMassAttributes()
 
 dbool PhysicalBody::getCollisionStatus( PhysicalBody* pOther)
 {
+	if( pOther->m_BodyType != EBT_DYNAMIC && m_BodyType != EBT_DYNAMIC )
+		return false;
+	
 	dbool bRes = true;
 	ConstraintEdge* cEdge = pOther->m_ConstraintEdgeList;
 	while (cEdge) 

@@ -1516,7 +1516,7 @@ void demo22()
 		pBox->setAngle(PI_4);
 		//pBox2->m_BodyType = EBT_STATIC;
 		
-		pBox->setPosition(Vector2f(0.0f,-0.02f));	
+		pBox->setPosition(Vector2f(0.5f,-0.02f));	
 		pBox->m_LinearDamping = 0.1f;
 		pBox->m_AngularDamping = 0.5f;
 		//pBox2->setAngle(1*PI_4);
@@ -1534,8 +1534,9 @@ void demo22()
 		CatenaryConstraintFixedRotationInfo cInfo;
 		cInfo.m_PhysicalBody1 = pBox;
 		cInfo.m_Anchor = Vector2f(0.0f,0.1f);
-		cInfo.m_FixedPoint1 = Vector2f(-0.9f,0.1f);
-		cInfo.m_FixedPoint2 = Vector2f(0.9f,0.0f);
+		cInfo.m_FixedPoint1 = Vector2f(-0.9f,0.0f);
+		cInfo.m_FixedPoint2 = Vector2f(0.9f,-0.4f);
+		cInfo.m_Frequency = 6.0f;
 		cInfo.m_FixedLength = 1.9030005f;
 		
 		CatenaryConstraintFixedRotation* cc = (CatenaryConstraintFixedRotation*)pWorld->createConstraint(cInfo);
@@ -2253,7 +2254,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo12();
+	demo22();
 
 	MouseConstraintInfo mInfo;
 	mouseJoint = (MouseConstraint*)pWorld->createConstraint(mInfo);
