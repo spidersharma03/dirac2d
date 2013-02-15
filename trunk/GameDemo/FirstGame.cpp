@@ -140,6 +140,11 @@ void FirstGame::explodeDebris( const GameObjectInfo& objectInfo, const Vector2f&
                 m_pDebrisBodyCreator->createDebrisBodies(objectInfo, position, 5);
             }
             break;
+		case EOT_PATH_HURDLE:
+			{
+				m_pDebrisBodyCreator->createDebrisBodies(objectInfo, position, 5);
+			}
+            break;
         default:
             break;
     }

@@ -136,11 +136,11 @@ void MouseButton(int button, int state, int x, int y)
 	
 	if( state == GLUT_DOWN && button == GLUT_LEFT_BUTTON )
 	{
-		pGame->getVehicle()->setBoostEnable(true);
+		//pGame->getVehicle()->setBoostEnable(true);
 	}
 	if( state == GLUT_UP && button == GLUT_LEFT_BUTTON )
 	{
-		pGame->getVehicle()->setBoostEnable(false);
+		//pGame->getVehicle()->setBoostEnable(false);
 	}
 	
 	_button = button;

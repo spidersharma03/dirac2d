@@ -71,7 +71,7 @@ void SimpleVehicle::init()
 {
     PhysicalWorld* pWorld = m_pGame->getPhysicalWorld();
     
-    m_MinSpeed = 50.0f;
+    m_MinSpeed = 20.0f;
 	m_MaxSpeed = 250.0f;
 	m_BoostIncreament = 10.0f;
 	m_DistanceFromTerrain = 0.01f;
@@ -110,14 +110,14 @@ void SimpleVehicle::init()
         circle1->setPosition(Vector2f(1.3f+xPos,0.8f+yPos));		
 		circle2->setPosition(Vector2f(1.0f-0.3f+xPos,0.8f+yPos));		
 		
-		pApp.m_MassAttributes.m_Density = 200.0f;
+		pApp.m_MassAttributes.m_Density = 50.0f;
         CircleInfo cInfo(0.1f);
 		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &cInfo;
 		
 		pShape = circle1->createPhysicalShape(pApp);
 		pShape->setUserData(this);
 		        
-        pApp.m_PhysicalAttributes.m_Friction = 2.0f;
+        pApp.m_PhysicalAttributes.m_Friction = 1.0f;
     
         pShape = circle2->createPhysicalShape(pApp);
 		pShape->setUserData(this);
@@ -128,7 +128,7 @@ void SimpleVehicle::init()
 		wInfo.m_Anchor = Vector2f(1.3f+xPos,0.8f+yPos);
 		wInfo.m_LocalAxis = Vector2f(1.0f,-1.0f);
 		wInfo.m_Frequency = 2.0f;
-		wInfo.m_DampingRatio = 0.5f;
+		wInfo.m_DampingRatio = 1.5f;
 		wInfo.m_bCollideConnected = false;
 		 
 		WheelConstraint* lc1 = (WheelConstraint*)pWorld->createConstraint(wInfo);
@@ -183,7 +183,6 @@ void SimpleVehicle::update(float dt)
 	{
 		applyBrake();
 	}
-
 }
 
 void SimpleVehicle::render()

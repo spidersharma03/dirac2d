@@ -40,6 +40,7 @@ void DebrisBodyCreator::createDebrisBodies( const GameObjectInfo& gInfo, const V
     switch (gInfo.m_ObjectType) 
     {
         case EOT_CRATE:
+		case EOT_PATH_HURDLE:	
             createCrateDebris(position, numBodies);
             break;
             

@@ -41,6 +41,7 @@ class TerrainSampleFunction
     }
 protected:
     SAMPLE_FUNCTION_TYPE m_SampleFunctionType;
+	float m_Slope;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,8 +50,9 @@ protected:
 class LinearSampleFunction : public TerrainSampleFunction
 {
 public:
-    LinearSampleFunction( float slope = 0.0f ) : m_Slope(slope)
+    LinearSampleFunction( float slope = 0.0f )
     {
+		m_Slope = slope;
         m_SampleFunctionType = ESFT_LINEAR;
     }
 public:
@@ -60,9 +62,6 @@ public:
         float y = sin(m_Slope);
         return Vector2f( x*t, y*t);
     }
-        
-private:
-    float m_Slope;
 };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +69,7 @@ private:
 class SinSampleFunction : public TerrainSampleFunction
 {
 public:
-    SinSampleFunction( float amplitude = 1.0f ) : m_Amplitude(amplitude)
+    SinSampleFunction( float slope = 0.0f, float amplitude = 1.0f ) : m_Amplitude(amplitude)
     {
         m_SampleFunctionType = ESFT_SIN_WAVE;
     }
@@ -91,7 +90,7 @@ private:
 class SquareSampleFunction : public TerrainSampleFunction
 {
 public:
-    SquareSampleFunction( float amplitude = 1.0f, float period = 120.0f ) : m_Amplitude(amplitude), m_Period(period)
+    SquareSampleFunction( float slope = 0.0f, float amplitude = 1.0f, float period = 120.0f ) : m_Amplitude(amplitude), m_Period(period)
     {
         m_SampleFunctionType = ESFT_SQUARE_WAVE;
         m_Amplitude = m_Amplitude < 0.0f ? 0.0f : m_Amplitude;
@@ -122,7 +121,7 @@ private:
 class SawToothSampleFunction : public TerrainSampleFunction
 {
 public:
-    SawToothSampleFunction( float amplitude = 1.0f, float period = 15.0f ) : m_Amplitude(amplitude), m_Period(period)
+    SawToothSampleFunction( float slope = 0.0f, float amplitude = 1.0f, float period = 15.0f ) : m_Amplitude(amplitude), m_Period(period)
     {
         m_SampleFunctionType = ESFT_SAW_TOOTH;
         m_Period = m_Period < 10.0f ? 10.0f : m_Period;

@@ -18,7 +18,7 @@ USE_NAMESPACE_DIRAC2D
 
 #define AVG_OBJECT_DENSITY 1.0
 
-enum GAME_OBJECT_TYPE { EOT_COIN = 1, EOT_CRATE, EOT_DEBRIS ,EOT_TUMBLER, EOT_VEHICLE,  EOT_NONE };
+enum GAME_OBJECT_TYPE { EOT_COIN = 1, EOT_CRATE, EOT_DEBRIS ,EOT_TUMBLER, EOT_VEHICLE, EOT_PATH_HURDLE, EOT_CABLE_CAR, EOT_NONE };
 
 enum OBJECT_COLLISION_BIT { EOCB_COIN = 0x1, EOCB_PHYSICAL_BODY = 0x2, EOCB_TERRAIN = 0x4, EOCB_PARTICLE_DEBRIS = 0x8};
 	
@@ -32,6 +32,7 @@ struct GameObjectInfo
 		m_Restitution = 1.0f;
 		m_Friction = 1.0f;
 		m_BodyType = 0;
+		m_bAutoCull = true;
 	}
 	
     Vector2f m_Position;
@@ -42,6 +43,7 @@ struct GameObjectInfo
 	float m_Friction;
 	GAME_OBJECT_TYPE m_ObjectType;
 	int m_BodyType;
+	bool m_bAutoCull;
 };
 
 class GameObject : public IUpdatable, public IGameCollisionListener

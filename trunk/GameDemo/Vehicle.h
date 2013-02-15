@@ -76,6 +76,16 @@ public:
         return m_Position;
     }
     
+	inline void setVelocity(const Vector2f& v)
+	{
+		m_pVehicleBody->setVelocity(v);
+	}
+	
+	inline void changeMotorSpeed( float dSpeed )
+	{
+		m_pMotor->setSpeed( getMotorSpeed() + dSpeed );
+	}
+	
     inline void setMaxMotorTorque(float torque)
     {
         m_MaxTorque = torque; 
@@ -104,7 +114,8 @@ protected:
 
 protected:
     Vector2f m_Com; // Centre of Mass of the Vehicle
-    
+	PhysicalBody* m_pVehicleBody;
+
     float m_MaxTorque; // Max Motor Torque
     
 	Gun* m_pGun;
