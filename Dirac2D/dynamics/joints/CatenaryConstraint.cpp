@@ -21,8 +21,8 @@ CatenaryConstraint::CatenaryConstraint( const CatenaryConstraintInfo& cInfo): Co
     m_Anchor = cInfo.m_Anchor;
     m_FixedPoint1 = cInfo.m_FixedPoint1;
     m_FixedPoint2 = cInfo.m_FixedPoint2;
-	m_Frequency = 2.0f;
-	m_DampingRatio = 0.2f;
+	m_Frequency = cInfo.m_Frequency;
+	m_DampingRatio = cInfo.m_DampingRatio;
 }
 
 void CatenaryConstraint::initialize()

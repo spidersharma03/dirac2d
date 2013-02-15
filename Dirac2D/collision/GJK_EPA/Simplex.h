@@ -16,10 +16,19 @@
 
 BEGIN_NAMESPACE_DIRAC2D
 
+enum FeatureType { EFT_VERTEX, EFT_EDGE };
+
+struct FeatureInfo
+{
+	dint16 m_FeatureID[4];
+	FeatureType m_FeatureType;
+};
+
 struct ClosestPoints
 {
 	Vector2f m_Point1;
 	Vector2f m_Point2;
+	FeatureInfo m_FeatureInfo[2];
 };
 
 template< class T >
@@ -31,14 +40,16 @@ public:
 		m_SimplexType = -1;
 	}
 	
-	inline void addPoint1( Vector2<T>& p )
+	inline void addPoint1( Vector2<T>& p, dint32 index = -1 )
 	{
 		m_SupportPoint1[m_SimplexType] = p;
+		m_Index1[m_SimplexType] = index;
 	}
 	
-	inline void addPoint2( Vector2<T>& p )
+	inline void addPoint2( Vector2<T>& p, dint32 index = -1 )
 	{
 		m_SupportPoint2[m_SimplexType] = p;
+		m_Index1[m_SimplexType] = index;
 	}
 	
 	inline void addPoint( Vector2<T>& p )
@@ -115,7 +126,9 @@ protected:
 	Vector2<T> m_SupportPoint1[3];
 	Vector2<T> m_SupportPoint2[3];
 
-	int m_SimplexType;
+	dint32 m_Index1[3];
+	dint32 m_Index2[3];
+	dint32 m_SimplexType;
 	
 };
 

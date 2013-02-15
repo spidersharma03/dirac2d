@@ -20,6 +20,8 @@ struct CatenaryConstraintInfo : public ConstraintInfo
         m_Type = ECT_CATENARY;
         m_PhysicalBody1 = m_PhysicalBody2 = 0;
         m_FixedLength = -1.0f;
+		m_Frequency = 2.0f;
+		m_DampingRatio = 0.2f;
     }
     // Anchor Point.
     Vector2f m_Anchor;
