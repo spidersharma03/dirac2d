@@ -54,7 +54,6 @@ private:
     FirstGame* m_pGame;
     RayCastTerrainCallBack* m_pRayCastTerrainCallBack;
 	
-    PhysicalBody* m_pVehicleBody;
     float m_MinSpeed;
 	float m_MaxSpeed;
 	

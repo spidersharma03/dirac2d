@@ -58,6 +58,12 @@ private:
 	
 	void generateTumblers();
 	
+	void generatePathHurdle();
+	
+private:
+	
+	void spawnCableCar();
+	
     // Removes Game Objects from the Global List    
     void remove(GameObject* pObjectList);
     
@@ -71,6 +77,8 @@ private:
 	// TODO -- use some different structure
 	set<GameObject*> m_SetMarkedObjects;
     int m_NumCoins;
+	
+	bool m_bCableCarExisting;
 };
 
 #endif

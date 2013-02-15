@@ -15,12 +15,15 @@
 #include "Coin.h"
 #include "Crate.h"
 #include "Tumbler.h"
+#include "PathHurdle.h"
+#include "CableCar.h"
 #include "ObjectPlacementSrategy.h"
 
 ObjectManager::ObjectManager(FirstGame* pGame)
 {
 	m_pGame = pGame;
     m_pObjectList = 0;
+	m_bCableCarExisting = false;
     //m_SetMarkedObjects.reserve(100);
 }
 
@@ -32,8 +35,20 @@ void ObjectManager::manageObjects()
     {
         initTime = time;
         generateCoins();
+		generatePathHurdle();
 	} 
 	
+	if( !m_bCableCarExisting )
+	{
+		static double initTime = m_Timer.getCurrentTime();
+		double time = m_Timer.getCurrentTime();
+		if( time - initTime > 2000 )
+		{
+			m_bCableCarExisting = true;
+			initTime = time;
+			spawnCableCar();
+		} 
+	}
 	// Place Falling Crates only for Non Linear regions
 	if( m_pGame->getTerrainGenerator()->getSampleFunctionType() != ESFT_LINEAR )
 	{
@@ -73,13 +88,42 @@ void ObjectManager::cullObjects()
     while (pList) 
     {
         bool bRes =  (pCamera->getPosition().x - pList->getPosition().x) > R;
-        if( bRes )
+        if( bRes && pList->getGameObjectInfo().m_bAutoCull )
         {
             remove(pList);
             pObjFactory->destroyObject(pList);
         }
         pList = pList->m_pNext;
     }  
+}
+
+void ObjectManager::generatePathHurdle()
+{
+	if( PathHurdle::m_PathHurdleCount > 1 )
+		return;
+	
+	ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
+    
+    // PathHurdle info. 
+    PathHurdleInfo pInfo;
+    pInfo.m_Radius = RANDOM_NUMBER( 0.1f, 0.2f);
+	pInfo.m_NumVertices = RANDOM_NUMBER(3.0f, 7.0f);
+	
+	TerrainGenerator* pTerrainGenerator = m_pGame->getTerrainGenerator();
+	float* pCurvePoints;
+    int nCurvePoints = pTerrainGenerator->getNumTerrainPoints();
+	pCurvePoints = pTerrainGenerator->getCurvePointsArray();
+	int n = 2*nCurvePoints-40;
+	
+	//Vector3f cameraPos = m_pGame->getCamera()->getPosition();
+	//float sw = m_pGame->getCamera()->getScreenWidth();	
+	//Vector2f(pCurvePoints[n], pCurvePoints[n+1] + 0.4)
+	
+	pInfo.m_Position = Vector2f(pCurvePoints[n], pCurvePoints[n+1]);
+	
+	GameObject* pObject = pObjFactory->createObject(pInfo);
+	
+	add(pObject);
 }
 
 void ObjectManager::generateCoins() 
@@ -218,6 +262,26 @@ void ObjectManager::generateTumblers()
 	tInfo.m_Position = Vector2f( cameraPos.x + sw, cameraPos.y + sh);
 		
 	GameObject* pObject = pObjFactory->createObject(tInfo);
+	
+	add(pObject);
+}
+
+void ObjectManager::spawnCableCar()
+{
+	ObjectFactory* pObjFactory = m_pGame->getObjectFactory();
+	
+	Vector3f cameraPos = m_pGame->getCamera()->getPosition();
+	float sw = m_pGame->getCamera()->getScreenWidth();
+	float sh = m_pGame->getCamera()->getScreenHeight() * 0.5f;
+	
+	CableCarInfo cInfo;
+	cInfo.m_FixedPoint1 = Vector2f( cameraPos.x - 1.5*sw, cameraPos.y + sh);
+	cInfo.m_FixedPoint2 = Vector2f( cameraPos.x + 4*sw, cameraPos.y - 0.5*sh);
+	cInfo.m_FixedLength = cInfo.m_FixedPoint1.distance(cInfo.m_FixedPoint2) + 0.1f;
+	
+	cInfo.m_Position = Vector2f( cameraPos.x - sw , cameraPos.y + sh);
+	
+	GameObject* pObject = pObjFactory->createObject(cInfo);
 	
 	add(pObject);
 }

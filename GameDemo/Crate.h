@@ -30,6 +30,7 @@ struct CrateInfo : public GameObjectInfo
 		m_Width = 0.2f;
 		m_Height = 0.2f;
 		m_Radius = 0.1f;
+		m_NumVertices = 0;
     }
 	
 	CRATE_SHAPE m_ShapeType;

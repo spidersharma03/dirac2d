@@ -65,7 +65,8 @@ Crate::Crate(CrateInfo cInfo, FirstGame* pGame)
         PolygonInfo pInfo(vertices, cInfo.m_NumVertices);
 		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
 	}
-	else {
+	else 
+	{
 		float w = 0.5*cInfo.m_Width; float h = 0.5*cInfo.m_Height;
 		Vector2f vertices[4] = { Vector2f(w,h), Vector2f(-w,h), Vector2f(-w,-h), Vector2f(w,-h)};
         PolygonInfo pInfo(vertices, 4);

@@ -35,7 +35,7 @@ TerrainGenerator::TerrainGenerator(FirstGame* pGame)
     m_AvgLevel = 0.0f;
     m_SmoothNess = 3;
     
-    m_vecTerrainSampleFunctions.push_back(new LinearSampleFunction(PI_4/10));
+    m_vecTerrainSampleFunctions.push_back(new LinearSampleFunction(-PI_4/20));
     m_vecTerrainSampleFunctions.push_back(new SinSampleFunction());
     m_vecTerrainSampleFunctions.push_back(new SquareSampleFunction(2.0f));
     m_vecTerrainSampleFunctions.push_back(new LinearSampleFunction(-PI_4/2));
@@ -147,7 +147,6 @@ void TerrainGenerator::generateSamplePoints()
         }
     }
     
-   
     float delta = swh * 2.0f * 3.0f/(3*MAX_TERRAIN_POINTS_ON_SCREEN);
 
     float low  = -m_MaxTerrainHeight * 0.5f;
@@ -201,7 +200,7 @@ float TerrainGenerator::getAvgLevel(float x)
         }
     }
     
-    dAssert(index != -1);
+    //dAssert(index != -1);
     
     float m = (m_vecAvgSamplePoints[index+1].y - m_vecAvgSamplePoints[index].y)
     /(m_vecAvgSamplePoints[index+1].x - m_vecAvgSamplePoints[index].x);

@@ -14,6 +14,8 @@
 #include "Crate.h"
 #include "DebrisBody.h"
 #include "Tumbler.h"
+#include "PathHurdle.h"
+#include "CableCar.h"
 
 ObjectFactory::ObjectFactory(FirstGame* pGame) : m_pGame( pGame )
 {
@@ -39,6 +41,12 @@ GameObject* ObjectFactory::createObject(GameObjectInfo& gInfo)
 			break;
 		case EOT_TUMBLER:
 			pObject = new(m_pBlockAllocator->Allocate(sizeof(Tumbler))) Tumbler((TumblerInfo&)gInfo, m_pGame);
+			break;
+		case EOT_PATH_HURDLE:
+			pObject = new(m_pBlockAllocator->Allocate(sizeof(PathHurdle))) PathHurdle((PathHurdleInfo&)gInfo, m_pGame);
+			break;
+		case EOT_CABLE_CAR:
+			pObject = new(m_pBlockAllocator->Allocate(sizeof(CableCar))) CableCar((CableCarInfo&)gInfo, m_pGame);
 			break;
 		default:
 			break;
@@ -72,6 +80,18 @@ void ObjectFactory::destroyObject( GameObject* pObject )
 		{
             ((Tumbler*)pObject)->~Tumbler();
 			m_pBlockAllocator->Free(pObject, sizeof(Tumbler));
+			break;
+		}
+		case EOT_PATH_HURDLE:
+		{
+            ((PathHurdle*)pObject)->~PathHurdle();
+			m_pBlockAllocator->Free(pObject, sizeof(PathHurdle));
+			break;
+		}
+		case EOT_CABLE_CAR:
+		{
+            ((CableCar*)pObject)->~CableCar();
+			m_pBlockAllocator->Free(pObject, sizeof(CableCar));
 			break;
 		}
 		default:
