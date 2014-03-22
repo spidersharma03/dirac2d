@@ -10,7 +10,6 @@
 		354F4703163586AB000DFC09 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; };
 		355FCBE916592EF2004D4C5E /* memoryBlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */; };
 		3568969B16062D78001D9A15 /* CirclePathConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3568969A16062D78001D9A15 /* CirclePathConstraint.cpp */; };
-		35940EF91750FABE00E0F899 /* CollisionShapeSoftBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35940EF81750FABE00E0F899 /* CollisionShapeSoftBody.cpp */; };
 		35C07736163C21BD00B32CB4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C257F8351552A23500270D77 /* OpenGL.framework */; };
 		35C07737163C21BD00B32CB4 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DD14FF1558E6A300432320 /* GLUT.framework */; };
 		35C07739163C21BD00B32CB4 /* Dirac2D.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Dirac2D.1 */; };
@@ -85,7 +84,6 @@
 		8F596F7D18A602EF00A20EE9 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D8B3157398D600E31E38 /* Edge.cpp */; };
 		8F596F7E18A602EF00A20EE9 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
 		8F596F7F18A602EF00A20EE9 /* CircleSweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */; };
-		8F596F8018A602EF00A20EE9 /* CollisionShapeSoftBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35940EF81750FABE00E0F899 /* CollisionShapeSoftBody.cpp */; };
 		8F596F8118A602EF00A20EE9 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C244CF86161D805300C141F8 /* BSpline.cpp */; };
 		8F596F8218A602EF00A20EE9 /* memoryBlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */; };
 		8F596F8B18A618E500A20EE9 /* DTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 758921F113B0E3DF0005E1E2 /* DTimer.cpp */; };
@@ -127,7 +125,6 @@
 		8F596FAF18A618E500A20EE9 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2B6D8B3157398D600E31E38 /* Edge.cpp */; };
 		8F596FB018A618E500A20EE9 /* EdgeChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2C2F1573C48600E92679 /* EdgeChain.cpp */; };
 		8F596FB118A618E500A20EE9 /* CircleSweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C250BD4915A41D4E009C9A37 /* CircleSweep.cpp */; };
-		8F596FB218A618E500A20EE9 /* CollisionShapeSoftBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35940EF81750FABE00E0F899 /* CollisionShapeSoftBody.cpp */; };
 		8F596FB318A618E500A20EE9 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C244CF86161D805300C141F8 /* BSpline.cpp */; };
 		8F596FB418A618E500A20EE9 /* memoryBlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 355FCBE816592EF2004D4C5E /* memoryBlockAllocator.cpp */; };
 		C218450115A2C94E00164BD4 /* CatenaryConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C218450015A2C94E00164BD4 /* CatenaryConstraint.cpp */; };
@@ -787,7 +784,6 @@
 				C244CF87161D805300C141F8 /* BSpline.cpp in Sources */,
 				355FCBE916592EF2004D4C5E /* memoryBlockAllocator.cpp in Sources */,
 				C2FB8793169E9A1E002549D8 /* MouseConstraint.cpp in Sources */,
-				35940EF91750FABE00E0F899 /* CollisionShapeSoftBody.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -833,7 +829,6 @@
 				8F596F7D18A602EF00A20EE9 /* Edge.cpp in Sources */,
 				8F596F7E18A602EF00A20EE9 /* EdgeChain.cpp in Sources */,
 				8F596F7F18A602EF00A20EE9 /* CircleSweep.cpp in Sources */,
-				8F596F8018A602EF00A20EE9 /* CollisionShapeSoftBody.cpp in Sources */,
 				8F596F8118A602EF00A20EE9 /* BSpline.cpp in Sources */,
 				8F596F8218A602EF00A20EE9 /* memoryBlockAllocator.cpp in Sources */,
 				8F596F5918A6020A00A20EE9 /* DTimer.cpp in Sources */,
@@ -884,7 +879,6 @@
 				8F596FAF18A618E500A20EE9 /* Edge.cpp in Sources */,
 				8F596FB018A618E500A20EE9 /* EdgeChain.cpp in Sources */,
 				8F596FB118A618E500A20EE9 /* CircleSweep.cpp in Sources */,
-				8F596FB218A618E500A20EE9 /* CollisionShapeSoftBody.cpp in Sources */,
 				8F596FB318A618E500A20EE9 /* BSpline.cpp in Sources */,
 				8F596FB418A618E500A20EE9 /* memoryBlockAllocator.cpp in Sources */,
 			);
