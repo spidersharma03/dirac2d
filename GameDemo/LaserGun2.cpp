@@ -22,12 +22,12 @@ LaserGun2::LaserGun2(FirstGame* pGame) : Gun(pGame)
 	m_ShootingImpact = 2.0f;
 }
 
-static int count = 100;
+static int count1 = 100;
 
 
 void LaserGun2::shoot(const Vector2f& direction)
 {	
-	count = 255;
+	count1 = 255;
     {
         // Shoot Ray/Gun
 		RaySegment2f raySegment;
@@ -44,7 +44,8 @@ void LaserGun2::shoot(const Vector2f& direction)
 			
 			if( pObject )
 			{
-				if( pObject->getGameObjectInfo().m_ObjectType == EOT_CRATE )
+				if( pObject->getGameObjectInfo().m_ObjectType == EOT_CRATE
+                   || pObject->getGameObjectInfo().m_ObjectType == EOT_PATH_HURDLE )
 				{
 					// Mark the Crate for Removal.
 					m_pGame->getObjectManager()->markObjectsForCleanup(pObject);                
@@ -77,12 +78,12 @@ void LaserGun2::shoot(const Vector2f& direction)
 void LaserGun2::render()
 {
 	glPushMatrix();
-	if( count > 0 )
+	if( count1 > 0 )
 	{
-		count-=10;
+		count1-=10;
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		m_pGame->getRenderer()->setColor(255, 0, 0, count);
+		m_pGame->getRenderer()->setColor(255, 0, 0, count1);
 		m_pGame->getRenderer()->drawLine(m_ShootingOrigin, m_ShootingOrigin + m_ShootingTarget);
 		//m_pGame->getRenderer()->setColor(255, 255, 0, count);
 		//m_pGame->getRenderer()->setPointSize(6.0f);

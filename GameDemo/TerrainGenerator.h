@@ -11,8 +11,8 @@
 #ifndef _TERRAIN_GENERATOR_H_
 #define _TERRAIN_GENERATOR_H_
 
-#include "../Dirac2D/maths/MathUtil.h"
-#include "../Dirac2D/DTimer.h"
+#include "maths/MathUtil.h"
+#include "DTimer.h"
 #include <vector>
 
 using namespace std;

@@ -11,7 +11,7 @@
 #include "ObjectManager.h"
 #include "GameObject.h"
 #include "SimpleVehicle.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 
 GameCollisionListener::GameCollisionListener(FirstGame* pGame) : m_pGame( pGame )

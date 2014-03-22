@@ -9,7 +9,7 @@
 #ifndef _DEBRIS_BODY_CREATOR_H_
 #define _DEBRIS_BODY_CREATOR_H_
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 USE_NAMESPACE_DIRAC2D
 

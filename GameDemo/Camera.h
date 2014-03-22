@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 #include "IUpdatable.h"
-#include "../Dirac2D/maths/MathUtil.h"
+#include "maths/MathUtil.h"
 
 #ifndef WIN32 
 #include <sys/time.h>

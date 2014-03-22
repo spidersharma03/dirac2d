@@ -12,7 +12,7 @@
 #include "Camera.h"
 #include "ObjectFactory.h"
 #include "ObjectManager.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 FirstGame* Tumbler::m_pGame = 0;
 int Tumbler::m_TumblerCount = 0;
@@ -62,13 +62,14 @@ Tumbler::Tumbler(TumblerInfo tInfo, FirstGame* pGame)
 	pApp.m_PhysicalAttributes.m_Angle = 0.0f;
 	m_pTumblerLidBody->createPhysicalShape(pApp);
 	
-	m_pTumblerLidBody->setPosition(Vector2f(c.x+w, c.y-1.05*h));
+	m_pTumblerLidBody->setPosition(Vector2f(c.x+2*w, c.y-1.05*h));
     
     HingeConstraintInfo hInfo;
     hInfo.m_PhysicalBody1 = m_pTumblerBody;
 	hInfo.m_PhysicalBody2 = m_pTumblerLidBody;
-	hInfo.m_Anchor = c - Vector2f(0.0f,h);
+	hInfo.m_Anchor = c - Vector2f(-w,h);
     hInfo.m_UpperAngle = PI_4/1115;
+    hInfo.m_Frequency = 60;
     
 	m_pLidConstraint = (HingeConstraint*)m_pGame->getPhysicalWorld()->createConstraint(hInfo);
 	
@@ -92,7 +93,7 @@ Tumbler::Tumbler(TumblerInfo tInfo, FirstGame* pGame)
 
 void Tumbler::openLid()
 {
-    m_pLidConstraint->setUpperAngleLimit(PI_4);
+    //m_pLidConstraint->setUpperAngleLimit(PI_4);
 	m_pLidConstraint->initialize();
 }
 

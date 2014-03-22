@@ -6,7 +6,7 @@
  *
  */
 
-#include "../Dirac2D/CallBacks.h"
+#include "CallBacks.h"
 
 USE_NAMESPACE_DIRAC2D
 

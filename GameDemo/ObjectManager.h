@@ -9,7 +9,7 @@
 #ifndef _OBJECT_MANAGER_H_
 #define _OBJECT_MANAGER_H_
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "IUpdatable.h"
 #include <set>
 

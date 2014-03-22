@@ -71,8 +71,6 @@ void SimpleVehicle::init()
 {
     PhysicalWorld* pWorld = m_pGame->getPhysicalWorld();
     
-    m_MinSpeed = 20.0f;
-	m_MaxSpeed = 250.0f;
 	m_BoostIncreament = 10.0f;
 	m_DistanceFromTerrain = 0.01f;
 	
@@ -89,21 +87,21 @@ void SimpleVehicle::init()
         pApp.m_CollisionAttributes.m_Filter.m_CollisionBit = EOCB_PHYSICAL_BODY;
         pApp.m_CollisionAttributes.m_Filter.m_CollisionMask = EOCB_PARTICLE_DEBRIS;
 
-		pApp.m_MassAttributes.m_Density = 10.0f;
+		pApp.m_MassAttributes.m_Density = 8.0f;
         CapsuleInfo capsuleInfo(0.07f, 0.6f);
-		dfloat vehicleWidth = 0.4f; dfloat vehicleHeight = 0.08f;
+		dfloat vehicleWidth = 0.7f; dfloat vehicleHeight = 0.08f;
 		Vector2f vertices[4] = { Vector2f(vehicleWidth, vehicleHeight), 
 								 Vector2f(-vehicleWidth, vehicleHeight), 
 								 Vector2f(-vehicleWidth, -vehicleHeight), 
 								 Vector2f(vehicleWidth, -vehicleHeight) };
 		PolygonInfo pInfo(vertices, 4);
 		pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
-		
+		m_pVehicleBody->setPosition(m_pVehicleBody->m_Position + Vector2f(0.1f,0.0f));
         //pApp.m_CollisionAttributes.m_CollisionShapeInfo = &capsuleInfo;
 		PhysicalShape* pShape = m_pVehicleBody->createPhysicalShape(pApp);
 		pShape->setUserData(this);
         
-		m_pVehicleBody->m_AngularDamping = 50.0f;
+		m_pVehicleBody->m_AngularDamping = 20.0f;
 		
 		PhysicalBody* circle1 = pWorld->createPhysicalBody();
 		PhysicalBody* circle2 = pWorld->createPhysicalBody();
@@ -119,6 +117,7 @@ void SimpleVehicle::init()
 		        
         pApp.m_PhysicalAttributes.m_Friction = 1.0f;
     
+        pApp.m_MassAttributes.m_Density = 20.0f;
         pShape = circle2->createPhysicalShape(pApp);
 		pShape->setUserData(this);
 		
@@ -170,9 +169,6 @@ void SimpleVehicle::update(float dt)
 	
 	m_DistanceFromTerrain = m_pRayCastTerrainCallBack->m_IntersectionInfo.m_HitPoint.distance(m_Position);
 	
-	if( m_DistanceFromTerrain > 20.0f )
-		m_DistanceFromTerrain = 20.0f;
-	
 	m_pGun->update(dt);
 	
 	if( m_bBoostEnable )
@@ -192,16 +188,16 @@ void SimpleVehicle::render()
 
 void SimpleVehicle::accelerate()
 {
-    float speed = m_pMotor->getSpeed();
-	m_pMotor->setSpeed(speed + m_BoostIncreament);
+    //float speed = m_pMotor->getSpeed();
+	//m_pMotor->setSpeed(speed + m_BoostIncreament);
 	if( m_pMotor->getSpeed() >= m_MaxSpeed )
 		m_pMotor->setSpeed(m_MaxSpeed);
 }
 
 void SimpleVehicle::applyBrake()
 {
-	float speed = m_pMotor->getSpeed();
-	m_pMotor->setSpeed(speed - m_BoostIncreament);
+	//float speed = m_pMotor->getSpeed();
+	//m_pMotor->setSpeed(speed - m_BoostIncreament);
 	if( m_pMotor->getSpeed() < m_MinSpeed )
 		m_pMotor->setSpeed(m_MinSpeed);
 }

@@ -7,7 +7,7 @@
 #include<GL/glut.h>
 #endif
 
-#include "Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 
 USE_NAMESPACE_DIRAC2D
@@ -709,24 +709,24 @@ void demo9()
 	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
 	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
 	
-	DistanceConstraint* dc2 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
-	dc2->initialize();
-	
-	dInfo.m_PhysicalBody1 = pBodyBoxR;
-	dInfo.m_PhysicalBody2 = pBodyBoxA;
-	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
-	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
-	
-	DistanceConstraint* dc3 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
-	dc3->initialize();
-	
-	dInfo.m_PhysicalBody1 = pBodyBoxA;
-	dInfo.m_PhysicalBody2 = pBodyBoxC;
-	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
-	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
-	
-	DistanceConstraint* dc4 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
-	dc4->initialize();
+//	DistanceConstraint* dc2 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+//	dc2->initialize();
+//	
+//	dInfo.m_PhysicalBody1 = pBodyBoxR;
+//	dInfo.m_PhysicalBody2 = pBodyBoxA;
+//	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+//	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
+//	
+//	DistanceConstraint* dc3 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+//	dc3->initialize();
+//	
+//	dInfo.m_PhysicalBody1 = pBodyBoxA;
+//	dInfo.m_PhysicalBody2 = pBodyBoxC;
+//	dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+//	dInfo.m_Anchor2 = Vector2f(0.0f,0.0f);
+//	
+//	DistanceConstraint* dc4 = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+//	dc4->initialize();
 	
 	//PhysicalBody* pBodyBoxD2 = pBodyBoxD->clone();
 	//pBodyBoxD2->setPosition(Vector2f(1.2f,0.0f));
@@ -810,7 +810,7 @@ void demo11()
 	// Create Capsule
 	dfloat y = 0.4f;
 	PhysicalBody* pBodyCompound = pWorld->createPhysicalBody();
-	//pBodyCompound->m_BodyType = EBT_STATIC;
+	pBodyCompound->m_BodyType = EBT_STATIC;
 	pBodyCompound->setPosition(Vector2f(-1.2,y));
 	//pBodyCompound->setAngle(PI_4*0.9);
 	dfloat capsuleRadius = 0.15f;
@@ -2247,6 +2247,186 @@ void demo31()
 	//GJKAlgorithm::getInstance()->numIterations;
 }
 
+void demo32()
+{
+    int nRadialDiv = 10;
+    int nAngularDiv = 10;
+    float radius = 1.3f;
+    float theta = 0.0f;
+    float dTheta = PI*2.0f/(nAngularDiv);
+    pWorld->setDrawShapes(false);
+    
+    dfloat groundWidth = 0.02f;  dfloat groundHeight = 0.02f;
+    Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+    PhysicalAppearance pApp;
+    PolygonInfo pInfo(vertices, 4);
+    
+    PhysicalBody* pBodyArray[30];
+
+    float frequency = 10.0f;
+    float dampingRatio = 1.91f;
+    
+    PhysicalBody* pPrevBody = 0;
+    // Create Outer Ring
+    for( int i=0; i<nAngularDiv; i++ )
+    {
+        PhysicalBody* pBody = pWorld->createPhysicalBody();
+        pBody->setPosition(Vector2f(radius*cos(theta),radius*sin(theta)));
+       
+        pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
+        PhysicalShape* pShape = pBody->createPhysicalShape(pApp);
+        pShape->m_CollisionFilter.m_CollisionBit = 0x1;
+        pShape->m_CollisionFilter.m_CollisionMask = 0x1; 
+        
+        DistanceConstraintInfo dInfo;
+        dInfo.m_Frequency = frequency;
+        dInfo.m_DampingRatio = dampingRatio;
+        dInfo.m_PhysicalBody1 = pBody;
+        dInfo.m_Anchor1 = Vector2f(0.0f,0.0f);
+        float r = radius + 0.2f;
+        dInfo.m_Anchor2 = Vector2f(r*cos(theta),r*sin(theta));
+                
+        
+        DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+        dc->initialize();
+        
+        theta += dTheta;
+        if( i > 0 )
+        {
+            DistanceConstraintInfo dInfo;
+            dInfo.m_Frequency = frequency;
+            dInfo.m_DampingRatio = dampingRatio;
+            dInfo.m_PhysicalBody1 = pBody;
+            dInfo.m_PhysicalBody2 = pPrevBody;
+            
+            DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+            dc->initialize();
+        }
+        pPrevBody = pBody;
+        
+        pBodyArray[i] = pBody;
+    }
+    
+    {
+        DistanceConstraintInfo dInfo;
+        dInfo.m_Frequency = frequency;
+        dInfo.m_DampingRatio = dampingRatio;
+        dInfo.m_PhysicalBody1 = pBodyArray[0];
+        dInfo.m_PhysicalBody2 = pBodyArray[nAngularDiv-1];
+        
+        DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+        dc->initialize();
+    }
+    
+    // Create Inner Ring
+    float dr = radius/(nRadialDiv+1);
+    float R = radius - dr;
+    
+    for( int i=0; i<nRadialDiv; i++ )
+    {
+        theta = 0.0f;
+        for( int j=0; j<nAngularDiv; j++ )
+        {
+            PhysicalBody* pBody = pWorld->createPhysicalBody();
+            pBody->setPosition(Vector2f(R*cos(theta),R*sin(theta)));
+            
+            pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo;
+            PhysicalShape* pShape = pBody->createPhysicalShape(pApp);
+            pShape->m_CollisionFilter.m_CollisionBit = 0x1;
+            pShape->m_CollisionFilter.m_CollisionMask = 0x1;
+            
+            if( j > 0 )
+            {
+                DistanceConstraintInfo dInfo;
+                dInfo.m_PhysicalBody1 = pBody;
+                dInfo.m_PhysicalBody2 = pPrevBody;
+                dInfo.m_Frequency = frequency;
+                dInfo.m_DampingRatio = dampingRatio;
+                DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+                dc->initialize();
+            }
+            {
+                DistanceConstraintInfo dInfo;
+                dInfo.m_Frequency = frequency;
+                dInfo.m_DampingRatio = dampingRatio;
+                dInfo.m_PhysicalBody1 = pBody;
+                dInfo.m_PhysicalBody2 = pBodyArray[j];
+                pBodyArray[j] = pBody;
+
+                DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+                dc->initialize();
+            }
+            pPrevBody = pBody;
+            theta += dTheta;
+        }
+        {
+            DistanceConstraintInfo dInfo;
+            dInfo.m_Frequency = frequency;
+            dInfo.m_DampingRatio = dampingRatio;
+            dInfo.m_PhysicalBody1 = pBodyArray[0];
+            dInfo.m_PhysicalBody2 = pBodyArray[nAngularDiv-1];
+            
+            DistanceConstraint* dc = (DistanceConstraint*)pWorld->createConstraint(dInfo);
+            dc->initialize();
+        }
+        R -= dr;
+    }
+}
+
+void demo33()
+{
+	// Create Ground Body
+	PhysicalBody* pBodyGround = pWorld->createPhysicalBody();
+	pBodyGround->setPosition(Vector2f(0.0f,-0.8f));
+	//pBodyGround->setAngle(M_PI_4/5);
+	pBodyGround->m_BodyType = EBT_STATIC;
+	
+	PhysicalAppearance pApp;
+	dfloat groundWidth = 1.0f; dfloat groundHeight = 0.02f;
+	Vector2f vertices[4] = { Vector2f(groundWidth, groundHeight), Vector2f(-groundWidth, groundHeight), Vector2f(-groundWidth, -groundHeight), Vector2f(groundWidth, -groundHeight) };
+    PolygonInfo pInfo0(vertices, 4);
+	pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo0;
+	pBodyGround->createPhysicalShape(pApp);
+	
+	// Create Box
+	PhysicalBody* pBodyBox = pWorld->createPhysicalBody();
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBox->setPosition(Vector2f(0.0f,0.1f));
+	pBodyBox->setAngle(-PI_2);
+	dfloat boxWidth = 0.051f; dfloat boxHeight = 0.051f;
+	//pBodyBox->createPhysicalShape(pApp);
+    
+    float radius = 0.12;
+    int numVertices = 5;
+    Vector2f *softVertices = new Vector2f[numVertices];
+    float theta = 1.82f;
+    float dTheta = M_PI * 2.0f/(numVertices-1);
+    for( int i=0; i<numVertices-1; i++ )
+    {
+        softVertices[i].x = radius * cos(theta);
+        softVertices[i].y = radius * sin(theta);
+        theta += dTheta;
+    }
+    
+    softVertices[numVertices-1].x = softVertices[0].x;
+    softVertices[numVertices-1].y = softVertices[0].y;
+    
+    EdgeChainInfo eInfo(softVertices, numVertices);
+    pApp.m_CollisionAttributes.m_CollisionShapeInfo = &eInfo;
+
+    pBodyBox->createPhysicalShape(pApp);
+    
+    
+    PhysicalBody* pBodyBox1 = pWorld->createPhysicalBody();
+	//pBodyBox->m_BodyType = EBT_STATIC;
+	pBodyBox1->setPosition(Vector2f(0.0f,0.31f));
+	pBodyBox1->setAngle(-PI_2);
+	Vector2f verticesBox[4] = { Vector2f(boxWidth, boxHeight), Vector2f(-boxWidth, boxHeight), Vector2f(-boxWidth, -boxHeight), Vector2f(boxWidth, -boxHeight) };
+    PolygonInfo pInfo1(verticesBox, 4);
+	pApp.m_CollisionAttributes.m_CollisionShapeInfo = &pInfo1;
+   // pBodyBox1->createPhysicalShape(pApp);
+
+}
 
 void initScene()
 {
@@ -2254,7 +2434,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo22();
+	demo32();
 
 	MouseConstraintInfo mInfo;
 	mouseJoint = (MouseConstraint*)pWorld->createConstraint(mInfo);
@@ -2407,7 +2587,9 @@ void renderScene(void)
 //	  glVertex2f(raySeg.m_End.x, raySeg.m_End.y); 
 //	glEnd();
 //	glPopMatrix();
-
+    
+    //rectGrid.render();
+    
 	glutSwapBuffers();
 	
 #ifndef WIN32
@@ -2458,6 +2640,7 @@ void keyProcessor(unsigned char key, int x, int y)
 int _button = -1;
 dbool bPicked = false;
 
+
 void MouseButton(int button, int state, int x, int y)
 {	
 	_button = button;
@@ -2467,6 +2650,8 @@ void MouseButton(int button, int state, int x, int y)
 	y = windowHeight - y;
     dfloat ratio = 1.0* windowWidth / windowHeight;
 	
+    
+   
 	dfloat px = 2.0f * (dfloat)x/windowWidth - 1;
 	dfloat py = 2.0f * (dfloat)y/windowHeight - 1;
 	px *= 1.5f*ratio;
@@ -2475,6 +2660,10 @@ void MouseButton(int button, int state, int x, int y)
 	Vector2f p(px,py);
 	if (state == GLUT_DOWN && button == GLUT_LEFT_BUTTON)
     {
+        //Vector2f gc = rectGrid.getGridCoordinates(Vector2f(x,y));
+
+        //printf("GC X  Y = %f   %f\n", gc.x, gc.y);
+
 		PhysicalBody* pBody = pWorld->pickBodyFromScreenCoordinates(p);
 		if( pBody )
 		{

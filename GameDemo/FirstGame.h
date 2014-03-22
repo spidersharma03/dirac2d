@@ -11,7 +11,7 @@
 
 #include <vector>
 #include "Game.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 using namespace std;
 
