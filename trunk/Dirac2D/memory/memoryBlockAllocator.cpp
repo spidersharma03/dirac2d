@@ -1,5 +1,5 @@
 
-#include "memoryBlockAllocator.h"
+#include "memory/memoryBlockAllocator.h"
 #include <string>
 
 BEGIN_NAMESPACE_DIRAC2D

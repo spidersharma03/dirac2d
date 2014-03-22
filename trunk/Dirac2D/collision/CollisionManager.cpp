@@ -6,13 +6,13 @@
  *
  */
 
-#include "../dynamics/PhysicalWorld.h"
-#include "CollisionManager.h"
-#include "../dynamics/PhysicalBody.h"
-#include "../dynamics/PhysicalShape.h"
-#include "../dynamics/contacts/Contact.h"
-#include "../geometry/CollisionShape.h"
-#include "broadPhase/BroadPhaseCollisionAlgorithm.h"
+#include "dynamics/PhysicalWorld.h"
+#include "collision/CollisionManager.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalShape.h"
+#include "dynamics/contacts/Contact.h"
+#include "geometry/CollisionShape.h"
+#include "collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

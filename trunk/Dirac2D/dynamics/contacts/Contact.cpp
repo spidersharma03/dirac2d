@@ -6,13 +6,13 @@
  *
  */
 
-#include "Contact.h"
-#include "../PhysicalShape.h"
-#include "../../geometry/CollisionShape.h"
-#include "../PhysicalBody.h"
-#include "../../collision/CollisionDetection.h"
-#include "../../CallBacks.h"
-#include "../../collision/GJK_EPA/GJKAlgorithm.h"
+#include "dynamics/contacts/Contact.h"
+#include "dynamics/PhysicalShape.h"
+#include "geometry/CollisionShape.h"
+#include "dynamics/PhysicalBody.h"
+#include "collision/CollisionDetection.h"
+#include "CallBacks.h"
+#include "collision/GJK_EPA/GJKAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

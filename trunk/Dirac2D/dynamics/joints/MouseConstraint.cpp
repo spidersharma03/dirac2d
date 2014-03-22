@@ -6,9 +6,9 @@
  *
  */
 
-#include "MouseConstraint.h"
-#include "DistantConstraint.h"
-#include "../PhysicalBody.h"
+#include "dynamics/joints/MouseConstraint.h"
+#include "dynamics/joints/DistantConstraint.h"
+#include "dynamics/PhysicalBody.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D

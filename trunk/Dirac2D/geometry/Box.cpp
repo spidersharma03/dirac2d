@@ -5,7 +5,7 @@
  *  Created by Prashant on 03/05/12.
  *
  */
-#include "Box.h"
+#include "geometry/Box.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

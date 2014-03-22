@@ -4,7 +4,7 @@
 //
 //  Created by Prashant Sharma on 16/09/12.
 //
-#include "CirclePathConstraint.h"
+#include "dynamics/joints/CirclePathConstraint.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

@@ -6,7 +6,7 @@
  *
  */
 
-#include "Capsule.h"
+#include "geometry/Capsule.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

@@ -6,7 +6,7 @@
  *
  */
 
-#include "CollisionDetectionCirclePolygon.h"
+#include "collision/CollisionDetectionCirclePolygon.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

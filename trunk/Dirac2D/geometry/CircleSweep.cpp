@@ -6,9 +6,9 @@
  *
  */
 
-#include "CircleSweep.h"
-#include "Edge.h"
-#include "../common.h"
+#include "geometry/CircleSweep.h"
+#include "geometry/Edge.h"
+#include "common.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

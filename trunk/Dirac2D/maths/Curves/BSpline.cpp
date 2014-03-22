@@ -6,8 +6,8 @@
  *
  */
 
-#include "BSpline.h"
-#include "../Vector2.h"
+#include "maths/Curves/BSpline.h"
+#include "maths/Vector2.h"
 
 USE_NAMESPACE_DIRAC2D
 

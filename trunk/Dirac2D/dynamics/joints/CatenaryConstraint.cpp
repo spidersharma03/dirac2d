@@ -6,9 +6,9 @@
  *
  */
 
-#include "CatenaryConstraint.h"
-#include "../PhysicalBody.h"
-#include "../PhysicalShape.h"
+#include "dynamics/joints/CatenaryConstraint.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalShape.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D

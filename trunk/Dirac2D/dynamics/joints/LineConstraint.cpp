@@ -6,8 +6,8 @@
  *
  */
 
-#include "LineConstraint.h"
-#include "../PhysicalBody.h"
+#include "dynamics/joints/LineConstraint.h"
+#include "dynamics/PhysicalBody.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D

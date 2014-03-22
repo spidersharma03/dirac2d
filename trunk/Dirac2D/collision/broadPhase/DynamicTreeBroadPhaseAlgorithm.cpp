@@ -6,15 +6,14 @@
  *
  */
 
-#include "../CollisionManager.h"
-#include "../../dynamics/PhysicalShape.h"
-#include "../../dynamics/PhysicalBody.h"
-#include "../../geometry/CollisionShape.h"
-#include "../../dynamics/contacts/Contact.h"
+#include "collision/CollisionManager.h"
+#include "dynamics/PhysicalShape.h"
+#include "dynamics/PhysicalBody.h"
+#include "geometry/CollisionShape.h"
+#include "dynamics/contacts/Contact.h"
 
-#include "DynamicTreeBroadPhaseAlgorithm.h"
-#include "DynamicTree.h"
-#include <algorithm>
+#include "collision/broadPhase/DynamicTreeBroadPhaseAlgorithm.h"
+#include "collision/broadPhase/DynamicTree.h"
 
 using namespace std;
 

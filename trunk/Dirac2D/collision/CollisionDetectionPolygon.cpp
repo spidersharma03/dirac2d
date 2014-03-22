@@ -5,9 +5,9 @@
  *  Created by Prashant on 30/04/12.
  *
  */
-#include "CollisionDetectionPolygon.h"
-#include "PolygonHelper.h"
-#include "GJK_EPA/GJKAlgorithm.h"
+#include "collision/CollisionDetectionPolygon.h"
+#include "collision/PolygonHelper.h"
+#include "collision/GJK_EPA/GJKAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

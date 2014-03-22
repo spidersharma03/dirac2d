@@ -6,7 +6,7 @@
  *
  */
 
-#include "SAP_Algorithm.h"
+#include "collision/broadPhase/SAP_Algorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

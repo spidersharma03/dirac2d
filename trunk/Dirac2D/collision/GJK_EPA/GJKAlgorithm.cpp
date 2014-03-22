@@ -5,8 +5,8 @@
 //  Created by Prashant on 21/07/11.
 //
 
-#include "GJKAlgorithm.h"
-#include "../../geometry/CollisionShape.h"
+#include "collision/GJK_EPA/GJKAlgorithm.h"
+#include "geometry/CollisionShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

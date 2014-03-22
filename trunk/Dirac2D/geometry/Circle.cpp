@@ -7,7 +7,7 @@
  */
 
 
-#include "Circle.h"
+#include "geometry/Circle.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

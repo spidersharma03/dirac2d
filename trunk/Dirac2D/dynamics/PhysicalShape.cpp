@@ -6,12 +6,12 @@
  *
  */
 
-#include "../memory/memoryBlockAllocator.h"
-#include "PhysicalShape.h"
-#include "../geometry/Box.h"
-#include "../geometry/Circle.h"
-#include "../geometry/Capsule.h"
-#include "../common.h"
+#include "memory/memoryBlockAllocator.h"
+#include "dynamics/PhysicalShape.h"
+#include "geometry/Box.h"
+#include "geometry/Circle.h"
+#include "geometry/Capsule.h"
+#include "common.h"
 
 #include <new>
 

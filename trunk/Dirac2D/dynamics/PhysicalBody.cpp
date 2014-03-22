@@ -6,18 +6,18 @@
  *
  */
 
-#include "PhysicalWorld.h"
-#include "PhysicalBody.h"
-#include "PhysicalShape.h"
-#include "contacts/Contact.h"
-#include "../geometry/CollisionShape.h"
-#include "../geometry/Circle.h"
-#include "../geometry/Capsule.h"
-#include "../geometry/ConvexPolygon.h"
-#include "../geometry/Edge.h"
-#include "../geometry/EdgeChain.h"
+#include "dynamics/PhysicalWorld.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalShape.h"
+#include "dynamics/contacts/Contact.h"
+#include "geometry/CollisionShape.h"
+#include "geometry/Circle.h"
+#include "geometry/Capsule.h"
+#include "geometry/ConvexPolygon.h"
+#include "geometry/Edge.h"
+#include "geometry/EdgeChain.h"
 
-#include "../collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
+#include "collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -38,6 +38,7 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 	m_bSleepingPolicy = false;
 	m_PhysicalShapeList = 0;
 	m_ContactEdgeList = 0;
+    m_ContactEdgeList = 0;
 }
 
 PhysicalBody::PhysicalBody(const PhysicalBody& other)
@@ -483,18 +484,18 @@ dbool PhysicalBody::getCollisionStatus( PhysicalBody* pOther)
 {
 	if( pOther->m_BodyType != EBT_DYNAMIC && m_BodyType != EBT_DYNAMIC )
 		return false;
-	
-	dbool bRes = true;
-	ConstraintEdge* cEdge = pOther->m_ConstraintEdgeList;
+	    
+	ConstraintEdge* cEdge = m_ConstraintEdgeList;
 	while (cEdge) 
 	{
-		if( cEdge->pBody == this )
-		{
-			return cEdge->m_pConstraint->shouldCollideConnected();
+		if( cEdge->pBody == pOther )
+		{            
+            if( !cEdge->m_pConstraint->shouldCollideConnected() )
+                return false;
 		}
 		cEdge = cEdge->m_Next;
 	}
-	return bRes;
+	return true;
 }
 
 END_NAMESPACE_DIRAC2D

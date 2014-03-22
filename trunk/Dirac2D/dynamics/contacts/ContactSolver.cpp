@@ -6,11 +6,11 @@
  *
  */
 
-#include "ContactSolver.h"
-#include "Contact.h"
-#include "../PhysicalShape.h"
-#include "../PhysicalBody.h"
-#include "../PhysicalWorld.h"
+#include "dynamics/contacts/ContactSolver.h"
+#include "dynamics/contacts/Contact.h"
+#include "dynamics/PhysicalShape.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalWorld.h"
 
 
 BEGIN_NAMESPACE_DIRAC2D
@@ -177,73 +177,9 @@ void ContactSolver::correctVelocities()
 
 dbool ContactSolver::correctPositions()
 {
-	Contact* contactList = m_PhysicalWorld->m_ContactList;
-	Contact* contact = contactList;
-	while( contact )
-	{
-		PhysicalShape* shape1 = contact->m_PhysicalShape1;
-		PhysicalShape* shape2 = contact->m_PhysicalShape2;		
-		PhysicalBody* body1 = shape1->m_ParentBody;
-		PhysicalBody* body2 = shape2->m_ParentBody;
-		Vector2f c1 = body1->m_Centre;
-		Vector2f c2 = body2->m_Centre;
-		
-		body1->m_Transform.transformAsPoint(c1);
-		body2->m_Transform.transformAsPoint(c2);
-		
-		Vector2f tangent = contact->m_ContactNormal.cross(-1.0f);
-		
-		Vector2f pos1, pos2;
-		dfloat angle1 = 0.0f, angle2 = 0.0f;
-		Matrix3f xForm1 = body1->m_Transform;
-		Matrix3f xForm2 = body2->m_Transform;
-		
-		for( dint32 i=0; i<contact->m_NumContactConstraints; i++ )
-		{
-			//ContactConstraint& constraint = contact->m_ContactConstraint[i];
-			const Vector2f& p = contact->m_ContactPoint[i].m_Point;
-			
-			// Get Contact Point in Local coordinates of each body
-			Vector2f p1 = p * xForm1 - body1->m_Centre;
-			Vector2f p2 = p * xForm2 - body2->m_Centre;;
-			
-			Vector2f n = contact->m_ContactNormal;
-
-			Vector2f r1 = p - c1;
-			Vector2f r2 = p - c2;
-			
-			dfloat r1cross_n = r1.cross(n);
-			dfloat r2cross_n = r2.cross(n);
-			dfloat JInvMJT = body1->m_InvMass + body2->m_InvMass + r1cross_n * r1cross_n * body1->m_InvI + r2cross_n * r2cross_n * body2->m_InvI;
-			JInvMJT = JInvMJT != 0.0f ? 1.0f/JInvMJT : JInvMJT;
-			
-			dfloat depth = contact->m_ContactPoint[i].m_Depth;
-			
-			dfloat impulseMagnitude = -contact->m_ERP * MIN( 0.0f, depth + ALLOWED_PENETRATION) * JInvMJT;
-			Vector2f impulse = n * impulseMagnitude;
-			
-			pos1 += impulse * body1->m_InvMass;
-			angle1 += Vector2f::cross(r1, impulse) * body1->m_InvI;
-			
-			pos2 -= impulse * body2->m_InvMass;
-			angle2 += Vector2f::cross(r2, impulse) * body2->m_InvI;
-			
-			dfloat cs = cos(angle1); dfloat sn = sin(angle1);
-			
-			xForm1.rotate(body1->m_Angle);
-			xForm2.rotate(body2->m_Angle);
-			
-			xForm1.col3.x = -cs * body1->m_Centre.x + sn * body1->m_Centre.y + body1->m_Centre.x + body1->m_Position.x;
-			xForm1.col3.y = -sn * body1->m_Centre.x - cs * body1->m_Centre.y + body1->m_Centre.y + body1->m_Position.y;
-			
-			cs = cos(angle2);  sn = sin(angle2);
-			
-			xForm2.col3.x = -cs * body2->m_Centre.x + sn * body2->m_Centre.y + body2->m_Centre.x + body2->m_Position.x;
-			xForm2.col3.y = -sn * body2->m_Centre.x - cs * body2->m_Centre.y + body2->m_Centre.y + body2->m_Position.y;
-		}
-		contact = contact->m_Next;
-	}
-	return false;
+    printf("Not yet implemented\n");
+    dAssert(0);
+    return false;
 }
 	
 END_NAMESPACE_DIRAC2D

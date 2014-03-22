@@ -6,8 +6,8 @@
  *
  */
 
-#include "GrahamScanConvexHullGenerator.h"
-#include "../ConvexPolygon.h"
+#include "geometry/ConvexHull/GrahamScanConvexHullGenerator.h"
+#include "geometry/ConvexPolygon.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

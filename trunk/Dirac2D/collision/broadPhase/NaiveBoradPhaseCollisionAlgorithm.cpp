@@ -6,15 +6,13 @@
  *
  */
 
-#include "NaiveBoradPhaseCollisionAlgorithm.h"
-#include "../CollisionManager.h"
-#include "../../dynamics/PhysicalShape.h"
-#include "../../dynamics/PhysicalBody.h"
-#include "../../geometry/CollisionShape.h"
-#include "../../dynamics/contacts/Contact.h"
-#include <set>
-
-using namespace std;
+#include "collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h"
+#include "collision/CollisionManager.h"
+#include "dynamics/PhysicalShape.h"
+#include "dynamics/PhysicalBody.h"
+#include "geometry/CollisionShape.h"
+#include "dynamics/contacts/Contact.h"
+#include <string>
 
 BEGIN_NAMESPACE_DIRAC2D
 
