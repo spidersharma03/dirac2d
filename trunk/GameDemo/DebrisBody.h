@@ -8,7 +8,7 @@
 #ifndef _DEBRIS_BODY_H_
 #define _DEBRIS_BODY_H_
 
-#include "../Dirac2D/definitions.h"
+#include "definitions.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 class PhysicalBody;

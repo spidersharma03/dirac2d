@@ -11,7 +11,7 @@
 #ifndef _OBJECT_FACTORY_H_
 #define _OBJECT_FACTORY_H_
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "GameObject.h"
 
 class FirstGame;

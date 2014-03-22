@@ -10,7 +10,7 @@
 #define _CABLE_CAR_H_
 
 #include "GameObject.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 
 USE_NAMESPACE_DIRAC2D

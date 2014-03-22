@@ -10,7 +10,7 @@
 #include "FirstGame.h"
 #include "ObjectManager.h"
 #include "SimpleVehicle.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 FirstGame* PathHurdle::m_pGame = 0;
 int PathHurdle::m_PathHurdleCount = 0;
@@ -82,7 +82,7 @@ void PathHurdle::onCollisionEnter( GameObject* pObject, ContactManifold& manifol
 		m_pGame->explodeDebris(getGameObjectInfo(), getPosition());
 		// slow down the vehicle
 		m_pGame->getVehicle()->setVelocity(Vector2f());
-		m_pGame->getVehicle()->setMotorSpeed(0.0f);
+		m_pGame->getVehicle()->changeMotorSpeed(-5.0f);
     }
 }
 

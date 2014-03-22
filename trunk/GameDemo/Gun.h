@@ -9,7 +9,7 @@
 #ifndef _GUN_H_
 #define _GUN_H_
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "GameObject.h"
 #include "IRenderable.h"
 

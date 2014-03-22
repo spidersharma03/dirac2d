@@ -11,7 +11,7 @@
 #include "TerrainGenerator.h"
 #include "Coin.h"
 #include "Crate.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "FirstGame.h"
 #include "Camera.h"
 

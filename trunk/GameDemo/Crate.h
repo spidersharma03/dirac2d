@@ -55,6 +55,10 @@ private:
 	
 	virtual ~Crate();
 	
+    void onCollisionEnter( GameObject* pObject, ContactManifold& manifold );
+    
+    void onCollisionExit( GameObject* pObject, ContactManifold& manifold );
+    
 	friend class ObjectFactory;
 private:
 	

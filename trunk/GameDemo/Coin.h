@@ -6,7 +6,7 @@
 //
 
 #include "GameObject.h"
-#include "../Dirac2D/definitions.h"
+#include "definitions.h"
 
 #ifndef _COIN_H_
 #define _COIN_H_

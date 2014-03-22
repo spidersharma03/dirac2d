@@ -54,8 +54,6 @@ private:
     FirstGame* m_pGame;
     RayCastTerrainCallBack* m_pRayCastTerrainCallBack;
 	
-    float m_MinSpeed;
-	float m_MaxSpeed;
 	
 	float m_DistanceFromTerrain;
 };

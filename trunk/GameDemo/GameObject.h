@@ -6,7 +6,7 @@
  *
  */
 
-#include "../Dirac2D/maths/MathUtil.h"
+#include "maths/MathUtil.h"
 #include "IUpdatable.h"
 #include "IGameCollisionListener.h"
 

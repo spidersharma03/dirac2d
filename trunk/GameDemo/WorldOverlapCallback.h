@@ -9,7 +9,7 @@
 #ifndef _WORLD_OVERLAP_CALL_BACK_H_
 #define _WORLD_OVERLAP_CALL_BACK_H_
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 USE_NAMESPACE_DIRAC2D
 

@@ -6,7 +6,7 @@
  *
  */
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "ObjectManager.h"
 #include "FirstGame.h"
 #include "Camera.h"
@@ -69,7 +69,7 @@ void ObjectManager::manageObjects()
 		{
 			initTime = time;
 			generateCrates();
-			//generateTumblers();
+			generateTumblers();
 		}
 	}
 }
@@ -106,7 +106,7 @@ void ObjectManager::generatePathHurdle()
     
     // PathHurdle info. 
     PathHurdleInfo pInfo;
-    pInfo.m_Radius = RANDOM_NUMBER( 0.1f, 0.2f);
+    pInfo.m_Radius = RANDOM_NUMBER( 0.25f, 0.4f);
 	pInfo.m_NumVertices = RANDOM_NUMBER(3.0f, 7.0f);
 	
 	TerrainGenerator* pTerrainGenerator = m_pGame->getTerrainGenerator();
@@ -119,7 +119,7 @@ void ObjectManager::generatePathHurdle()
 	//float sw = m_pGame->getCamera()->getScreenWidth();	
 	//Vector2f(pCurvePoints[n], pCurvePoints[n+1] + 0.4)
 	
-	pInfo.m_Position = Vector2f(pCurvePoints[n], pCurvePoints[n+1]);
+	pInfo.m_Position = Vector2f(pCurvePoints[n], pCurvePoints[n+1] + 0.2);
 	
 	GameObject* pObject = pObjFactory->createObject(pInfo);
 	

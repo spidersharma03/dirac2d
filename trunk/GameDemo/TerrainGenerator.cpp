@@ -10,7 +10,7 @@
 #include "FirstGame.h"
 #include "Camera.h"
 #include "ObjectFactory.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "SimpleVehicle.h"
 
 #include <algorithm>

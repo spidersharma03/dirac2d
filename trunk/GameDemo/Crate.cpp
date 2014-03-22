@@ -9,7 +9,9 @@
 
 #include "Crate.h"
 #include "FirstGame.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "ObjectManager.h"
+#include "SimpleVehicle.h"
+#include "Dirac2D.h"
 
 FirstGame* Crate::m_pGame = 0;
 int Crate::m_CrateCount = 0;
@@ -97,4 +99,20 @@ Crate::~Crate()
 	m_pGame->getPhysicalWorld()->deletePhysicalBody(m_pBody);
 	m_pBody = 0;
 	m_CrateCount--;
+}
+
+// COLLISION CALL BACKS
+
+void Crate::onCollisionEnter( GameObject* pObject, ContactManifold& manifold )
+{
+	if( pObject && pObject->getGameObjectInfo().m_ObjectType == EOT_VEHICLE ) 
+    {
+		// slow down the vehicle
+		m_pGame->getVehicle()->setVelocity(Vector2f());
+        m_pGame->getVehicle()->changeMotorSpeed(-5.0f);
+    }
+}
+
+void Crate::onCollisionExit( GameObject* pObject, ContactManifold& manifold )
+{
 }

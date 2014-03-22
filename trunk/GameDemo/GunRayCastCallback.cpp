@@ -7,7 +7,7 @@
  */
 
 #include "GunRayCastCallback.h"
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "GameObject.h"
 #include "ObjectManager.h"
 #include "FirstGame.h"
@@ -74,7 +74,8 @@ float GunRayCastManyCallBack::rayIntersectionCallBack(const RaySegment2f& raySeg
 	
     if( pObject )
     {
-		if( pObject->getGameObjectInfo().m_ObjectType != EOT_CRATE )
+		if( pObject->getGameObjectInfo().m_ObjectType != EOT_CRATE
+           && pObject->getGameObjectInfo().m_ObjectType != EOT_PATH_HURDLE)
         {
 			return -1.0f;
 		}

@@ -9,7 +9,7 @@
 #ifndef _VEHICLE_H_
 #define _VEHICLE_H_
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "IRenderable.h"
 #include "GameObject.h"
 
@@ -29,6 +29,9 @@ public:
 		m_ObjectInfo.m_ObjectType = EOT_VEHICLE;
         m_bBoostEnable = false;
 		m_BoostIncreament = 1.0f;
+        
+        m_MinSpeed = 20.0f;
+        m_MaxSpeed = 550.0f;
     }
     
     virtual void init() = 0;
@@ -83,7 +86,11 @@ public:
 	
 	inline void changeMotorSpeed( float dSpeed )
 	{
-		m_pMotor->setSpeed( getMotorSpeed() + dSpeed );
+        float currentSpeed = getMotorSpeed();
+        currentSpeed += dSpeed;
+        currentSpeed = currentSpeed < m_MinSpeed ? m_MinSpeed : currentSpeed;
+        currentSpeed = currentSpeed > m_MaxSpeed ? m_MaxSpeed : currentSpeed;
+		m_pMotor->setSpeed( currentSpeed );
 	}
 	
     inline void setMaxMotorTorque(float torque)
@@ -117,6 +124,8 @@ protected:
 	PhysicalBody* m_pVehicleBody;
 
     float m_MaxTorque; // Max Motor Torque
+    float m_MinSpeed;
+	float m_MaxSpeed;
     
 	Gun* m_pGun;
 };

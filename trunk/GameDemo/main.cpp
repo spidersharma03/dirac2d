@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "FirstGame.h"
 #include "TerrainGenerator.h"
 #include "Camera.h"

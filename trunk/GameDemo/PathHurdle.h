@@ -27,7 +27,7 @@ struct PathHurdleInfo : public GameObjectInfo
     {
         m_ObjectType = EOT_PATH_HURDLE;
 		m_NumVertices = 4;
-		m_Radius = 0.3f;
+		m_Radius = 0.63f;
     }
 	
 	Vector2f m_Vertices[8];

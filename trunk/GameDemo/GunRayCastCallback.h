@@ -10,7 +10,7 @@
 #define _GUN_RAY_CAST_CALL_BACK_
 
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 
 USE_NAMESPACE_DIRAC2D
 

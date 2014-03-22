@@ -6,11 +6,12 @@
  *
  */
 
-#include "../Dirac2D/Dirac2D.h"
+#include "Dirac2D.h"
 #include "FirstGame.h"
 #include "CoinPlacementStrategy.h"
 #include "TerrainGenerator.h"
 #include "Coin.h"
+#include <cassert>
 
 CoinPlacementStraregy::CoinPlacementStraregy( FirstGame* pGame ) : ObjectPlacementStraregy( pGame )
 {

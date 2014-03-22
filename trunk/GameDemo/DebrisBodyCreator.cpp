@@ -37,6 +37,7 @@ DebrisBodyCreator::DebrisBodyCreator(FirstGame* pGame)
 
 void DebrisBodyCreator::createDebrisBodies( const GameObjectInfo& gInfo, const Vector2f& position, int numBodies )
 {
+    //return;
     switch (gInfo.m_ObjectType) 
     {
         case EOT_CRATE:
