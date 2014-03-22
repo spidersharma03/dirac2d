@@ -6,9 +6,9 @@
  *
  */
 
-#include "HingeConstraint.h"
-#include "../PhysicalBody.h"
-#include "../PhysicalShape.h"
+#include "dynamics/joints/HingeConstraint.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalShape.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
@@ -20,8 +20,6 @@ HingeConstraint::HingeConstraint(const HingeConstraintInfo& cInfo) : Constraint(
     m_Anchor = cInfo.m_Anchor;
     m_LowerAngle = cInfo.m_LowerAngle;
     m_UpperAngle = cInfo.m_UpperAngle;
-	m_Frequency = 1.0f;
-	m_DampingRatio = 0.2f;
 }
 
 void HingeConstraint::initialize()

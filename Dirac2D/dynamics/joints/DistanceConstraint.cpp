@@ -5,9 +5,9 @@
  *  Created by Prashant on 08/06/12.
  *
  */
-#include "DistantConstraint.h"
-#include "../PhysicalBody.h"
-#include "../PhysicalShape.h"
+#include "dynamics/joints/DistantConstraint.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalShape.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
@@ -18,8 +18,6 @@ DistanceConstraint::DistanceConstraint( const DistanceConstraintInfo& constraint
 	m_Type = ECT_DISTANCE;
     m_Anchor1 = constraintInfo.m_Anchor1;
     m_Anchor2 = constraintInfo.m_Anchor2;
-	m_Frequency = 4.0f;
-	m_DampingRatio = 0.1f;
 }
 
 void DistanceConstraint::initialize()

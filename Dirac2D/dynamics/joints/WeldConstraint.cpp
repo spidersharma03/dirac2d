@@ -6,9 +6,9 @@
  *
  */
 
-#include "WeldConstraint.h"
-#include "../PhysicalBody.h"
-#include "../PhysicalShape.h"
+#include "dynamics/joints/WeldConstraint.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalShape.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

@@ -6,8 +6,8 @@
  *
  */
 
-#include "CollisionDetectionEdgePolygon.h"
-#include "PolygonHelper.h"
+#include "collision/CollisionDetectionEdgePolygon.h"
+#include "collision/PolygonHelper.h"
 
 #include <stdio.h>
 

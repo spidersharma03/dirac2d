@@ -6,8 +6,8 @@
  *
  */
 
-#include "PulleyConstraint.h"
-#include "../PhysicalBody.h"
+#include "dynamics/joints/PulleyConstraint.h"
+#include "dynamics/PhysicalBody.h"
 
 
 BEGIN_NAMESPACE_DIRAC2D

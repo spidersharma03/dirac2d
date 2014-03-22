@@ -6,13 +6,13 @@
  *
  */
 
-#include "GLRenderer.h"
-#include "../geometry/CollisionShape.h"
-#include "../geometry/ConvexPolygon.h"
-#include "../geometry/Circle.h"
-#include "../geometry/Capsule.h"
-#include "../geometry/Edge.h"
-#include "../geometry/EdgeChain.h"
+#include "draw/GLRenderer.h"
+#include "geometry/CollisionShape.h"
+#include "geometry/ConvexPolygon.h"
+#include "geometry/Circle.h"
+#include "geometry/Capsule.h"
+#include "geometry/Edge.h"
+#include "geometry/EdgeChain.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

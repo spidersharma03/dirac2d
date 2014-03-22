@@ -6,10 +6,8 @@
  *
  */
 
-#include <stdlib.h>
-#include <string>
-#include "DynamicTree.h"
-#include "../../common.h"
+#include "collision/broadPhase/DynamicTree.h"
+#include "common.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 
@@ -623,16 +621,13 @@ dbool DynamicTree::intersectRaySegmentClosest(const RaySegment2f& raySeg, RayInt
 	
 	dint32 nodeCount = 0;
 	nodeVector[nodeCount++] = m_RootNode;
-	
-	Vector2f rayDir = raySeg.m_End - raySeg.m_Start;
-	
+		
 	while ( nodeCount != 0 ) 
 	{
 		dint32 nodeID;
 		
 		nodeCount--;
 		nodeID = nodeVector[nodeCount];
-		Vector2f c = m_Nodes[nodeID].m_AABB.getCentre();
 		
 		dfloat tmin1 = 100000.0f, tmax1, tmin2 = 100000.0f, tmax2;
 		dchar bRayInside1, bRayInside2;

@@ -6,8 +6,8 @@
  *
  */
 
-#include "PrismaticConstraint.h"
-#include "../PhysicalBody.h"
+#include "dynamics/joints/PrismaticConstraint.h"
+#include "dynamics/PhysicalBody.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D

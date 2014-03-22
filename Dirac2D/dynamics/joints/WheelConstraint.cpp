@@ -6,8 +6,8 @@
  *
  */
 
-#include "WheelConstraint.h"
-#include "../PhysicalBody.h"
+#include "dynamics/joints/WheelConstraint.h"
+#include "dynamics/PhysicalBody.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

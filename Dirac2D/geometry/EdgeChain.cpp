@@ -6,9 +6,9 @@
  *
  */
 
-#include "../common.h"
-#include "Edge.h"
-#include "EdgeChain.h"
+#include "common.h"
+#include "geometry/Edge.h"
+#include "geometry/EdgeChain.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

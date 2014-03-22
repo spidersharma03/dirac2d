@@ -7,8 +7,8 @@
  */
 
 
-#include "ConvexPolygon.h"
-#include "../common.h"
+#include "geometry/ConvexPolygon.h"
+#include "common.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

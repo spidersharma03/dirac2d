@@ -6,40 +6,43 @@
  *
  */
 
-#include "PhysicalWorld.h"
-#include "PhysicalBody.h"
-#include "PhysicalShape.h"
-#include "../geometry/CollisionShape.h"
-#include "../geometry/Edge.h"
-#include "../geometry/EdgeChain.h"
-#include "../collision/CollisionManager.h"
+#include "dynamics/PhysicalWorld.h"
+#include "dynamics/PhysicalBody.h"
+#include "dynamics/PhysicalShape.h"
+#include "geometry/CollisionShape.h"
+#include "geometry/Edge.h"
+#include "geometry/EdgeChain.h"
+#include "collision/CollisionManager.h"
 
-#include "../collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
-#include "../collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h"
-#include "../collision/broadPhase/DynamicTreeBroadPhaseAlgorithm.h"
+#include "collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
+#include "collision/broadPhase/NaiveBoradPhaseCollisionAlgorithm.h"
+#include "collision/broadPhase/DynamicTreeBroadPhaseAlgorithm.h"
 
-#include "../dynamics/contacts/ContactSolver.h"
-#include "../dynamics/contacts/Contact.h"
+#include "dynamics/contacts/ContactSolver.h"
+#include "dynamics/contacts/Contact.h"
 
-#include "../dynamics/joints/DistantConstraint.h"
-#include "../dynamics/joints/MouseConstraint.h"
-#include "../dynamics/joints/HingeConstraint.h"
-#include "../dynamics/joints/WeldConstraint.h"
-#include "../dynamics/joints/CatenaryConstraint.h"
-#include "../dynamics/joints/CatenaryConstraintFixedRotation.h"
-#include "../dynamics/joints/LineConstraint.h"
-#include "../dynamics/joints/PrismaticConstraint.h"
-#include "../dynamics/joints/WheelConstraint.h"
-#include "../dynamics/joints/PulleyConstraint.h"
-#include "../dynamics/joints/MotorConstraint.h"
-#include "../dynamics/joints/MinMaxConstraint.h"
+#include "dynamics/joints/DistantConstraint.h"
+#include "dynamics/joints/MouseConstraint.h"
+#include "dynamics/joints/HingeConstraint.h"
+#include "dynamics/joints/WeldConstraint.h"
+#include "dynamics/joints/CatenaryConstraint.h"
+#include "dynamics/joints/CatenaryConstraintFixedRotation.h"
+#include "dynamics/joints/LineConstraint.h"
+#include "dynamics/joints/PrismaticConstraint.h"
+#include "dynamics/joints/WheelConstraint.h"
+#include "dynamics/joints/PulleyConstraint.h"
+#include "dynamics/joints/MotorConstraint.h"
+#include "dynamics/joints/MinMaxConstraint.h"
 
 
-#include "../draw/Renderer.h"
+#include "draw/Renderer.h"
 
 #ifndef WIN32 
 #include <sys/time.h>
+#ifdef IOS
+#else
 #include<GLUT/glut.h>
+#endif
 #else
 #include<GL/glut.h>
 #endif
@@ -146,7 +149,7 @@ Constraint* PhysicalWorld::createConstraint(const ConstraintInfo& constraintInfo
 	switch (constraintInfo.m_Type) 
 	{
 		case ECT_DISTANCE:
-			constraint = new( m_DistanceConstraintPool->Allocate() )DistanceConstraint((DistanceConstraintInfo&)constraintInfo);
+			constraint = new( m_pBlockAllocator->Allocate(sizeof(DistanceConstraint)) )DistanceConstraint((DistanceConstraintInfo&)constraintInfo);
 			break;
 		case ECT_MOUSE:
 			constraint = new MouseConstraint((MouseConstraintInfo&)constraintInfo);
@@ -369,13 +372,12 @@ void PhysicalWorld::Step(dfloat dt)
 		while (pConstraint) 
 		{
 			pConstraint->correctVelocities();
-			pConstraint = pConstraint->m_Next;
+            pConstraint = pConstraint->m_Next;
+            
+            // Correct the velocities of the Physical Bodies due to Contacts.
+            m_ContactSolver->correctVelocities();
 		}
 	}
-	
-	// Correct the velocities of the Physical Bodies due to Contacts.
-	for( dint32 iter=0; iter<m_VelocityIterations; iter++ )
-		m_ContactSolver->correctVelocities();
 	
 	// Integrate/Advance the positions by time step. 
 	pBody = m_PhysicalBodyList;
@@ -420,7 +422,9 @@ void PhysicalWorld::draw()
 			if( m_bDrawShapes )
 			{
 				Matrix3f xForm =  pBody->m_Transform;
+#ifndef IOS
                 glPushMatrix();
+#endif
 				m_Renderer->setTransform(xForm);
 				if( pBody->m_BodyType == EBT_DYNAMIC )
 					m_Renderer->setColor(255, 255, 255);
@@ -432,7 +436,9 @@ void PhysicalWorld::draw()
 					m_Renderer->setColor(0, 255, 255);
 				
 				m_Renderer->drawShape(pShape->m_CollisionShape);
+#ifndef IOS
                 glPopMatrix();
+#endif
 			}
 			if( m_bDrawBoundingBoxes )
 			{
@@ -464,7 +470,9 @@ void PhysicalWorld::draw()
 		if( m_bDrawCentreOfMass )
 		{
 			Matrix3f xForm = pBody->m_Transform;// * pBody->m_PhysicalShapeList->m_RotOffsetTransform;
+#ifndef IOS
 			glPushMatrix();
+#endif
             m_Renderer->setTransform(xForm);
 			m_Renderer->setColor(0, 255, 0);
 			p0 = pBody->m_Centre - Vector2f(0.01f, 0.0f); p1 = pBody->m_Centre + Vector2f(0.01f, 0.0f);
@@ -472,7 +480,9 @@ void PhysicalWorld::draw()
 			p0 = pBody->m_Centre - Vector2f(0.0f, 0.01f); p1 = pBody->m_Centre + Vector2f(0.0f, 0.01f);
 			m_Renderer->setColor(255, 0, 0);
 			m_Renderer->drawLine(p0, p1);
+#ifndef IOS
             glPopMatrix();
+#endif
 		}
 		
 		pBody = pBody->m_Next;

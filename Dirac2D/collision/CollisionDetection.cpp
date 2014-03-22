@@ -6,13 +6,13 @@
  *
  */
 
-#include "CollisionDetection.h"
-#include "../geometry/CollisionShape.h"
-#include "CollisionDetectionPolygon.h"
-#include "CollisionDetectionCirclePolygon.h"
-#include "CollisionDetectionCapsulePolygon.h"
-#include "CollisionDetectionEdgePolygon.h"
-#include "GJK_EPA/GJKAlgorithm.h"
+#include "collision/CollisionDetection.h"
+#include "geometry/CollisionShape.h"
+#include "collision/CollisionDetectionPolygon.h"
+#include "collision/CollisionDetectionCirclePolygon.h"
+#include "collision/CollisionDetectionCapsulePolygon.h"
+#include "collision/CollisionDetectionEdgePolygon.h"
+#include "collision/GJK_EPA/GJKAlgorithm.h"
 
 BEGIN_NAMESPACE_DIRAC2D
 

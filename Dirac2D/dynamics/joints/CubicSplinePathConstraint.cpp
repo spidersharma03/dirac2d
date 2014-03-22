@@ -6,8 +6,8 @@
  *
  */
 
-#include "CubicSplinePathConstraint.h"
-#include "../PhysicalBody.h"
+#include "dynamics/joints/CubicSplinePathConstraint.h"
+#include "dynamics/PhysicalBody.h"
 #include <stdio.h>
 
 BEGIN_NAMESPACE_DIRAC2D
