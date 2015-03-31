@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="..\Dirac2D\Headers"
 				PreprocessorDefinitions="WIN32"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"

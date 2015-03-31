@@ -74,9 +74,9 @@ PhysicalWorld::PhysicalWorld()
 
 	m_bDrawShapes = true;
 	m_bDrawBoundingBoxes = false;
-	m_bDrawContacts = false;
+	m_bDrawContacts = true;
 	m_bDrawConstraints = true;
-	m_bDrawCentreOfMass = false;
+	m_bDrawCentreOfMass = true;
 	
 	m_PhysicalBodyList = 0;
 	m_ConstraintList   = 0;

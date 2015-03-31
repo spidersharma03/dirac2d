@@ -6,5 +6,5 @@
  *
  */
 
-#include "BroadPhaseCollisionAlgorithm.h"
+#include "collision/broadPhase/BroadPhaseCollisionAlgorithm.h"
 

@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="Dirac2D\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -117,6 +118,7 @@
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="0"
+				AdditionalIncludeDirectories="Dirac2D\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
