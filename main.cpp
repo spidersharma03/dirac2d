@@ -2400,7 +2400,7 @@ void demo33()
     int numVertices = 5;
     Vector2f *softVertices = new Vector2f[numVertices];
     float theta = 1.82f;
-    float dTheta = M_PI * 2.0f/(numVertices-1);
+    float dTheta = PI * 2.0f/(numVertices-1);
     for( int i=0; i<numVertices-1; i++ )
     {
         softVertices[i].x = radius * cos(theta);
@@ -2434,7 +2434,7 @@ void initScene()
 	glRenderer = new GLRenderer(pWorld);
 	pWorld->setRenderer(glRenderer);
 	pAlgo = (DynamicTreeBroadPhaseAlgorithm*)pWorld->getBroadPhaseAlgorithm();
-	demo32();
+	demo6();
 
 	MouseConstraintInfo mInfo;
 	mouseJoint = (MouseConstraint*)pWorld->createConstraint(mInfo);

@@ -39,6 +39,7 @@ PhysicalBody::PhysicalBody(PhysicalWorld* world) : m_PhysicalWorld(world)
 	m_PhysicalShapeList = 0;
 	m_ContactEdgeList = 0;
     m_ContactEdgeList = 0;
+	m_ConstraintEdgeList = 0;
 }
 
 PhysicalBody::PhysicalBody(const PhysicalBody& other)
