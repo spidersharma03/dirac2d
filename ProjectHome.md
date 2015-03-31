@@ -1,0 +1,1 @@
+dirac2d is a 2d physics engine which solves constraints and contacts based upon the sequential impulse method. it could be used in games and also it will serve a great educational purpose.
